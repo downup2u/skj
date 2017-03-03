@@ -12,7 +12,7 @@ import reducer from './reducers';
 import saga from './sagas';
 
 const DevTools = createDevTools(
-  <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q" defaultIsVisible={false}>
+  <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q" defaultIsVisible={true}>
     <LogMonitor theme="tomorrow" preserveScrollTop={false} />
   </DockMonitor>
 )

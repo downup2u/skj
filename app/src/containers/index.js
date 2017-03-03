@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import IndexPage from '../components/index.js';
 import {
   clickTab,
+  clickNavPage
 } from '../actions';
 
 
@@ -14,6 +15,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onChangedIndex:(index)=>{
       dispatch(clickTab({curtabindex:index}));
+    },
+    onChangeClickPage:(action,name)=>{
+      dispatch(clickNavPage({action:action,name:name}));
     }
   }
 };

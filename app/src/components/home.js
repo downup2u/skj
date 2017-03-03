@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {Page,Button,Toolbar, ToolbarButton, Icon} from 'react-onsenui';
-export default function MyPage(props) {
+export default function MyPage(props){
 
     let homePage = {
         height: "62%",

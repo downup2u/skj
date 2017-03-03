@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { createReducer } from 'redux-act';
 import {
   clickTab,
+  clickNavPage
 } from '../actions';
 
 const initial = {
@@ -14,6 +15,9 @@ const initial = {
 const app = createReducer({
   [clickTab]: (state, payload) => {
     return { ...state, curtabindex: payload.curtabindex };
+  },
+  [clickNavPage]: (state, payload) => {
+    return { ...state,action:payload.action,name:payload.name};
   },
 }, initial.app);
 
