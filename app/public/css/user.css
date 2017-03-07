@@ -1,0 +1,152 @@
+.AddressAddPage .setForm {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: #FFF;
+    min-height: 60px;
+    align-items: center;
+}
+
+.ui.list.addAddress {
+    border: none;
+    background: #FFF
+}
+
+.addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+    border-bottom: 1px solid #EEE;
+    border-radius: 0;
+    min-height: 60px;
+    align-items: stretch;
+}
+
+.addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item .tit {
+    width: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item .content {
+    flex-grow: 1;
+    display: flex;
+}
+
+.addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item input {
+    border: none;
+    border-radius: 0;
+}
+
+.addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item .content .input {
+    display: flex;
+    flex-grow: 1;
+    border: none;
+    border-radius: 0;
+}
+
+.addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item .content select {
+    border: none;
+    border-radius: 0;
+    flex-grow: 1;
+    align-self: stretch;
+}
+
+.AddressListPage .addNew {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 50px;
+}
+.AddressListPage .addNew button.button{
+    flex-grow: 1;
+    border-radius: 0;
+    margin: 0;
+}
+.AddressListPage .ui.list{
+    border: none;
+}
+.AddressListPage .ui.selection.list>.item{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background: #FFF;
+    border-radius: 0;
+    margin-bottom: 15px;
+}
+.AddressListPage .ui.selection.list>.item .tit{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.AddressListPage .ui.selection.list>.item .address span{
+    margin-right: 10px;
+}
+.AddressListPage .ui.selection.list>.item .address {
+    margin-bottom: 10px;
+}
+.AddressListPage .listControl{
+    display: flex;
+    justify-content: space-between;
+}
+.AddressListPage .listControl .lnk{
+    display: flex;
+}
+.AddressListPage .listControl .lnk>div {
+    margin-left: 10px;
+}
+.UserInfoPage .ui.list{
+    border: none;
+}
+.UserInfoPage .ui.selection.list>.item:after{
+    content: none;
+}
+.UserInfoPage .ui.selection.list>.item{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: #FFF;
+    border-radius: 0;
+    border-bottom: 1px solid #EEE;
+    align-items: center;
+}
+.UserInfoPage .escLogin{
+    display: flex;
+    justify-content: center;
+}
+.UserInfoPage .escLogin .ui.basic.button{
+    width: 60%;
+    border-radius: 50px;
+    background: #FFF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

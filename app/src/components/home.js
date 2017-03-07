@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {Page,Button,Toolbar, ToolbarButton, Icon} from 'react-onsenui';
+
 export default function MyPage(props){
 
     let homePage = {
@@ -83,7 +84,7 @@ export default function MyPage(props){
         marginBottom: "2px"
     };
     let headImg = {
-        width:"60%",
+        width:"60%"
     };
 
     return (
@@ -121,6 +122,7 @@ export default function MyPage(props){
                 <ul style={list}>
 
 
+                    
                     <li style={listLi}>
                         <div style={listhead}>
                             <div>
@@ -134,33 +136,7 @@ export default function MyPage(props){
                         </div>
                     </li>
 
-                    
-                    <li style={listLi}>
-                        <div style={listhead}>
-                            <div>
-                                <span style={listname}>5微米PP滤芯</span>
-                                <span style={listinfo}>剩余20天</span>
-                            </div>
-                            <span style={percentage}>30%</span>
-                        </div>
-                        <div style={lineBg}>
-                            <div style={linestyle("#52a3da","#5771c5", "60%")}></div>
-                        </div>
-                    </li>
 
-
-                    <li style={listLi}>
-                        <div style={listhead}>
-                            <div>
-                                <span style={listname}>5微米PP滤芯</span>
-                                <span style={listinfo}>剩余20天</span>
-                            </div>
-                            <span style={percentage}>100%</span>
-                        </div>
-                        <div style={lineBg}>
-                            <div style={linestyle("#52a3da","#5771c5", "100%")}></div>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </Page>

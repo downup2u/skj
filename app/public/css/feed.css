@@ -1,0 +1,90 @@
+.ui.feed{
+    border-bottom: 1px solid #EEE;
+    background: #FFF;
+    margin:0;
+    padding-top: 10px;
+}
+.feedHead {
+    display: flex;
+    padding: 0 15px
+}
+.feedContent{
+    padding: 0 15px 10px 15px;
+    border-bottom: 1px solid #EEE;
+}
+
+.feedHead .label {
+    margin-right: 10px;
+}
+
+.feedHead .label img {
+    border-radius: 50%
+}
+
+.feedHead .summary {
+    display: flex;
+    flex-direction: column
+}
+
+.ui.feed > .event > .content .summary > .date {
+    margin: 0;
+}
+.ui.feed > .event > .content .summary > .summaryName{
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.topTip {
+    background: #EEE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:6px 0;
+}
+
+.topTip .con {
+    background: #333;
+    border-radius: 6px;
+    color: #FFF;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding:0 8px;
+    justify-content: space-between;
+}
+
+.topTip .con img {
+    width: 20px;
+    margin-right: 10px;
+}
+.topTip .con span{
+    font-size: 14px;
+}
+.ui.feed>.event>.content .myMeta {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    margin: 0;
+}
+
+.ui.comments {
+    padding: 15px;
+    background: #FFF;
+}
+.myCommentAction{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.myCommentLnk{
+    display: flex;
+    justify-content: space-between;
+}
+.myCommentLnk > div{
+    padding:2px 5px;
+    color: #CCC;
+}
+
+.ui.comments .comment .myCommentAction .metadata{
+    margin: 0;
+}

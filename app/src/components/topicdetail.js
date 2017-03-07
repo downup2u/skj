@@ -6,7 +6,7 @@ export default function MyPage(props){
     return (<Page>
       <p style={{textAlign: 'center'}}>
           <Button onClick={()=>{
-            props.navigator.popPage();
+            props.history.goBack();
           }}>
           圈子详情!点击返回
           </Button>

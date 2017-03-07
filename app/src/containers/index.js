@@ -7,22 +7,21 @@ import {
 } from '../actions';
 
 
-const mapStateToProps = ({app}) => {
-  return {app};
+const mapStateToProps = (state) => {
+  return state;
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onChangedIndex:(index)=>{
-      dispatch(clickTab({curtabindex:index}));
-    },
-    onChangeClickPage:(action,name)=>{
-      dispatch(clickNavPage({action:action,name:name}));
-    }
-  }
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onChangedIndex:(index)=>{
+//       dispatch(clickTab({curtabindex:index}));
+//     },
+//     onChangeClickPage:(action,name)=>{
+//       dispatch(clickNavPage({action:action,name:name}));
+//     }
+//   }
+// };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
 )(IndexPage);

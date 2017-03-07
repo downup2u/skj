@@ -1,0 +1,36 @@
+.mySlide {
+    width: 100%;
+    flex-grow: 1;
+    margin-top: 44px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+
+}
+
+.mySlide .slick-list {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.mySlide .slick-list .slick-track {
+    height: 100%;
+}
+
+.mySlide .slick-dots {
+    width: 100%
+}
+
+.mySlide .slick-dots li {
+    margin: 0
+}
+
+.mySlide .slick-slide {
+    width: 100%
+}
+/*.react-grid-layoutbox {}*/
+/*.swiper-container {}*/
+/*.swiper-pagination-bullet{width: 18px;height: 3px;border-radius: 3px}*/
+/*.swiper-pagination-bullet-active{background: #FFF}*/
+/*.swiper-pagination-bullet{background:#FFF}*/

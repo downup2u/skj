@@ -17,26 +17,29 @@ const DevTools = createDevTools(
   </DockMonitor>
 )
 
-// let configureStore = (initialState)=> {
-//   const sagaMiddleware = createSagaMiddleware();
-//   const store = createStore(
-//     reducer, initialState,
-//       compose(
-//         applyMiddleware(sagaMiddleware),
-//         DevTools.instrument()
-//       )
-//   );
-// //  sagaMiddleware.run(saga);
-//   return store;
-// }
-//
-// let store = configureStore();
+let initialState = {
 
-const store = createStore(
-  reducer,
-  compose(
-    DevTools.instrument()
-  )
-);
+};
+let configureStore = (initialState)=> {
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(
+    reducer, initialState,
+      compose(
+        applyMiddleware(sagaMiddleware),
+        DevTools.instrument()
+      )
+  );
+  //sagaMiddleware.run(saga);
+  return store;
+}
+
+const store = configureStore();
+
+// const store = createStore(
+//   reducer,
+//   compose(
+//     DevTools.instrument()
+//   )
+// );
 
 export {DevTools,store};
