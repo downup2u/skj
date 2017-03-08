@@ -4,12 +4,12 @@ import { reducer as formReducer } from 'redux-form';
 import {
   clickTab,
   clickNavPage,
+  //登录
   login_result,
-
   login_err,
-  showerrmessage,
-  hideerrmessage,
-
+  showpopmessage,
+  hidepopmessage,
+  //圈子
   inserttopic_result,
   getmytopic_result,
   gettopiclist_result,
@@ -19,7 +19,7 @@ import {
   lovetopicunadd_result,
   lovecommentsadd_result,
   lovecommentsunadd_result,
-
+  //设备
   createdevice_result,
   getdevicelist_result,
 
@@ -31,7 +31,9 @@ import {normalizrtopiclist} from './normalizr.js';
 const initial = {
   app: {
     curtabindex: 0,
-    errmsg:'',
+    type:'error',
+    title:'',
+    msg:'',
     ispop:false
   },
   userlogin:{
@@ -55,11 +57,11 @@ const app = createReducer({
   [clickTab]: (state, payload) => {
     return { ...state, curtabindex: payload.curtabindex };
   },
-  [showerrmessage]:(state, payload) => {
-    return { ...state,errmsg:payload,ispop:true};
+  [showpopmessage]:(state, payload) => {
+    return { ...state,msg:payload.msg,title:payload.title,type:payload.type,ispop:true};
   },
-  [hideerrmessage]:(state, payload) => {
-    return { ...state,errmsg:'',ispop:false};
+  [hidepopmessage]:(state, payload) => {
+    return { ...state,msg:'',title:'',ispop:false};
   },
 }, initial.app);
 
@@ -70,6 +72,18 @@ const userlogin = createReducer({
   [login_err]: (state, payload) => {
     return { ...state, loginsuccess:false};
   },
+  // [sendauth_result]: (state, payload) => {
+  //   return { ...state, loginsuccess:false};
+  // },
+  // [sendauth_err]: (state, payload) => {
+  //   return { ...state, loginsuccess:false};
+  // },
+  // [register_result]: (state, payload) => {
+  //   return { ...state, loginsuccess:false};
+  // },
+  // [register_err]: (state, payload) => {
+  //   return { ...state, loginsuccess:false};
+  // },
 }, initial.userlogin);
 
 

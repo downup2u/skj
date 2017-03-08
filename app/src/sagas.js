@@ -3,7 +3,7 @@ import { eventChannel } from 'redux-saga';
 import config from './config.js';
 import { fork, take, call, put, cancel } from 'redux-saga/effects';
 import {
-  showerrmessage,
+  showpopmessage,
   login_request,login_result,login_err,
   logout_request,
 
@@ -22,8 +22,8 @@ import {
   disconnect
 } from './actions';
 import {
-  sendauth_request,
-  register_request
+  sendauth_request,sendauth_result,sendauth_err,
+  register_request,register_result,register_err,
 } from './actions/index.js';
 
 function connect() {
@@ -42,7 +42,39 @@ function subscribe(socket) {
     });
     socket.on('users.login_err',({errmsg})=>{
       emit(login_err());
-      emit(showerrmessage(errmsg));
+      emit(showpopmessage({
+        title:'登录失败',
+        msg:errmsg,
+        type:'error'
+      }));
+    });
+    socket.on('users.sendauth_result',({errmsg})=>{
+      emit(showpopmessage({
+        title:'成功',
+        msg:'发送验证码成功',
+        type:'success'
+      }));
+    });
+    socket.on('users.sendauth_err',({errmsg})=>{
+      emit(showpopmessage({
+        title:'发送验证码失败',
+        msg:errmsg,
+        type:'error'
+      }));
+    });
+    socket.on('users.register_result',({errmsg})=>{
+      emit(showpopmessage({
+        title:'成功',
+        msg:'注册成功',
+        type:'success'
+      }));
+    });
+    socket.on('users.register_err',({errmsg})=>{
+      emit(showpopmessage({
+        title:'注册失败',
+        msg:errmsg,
+        type:'error'
+      }));
     });
     //-------------------------------
     socket.on('forum.inserttopic_result',({newtopic})=>{

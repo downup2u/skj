@@ -18,8 +18,8 @@ let renderRegisterForm = (fields)=>{
   }
 
   let onClickAuth =(e)=>{
-    fields.dispatch(sendauth_request());
-    const name = e.currentTarget.name;
+    const name = fields.username.input.value;
+    fields.dispatch(sendauth_request({username:name}));
     console.log("发送验证码:"+name);
   }
 

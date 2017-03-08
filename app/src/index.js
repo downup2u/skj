@@ -146,13 +146,13 @@ const CoApp = (props) => {
   return (<Route exact path={pathname} component={CoAppRoute}/>);
 }
 
-import {hideerrmessage} from './actions/index.js';
+import {hidepopmessage} from './actions/index.js';
 import { Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 export class AppRoot extends React.Component {
   onDismiss=()=>{
-    this.props.dispatch(hideerrmessage());
+    this.props.dispatch(hidepopmessage());
   }
   componentWillMount () {
   }
@@ -160,9 +160,28 @@ export class AppRoot extends React.Component {
     console.log("this.props.ispop==>" + JSON.stringify(this.props));
     let MessageCo = null;
     if(this.props.ispop){
-      MessageCo = (<Message negative onDismiss={this.onDismiss}>
-        <Message.Header>{this.props.errmsg}</Message.Header>
-      </Message>);
+      if(this.props.type === 'error'){
+        MessageCo =  <Message onDismiss={this.onDismiss}
+            error
+            header={this.props.title}
+            content={this.props.msg}
+          />;
+      }
+      else if(this.props.type === 'warning'){
+      MessageCo =  <Message onDismiss={this.onDismiss}
+          warning
+          header={this.props.title}
+          content={this.props.msg}
+        />;
+      }
+      else if(this.props.type === 'success'){
+        MessageCo =  <Message onDismiss={this.onDismiss}
+            success
+            header={this.props.title}
+            content={this.props.msg}
+          />;
+      }
+
     }
     return (<div style={styles.content}>{MessageCo}<CoApp {...this.props} /></div>);
   }
