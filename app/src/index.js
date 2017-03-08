@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './containers/index.js';
 import Register from './components/register.js';
+import Login from './components/login.js';
 import Addresslist from './components/address-list.js';
 import AddressAdd from './components/address-add.js';
 import Userinfo from './components/user-info.js';
 import ProfileDetail from './components/profiledetail.js';
 import { TransitionMotion, spring } from 'react-motion';
-// import Register from './components/register.js';
+
 //import '../../public/semantic.min.css';
 
 import {DevTools,store} from './store';
@@ -120,18 +121,40 @@ const FadeRoute = ({ component: Component, ...rest }) => {
     )
 }
 
+const CoApp = (props) => {
+  console.log("CoApp====>" + JSON.stringify(props));
+  let pathname = props.location.pathname;
+  let CoAppRoute = App;
+  if(pathname === '/register'){
+    CoAppRoute = Register;
+  }
+  else if(pathname === '/addresslist'){
+    CoAppRoute = Addresslist;
+  }
+  else if(pathname === '/addressadd'){
+    CoAppRoute = AddressAdd;
+  }
+  else if(pathname === '/userinfo'){
+    CoAppRoute = Userinfo;
+  }
+  else if(pathname === '/profiledetail'){
+    CoAppRoute = ProfileDetail;
+  }
+  else if(pathname === '/login'){
+    CoAppRoute = Login;
+  }
+  return (<Route exact path={pathname} component={CoAppRoute}/>);
+}
+
+const AppRoot = (props) =>{
+  return (<div style={styles.content}><CoApp {...props} /></div>);
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <div>
       <Router>
-        <div>
-          <Route exact path="/" component={App}/>
-          <FadeRoute exact path="/register" component={Register}/>
-          <FadeRoute exact path="/addresslist" component={Addresslist}/>
-          <FadeRoute exact path="/addressadd" component={AddressAdd}/>
-          <FadeRoute exact path="/userinfo" component={Userinfo}/>
-          <FadeRoute exact path="/profiledetail" component={ProfileDetail}/>
-        </div>
+          <FadeRoute path="/" component={AppRoot}/>
       </Router>
       <DevTools />
    </div>

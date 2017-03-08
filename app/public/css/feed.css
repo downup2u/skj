@@ -66,10 +66,24 @@
     padding: 10px 15px;
     margin: 0;
 }
+.communityInfo .feedContent{
+    border-bottom: none;
+}
+.ui.feed.communityInfo .event .content .myMeta {
+    border-bottom: 1px solid #EEE;
+}
+.ui.feed.communityInfo .event .content .avatarlist{
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ui.feed.communityInfo .event .content .avatarlist:active{
+    background: #EEE;
+}
 
 .ui.comments {
     padding: 15px;
-    background: #FFF;
 }
 .myCommentAction{
     display: flex;
@@ -88,3 +102,42 @@
 .ui.comments .comment .myCommentAction .metadata{
     margin: 0;
 }
+.communityInfoComment.ui.comments{
+    padding: 0;
+}
+.communityInfoComment .title{
+    padding: 0 15px 5px 15px;
+}
+.communityInfoComment.ui.comments .comment{
+    border-bottom: 1px solid #EEE;
+    padding: 15px;
+    background: #FFF;
+    margin: 0;
+}
+.communityInfoComment.ui.comments .comment .avatar img{
+    border-radius: 100%;
+}
+.communityInfoComment.ui.comments .comment .author{
+    color: #5694dd;
+    font-weight: normal;
+}
+.feedBottomReply{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFF;
+    border-top: 1px solid #EEE;
+    padding: 10px 0;
+}
+.feedBottomReply .ui.input{
+    flex-grow: 1;
+    padding: 0 15px;
+}
+.feedBottomReply span{
+    padding-right: 15px;
+}
+

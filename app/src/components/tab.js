@@ -5,7 +5,7 @@ import React from "react"
 import {Page,Tabbar,Tab} from 'react-onsenui';
 
 import Page0 from './home.js';
-import Page1 from './community.js';
+import Page1 from './community-info.js';
 import Page2 from './myprofile.js';
 
 

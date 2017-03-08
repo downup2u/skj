@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { createReducer } from 'redux-act';
+import { reducer as formReducer } from 'redux-form';
 import {
   clickTab,
   clickNavPage,
@@ -191,5 +192,5 @@ const device = createReducer({
 }, initial.device);
 
 export default combineReducers(
-  { app,userlogin,forum,device }
+  { app,userlogin,forum,device,form: formReducer}
 );
