@@ -6,6 +6,10 @@ import {
   clickNavPage,
   login_result,
 
+  login_err,
+  showerrmessage,
+  hideerrmessage,
+
   inserttopic_result,
   getmytopic_result,
   gettopiclist_result,
@@ -26,10 +30,13 @@ import {normalizrtopiclist} from './normalizr.js';
 
 const initial = {
   app: {
-    curtabindex: 0
+    curtabindex: 0,
+    errmsg:'',
+    ispop:false
   },
   userlogin:{
-
+    loginsuccess:false,
+    profile:{},
   },
   forum:{
     mytopiclist:[],
@@ -48,14 +55,20 @@ const app = createReducer({
   [clickTab]: (state, payload) => {
     return { ...state, curtabindex: payload.curtabindex };
   },
-  [clickNavPage]: (state, payload) => {
-    return { ...state,action:payload.action,name:payload.name};
+  [showerrmessage]:(state, payload) => {
+    return { ...state,errmsg:payload,ispop:true};
+  },
+  [hideerrmessage]:(state, payload) => {
+    return { ...state,errmsg:'',ispop:false};
   },
 }, initial.app);
 
 const userlogin = createReducer({
   [login_result]: (state, payload) => {
-    return { ...state, profile: payload.profile };
+    return { ...state, profile: payload,loginsuccess:true };
+  },
+  [login_err]: (state, payload) => {
+    return { ...state, loginsuccess:false};
   },
 }, initial.userlogin);
 

@@ -2,9 +2,15 @@ import { createAction } from 'redux-act';
 
 export const clickTab = createAction('click bottom tab');
 export const clickNavPage = createAction('click nav page');
+export const showerrmessage = createAction('showerrmessage');
+export const hideerrmessage = createAction('hideerrmessage');
 
 export const login_request = createAction('userlogin.login_request');
 export const login_result = createAction('userlogin.login_result');
+export const login_err = createAction('userlogin.login_err');
+export const sendauth_request = createAction('userlogin.sendauth_request');
+export const register_request = createAction('userlogin.register_request');
+
 export const logout_request = createAction('userlogin.logout_request');
 
 //forum.

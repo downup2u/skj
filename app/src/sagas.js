@@ -3,7 +3,8 @@ import { eventChannel } from 'redux-saga';
 import config from './config.js';
 import { fork, take, call, put, cancel } from 'redux-saga/effects';
 import {
-  login_request,login_result,
+  showerrmessage,
+  login_request,login_result,login_err,
   logout_request,
 
   inserttopic_request,inserttopic_result,
@@ -20,6 +21,10 @@ import {
   getdevicelist_request,getdevicelist_result,
   disconnect
 } from './actions';
+import {
+  sendauth_request,
+  register_request
+} from './actions/index.js';
 
 function connect() {
   const socket = io(config.serverurl);
@@ -34,6 +39,10 @@ function subscribe(socket) {
   return eventChannel(emit => {
     socket.on('users.login_result', ({ profile }) => {
       emit(login_result( profile ));
+    });
+    socket.on('users.login_err',({errmsg})=>{
+      emit(login_err());
+      emit(showerrmessage(errmsg));
     });
     //-------------------------------
     socket.on('forum.inserttopic_result',({newtopic})=>{
@@ -98,36 +107,98 @@ function* write(socket,fun,cmd) {
 
 function* handleIOWithAuth(socket) {
   while (true) {
-    let { payload } = yield take(`${login_request}`);
-    socket.emit('message',{cmd:'login',data:payload});
+    console.log("not login!");
+    yield take(`${login_result}`);
+    console.log("login success!");
+    let fnsz = [
+      {
+        fnname:`${getmytopic_request}`,
+        cmd:'getmytopic'
+      },
+      {
+        fnname:`${inserttopic_request}`,
+        cmd:'inserttopic'
+      },
+      {
+        fnname:`${insertcommentstotopic_request}`,
+        cmd:'insertcommentstotopic'
+      },
+      {
+        fnname:`${insertcommentstocomments_request}`,
+        cmd:'insertcommentstocomments'
+      },
+      {
+        fnname:`${lovetopicadd_request}`,
+        cmd:'lovetopicadd'
+      },
+      {
+        fnname:`${lovetopicunadd_request}`,
+        cmd:'lovetopicunadd'
+      },
+      {
+        fnname:`${lovecommentsadd_request}`,
+        cmd:'lovecommentsadd'
+      },
+      {
+        fnname:`${lovecommentsunadd_request}`,
+        cmd:'lovecommentsunadd'
+      },
+      {
+        fnname:`${createdevice_request}`,
+        cmd:'createdevice'
+      },
+      {
+        fnname:`${lovecommentsunadd_request}`,
+        cmd:'getdevicelist'
+      },
 
-    const task1 = yield fork(write, socket,`${getmytopic_request}`,'getmytopic');
-    const task2 = yield fork(write, socket,`${inserttopic_request}`,'inserttopic');
-    const task3 = yield fork(write, socket,`${insertcommentstotopic_request}`,'insertcommentstotopic');
-
-
-
+    ];
+    let tasksz =[];
+    for (var fn of fnsz) {
+      let task =  yield fork(write, socket,fn.fnname,fn.cmd);
+      tasksz.push(task);
+    }
     let action = yield take(`${logout_request}`);
+    for (var task of tasksz) {
+      yield cancel(task);
+    }
 
-    yield cancel(task1);
-    yield cancel(task2);
-    yield cancel(task3);
 
   }
 }
 
 function* handleIO(socket) {
-  yield fork(write, socket,`${gettopiclist_request}`,'gettopiclist');
-  yield fork(write, socket,`${inserttopic_request}`,'inserttopic');//for test
-  yield fork(write, socket,`${insertcommentstotopic_request}`,'insertcommentstotopic');//for test
-
-  yield fork(write, socket,`${lovetopicadd_request}`,'lovetopicadd');//for test
-  yield fork(write, socket,`${lovetopicunadd_request}`,'lovetopicunadd');//for test
-  yield fork(write, socket,`${lovecommentsadd_request}`,'lovecommentsadd');//for test
-  yield fork(write, socket,`${lovecommentsunadd_request}`,'lovecommentsunadd');//for test
-
-  yield fork(write, socket,`${createdevice_request}`,'createdevice');//for test
-  yield fork(write, socket,`${getdevicelist_request}`,'getdevicelist');//for test
+  let fnsz = [
+    {
+      fnname:`${login_request}`,
+      cmd:'login'
+    },
+    {
+      fnname:`${sendauth_request}`,
+      cmd:'sendauth'
+    },
+    {
+      fnname:`${register_request}`,
+      cmd:'register'
+    },
+    {
+      fnname:`${gettopiclist_request}`,
+      cmd:'gettopiclist'
+    },
+  ];
+  // yield fork(write, socket,fnsz[0].fnname,fnsz[0].cmd);//for test
+  // yield fork(write, socket,fnsz[1].fnname,fnsz[1].cmd);//for test
+  // yield fork(write, socket,fnsz[2].fnname,fnsz[2].cmd);//for test
+  // yield fork(write, socket,fnsz[3].fnname,fnsz[3].cmd);//for test
+  for (var fn of fnsz) {
+        // some item manipulation
+        yield fork(write, socket,fn.fnname,fn.cmd);
+    }
+//  let tasksz =[];
+  // fnsz.forEach(function *(fn){
+  //   let task =  yield fork(write, socket,fn.fnname,fn.cmd);//for test
+  //   //yield tasksz.push(task);
+  // });
 }
 
 

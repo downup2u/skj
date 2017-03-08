@@ -146,9 +146,33 @@ const CoApp = (props) => {
   return (<Route exact path={pathname} component={CoAppRoute}/>);
 }
 
-const AppRoot = (props) =>{
-  return (<div style={styles.content}><CoApp {...props} /></div>);
+import {hideerrmessage} from './actions/index.js';
+import { Message } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+
+export class AppRoot extends React.Component {
+  onDismiss=()=>{
+    this.props.dispatch(hideerrmessage());
+  }
+  componentWillMount () {
+  }
+  render() {
+    console.log("this.props.ispop==>" + JSON.stringify(this.props));
+    let MessageCo = null;
+    if(this.props.ispop){
+      MessageCo = (<Message negative onDismiss={this.onDismiss}>
+        <Message.Header>{this.props.errmsg}</Message.Header>
+      </Message>);
+    }
+    return (<div style={styles.content}>{MessageCo}<CoApp {...this.props} /></div>);
+  }
+
 }
+
+const mapStateToProps = ({app}) => {
+  return app;
+}
+AppRoot = connect(mapStateToProps)(AppRoot);
 
 ReactDOM.render(
   <Provider store={store}>

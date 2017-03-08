@@ -1,52 +1,108 @@
 import React, { Component, PropTypes } from 'react';
 import '../../public/css/user.css';
-import { Input, List, Radio, Button, Icon, Image } from 'semantic-ui-react'
+import { Input, List, Radio, Button, Icon, Image, Checkbox} from 'semantic-ui-react';
+import { Field,Fields, reduxForm,Form  } from 'redux-form';
+import { connect } from 'react-redux';
+import {sendauth_request,register_request} from '../actions/index.js';
 //import 'semantic-ui/dist/semantic.min.css';
+let renderRegisterForm = (fields)=>{
+  console.dir(fields);
+  let ispasswordvisiable = fields.ispasswordvisiable.input.value;
+  if(typeof ispasswordvisiable === 'string'){
+    ispasswordvisiable = true;
+  }
 
-const ListExampleDivided = () => (
-    <div className="UserInfoPage">
-        <List selection>
-            <List.Item>
-                <div className="tit">
-                    <span>头像</span>
-                </div>
-                <div className="rightCont">
-                    <Image avatar src='http://semantic-ui.com/images/avatar2/small/rachel.png' />
-                </div>
-            </List.Item>
-            <List.Item>
-                <div className="tit">
-                    <span>昵称</span>
-                </div>
-                <div className="rightCont">
-                    <span>爱喝水的孩子</span>
-                    <Icon name="angle right"/>
-                </div>
-            </List.Item>
-            <List.Item>
-                <div className="tit">
-                    <span>手机号</span>
-                </div>
-                <div className="rightCont">
-                    <span>13800000000</span>
-                    <Icon name="angle right"/>
-                </div>
-            </List.Item>
-            <List.Item>
-                <div className="tit">
-                    <span>修改密码</span>
-                </div>
-                <div className="rightCont">
-                    <Icon name="angle right"/>
-                </div>
-            </List.Item>
+  let onChangePasswordvisiable = (event)=>{
+    let newvalue = !ispasswordvisiable;
+    fields.ispasswordvisiable.input.onChange(newvalue);
+  }
 
+  let onClickAuth =(e)=>{
+    fields.dispatch(sendauth_request());
+    const name = e.currentTarget.name;
+    console.log("发送验证码:"+name);
+  }
 
-        </List>
-        <div className="escLogin">
-            <Button basic>退出登录</Button>
+  return (<div className='registerform'>
+      <div className="username logininput">
+          <Input placeholder='输入手机号' {...fields.username.input} type="text"/>
+          <Icon name="mobile" className='lefticon'/>
+      </div>
+      <div className="password logininput">
+          <Input placeholder='输入验证码'  {...fields.authcode.input} type="text"/>
+          <Icon name="lock" className='lefticon'/>
+          <Button type="button" primary onClick={onClickAuth}>发送验证码</Button>
+      </div>
+      <div className="password logininput">
+          <Input placeholder='输入密码'  {...fields.password.input} type={ispasswordvisiable?"text":"password"}/>
+          <Icon name="lock" className='lefticon'/>
+          <Icon name={ispasswordvisiable?"lock":"eye"} className="sel" onClick={onChangePasswordvisiable}/>
+      </div>
+  </div>);
+}
+renderRegisterForm = connect()(renderRegisterForm);
+
+let RegisterForm = (props)=>{
+  let {handleSubmit,onClickRegister,onClickLogin} = props;
+  return (<Form onSubmit={handleSubmit(onClickRegister)}>
+    <div className="loginPageTop">
+        <img src="/img/1.png" className="loginhead"/>
+        <Fields names={['username','ispasswordvisiable','password','authcode']} component={renderRegisterForm}/>
+        <div className="loginBotton">
+            <Button primary>注册</Button>
+            <Button basic  type="button" onClick={onClickLogin}>快速登录</Button>
         </div>
     </div>
-)
+  </Form>);
+};
 
-export default ListExampleDivided
+RegisterForm = reduxForm({
+  form: 'register',
+  initialValues:{
+    username:'',
+    password:'',
+    authcode:'',
+    ispasswordvisiable:false,
+  }
+})(RegisterForm);
+
+
+import {login_request} from '../actions/index.js';
+export class Page extends React.Component {
+
+  componentWillMount () {
+  }
+
+  onClickRegister = (values)=>{
+    console.dir(values);
+
+    let payload = {
+      username:values.username,
+      password:values.password,
+      authcode:values.authcode
+    }
+    //alert(JSON.stringify(formdata));
+    this.props.dispatch(register_request(payload));
+  }
+
+  onClickLogin = ()=>{
+    this.props.history.push('/login');
+
+  }
+
+  render() {
+    return (
+        <div className="UserLoginPage">
+            <RegisterForm onClickRegister={this.onClickRegister}
+             onClickLogin={this.onClickLogin}/>
+        </div>
+    );
+  }
+
+}
+
+const mapStateToProps = ({userlogin}) => {
+  return {userlogin};
+}
+Page = connect(mapStateToProps)(Page);
+export default Page;

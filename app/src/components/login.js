@@ -7,6 +7,12 @@ import { connect } from 'react-redux';
 let renderLoginForm = (fields)=>{
   let ispasswordvisiable = fields.ispasswordvisiable.input.value;
   let ischeckedpassword = fields.ischeckedpassword.input.value;
+  if(typeof ispasswordvisiable === 'string'){
+    ispasswordvisiable = true;
+  }
+  if(typeof ischeckedpassword === 'string'){
+    ischeckedpassword = true;
+  }
   let onChangePasswordvisiable = (event)=>{
     let newvalue = !ispasswordvisiable;
     fields.ispasswordvisiable.input.onChange(newvalue);
@@ -37,65 +43,79 @@ let LoginForm = (props)=>{
   return (<Form onSubmit={handleSubmit(onClickLogin)}>
     <div className="loginPageTop">
         <img src="/img/1.png" className="loginhead"/>
-
         <Fields names={[ 'username', 'password','ispasswordvisiable','ischeckedpassword' ]} component={renderLoginForm}/>
         <div className="loginBotton">
             <Button primary>登录</Button>
-            <Button basic onClick={handleSubmit(onClickRegister)}>快速注册</Button>
-            <div className="forgetpwd" onClick={handleSubmit(onClickForgetPasword)}>忘记密码</div>
+            <Button basic  type="button"  onClick={onClickRegister}>快速注册</Button>
+            <div className="forgetpwd" onClick={onClickForgetPasword}>忘记密码</div>
         </div>
     </div>
   </Form>);
 };
 
-LoginForm = connect(
-  state => ({
-    initialValues:{
-      username:'',
-      password:'',
-      ispasswordvisiable:false,
-      ischeckedpassword:true
-    }
-  }))(LoginForm);
-
 LoginForm = reduxForm({
-  form: 'login' // a unique name for this form
+  form: 'login',
+  initialValues:{
+    username:'',
+    password:'',
+    ispasswordvisiable:false,
+    ischeckedpassword:true
+  }
 })(LoginForm);
 
 
+import {login_request} from '../actions/index.js';
+export class Page extends React.Component {
 
-
-let ListExampleDivided = (props) =>{
-  let onClickRegister = ()=>{
-    props.history.push('/register');
+  componentWillMount () {
   }
-  let onClickLogin = (values)=>{
+
+  onClickRegister = ()=>{
+    this.props.history.push('/register');
+  }
+
+  onClickLogin = (values)=>{
     console.dir(values);
-    let formdata = {
+    let payload = {
       username:values.username,
       password:values.password,
-      ispasswordvisiable:values.ispasswordvisiable,
-      ischeckedpassword:values.ischeckedpassword,
+      // ispasswordvisiable:values.ispasswordvisiable,
+      // ischeckedpassword:values.ischeckedpassword,
     }
-    alert(JSON.stringify(formdata));
+    //alert(JSON.stringify(formdata));
+    this.props.dispatch(login_request(payload));
   }
-  let onClickForgetPasword = ()=>{
-    props.history.push('/forgetpwd');
+  onClickForgetPasword = ()=>{
+    this.props.history.push('/forgetpwd');
   }
-  return (
-      <div className="UserLoginPage">
-          <LoginForm onClickRegister={onClickRegister} onClickLogin={onClickLogin} onClickForgetPasword={onClickForgetPasword}/>
-          <div className="loginPageBottom">
-              <div className="tit"><span>其他登录方式</span></div>
-              <div className="lnk">
-                  <div><Icon name="qq"/></div>
-                  <div><Icon name="weixin"/></div>
-              </div>
-          </div>
-      </div>
-  );
+  componentWillReceiveProps (nextProps) {
+    if(nextProps.loginsuccess){
+      const redirectRoute = this.props.location.query.next || '/';
+      this.props.history.replace(redirectRoute);
+      return;
+    }
+  }
+  render() {
+    return (
+        <div className="UserLoginPage">
+            <LoginForm onClickRegister={this.onClickRegister}
+             onClickLogin={this.onClickLogin}
+             onClickForgetPasword={this.onClickForgetPasword}/>
+            <div className="loginPageBottom">
+                <div className="tit"><span>其他登录方式</span></div>
+                <div className="lnk">
+                    <div><Icon name="qq"/></div>
+                    <div><Icon name="weixin"/></div>
+                </div>
+            </div>
+        </div>
+    );
+  }
 
 }
 
-ListExampleDivided = connect()(ListExampleDivided);
-export default ListExampleDivided
+const mapStateToProps = ({userlogin}) => {
+  return {userlogin};
+}
+Page = connect(mapStateToProps)(Page);
+export default Page;
