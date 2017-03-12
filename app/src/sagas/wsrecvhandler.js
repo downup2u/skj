@@ -48,10 +48,10 @@ export function wsrecvhandler(socket,emit){
       type:'error'
     }));
   });
-  socket.on('users.sendauth_result',({errmsg})=>{
+  socket.on('users.sendauth_result',({authcode})=>{
     emit(showpopmessage({
       title:'成功',
-      msg:'发送验证码成功',
+      msg:`发送验证码成功:${authcode}`,
       type:'success'
     }));
   });
