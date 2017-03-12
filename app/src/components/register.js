@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import '../../public/css/user.css';
-import { Input, List, Radio, Button, Icon, Image, Checkbox} from 'semantic-ui-react';
+import { Input, List, Radio, Button, Icon, Image, Checkbox,Label} from 'semantic-ui-react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import {sendauth_request,register_request} from '../actions/index.js';
@@ -27,15 +27,21 @@ let renderRegisterForm = (fields)=>{
   return (<div className='registerform'>
       <div className="username logininput">
           <Input placeholder='输入手机号' {...fields.username.input} type="text"/>
+          {fields.username.meta.touched && fields.username.meta.error &&
+              <Label basic color='red' pointing>{fields.username.meta.error}</Label>}
           <Icon name="mobile" className='lefticon'/>
       </div>
       <div className="password logininput">
           <Input placeholder='输入验证码'  {...fields.authcode.input} type="text"/>
+          {fields.authcode.meta.touched && fields.authcode.meta.error &&
+            <Label basic color='red' pointing>{fields.authcode.meta.error}</Label>}
           <Icon name="lock" className='lefticon'/>
           <Button type="button" primary onClick={onClickAuth}>发送验证码</Button>
       </div>
       <div className="password logininput">
           <Input placeholder='输入密码'  {...fields.password.input} type={ispasswordvisiable?"text":"password"}/>
+          {fields.password.meta.touched && fields.password.meta.error &&
+            <Label basic color='red' pointing>{fields.password.meta.error}</Label>}
           <Icon name="lock" className='lefticon'/>
           <Icon name={ispasswordvisiable?"lock":"eye"} className="sel" onClick={onChangePasswordvisiable}/>
       </div>
@@ -57,8 +63,55 @@ let RegisterForm = (props)=>{
   </Form>);
 };
 
+
+const validate = values => {
+  const errors = {}
+  if (!values.username) {
+    errors.username = '必须填写用户名';
+  }
+  else{
+    let phone = values.username;
+    phone = phone.replace(/\s/g,'');
+		if(phone.match(/\D/g)||phone.length!==11||!phone.match(/^1/))
+		{
+      errors.username = '无效的手机号码';
+    }
+  }
+
+  if (!values.authcode) {
+    errors.authcode = '必须填写验证码';
+  }
+  else{
+    let authcode = values.authcode;
+    authcode = authcode.replace(/\s/g,'');
+		if(authcode.match(/\D/g)||authcode.length!==4)
+		{
+      errors.authcode = '验证码必须是四位数字';
+    }
+  }
+
+  if (!values.password) {
+    errors.password = '必须填写密码'
+  }
+  else{
+    let psd = values.password;
+    if(psd.match(/\s/g))
+  	{
+  			errors.password = '密码不能含有空格';
+  	}
+    else if(psd.length <6){
+  			errors.password = '密码不能小于六位';
+  	}
+  	else	if(psd.length >16){
+      errors.password = '密码太长';
+    }
+  }
+  return errors;
+}
+
 RegisterForm = reduxForm({
   form: 'register',
+  validate,
   initialValues:{
     username:'',
     password:'',

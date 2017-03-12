@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import '../../public/css/user.css';
-import { Input, List, Radio, Button, Icon, Image, TextArea} from 'semantic-ui-react';
+import { Input, List, Radio, Button, Icon, Image, TextArea,Label} from 'semantic-ui-react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import {inserttopic_request} from '../actions/index.js';
@@ -12,6 +12,8 @@ let renderNewtopicForm = (fields)=>{
   console.dir(fields);
   return (<div className='registerform'>
           <TextArea placeholder='输入帖子内容' {...fields.title.input} type="text"/>
+          {fields.title.meta.touched && fields.title.meta.error &&
+            <Label basic color='red' pointing>{fields.title.meta.error}</Label>}
           <Icon name="mobile" className='lefticon'/>
           <PicturesWall  {...fields.picurl.input} />
           </div>);
@@ -30,8 +32,17 @@ let NewtopicForm = (props)=>{
   </Form>);
 };
 
+const validate = values => {
+  const errors = {}
+  if (!values.title) {
+    errors.title = '写点什么吧';
+  }
+  return errors;
+}
+
 NewtopicForm = reduxForm({
   form: 'newtopic',
+  validate,
   initialValues:{
     title:'',
     picurl:[],

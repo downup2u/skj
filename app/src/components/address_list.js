@@ -70,7 +70,7 @@ export class Page extends React.Component {
   }
   onClickDelete =(addressitem)=>{
     let poptitle = '确认删除';
-    let popmsg = `你确认要删除设备:${addressitem.addressname}吗?`;
+    let popmsg = `你确认要删除地址:${addressitem.addressname}吗?`;
     this.props.dispatch(deleteaddress_confirmpopshow({poptitle:poptitle,popmsg:popmsg,deleteingaddress:addressitem}));
   }
   onClickEdit =(addressitem)=>{

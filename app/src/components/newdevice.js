@@ -4,6 +4,8 @@ import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import { Input, List, Radio, Button, Icon, Image, Checkbox} from 'semantic-ui-react';
 import {createdevice} from '../actions/sagacallback.js';
+
+
 let renderNewdeviceForm = (fields)=>{
   console.dir(fields);
   return (<div className='registerform'>
