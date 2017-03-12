@@ -1,7 +1,8 @@
 import io from 'socket.io-client';
 import { eventChannel } from 'redux-saga';
-import config from './config.js';
 import { fork, take, call, put, cancel } from 'redux-saga/effects';
+
+import config from '../config.js';
 import {
   showpopmessage,
   login_request,login_result,login_err,
@@ -19,12 +20,21 @@ import {
 
   createdevice_request, createdevice_result,
   getdevicelist_request,getdevicelist_result,
+  deletedevice_request,deletedevice_result,
+
+  createaddress_request,
+  deleteaddress_request,
+  editaddress_request,
+  getaddresslist_request,
   disconnect
-} from './actions';
+} from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
   register_request,register_result,register_err,
-} from './actions/index.js';
+} from '../actions/index.js';
+
+import {wsrecvhandler} from './wsrecvhandler.js';
+
 
 function connect() {
   const socket = io(config.serverurl);
@@ -37,85 +47,7 @@ function connect() {
 
 function subscribe(socket) {
   return eventChannel(emit => {
-    socket.on('users.login_result', ({ profile }) => {
-      emit(login_result( profile ));
-    });
-    socket.on('users.login_err',({errmsg})=>{
-      emit(login_err());
-      emit(showpopmessage({
-        title:'登录失败',
-        msg:errmsg,
-        type:'error'
-      }));
-    });
-    socket.on('users.sendauth_result',({errmsg})=>{
-      emit(showpopmessage({
-        title:'成功',
-        msg:'发送验证码成功',
-        type:'success'
-      }));
-    });
-    socket.on('users.sendauth_err',({errmsg})=>{
-      emit(showpopmessage({
-        title:'发送验证码失败',
-        msg:errmsg,
-        type:'error'
-      }));
-    });
-    socket.on('users.register_result',({errmsg})=>{
-      emit(showpopmessage({
-        title:'成功',
-        msg:'注册成功',
-        type:'success'
-      }));
-    });
-    socket.on('users.register_err',({errmsg})=>{
-      emit(showpopmessage({
-        title:'注册失败',
-        msg:errmsg,
-        type:'error'
-      }));
-    });
-    //-------------------------------
-    socket.on('forum.inserttopic_result',({newtopic})=>{
-      emit(inserttopic_result(newtopic));
-    });
-    socket.on('forum.getmytopic_result', ({ mytopiclist }) => {
-      emit(getmytopic_result(mytopiclist ));
-    });
-    socket.on('forum.gettopiclist_result', ({ alltopiclist }) => {
-      emit(gettopiclist_result( alltopiclist ));
-    });
-    socket.on('forum.lovetopicadd_result', ({ updatedtopic }) => {
-      emit(lovetopicadd_result( updatedtopic ));
-    });
-    socket.on('forum.lovetopicunadd_result', ({ updatedtopic }) => {
-      emit(lovetopicunadd_result( updatedtopic ));
-    });
-    socket.on('forum.lovecommentsadd_result', ({ updatedcomment }) => {
-      emit(lovecommentsadd_result( updatedcomment ));
-    });
-    socket.on('forum.lovecommentsunadd_result', ({ updatedcomment }) => {
-      emit(lovecommentsunadd_result( updatedcomment ));
-    });
-    socket.on('forum.insertcommentstotopic_result', ({ newcomments,updatedtopic }) => {
-      emit(insertcommentstotopic_result( { newcomments,updatedtopic } ));
-    });
-    socket.on('forum.insertcommentstocomments_result', ({ newcomments,updatedcomment }) => {
-      emit(insertcommentstocomments_result( { newcomments,updatedcomment }));
-    });
-    //-------------------------------
-    socket.on('device.createdevice_result', ({ newdevice }) => {
-      emit(createdevice_result( newdevice ));
-    });
-
-    socket.on('device.getdevicelist_result', ({ mydevicelist }) => {
-      emit(getdevicelist_result( mydevicelist ));
-    });
-
-    socket.on('disconnect', e => {
-      emit(disconnect());
-    });
+    wsrecvhandler(socket,emit);
     return () => {};
   });
 }
@@ -180,10 +112,29 @@ function* handleIOWithAuth(socket) {
         cmd:'createdevice'
       },
       {
-        fnname:`${lovecommentsunadd_request}`,
+        fnname:`${getdevicelist_request}`,
         cmd:'getdevicelist'
       },
-
+      {
+        fnname:`${deletedevice_request}`,
+        cmd:'deletedevice'
+      },
+      {
+        fnname:`${createaddress_request}`,
+        cmd:'createaddress'
+      },
+      {
+        fnname:`${deleteaddress_request}`,
+        cmd:'deleteaddress'
+      },
+      {
+        fnname:`${editaddress_request}`,
+        cmd:'editaddress'
+      },
+      {
+        fnname:`${getaddresslist_request}`,
+        cmd:'getaddresslist'
+      },
     ];
     let tasksz =[];
     for (var fn of fnsz) {
@@ -251,6 +202,19 @@ function* flow() {
   }
 }
 
+import {
+  createaddressflow,
+  editaddressflow,
+  registerflow,
+  inserttopicflow,
+  createdeviceflow,
+} from '../actions/sagacallback.js';
+
 export default function* rootSaga() {
   yield fork(flow);
+  yield fork(createaddressflow);
+  yield fork(editaddressflow);
+  yield fork(registerflow);
+  yield fork(inserttopicflow);
+  yield fork(createdeviceflow);
 }

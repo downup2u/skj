@@ -1,111 +1,104 @@
 import React, { Component, PropTypes } from 'react';
-import {Page,Button as Button1} from 'react-onsenui';
-import TopicDetail from './topicdetail.js';
-import { Button, Comment, Form, Header,Feed, Icon  } from 'semantic-ui-react';
-//import 'semantic-ui/dist/semantic.min.css';
+import { Button, Comment, Header,Feed, Icon,Input  } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import {gettopiclist_request,
+    uicommentshow,
+    uicommenthide
+} from '../actions/index.js';
 import '../../public/css/feed.css';
 
-const CommentExampleComment = () => (
-    <Comment.Group>
-        <Comment>
-            <Comment.Avatar src='http://semantic-ui.com/images/avatar/small/elliot.jpg'/>
-            <Comment.Content>
-                <Comment.Author as='a'>Elliot Fu</Comment.Author>
-                <Comment.Text>
-                    <p>This has been very useful</p>
-                </Comment.Text>
-                <Comment.Actions className="myCommentAction">
-                    <Comment.Metadata>
-                        <div>Yesterday at 12:30AM</div>
-                    </Comment.Metadata>
+import CommentExampleComment from './community_comment.js';
+import FeedExampleBasic from './community_topic.js';
+import FeedReplyForm from './community_reply.js';
 
-                    <div className="myCommentLnk">
-                        <div className="lnkAddCommunity">
-                            <Icon name="commenting outline"/>
-                            200
-                        </div>
-                        <div className="lnkZhan">
-                            <Icon name="thumbs outline up"/>
-                            200
-                        </div>
-
-                    </div>
-                </Comment.Actions>
-            </Comment.Content>
-        </Comment>
-    </Comment.Group>
-);
-
-const FeedExampleBasic = () => (
-    <Feed>
-
-        <Feed.Event>
-
-            <Feed.Content>
-                <div className="feedHead">
-                    <Feed.Label image='http://semantic-ui.com/images/avatar/small/joe.jpg'>
-                    </Feed.Label>
-                    <Feed.Summary>
-                        <a className="summaryName">Joe Henderson</a>
-                        <Feed.Date>2017-11-11</Feed.Date>
-                    </Feed.Summary>
-                </div>
-                <div className="feedContent">
-                    <Feed.Extra images>
-                        <a><img src='http://semantic-ui.com/images/wireframe/image.png'/></a>
-                        <a><img src='http://semantic-ui.com/images/wireframe/image.png'/></a>
-                    </Feed.Extra>
-                    <Feed.Extra text>
-                        Ours is
-                    </Feed.Extra>
-                </div>
-                <Feed.Meta className="myMeta">
-                    <div className="addCommunity">
-                        <Icon name="talk outline"/>
-                        评论 (10)
-                    </div>
-                    <Feed.Like>
-                        <Icon name='like'/>
-                        赞 (20)
-                    </Feed.Like>
-                </Feed.Meta>
-            </Feed.Content>
-        </Feed.Event>
-    </Feed>
-)
-
-const TopTip = (props) => {
+let TopTip = (props) => {
     return (
-        <div className="topTip">
-            <div className="con">
-                <img src={props.data.avatar}/>
-                <span>{props.data.text}</span>
-                <Icon name='chevron right' size="small"/>
-            </div>
-        </div>
+
+          <div className="topTip">
+              <div className="con">
+                  <img src={props.data.avatar}/>
+                  <span>{props.data.text}</span>
+                  <Icon name='chevron right' size="small"/>
+              </div>
+          </div>
+
     )
 }
 
+export class Topic extends React.Component {
+  componentWillMount () {
+  }
 
-export default function MyPage(props) {
-
-    let HotLnk = (data)=> {
-        props.navigator.pushPage({
-            comp: TopicDetail,
-            props: data
-        });
-    };
-
-    let toptipData = {
-        avatar: "http://semantic-ui.com/images/avatar/small/joe.jpg",
-        text: "一条消息"
+  render() {
+    let commentsco = [];
+    for(let commentid of this.props.topic.comments){
+      commentsco.push(<CommentExampleComment key={commentid} comment={this.props.comments[commentid]} {...this.props} />);
     }
+    return  (<div onClick={()=>{
+      this.props.onClickTopic(this.props.topic._id);
+    }}>
+                <FeedExampleBasic topic={this.props.topic} {...this.props} />
+                  <Comment.Group>
+                    <div className="title">最热评论</div>
+                    {commentsco}
+                  </Comment.Group>
+            </div>);
 
-    return (<Page style={{backgroundColor:"#EEE"}}>
-        <div>
-            <TopTip data={toptipData}></TopTip>
-            <FeedExampleBasic></FeedExampleBasic>
-            <CommentExampleComment></CommentExampleComment>
-        </div>
-    </Page>);
+  }
 }
+
+
+export class Page extends React.Component {
+
+  componentWillMount () {
+    let page = 1;
+    let perpagenumber = 10;
+    let payload = {
+      query:{},
+      options:{
+        page: page,
+        limit: perpagenumber,
+      }
+    };
+    this.props.dispatch(gettopiclist_request(payload));
+    console.log("--------->comm:componentWillMount");
+  }
+   HotLnk = (data)=> {
+        // props.navigator.pushPage({
+        //     comp: TopicDetail,
+        //     props: data
+        // });
+    };
+    onClickPage =()=>{//点击空白处，隐藏?如何判断点击空白
+      this.props.dispatch(uicommenthide());
+    }
+    onClickTopic =(topicid)=>{//点击空白处，隐藏?如何判断点击空白
+      this.props.history.push(`/communityinfo/${topicid}`);
+    }
+    render() {
+
+     console.dir(this.props.topics);
+
+      let toptipData = {
+          avatar: "http://semantic-ui.com/images/avatar/small/joe.jpg",
+          text: "一条消息"
+      }
+      let topicsco = [];
+      for( let topicid of this.props.topiclist ){
+        console.log(`FeedExampleBasic,topicid:${topicid}`);
+        topicsco.push(<Topic key={topicid} topic={this.props.topics[topicid]} {...this.props} onClickTopic={this.onClickTopic}/>);
+      }
+      return (
+        <div style={{backgroundColor:"#EEE"}}>
+            <TopTip data={toptipData}></TopTip>
+            {topicsco}
+            {this.props.iscommentshow?<FeedReplyForm {...this.props}/>:null}
+        </div>);
+  }
+}
+
+const mapStateToProps = ({forum}) => {
+  return forum;
+}
+Page = connect(mapStateToProps)(Page);
+export default Page;

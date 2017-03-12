@@ -2,6 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "devDependencies": {
     "react-scripts": "0.9.1",
     "redux-devtools": "^3.3.2",
@@ -9,18 +10,19 @@
     "redux-devtools-log-monitor": "^1.2.0"
   },
   "dependencies": {
+    "antd": "^2.8.0",
     "normalizr": "^3.2.2",
-    "onsenui": "^2.1.0",
+    "rc-swipeout": "^1.2.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-motion": "^0.4.7",
-    "react-onsenui": "^1.1.0",
     "react-redux": "^5.0.3",
     "react-router-dom": "^4.0.0-beta.7",
     "redux": "^3.6.0",
     "redux-act": "^1.1.0",
     "redux-form": "^6.5.0",
     "redux-saga": "^0.14.3",
+    "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.67.0",
     "socket.io-client": "^1.7.3"
   },

@@ -3,6 +3,7 @@ import '../../public/css/user.css';
 import { Input, List, Radio, Button, Icon, Image, Checkbox} from 'semantic-ui-react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
+import NavBar from './nav.js';
 //import 'semantic-ui/dist/semantic.min.css';
 let renderLoginForm = (fields)=>{
   let ispasswordvisiable = fields.ispasswordvisiable.input.value;
@@ -89,22 +90,36 @@ export class Page extends React.Component {
     this.props.history.push('/forgetpwd');
   }
   componentWillReceiveProps (nextProps) {
-    if(nextProps.loginsuccess){
-      const redirectRoute = this.props.location.query.next || '/';
-      this.props.history.replace(redirectRoute);
+    if(nextProps.loginsuccess && !this.props.loginsuccess){
+      console.log("------->" + JSON.stringify(this.props.location));
+      //search:?next=/devicelist
+      var fdStart = this.props.location.search.indexOf("?next=");
+      if(fdStart === 0){
+        const redirectRoute = this.props.location.search.substring(6);
+        this.props.history.replace(redirectRoute);
+      }
+      else{
+        this.props.history.goBack();
+      }
       return;
     }
+  }
+  onClickReturn =()=>{
+    this.props.history.goBack();
   }
   render() {
     return (
         <div className="UserLoginPage">
+            <NavBar lefttitle="返回" title="登录" onClickLeft={this.onClickReturn} />
             <LoginForm onClickRegister={this.onClickRegister}
              onClickLogin={this.onClickLogin}
              onClickForgetPasword={this.onClickForgetPasword}/>
             <div className="loginPageBottom">
                 <div className="tit"><span>其他登录方式</span></div>
                 <div className="lnk">
-                    <div><Icon name="qq"/></div>
+                    <div><Icon name="qq" onClick={()=>{
+                      this.props.history.push('/');
+                    }}/></div>
                     <div><Icon name="weixin"/></div>
                 </div>
             </div>
@@ -115,7 +130,7 @@ export class Page extends React.Component {
 }
 
 const mapStateToProps = ({userlogin}) => {
-  return {userlogin};
+  return userlogin;
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

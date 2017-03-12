@@ -22,10 +22,21 @@ import {
   //设备
   createdevice_result,
   getdevicelist_result,
+  deletedevice_result,
+  //地址
+  createaddress_result,
+  deleteaddress_result,
+  editaddress_result,
+  getaddresslist_result,
 
-  serverpush_newtopic
+  serverpush_newtopic,
+
+  newtopicfileuploadsetpreview,
+  uicommentshow,
+  uicommenthide
 } from '../actions';
-
+import {deletedevice_confirmpopshow,deletedevice_confirmpophide} from '../actions/index.js';
+import {deleteaddress_confirmpopshow,deleteaddress_confirmpophide} from '../actions/index.js';
 import {normalizrtopiclist} from './normalizr.js';
 
 const initial = {
@@ -45,11 +56,30 @@ const initial = {
     topiclist:[],
     topics:{},
     comments:{},
-    users:{}
+    users:{},
+    selectedid:'',
+    iscommentshow:false,
+    selectedtype:'topic'
   },
   device:{
     mydevicelist:[],
-    curdevice:{}
+    curdevice:{},
+    isconfirmshow:false,
+    poptitle:'',
+    popmsg:'',
+    deleteingdevice:{}
+  },
+  newtopicfileupload:{
+      previewVisible: false,
+      previewImage: '',
+      fileList: [],
+  },
+  address:{
+    addresslist:[],
+    isconfirmshow:false,
+    poptitle:'',
+    popmsg:'',
+    deleteingaddress:{}
   }
 };
 
@@ -109,7 +139,7 @@ const forum = createReducer({
   [getmytopic_result]: (state, payload) => {
     let newdocs = normalizrtopiclist(payload);
     return { ...state,
-      mytopiclist:[ ...state.topiclist, ...newdocs.result.docs ],
+      mytopiclist:[ ...newdocs.result.docs ],//这样分页就有问题
       topics: newdocs.entities.topics,
       comments: newdocs.entities.comments,
       users: newdocs.entities.users,
@@ -118,17 +148,21 @@ const forum = createReducer({
   [gettopiclist_result]: (state, payload) => {
     let newdocs = normalizrtopiclist(payload);
     return {...state,
-          topiclist: [ ...state.topiclist, ...newdocs.result.docs ],
+          topiclist: [ ...newdocs.result.docs ],//这样分页就有问题
           topics: newdocs.entities.topics,
-          comments: newdocs.entities.comments,
+          comments: newdocs.entities.comments?newdocs.entities.comments:{},
           users: newdocs.entities.users,
         };
   },
   [inserttopic_result]: (state, payload) => {
     let newtopic = payload;
     return { ...state,
-      topiclist:[newtopic,...state.topiclist],
-      mytopiclist:[newtopic,...state.mytopiclist]
+      topiclist:[newtopic._id,...state.topiclist],
+      mytopiclist:[newtopic._id,...state.mytopiclist],
+      topics:{
+        ...state.topics,
+        [newtopic._id]:newtopic
+      }
     };
   },
   [lovetopicadd_result]: (state, payload) => {
@@ -204,7 +238,14 @@ const forum = createReducer({
          }
        };
      }
-  }
+  },
+  [uicommentshow]: (state, payload) => {
+    return {...state,selectedid:payload.selectedid,selectedtype:payload.selectedtype,iscommentshow:true};
+  },
+  [uicommenthide]: (state, payload) => {
+    return {...state,iscommentshow:false};
+  },
+
 }, initial.forum);
 
 const device = createReducer({
@@ -216,8 +257,85 @@ const device = createReducer({
     let mydevicelist =  payload.docs;
     return { ...state,mydevicelist:mydevicelist};
   },
+  [deletedevice_result]: (state, payload) => {
+    let mydevicelist =  state.mydevicelist;
+    let newdevicelist = [];
+    for(let item of mydevicelist){
+      if(item._id !== payload._id){
+        newdevicelist.push(item);
+      }
+    }
+    return { ...state,mydevicelist:[...newdevicelist]};
+  },
+  [deletedevice_confirmpopshow]: (state, payload) => {
+    // isconfirmshow:false,
+    // poptitle:'',
+    // popmsg:''
+    return { ...state,isconfirmshow:true,
+      poptitle:payload.poptitle,popmsg:payload.popmsg,deleteingdevice:payload.deleteingdevice};
+  },
+  [deletedevice_confirmpophide]: (state, payload) => {
+    return { ...state,isconfirmshow:false};
+  },
+
 }, initial.device);
 
+
+const address = createReducer({
+  [createaddress_result]: (state, payload) => {
+    let newaddress = payload;
+    return { ...state, addresslist:[newaddress,...state.addresslist] };
+  },
+  [editaddress_result]: (state, payload) => {
+    let addresslist =  state.addresslist;
+    let newaddresslist = [];
+    for(let item of newaddresslist){
+      if(item._id===payload._id){
+        newaddresslist.push(payload);
+      }
+    }
+    return { ...state,addresslist:[...newaddresslist]};
+  },
+  [getaddresslist_result]: (state, payload) => {
+    let addresslist =  payload.docs;
+    return { ...state,addresslist:addresslist};
+  },
+  [deleteaddress_result]: (state, payload) => {
+    let addresslist =  state.addresslist;
+    let newaddresslist = [];
+    for(let item of addresslist){
+      if(item._id !== payload._id){
+        newaddresslist.push(item);
+      }
+    }
+    return { ...state,addresslist:[...newaddresslist]};
+  },
+  [deleteaddress_confirmpopshow]: (state, payload) => {
+    return { ...state,isconfirmshow:true,
+      poptitle:payload.poptitle,popmsg:payload.popmsg,deleteingaddress:payload.deleteingaddress};
+  },
+  [deleteaddress_confirmpophide]: (state, payload) => {
+    return { ...state,isconfirmshow:false};
+  },
+
+}, initial.address);
+
+const newtopicfileupload = createReducer({
+  [newtopicfileuploadsetpreview]: (state, payload) => {
+    let newstate = state;
+    if(payload.hasOwnProperty('previewVisible')){
+      newstate =  { ...newstate, previewVisible:payload.previewVisible};
+    }
+    if(payload.hasOwnProperty('previewImage')){
+      newstate =  { ...newstate, previewImage:payload.previewImage};
+    }
+    if(payload.hasOwnProperty('fileList')){
+      newstate =  { ...newstate,fileList:[...payload.fileList]};
+    }
+    return newstate;
+  },
+},initial.newtopicfileupload);
+
 export default combineReducers(
-  { app,userlogin,forum,device,form: formReducer}
+  { app,userlogin,forum,device,address,newtopicfileupload,form: formReducer}
 );

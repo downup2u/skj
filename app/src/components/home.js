@@ -86,7 +86,9 @@ export default function MyPage(props){
     let headImg = {
         width:"60%"
     };
-
+    let onClickDevicelist =()=>{
+      props.history.push('/devicelist');
+    }
     return (
         <Page>
             <div style={homePage}>
@@ -97,7 +99,7 @@ export default function MyPage(props){
                             <Icon icon='md-plus' style={{color:"#FFF",fontSize:"16px"}}></Icon>
                         </ToolbarButton>
                     </div>
-                    <div className='right'>
+                    <div className='right' onClick={onClickDevicelist}>
                         <ToolbarButton>
                             <Icon icon='md-menu' style={{color:"#FFF",fontSize:"16px"}}></Icon>
                         </ToolbarButton>
@@ -122,7 +124,7 @@ export default function MyPage(props){
                 <ul style={list}>
 
 
-                    
+
                     <li style={listLi}>
                         <div style={listhead}>
                             <div>

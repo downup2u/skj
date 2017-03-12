@@ -4,6 +4,7 @@ import { Input, List, Radio, Button, Icon, Image, Checkbox} from 'semantic-ui-re
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import {sendauth_request,register_request} from '../actions/index.js';
+import {register} from '../actions/sagacallback.js';
 //import 'semantic-ui/dist/semantic.min.css';
 let renderRegisterForm = (fields)=>{
   console.dir(fields);
@@ -82,11 +83,15 @@ export class Page extends React.Component {
       authcode:values.authcode
     }
     //alert(JSON.stringify(formdata));
-    this.props.dispatch(register_request(payload));
+    this.props.dispatch(register(payload)).then((result)=>{
+      this.props.history.goBack();
+    }).catch((error)=>{
+      console.log("注册失败:" + JSON.stringify(error));
+    });
   }
 
   onClickLogin = ()=>{
-    this.props.history.push('/login');
+    this.props.history.replace('/login');
 
   }
 

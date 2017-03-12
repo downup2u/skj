@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-
+import thunk from 'redux-thunk';
 import { createDevTools } from 'redux-devtools';
 import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
@@ -25,11 +25,11 @@ let configureStore = (initialState)=> {
   const store = createStore(
     reducer, initialState,
       compose(
-        applyMiddleware(sagaMiddleware),
+        applyMiddleware(thunk,sagaMiddleware),
         DevTools.instrument()
       )
   );
-  //sagaMiddleware.run(saga);
+  sagaMiddleware.run(saga);
   return store;
 }
 

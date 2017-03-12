@@ -4,20 +4,24 @@ import { Provider } from 'react-redux';
 import App from './containers/index.js';
 import Register from './components/register.js';
 import Login from './components/login.js';
-import Addresslist from './components/address-list.js';
+import Addresslist from './components/address_list.js';
 import AddressAdd from './components/address-add.js';
+import AddressEdit from './components/address-edit.js';
 import Userinfo from './components/user-info.js';
 import ProfileDetail from './components/profiledetail.js';
 import { TransitionMotion, spring } from 'react-motion';
-
-//import '../../public/semantic.min.css';
+import Devicelist from './components/devicelist.js';
+import NewDevice from './components/newdevice.js';
+import Community from './components/community.js';
+import Communityinfo from './components/community-info.js';
+import {requireAuthentication} from './components/requireauthentication';
 
 import {DevTools,store} from './store';
 
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
-  Link
+  Switch
 } from 'react-router-dom';
 
 
@@ -121,29 +125,26 @@ const FadeRoute = ({ component: Component, ...rest }) => {
     )
 }
 
+import NewTopic from './components/newtopic.js';
 const CoApp = (props) => {
-  console.log("CoApp====>" + JSON.stringify(props));
-  let pathname = props.location.pathname;
-  let CoAppRoute = App;
-  if(pathname === '/register'){
-    CoAppRoute = Register;
-  }
-  else if(pathname === '/addresslist'){
-    CoAppRoute = Addresslist;
-  }
-  else if(pathname === '/addressadd'){
-    CoAppRoute = AddressAdd;
-  }
-  else if(pathname === '/userinfo'){
-    CoAppRoute = Userinfo;
-  }
-  else if(pathname === '/profiledetail'){
-    CoAppRoute = ProfileDetail;
-  }
-  else if(pathname === '/login'){
-    CoAppRoute = Login;
-  }
-  return (<Route exact path={pathname} component={CoAppRoute}/>);
+  let CustomRoute = Route;
+  return (
+    <Switch>
+      <CustomRoute exact path="/" component={App}/>
+      <CustomRoute path="/login" component={Login}/>
+      <CustomRoute path="/register" component={Register}/>
+      <CustomRoute path="/addresslist" component={requireAuthentication(Addresslist)}/>
+      <CustomRoute path="/newaddress" component={requireAuthentication(AddressAdd)}/>
+      <CustomRoute path="/editaddress/:addressid" component={requireAuthentication(AddressEdit)}/>
+      <CustomRoute path="/userinfo" component={Userinfo}/>
+      <CustomRoute path="/profiledetail" component={requireAuthentication(ProfileDetail)}/>
+      <CustomRoute path="/newtopic" component={requireAuthentication(NewTopic)}/>
+      <CustomRoute path="/devicelist" component={requireAuthentication(Devicelist)}/>
+      <CustomRoute path="/newdevice" component={requireAuthentication(NewDevice)}/>
+      <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
+      <CustomRoute component={App}/>
+    </Switch>
+    );
 }
 
 import {hidepopmessage} from './actions/index.js';
@@ -157,7 +158,6 @@ export class AppRoot extends React.Component {
   componentWillMount () {
   }
   render() {
-    console.log("this.props.ispop==>" + JSON.stringify(this.props));
     let MessageCo = null;
     if(this.props.ispop){
       if(this.props.type === 'error'){
@@ -183,7 +183,7 @@ export class AppRoot extends React.Component {
       }
 
     }
-    return (<div style={styles.content}>{MessageCo}<CoApp {...this.props} /></div>);
+    return (<div>{MessageCo}<CoApp {...this.props} /></div>);
   }
 
 }
@@ -197,7 +197,7 @@ ReactDOM.render(
   <Provider store={store}>
     <div>
       <Router>
-          <FadeRoute path="/" component={AppRoot}/>
+          <Route path="/" component={AppRoot}/>
       </Router>
       <DevTools />
    </div>

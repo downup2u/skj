@@ -1,7 +1,8 @@
 let config = {
-  serverurl:'http://localhost:3100',//'http://localhost:3004',//'http://vpn.czjcd.com:3004',//
+  serverurl:'http://localhost:3100',//'http://localhost:3100',//'http://vpn.czjcd.com:3100',//
   isxview:false,
-  istest:true
+  istest:true,
+  requesttimeout:5000
 };
 
 export default config;
