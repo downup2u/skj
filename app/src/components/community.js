@@ -26,16 +26,16 @@ let TopTip = (props) => {
 }
 
 export class Topic extends React.Component {
-  componentWillMount () {
-  }
+    componentWillMount () {
+    }
 
-  render() {
-    let commentsco = [];
+    render() {
+        let commentsco = [];
     for(let commentid of this.props.topic.comments){
-      commentsco.push(<CommentExampleComment key={commentid} comment={this.props.comments[commentid]} {...this.props} />);
+        commentsco.push(<CommentExampleComment key={commentid} comment={this.props.comments[commentid]} {...this.props} />);
     }
     return  (<div onClick={()=>{
-      this.props.onClickTopic(this.props.topic._id);
+        this.props.onClickTopic(this.props.topic._id);
     }}>
                 <FeedExampleBasic topic={this.props.topic} {...this.props} />
                   <Comment.Group>

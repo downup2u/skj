@@ -1,19 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import {Page,Button,Toolbar, ToolbarButton, Icon} from 'react-onsenui';
+import {  Button, Icon, Input, List, Radio} from 'semantic-ui-react'
 
 export default function MyPage(props){
 
     let homePage = {
-        height: "62%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: 'column',
-        backgroundImage: "linear-gradient(135deg, #52a3da, #5771c5)"
+        backgroundImage: "linear-gradient(135deg, #52a3da, #5771c5)",
+        padding: "20px 0"
     };
     let toolBar = {
         background: "none",
-        border: "none"
+        border: "none",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
     };
     let headContent = {
         textAlign: "center",
@@ -51,16 +54,14 @@ export default function MyPage(props){
         padding: "15px",
         margin: "0"
     };
-    let linestyle = (startColor, endColor, widthStyle)=> (
-    {
+    let linestyle = (startColor, endColor, widthStyle)=> ({
         backgroundImage: "linear-gradient(135deg, " + startColor + ", " + endColor + ")",
         height: "12px",
         borderRadius: "12px",
         width: widthStyle
-    }
-    );
+    });
     let listLi = {
-        marginBottom: "10px",
+        marginBottom: "10px"
     };
     let listinfo = {
         color: "#CCC",
@@ -79,32 +80,28 @@ export default function MyPage(props){
         fontSize: "11px"
     };
     let listhead = {
-        display:"flex",
+        display: "flex",
         justifyContent: "space-between",
         marginBottom: "2px"
     };
     let headImg = {
-        width:"60%"
+        width: "60%"
     };
     let onClickDevicelist =()=>{
-      props.history.push('/devicelist');
-    }
+        props.history.push('/devicelist');
+    };
     return (
-        <Page>
+        <div>
             <div style={homePage}>
-                <Toolbar style={toolBar}>
-                    <div className='center' style={{color:"#FFF",fontSize:"18px"}}>水质监测</div>
+                <div style={toolBar}>
                     <div className='left'>
-                        <ToolbarButton>
-                            <Icon icon='md-plus' style={{color:"#FFF",fontSize:"16px"}}></Icon>
-                        </ToolbarButton>
+                        <Icon name='add' />
                     </div>
+                    <div className='center' style={{color:"#FFF",fontSize:"18px"}}>水质监测</div>
                     <div className='right' onClick={onClickDevicelist}>
-                        <ToolbarButton>
-                            <Icon icon='md-menu' style={{color:"#FFF",fontSize:"16px"}}></Icon>
-                        </ToolbarButton>
+                        <div>...</div>
                     </div>
-                </Toolbar>
+                </div>
 
                 <div style={headContent}>
                     <img src="1.png" style={headImg} />
@@ -119,12 +116,9 @@ export default function MyPage(props){
             <div style={HomeList}>
                 <div style={ListTitle}>
                     <span>滤芯状态</span>
-                    <ToolbarButton>更换</ToolbarButton>
+                    <div>更换</div>
                 </div>
                 <ul style={list}>
-
-
-
                     <li style={listLi}>
                         <div style={listhead}>
                             <div>
@@ -137,10 +131,8 @@ export default function MyPage(props){
                             <div style={linestyle("#52a3da","#C00", "20%")}></div>
                         </div>
                     </li>
-
-
                 </ul>
             </div>
-        </Page>
+        </div>
     );
 }
