@@ -138,6 +138,15 @@
 .UserLoginPage .loginform .logininput{
     position: relative;
 }
+.UserLoginPage .loginform .yanzhenBtn{
+    position: absolute;
+    width: 120px;
+    height: 44px;
+    right: 34px;
+    z-index: 1000;
+    border-radius: 0;
+    top:0
+}
 .UserLoginPage .logininput .input,.UserLoginPage .loginform .remember{
     width: 100%;
     border-radius: 0;
@@ -148,12 +157,14 @@
 .UserLoginPage .logininput .lefticon{
     position: absolute;
     left: 11%;
-    top: 15px;
+    top: 8px;
     font-size: 22px;
     color: #666;
+
 }
 .UserLoginPage .logininput .mobile{
     font-size: 26px;
+    top:5px
 }
 .UserLoginPage .logininput .eye , .UserLoginPage .logininput .yanzhen{
     position: absolute;
@@ -181,6 +192,7 @@
     background: #EEE;
     margin-bottom: 10px;
     text-indent: 25px;
+    height: 44px;
 }
 .UserLoginPage .loginBotton{
     display: flex;
@@ -199,6 +211,22 @@
 }
 .UserLoginPage .loginPageTop {
     flex-grow: 1;
+    position: relative;
+}
+.UserLoginPage .loginPageTop .loginHead{
+    position: relative;
+}
+.UserLoginPage .loginPageTop .loginHead i{
+    position: absolute;
+    left: 0;
+    top:0;
+    color: #FFF;
+    font-size: 30px;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
 }
 .UserLoginPage .loginPageBottom{
     display: flex;

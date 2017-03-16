@@ -1,0 +1,29 @@
+.ui.segment.headContent{
+    background: #5694dd;
+    border-radius: 0;
+    border: 0;
+    display: flex;
+    justify-content : space-between;
+    align-items: center;
+    margin-bottom: 0;
+    padding: 10px 0;
+}
+.ui.segment.headContent .leftlnk{
+    width: 25%;
+    display: flex;
+}
+.ui.segment.headContent .leftlnk button{
+    background: none;
+    color: #FFF;
+    padding: 0;
+    margin: 0;
+    padding-left: 15px;
+}
+.ui.segment.headContent .rightlnk {
+    width: 25%;
+}
+.ui.segment.headContent .title {
+    width: 50%;
+    font-size: 20px;
+    color: #FFF;
+}

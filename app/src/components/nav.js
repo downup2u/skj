@@ -1,5 +1,7 @@
 import React from 'react';
 import { Header, Segment,Button } from 'semantic-ui-react';
+import '../../public/css/head.css';
+
 
 export class Page extends React.Component {
 
@@ -9,21 +11,25 @@ export class Page extends React.Component {
 
   render() {
 
-    return (<Segment >
-      {this.props.hasOwnProperty('righttitle')?
-         (<Header as='h3' textAlign='right'>
-          <Button onClick={this.props.onClickRight}>{this.props.righttitle}</Button>
-        </Header>):null
-      }
-      {this.props.hasOwnProperty('lefttitle')?
-        (<Header as='h3' textAlign='left'>
-          <Button onClick={this.props.onClickLeft}>{this.props.lefttitle}</Button>
-        </Header>):null
-      }
-      <Header as='h3' textAlign='center'>
-        {this.props.title}
-      </Header>
-    </Segment>);
+      return (<Segment className="headContent">
+
+          {this.props.hasOwnProperty('lefttitle')?
+              (<span className="leftlnk">
+              <Button onClick={this.props.onClickLeft}>{this.props.lefttitle}</Button>
+              </span>):(<span className="leftlnk"></span>)
+          }
+
+          <span className="title">
+              {this.props.title}
+          </span>
+
+          {this.props.hasOwnProperty('righttitle')?
+              (<span className="rightlnk">
+              <Button onClick={this.props.onClickRight}>{this.props.righttitle}</Button>
+              </span>):(<span className="rightlnk"></span>)
+          }
+
+      </Segment>);
 
   }
 }

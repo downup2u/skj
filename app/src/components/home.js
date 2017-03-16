@@ -1,54 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import {  Button, Icon, Input, List, Radio} from 'semantic-ui-react'
+import '../../public/css/home.css';
 
 export default function MyPage(props){
 
-    let homePage = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: 'column',
-        backgroundImage: "linear-gradient(135deg, #52a3da, #5771c5)",
-        padding: "20px 0"
-    };
-    let toolBar = {
-        background: "none",
-        border: "none",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center"
-    };
-    let headContent = {
-        textAlign: "center",
-        padding: "10px"
-    };
-    let headInfo = {
-        border: "1px solid #7abbf5",
-        padding: "5px 15px",
-        borderRadius: "100px",
-        fontSize: "14px",
-        color: "#FFF"
-    };
-    let headInfoborder = {
-        borderRight: "1px solid #7abbf5",
-        margin: "0 10px"
-    };
-    let HomeList = {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "space-between",
-        flexDirection: 'column'
-    };
-    let ListTitle = {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexGrow: "1",
-        paddingLeft: "15px",
-        borderBottom: "1px solid #DDD",
-        background: "#EEE",
-        color: "#5694dd"
-    };
+
+
+
     let list = {
         listStyle: "none",
         padding: "15px",
@@ -92,31 +50,33 @@ export default function MyPage(props){
     };
     return (
         <div>
-            <div style={homePage}>
-                <div style={toolBar}>
+            <div className="homePage">
+
+                <div className="toolBar">
                     <div className='left'>
-                        <Icon name='add' />
+                        +
                     </div>
                     <div className='center' style={{color:"#FFF",fontSize:"18px"}}>水质监测</div>
                     <div className='right' onClick={onClickDevicelist}>
-                        <div>...</div>
+                        ...
                     </div>
                 </div>
-
-                <div style={headContent}>
-                    <img src="1.png" style={headImg} />
+                <div className="headContent">
+                    <img src="1.png"/>
                 </div>
-                <div style={headInfo}>
+                <div className="headInfo">
                     <span>原水TDS-224不健康</span>
-                    <span style={headInfoborder}></span>
+                    <span className="headInfoborder"></span>
                     <span>净水TDS-22 可直饮</span>
                 </div>
+
             </div>
 
-            <div style={HomeList}>
-                <div style={ListTitle}>
-                    <span>滤芯状态</span>
-                    <div>更换</div>
+            <div className="HomeList">
+
+                <div className="ListTitle">
+                    <div>滤芯状态</div>
+                    <div>断水更换<Radio toggle /></div>
                 </div>
                 <ul style={list}>
                     <li style={listLi}>
@@ -125,14 +85,19 @@ export default function MyPage(props){
                                 <span style={listname}>5微米PP滤芯</span>
                                 <span style={listinfo}>剩余20天</span>
                             </div>
-                            <span style={percentage}>30%</span>
+                            <div>
+                                <span style={percentage}>30%</span>
+                                <span>复位</span>
+                            </div>
                         </div>
                         <div style={lineBg}>
                             <div style={linestyle("#52a3da","#C00", "20%")}></div>
                         </div>
                     </li>
                 </ul>
+
             </div>
+
         </div>
     );
 }

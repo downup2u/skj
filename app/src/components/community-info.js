@@ -12,20 +12,6 @@ import CommentExampleComment from './community_comment.js';
 import FeedExampleBasic from './community_topic.js';
 import FeedReplyForm from './community_reply.js';
 
-let TopTip = (props) => {
-    return (
-
-          <div className="topTip">
-              <div className="con">
-                  <img src={props.data.avatar}/>
-                  <span>{props.data.text}</span>
-                  <Icon name='chevron right' size="small"/>
-              </div>
-          </div>
-
-    )
-}
-
 export class Topic extends React.Component {
   componentWillMount () {
   }
@@ -49,43 +35,41 @@ export class Topic extends React.Component {
 
 export class Page extends React.Component {
 
-  componentWillMount () {
+    componentWillMount () {
 
-  }
-   HotLnk = (data)=> {
+    }
+    HotLnk = (data)=> {
         // props.navigator.pushPage({
         //     comp: TopicDetail,
         //     props: data
         // });
     };
     onClickPage =()=>{//点击空白处，隐藏?如何判断点击空白
-      this.props.dispatch(uicommenthide());
+        this.props.dispatch(uicommenthide());
     }
     onClickReturn=()=>{
-      this.props.history.goBack();
+        this.props.history.goBack();
     }
     render() {
+        let toptipData = {
+            avatar: "http://semantic-ui.com/images/avatar/small/joe.jpg",
+            text: "一条消息"
+        }
 
-      let toptipData = {
-          avatar: "http://semantic-ui.com/images/avatar/small/joe.jpg",
-          text: "一条消息"
-      }
+        let topicid = this.props.match.params.topicid;
+        let topicsco = <Topic key={topicid} topic={this.props.topics[topicid]} {...this.props}/>;
 
-      let topicid = this.props.match.params.topicid;
-      let topicsco = <Topic key={topicid} topic={this.props.topics[topicid]} {...this.props}/>;
-
-      return (
-        <div style={{backgroundColor:"#EEE"}}>
-            <NavBar lefttitle="返回" title="帖子详情" onClickLeft={this.onClickReturn} />
-            <TopTip data={toptipData}></TopTip>
-            {topicsco}
-            {this.props.iscommentshow?<FeedReplyForm {...this.props}/>:null}
-        </div>);
+        return (
+            <div>
+                <NavBar lefttitle="返回" title="帖子详情" onClickLeft={this.onClickReturn} />
+                {topicsco}
+                {this.props.iscommentshow?<FeedReplyForm {...this.props}/>:null}
+            </div>);
   }
 }
 
 const mapStateToProps = ({forum}) => {
-  return forum;
+    return forum;
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

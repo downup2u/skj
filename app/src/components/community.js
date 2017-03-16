@@ -14,91 +14,103 @@ import FeedReplyForm from './community_reply.js';
 let TopTip = (props) => {
     return (
 
-          <div className="topTip">
-              <div className="con">
-                  <img src={props.data.avatar}/>
-                  <span>{props.data.text}</span>
-                  <Icon name='chevron right' size="small"/>
-              </div>
-          </div>
+        <div className="topTip">
+            <div className="con">
+                <img src={props.data.avatar}/>
+                <span>{props.data.text}</span>
+                <Icon name='chevron right' size="small"/>
+            </div>
+        </div>
 
     )
 }
 
 export class Topic extends React.Component {
-    componentWillMount () {
+    componentWillMount() {
     }
 
     render() {
         let commentsco = [];
-    for(let commentid of this.props.topic.comments){
-        commentsco.push(<CommentExampleComment key={commentid} comment={this.props.comments[commentid]} {...this.props} />);
-    }
-    return  (<div onClick={()=>{
-        this.props.onClickTopic(this.props.topic._id);
-    }}>
+        for (let commentid of this.props.topic.comments) {
+            commentsco.push(<CommentExampleComment key={commentid}
+                                                   comment={this.props.comments[commentid]} {...this.props} />);
+        }
+        return (
+            <div onClick={()=>{this.props.onClickTopic(this.props.topic._id);}}>
                 <FeedExampleBasic topic={this.props.topic} {...this.props} />
-                  <Comment.Group>
-                    <div className="title">最热评论</div>
-                    {commentsco}
-                  </Comment.Group>
-            </div>);
 
-  }
+                <div className="commentlistcontent">
+                    <Comment.Group>
+                        <div className="title">最热评论</div>
+                        {commentsco}
+                    </Comment.Group>
+                </div>
+            </div>);
+    }
 }
 
 
 export class Page extends React.Component {
 
-  componentWillMount () {
-    let page = 1;
-    let perpagenumber = 10;
-    let payload = {
-      query:{},
-      options:{
-        page: page,
-        limit: perpagenumber,
-      }
-    };
-    this.props.dispatch(gettopiclist_request(payload));
-    console.log("--------->comm:componentWillMount");
-  }
-   HotLnk = (data)=> {
+    componentWillMount() {
+        let page = 1;
+        let perpagenumber = 10;
+        let payload = {
+            query: {},
+            options: {
+                page: page,
+                limit: perpagenumber,
+            }
+        };
+        this.props.dispatch(gettopiclist_request(payload));
+        console.log("--------->comm:componentWillMount");
+    }
+
+    HotLnk = (data)=> {
         // props.navigator.pushPage({
-        //     comp: TopicDetail,
-        //     props: data
+        // comp: TopicDetail,
+        // props: data
         // });
     };
-    onClickPage =()=>{//点击空白处，隐藏?如何判断点击空白
-      this.props.dispatch(uicommenthide());
+    onClickPage = ()=> {//点击空白处，隐藏?如何判断点击空白
+        this.props.dispatch(uicommenthide());
     }
-    onClickTopic =(topicid)=>{//点击空白处，隐藏?如何判断点击空白
-      this.props.history.push(`/communityinfo/${topicid}`);
+    onClickTopic = (topicid)=> {//点击空白处，隐藏?如何判断点击空白
+        this.props.history.push(`/communityinfo/${topicid}`);
     }
+    stopDefault = (e)=> {
+        e.stopPropagation
+    }
+
     render() {
 
-     console.dir(this.props.topics);
+        console.dir(this.props.topics);
 
-      let toptipData = {
-          avatar: "http://semantic-ui.com/images/avatar/small/joe.jpg",
-          text: "一条消息"
-      }
-      let topicsco = [];
-      for( let topicid of this.props.topiclist ){
-        console.log(`FeedExampleBasic,topicid:${topicid}`);
-        topicsco.push(<Topic key={topicid} topic={this.props.topics[topicid]} {...this.props} onClickTopic={this.onClickTopic}/>);
-      }
-      return (
-        <div style={{backgroundColor:"#EEE"}}>
-            <TopTip data={toptipData}></TopTip>
-            {topicsco}
-            {this.props.iscommentshow?<FeedReplyForm {...this.props}/>:null}
-        </div>);
-  }
+        let toptipData = {
+            avatar: "http://semantic-ui.com/images/avatar/small/joe.jpg",
+            text: "一条消息"
+        }
+        let topicsco = [];
+        for (let topicid of this.props.topiclist) {
+            console.log(`FeedExampleBasic,topicid:${topicid}`);
+            topicsco.push(<Topic key={topicid} topic={this.props.topics[topicid]} {...this.props}
+                                 onClickTopic={this.onClickTopic}/>);
+        }
+        return (
+            <div className="feedPage">
+                <div onClick={this.onClickPage}>
+                    <TopTip data={toptipData}></TopTip>
+                    {topicsco}
+                </div>
+                <div onClick={this.stopDefault}>
+                    {this.props.iscommentshow ? <FeedReplyForm {...this.props} /> : null}
+                </div>
+            </div>);
+    }
 }
 
 const mapStateToProps = ({forum}) => {
-  return forum;
+    return forum;
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

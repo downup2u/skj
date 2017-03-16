@@ -1,0 +1,73 @@
+.homePage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: linear-gradient(135deg, #52a3da, #5771c5);
+    padding: 0 0 20px 0
+}
+.homePage .toolBar{
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.homePage .toolBar .left,.homePage .toolBar .right{
+    color: #FFF;
+    font-size: 30px;
+    font-weight: 100;
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.homePage .toolBar .right{
+    right: 0;
+}
+.headContent{
+    text-align: center;
+    padding: 10px
+}
+.headContent img{
+    width: 60%;
+}
+.headInfo{
+    border: 1px solid #7abbf5;
+    padding: 5px 15px;
+    border-radius: 100px;
+    font-size: 14px;
+    color: #FFF
+}
+.headInfo .headInfoborder {
+    border-right: 1px solid #7abbf5;
+    margin: 0 10px
+}
+.HomeList{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-direction: column
+}
+.ListTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    border-bottom: 1px solid #DDD;
+    background: #EEE;
+    color: #5694dd;
+    padding: 10px 15px;
+}
+.ListTitle > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+.ListTitle > div:last-child .ui.fitted.toggle.checkbox{
+    margin-left: 10px;
+}

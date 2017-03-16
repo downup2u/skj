@@ -24,7 +24,7 @@ let renderRegisterForm = (fields)=>{
     console.log("发送验证码:"+name);
   }
 
-  return (<div className='registerform'>
+  return (<div className='loginform'>
       <div className="username logininput">
           <Input placeholder='输入手机号' {...fields.username.input} type="text"/>
           {fields.username.meta.touched && fields.username.meta.error &&
@@ -34,9 +34,9 @@ let renderRegisterForm = (fields)=>{
       <div className="password logininput">
           <Input placeholder='输入验证码'  {...fields.authcode.input} type="text"/>
           {fields.authcode.meta.touched && fields.authcode.meta.error &&
-            <Label basic color='red' pointing>{fields.authcode.meta.error}</Label>}
+          <Label basic color='red' pointing>{fields.authcode.meta.error}</Label>}
           <Icon name="lock" className='lefticon'/>
-          <Button type="button" primary onClick={onClickAuth}>发送验证码</Button>
+          <Button type="button" className="yanzhenBtn" primary onClick={onClickAuth}>发送验证码</Button>
       </div>
       <div className="password logininput">
           <Input placeholder='输入密码'  {...fields.password.input} type={ispasswordvisiable?"text":"password"}/>
@@ -53,7 +53,10 @@ let RegisterForm = (props)=>{
   let {handleSubmit,onClickRegister,onClickLogin} = props;
   return (<Form onSubmit={handleSubmit(onClickRegister)}>
     <div className="loginPageTop">
-        <img src="/img/1.png" className="loginhead"/>
+        <div className="loginHead">
+            <Icon  name='angle left' />
+            <img src="/img/4.png" className="loginhead"/>
+        </div>
         <Fields names={['username','ispasswordvisiable','password','authcode']} component={renderRegisterForm}/>
         <div className="loginBotton">
             <Button primary>注册</Button>

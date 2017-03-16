@@ -54,5 +54,4 @@ FeedReplyForm = reduxForm({
   }
 })(FeedReplyForm);
 
-
 export default FeedReplyForm;

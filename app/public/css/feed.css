@@ -1,3 +1,11 @@
+.feedPage{
+    width: 100%;
+    background: #EEE;
+}
+.commentlistcontent{
+    background: #FFF;
+    margin-bottom: 15px;
+}
 .ui.feed{
     border-bottom: 1px solid #EEE;
     background: #FFF;
@@ -66,6 +74,12 @@
     padding: 10px 15px;
     margin: 0;
 }
+.ui.feed>.event>.content .myMeta .addCommunity,
+.ui.feed>.event>.content .myMeta > a{
+    display: flex;
+    width: 50%;
+    justify-content: center;
+}
 .communityInfo .feedContent{
     border-bottom: none;
 }
@@ -131,11 +145,13 @@
     align-items: center;
     background: #FFF;
     border-top: 1px solid #EEE;
-    padding: 10px 0;
+    padding: 8px 0;
+    z-index: 1000;
 }
 .feedBottomReply .ui.input{
     flex-grow: 1;
-    padding: 0 15px;
+    padding: 5px 15px;
+
 }
 .feedBottomReply span{
     padding-right: 15px;
