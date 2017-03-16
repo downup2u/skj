@@ -47,11 +47,20 @@ let FeedReplyForm = (props)=>{
 }
 
 
+const validate = values => {
+  const errors = {}
+  if (!values.title || values.title ==='') {
+    errors.title = '说点什么吧';
+  }
+  return errors;
+}
+
 FeedReplyForm = reduxForm({
   form: 'feedreply',
   initialValues:{
     title:'',
-  }
+  },
+  validate
 })(FeedReplyForm);
 
 export default FeedReplyForm;

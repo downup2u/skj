@@ -18,11 +18,43 @@ export class Page extends React.Component {
 
     render() {
         let pagesz = [];
-        pagesz.push(<Page0 {...this.props} />);
-        pagesz.push(<Page1 {...this.props} />);
-        pagesz.push(<Page2 {...this.props} />);
+        pagesz.push(<Page0 key="page0" {...this.props} />);
+        pagesz.push(<Page1 key="page1"  {...this.props} />);
+        pagesz.push(<Page2 key="page2"  {...this.props} />);
         let pagewamp = {
             height : window.height,
+        }
+        let btnsz = [
+          {
+            title:'首页',
+            imgnormal:'/img/2.png',
+            imghov:'/img/3.png',
+          },
+          {
+            title:'圈子',
+            imgnormal:'/img/2.png',
+            imghov:'/img/3.png',
+          },
+          {
+            title:'我的',
+            imgnormal:'/img/3.png',
+            imghov:'/img/2.png',
+          },
+        ];
+        let btncosz = [];
+        for(let index in btnsz ){
+          if(index === this.props.curtabindex){
+            btncosz.push(<Button key={'btn'+index} onClick={this.onClickTab.bind(this,index)} className="action">
+                    <img src={btnsz[index].imghov} />
+                    <span>{btnsz[index].title}</span>
+                </Button>);
+          }
+          else{
+            btncosz.push(<Button key={'btn'+index} onClick={this.onClickTab.bind(this,index)}>
+                    <img src={btnsz[index].imgnormal} />
+                    <span>{btnsz[index].title}</span>
+                </Button>);
+          }
         }
         return (
             <div style={pagewamp}>
@@ -30,18 +62,7 @@ export class Page extends React.Component {
                     {pagesz[this.props.curtabindex]}
                 </div>
                 <div className="homeBottom">
-                    <Button onClick={this.onClickTab.bind(this,0)} className="action">
-                        <img src="/img/2.png" />
-                        <span>首页</span>
-                    </Button>
-                    <Button onClick={this.onClickTab.bind(this,1)}>
-                        <img src="/img/3.png" />
-                        <span>圈子</span>
-                    </Button>
-                    <Button onClick={this.onClickTab.bind(this,2)}>
-                        <img src="/img/3.png" />
-                        <span>我的</span>
-                    </Button>
+                  {btncosz}
                 </div>
             </div>
         );

@@ -6,9 +6,13 @@ const user = new schema.Entity('users',{},{
 });
 
 // Define your comments schema
+const subcomment = new schema.Entity('subcomment', {
+  creator: user,
+},{idAttribute: '_id'});
+
 const comment = new schema.Entity('comments', {
   creator: user,
-  comments: [ comment ],
+  comments: [ subcomment ],
   loves:[user]
 },{idAttribute: '_id'});
 
