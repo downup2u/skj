@@ -4,22 +4,20 @@ import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import { Input, List, Radio, Button, Icon, Image, Checkbox} from 'semantic-ui-react';
 import {createdevice} from '../actions/sagacallback.js';
+import PicturesWall  from './controls/pictureswall.js';
 
 
 let renderNewdeviceForm = (fields)=>{
   console.dir(fields);
-  return (<div className='registerform'>
-            <div className="username logininput">
+  return (<div className='newdevice'>
+            <div className="newdeviceinput">
                 <Input placeholder='输入设备名' {...fields.devicename.input} type="text"/>
-                <Icon name="mobile" className='lefticon'/>
             </div>
-            <div className="username logininput">
+            <div className="newdeviceinput">
                 <Input placeholder='输入设备品牌' {...fields.devicebrand.input} type="text"/>
-                <Icon name="mobile" className='lefticon'/>
             </div>
-            <div className="username logininput">
+            <div className="newdeviceinput">
                 <Input placeholder='输入型号' {...fields.devicemodel.input} type="text"/>
-                <Icon name="mobile" className='lefticon'/>
             </div>
           </div>);
 }

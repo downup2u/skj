@@ -4,26 +4,36 @@
     border: 0;
     display: flex;
     justify-content : space-between;
-    align-items: center;
+    align-items: stretch;
     margin-bottom: 0;
-    padding: 10px 0;
+    padding: 0;
+    height:46px;
 }
 .ui.segment.headContent .leftlnk{
     width: 25%;
     display: flex;
 }
-.ui.segment.headContent .leftlnk button{
+.ui.segment.headContent .rightlnk {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+}
+.ui.segment.headContent .leftlnk button, .ui.segment.headContent .rightlnk button{
     background: none;
     color: #FFF;
     padding: 0;
     margin: 0;
     padding-left: 15px;
 }
-.ui.segment.headContent .rightlnk {
-    width: 25%;
+.ui.segment.headContent .rightlnk button{
+    padding:0;
+    padding-right: 15px;
 }
 .ui.segment.headContent .title {
     width: 50%;
     font-size: 20px;
     color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

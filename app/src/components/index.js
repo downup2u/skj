@@ -22,39 +22,44 @@ export class Page extends React.Component {
         pagesz.push(<Page1 key="page1"  {...this.props} />);
         pagesz.push(<Page2 key="page2"  {...this.props} />);
         let pagewamp = {
-            height : window.height,
+            height: window.height,
         }
         let btnsz = [
-          {
-            title:'首页',
-            imgnormal:'/img/2.png',
-            imghov:'/img/3.png',
-          },
-          {
-            title:'圈子',
-            imgnormal:'/img/2.png',
-            imghov:'/img/3.png',
-          },
-          {
-            title:'我的',
-            imgnormal:'/img/3.png',
-            imghov:'/img/2.png',
-          },
+            {
+                title: '首页',
+                imgnormal: '/img/2.png',
+                imghov: '/img/3.png',
+            },
+            {
+                title: '圈子',
+                imgnormal: '/img/3.png',
+                imghov: '/img/3.png',
+            },
+            {
+                title: '商城',
+                imgnormal: '/img/3.png',
+                imghov: '/img/2.png',
+            },
+            {
+                title: '我的',
+                imgnormal: '/img/3.png',
+                imghov: '/img/2.png',
+            },
         ];
         let btncosz = [];
-        for(let index in btnsz ){
-          if(index === this.props.curtabindex){
-            btncosz.push(<Button key={'btn'+index} onClick={this.onClickTab.bind(this,index)} className="action">
-                    <img src={btnsz[index].imghov} />
+        for (let index in btnsz) {
+            if (index === this.props.curtabindex) {
+                btncosz.push(<Button key={'btn'+index} onClick={this.onClickTab.bind(this,index)} className="action">
+                    <img src={btnsz[index].imghov}/>
                     <span>{btnsz[index].title}</span>
                 </Button>);
-          }
-          else{
-            btncosz.push(<Button key={'btn'+index} onClick={this.onClickTab.bind(this,index)}>
-                    <img src={btnsz[index].imgnormal} />
+            }
+            else {
+                btncosz.push(<Button key={'btn'+index} onClick={this.onClickTab.bind(this,index)}>
+                    <img src={btnsz[index].imgnormal}/>
                     <span>{btnsz[index].title}</span>
                 </Button>);
-          }
+            }
         }
         return (
             <div style={pagewamp}>
@@ -62,7 +67,7 @@ export class Page extends React.Component {
                     {pagesz[this.props.curtabindex]}
                 </div>
                 <div className="homeBottom">
-                  {btncosz}
+                    {btncosz}
                 </div>
             </div>
         );
