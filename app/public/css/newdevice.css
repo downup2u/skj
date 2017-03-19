@@ -1,0 +1,48 @@
+.addnewdevice .tt{
+    margin-bottom: 20px;
+}
+.addnewdevice .tt img{
+    width: 100%;
+}
+.addnewdevice .fm{
+    display: flex;
+    flex-direction: column;
+}
+.addnewdevice .fm .device2_text{
+    padding: 30px 0;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    display: flex;
+    font-size: 20px;
+}
+.addnewdevice .fm .input{
+    margin: 5px 10% 10px 10%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.addnewdevice .fm .input img{
+    position: absolute;
+    left: 10px;
+    top: 11px;
+    width: 20px;
+}
+
+.addnewdevice .fm .input .ui.selection.dropdown{
+    flex-grow: 1;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+.addnewdevice .fm .input .input{
+    margin: 0;
+    flex-grow: 1;
+    height: 43px;
+}
+.addnewdevice .fm .input .input input{
+    text-align: center;
+    font-size: 16px;
+}

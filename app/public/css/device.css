@@ -1,0 +1,46 @@
+.deviceList.ui.selection.list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+.deviceList.ui.selection.list>.item{
+    padding: 0;
+}
+.deviceLi{
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    border-bottom: 1px solid #EEE;
+    padding: 5px 10px;
+}
+.deviceLi .pic{
+    width: 30%;
+}
+.deviceLi .pic img{
+    width: 100%;
+}
+.deviceLi .info{
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+}
+.deviceLi .info .tit{
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.deviceLi .info .address{
+    display: flex;
+    flex-direction: column;
+}
+.deviceLi .info .address span{
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+.deviceLi .info .address span:last-child{
+    margin:0;
+}
+
+

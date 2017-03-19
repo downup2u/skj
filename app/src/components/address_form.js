@@ -1,6 +1,6 @@
 import React,{ Component, PropTypes } from 'react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
-import {  Button, Icon,Input, List, Radio,Label} from 'semantic-ui-react';
+import {  Button, Icon, Input, List, Radio, Label, Checkbox } from 'semantic-ui-react';
 
 let renderNewaddressForm = (fields)=>{
 
@@ -51,8 +51,7 @@ let renderNewaddressForm = (fields)=>{
             </List.Item>
         </List>
         <div className="setForm">
-            <div className="text">是否设为默认地址</div>
-            <Radio toggle label='Make my profile visible' />
+            <Radio toggle label='是否设为默认地址'/>
         </div>
     </div>);
 };

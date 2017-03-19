@@ -80,7 +80,7 @@ export class Page extends React.Component {
         this.props.dispatch(deletedevice_confirmpophide());
     }
     onClickNewDevice = ()=> {
-        this.props.history.push('/newdevice');
+        this.props.history.push('/addnewdevice');
     }
 
     render() {

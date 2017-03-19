@@ -3,7 +3,6 @@
     justify-content: space-between;
     padding: 10px 15px;
     background: #FFF;
-    min-height: 60px;
     align-items: center;
 }
 
@@ -18,19 +17,21 @@
     padding-left: 15px;
     border-bottom: 1px solid #EEE;
     border-radius: 0;
-    min-height: 60px;
+    min-height: 50px;
     align-items: stretch;
 }
 
 .addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item .tit {
-    width: 100px;
+    width: 80px;
     display: flex;
     align-items: center;
+    font-size: 16px;
 }
 
 .addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item .content {
     flex-grow: 1;
     display: flex;
+    font-size: 16px;
 }
 
 .addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item input {
@@ -61,50 +62,63 @@
     width: 100%;
     min-height: 50px;
 }
-.AddressListPage .addNew button.button{
+
+.AddressListPage .addNew button.button {
     flex-grow: 1;
     border-radius: 0;
     margin: 0;
 }
-.AddressListPage .ui.list{
+
+.AddressListPage .ui.list {
     border: none;
 }
-.AddressListPage .ui.selection.list>.item{
+
+.AddressListPage .ui.selection.list > .item {
     display: flex;
     flex-direction: column;
     padding: 15px;
     background: #FFF;
     border-radius: 0;
     margin-bottom: 15px;
+    border-bottom: 1px solid #EEE;
 }
-.AddressListPage .ui.selection.list>.item .tit{
+
+.AddressListPage .ui.selection.list > .item .tit {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
-.AddressListPage .ui.selection.list>.item .address span{
+
+.AddressListPage .ui.selection.list > .item .address span {
     margin-right: 10px;
 }
-.AddressListPage .ui.selection.list>.item .address {
+
+.AddressListPage .ui.selection.list > .item .address {
     margin-bottom: 10px;
 }
-.AddressListPage .listControl{
+
+.AddressListPage .listControl {
     display: flex;
     justify-content: space-between;
 }
-.AddressListPage .listControl .lnk{
+
+.AddressListPage .listControl .lnk {
     display: flex;
 }
-.AddressListPage .listControl .lnk>div {
+
+.AddressListPage .listControl .lnk > div {
     margin-left: 10px;
 }
-.UserInfoPage .ui.list{
+
+.UserInfoPage .ui.list {
     border: none;
 }
-.UserInfoPage .ui.selection.list>.item:after{
+
+.UserInfoPage .ui.selection.list > .item:after {
     content: none;
 }
-.UserInfoPage .ui.selection.list>.item{
+
+.UserInfoPage .ui.selection.list > .item {
     display: flex;
     justify-content: space-between;
     padding: 15px;
@@ -113,48 +127,57 @@
     border-bottom: 1px solid #EEE;
     align-items: center;
 }
-.UserInfoPage .escLogin{
+
+.UserInfoPage .escLogin {
     display: flex;
     justify-content: center;
 }
-.UserInfoPage .escLogin .ui.basic.button{
+
+.UserInfoPage .escLogin .ui.basic.button {
     width: 60%;
     border-radius: 50px;
     background: #FFF;
 }
-.UserLoginPage{
+
+.UserLoginPage {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
 }
-.UserLoginPage .loginhead{
+
+.UserLoginPage .loginhead {
     width: 100%;
 }
-.UserLoginPage .loginform{
+
+.UserLoginPage .loginform {
     padding-top: 20px;
     position: relative;
 }
-.UserLoginPage .loginform .logininput{
+
+.UserLoginPage .loginform .logininput {
     position: relative;
 }
-.UserLoginPage .loginform .yanzhenBtn{
+
+.UserLoginPage .loginform .yanzhenBtn {
     position: absolute;
     width: 120px;
     height: 44px;
-    right: 34px;
+    right: 10%;
     z-index: 1000;
     border-radius: 0;
-    top:0
+    top: 0;
+    margin: 0;
 }
-.UserLoginPage .logininput .input,.UserLoginPage .loginform .remember{
+
+.UserLoginPage .logininput .input, .UserLoginPage .loginform .remember {
     width: 100%;
     border-radius: 0;
     padding-left: 10%;
     padding-right: 10%;
 }
 
-.UserLoginPage .logininput .lefticon{
+.UserLoginPage .logininput .lefticon {
     position: absolute;
     left: 11%;
     top: 8px;
@@ -162,14 +185,16 @@
     color: #666;
 
 }
-.UserLoginPage .logininput .mobile{
+
+.UserLoginPage .logininput .mobile {
     font-size: 26px;
-    top:5px
+    top: 5px
 }
-.UserLoginPage .logininput .eye , .UserLoginPage .logininput .yanzhen{
+
+.UserLoginPage .logininput .eye, .UserLoginPage .logininput .yanzhen {
     position: absolute;
     right: 10%;
-    top:0px;
+    top: 0px;
     color: #CCC;
     height: 44px;
     display: flex;
@@ -178,48 +203,56 @@
     width: 44px;
     margin: 0;
 }
-.UserLoginPage .logininput .yanzhen{
+
+.UserLoginPage .logininput .yanzhen {
     width: auto;
     padding: 0 10px;
     border-left: 1px solid #CCC;
 }
 
-.UserLoginPage .logininput .eye.sel{
+.UserLoginPage .logininput .eye.sel {
     color: #111;
 }
-.UserLoginPage .logininput .input input{
+
+.UserLoginPage .logininput .input input {
     border-radius: 0;
     background: #EEE;
     margin-bottom: 10px;
     text-indent: 25px;
     height: 44px;
 }
-.UserLoginPage .loginBotton{
+
+.loginBotton {
     display: flex;
     flex-direction: column;
     padding: 20px 14% 20px 14%;
 }
-.UserLoginPage .loginBotton .ui.button{
+
+.loginBotton .ui.button {
     border-radius: 100px;
     margin-bottom: 10px;
 }
-.UserLoginPage .forgetpwd{
+
+.UserLoginPage .forgetpwd {
     display: flex;
     justify-content: flex-end;
     padding-right: 10px;
     font-size: 14px;
 }
+
 .UserLoginPage .loginPageTop {
     flex-grow: 1;
     position: relative;
 }
-.UserLoginPage .loginPageTop .loginHead{
+
+.UserLoginPage .loginPageTop .loginHead {
     position: relative;
 }
-.UserLoginPage .loginPageTop .loginHead i{
+
+.UserLoginPage .loginPageTop .loginHead i {
     position: absolute;
     left: 0;
-    top:0;
+    top: 0;
     color: #FFF;
     font-size: 30px;
     display: flex;
@@ -228,10 +261,12 @@
     justify-content: center;
     align-items: center;
 }
-.UserLoginPage .loginPageBottom{
+
+.UserLoginPage .loginPageBottom {
     display: flex;
     flex-direction: column;
 }
+
 .UserLoginPage .loginPageBottom .tit {
     position: relative;
     line-height: 40px;
@@ -240,29 +275,33 @@
     margin: 0 10%;
     margin-bottom: 10px;
 }
-.UserLoginPage .loginPageBottom .tit span{
+
+.UserLoginPage .loginPageBottom .tit span {
     background: #FFF;
     z-index: 2;
     position: relative;
-    padding:0 10px;
+    padding: 0 10px;
 }
-.UserLoginPage .loginPageBottom .tit:after{
+
+.UserLoginPage .loginPageBottom .tit:after {
     content: ' ';
     z-index: 0;
     position: absolute;
     left: 0;
-    top:20px;
+    top: 20px;
     width: 100%;
     height: 1px;
     background: #EEE;
 }
-.UserLoginPage .loginPageBottom .lnk{
+
+.UserLoginPage .loginPageBottom .lnk {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }
-.UserLoginPage .loginPageBottom .lnk>div{
+
+.UserLoginPage .loginPageBottom .lnk > div {
     padding: 10px;
     background: #36a9eb;
     border-radius: 100px;
@@ -273,11 +312,13 @@
     align-items: center;
     color: #FFF;
 }
-.UserLoginPage .loginPageBottom .lnk>div i.icon{
+
+.UserLoginPage .loginPageBottom .lnk > div i.icon {
     margin: 0;
     font-size: 22px;
 }
-.UserLoginPage .loginPageBottom .lnk>div:last-child{
+
+.UserLoginPage .loginPageBottom .lnk > div:last-child {
     margin-left: 15px;
     background: #00c40c;
 }

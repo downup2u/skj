@@ -12,6 +12,8 @@ import ProfileDetail from './components/profiledetail.js';
 import { TransitionMotion, spring } from 'react-motion';
 import Devicelist from './components/devicelist.js';
 import NewDevice from './components/newdevice.js';
+import AddNewDevice from './components/device-add.js';
+import AddNewDevice2 from './components/device-add2.js';
 import Community from './components/community.js';
 import Communityinfo from './components/community-info.js';
 import {requireAuthentication} from './components/requireauthentication';
@@ -154,6 +156,8 @@ const CoApp = (props) => {
             <CustomRoute path="/newtopic" component={requireAuthentication(NewTopic)}/>
             <CustomRoute path="/devicelist" component={requireAuthentication(Devicelist)}/>
             <CustomRoute path="/newdevice" component={requireAuthentication(NewDevice)}/>
+            <CustomRoute path="/addnewdevice" component={requireAuthentication(AddNewDevice)}/>
+            <CustomRoute path="/addnewdevice2" component={requireAuthentication(AddNewDevice2)}/>
             <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
             <CustomRoute component={App}/>
         </Switch>
