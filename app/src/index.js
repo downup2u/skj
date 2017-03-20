@@ -192,6 +192,13 @@ export class AppRoot extends React.Component {
 
     componentWillMount() {
     }
+    componentWillReceiveProps (nextProps) {
+        if(nextProps.ispop && !this.props.ispop){
+            window.setTimeout(()=>{
+                this.props.dispatch(hidepopmessage());
+        },3000);
+        }
+    }
 
     render() {
         let fullheight = {
