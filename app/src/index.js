@@ -10,12 +10,22 @@ import AddressEdit from './components/address-edit.js';
 import Userinfo from './components/user-info.js';
 import ProfileDetail from './components/profiledetail.js';
 import { TransitionMotion, spring } from 'react-motion';
+
+
 import Devicelist from './components/devicelist.js';
+//添加设备
 import NewDevice from './components/newdevice.js';
+//添加设备第一步连接wifi
 import AddNewDevice from './components/device-add.js';
+//添加设备第二步连接设备
 import AddNewDevice2 from './components/device-add2.js';
+//圈子首页
 import Community from './components/community.js';
+//帖子详情
 import Communityinfo from './components/community-info.js';
+//个人中心
+import UserCenter from './components/user-center.js';
+
 import {requireAuthentication} from './components/requireauthentication';
 import '../public/css/page.css';
 
@@ -158,6 +168,13 @@ const CoApp = (props) => {
             <CustomRoute path="/newdevice" component={requireAuthentication(NewDevice)}/>
             <CustomRoute path="/addnewdevice" component={requireAuthentication(AddNewDevice)}/>
             <CustomRoute path="/addnewdevice2" component={requireAuthentication(AddNewDevice2)}/>
+
+            <CustomRoute path="/usercenter" component={requireAuthentication(UserCenter)}/>
+
+
+
+
+
             <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
             <CustomRoute component={App}/>
         </Switch>

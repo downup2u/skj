@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {clickTab} from '../actions/index.js';
 import Page0 from './home.js';
 import Page1 from './community.js';
-import Page2 from './myprofile.js';
+import Page2 from './shopping/index.js';
+import Page3 from './myprofile.js';
 import '../../public/css/index.css';
 
 export class Page extends React.Component {
@@ -21,29 +22,30 @@ export class Page extends React.Component {
         pagesz.push(<Page0 key="page0" {...this.props} />);
         pagesz.push(<Page1 key="page1"  {...this.props} />);
         pagesz.push(<Page2 key="page2"  {...this.props} />);
+        pagesz.push(<Page3 key="page3"  {...this.props} />);
         let pagewamp = {
             height: window.height,
         }
         let btnsz = [
             {
                 title: '首页',
-                imgnormal: '/img/2.png',
-                imghov: '/img/3.png',
+                imgnormal: '/img/bottom2.png',
+                imghov: '/img/bottom1.png',
             },
             {
                 title: '圈子',
-                imgnormal: '/img/3.png',
-                imghov: '/img/3.png',
+                imgnormal: '/img/bottom4.png',
+                imghov: '/img/bottom3.png',
             },
             {
                 title: '商城',
-                imgnormal: '/img/3.png',
-                imghov: '/img/2.png',
+                imgnormal: '/img/bottom6.png',
+                imghov: '/img/bottom5.png',
             },
             {
                 title: '我的',
-                imgnormal: '/img/3.png',
-                imghov: '/img/2.png',
+                imgnormal: '/img/bottom8.png',
+                imghov: '/img/bottom7.png',
             },
         ];
         let btncosz = [];
