@@ -7,9 +7,16 @@ import '../../public/css/newdevice.css';
 
 let countryOptions = [{key: 'af', value: 'af', flag: 'af', text: 'Afghanistan'}]
 
-const Page = () => (
+const Page = (props) => {
+    let onClickReturn = ()=> {
+        props.history.goBack();
+    }
+    let onClickNext =()=>{
+        props.history.replace('/');
+    }
+    return (
     <div className="addnewdevice">
-        <NavBar lefttitle="返回" title="设备匹配"/>
+        <NavBar lefttitle="返回" title="设备匹配" onClickLeft={onClickReturn}/>
 
         <div className="tt">
             <img src="/img/9.png"/>
@@ -23,6 +30,7 @@ const Page = () => (
             </div>
         </div>
     </div>
-)
+);
+}
 
 export default Page

@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import {  Button, Icon, Input, List, Radio} from 'semantic-ui-react'
 import '../../public/css/home.css';
 
-export default function MyPage(props){
-
-
-
+let Page =(props)=>{
 
     let list = {
         listStyle: "none",
@@ -45,15 +43,43 @@ export default function MyPage(props){
     let headImg = {
         width: "60%"
     };
+
+    let onClickNewDevice = ()=> {
+        props.history.push('/addnewdevice');
+    }
     let onClickDevicelist =()=>{
         props.history.push('/devicelist');
     };
+    const {curdevicedata} = props;
+    let detaillistco = [];
+    for (let detail of curdevicedata.detaillist){
+        let linestyleresult = linestyle("#52a3da","#C00", `${detail.leftpecent}%`);
+        detaillistco.push( <ul style={list} key={detail.name}>
+            <li style={listLi}>
+            <div style={listhead}>
+            <div>
+            <span style={listname}>{detail.name}</span>
+        <span style={listinfo}>剩余{detail.leftday}天</span>
+            </div>
+            <div>
+            <span style={percentage}>{detail.leftpecent}%</span>
+            <span>复位</span>
+            </div>
+            </div>
+            <div style={lineBg}>
+            <div style={linestyleresult}></div>
+        </div>
+        </li>
+        </ul>);
+    }
+
+
     return (
         <div>
             <div className="homePage">
 
                 <div className="toolBar">
-                    <div className='left'>
+                    <div className='left' onClick={onClickNewDevice}>
                         +
                     </div>
                     <div className='center' style={{color:"#FFF",fontSize:"18px"}}>水质监测</div>
@@ -65,9 +91,9 @@ export default function MyPage(props){
                     <img src="1.png"/>
                 </div>
                 <div className="headInfo">
-                    <span>原水TDS-224不健康</span>
+                    <span>{curdevicedata.leftmodel.name} {curdevicedata.leftmodel.resultstring}</span>
                     <span className="headInfoborder"></span>
-                    <span>净水TDS-22 可直饮</span>
+                    <span>{curdevicedata.rightmodel.name} {curdevicedata.rightmodel.resultstring}</span>
                 </div>
 
             </div>
@@ -78,26 +104,19 @@ export default function MyPage(props){
                     <div>滤芯状态</div>
                     <div>断水更换<Radio toggle /></div>
                 </div>
-                <ul style={list}>
-                    <li style={listLi}>
-                        <div style={listhead}>
-                            <div>
-                                <span style={listname}>5微米PP滤芯</span>
-                                <span style={listinfo}>剩余20天</span>
-                            </div>
-                            <div>
-                                <span style={percentage}>30%</span>
-                                <span>复位</span>
-                            </div>
-                        </div>
-                        <div style={lineBg}>
-                            <div style={linestyle("#52a3da","#C00", "20%")}></div>
-                        </div>
-                    </li>
-                </ul>
+                    {detaillistco}
 
             </div>
 
         </div>
     );
 }
+
+
+const mapStateToProps = ({devicedata}) => {
+    return devicedata;
+};
+
+Page = connect(mapStateToProps)(Page);
+export default Page;
+

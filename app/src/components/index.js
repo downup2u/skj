@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {clickTab} from '../actions/index.js';
 import Page0 from './home.js';
 import Page1 from './community.js';
-import Page2 from './shopping/index.js';
+import Page2 from './test';
+//import Page2 from './shopping/index.js';
 import Page3 from './myprofile.js';
 import '../../public/css/index.css';
 
