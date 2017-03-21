@@ -2,8 +2,17 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {  Button, Icon, Input, List, Radio} from 'semantic-ui-react'
 import '../../public/css/home.css';
+import { Swiper, Slide } from 'react-dynamic-swiper';
+import '../../node_modules/react-dynamic-swiper/lib/styles.css';
 
-let Page =(props)=>{
+
+let swiperOptions = {
+    navigation: false,
+    pagination: true,
+    scrollBar: false
+};
+
+let Page = (props)=> {
 
     let list = {
         listStyle: "none",
@@ -47,35 +56,34 @@ let Page =(props)=>{
     let onClickNewDevice = ()=> {
         props.history.push('/addnewdevice');
     }
-    let onClickDevicelist =()=>{
+    let onClickDevicelist = ()=> {
         props.history.push('/devicelist');
     };
     const {curdevicedata} = props;
     let detaillistco = [];
-    for (let detail of curdevicedata.detaillist){
-        let linestyleresult = linestyle("#52a3da","#C00", `${detail.leftpecent}%`);
-        detaillistco.push( <ul style={list} key={detail.name}>
-            <li style={listLi}>
-            <div style={listhead}>
-            <div>
-            <span style={listname}>{detail.name}</span>
-        <span style={listinfo}>剩余{detail.leftday}天</span>
-            </div>
-            <div>
-            <span style={percentage}>{detail.leftpecent}%</span>
-            <span>复位</span>
-            </div>
-            </div>
-            <div style={lineBg}>
-            <div style={linestyleresult}></div>
-        </div>
-        </li>
-        </ul>);
+    for (let detail of curdevicedata.detaillist) {
+        let linestyleresult = linestyle("#52a3da", "#C00", `${detail.leftpecent}%`);
+        detaillistco.push(
+            <li style={listLi} key={detail.name}>
+                <div style={listhead}>
+                    <div>
+                        <span style={listname}>{detail.name}</span>
+                        <span style={listinfo}>剩余{detail.leftday}天</span>
+                    </div>
+                    <div>
+                        <span style={percentage}>{detail.leftpecent}%</span>
+                        <span>复位</span>
+                    </div>
+                </div>
+                <div style={lineBg}>
+                    <div style={linestyleresult}></div>
+                </div>
+            </li>
+        );
     }
 
-
     return (
-        <div>
+        <div style={{height:(window.innerHeight-57)+"px"}} className="homePageWamp">
             <div className="homePage">
 
                 <div className="toolBar">
@@ -87,9 +95,44 @@ let Page =(props)=>{
                         ...
                     </div>
                 </div>
-                <div className="headContent">
-                    <img src="1.png"/>
-                </div>
+                <Swiper
+                    swiperOptions={{slidesPerView: 'auto'}}
+                    {...swiperOptions}
+                    onSlideChangeEnd={(swiper, event) => {
+                        console.log("change swiper");
+                    }}
+                    >
+
+                    <Slide
+                        className="Demo-swiper__slide"
+                        >
+                        <div className="headContent">
+                            <img src="/img/1.png"/>
+                            <div className="headContentInfo">
+                                <span className="i1">TDS002</span>
+                                <span className="i2">优</span>
+                                <span className="i3"><span>可直饮</span></span>
+                                <span className="i4">共净化2800L</span>
+                            </div>
+                        </div>
+                    </Slide>
+
+                    <Slide
+                        className="Demo-swiper__slide"
+                        >
+                        <div className="headContent">
+                            <img src="/img/1.png"/>
+                            <div className="headContentInfo">
+                                <span className="i1">TDS002</span>
+                                <span className="i2">优</span>
+                                <span className="i3"><span>可直饮</span></span>
+                                <span className="i4">共净化2800L</span>
+                            </div>
+                        </div>
+                    </Slide>
+
+                </Swiper>
+
                 <div className="headInfo">
                     <span>{curdevicedata.leftmodel.name} {curdevicedata.leftmodel.resultstring}</span>
                     <span className="headInfoborder"></span>
@@ -102,9 +145,11 @@ let Page =(props)=>{
 
                 <div className="ListTitle">
                     <div>滤芯状态</div>
-                    <div>断水更换<Radio toggle /></div>
+                    <div>断水更换<Radio toggle/></div>
                 </div>
+                <ul style={list}>
                     {detaillistco}
+                </ul>
 
             </div>
 

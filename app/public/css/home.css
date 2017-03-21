@@ -4,7 +4,8 @@
     align-items: center;
     flex-direction: column;
     background-image: linear-gradient(135deg, #52a3da, #5771c5);
-    padding: 0 0 20px 0
+    padding: 0 0 10px 0;
+    flex-shrink: 0;
 }
 .homePage .toolBar{
     background: none;
@@ -28,12 +29,53 @@
 .homePage .toolBar .right{
     right: 0;
 }
+.homePageWamp {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
 .headContent{
     text-align: center;
-    padding: 10px
+    padding: 10px;
+    position: relative;
 }
 .headContent img{
-    width: 60%;
+    width: 220px;
+}
+.headContentInfo{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 65px;
+}
+.headContentInfo .i1{
+    color: #FFF;
+}
+.headContentInfo .i2 {
+    font-size: 56px;
+    line-height: 60px;
+    color: #FFF;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.headContentInfo .i3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 22px;
+}
+.headContentInfo .i3 span{
+    color: #7ffef8;
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 50px;
+    padding: 0 10px;
+}
+.headContentInfo .i4 {
+    color: #FFF;
 }
 .headInfo{
     border: 1px solid #7abbf5;
@@ -44,14 +86,29 @@
 }
 .headInfo .headInfoborder {
     border-right: 1px solid #7abbf5;
-    margin: 0 10px
+    margin: 0 10px;
 }
 .HomeList{
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    flex-direction: column
+    flex-direction: column;
+    flex-shrink: 1;
+    overflow: scroll;
 }
+.HomeList .ListTitle{
+    flex-shrink: 0;
+}
+.HomeList > ul{
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+.HomeList > ul li{
+    flex-shrink: 0;
+}
+
 .ListTitle{
     display: flex;
     justify-content: space-between;
@@ -70,4 +127,23 @@
 }
 .ListTitle > div:last-child .ui.fitted.toggle.checkbox{
     margin-left: 10px;
+}
+.homePage .swiper-container{
+    width: 100%;
+    padding-bottom: 10px;
+}
+.homePage .swiper-container .swiper-pagination.swiper-pagination-bullets{
+    bottom: 0px;
+}
+.homePage .swiper-pagination-bullet{
+    background: #79bdf0;
+    opacity: 1;
+}
+.homePage .swiper-pagination-bullet-active{
+    background: #7ffef8;
+    width: 12px;
+    border-radius: 4px;
+}
+.homePage .swiper-container.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet{
+    margin: 0 2px;
 }

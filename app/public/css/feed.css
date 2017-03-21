@@ -20,7 +20,21 @@
     padding: 0 15px 10px 15px;
     border-bottom: 1px solid #EEE;
 }
+.feedContent .images{
+    display: flex;
+    flex-wrap: wrap;
+}
+.feedContent .images > div{
+    width: 33.33%;
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+}
 
+.ui.feed>.event>.content>.feedContent .extra.images img{
+    margin: 3px;
+    flex-grow: 1;
+}
 .feedHead .label {
     margin-right: 10px;
 }
