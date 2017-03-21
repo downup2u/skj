@@ -19,6 +19,8 @@ import NewDevice from './components/newdevice.js';
 import AddNewDevice from './components/device-add.js';
 //添加设备第二步连接设备
 import AddNewDevice2 from './components/device-add2.js';
+//添加设备第三部连接成功
+import AddNewDevice3 from './components/device-add3.js';
 //圈子首页
 import Community from './components/community.js';
 //帖子详情
@@ -51,12 +53,8 @@ styles.fill = {
 
 styles.content = {
     ...styles.fill,
-    top
-:
-'40px',
-    textAlign
-:
-'center'
+    top:'40px',
+    textAlign:'center'
 }
 
 styles.nav = {
@@ -168,11 +166,9 @@ const CoApp = (props) => {
             <CustomRoute path="/newdevice" component={requireAuthentication(NewDevice)}/>
             <CustomRoute path="/addnewdevice" component={requireAuthentication(AddNewDevice)}/>
             <CustomRoute path="/addnewdevice2" component={requireAuthentication(AddNewDevice2)}/>
+            <CustomRoute path="/addnewdevice3" component={requireAuthentication(AddNewDevice3)}/>
 
             <CustomRoute path="/usercenter" component={requireAuthentication(UserCenter)}/>
-
-
-
 
 
             <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
@@ -192,11 +188,12 @@ export class AppRoot extends React.Component {
 
     componentWillMount() {
     }
-    componentWillReceiveProps (nextProps) {
-        if(nextProps.ispop && !this.props.ispop){
-            window.setTimeout(()=>{
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.ispop && !this.props.ispop) {
+            window.setTimeout(()=> {
                 this.props.dispatch(hidepopmessage());
-        },3000);
+            }, 3000);
         }
     }
 
@@ -221,9 +218,9 @@ export class AppRoot extends React.Component {
                 MessageCo = (
                     <div className="messageCo" style={fullheight}>
                         <Message onDismiss={this.onDismiss}
-                                     warning
-                                     header={this.props.title}
-                                     content={this.props.msg}
+                                 warning
+                                 header={this.props.title}
+                                 content={this.props.msg}
                             />
                     </div>
                 );
@@ -232,9 +229,9 @@ export class AppRoot extends React.Component {
                 MessageCo = (
                     <div className="messageCo" style={fullheight}>
                         <Message onDismiss={this.onDismiss}
-                                         success
-                                         header={this.props.title}
-                                         content={this.props.msg}
+                                 success
+                                 header={this.props.title}
+                                 content={this.props.msg}
                             />
                     </div>
                 );

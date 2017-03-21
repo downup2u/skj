@@ -1,0 +1,118 @@
+.myProfilePage{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #F5F5F5;
+}
+.myProfilePage .headCont{
+    background: linear-gradient(180deg, #5596d6, #337dc4);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    position: relative;
+    flex-shrink: 0;
+}
+.userInfo{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.userInfo img.avatar{
+    border-radius: 50%;
+    width: 80px;
+    border:3px solid #FFF;
+    margin-bottom: 5px;
+}
+.userInfo .username{
+    color: #FFF;
+    font-size: 14px;
+}
+.userInfo .usertype {
+    color: #FFF;
+}
+.userCode{
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    color: #FFF;
+}
+.userMessageLnk{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+.userMessageLnk img{
+    width: 26px;
+}
+.userMessageLnk span {
+    position: absolute;
+    top:0;
+    right: -5px;
+    background: #C00;
+    border-radius: 10px;
+    color: #FFF;
+    padding: 0 3px;
+}
+.myProfileBannerCont .l1con{
+    background: #FFF;
+}
+.myProfileBannerCont .l1{
+    border-bottom: 1px solid #EEE;
+    display: flex;
+    padding: 10px 15px;
+    justify-content: space-between;
+    padding-right: 30px;
+    background: url("/img/myprofile/15.png") no-repeat right center;
+    background-size: 40px 40px;
+}
+.myProfileBannerCont .l1 span{
+    font-size: 16px;
+}
+.myProfileBannerCont .l1 span:last-child{
+    font-size:14px;
+    color: #999;
+}
+.myProfileBannerCont .l2 {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #EEE;
+    margin-bottom: 20px;
+}
+.myProfileBannerCont .l2 > div img{
+    width: 40px;
+}
+
+.myProfileBannerCont .l2 > div{
+    padding:5px 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+.myProfileBannerCont .ll{
+    margin-bottom: 15px;
+    background: #FFF;
+}
+.myProfileBannerCont .llcont{
+    border-top: 1px solid #EEE;
+}
+
+.myProfileBannerCont .ll div{
+    border-bottom: 1px solid #EEE;
+    padding: 5px 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: url("/img/myprofile/15.png") no-repeat right center;
+    background-size: 40px 40px;
+}
+.myProfileBannerCont .ll div img{
+    width: 30px;
+    margin-right: 10px;
+}
+.myProfileBannerCont .ll div span{
+    font-size: 16px;
+}
