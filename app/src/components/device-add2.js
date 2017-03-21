@@ -19,14 +19,14 @@ const Page = (props) => {
         <NavBar lefttitle="返回" title="设备匹配" onClickLeft={onClickReturn}/>
 
         <div className="tt">
-            <img src="/img/9.png"/>
+            <img src="img/9.png"/>
         </div>
         <div className="fm">
             <div className="device2_text">
                 设备正在尝试和云端进行连接
             </div>
             <div className="loginBotton">
-                <Button primary>下一步</Button>
+                <Button onClick={onClickNext}  primary>下一步</Button>
             </div>
         </div>
     </div>

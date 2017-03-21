@@ -55,7 +55,7 @@ let RegisterForm = (props)=> {
         <div className="loginPageTop">
             <div className="loginHead">
                 <Icon name='angle left'/>
-                <img src="/img/4.png" className="loginhead"/>
+                <img src="img/4.png" className="loginhead"/>
             </div>
             <Fields names={['username','ispasswordvisiable','password','authcode']} component={renderRegisterForm}/>
 

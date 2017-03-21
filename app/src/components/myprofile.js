@@ -14,13 +14,13 @@ const Page = () => (
          }}>
         <div className="headCont">
             <div className="userInfo">
-                <img src="/img/myprofile/1.png" className="avatar"/>
+                <img src="img/myprofile/1.png" className="avatar"/>
                 <span className="username">爱喝水的孩子</span>
                 <span className="usertype">普通会员</span>
             </div>
             <div className="userCode">我的积分 <span>0</span></div>
             <div className="userMessageLnk">
-                <img src="/img/message.png"/>
+                <img src="img/message.png"/>
                 <span>0</span>
             </div>
         </div>
@@ -32,19 +32,19 @@ const Page = () => (
                 </div>
                 <div className="l2">
                     <div>
-                        <img src="/img/myprofile/2.png"/>
+                        <img src="img/myprofile/2.png"/>
                         <span>待付款</span>
                     </div>
                     <div>
-                        <img src="/img/myprofile/3.png"/>
+                        <img src="img/myprofile/3.png"/>
                         <span>待发货</span>
                     </div>
                     <div>
-                        <img src="/img/myprofile/4.png"/>
+                        <img src="img/myprofile/4.png"/>
                         <span>待收货</span>
                     </div>
                     <div>
-                        <img src="/img/myprofile/5.png"/>
+                        <img src="img/myprofile/5.png"/>
                         <span>退货</span>
                     </div>
                 </div>
@@ -52,50 +52,50 @@ const Page = () => (
             <div className="llcont">
                 <div className="ll">
                     <div>
-                        <img src="/img/myprofile/6.png"/>
+                        <img src="img/myprofile/6.png"/>
                         <span>我的分销</span>
                     </div>
                     <div>
-                        <img src="/img/myprofile/7.png"/>
+                        <img src="img/myprofile/7.png"/>
                         <span>我的钱包</span>
                     </div>
                 </div>
                 <div className="ll">
                     <div>
-                        <img src="/img/myprofile/8.png"/>
+                        <img src="img/myprofile/8.png"/>
                         <span>推广产品</span>
                     </div>
                     <div>
-                        <img src="/img/myprofile/9.png"/>
+                        <img src="img/myprofile/9.png"/>
                         <span>分享赚钱</span>
                     </div>
                 </div>
                 <div className="ll">
                     <div>
-                        <img src="/img/myprofile/10.png"/>
+                        <img src="img/myprofile/10.png"/>
                         <span>设置</span>
                     </div>
                 </div>
 
                 <div className="ll">
                     <div>
-                        <img src="/img/myprofile/11.png"/>
+                        <img src="img/myprofile/11.png"/>
                         <span>我的收藏</span>
                     </div>
                     <div>
-                        <img src="/img/myprofile/12.png"/>
+                        <img src="img/myprofile/12.png"/>
                         <span>优惠券</span>
                     </div>
                 </div>
                 <div className="ll">
                     <div>
-                        <img src="/img/myprofile/13.png"/>
+                        <img src="img/myprofile/13.png"/>
                         <span>地址管理</span>
                     </div>
                 </div>
                 <div className="ll">
                     <div>
-                        <img src="/img/myprofile/14.png"/>
+                        <img src="img/myprofile/14.png"/>
                         <span>意见反馈</span>
                     </div>
                 </div>

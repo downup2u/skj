@@ -30,23 +30,23 @@ export class Page extends React.Component {
         let btnsz = [
             {
                 title: '首页',
-                imgnormal: '/img/bottom2.png',
-                imghov: '/img/bottom1.png',
+                imgnormal: 'img/bottom2.png',
+                imghov: 'img/bottom1.png',
             },
             {
                 title: '圈子',
-                imgnormal: '/img/bottom4.png',
-                imghov: '/img/bottom3.png',
+                imgnormal: 'img/bottom4.png',
+                imghov: 'img/bottom3.png',
             },
             {
                 title: '商城',
-                imgnormal: '/img/bottom6.png',
-                imghov: '/img/bottom5.png',
+                imgnormal: 'img/bottom6.png',
+                imghov: 'img/bottom5.png',
             },
             {
                 title: '我的',
-                imgnormal: '/img/bottom8.png',
-                imghov: '/img/bottom7.png',
+                imgnormal: 'img/bottom8.png',
+                imghov: 'img/bottom7.png',
             },
         ];
         let btncosz = [];

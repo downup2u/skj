@@ -30,7 +30,7 @@ const DeviceItem = (props)=> {
                 onClose={() => console.log('close')}
             >
                 <div className="deviceLi">
-                    <div className="pic"><img src="/img/5.png"/></div>
+                    <div className="pic"><img src="img/5.png"/></div>
                     <div className="info">
                         <div className="tit">
                             <span>{deviceitem.devicename}</span>

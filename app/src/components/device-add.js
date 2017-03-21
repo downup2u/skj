@@ -19,16 +19,16 @@ const Page = (props) => {
             <NavBar lefttitle="返回" title="设备连接" onClickLeft={onClickReturn}/>
 
             <div className="tt">
-                <img src="/img/6.png"/>
+                <img src="img/6.png"/>
             </div>
             <div className="fm">
                 <div className="input">
                     <Select options={countryOptions}/>
-                    <img src="/img/8.png" />
+                    <img src="img/8.png" />
                 </div>
                 <div className="input">
                     <Input placeholder='请输入网络密码'/>
-                    <img src="/img/7.png" />
+                    <img src="img/7.png" />
                 </div>
                 <div className="loginBotton">
                     <Button onClick={onClickNext} primary>下一步</Button>

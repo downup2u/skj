@@ -107,7 +107,7 @@ let Page = (props)=> {
                         className="Demo-swiper__slide"
                         >
                         <div className="headContent">
-                            <img src="/img/1.png"/>
+                            <img src="img/1.png"/>
                             <div className="headContentInfo">
                                 <span className="i1">TDS002</span>
                                 <span className="i2">优</span>
@@ -121,7 +121,7 @@ let Page = (props)=> {
                         className="Demo-swiper__slide"
                         >
                         <div className="headContent">
-                            <img src="/img/1.png"/>
+                            <img src="img/1.png"/>
                             <div className="headContentInfo">
                                 <span className="i1">TDS002</span>
                                 <span className="i2">优</span>

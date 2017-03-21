@@ -22,8 +22,8 @@ const Page = (props) => {
                 设备连接成功！
             </div>
             <div className="loginBotton">
-                <Button primary>完成</Button>
-                <Button default>查看数据</Button>
+                <Button onClick={onClickNext} primary>完成</Button>
+                <Button onClick={onClickNext} default>查看数据</Button>
             </div>
         </div>
     </div>

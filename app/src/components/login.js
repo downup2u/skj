@@ -53,7 +53,7 @@ let LoginForm = (props)=> {
             <div className="loginPageTop">
                 <div className="loginHead">
                     <Icon  name='angle left' onClick={onClickReturn} />
-                    <img src="/img/4.png" className="loginhead"/>
+                    <img src="img/4.png" className="loginhead"/>
                 </div>
                 <Fields names={[ 'username', 'password','ispasswordvisiable','ischeckedpassword' ]}
                         component={renderLoginForm}/>
