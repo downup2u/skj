@@ -1,0 +1,69 @@
+.myCouponPage{
+    background: #F5F5F5;
+}
+.myCouponPage .ui.secondary.pointing.menu .item{
+    width: 33.33%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.myCouponPage .ui.secondary.pointing.menu{
+    margin: 0;
+}
+.myCouponPage .ui.secondary.pointing.menu .active.item, .ui.secondary.pointing.menu .active.item:hover{
+    color: #5694dd;
+    border-color: #5694dd
+}
+.myCouponPage .ui.secondary.pointing.menu{
+    background: #FFF;
+}
+.myCouponList{
+}
+.myCouponList .item{
+    display: flex;
+    margin:10px 15px;
+    padding-left: 7px;
+    background: url("/img/coupon1.png") repeat-y -1px center;
+    background-size: 8px 7px;
+    min-height: 94px;
+}
+.myCouponList .item .leftcont{
+    width: 80px;
+    flex-shrink: 0;
+    background:#FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.myCouponList .item .leftcont span{
+    color: #5694dd;
+}
+.myCouponList .item .leftcont span > span{
+    font-size: 30px;
+}
+.myCouponList .item .cont {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: stretch;
+    justify-content: space-between;
+    padding-left: 13px;
+    background: url("/img/coupon3.png") no-repeat left center;
+    background-size: 13px 94px;
+}
+.myCouponList .item .cont div{
+    background: #FFF;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 10px;
+}
+.myCouponList .item .cont div .tt{
+    color: #5694dd;
+    font-size: 16px;
+    margin-bottom: 8px;
+}

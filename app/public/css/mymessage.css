@@ -1,0 +1,27 @@
+.myMessage{
+    background: #F5F5F5;
+}
+.messageList{
+    display: flex;
+    flex-direction: column;
+}
+.messageList .items{
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #DDD;
+    background: #FFF;
+}
+.messageList .items .tt{
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.messageList .items .cont{
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #EEE;
+}
+.messageList .items .lnk {
+    display: flex;
+    justify-content: space-between;
+    color: #999;
+}

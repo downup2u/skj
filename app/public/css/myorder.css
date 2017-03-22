@@ -1,0 +1,110 @@
+.myOrder {
+    background: #F5F5F5;
+}
+
+.myOrder .ui.secondary.pointing.menu .item {
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myOrder .ui.secondary.pointing.menu {
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.myOrder .ui.secondary.pointing.menu .active.item, .ui.secondary.pointing.menu .active.item:hover {
+    color: #5694dd;
+    border-color: #5694dd
+}
+
+.myOrder .ui.secondary.pointing.menu {
+    background: #FFF;
+}
+
+.orderList .items {
+    margin-bottom: 10px;
+    background: #FFF;
+}
+
+.orderList .items > div {
+    padding: 2px 15px;
+}
+
+.orderList .items > div.tt {
+    display: flex;
+    height: 36px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #999;
+}
+
+.orderList .items > div.cont {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #EEE;
+}
+
+.orderList .items > div.cont img {
+    width: 80px;
+    border: 1px solid #EEE;
+    margin-right: 10px;
+}
+
+.orderList .items > div.cont .proinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    align-self: stretch;
+}
+
+.orderList .items > div.cont .proinfo .proname {
+    font-size: 13px;
+}
+
+.orderList .items > div.cont .proinfo .proother {
+    display: flex;
+    justify-content: space-between;
+}
+
+.orderList .items > div.cont .proinfo .proother .price {
+    color: #F00;
+    font-size: 16px;
+}
+
+.orderList .items > div.lnk {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-top: 1px solid #EEE;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.orderList .items > div.lnk .txt {
+    text-align: right;
+    margin-bottom: 5px;
+}
+.orderList .items > div.lnk .hotlnk{
+    display: flex;
+    justify-content: flex-end;
+}
+.orderList .items > div.lnk .hotlnk .btn{
+    padding: 4px 8px;
+    border: 1px solid #EEE;
+    border-radius: 6px;
+    margin-left: 5px;
+}
+.orderList .items > div.lnk .hotlnk .btn.pay{
+    border-color: #F00;
+    color: #F00;
+}
+
+
+

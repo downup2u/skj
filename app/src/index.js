@@ -27,6 +27,15 @@ import Community from './components/community.js';
 import Communityinfo from './components/community-info.js';
 //个人中心
 import UserCenter from './components/user-center.js';
+//我的收藏
+import MyCollection from './components/myprofile/collection.js';
+//我的优惠券
+import MyCoupon from './components/myprofile/coupon.js';
+//我的消息列表
+import MyMessage from './components/myprofile/message.js';
+//我的订单
+import MyOrder from './components/myprofile/order.js';
+
 
 import {requireAuthentication} from './components/requireauthentication';
 import '../public/css/page.css';
@@ -167,10 +176,11 @@ const CoApp = (props) => {
             <CustomRoute path="/addnewdevice" component={requireAuthentication(AddNewDevice)}/>
             <CustomRoute path="/addnewdevice2" component={requireAuthentication(AddNewDevice2)}/>
             <CustomRoute path="/addnewdevice3" component={requireAuthentication(AddNewDevice3)}/>
-
+            <CustomRoute path="/mycollection" component={requireAuthentication(MyCollection)}/>
+            <CustomRoute path="/mycoupon" component={requireAuthentication(MyCoupon)}/>
+            <CustomRoute path="/mymessage" component={requireAuthentication(MyMessage)}/>
+            <CustomRoute path="/myorder" component={requireAuthentication(MyOrder)}/>
             <CustomRoute path="/usercenter" component={requireAuthentication(UserCenter)}/>
-
-
             <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
             <CustomRoute component={App}/>
         </Switch>
