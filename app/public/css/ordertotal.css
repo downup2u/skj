@@ -1,0 +1,33 @@
+.orderTotalPageContent .item{
+    margin: 20px 30px;
+    border-radius: 10px;
+    background: #eff4fa;
+    box-shadow: 1px 1px 2px #CCC;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.orderTotalPageContent .item .tit{
+    height: 44px;
+    text-align: center;
+    color: #FFF;
+    font-size: 16px;
+    line-height: 44px;
+    background: #5596d6;
+    border-radius: 10px 10px 0 0 ;
+}
+.orderTotalPageContent .item .cont{
+    display: flex;
+    flex-direction: column;
+}
+.orderTotalPageContent .item .cont .li{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.orderTotalPageContent .item .cont .li span{
+    font-size: 16px;
+}
+.orderTotalPageContent .item .cont .li:first-child{
+    border-bottom: 1px solid #EEE;
+}

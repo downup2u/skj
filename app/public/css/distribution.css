@@ -1,0 +1,127 @@
+.distributionPage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #F5F5F5;
+}
+
+.distributionPage .headCont {
+    background: linear-gradient(180deg, #5596d6, #337dc4);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    position: relative;
+    flex-shrink: 0;
+    justify-content: center;
+    align-content: center;
+}
+
+.distributionPage .userInfo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.distributionPage .userInfo img.avatar {
+    border-radius: 50%;
+    width: 80px;
+    border: 3px solid #FFF;
+    margin-bottom: 5px;
+}
+
+.distributionPage .userInfo .username {
+    color: #FFF;
+    font-size: 14px;
+}
+
+.distributionPage .userInfo .usertype {
+    color: #FFF;
+}
+
+.distributionPage .ui.secondary.pointing.menu {
+    margin: 0;
+    border-bottom: 1px solid #EEE
+}
+
+.distributionPage .ui.secondary.pointing.menu .item {
+    flex-grow: 1;
+    justify-content: center;
+    margin: 0;
+    line-height: 20px;
+    font-weight: 100;
+}
+
+.distributionPage .ui.secondary.pointing.menu .item.active {
+    border: none;
+    color: #5694dd;
+    margin: 0;
+    line-height: 20px;
+    font-weight: 100;
+}
+
+.distributionPage .cont {
+    display: flex;
+    flex-direction: column;
+    background: #FFF;
+    flex-grow: 1;
+    justify-content: flex-start;
+    overflow: scroll;
+}
+
+.distributionPage .cont .li {
+    margin: 5px 15px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background: #eff4fa;
+    border: 1px solid #EEE;
+    display: flex;
+    align-items: center;
+}
+
+.distributionPage .cont .li img {
+    width: 46px;
+    border-radius: 46px;
+    height: 46px;
+    margin-right: 10px;
+}
+
+.distributionPage .cont .li span.num {
+    font-size: 16px;
+    margin-right: 15px;
+    color: #5096d1;
+}
+
+.distributionPage .cont .li div {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.distributionPage .cont .li i {
+    font-style: normal;
+    color: #F00;
+}
+
+.bottomBttn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #EEE;
+    background: #EEE;
+    padding: 5px 20%;
+}
+
+.bottomBttn span{
+    display: flex;
+    border-radius: 5px;
+    background: #F00;
+    color: #FFF;
+    font-size: 14px;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    height: 40px;
+}
+
+
