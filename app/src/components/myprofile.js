@@ -54,12 +54,12 @@ export default function Page(props) {
                 </div>
                 <div className="llcont">
                     <div className="ll">
-                        <div>
+                        <div onClick={()=>{onClickPage('/distribution')}}>
                             <img src="img/myprofile/6.png"/>
                             <span>我的分销</span>
                         </div>
-                        <div>
-                            <img src="img/myprofile/7.png"/>
+                        <div onClick={()=>{onClickPage('/myprofit')}}>
+                            <img src="img/myprofile/7.png" />
                             <span>我的钱包</span>
                         </div>
                     </div>
@@ -91,7 +91,7 @@ export default function Page(props) {
                         </div>
                     </div>
                     <div className="ll">
-                        <div>
+                        <div  onClick={()=>{onClickPage('/addresslist')}}>
                             <img src="img/myprofile/13.png"/>
                             <span>地址管理</span>
                         </div>

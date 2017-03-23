@@ -1,0 +1,99 @@
+.myProfitPage{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #F5F5F5;
+}
+.myProfitPage .headCont{
+    background: linear-gradient(180deg, #5596d6, #337dc4);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    position: relative;
+    flex-shrink: 0;
+    justify-content: center;
+    align-content: center;
+}
+.myProfitPage .info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20px;
+}
+.myProfitPage .info span{
+    color: #FFF;
+}
+.myProfitPage .info span.profittit{
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.myProfitPage .info span.number{
+    font-size: 36px;
+}
+.myProfitPage .tixian{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -15px;
+    padding-right: 15px;
+}
+.myProfitPage .tixian span{
+    color: #FFF;
+    font-size: 14px;
+    border-radius: 30px;
+    border:1px solid #FFF;
+    padding: 3px 10px;
+}
+.myProfitPage .tixian span:active{
+    background: rgba(255,255,255,.3);
+}
+.myProfitPage .ui.secondary.pointing.menu{
+    margin: 0;
+    background: #FFF;
+}
+.myProfitPage .ui.secondary.pointing.menu .item{
+    flex-grow: 1;
+    justify-content: center;
+    color: #999;
+}
+.myProfitPage .ui.secondary.pointing.menu .item.active{
+    border-color: #5694dd;
+    color:#5694dd;
+}
+.myProfitPage .cont{
+    display: flex;
+    flex-direction: column;
+}
+.myProfitPage .cont .tt{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+}
+.myProfitPage .cont .tt span{
+    font-size: 14px;
+}
+.myProfitPage .cont .ll .l{
+    background: #FFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 15px;
+    align-items: center;
+    border-bottom: 1px solid #EEE;
+}
+.myProfitPage .cont .ll .l:last-child{
+    border: none;
+}
+.myProfitPage .cont .ll .l .i{
+    display: flex;
+    flex-direction: column;
+}
+.myProfitPage .cont .ll .l .p{
+    color: #5694dd;
+    font-size: 14px;
+}
+.myProfitPage .cont .ll .l .i .code{
+    font-size: 14px;
+}
+.myProfitPage .cont .ll .l .i .date {
+    color: #999;
+}

@@ -35,7 +35,18 @@ import MyCoupon from './components/myprofile/coupon.js';
 import MyMessage from './components/myprofile/message.js';
 //我的订单
 import MyOrder from './components/myprofile/order.js';
-
+//我的收益
+import MyProfit from './components/myprofile/profit.js';
+//提现
+import TiXian from './components/myprofile/tixian.js';
+//提现2－添加银行卡
+import TiXian2 from './components/myprofile/tixian2.js';
+//提现3-短信验证
+import TiXian3 from './components/myprofile/messageCode.js';
+//订单统计
+import OrderTotal from './components/myprofile/orderTotal.js';
+//我的分销
+import Distribution from './components/myprofile/distribution.js';
 
 import {requireAuthentication} from './components/requireauthentication';
 import '../public/css/page.css';
@@ -181,6 +192,12 @@ const CoApp = (props) => {
             <CustomRoute path="/mymessage" component={requireAuthentication(MyMessage)}/>
             <CustomRoute path="/myorder" component={requireAuthentication(MyOrder)}/>
             <CustomRoute path="/usercenter" component={requireAuthentication(UserCenter)}/>
+            <CustomRoute path="/myprofit" component={requireAuthentication(MyProfit)}/>
+            <CustomRoute path="/tixian" component={requireAuthentication(TiXian)}/>
+            <CustomRoute path="/tixian2" component={requireAuthentication(TiXian2)}/>
+            <CustomRoute path="/tixian3" component={requireAuthentication(TiXian3)}/>
+            <CustomRoute path="/ordertotal" component={requireAuthentication(OrderTotal)}/>
+            <CustomRoute path="/distribution" component={requireAuthentication(Distribution)}/>
             <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
             <CustomRoute component={App}/>
         </Switch>

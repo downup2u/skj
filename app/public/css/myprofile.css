@@ -12,40 +12,40 @@
     position: relative;
     flex-shrink: 0;
 }
-.userInfo{
+.myProfilePage .userInfo{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
-.userInfo img.avatar{
+.myProfilePage .userInfo img.avatar{
     border-radius: 50%;
     width: 80px;
     border:3px solid #FFF;
     margin-bottom: 5px;
 }
-.userInfo .username{
+.myProfilePage .userInfo .username{
     color: #FFF;
     font-size: 14px;
 }
-.userInfo .usertype {
+.myProfilePage .userInfo .usertype {
     color: #FFF;
 }
-.userCode{
+.myProfilePage .userCode{
     position: absolute;
     bottom: 10px;
     left: 15px;
     color: #FFF;
 }
-.userMessageLnk{
+.myProfilePage .userMessageLnk{
     position: absolute;
     right: 15px;
     top: 10px;
 }
-.userMessageLnk img{
+.myProfilePage .userMessageLnk img{
     width: 26px;
 }
-.userMessageLnk span {
+.myProfilePage .userMessageLnk span {
     position: absolute;
     top:0;
     right: -5px;

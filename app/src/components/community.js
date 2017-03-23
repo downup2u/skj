@@ -6,6 +6,8 @@ import {gettopiclist_request,
     uicommenthide
 } from '../actions/index.js';
 import '../../public/css/feed.css';
+import NavBar from './nav.js';
+
 
 import CommentExampleComment from './community_comment.js';
 import FeedExampleBasic from './community_topic.js';
@@ -81,7 +83,6 @@ export class Page extends React.Component {
     stopDefault = (e)=> {
         e.stopPropagation
     }
-
     render() {
 
         console.dir(this.props.topics);
@@ -98,6 +99,7 @@ export class Page extends React.Component {
         }
         return (
             <div className="feedPage">
+                <NavBar title="圈子" />
                 <div onClick={this.onClickPage}>
                     <TopTip data={toptipData}></TopTip>
                     {topicsco}
