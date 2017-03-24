@@ -33,4 +33,20 @@ let normalizrtopiclist=(oldtopicdataobj)=>{
   return newtopicdataobj;
 };
 
-export {normalizrtopiclist};
+
+// Define a orders schema
+const notifymessages = new schema.Entity('notifymessages',{},{
+  idAttribute: '_id',
+});
+
+const notifymessagesSchma = {list:[notifymessages]};
+
+const normalizr_notifymessageslist=(list)=>{
+  console.log("normalizr_notifymessageslist before====>" + JSON.stringify(list));
+  const notifymessages = normalize(list, notifymessagesSchma);
+  console.log("normalizr_notifymessageslist after ====>" + JSON.stringify(notifymessages));
+  return notifymessages;
+};
+
+
+export {normalizrtopiclist,normalizr_notifymessageslist};

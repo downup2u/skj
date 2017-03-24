@@ -33,6 +33,8 @@ import MyCollection from './components/myprofile/collection.js';
 import MyCoupon from './components/myprofile/coupon.js';
 //我的消息列表
 import MyMessage from './components/myprofile/message.js';
+//消息详情
+import MyMessageDetail from './components/myprofile/messagedetail.js';
 //我的订单
 import MyOrder from './components/myprofile/order.js';
 //我的收益
@@ -49,6 +51,8 @@ import OrderTotal from './components/myprofile/orderTotal.js';
 import Distribution from './components/myprofile/distribution.js';
 
 import {requireAuthentication} from './components/requireauthentication';
+
+
 import '../public/css/page.css';
 
 
@@ -189,7 +193,8 @@ const CoApp = (props) => {
             <CustomRoute path="/addnewdevice3" component={requireAuthentication(AddNewDevice3)}/>
             <CustomRoute path="/mycollection" component={requireAuthentication(MyCollection)}/>
             <CustomRoute path="/mycoupon" component={requireAuthentication(MyCoupon)}/>
-            <CustomRoute path="/mymessage" component={requireAuthentication(MyMessage)}/>
+            <CustomRoute path="/mymessage" component={MyMessage}/>
+            <CustomRoute path="/mymessagedetail/:msgid" component={MyMessageDetail}/>
             <CustomRoute path="/myorder" component={requireAuthentication(MyOrder)}/>
             <CustomRoute path="/usercenter" component={requireAuthentication(UserCenter)}/>
             <CustomRoute path="/myprofit" component={requireAuthentication(MyProfit)}/>

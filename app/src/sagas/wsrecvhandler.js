@@ -17,6 +17,8 @@ import {
   getdevicelist_request,getdevicelist_result,
   deletedevice_request,deletedevice_result,
 
+    getnotifymessage_result,
+
   createaddress_result,
   deleteaddress_result,
   editaddress_result,
@@ -139,7 +141,7 @@ export function wsrecvhandler(socket,emit){
         emit(deleteaddress_result( {_id} ));
   });
 
-  socket.on('disconnect', e => {
-    emit(disconnect());
+  socket.on('getnotifymessage_result',(result)=> {
+      emit(getnotifymessage_result(result));
   });
 }

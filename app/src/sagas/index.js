@@ -26,7 +26,8 @@ import {
   deleteaddress_request,
   editaddress_request,
   getaddresslist_request,
-  disconnect
+  disconnect,
+    getnotifymessage_request,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -133,6 +134,7 @@ function* handleIO(socket) {
     'sendauth':`${sendauth_request}`,
     'register':`${register_request}`,
     'gettopiclist':`${gettopiclist_request}`,
+    'getnotifymessage':`${getnotifymessage_request}`,
   };
 
 
