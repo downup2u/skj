@@ -7,7 +7,7 @@ import {
   showpopmessage,
   login_request,login_result,login_err,
   logout_request,
-
+    loginwithtoken_request,
   inserttopic_request,inserttopic_result,
   getmytopic_request,getmytopic_result,
   gettopiclist_request,gettopiclist_result,
@@ -35,6 +35,14 @@ import {
 
 import {wsrecvhandler} from './wsrecvhandler.js';
 
+let sendmsgwhenreconnect =(socket)=>{
+  //连接上以后直接发送-----》
+  let token = localStorage.getItem('shuikejing_user_token');
+  if (token !== null) {
+    socket.emit('message',{cmd:'loginwithtoken',data:{token:token}});
+  }
+
+}
 
 function connect() {
   const socket = io(config.serverurl);
@@ -48,6 +56,20 @@ function connect() {
 function subscribe(socket) {
   return eventChannel(emit => {
     wsrecvhandler(socket,emit);
+    socket.on('connect',()=>{
+      sendmsgwhenreconnect(socket);
+    });
+    socket.on('disconnect',()=>{
+      // emit(disconnect());
+      // emit(showpopmessage({
+      //   title:'错误',
+      //   msg:'连接断开,尝试重连...',
+      //   type:'error'
+      // }));
+    });
+    socket.on('error',()=>{
+      //emit(disconnect());
+    });
     return () => {};
   });
 }
@@ -71,135 +93,66 @@ function* write(socket,fun,cmd) {
 
 function* handleIOWithAuth(socket) {
   while (true) {
-    console.log("not login!");
+    console.log("未登录!");
     yield take(`${login_result}`);
-    console.log("login success!");
-    let fnsz = [
-      {
-        fnname:`${getmytopic_request}`,
-        cmd:'getmytopic'
-      },
-      {
-        fnname:`${inserttopic_request}`,
-        cmd:'inserttopic'
-      },
-      {
-        fnname:`${insertcommentstotopic_request}`,
-        cmd:'insertcommentstotopic'
-      },
-      {
-        fnname:`${insertcommentstocomments_request}`,
-        cmd:'insertcommentstocomments'
-      },
-      {
-        fnname:`${lovetopicadd_request}`,
-        cmd:'lovetopicadd'
-      },
-      {
-        fnname:`${lovetopicunadd_request}`,
-        cmd:'lovetopicunadd'
-      },
-      {
-        fnname:`${lovecommentsadd_request}`,
-        cmd:'lovecommentsadd'
-      },
-      {
-        fnname:`${lovecommentsunadd_request}`,
-        cmd:'lovecommentsunadd'
-      },
-      {
-        fnname:`${createdevice_request}`,
-        cmd:'createdevice'
-      },
-      {
-        fnname:`${getdevicelist_request}`,
-        cmd:'getdevicelist'
-      },
-      {
-        fnname:`${deletedevice_request}`,
-        cmd:'deletedevice'
-      },
-      {
-        fnname:`${createaddress_request}`,
-        cmd:'createaddress'
-      },
-      {
-        fnname:`${deleteaddress_request}`,
-        cmd:'deleteaddress'
-      },
-      {
-        fnname:`${editaddress_request}`,
-        cmd:'editaddress'
-      },
-      {
-        fnname:`${getaddresslist_request}`,
-        cmd:'getaddresslist'
-      },
-    ];
+    console.log("登录成功!");
+    let fnsz = {
+      'getmytopic':`${getmytopic_request}`,
+      'inserttopic':`${inserttopic_request}`,
+      'insertcommentstotopic':`${insertcommentstotopic_request}`,
+      'insertcommentstocomments':`${insertcommentstocomments_request}`,
+      'lovetopicadd':`${lovetopicadd_request}`,
+      'lovetopicunadd':`${lovetopicunadd_request}`,
+      'lovecommentsadd':`${lovecommentsadd_request}`,
+      'lovecommentsunadd':`${lovecommentsunadd_request}`,
+      'createdevice':`${createdevice_request}`,
+      'getdevicelist':`${getdevicelist_request}`,
+      'deletedevice':`${deletedevice_request}`,
+
+      'createaddress':`${createaddress_request}`,
+      'deleteaddress':`${deleteaddress_request}`,
+      'editaddress':`${editaddress_request}`,
+      'getaddresslist':`${getaddresslist_request}`,
+    };
+
     let tasksz =[];
-    for (var fn of fnsz) {
-      let task =  yield fork(write, socket,fn.fnname,fn.cmd);
+    for (let cmd in fnsz) {
+      let task =  yield fork(write, socket,fnsz[cmd],cmd);
       tasksz.push(task);
     }
     let action = yield take(`${logout_request}`);
-    for (var task of tasksz) {
+    for (let task of tasksz) {
       yield cancel(task);
     }
-
-
   }
 }
 
 function* handleIO(socket) {
-  let fnsz = [
-    {
-      fnname:`${login_request}`,
-      cmd:'login'
-    },
-    {
-      fnname:`${sendauth_request}`,
-      cmd:'sendauth'
-    },
-    {
-      fnname:`${register_request}`,
-      cmd:'register'
-    },
-    {
-      fnname:`${gettopiclist_request}`,
-      cmd:'gettopiclist'
-    },
-  ];
-  // yield fork(write, socket,fnsz[0].fnname,fnsz[0].cmd);//for test
-  // yield fork(write, socket,fnsz[1].fnname,fnsz[1].cmd);//for test
-  // yield fork(write, socket,fnsz[2].fnname,fnsz[2].cmd);//for test
-  // yield fork(write, socket,fnsz[3].fnname,fnsz[3].cmd);//for test
-  for (var fn of fnsz) {
-        // some item manipulation
-        yield fork(write, socket,fn.fnname,fn.cmd);
-    }
-//  let tasksz =[];
-  // fnsz.forEach(function *(fn){
-  //   let task =  yield fork(write, socket,fn.fnname,fn.cmd);//for test
-  //   //yield tasksz.push(task);
-  // });
+  let fnsz =  {
+    'login':`${login_request}`,
+    'sendauth':`${sendauth_request}`,
+    'register':`${register_request}`,
+    'gettopiclist':`${gettopiclist_request}`,
+  };
+
+
+  let tasksz =[];
+  for (let cmd in fnsz) {
+    let task =  yield fork(write, socket,fnsz[cmd],cmd);
+    tasksz.push(task);
+  }
 }
 
 
 function* flow() {
-  while (true) {
-    console.log("flow...");
+  const socket = yield call(connect);
+  //连接上以后直接发送-----》
+  sendmsgwhenreconnect(socket);
 
-    const socket = yield call(connect);
-    const taskread = yield fork(read, socket);
-    const taskwritewithauth = yield fork(handleIOWithAuth, socket);
-    const taskwrite = yield fork(handleIO, socket);
+  const taskread = yield fork(read, socket);
+  const taskwritewithauth = yield fork(handleIOWithAuth, socket);
+  const taskwrite = yield fork(handleIO, socket);
 
-    yield take(`${disconnect}`);
-    console.log('断开连接,重新连接中');
-    yield cancel(taskread);
-    yield cancel(taskwritewithauth);
-    yield cancel(taskwrite);
-  }
 }
 
 import {

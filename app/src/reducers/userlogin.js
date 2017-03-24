@@ -10,14 +10,17 @@ import {
 
 const initial = {
     userlogin: {
-        loginsuccess: false,
-        profile: {},
+        loginsuccess:false,
+        username:'',
+        token:'',
+        profile:{},
     },
 };
 
 const userlogin = createReducer({
     [login_result]: (state, payload) => {
-        return { ...state, profile: payload,loginsuccess:true };
+        localStorage.setItem('shuikejing_user_token',payload.token);
+        return { ...state, ...payload,loginsuccess:true };
     },
     [login_err]: (state, payload) => {
         return { ...state, loginsuccess:false};

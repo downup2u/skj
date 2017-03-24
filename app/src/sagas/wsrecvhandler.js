@@ -37,8 +37,8 @@ import {
 import {store} from '../store.js';
 
 export function wsrecvhandler(socket,emit){
-  socket.on('users.login_result', ({ profile }) => {
-    emit(login_result( profile ));
+  socket.on('users.login_result', (payload) => {
+    emit(login_result( payload ));
   });
   socket.on('users.login_err',({errmsg})=>{
     emit(login_err());

@@ -21,6 +21,7 @@ export const hidepopmessage = createAction('hidepopmessage');
 export const login_request = createAction('userlogin.login_request');
 export const login_result = createAction('userlogin.login_result');
 export const login_err = createAction('userlogin.login_err');
+export const loginwithtoken_request = createAction('userlogin.loginwithtoken');
 
 export const sendauth_request = createAction('userlogin.sendauth_request');
 export const sendauth_result = createAction('userlogin.sendauth_result');

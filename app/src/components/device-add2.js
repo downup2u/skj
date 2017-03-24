@@ -12,7 +12,7 @@ const Page = (props) => {
         props.history.goBack();
     }
     let onClickNext =()=>{
-        props.history.replace('/');
+        props.history.push('/addnewdevice3');
     }
     return (
     <div className="addnewdevice">

@@ -50,7 +50,7 @@ export class Page extends React.Component {
             },
         ];
         let btncosz = [];
-        for (let index in btnsz) {
+        btnsz.forEach((obj,index)=> {
             if (index === this.props.curtabindex) {
                 btncosz.push(<Button key={'btn'+index} onClick={this.onClickTab.bind(this,index)} className="action">
                     <img src={btnsz[index].imghov}/>
@@ -63,7 +63,7 @@ export class Page extends React.Component {
                     <span>{btnsz[index].title}</span>
                 </Button>);
             }
-        }
+        });
         return (
             <div style={pagewamp}>
                 <div className="pageStyle">
