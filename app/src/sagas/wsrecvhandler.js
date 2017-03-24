@@ -24,7 +24,7 @@ import {
   editaddress_result,
   getaddresslist_result,
 
-  disconnect,
+
 
   wait_createaddress_result,
   wait_editaddress_result,

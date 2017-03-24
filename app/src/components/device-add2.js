@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Input, Button, Select } from 'semantic-ui-react';
 import '../../public/css/newdevice.css';
 
-let countryOptions = [{key: 'af', value: 'af', flag: 'af', text: 'Afghanistan'}]
 
 const Page = (props) => {
     let onClickReturn = ()=> {
@@ -32,5 +31,6 @@ const Page = (props) => {
     </div>
 );
 }
+
 
 export default Page

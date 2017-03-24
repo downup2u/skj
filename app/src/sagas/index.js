@@ -26,7 +26,7 @@ import {
   deleteaddress_request,
   editaddress_request,
   getaddresslist_request,
-  disconnect,
+
     getnotifymessage_request,
 } from '../actions';
 import {
@@ -164,9 +164,11 @@ import {
   inserttopicflow,
   createdeviceflow,
 } from '../actions/sagacallback.js';
+import {wififlow} from './wififlow';
 
 export default function* rootSaga() {
   yield fork(flow);
+  yield fork(wififlow);
   yield fork(createaddressflow);
   yield fork(editaddressflow);
   yield fork(registerflow);
