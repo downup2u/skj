@@ -8,6 +8,7 @@
     margin-bottom: 0;
     padding: 0;
     height:46px;
+    width: 100%;
 }
 .ui.segment.headContent .leftlnk{
     width: 25%;
@@ -36,4 +37,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.ui.segment.headContent .ui.grid{
+    margin: 0;
+}
+
+.ui.segment.headContent .ui.grid>.row>[class*="right aligned"].column.column i.large.icon{
+    color: #FFF;
+}
+.ui.bottom.right.popup{
+    padding: 0;
+}
+.communityMoreLnk > div{
+    display: flex;
+    padding: 0 10px;
+    line-height: 30px;
+}
+.communityMoreLnk > div:first-child{
+    border-bottom: 1px solid #EEE;
 }

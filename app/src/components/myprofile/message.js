@@ -3,7 +3,7 @@ import NavBar from '../nav.js';
 //import { Input, Button, Select, List, Menu } from 'semantic-ui-react';
 import '../../../public/css/mymessage.css';
 import {ui_setnotifymessageinited,getnotifymessage_request} from '../../actions';
-import { InfiniteLoader, List } from 'react-virtualized';
+import { InfiniteLoader, List, Icon } from 'react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -64,7 +64,6 @@ export class Page extends Component {
         return (
             <div className="myMessage" style={{minHeight:(window.innerHeight)+"px"}}>
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn}/>
-
                 <div className="messageList">
                         <InfiniteLoader
                             isRowLoaded={this.isRowLoaded}
@@ -73,18 +72,17 @@ export class Page extends Component {
                         >
                             {({ onRowsRendered, registerChild }) => (
                             <List
-                                height={580}
+                                height={window.innerHeight-46}
                                 onRowsRendered={onRowsRendered}
                                 ref={registerChild}
                                 rowCount={this.props.remoteRowCount}
                                 rowHeight={129}
                                 rowRenderer={this.rowRenderer}
-                                width={400}
+                                width={window.innerWidth}
                                     />
                             )}
                         </InfiniteLoader>
                 </div>
-
             </div>
         )
     }
@@ -102,5 +100,5 @@ const mapStateToProps =  ({notifymessage}, props) =>{
 };
 
 export default connect(
-    mapStateToProps,
+    mapStateToProps
 )(Page);

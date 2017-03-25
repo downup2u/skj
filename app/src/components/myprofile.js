@@ -16,7 +16,7 @@ export default function Page(props) {
                 overflow:"scroll"
              }}>
             <div className="headCont">
-                <div className="userInfo">
+                <div className="userInfo" onClick={()=>{onClickPage('/userinfo')}}>
                     <img src="img/myprofile/1.png" className="avatar"/>
                     <span className="username">爱喝水的孩子</span>
                     <span className="usertype">普通会员</span>

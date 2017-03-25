@@ -49,6 +49,12 @@ import TiXian3 from './components/myprofile/messageCode.js';
 import OrderTotal from './components/myprofile/orderTotal.js';
 //我的分销
 import Distribution from './components/myprofile/distribution.js';
+//我的帖子列表
+import Topiclist from './components/myprofile/topiclist.js';
+//修改用户名
+import ChangeUsername from './components/myprofile/changeusername.js';
+//忘记密码
+import ForgetPwd from './components/forgetpwd.js';
 
 import {requireAuthentication} from './components/requireauthentication';
 
@@ -204,6 +210,9 @@ const CoApp = (props) => {
             <CustomRoute path="/ordertotal" component={requireAuthentication(OrderTotal)}/>
             <CustomRoute path="/distribution" component={requireAuthentication(Distribution)}/>
             <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
+            <CustomRoute path="/mytopiclist" component={Topiclist}/>
+            <CustomRoute path="/changeusername" component={ChangeUsername}/>
+            <CustomRoute path="/forgetpwd" component={ForgetPwd}/>
             <CustomRoute component={App}/>
         </Switch>
     );

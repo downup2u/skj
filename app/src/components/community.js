@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Comment, Header,Feed, Icon,Input  } from 'semantic-ui-react';
+import { Button, Comment, Header, Feed, Icon, Input, Grid, Popup  } from 'semantic-ui-react';
+
+
 import { connect } from 'react-redux';
 import {gettopiclist_request,
     uicommentshow,
     uicommenthide
 } from '../actions/index.js';
 import '../../public/css/feed.css';
-import NavBar from './nav.js';
+import NavBar from './nav2.js';
 
 
 import CommentExampleComment from './community_comment.js';
@@ -76,13 +78,23 @@ export class Page extends React.Component {
     };
     onClickPage = ()=> {//点击空白处，隐藏?如何判断点击空白
         this.props.dispatch(uicommenthide());
-    }
+    };
     onClickTopic = (topicid)=> {//点击空白处，隐藏?如何判断点击空白
         this.props.history.push(`/communityinfo/${topicid}`);
-    }
+    };
     stopDefault = (e)=> {
         e.stopPropagation
-    }
+    };
+
+    //新建帖子
+    addNewCommunity = (topicid)=> {
+        this.props.history.push(`/communityinfo/${topicid}`);
+    };
+
+    addNewCommunityHotlnk = ()=>{
+        this.props.history.push('/newtopic');
+    };
+
     render() {
 
         console.dir(this.props.topics);
@@ -98,8 +110,11 @@ export class Page extends React.Component {
                                  onClickTopic={this.onClickTopic}/>);
         }
         return (
-            <div className="feedPage">
-                <NavBar title="圈子" />
+            <div className="feedPage" style={{paddingBottom:"60px"}}>
+                <NavBar titlename="圈子" {...this.props}/>
+                <Icon name="add circle" color='blue' size='huge' className="addcommunityHotlnk"
+                      onClick={this.addNewCommunityHotlnk.bind(this)}
+                    />
                 <div onClick={this.onClickPage}>
                     <TopTip data={toptipData}></TopTip>
                     {topicsco}

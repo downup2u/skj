@@ -5,6 +5,8 @@ import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import {sendauth_request,register_request} from '../actions/index.js';
 import {register} from '../actions/sagacallback.js';
+import NavBar from './nav.js';
+
 
 let renderRegisterForm = (fields)=> {
     console.dir(fields);
@@ -53,15 +55,11 @@ let RegisterForm = (props)=> {
     let {handleSubmit,onClickRegister,onClickLogin} = props;
     return (<Form onSubmit={handleSubmit(onClickRegister)}>
         <div className="loginPageTop">
-            <div className="loginHead">
-                <Icon name='angle left'/>
-                <img src="img/4.png" className="loginhead"/>
-            </div>
+            <NavBar lefttitle="返回" title="重置密码" />
             <Fields names={['username','ispasswordvisiable','password','authcode']} component={renderRegisterForm}/>
 
             <div className="loginBotton">
-                <Button primary>注册</Button>
-                <Button basic type="button" onClick={onClickLogin}>快速登录</Button>
+                <Button primary>确定</Button>
             </div>
         </div>
     </Form>);

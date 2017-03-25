@@ -128,6 +128,7 @@
     border-radius: 0;
     border-bottom: 1px solid #EEE;
     align-items: center;
+    font-size: 16px;
 }
 
 .UserInfoPage .escLogin {
@@ -222,6 +223,7 @@
     margin-bottom: 10px;
     text-indent: 25px;
     height: 44px;
+    font-size: 14px;
 }
 
 .loginBotton {
@@ -325,6 +327,40 @@
     background: #00c40c;
 }
 
+.ChangeUsernamePage .inputContent{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 15px;
+    position: relative;
+}
+.ChangeUsernamePage .inputContent .inputTitle{
+
+}
+.ChangeUsernamePage .inputContent > .ui.input{
+    flex-grow: 1;
+}
+.ChangeUsernamePage .inputContent > .ui.input input{
+    height: 50px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+}
+
+.ChangeUsernamePage .btnSub{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.ChangeUsernamePage .btnSub button.ui.primary.button{
+    flex-grow: 1;
+    margin: 0;
+    height: 46px;
+    border-radius: 0;
+}
 
 
 
