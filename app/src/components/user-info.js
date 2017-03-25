@@ -2,8 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import '../../public/css/user.css';
 import { Input, List, Radio, Button, Icon, Image } from 'semantic-ui-react'
 import NavBar from './nav.js';
+import { connect } from 'react-redux';
 
-export default class Page extends Component {
+class Page extends Component {
 
     onClickReturn = ()=> {
         this.props.history.goBack();
@@ -23,7 +24,7 @@ export default class Page extends Component {
                             <span>头像</span>
                         </div>
                         <div className="rightCont">
-                            <Image avatar src='http://semantic-ui.com/images/avatar2/small/rachel.png' />
+                            <Image avatar src={this.props.profile.avatar} />
                         </div>
                     </List.Item>
                     <List.Item onClick={this.onClickPage.bind(this, '/changeusername')}>
@@ -31,7 +32,7 @@ export default class Page extends Component {
                             <span>昵称</span>
                         </div>
                         <div className="rightCont">
-                            <span>爱喝水的孩子</span>
+                            <span>{this.props.profile.nickname}</span>
                             <Icon name="angle right"/>
                         </div>
                     </List.Item>
@@ -40,7 +41,7 @@ export default class Page extends Component {
                             <span>手机号</span>
                         </div>
                         <div className="rightCont">
-                            <span>13800000000</span>
+                            <span>{this.props.username}</span>
                             <Icon name="angle right"/>
                         </div>
                     </List.Item>
@@ -60,3 +61,11 @@ export default class Page extends Component {
         )
     }
 }
+
+const mapStateToProps =  ({userlogin}) =>{
+    return userlogin;
+};
+
+export default connect(
+    mapStateToProps
+)(Page);

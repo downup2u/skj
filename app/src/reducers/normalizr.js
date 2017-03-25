@@ -23,7 +23,7 @@ const topics = new schema.Entity('topics', {
   loves:[user]
 },{idAttribute: '_id'});
 
-const mySchema = { docs: [ topics ] }
+const mySchema = { list: [ topics ] }
 // const docSchema = new schema.Object({ docs: new schema.Array(topics) });
 
 let normalizrtopiclist=(oldtopicdataobj)=>{
@@ -42,9 +42,9 @@ const notifymessages = new schema.Entity('notifymessages',{},{
 const notifymessagesSchma = {list:[notifymessages]};
 
 const normalizr_notifymessageslist=(list)=>{
-  console.log("normalizr_notifymessageslist before====>" + JSON.stringify(list));
+  //console.log("normalizr_notifymessageslist before====>" + JSON.stringify(list));
   const notifymessages = normalize(list, notifymessagesSchma);
-  console.log("normalizr_notifymessageslist after ====>" + JSON.stringify(notifymessages));
+  //console.log("normalizr_notifymessageslist after ====>" + JSON.stringify(notifymessages));
   return notifymessages;
 };
 

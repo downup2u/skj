@@ -28,7 +28,7 @@ export class Page extends React.Component {
                     <Grid.Row>
                         <Grid.Column textAlign='right'>
                             <Popup
-                                trigger={<Icon name='ellipsis horizontal' color='white' size='large'/>}
+                                trigger={<Icon name='ellipsis horizontal' color='grey' size='large'/>}
                                 position='top right'
                                 >
                                 <div className="communityMoreLnk">

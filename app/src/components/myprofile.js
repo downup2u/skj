@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import NavBar from './nav.js';
 import { Input, Button, Select } from 'semantic-ui-react';
 import '../../public/css/myprofile.css';
-
+import { connect } from 'react-redux';
 let countryOptions = [{key: 'af', value: 'af', flag: 'af', text: 'Afghanistan'}];
 
-export default function Page(props) {
+let Page =(props)=> {
     let onClickPage = (name)=> {
         props.history.push(name);
     };
@@ -17,8 +17,8 @@ export default function Page(props) {
              }}>
             <div className="headCont">
                 <div className="userInfo" onClick={()=>{onClickPage('/userinfo')}}>
-                    <img src="img/myprofile/1.png" className="avatar"/>
-                    <span className="username">爱喝水的孩子</span>
+                    <img src={props.profile.avatar} className="avatar"/>
+                    <span className="username">{props.profile.nickname}</span>
                     <span className="usertype">普通会员</span>
                 </div>
                 <div className="userCode">我的积分 <span>0</span></div>
@@ -107,3 +107,11 @@ export default function Page(props) {
         </div>
     );
 }
+
+const mapStateToProps =  ({userlogin}) =>{
+    return userlogin;
+};
+
+export default connect(
+    mapStateToProps
+)(Page);

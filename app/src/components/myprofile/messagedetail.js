@@ -31,7 +31,7 @@ export class Page extends React.Component {
                 <NavBar lefttitle="返回" title="消息详情" onClickLeft={this.onClickBack.bind(this)} />
                 <div className="tt">{notifymessageitem.messagetitle}</div>
                 <div className="time">
-                    <span>{moment(notifymessageitem.created_at).format("MM月DD日 HH时ss分")}</span>
+                    <span>{moment(notifymessageitem.created_at).format("MM月DD日 HH时mm分")}</span>
                 </div>
                 <div className="cont">{notifymessageitem.messagecontent}</div>
 

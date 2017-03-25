@@ -5,6 +5,7 @@ import {
   register_request,wait_register_request,wait_register_result,
   inserttopic_request,wait_inserttopic_request,wait_inserttopic_result,
   createdevice_request,wait_createdevice_request,wait_createdevice_result,
+  getnotifymessage_request, wait_getnotifymessage_request,wait_getnotifymessage_result,
 } from '../actions/index.js';
 import { fork, take, call, put, cancel,race } from 'redux-saga/effects';
 import {delay} from 'redux-saga';
@@ -64,6 +65,10 @@ export function createdevice(payload){
   return synccall(payload,wait_createdevice_request,createdevice_request);
 }
 
+export function getnotifymessage(payload){
+  return synccall(payload,wait_getnotifymessage_request,getnotifymessage_request);
+}
+
 //2.
 
 //以下导出放在saga中
@@ -85,4 +90,9 @@ export function* inserttopicflow(){
 
 export function* createdeviceflow(){
   return yield createflow(`${wait_createdevice_request}`,`${wait_createdevice_result}`);
+}
+
+
+export function* getnotifymessageflow(){
+  return yield createflow(`${wait_getnotifymessage_request}`,`${wait_getnotifymessage_result}`);
 }

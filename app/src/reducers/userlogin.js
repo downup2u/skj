@@ -6,37 +6,35 @@ import {
     //登录
     login_result,
     login_err,
+    fillprofile_result,
+    ui_changeusername,
 } from '../actions/index.js';
 
 const initial = {
     userlogin: {
+        editusername:'',
         loginsuccess:false,
         username:'',
+        userid:'',
         token:'',
         profile:{},
     },
 };
 
 const userlogin = createReducer({
+    [ui_changeusername]:(state,editusername)=>{
+        return {...state,editusername};
+    },
+    [fillprofile_result]: (state, {profile}) => {
+        return { ...state, profile,editusername:profile.nickname};
+    },
     [login_result]: (state, payload) => {
         localStorage.setItem('shuikejing_user_token',payload.token);
-        return { ...state, ...payload,loginsuccess:true };
+        return { ...state, ...payload,loginsuccess:true ,editusername:payload.profile.nickname};
     },
     [login_err]: (state, payload) => {
-        return { ...state, loginsuccess:false};
+        return { ...initial.userlogin};
     },
-    // [sendauth_result]: (state, payload) => {
-    //   return { ...state, loginsuccess:false};
-    // },
-    // [sendauth_err]: (state, payload) => {
-    //   return { ...state, loginsuccess:false};
-    // },
-    // [register_result]: (state, payload) => {
-    //   return { ...state, loginsuccess:false};
-    // },
-    // [register_err]: (state, payload) => {
-    //   return { ...state, loginsuccess:false};
-    // },
-    }, initial.userlogin);
+}, initial.userlogin);
 
 export default userlogin;

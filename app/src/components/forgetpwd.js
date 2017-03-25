@@ -52,7 +52,7 @@ let renderRegisterForm = (fields)=> {
 renderRegisterForm = connect()(renderRegisterForm);
 
 let RegisterForm = (props)=> {
-    let {handleSubmit,onClickRegister,onClickLogin} = props;
+    let {handleSubmit,onClickRegister,onClickLogin,onClickReturn} = props;
     return (<Form onSubmit={handleSubmit(onClickRegister)}>
         <div className="loginPageTop">
             <NavBar lefttitle="返回" title="重置密码" />
@@ -147,11 +147,16 @@ export class Page extends React.Component {
 
     }
 
+    onClickReturn =()=>{
+        this.props.history.goBack();
+    }
+
     render() {
         return (
             <div className="UserLoginPage">
                 <RegisterForm onClickRegister={this.onClickRegister}
-                              onClickLogin={this.onClickLogin}/>
+                              onClickLogin={this.onClickLogin}
+                              onClickReturn={this.onClickReturn}/>
             </div>
         );
     }

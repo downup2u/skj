@@ -28,6 +28,7 @@ import {
   getaddresslist_request,
 
     getnotifymessage_request,
+    fillprofile_request,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -114,6 +115,7 @@ function* handleIOWithAuth(socket) {
       'deleteaddress':`${deleteaddress_request}`,
       'editaddress':`${editaddress_request}`,
       'getaddresslist':`${getaddresslist_request}`,
+      'fillprofile':`${fillprofile_request}`,
     };
 
     let tasksz =[];
@@ -163,6 +165,7 @@ import {
   registerflow,
   inserttopicflow,
   createdeviceflow,
+    getnotifymessageflow,
 } from '../actions/sagacallback.js';
 import {wififlow} from './wififlow';
 
@@ -174,4 +177,5 @@ export default function* rootSaga() {
   yield fork(registerflow);
   yield fork(inserttopicflow);
   yield fork(createdeviceflow);
+  yield fork(getnotifymessageflow);
 }

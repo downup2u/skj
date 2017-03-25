@@ -9,7 +9,7 @@ import {gettopiclist_request,
     uicommenthide
 } from '../actions/index.js';
 import '../../public/css/feed.css';
-//import { withRouter } from 'react-router';
+import moment from 'moment';
 
 let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
   let islovedbyme = false;//判断loave数组是否有自己
@@ -40,6 +40,13 @@ let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
   for(let url in topic.picurl){
     imgcos.push(<div key={url}><img src={topic.picurl[url]}/></div>);
   }
+
+
+    if (typeof topic.created_at === 'string') {
+        topic.created_at= new Date(Date.parse(topic.created_at));
+    }
+    console.log("users-->" + JSON.stringify(users));
+    console.log("topic.creator-->" + JSON.stringify(topic.creator));
   return (
       <Feed>
           <Feed.Event>
@@ -48,8 +55,8 @@ let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
                       <Feed.Label image='http://semantic-ui.com/images/avatar/small/joe.jpg'>
                       </Feed.Label>
                       <Feed.Summary>
-                          <a className="summaryName">{users[topic.creator].username}</a>
-                          <Feed.Date>{topic.created_at}</Feed.Date>
+                          <a className="summaryName">{users[topic.creator].profile.nickname}</a>
+                          <Feed.Date>{moment(topic.created_at).format("MM月DD日 HH时mm分")}</Feed.Date>
                       </Feed.Summary>
                   </div>
                   <div className="feedContent">
@@ -76,8 +83,8 @@ let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
   );
 }
 
-const mapStateToProps =  ({userlogin}) =>{
-  return userlogin;
+const mapStateToProps =  ({userlogin,forum}) =>{
+  return {...userlogin,...forum};
 };
 
 FeedExampleBasic = connect(mapStateToProps)(FeedExampleBasic);

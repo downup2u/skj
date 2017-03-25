@@ -14,22 +14,16 @@ const initial = {
     notifymessage: {
         remoteRowCount:0,
         inited:true,
-        mynotifymessages:{
-            result:{
-                list:[]
-            },
-            entities:{
-                notifymessages:{
+        list:[],
+        notifymessages:{
 
-                }
-            }
         }
     },
 };
 
 const notifymessage = createReducer({
         [ui_setnotifymessageinited]:(state, inited) => {
-                return  {...state,inited};
+            return  {...state,inited};
         },
         [getnotifymessage_result]:(state, {result}) => {
             // docs {Array} - Array of documents
@@ -44,41 +38,34 @@ const notifymessage = createReducer({
 
             if(state.inited){
                 //替换
-                return { ...state,mynotifymessages,inited:false,remoteRowCount};
+                return { ...state,
+                    list:[...mynotifymessages.result.list],
+                    notifymessages:{...mynotifymessages.entities.notifymessages},
+                    inited:false,
+                    remoteRowCount};
             }
             //追加记录
             return {
                     ...state,
-                    mynotifymessages:{
-                    result:{
-                        list:[...state.mynotifymessages.result.list,...mynotifymessages.result.list]
-                    },
-                    entities:{
-                        notifymessages:{
-                        ...state.mynotifymessages.entities.notifymessages,
+                     list:[...state.list,...mynotifymessages.result.list],
+                     notifymessages:{
+                        ...state.notifymessages,
                         ...mynotifymessages.entities.notifymessages
 
-                        }
                     }
-                }
+
             };
 
         },
         [notifymessages_addone]:(state, payload) => {
-            let list = [payload._id,...state.mynotifymessages.result.list];
-            let entities = state.mynotifymessages.entities.notifymessages;
-             entities[payload._id] = payload;
-            return { ...state,mynotifymessages:{
-                result:{
-                    list:[...list]
-                },
-                entities:{
-                    notifymessages:{
-                     ...entities
-                    }
-                }
-            }
-        };
+            let list = [payload._id,...state.list];
+            let notifymessages = state.notifymessages;
+            notifymessages[payload._id] = payload;
+            return {
+                ...state,
+                list,
+                notifymessages
+            };
         },
 
 }, initial.notifymessage);

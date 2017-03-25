@@ -18,5 +18,8 @@ export const sendauth_err = createAction('userlogin.sendauth_err');
 export const register_request = createAction('userlogin.register_request');
 export const register_result = createAction('userlogin.register_result');
 export const register_err = createAction('userlogin.register_err');
-
+//发送编辑信息请求
+export const fillprofile_request = createAction('fillprofile_request');
+export const fillprofile_result = createAction('fillprofile_result');
+export const ui_changeusername = createAction('ui_changeusername');
 export const logout_request = createAction('userlogin.logout_request');

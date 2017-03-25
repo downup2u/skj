@@ -3,7 +3,9 @@ import { Button, Comment, Header, Feed, Icon, Input, Grid, Popup  } from 'semant
 
 
 import { connect } from 'react-redux';
-import {gettopiclist_request,
+import {
+    ui_settopiclistinited,
+    gettopiclist_request,
     uicommentshow,
     uicommenthide
 } from '../actions/index.js';
@@ -57,16 +59,17 @@ export class Topic extends React.Component {
 export class Page extends React.Component {
 
     componentWillMount() {
-        let page = 1;
-        let perpagenumber = 10;
-        let payload = {
-            query: {},
-            options: {
-                page: page,
-                limit: perpagenumber,
+        this.props.dispatch(ui_settopiclistinited(true));
+        let queryobj = {};
+        this.props.dispatch(gettopiclist_request({
+            query:queryobj,
+            options:{
+                sort:{created_at:-1},
+                offset: 0,
+                limit: 10,
             }
-        };
-        this.props.dispatch(gettopiclist_request(payload));
+        }));
+
         console.log("--------->comm:componentWillMount");
     }
 
@@ -97,8 +100,6 @@ export class Page extends React.Component {
 
     render() {
 
-        console.dir(this.props.topics);
-
         let toptipData = {
             avatar: "http://semantic-ui.com/images/avatar/small/joe.jpg",
             text: "一条消息"
@@ -106,7 +107,7 @@ export class Page extends React.Component {
         let topicsco = [];
         for (let topicid of this.props.topiclist) {
             console.log(`FeedExampleBasic,topicid:${topicid}`);
-            topicsco.push(<Topic key={topicid} topic={this.props.topics[topicid]} {...this.props}
+            topicsco.push(<Topic key={`topic${topicid}`} topic={this.props.topics[topicid]}
                                  onClickTopic={this.onClickTopic}/>);
         }
         return (

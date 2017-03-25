@@ -7,6 +7,7 @@ import { InfiniteLoader, List, Icon } from 'react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 import { connect } from 'react-redux';
 import moment from 'moment';
+import {getnotifymessage} from '../../actions/sagacallback';
 
 export class Page extends Component {
 
@@ -21,7 +22,7 @@ export class Page extends Component {
             options:{
                 sort:{created_at:-1},
                 offset: 0,
-                limit: 10,
+                limit: 5,
             }
         }));
     }
@@ -31,36 +32,59 @@ export class Page extends Component {
     }
 
     loadMoreRows= ({ startIndex, stopIndex })=> {
-        let queryobj = {};
-        this.props.dispatch(getnotifymessage_request({
-            query:queryobj,
-            options:{
-                sort:{created_at:-1},
-                offset: startIndex,
-                limit: (stopIndex-startIndex),
-            }
-        }));
+        console.log(`loadMoreRows====>${startIndex},${stopIndex}`)
+            // let queryobj = {};
+            // return this.props.dispatch(getnotifymessage({
+            //     query:queryobj,
+            //     options:{
+            //         sort:{created_at:-1},
+            //         offset: startIndex,
+            //         limit: (stopIndex-startIndex)+1,
+            //     }
+            // }));
 
+        return new Promise((resolve) => {
+            let queryobj = {};
+            this.props.dispatch(getnotifymessage({
+                query:queryobj,
+                options:{
+                    sort:{created_at:-1},
+                    offset: startIndex,
+                    limit: (stopIndex-startIndex)+1,
+                }
+            })).then((result)=>{
+                resolve();
+            });
+        });
     }
 
     rowRenderer= ({ key, index, style})=> {
-        let iteminfo = this.props.list[index];
-        if (typeof iteminfo.created_at === 'string') {
-            iteminfo.created_at = new Date(Date.parse(iteminfo.created_at));
-        }
-        return ( <div className="items" key={key}>
-            <div className="tt">{iteminfo.messagetitle}</div>
+        //console.log(`rowRenderer====>${key},${index}`);
+
+        if(this.isRowLoaded({index})){
+            let msgid = this.props.list[index];
+            let iteminfo = this.props.notifymessages[msgid];
+
+            if (typeof iteminfo.created_at === 'string') {
+                iteminfo.created_at = new Date(Date.parse(iteminfo.created_at));
+            }
+            return ( <div className="items" key={key}>
+                <div className="tt">{iteminfo.messagetitle}</div>
             <div className="cont">{iteminfo.messagecontent}</div>
             <div className="lnk">
-            <span>{moment(iteminfo.created_at).format("MM月DD日 HH时ss分")}</span>
+                <span>{moment(iteminfo.created_at).format("MM月DD日 HH时mm分")}</span>
             <span onClick={()=>{this.props.history.push(`/mymessagedetail/${iteminfo._id}`);}}>查看详情</span>
             </div>
             </div> );
+        }
+        return (<div key={key}>loading...</div>);
+
 
     }
 
 
     render() {
+        console.log(`window.innerHeight===>${window.innerHeight}`);
         return (
             <div className="myMessage" style={{minHeight:(window.innerHeight)+"px"}}>
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn}/>
@@ -76,10 +100,10 @@ export class Page extends Component {
                                 onRowsRendered={onRowsRendered}
                                 ref={registerChild}
                                 rowCount={this.props.remoteRowCount}
-                                rowHeight={129}
+                                rowHeight={97}
                                 rowRenderer={this.rowRenderer}
                                 width={window.innerWidth}
-                                    />
+                            />
                             )}
                         </InfiniteLoader>
                 </div>
@@ -88,15 +112,8 @@ export class Page extends Component {
     }
 }
 
-const mapStateToProps =  ({notifymessage}, props) =>{
-    let list = [];
-    const {mynotifymessages,...rest} = notifymessage;
-    for(let msgid of mynotifymessages.result.list){
-        let msg = mynotifymessages.entities.notifymessages[msgid];
-        list.push(msg);
-    }
-    console.log("mapStateToProp===>" + JSON.stringify({...rest,list}));
-    return {...rest,list};
+const mapStateToProps =  ({notifymessage}) =>{
+    return notifymessage;
 };
 
 export default connect(

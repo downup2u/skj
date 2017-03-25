@@ -3,6 +3,9 @@
  */
 import { createAction } from 'redux-act';
 
+export const ui_setmytopiclistinited = createAction('ui_setmytopiclistinited');
+export const ui_settopiclistinited = createAction('ui_settopiclistinited');
+
 export const wait_inserttopic_request= createAction('wait_inserttopic_request');
 export const wait_inserttopic_result= createAction('wait_inserttopic_result');
 
