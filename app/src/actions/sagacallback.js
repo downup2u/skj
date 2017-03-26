@@ -6,6 +6,7 @@ import {
   inserttopic_request,wait_inserttopic_request,wait_inserttopic_result,
   createdevice_request,wait_createdevice_request,wait_createdevice_result,
   getnotifymessage_request, wait_getnotifymessage_request,wait_getnotifymessage_result,
+    findpwd_request,wait_findpwd_request,wait_findpwd_result
 } from '../actions/index.js';
 import { fork, take, call, put, cancel,race } from 'redux-saga/effects';
 import {delay} from 'redux-saga';
@@ -57,6 +58,10 @@ export function register(payload){
   return synccall(payload,wait_register_request,register_request);
 }
 
+export function findpwd(payload){
+  return synccall(payload,wait_findpwd_request,findpwd_request);
+}
+
 export function inserttopic(payload){
     return synccall(payload,wait_inserttopic_request,inserttopic_request);
 }
@@ -83,6 +88,11 @@ export function* editaddressflow(){
 export function* registerflow(){
   return yield createflow(`${wait_register_request}`,`${wait_register_result}`);
 }
+
+export function* findpwdflow(){
+  return yield createflow(`${wait_findpwd_request}`,`${wait_findpwd_result}`);
+}
+
 
 export function* inserttopicflow(){
   return yield createflow(`${wait_inserttopic_request}`,`${wait_inserttopic_result}`);

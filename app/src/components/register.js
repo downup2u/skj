@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {sendauth_request,register_request} from '../actions/index.js';
 import {register} from '../actions/sagacallback.js';
 
+
 let renderRegisterForm = (fields)=> {
     console.dir(fields);
     let ispasswordvisiable = fields.ispasswordvisiable.input.value;
@@ -24,41 +25,39 @@ let renderRegisterForm = (fields)=> {
         console.log("发送验证码:" + name);
     }
 
+
+
     return (<div className='loginform'>
         <div className="username logininput">
             <Input placeholder='输入手机号' {...fields.username.input} type="text"/>
             {fields.username.meta.touched && fields.username.meta.error &&
             <Label basic color='red' pointing>{fields.username.meta.error}</Label>}
-            <img src="img/rg1.png" className='lefticon'/>
+            <Icon name="mobile" className='lefticon'/>
         </div>
         <div className="password logininput">
             <Input placeholder='输入验证码'  {...fields.authcode.input} type="text"/>
             {fields.authcode.meta.touched && fields.authcode.meta.error &&
             <Label basic color='red' pointing>{fields.authcode.meta.error}</Label>}
-            <img src="img/rg2.png" className='lefticon'/>
+            <Icon name="lock" className='lefticon'/>
             <Button type="button" className="yanzhenBtn" primary onClick={onClickAuth}>发送验证码</Button>
         </div>
         <div className="password logininput">
             <Input placeholder='输入密码'  {...fields.password.input} type={ispasswordvisiable?"text":"password"}/>
             {fields.password.meta.touched && fields.password.meta.error &&
             <Label basic color='red' pointing>{fields.password.meta.error}</Label>}
-            <img src="img/rg3.png" className='lefticon'/>
-            <img className="eye" src={ispasswordvisiable?"img/eye.png":"img/eye2.png"} onClick={onChangePasswordvisiable} />
-        </div>
-        <div className="password logininput">
-            <Input placeholder='请输入邀请码(选填)' />
-            <img src="img/rg4.png" className='lefticon'/>
+            <Icon name="lock" className='lefticon'/>
+            <Icon name="eye" className={ispasswordvisiable?"eye sel":"eye"} onClick={onChangePasswordvisiable}/>
         </div>
     </div>);
 }
 renderRegisterForm = connect()(renderRegisterForm);
 
 let RegisterForm = (props)=> {
-    let {handleSubmit,onClickRegister,onClickLogin} = props;
+    let {handleSubmit,onClickRegister,onClickLogin,onClickReturn} = props;
     return (<Form onSubmit={handleSubmit(onClickRegister)}>
         <div className="loginPageTop">
             <div className="loginHead">
-                <Icon name='angle left'/>
+                <Icon name='angle left' onClick={onClickReturn}/>
                 <img src="img/4.png" className="loginhead"/>
             </div>
             <Fields names={['username','ispasswordvisiable','password','authcode']} component={renderRegisterForm}/>
@@ -132,6 +131,9 @@ export class Page extends React.Component {
     componentWillMount() {
     }
 
+    onClickReturn =()=>{
+        this.props.history.goBack();
+    }
     onClickRegister = (values)=> {
         console.dir(values);
 
@@ -157,7 +159,8 @@ export class Page extends React.Component {
         return (
             <div className="UserLoginPage">
                 <RegisterForm onClickRegister={this.onClickRegister}
-                              onClickLogin={this.onClickLogin}/>
+                              onClickLogin={this.onClickLogin}
+        onClickReturn={this.onClickReturn}/>
             </div>
         );
     }

@@ -28,7 +28,11 @@ login_result,login_err,
   wait_register_result,
   wait_inserttopic_result,
   wait_createdevice_result,
-    fillprofile_result
+    fillprofile_result,
+    logout_result,
+    findpwd_result,
+    findpwd_err,
+    wait_findpwd_result
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -39,6 +43,11 @@ import {store} from '../store.js';
 
 
 const handlerlist = {
+  ['logout_result']: (socket, emit)=> {
+    return ((payload) => {
+      emit(logout_result(payload));
+    });
+  },
   ['users.login_result']: (socket, emit)=> {
     return ((payload) => {
       emit(login_result(payload));
@@ -90,6 +99,26 @@ const handlerlist = {
         type: 'error'
       }));
       emit(wait_register_result({err: errmsg}));
+    });
+  },
+  ['findpwd_result']: (socket, emit)=> {
+    return (({errmsg})=> {
+      emit(showpopmessage({
+        title: '成功',
+        msg: '找回密码成功',
+        type: 'success'
+      }));
+      emit(wait_findpwd_result({result: 'OK'}));
+    });
+  },
+  ['findpwd_err']: (socket, emit)=> {
+    return (({errmsg})=> {
+      emit(showpopmessage({
+        title: '找回密码失败',
+        msg: errmsg,
+        type: 'error'
+      }));
+      emit(wait_findpwd_result({err: errmsg}));
     });
   },
   ['fillprofile_result']:(socket,emit)=>{

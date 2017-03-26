@@ -8,7 +8,7 @@ import {register} from '../actions/sagacallback.js';
 import NavBar from './nav.js';
 
 
-let renderRegisterForm = (fields)=> {
+let renderFindPwdForm = (fields)=> {
     console.dir(fields);
     let ispasswordvisiable = fields.ispasswordvisiable.input.value;
     if (typeof ispasswordvisiable === 'string') {
@@ -49,14 +49,14 @@ let renderRegisterForm = (fields)=> {
         </div>
     </div>);
 }
-renderRegisterForm = connect()(renderRegisterForm);
+renderFindPwdForm = connect()(renderFindPwdForm);
 
-let RegisterForm = (props)=> {
-    let {handleSubmit,onClickRegister,onClickLogin,onClickReturn} = props;
-    return (<Form onSubmit={handleSubmit(onClickRegister)}>
+let FindpwdForm = (props)=> {
+    let {handleSubmit,onClickOK,onClickLogin,onClickReturn} = props;
+    return (<Form onSubmit={handleSubmit(onClickOK)}>
         <div className="loginPageTop">
-            <NavBar lefttitle="返回" title="重置密码" />
-            <Fields names={['username','ispasswordvisiable','password','authcode']} component={renderRegisterForm}/>
+            <NavBar lefttitle="返回" title="重置密码" onClickLeft={onClickReturn}/>
+            <Fields names={['username','ispasswordvisiable','password','authcode']} component={renderFindPwdForm}/>
 
             <div className="loginBotton">
                 <Button primary>确定</Button>
@@ -69,7 +69,7 @@ let RegisterForm = (props)=> {
 const validate = values => {
     const errors = {}
     if (!values.username) {
-        errors.username = '必须填写用户名';
+        errors.username = '必须填写手机号码';
     }
     else {
         let phone = values.username;
@@ -108,8 +108,8 @@ const validate = values => {
     return errors;
 }
 
-RegisterForm = reduxForm({
-    form: 'register',
+FindpwdForm = reduxForm({
+    form: 'findpwd',
     validate,
     initialValues: {
         username: '',
@@ -117,16 +117,16 @@ RegisterForm = reduxForm({
         authcode: '',
         ispasswordvisiable: false,
     }
-})(RegisterForm);
+})(FindpwdForm);
 
 
-import {login_request} from '../actions/index.js';
+import {findpwd} from '../actions/sagacallback';
 export class Page extends React.Component {
 
     componentWillMount() {
     }
 
-    onClickRegister = (values)=> {
+    onClickOK = (values)=> {
         console.dir(values);
 
         let payload = {
@@ -135,7 +135,7 @@ export class Page extends React.Component {
             authcode: values.authcode
         }
         //alert(JSON.stringify(formdata));
-        this.props.dispatch(register(payload)).then((result)=> {
+        this.props.dispatch(findpwd(payload)).then((result)=> {
             this.props.history.goBack();
         }).catch((error)=> {
             console.log("注册失败:" + JSON.stringify(error));
@@ -154,7 +154,7 @@ export class Page extends React.Component {
     render() {
         return (
             <div className="UserLoginPage">
-                <RegisterForm onClickRegister={this.onClickRegister}
+                <FindpwdForm onClickOK={this.onClickOK}
                               onClickLogin={this.onClickLogin}
                               onClickReturn={this.onClickReturn}/>
             </div>

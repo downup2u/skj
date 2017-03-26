@@ -64,9 +64,7 @@ import OrderEvaluation from './components/orderevaluation.js';
 //订单详情
 import OrderInfo from './components/orderinfo.js';
 //物流详情
-import LogisticsInfo from './components/logisticsinfo.js'
-//商城首页
-import Shopping from './components/shopping/index.js';
+import LogisticsInfo from './components/logisticsinfo.js';
 
 import {requireAuthentication} from './components/requireauthentication';
 
@@ -201,7 +199,7 @@ const CoApp = (props) => {
             <CustomRoute path="/addresslist" component={requireAuthentication(Addresslist)}/>
             <CustomRoute path="/newaddress" component={requireAuthentication(AddressAdd)}/>
             <CustomRoute path="/editaddress/:addressid" component={requireAuthentication(AddressEdit)}/>
-            <CustomRoute path="/userinfo" component={Userinfo}/>
+            <CustomRoute path="/userinfo" component={requireAuthentication(Userinfo)}/>
             <CustomRoute path="/profiledetail" component={requireAuthentication(ProfileDetail)}/>
             <CustomRoute path="/newtopic" component={requireAuthentication(NewTopic)}/>
             <CustomRoute path="/devicelist" component={requireAuthentication(Devicelist)}/>
@@ -225,12 +223,11 @@ const CoApp = (props) => {
             <CustomRoute path="/applicationreturns" component={requireAuthentication(ApplicationReturns)}/>
             <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
             <CustomRoute path="/mytopiclist" component={Topiclist}/>
-            <CustomRoute path="/changeusername" component={ChangeUsername}/>
+            <CustomRoute path="/changeusername" component={requireAuthentication(ChangeUsername)}/>
             <CustomRoute path="/orderevaluation" component={OrderEvaluation}/>
             <CustomRoute path="/orderinfo" component={OrderInfo}/>
             <CustomRoute path="/forgetpwd" component={ForgetPwd}/>
             <CustomRoute path="/logisticsinfo" component={LogisticsInfo}/>
-            <CustomRoute path="/shopping" component={Shopping}/>
 
 
             <CustomRoute component={App}/>

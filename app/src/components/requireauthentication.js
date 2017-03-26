@@ -14,7 +14,7 @@ export function requireAuthentication(Component) {
             <div>
                 {props.loginsuccess === true
                     ? <Component {...props}/>
-                    : <Redirect push to={loginroute}/>
+                    : <Redirect to={loginroute}/>
                 }
             </div>
         );

@@ -6,7 +6,7 @@ import config from '../config.js';
 import {
   showpopmessage,
   login_request,login_result,login_err,
-  logout_request,
+  logout_request,logout_result,
     loginwithtoken_request,
   inserttopic_request,inserttopic_result,
   getmytopic_request,getmytopic_result,
@@ -29,6 +29,8 @@ import {
 
     getnotifymessage_request,
     fillprofile_request,
+    findpwd_request,
+
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -116,6 +118,7 @@ function* handleIOWithAuth(socket) {
       'editaddress':`${editaddress_request}`,
       'getaddresslist':`${getaddresslist_request}`,
       'fillprofile':`${fillprofile_request}`,
+      'logout':`${logout_request}`,
     };
 
     let tasksz =[];
@@ -123,7 +126,11 @@ function* handleIOWithAuth(socket) {
       let task =  yield fork(write, socket,fnsz[cmd],cmd);
       tasksz.push(task);
     }
-    let action = yield take(`${logout_request}`);
+
+    let action = yield take(`${logout_result}`);
+    yield put(action);
+    localStorage.removeItem('shuikejing_user_token');
+
     for (let task of tasksz) {
       yield cancel(task);
     }
@@ -137,6 +144,7 @@ function* handleIO(socket) {
     'register':`${register_request}`,
     'gettopiclist':`${gettopiclist_request}`,
     'getnotifymessage':`${getnotifymessage_request}`,
+    'findpwd':`${findpwd_request}`,
   };
 
 
@@ -163,6 +171,7 @@ import {
   createaddressflow,
   editaddressflow,
   registerflow,
+    findpwdflow,
   inserttopicflow,
   createdeviceflow,
     getnotifymessageflow,
@@ -175,6 +184,7 @@ export default function* rootSaga() {
   yield fork(createaddressflow);
   yield fork(editaddressflow);
   yield fork(registerflow);
+  yield fork(findpwdflow);
   yield fork(inserttopicflow);
   yield fork(createdeviceflow);
   yield fork(getnotifymessageflow);

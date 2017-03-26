@@ -16,11 +16,17 @@ let Page =(props)=> {
                 overflow:"scroll"
              }}>
             <div className="headCont">
+    {props.loginsuccess?(
                 <div className="userInfo" onClick={()=>{onClickPage('/userinfo')}}>
                     <img src={props.profile.avatar} className="avatar"/>
                     <span className="username">{props.profile.nickname}</span>
                     <span className="usertype">普通会员</span>
-                </div>
+                </div>):
+    (<div className="userInfo" onClick={()=>{onClickPage('/login')}}>
+    <img src="img/myprofile/1.png" className="avatar"/>
+        <span className="username">未登录</span>
+    <span className="usertype"></span>
+        </div>)}
                 <div className="userCode">我的积分 <span>0</span></div>
                 <div className="userMessageLnk"  onClick={()=>{onClickPage('/mymessage')}}>
                     <img src="img/message.png"/>

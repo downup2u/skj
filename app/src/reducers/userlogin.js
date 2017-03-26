@@ -8,6 +8,7 @@ import {
     login_err,
     fillprofile_result,
     ui_changeusername,
+    logout_result,
 } from '../actions/index.js';
 
 const initial = {
@@ -22,6 +23,9 @@ const initial = {
 };
 
 const userlogin = createReducer({
+    [logout_result]:(state, payload)=>{
+        return { ...initial.userlogin};
+    },
     [ui_changeusername]:(state,editusername)=>{
         return {...state,editusername};
     },

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {fileupload} from '../util/fileupload.js';
 import {fillprofile_request} from '../actions';
 import config from '../config.js';
+import {logout_request} from '../actions';
 
 class Page extends Component {
 
@@ -15,6 +16,10 @@ class Page extends Component {
 
     onClickPage = (name)=> {
         this.props.history.push(name);
+    };
+
+    onClickLogout = ()=>{
+        this.props.dispatch(logout_request());
     };
 
     fileChange=(event)=>{
@@ -77,7 +82,7 @@ class Page extends Component {
                     </List.Item>
                 </List>
                 <div className="escLogin">
-                    <Button basic>退出登录</Button>
+                    <Button basic onClick={this.onClickLogout}>退出登录</Button>
                 </div>
             </div>
         )
