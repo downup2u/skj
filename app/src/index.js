@@ -64,7 +64,9 @@ import OrderEvaluation from './components/orderevaluation.js';
 //订单详情
 import OrderInfo from './components/orderinfo.js';
 //物流详情
-import LogisticsInfo from './components/logisticsinfo.js';
+import LogisticsInfo from './components/logisticsinfo.js'
+//商城首页
+import Shopping from './components/shopping/index.js';
 
 import {requireAuthentication} from './components/requireauthentication';
 
@@ -228,6 +230,7 @@ const CoApp = (props) => {
             <CustomRoute path="/orderinfo" component={OrderInfo}/>
             <CustomRoute path="/forgetpwd" component={ForgetPwd}/>
             <CustomRoute path="/logisticsinfo" component={LogisticsInfo}/>
+            <CustomRoute path="/shopping" component={Shopping}/>
 
 
             <CustomRoute component={App}/>

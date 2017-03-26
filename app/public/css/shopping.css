@@ -1,3 +1,100 @@
 .shoppingPage{
 
 }
+.shoppingPage .shoppingHead{
+    background: #5596d6;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+.shoppingPage .shoppingHead .ui.input{
+    flex-grow: 1;
+}
+.shoppingPage .shoppingHead .ui.input input{
+    border-radius: 50px;
+    margin-left: 30px;
+    margin-right: 10px;
+}
+.shoppingPage .shoppingHead img{
+    width: 30px;
+}
+.shoppingPage .shoppingBanner .Demo-swiper__slide img{
+    width: 100%;
+}
+.shoppingPage .shoppingBanner2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.shoppingPage .shoppingBanner2 img{
+    flex-shrink: 1;
+}
+.shoppingPage .shoppingBanner2 img{
+    width: 46.7%;
+}
+.shoppingPage .shoppingBanner2 img:first-child {
+    width: 53.3%;
+}
+.shoppingPage .listTitle{
+    display: flex;
+    padding: 10px 15px;
+    align-items: center;
+}
+.shoppingPage .listTitle img{
+    width: 40px;
+    margin-right: 10px;
+}
+.shoppingPage .listTitle span {
+    font-size: 14px;
+    border-left: 1px solid #EEE;
+    padding-left: 15px;
+}
+.shoppingPage .shoppingBannerLnk{
+    display: flex;
+}
+.shoppingPage .shoppingBannerLnk span{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+.shoppingPage .shoppingBannerLnk span img{
+    width: 40px;
+}
+.shoppingPage .listTitle2 {
+    display: flex;
+    justify-content: space-between;
+    padding:10px 15px;
+    font-size: 14px;
+    background: #EEE;
+}
+.shoppingPage .proList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.shoppingPage .proList .li{
+    width: 49.5%;
+    display: flex;
+    flex-direction: column;
+}
+.shoppingPage .proList .li > img{
+    width: 100%;
+}
+.shoppingPage .proList .li .name{
+    font-size: 14px;
+    padding: 10px 10px 0 10px;
+}
+.shoppingPage .proList .li .price{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    color: #F00;
+}
+.shoppingPage .proList .li .price img{
+    width: 22px;
+    margin: 5px;
+}

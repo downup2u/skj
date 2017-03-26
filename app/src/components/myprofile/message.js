@@ -14,13 +14,14 @@ export class Page extends Component {
     onClickReturn = ()=> {
         this.props.history.goBack();
     };
-    componentWillMount () {
+
+    componentWillMount() {
         this.props.dispatch(ui_setnotifymessageinited(true));
         let queryobj = {};
         this.props.dispatch(getnotifymessage_request({
-            query:queryobj,
-            options:{
-                sort:{created_at:-1},
+            query: queryobj,
+            options: {
+                sort: {created_at: -1},
                 offset: 0,
                 limit: 5,
             }
@@ -31,37 +32,37 @@ export class Page extends Component {
         return (this.props.list.length > index);
     }
 
-    loadMoreRows= ({ startIndex, stopIndex })=> {
+    loadMoreRows = ({ startIndex, stopIndex })=> {
         console.log(`loadMoreRows====>${startIndex},${stopIndex}`)
-            // let queryobj = {};
-            // return this.props.dispatch(getnotifymessage({
-            //     query:queryobj,
-            //     options:{
-            //         sort:{created_at:-1},
-            //         offset: startIndex,
-            //         limit: (stopIndex-startIndex)+1,
-            //     }
-            // }));
+        // let queryobj = {};
+        // return this.props.dispatch(getnotifymessage({
+        //     query:queryobj,
+        //     options:{
+        //         sort:{created_at:-1},
+        //         offset: startIndex,
+        //         limit: (stopIndex-startIndex)+1,
+        //     }
+        // }));
 
         return new Promise((resolve) => {
             let queryobj = {};
             this.props.dispatch(getnotifymessage({
-                query:queryobj,
-                options:{
-                    sort:{created_at:-1},
+                query: queryobj,
+                options: {
+                    sort: {created_at: -1},
                     offset: startIndex,
-                    limit: (stopIndex-startIndex)+1,
+                    limit: (stopIndex - startIndex) + 1,
                 }
-            })).then((result)=>{
+            })).then((result)=> {
                 resolve();
             });
         });
     }
 
-    rowRenderer= ({ key, index, style})=> {
+    rowRenderer = ({ key, index, style})=> {
         //console.log(`rowRenderer====>${key},${index}`);
         console.log(`当前${index}|所有：${this.props.list.length}`)
-        if(this.isRowLoaded({index})){
+        if (this.isRowLoaded({index})) {
             let msgid = this.props.list[index];
             let iteminfo = this.props.notifymessages[msgid];
 
@@ -70,49 +71,49 @@ export class Page extends Component {
             }
             return ( <div className="items" key={key}>
                 <div className="tt">{iteminfo.messagetitle}</div>
-            <div className="cont">{iteminfo.messagecontent}</div>
-            <div className="lnk">
-                <span>{moment(iteminfo.created_at).format("MM月DD日 HH时mm分")}</span>
-            <span onClick={()=>{this.props.history.push(`/mymessagedetail/${iteminfo._id}`);}}>查看详情</span>
-            </div>
+                <div className="cont">{iteminfo.messagecontent}</div>
+                <div className="lnk">
+                    <span>{moment(iteminfo.created_at).format("MM月DD日 HH时mm分")}</span>
+                    <span onClick={()=>{this.props.history.push(`/mymessagedetail/${iteminfo._id}`);}}>查看详情</span>
+                </div>
             </div> );
         }
         return (<div key={key}>loading...</div>);
-
-
     }
-
 
     render() {
         console.log(`window.innerHeight===>${window.innerHeight}`);
         return (
             <div className="myMessage" style={{minHeight:(window.innerHeight)+"px"}}>
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn}/>
-                <div className="messageList">
+
+                <div className="messageList" style={{height:(window.innerHeight-46)+"px"}}>
+                    <div>
                         <InfiniteLoader
                             isRowLoaded={this.isRowLoaded}
                             loadMoreRows={this.loadMoreRows}
                             rowCount={this.props.remoteRowCount}
-                        >
+                            >
                             {({ onRowsRendered, registerChild }) => (
-                            <List
-                                height={97*this.props.list.length}
-                                onRowsRendered={onRowsRendered}
-                                ref={registerChild}
-                                rowCount={this.props.remoteRowCount}
-                                rowHeight={97}
-                                rowRenderer={this.rowRenderer}
-                                width={window.innerWidth}
-                            />
+                                <List
+                                    height={97*this.props.list.length}
+                                    onRowsRendered={onRowsRendered}
+                                    ref={registerChild}
+                                    rowCount={this.props.remoteRowCount}
+                                    rowHeight={97}
+                                    rowRenderer={this.rowRenderer}
+                                    width={window.innerWidth}
+                                    />
                             )}
                         </InfiniteLoader>
+                    </div>
                 </div>
             </div>
         )
     }
 }
 
-const mapStateToProps =  ({notifymessage}) =>{
+const mapStateToProps = ({notifymessage}) => {
     return notifymessage;
 };
 
