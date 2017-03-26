@@ -38,7 +38,7 @@ export default class Page extends Component {
                 </Menu>
 
                 <div className="cont">
-                    <div className="li">
+                    <div className="li" onClick={this.onClickPage.bind(this, "/distributioninfo")}>
                         <span className="num">1</span>
                         <img src="img/myprofile/1.png" className="avatar"/>
                         <div>

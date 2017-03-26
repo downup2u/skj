@@ -1,0 +1,93 @@
+.orderinfoPage{
+    background: #EEE;
+}
+.orderinfoPage .proinfo{
+    margin-bottom: 20px;
+}
+
+.orderinfoPage .proinfo .li{
+    display: flex;
+    border-bottom: 1px solid #EEE;
+    padding: 15px;
+    background: #FFF;
+}
+
+.orderinfoPage .proinfo .li img{
+    width: 80px;
+    align-self: flex-start;
+    border: 1px solid #EEE;
+}
+
+.orderinfoPage .proinfo .li >div{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    padding-left: 15px;
+    font-size:14px;
+}
+.orderinfoPage .proinfo .li >div .price {
+    display: flex;
+    justify-content: space-between;
+}
+.orderinfoPage .proinfo .li >div .price span:first-child{
+    color: #F00;
+}
+.orderinfoPage .list{
+    border-top: 1px solid #EEE;
+}
+.orderinfoPage .list .li{
+    background: #FFF;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #EEE;
+    padding: 2px 15px;
+    line-height: 40px;
+}
+.orderinfoPage .list .li span{
+    font-size: 16px;
+}
+.orderinfoPage .list .li span.price {
+    color: #F00;
+}
+
+.orderinfoPage .orderaddress{
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    background: #FFF;
+    border-bottom: 1px solid #EEE;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.orderinfoPage .orderaddress img{
+    width: 30px;
+}
+.orderinfoPage .orderaddress .addressinfo{
+    flex-grow: 1;
+    padding-left: 10px;
+}
+.orderinfoPage .orderaddress .addressinfo .userinfo{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.orderinfoPage .subBtn{
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #FFF;
+    padding: 10px;
+}
+.orderinfoPage .subBtn .ui.button{
+    background: none;
+    border: 1px solid #999;
+    font-weight: 100;
+}
+.orderinfoPage .subBtn .ui.button.pay{
+    color: #F00;
+    border-color:#F00;
+}

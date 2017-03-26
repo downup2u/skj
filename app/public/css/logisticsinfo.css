@@ -1,0 +1,86 @@
+.logisticsinfoPage{
+    background: #EEE;
+}
+.logisticsinfoPage .proinfo{
+    margin-bottom: 10px;
+}
+.logisticsinfoPage .proinfo .li{
+    display: flex;
+    border-bottom: 1px solid #EEE;
+    padding: 15px;
+    background: #FFF;
+}
+.logisticsinfoPage .proinfo .li img{
+    width: 60px;
+    align-self: flex-start;
+    border: 1px solid #EEE;
+}
+.logisticsinfoPage .proinfo .li >div{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    padding-left: 15px;
+    font-size:14px;
+}
+.logisticsinfoPage .list{
+    border-top: 1px solid #EEE;
+    background: #FFF;
+    padding: 10px;
+}
+.logisticsinfoPage .list .li{
+    background: #FFF;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #EEE;
+    padding: 8px 15px 8px 35px;
+    line-height: 22px;
+    flex-direction: column;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+}
+.logisticsinfoPage .list .li:before{
+    content: '';
+    width: 1px;
+    height: 20000px;
+    background: #CCC;
+    position: absolute;
+    left:15px;
+    top:0;
+    border-radius: 50%;
+}
+.logisticsinfoPage .list .li:after{
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #CCC;
+    position: absolute;
+    left:11px;
+    top:24px;
+    border-radius: 50%;
+}
+.logisticsinfoPage .list .li.nowli:before{
+    top:30px;
+}
+.logisticsinfoPage .list .li.nowli:after{
+    content: '';
+    background: #01aa2b;
+    width: 20px;
+    height: 20px;
+    left:6px;
+    border: 4px solid #b7fbd6;
+}
+.logisticsinfoPage .list .li.nowli{
+    color: #01aa2b;
+}
+.logisticsinfoPage .list .tit{
+    padding: 0 0 5px 0;
+    border-bottom: 1px solid #EEE;
+}
+.logisticsinfoPage .list .tit span{
+    line-height: 36px;
+    border-left: 3px solid #01aa2b;
+    padding-left: 10px;
+    font-size: 14px;
+}

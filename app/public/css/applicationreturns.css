@@ -1,0 +1,84 @@
+.applicationreturnsPage{
+    background: #EEE;
+}
+.applicationreturnsPage .proinfo{
+    margin-bottom: 20px;
+}
+.applicationreturnsPage .proinfo .li{
+    display: flex;
+    border-bottom: 1px solid #EEE;
+    padding: 15px;
+    background: #FFF;
+}
+.applicationreturnsPage .proinfo .li img{
+    width: 80px;
+    align-self: flex-start;
+    border: 1px solid #EEE;
+}
+.applicationreturnsPage .proinfo .li >div{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    padding-left: 15px;
+    font-size:14px;
+}
+.applicationreturnsPage .proinfo .li >div .price {
+    display: flex;
+    justify-content: space-between;
+}
+.applicationreturnsPage .proinfo .li >div .price span:first-child{
+    color: #F00;
+}
+.applicationreturnsPage .list .li{
+    display: flex;
+    background: #FFF;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #EEE;
+}
+.applicationreturnsPage .list .li .ui.selection.dropdown{
+    border: none;
+    text-align: right;
+}
+.applicationreturnsPage .list .li  .rightinput{
+    flex-grow: 1;
+    text-align: right;
+}
+.applicationreturnsPage .list .li .ui.selection.active.dropdown .menu{
+    border: none;
+}
+.applicationreturnsPage .list .li .ui.dropdown .menu .item{
+    text-align: right;
+}
+.applicationreturnsPage .list .li .maxPrice{
+    color: #999;
+}
+.applicationreturnsPage .list .li .ui.input input{
+    border: none;
+    text-align: right;
+}
+.applicationreturnsPage .list .li.explain span{
+    margin-bottom: 5px;
+}
+.applicationreturnsPage .list .li.explain{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.applicationreturnsPage .list .li.explain textarea{
+    width: 100%;
+    height: 80px;
+    resize: none;
+}
+.applicationreturnsPage .subBtn{
+    display: flex;
+    justify-content: center;
+    padding: 30px 50px 0 50px;
+}
+.applicationreturnsPage .subBtn .ui.primary.button{
+    border-radius: 50px;
+    flex-grow: 1;
+}

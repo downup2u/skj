@@ -123,5 +123,55 @@
     flex-grow: 1;
     height: 40px;
 }
+.distributionInfoPage{
+    background: #EEE;
+}
+.distributionInfoPage .proinfo{
+    margin-bottom: 20px;
+}
 
+.distributionInfoPage .proinfo .li{
+    display: flex;
+    border-bottom: 1px solid #EEE;
+    padding: 15px;
+    background: #FFF;
+}
 
+.distributionInfoPage .proinfo .li img{
+    width: 80px;
+    align-self: flex-start;
+    border: 1px solid #EEE;
+}
+
+.distributionInfoPage .proinfo .li >div{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    padding-left: 15px;
+    font-size:14px;
+}
+.distributionInfoPage .proinfo .li >div .price {
+    display: flex;
+    justify-content: space-between;
+}
+.distributionInfoPage .proinfo .li >div .price span:first-child{
+    color: #F00;
+}
+.distributionInfoPage .list{
+    border-top: 1px solid #EEE;
+}
+.distributionInfoPage .list .li{
+    background: #FFF;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #EEE;
+    padding: 2px 15px;
+    line-height: 40px;
+}
+.distributionInfoPage .list .li span{
+    font-size: 16px;
+}
+.distributionInfoPage .list .li span.price {
+    color: #F00;
+}

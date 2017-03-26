@@ -49,12 +49,22 @@ import TiXian3 from './components/myprofile/messageCode.js';
 import OrderTotal from './components/myprofile/orderTotal.js';
 //我的分销
 import Distribution from './components/myprofile/distribution.js';
+//分销详情
+import DistributionInfo from './components/myprofile/distributioninfo.js';
+//退货申请
+import ApplicationReturns from './components/myprofile/applicationreturns.js';
 //我的帖子列表
 import Topiclist from './components/myprofile/topiclist.js';
 //修改用户名
 import ChangeUsername from './components/myprofile/changeusername.js';
 //忘记密码
 import ForgetPwd from './components/forgetpwd.js';
+//订单评价
+import OrderEvaluation from './components/orderevaluation.js';
+//订单详情
+import OrderInfo from './components/orderinfo.js';
+//物流详情
+import LogisticsInfo from './components/logisticsinfo.js';
 
 import {requireAuthentication} from './components/requireauthentication';
 
@@ -209,10 +219,17 @@ const CoApp = (props) => {
             <CustomRoute path="/tixian3" component={requireAuthentication(TiXian3)}/>
             <CustomRoute path="/ordertotal" component={requireAuthentication(OrderTotal)}/>
             <CustomRoute path="/distribution" component={requireAuthentication(Distribution)}/>
+            <CustomRoute path="/distributioninfo" component={requireAuthentication(DistributionInfo)}/>
+            <CustomRoute path="/applicationreturns" component={requireAuthentication(ApplicationReturns)}/>
             <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
             <CustomRoute path="/mytopiclist" component={Topiclist}/>
             <CustomRoute path="/changeusername" component={ChangeUsername}/>
+            <CustomRoute path="/orderevaluation" component={OrderEvaluation}/>
+            <CustomRoute path="/orderinfo" component={OrderInfo}/>
             <CustomRoute path="/forgetpwd" component={ForgetPwd}/>
+            <CustomRoute path="/logisticsinfo" component={LogisticsInfo}/>
+
+
             <CustomRoute component={App}/>
         </Switch>
     );
