@@ -183,10 +183,10 @@
 .UserLoginPage .logininput .lefticon {
     position: absolute;
     left: 11%;
-    top: 8px;
+    top: 7px;
     font-size: 22px;
     color: #666;
-
+    width: 30px;
 }
 
 .UserLoginPage .logininput .mobile {
