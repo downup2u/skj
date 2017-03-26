@@ -108,11 +108,11 @@ class Page extends Component {
                     >
                         {({ onRowsRendered, registerChild }) => (
                         <List
-                            height={window.innerHeight-46}
+                            height={this.props.mytopiclist.length*207}
                             onRowsRendered={onRowsRendered}
                             ref={registerChild}
                             rowCount={this.props.mytopicremoteRowCount}
-                            rowHeight={129}
+                            rowHeight={207}
                             rowRenderer={this.rowRenderer}
                             width={window.innerWidth}
                         />

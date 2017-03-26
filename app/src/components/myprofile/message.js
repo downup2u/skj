@@ -60,7 +60,7 @@ export class Page extends Component {
 
     rowRenderer= ({ key, index, style})=> {
         //console.log(`rowRenderer====>${key},${index}`);
-
+        console.log(`当前${index}|所有：${this.props.list.length}`)
         if(this.isRowLoaded({index})){
             let msgid = this.props.list[index];
             let iteminfo = this.props.notifymessages[msgid];
@@ -96,7 +96,7 @@ export class Page extends Component {
                         >
                             {({ onRowsRendered, registerChild }) => (
                             <List
-                                height={window.innerHeight-46}
+                                height={97*this.props.list.length}
                                 onRowsRendered={onRowsRendered}
                                 ref={registerChild}
                                 rowCount={this.props.remoteRowCount}
