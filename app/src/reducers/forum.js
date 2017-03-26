@@ -78,6 +78,9 @@ const forum = createReducer({
                 topics: newdocs.entities.topics,
                 comments: newdocs.entities.comments,
                 users: newdocs.entities.users,
+                topicremoteRowCount:0,
+                topicinited:true,
+                topiclist: [],
             };
         }
         return {
@@ -110,6 +113,9 @@ const forum = createReducer({
                 topics: newdocs.entities.topics,
                 comments: newdocs.entities.comments,
                 users: newdocs.entities.users,
+                mytopicremoteRowCount:0,
+                mytopicinited:true,
+                mytopiclist: [],
             };
         }
         return {
