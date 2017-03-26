@@ -52,7 +52,7 @@ let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
           <Feed.Event>
               <Feed.Content>
                   <div className="feedHead">
-                      <Feed.Label image='http://semantic-ui.com/images/avatar/small/joe.jpg'>
+                      <Feed.Label image={users[topic.creator].profile.avatar}>
                       </Feed.Label>
                       <Feed.Summary>
                           <a className="summaryName">{users[topic.creator].profile.nickname}</a>

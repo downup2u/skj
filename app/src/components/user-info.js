@@ -3,6 +3,9 @@ import '../../public/css/user.css';
 import { Input, List, Radio, Button, Icon, Image } from 'semantic-ui-react'
 import NavBar from './nav.js';
 import { connect } from 'react-redux';
+import {fileupload} from '../util/fileupload.js';
+import {fillprofile_request} from '../actions';
+import config from '../config.js';
 
 class Page extends Component {
 
@@ -14,6 +17,16 @@ class Page extends Component {
         this.props.history.push(name);
     };
 
+    fileChange=(event)=>{
+        fileupload(event,localStorage.getItem('shuikejing_user_token'),(issuc,result)=>{
+            if(issuc){
+                let profile = {...this.props.profile};
+                profile.avatar = config.serverurl + result.url;
+                this.props.dispatch(fillprofile_request({profile}));
+                //props.avatar.input.onChange(config.serverurl + result.url);
+            }
+        });
+    }
     render() {
         return (
             <div className="UserInfoPage">
@@ -25,6 +38,15 @@ class Page extends Component {
                         </div>
                         <div className="rightCont">
                             <Image avatar src={this.props.profile.avatar} />
+                            <input type="file" id="cpic" name="cpic" onChange={this.fileChange }
+                                style={
+                                {
+                                    filter:"alpha(opacity=0)","MozOpacity":"0.0",
+                                    "KhtmlOpacity":0.0,opacity:0.0,position:"absolute",
+                                    right: "5px",top:"10px",zIndex:"9"
+                                }
+                            }
+                            />
                         </div>
                     </List.Item>
                     <List.Item onClick={this.onClickPage.bind(this, '/changeusername')}>
