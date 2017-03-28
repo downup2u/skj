@@ -23,14 +23,20 @@ const topics = new schema.Entity('topics', {
   loves:[user]
 },{idAttribute: '_id'});
 
+const useralerttopics = new schema.Entity('useralerttopics', {
+  creator: user,
+  topicself: topics,
+  commentself:comment,
+  comment:comment,
+  userfrom:user,
+},{idAttribute: '_id'});
+
 const mySchema = { list: [ topics ] }
 // const docSchema = new schema.Object({ docs: new schema.Array(topics) });
 
 let normalizrtopiclist=(oldtopicdataobj)=>{
-  console.log("normalizrtopiclist before====>" + JSON.stringify(oldtopicdataobj));
-  const newtopicdataobj = normalize(oldtopicdataobj, mySchema);
-  console.log("normalizrtopiclist after ====>" + JSON.stringify(newtopicdataobj));
-  return newtopicdataobj;
+   const newtopicdataobj = normalize(oldtopicdataobj, mySchema);
+   return newtopicdataobj;
 };
 
 
@@ -42,11 +48,20 @@ const notifymessages = new schema.Entity('notifymessages',{},{
 const notifymessagesSchma = {list:[notifymessages]};
 
 const normalizr_notifymessageslist=(list)=>{
-  //console.log("normalizr_notifymessageslist before====>" + JSON.stringify(list));
   const notifymessages = normalize(list, notifymessagesSchma);
-  //console.log("normalizr_notifymessageslist after ====>" + JSON.stringify(notifymessages));
   return notifymessages;
 };
 
+const useralerttopicsSchma = {list:[useralerttopics]};
+const normalizruseralerttopic = (result)=>{
+  const norresult = normalize(result, useralerttopics);
+  return norresult;
+};
+const normalizruseralerttopiclist = (result)=>{
+  const norresult = normalize(result, useralerttopicsSchma);
+  return norresult;
+};
 
-export {normalizrtopiclist,normalizr_notifymessageslist};
+
+
+export {normalizrtopiclist,normalizr_notifymessageslist,normalizruseralerttopic,normalizruseralerttopiclist};

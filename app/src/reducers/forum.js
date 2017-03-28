@@ -13,9 +13,12 @@ import {
     uicommenthide,
     ui_settopiclistinited,
     ui_setmytopiclistinited,
-    login_result
+    login_result,
+    serverpush_useralerttopic,
+    serverpush_useralerttopiclist,
+    setuseralerttopicreaded_result
 } from '../actions/index.js';
-import {normalizrtopiclist} from './normalizr.js';
+import {normalizrtopiclist,normalizruseralerttopiclist,normalizruseralerttopic} from './normalizr.js';
 
 const initial = {
     forum: {
@@ -23,9 +26,11 @@ const initial = {
         mytopicremoteRowCount:0,
         mytopicinited:true,
         mytopiclist: [],
+        useralerttopiclist:[],
         topicremoteRowCount:0,
         topicinited:true,
         topiclist: [],
+        useralerttopics:{},
         topics: {},
         comments: {},
         users: {},
@@ -54,6 +59,61 @@ const initial = {
      }
      */
 const forum = createReducer({
+    [setuseralerttopicreaded_result]:(state,payload)=> {
+        let newuseralerttopiclist = [];
+        for(let id of state.useralerttopiclist){
+            if(id != payload._id){
+                newuseralerttopiclist.push(id);
+            }
+        }
+        let useralerttopics = {...state.useralerttopics};
+        delete useralerttopics[payload._id];
+        return {
+            ...state,
+            useralerttopics,
+            useralerttopiclist: [...newuseralerttopiclist]
+        };
+    },
+    [serverpush_useralerttopic]:(state,payload)=>{
+        let newdoc = normalizruseralerttopic(payload);
+        return {
+            ...state,
+            useralerttopiclist: [newdoc.result,...state.useralerttopiclist],
+            useralerttopics:{
+                ...state.useralerttopics,...newdoc.entities.useralerttopics,
+            },
+            topics: {
+                ...state.topics,...newdoc.entities.topics,
+            },
+            comments:{
+                ...state.comments,...newdoc.entities.comments
+            },
+            users: {
+                ...state.users,...newdoc.entities.users
+            }
+        };
+    },
+    [serverpush_useralerttopiclist]:(state,payload)=>{
+        //console.log("serverpush_useralerttopiclist看看出来什么数据结构：" + JSON.stringify(payload));
+        let newdocs = normalizruseralerttopiclist(payload);
+        //console.log("serverpush_useralerttopiclist看看出来什么数据结构：" + JSON.stringify(useralerttopiclist));
+        return {
+            ...state,
+            useralerttopiclist: [...newdocs.result.list],
+            useralerttopics:{
+                ...state.useralerttopics,...newdocs.entities.useralerttopics,
+            },
+            topics: {
+                ...state.topics,...newdocs.entities.topics,
+            },
+            comments:{
+                ...state.comments,...newdocs.entities.comments
+            },
+            users: {
+                ...state.users,...newdocs.entities.users
+            }
+        };
+    },
     [login_result]: (state, payload) => {
         let selfuser = {
             _id:payload.userid,
@@ -75,9 +135,15 @@ const forum = createReducer({
                 mytopicremoteRowCount,
                 mytopicinited:false,
                 mytopiclist: [...newdocs.result.list],
-                topics: newdocs.entities.topics,
-                comments: newdocs.entities.comments,
-                users: newdocs.entities.users,
+                topics: {
+                    ...state.topics,...newdocs.entities.topics,
+                },
+                comments:{
+                    ...state.comments,...newdocs.entities.comments
+                },
+                users: {
+                    ...state.users,...newdocs.entities.users
+                },
                 topicremoteRowCount:0,
                 topicinited:true,
                 topiclist: [],
@@ -110,9 +176,15 @@ const forum = createReducer({
                 topicremoteRowCount,
                 topicinited:false,
                 topiclist: [...newdocs.result.list],
-                topics: newdocs.entities.topics,
-                comments: newdocs.entities.comments,
-                users: newdocs.entities.users,
+                topics: {
+                    ...state.topics,...newdocs.entities.topics,
+                },
+                comments:{
+                    ...state.comments,...newdocs.entities.comments
+                },
+                users: {
+                    ...state.users,...newdocs.entities.users
+                },
                 mytopicremoteRowCount:0,
                 mytopicinited:true,
                 mytopiclist: [],

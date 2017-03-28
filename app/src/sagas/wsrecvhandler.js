@@ -32,7 +32,10 @@ login_result,login_err,
     logout_result,
     findpwd_result,
     findpwd_err,
-    wait_findpwd_result
+    wait_findpwd_result,
+    serverpush_useralerttopic,
+    serverpush_useralerttopiclist,
+    setuseralerttopicreaded_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -43,6 +46,21 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+  ['serverpush_useralerttopic']: (socket, emit)=> {
+    return ((payload) => {
+      emit(serverpush_useralerttopic(payload));
+    });
+  },
+  ['serverpush_useralerttopiclist']: (socket, emit)=> {
+    return ((payload) => {
+      emit(serverpush_useralerttopiclist(payload));
+    });
+  },
+  ['setuseralerttopicreaded_result']: (socket, emit)=> {
+    return ((payload) => {
+      emit(setuseralerttopicreaded_result(payload));
+    });
+  },
   ['logout_result']: (socket, emit)=> {
     return ((payload) => {
       emit(logout_result(payload));

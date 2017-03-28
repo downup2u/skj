@@ -42,5 +42,9 @@ export const uicommenthide = createAction('forum.uicommenthide');
 
 export const serverpush_newtopic = createAction('serverpush_newtopic');
 export const serverpush_newcoments = createAction('serverpush_newcoments');
+export const serverpush_useralerttopic = createAction('serverpush_useralerttopic');
+export const serverpush_useralerttopiclist= createAction('serverpush_useralerttopiclist');
+export const setuseralerttopicreaded_request = createAction('setuseralerttopicreaded_request');
+export const setuseralerttopicreaded_result = createAction('setuseralerttopicreaded_result');
 
 export const newtopicfileuploadsetpreview =  createAction('newtopicfileupload.setpreview');

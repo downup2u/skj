@@ -24,7 +24,7 @@ import {
     createdevice_request, createdevice_result,
     getdevicelist_request,getdevicelist_result,
     deletedevice_request,deletedevice_result,
-
+    setuseralerttopicreaded_request,
     createaddress_request,
     deleteaddress_request,
     editaddress_request,
@@ -122,6 +122,7 @@ function* handleIOWithAuth(socket) {
             'getaddresslist':`${getaddresslist_request}`,
             'fillprofile':`${fillprofile_request}`,
             'logout':`${logout_request}`,
+            'setuseralerttopicreaded':`${setuseralerttopicreaded_request}`,
         };
 
         let tasksz =[];

@@ -41,10 +41,11 @@ let CommentExampleComment = ({loginsuccess,history,comment,users,dispatch}) => {
     }
   }
   return (
+            <div id={'comment_'+comment._id}>
           <Comment>
-              <Comment.Avatar src='http://semantic-ui.com/images/avatar/small/elliot.jpg'/>
+              <Comment.Avatar src={users[comment.creator].profile.avatar}/>
               <Comment.Content>
-                  <Comment.Author as='a'>{users[comment.creator].username}</Comment.Author>
+                  <Comment.Author as='a'>{users[comment.creator].profile.nickname}</Comment.Author>
                   <Comment.Text>
                       <p>{comment.title}</p>
                   </Comment.Text>
@@ -67,6 +68,7 @@ let CommentExampleComment = ({loginsuccess,history,comment,users,dispatch}) => {
                   </Comment.Actions>
               </Comment.Content>
           </Comment>
+        </div>
 
   );
 }

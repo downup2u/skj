@@ -11,6 +11,7 @@ import '../../public/css/feed.css';
 import CommentExampleComment from './community_comment.js';
 import FeedExampleBasic from './community_topic.js';
 import FeedReplyForm from './community_reply.js';
+import TopTip from './community_topictip';
 
 export class Topic extends React.Component {
   componentWillMount () {
@@ -51,17 +52,37 @@ export class Page extends React.Component {
         this.props.history.goBack();
     }
     render() {
-        let toptipData = {
-            avatar: "http://semantic-ui.com/images/avatar/small/joe.jpg",
-            text: "一条消息"
+        let topicid = this.props.match.params.topicid;
+        let ToptipCo = null;
+        if(this.props.useralerttopiclist.length > 0){
+            let filterlist = [];
+            for(let useralerttopicid of this.props.useralerttopiclist){
+                if(this.props.useralerttopics[useralerttopicid].topicself === topicid){
+                    //关于该帖的评论
+                    filterlist.push(useralerttopicid);
+                }
+            }
+
+            if(filterlist.length > 0){
+                let useralerttopicnew = this.props.useralerttopics[filterlist[0]]; //选取最新一条
+                let user = this.props.users[useralerttopicnew.userfrom];
+                let toptipData = {
+                    avatar: user.profile.avatar,
+                    text: `${filterlist.length}条新消息`
+                };
+                ToptipCo = <TopTip data={toptipData} useralerttopic={useralerttopicnew}  frompage='thispage'/>;
+            }
+
+
         }
 
-        let topicid = this.props.match.params.topicid;
+
         let topicsco = <Topic key={topicid} topic={this.props.topics[topicid]} {...this.props}/>;
 
         return (
             <div>
                 <NavBar lefttitle="返回" title="帖子详情" onClickLeft={this.onClickReturn} />
+                 {ToptipCo}
                 {topicsco}
                 {this.props.iscommentshow?<FeedReplyForm {...this.props}/>:null}
             </div>);

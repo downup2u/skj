@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Button, Comment, Header,Feed, Icon,Input  } from 'semantic-ui-react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
+
 import {gettopiclist_request,
     lovetopicadd_request,
     lovetopicunadd_request,
@@ -88,5 +90,5 @@ const mapStateToProps =  ({userlogin,forum}) =>{
 };
 
 FeedExampleBasic = connect(mapStateToProps)(FeedExampleBasic);
-//FeedExampleBasic =withRouter(FeedExampleBasic);
+FeedExampleBasic =withRouter(FeedExampleBasic);
 export default FeedExampleBasic;
