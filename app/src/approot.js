@@ -68,6 +68,16 @@ import OrderEvaluation from './components/orderevaluation.js';
 import OrderInfo from './components/orderinfo.js';
 //物流详情
 import LogisticsInfo from './components/logisticsinfo.js';
+//商城套餐
+import ShoppingPackage from './components/shopping/package.js';
+//商城产品列表
+import ShoppingProlist from './components/shopping/prolist.js';
+//商城产品详情
+import ShoppingProinfo from './components/shopping/proinfo.js';
+//商城产品评价
+import ShoppingProevaluate from './components/shopping/evaluate.js';
+
+//ShoppingProlist   ShoppingProinfo
 
 import {requireAuthentication} from './components/requireauthentication';
 
@@ -75,7 +85,6 @@ import {requireAuthentication} from './components/requireauthentication';
 import '../public/css/page.css';
 
 
-import {DevTools,store} from './store';
 
 import {
     HashRouter as Router,
@@ -231,9 +240,13 @@ const CoApp = (props) => {
         <CustomRoute path="/orderinfo" component={OrderInfo}/>
         <CustomRoute path="/forgetpwd" component={ForgetPwd}/>
         <CustomRoute path="/logisticsinfo" component={LogisticsInfo}/>
+           <CustomRoute path="/shoppingpackage" component={ShoppingPackage} />
+            <CustomRoute path="/shoppingprolist" component={ShoppingProlist} />
+            <CustomRoute path="/shoppingproinfo" component={ShoppingProinfo} />
+            <CustomRoute path="/shoppingproevaluate" component={ShoppingProevaluate} />
 
 
-        <CustomRoute component={App}/>
+            <CustomRoute component={App}/>
         </Switch>
     );
 }
