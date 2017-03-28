@@ -24,7 +24,7 @@ const app = createReducer({
     },
     [hidepopmessage]:(state, payload) => {
         return { ...state,msg:'',title:'',ispop:false};
-    },
+    }
 }, initial.app);
 
 export default app;

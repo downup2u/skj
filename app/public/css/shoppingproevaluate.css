@@ -1,0 +1,99 @@
+.ShoppingproevaluatePage {
+    background: #EEE;
+    padding-top: 48px;
+}
+
+.ShoppingproevaluatePage .ProinfoPageHead {
+    background: #5596d6;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 48px;
+    width: 100%;
+    z-index: 1000;
+}
+
+.ShoppingproevaluatePage .title {
+    flex-grow: 1;
+    text-align: center;
+    line-height: 48px;
+    color: #FFF;
+    font-size: 16px;
+}
+
+.ShoppingproevaluatePage .ProinfoPageHead .imgcont {
+    display: flex;
+    width: 50px;
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.ShoppingproevaluatePage .ProinfoPageHead .imgcont img {
+    width: 48px;
+}
+
+.ShoppingproevaluatePage .ProinfoPageHead i.icon {
+    font-size: 30px;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.ShoppingproevaluatePage .proList {
+    overflow-y: scroll;
+}
+
+.ShoppingproevaluatePage .proList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-self: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.ShoppingproevaluatePage .proList .li {
+    display: flex;
+    flex-direction: column;
+    background: #FFF;
+    align-self: flex-start;
+    margin-bottom: 5px;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.ShoppingproevaluatePage .proList .li .tt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ShoppingproevaluatePage .proList .li .tt img {
+    border-radius: 50%;
+    width: 40px;
+    margin-right: 15px;
+}
+
+.ShoppingproevaluatePage .proList .li .tt > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.ShoppingproevaluatePage .proList .li .content {
+
+}

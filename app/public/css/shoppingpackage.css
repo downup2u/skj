@@ -1,0 +1,95 @@
+.PackagePage{
+    background: #EEE;
+}
+.PackagePage .searchHead{
+    background: #5596d6;
+    display: flex;
+    align-items: center;
+}
+.PackagePage .searchHead .ui.input{
+    flex-grow: 1;
+    margin: 10px 0;
+}
+.PackagePage .searchHead .ui.input input{
+    border-radius: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+.PackagePage .searchHead img{
+    width: 30px;
+    margin-right: 15px;
+}
+.PackagePage .searchHead i.icon{
+    font-size: 30px;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+}
+.PackagePage .proList{
+    overflow-y: scroll;
+}
+.PackagePage .proList .li{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    background: #FFF;
+    padding-bottom: 8px;
+}
+.PackagePage .proList .li > img{
+    width: 100%;
+}
+.PackagePage .proList .li .name{
+    font-size: 14px;
+    padding: 10px 10px 0 10px;
+}
+.PackagePage .proList .li .price{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    color: #F00;
+}
+.PackagePage .proList .li .price img{
+    width: 22px;
+    margin: 5px;
+}
+.PackagePage .proList .li .price span{
+    margin-right: 0px;
+    font-size: 16px;
+}
+.PackagePage .proList .li .price span.p1{
+    color: #666;
+    font-size: 12px;
+    margin-right: 4px;
+}
+.PackagePage .proList .li .price span.p2{
+    font-size: 18px;
+    margin-right: 10px;
+}
+.PackagePage .proList .li .price span.p3{
+    font-size: 14px;
+    color: #999;
+    text-decoration:line-through
+}
+.PackagePage .proList .li .price span.p3 i{
+    font-style: normal;
+    font-size: 12px;
+    margin-right: 3px;
+}
+.PackagePage .proList .li .price .ui.red.button{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+.PackagePage .proList .li .price .ui.red.button span{
+    flex-shrink: 0;
+    margin-right: 2px;
+    font-size: 12px;
+}
+.PackagePage .proList .li .price .ui.red.button i.icon{
+    margin:0;
+    width: auto;
+}

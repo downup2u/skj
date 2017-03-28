@@ -1,0 +1,192 @@
+.ProinfoPage {
+    background: #EEE;
+    padding-top: 48px;
+}
+
+.ProinfoPage .ProinfoPageHead {
+    background: #5596d6;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left:0;
+    top:0;
+    height: 48px;
+    width: 100%;
+    z-index: 1000;
+}
+
+.ProinfoPage .title {
+    flex-grow: 1;
+    text-align: center;
+    line-height: 48px;
+    color: #FFF;
+    font-size: 16px;
+}
+
+.ProinfoPage .ProinfoPageHead .imgcont {
+    display: flex;
+    width: 50px;
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProinfoPage .ProinfoPageHead .imgcont img {
+    width: 30px;
+}
+
+.ProinfoPage .ProinfoPageHead i.icon {
+    font-size: 30px;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.ProinfoPage .proList {
+    overflow-y: scroll;
+}
+
+.ProinfoPage .shoppingBanner .Demo-swiper__slide img {
+    width: 100%;
+}
+
+.ProinfoPage .proinfoHead {
+    background: #FFF;
+    padding: 10px 15px;
+    border-bottom: 1px solid #EEE;
+    margin-bottom: 10px;
+}
+
+.ProinfoPage .proinfoHead .p1 {
+    display: flex;
+}
+
+.ProinfoPage .proinfoHead .p2 {
+    color: #F00;
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.ProinfoPage .proinfoHead .p3 {
+    font-size: 12px;
+    color: #888;
+}
+
+.ProinfoPage .shoppingBanner .swiper-slide {
+    display: flex;
+    align-items: flex-start;
+}
+
+.ProinfoPage .proinfoHead .proname {
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+.ProinfoPage .proinfoHead .collectionLnk {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProinfoPage .proinfoHead .collectionLnk img {
+    width: 30px;
+}
+
+.ProinfoPage .discountlist .li {
+    background: #FFF;
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ProinfoPage .discountlist .li .tt {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.ProinfoPage .discountlist .li .tt img {
+    width: 40px;
+    margin-right: 5px;
+}
+
+.ProinfoPage .discountlist .li .btn.getdiscountlnk {
+    padding: 3px 10px;
+    color: #ff4000;
+    border: 1px solid #ff4000;
+    border-radius: 4px;
+}
+
+.ProinfoPage .discountlist .li .btn i.icon {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    font-size: 20px;
+}
+
+.ProinfoPage .proinfoBody {
+    flex-grow: 1;
+}
+
+.ProinfoPage .proinfoBodyHead {
+    border-left: 3px solid #ff4000;
+    line-height: 40px;
+    padding-left: 10px;
+    font-size: 16px;
+    background: #FFF;
+}
+
+.ProinfoPage .proinfoFoot {
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-top: 1px solid #EEE;
+    background: #FFF;
+}
+
+.ProinfoPage .proinfoFoot span {
+    width: 50%;
+    line-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProinfoPage .proinfoFoot span > i {
+    width: 90%;
+    line-height: 40px;
+    display: flex;
+    font-style: normal;
+    justify-content: center;
+    font-size: 14px;
+    background: #ff3d00;
+    color: #FFF;
+    border-radius: 3px;
+}
+
+.ProinfoPage .proinfoFoot span:first-child > i {
+    background: #f2a225;
+}
+
+.ProinfoPage .proinfoBodyBody {
+    padding-bottom: 50px;
+}
+
+.ProinfoPage .proinfoBodyBody img {
+    width: 100%;
+}
