@@ -1,0 +1,123 @@
+.shoppingCartPage {
+    background: #EEE;
+}
+
+.shoppingCartPage .proinfo {
+    margin-bottom: 20px;
+}
+
+.shoppingCartPage .proinfo .li {
+    display: flex;
+    border-bottom: 1px solid #EEE;
+    padding: 15px;
+    background: #FFF;
+    align-items: center;
+}
+
+.shoppingCartPage .proinfo .li .l {
+    flex-direction: row;
+}
+
+.shoppingCartPage .proinfo .li .l img {
+    width: 80px;
+    align-self: flex-start;
+    border: 1px solid #EEE;
+}
+
+.shoppingCartPage .proinfo .li div.l {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    padding-left: 15px;
+    font-size: 14px;
+}
+
+.shoppingCartPage .proinfo .li div.l > div {
+    padding-left: 15px;
+}
+
+.shoppingCartPage .proinfo .li div.l .price {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.shoppingCartPage .proinfo .li div.l .price span:first-child {
+    color: #F00;
+}
+
+.shoppingCartPage .ui.radio.checkbox {
+    padding: 0;
+}
+
+.shoppingCartPage .footBtn {
+    background: #FFF;
+    padding: 0 0 0 15px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 44px;
+}
+
+.shoppingCartPage .footBtn .left {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.shoppingCartPage .footBtn .left label {
+    margin-right: 10px;
+}
+
+.shoppingCartPage .footBtn .left .price > span {
+    color: #F00;
+}
+
+.shoppingCartPage .footBtn .btn {
+    display: flex;
+    background: #5596d6;
+    color: #FFF;
+    align-self: stretch;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.shoppingCartPage .proinfo .li div .btnControl {
+    display: flex;
+    flex-direction: row;
+}
+
+.shoppingCartPage .proinfo .btnControl > div {
+    border: 1px solid #EEE;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.shoppingCartPage .proinfo .btnControl > div.num {
+    border: none;
+}
+
+.shoppingCartPage .proinfo .btnControl > div.num .ui.input {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.shoppingCartPage .proinfo .btnControl > div.num .ui.input input {
+    border-radius: 0;
+    line-height: 30px;
+    text-align: center;
+    padding: 0;
+    width: 30px;
+    font-size: 14px;
+
+}

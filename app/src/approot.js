@@ -76,15 +76,15 @@ import ShoppingProlist from './components/shopping/prolist.js';
 import ShoppingProinfo from './components/shopping/proinfo.js';
 //商城产品评价
 import ShoppingProevaluate from './components/shopping/evaluate.js';
-
-//ShoppingProlist   ShoppingProinfo
+//购物车
+import ShoppingCart from './components/shopping/cart.js';
+//提交订单
+import Pay from './components/shopping/pay.js';
+//结算
+import PayEnd from './components/shopping/payend.js';
 
 import {requireAuthentication} from './components/requireauthentication';
-
-
 import '../public/css/page.css';
-
-
 
 import {
     HashRouter as Router,
@@ -92,8 +92,7 @@ import {
     Switch
 } from 'react-router-dom';
 
-
-const styles = {}
+const styles = {};
 
 styles.fill = {
     position: 'absolute',
@@ -105,8 +104,12 @@ styles.fill = {
 
 styles.content = {
     ...styles.fill,
-    top:'40px',
-    textAlign:'center'
+    top
+:
+'40px',
+    textAlign
+:
+'center'
 }
 
 styles.nav = {
@@ -129,14 +132,14 @@ styles.navItem = {
 styles.hsl = {
     ...styles.fill,
     color
-        :
-        'white',
+:
+'white',
     paddingTop
-        :
-        '20px',
+:
+'20px',
     fontSize
-        :
-        '30px'
+:
+'30px'
 }
 
 const FadeRoute = ({ component: Component, ...rest }) => {
@@ -156,42 +159,42 @@ const FadeRoute = ({ component: Component, ...rest }) => {
         }
         let prvleft = movelength;
         return (<TransitionMotion
-        willLeave={()=>{willLeave(movelength)}}
-        styles={match ? [ {
+                willLeave={()=>{willLeave(movelength)}}
+                styles={match ? [ {
                 key: location.pathname,
                 style: { left: 0, x : 1,zIndex:2},
                 data: match
             } ] : []}
-            >
-            {interpolatedStyles => (
-        <div>
-        {interpolatedStyles.map(config => {
-                let x = config.style.x ? (prvleft + movelength) : config.style.left;
-                if (!config.style.x) {
-                    pagefirst = false;
-                    prvleft = config.style.left;
-                }
-                if (pagefirst) {
-                    x = 0
-                }
+                >
+                {interpolatedStyles => (
+                    <div>
+                        {interpolatedStyles.map(config => {
+                                let x = config.style.x ? (prvleft + movelength) : config.style.left;
+                                if (!config.style.x) {
+                                    pagefirst = false;
+                                    prvleft = config.style.left;
+                                }
+                                if (pagefirst) {
+                                    x = 0
+                                }
 
-                return (
-                    <div
-                key={config.key}
-                style={{
+                                return (
+                                    <div
+                                        key={config.key}
+                                        style={{
                 ...styles.fill,
                 ...config.style,
                         left: `${x}px`,
                 }}
-                >
-                <Component {...config.data} {...props}/>
-                </div>
-                )
-            }
-        )}
-        </div>
-        )}
-        </TransitionMotion>
+                                        >
+                                        <Component {...config.data} {...props}/>
+                                    </div>
+                                )
+                            }
+                        )}
+                    </div>
+                )}
+            </TransitionMotion>
         );
     };
 
@@ -205,46 +208,48 @@ const CoApp = (props) => {
     let CustomRoute = Route;
     return (
         <Switch>
-        <CustomRoute exact path="/" component={App}/>
-        <CustomRoute path="/login" component={Login}/>
-        <CustomRoute path="/register" component={Register}/>
-        <CustomRoute path="/addresslist" component={requireAuthentication(Addresslist)}/>
-        <CustomRoute path="/newaddress" component={requireAuthentication(AddressAdd)}/>
-        <CustomRoute path="/editaddress/:addressid" component={requireAuthentication(AddressEdit)}/>
-        <CustomRoute path="/userinfo" component={requireAuthentication(Userinfo)}/>
-        <CustomRoute path="/profiledetail" component={requireAuthentication(ProfileDetail)}/>
-        <CustomRoute path="/newtopic" component={requireAuthentication(NewTopic)}/>
-        <CustomRoute path="/devicelist" component={requireAuthentication(Devicelist)}/>
-        <CustomRoute path="/newdevice" component={requireAuthentication(NewDevice)}/>
-        <CustomRoute path="/addnewdevice" component={requireAuthentication(AddNewDevice)}/>
-        <CustomRoute path="/addnewdevice2" component={requireAuthentication(AddNewDevice2)}/>
-        <CustomRoute path="/addnewdevice3" component={requireAuthentication(AddNewDevice3)}/>
-        <CustomRoute path="/mycollection" component={requireAuthentication(MyCollection)}/>
-        <CustomRoute path="/mycoupon" component={requireAuthentication(MyCoupon)}/>
-        <CustomRoute path="/mymessage" component={MyMessage}/>
-        <CustomRoute path="/mymessagedetail/:msgid" component={MyMessageDetail}/>
-        <CustomRoute path="/myorder" component={requireAuthentication(MyOrder)}/>
-        <CustomRoute path="/usercenter" component={requireAuthentication(UserCenter)}/>
-        <CustomRoute path="/myprofit" component={requireAuthentication(MyProfit)}/>
-        <CustomRoute path="/tixian" component={requireAuthentication(TiXian)}/>
-        <CustomRoute path="/tixian2" component={requireAuthentication(TiXian2)}/>
-        <CustomRoute path="/tixian3" component={requireAuthentication(TiXian3)}/>
-        <CustomRoute path="/ordertotal" component={requireAuthentication(OrderTotal)}/>
-        <CustomRoute path="/distribution" component={requireAuthentication(Distribution)}/>
-        <CustomRoute path="/distributioninfo" component={requireAuthentication(DistributionInfo)}/>
-        <CustomRoute path="/applicationreturns" component={requireAuthentication(ApplicationReturns)}/>
-        <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
-        <CustomRoute path="/mytopiclist" component={Topiclist}/>
-        <CustomRoute path="/changeusername" component={requireAuthentication(ChangeUsername)}/>
-        <CustomRoute path="/orderevaluation" component={OrderEvaluation}/>
-        <CustomRoute path="/orderinfo" component={OrderInfo}/>
-        <CustomRoute path="/forgetpwd" component={ForgetPwd}/>
-        <CustomRoute path="/logisticsinfo" component={LogisticsInfo}/>
-           <CustomRoute path="/shoppingpackage" component={ShoppingPackage} />
-            <CustomRoute path="/shoppingprolist" component={ShoppingProlist} />
-            <CustomRoute path="/shoppingproinfo" component={ShoppingProinfo} />
-            <CustomRoute path="/shoppingproevaluate" component={ShoppingProevaluate} />
-
+            <CustomRoute exact path="/" component={App}/>
+            <CustomRoute path="/login" component={Login}/>
+            <CustomRoute path="/register" component={Register}/>
+            <CustomRoute path="/addresslist" component={requireAuthentication(Addresslist)}/>
+            <CustomRoute path="/newaddress" component={requireAuthentication(AddressAdd)}/>
+            <CustomRoute path="/editaddress/:addressid" component={requireAuthentication(AddressEdit)}/>
+            <CustomRoute path="/userinfo" component={requireAuthentication(Userinfo)}/>
+            <CustomRoute path="/profiledetail" component={requireAuthentication(ProfileDetail)}/>
+            <CustomRoute path="/newtopic" component={requireAuthentication(NewTopic)}/>
+            <CustomRoute path="/devicelist" component={requireAuthentication(Devicelist)}/>
+            <CustomRoute path="/newdevice" component={requireAuthentication(NewDevice)}/>
+            <CustomRoute path="/addnewdevice" component={requireAuthentication(AddNewDevice)}/>
+            <CustomRoute path="/addnewdevice2" component={requireAuthentication(AddNewDevice2)}/>
+            <CustomRoute path="/addnewdevice3" component={requireAuthentication(AddNewDevice3)}/>
+            <CustomRoute path="/mycollection" component={requireAuthentication(MyCollection)}/>
+            <CustomRoute path="/mycoupon" component={requireAuthentication(MyCoupon)}/>
+            <CustomRoute path="/mymessage" component={MyMessage}/>
+            <CustomRoute path="/mymessagedetail/:msgid" component={MyMessageDetail}/>
+            <CustomRoute path="/myorder" component={requireAuthentication(MyOrder)}/>
+            <CustomRoute path="/usercenter" component={requireAuthentication(UserCenter)}/>
+            <CustomRoute path="/myprofit" component={requireAuthentication(MyProfit)}/>
+            <CustomRoute path="/tixian" component={requireAuthentication(TiXian)}/>
+            <CustomRoute path="/tixian2" component={requireAuthentication(TiXian2)}/>
+            <CustomRoute path="/tixian3" component={requireAuthentication(TiXian3)}/>
+            <CustomRoute path="/ordertotal" component={requireAuthentication(OrderTotal)}/>
+            <CustomRoute path="/distribution" component={requireAuthentication(Distribution)}/>
+            <CustomRoute path="/distributioninfo" component={requireAuthentication(DistributionInfo)}/>
+            <CustomRoute path="/applicationreturns" component={requireAuthentication(ApplicationReturns)}/>
+            <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
+            <CustomRoute path="/mytopiclist" component={Topiclist}/>
+            <CustomRoute path="/changeusername" component={requireAuthentication(ChangeUsername)}/>
+            <CustomRoute path="/orderevaluation" component={OrderEvaluation}/>
+            <CustomRoute path="/orderinfo" component={OrderInfo}/>
+            <CustomRoute path="/forgetpwd" component={ForgetPwd}/>
+            <CustomRoute path="/logisticsinfo" component={LogisticsInfo}/>
+            <CustomRoute path="/shoppingpackage" component={ShoppingPackage}/>
+            <CustomRoute path="/shoppingprolist" component={ShoppingProlist}/>
+            <CustomRoute path="/shoppingproinfo" component={ShoppingProinfo}/>
+            <CustomRoute path="/shoppingproevaluate" component={ShoppingProevaluate}/>
+            <CustomRoute path="/shoppingcart" component={ShoppingCart} />
+            <CustomRoute path="/pay" component={Pay} />
+            <CustomRoute path="/payend" component={PayEnd} />
 
             <CustomRoute component={App}/>
         </Switch>
@@ -280,35 +285,35 @@ export class AppRoot extends React.Component {
             if (this.props.type === 'error') {
                 MessageCo = (
                     <div className="messageCo" style={fullheight}>
-                    <Message onDismiss={this.onDismiss}
-                error
-                header={this.props.title}
-                content={this.props.msg}
-            />
-            </div>
-            );
+                        <Message onDismiss={this.onDismiss}
+                                 error
+                                 header={this.props.title}
+                                 content={this.props.msg}
+                            />
+                    </div>
+                );
             }
             else if (this.props.type === 'warning') {
                 MessageCo = (
                     <div className="messageCo" style={fullheight}>
-                    <Message onDismiss={this.onDismiss}
-                warning
-                header={this.props.title}
-                content={this.props.msg}
-            />
-            </div>
-            );
+                        <Message onDismiss={this.onDismiss}
+                                 warning
+                                 header={this.props.title}
+                                 content={this.props.msg}
+                            />
+                    </div>
+                );
             }
             else if (this.props.type === 'success') {
                 MessageCo = (
                     <div className="messageCo" style={fullheight}>
-                    <Message onDismiss={this.onDismiss}
-                success
-                header={this.props.title}
-                content={this.props.msg}
-            />
-            </div>
-            );
+                        <Message onDismiss={this.onDismiss}
+                                 success
+                                 header={this.props.title}
+                                 content={this.props.msg}
+                            />
+                    </div>
+                );
             }
         }
 

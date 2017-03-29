@@ -1,0 +1,145 @@
+.PayPage{
+    background: #EEE;
+}
+.PayPage .proinfo{
+    margin-bottom: 20px;
+}
+
+.PayPage .proinfo .li{
+    display: flex;
+    border-bottom: 1px solid #EEE;
+    padding: 15px;
+    background: #FFF;
+}
+
+.PayPage .proinfo .li img{
+    width: 80px;
+    align-self: flex-start;
+    border: 1px solid #EEE;
+}
+
+.PayPage .proinfo .li >div{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    padding-left: 15px;
+    font-size:14px;
+}
+.PayPage .proinfo .li >div .price {
+    display: flex;
+    justify-content: space-between;
+}
+.PayPage .proinfo .li >div .price span:first-child{
+    color: #F00;
+}
+.PayPage .list{
+    border-top: 1px solid #EEE;
+}
+.PayPage .list .li{
+    background: #FFF;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #EEE;
+    padding: 2px 15px;
+    line-height: 40px;
+}
+.PayPage .list .li span{
+    font-size: 16px;
+}
+.PayPage .list .li span.price {
+    color: #F00;
+}
+
+.PayPage .orderaddress{
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    background: #FFF;
+    border-bottom: 1px solid #EEE;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.PayPage .orderaddress img{
+    width: 30px;
+}
+.PayPage .orderaddress .addressinfo{
+    flex-grow: 1;
+    padding-left: 10px;
+}
+.PayPage .orderaddress .addressinfo .userinfo{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.PayPage .subBtn{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #FFF;
+    align-items: center;
+    height: 44px;
+    padding: 0 0 0 15px;
+}
+.PayPage .subBtn .ui.button{
+    background: none;
+    border: 1px solid #999;
+    font-weight: 100;
+}
+.PayPage .subBtn .ui.button.pay{
+    color: #F00;
+    border-color:#F00;
+}
+.PayPage .subBtn{
+    font-size: 14px;
+}
+.PayPage .subBtn .b{
+    background: #5596d6;
+    color: #FFF;
+    align-self: stretch;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+}
+.PayPage .subBtn .i span{
+    color: #F00;
+}
+
+.PayPage .paytype .li{
+    background: #FFF;
+    border-bottom: 1px solid #EEE;
+    display: flex;
+    padding: 10px 15px;
+    align-items: center;
+}
+.PayPage .paytype .li > div.txt{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+}
+.PayPage .paytype .li img{
+    width: 40px;
+    align-self: flex-start;
+}
+.PayPage .paytype .ui.checkbox .box:before,
+.PayPage .paytype .ui.checkbox label:before{
+    border-radius: 50px;
+    width: 24px;
+    height: 24px;
+}
+.PayPage .paytype .ui.checkbox .box:after,
+.PayPage .paytype .ui.checkbox label:after{
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    background: #5596d6;
+    border-radius: 40px;
+    color: #FFF;
+    font-weight: 100;
+}
+
+
