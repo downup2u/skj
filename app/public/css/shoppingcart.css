@@ -1,5 +1,55 @@
 .shoppingCartPage {
     background: #EEE;
+    overflow: scroll;
+    padding-top: 48px;
+}
+
+.shoppingCartPage .PageHead {
+    background: #5596d6;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 48px;
+    width: 100%;
+    z-index: 1000;
+}
+
+.shoppingCartPage .PageHead .title {
+    flex-grow: 1;
+    text-align: center;
+    line-height: 48px;
+    color: #FFF;
+    font-size: 16px;
+}
+
+.shoppingCartPage .PageHead .imgcont {
+    display: flex;
+    width: 50px;
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.shoppingCartPage .PageHead .imgcont img {
+    width: 48px;
+}
+
+.shoppingCartPage .PageHead i.icon {
+    font-size: 30px;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
 }
 
 .shoppingCartPage .proinfo {

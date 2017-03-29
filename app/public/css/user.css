@@ -1,9 +1,13 @@
+.AddressAddPage{
+    background: #EEE;
+}
 .AddressAddPage .setForm {
     display: flex;
     justify-content: space-between;
     padding: 10px 15px;
     background: #FFF;
     align-items: center;
+    font-size: 14px;
 }
 
 .ui.list.addAddress {
@@ -235,6 +239,13 @@
 .loginBotton .ui.button {
     border-radius: 100px;
     margin-bottom: 10px;
+}
+
+
+.AddressAddPageBottom{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .UserLoginPage .forgetpwd {

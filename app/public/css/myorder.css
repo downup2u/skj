@@ -2,6 +2,10 @@
     background: #F5F5F5;
 }
 
+.myOrder .ui.secondary.pointing.menu{
+    width: 100%;
+    overflow-x: scroll;
+}
 .myOrder .ui.secondary.pointing.menu .item {
     flex-grow: 1;
     text-align: center;
@@ -17,7 +21,7 @@
 
 .myOrder .ui.secondary.pointing.menu .active.item, .ui.secondary.pointing.menu .active.item:hover {
     color: #5694dd;
-    border-color: #5694dd
+    border-color: #5694dd;
 }
 
 .myOrder .ui.secondary.pointing.menu {

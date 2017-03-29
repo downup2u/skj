@@ -40,19 +40,19 @@ let Page =(props)=> {
                         <span onClick={()=>{onClickPage('/myorder')}}>全部订单</span>
                     </div>
                     <div className="l2">
-                        <div>
+                        <div onClick={()=>{onClickPage('/myorder')}}>
                             <img src="img/myprofile/2.png"/>
                             <span>待付款</span>
                         </div>
-                        <div>
+                        <div onClick={()=>{onClickPage('/myorder')}}>
                             <img src="img/myprofile/3.png"/>
                             <span>待发货</span>
                         </div>
-                        <div>
+                        <div onClick={()=>{onClickPage('/myorder')}}>
                             <img src="img/myprofile/4.png"/>
                             <span>待收货</span>
                         </div>
-                        <div>
+                        <div onClick={()=>{onClickPage('/myorder')}}>
                             <img src="img/myprofile/5.png"/>
                             <span>退货</span>
                         </div>

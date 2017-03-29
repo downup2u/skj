@@ -22,6 +22,7 @@ export default class Page extends Component {
                     <Menu.Item name='待发货' active={activeItem === '待发货'} onClick={this.handleItemClick}/>
                     <Menu.Item name='待收货' active={activeItem === '待收货'} onClick={this.handleItemClick}/>
                     <Menu.Item name='已完成' active={activeItem === '已完成'} onClick={this.handleItemClick}/>
+                    <Menu.Item name='我的退货' active={activeItem === '我的退货'} onClick={this.handleItemClick}/>
                 </Menu>
 
                 <div className="orderList">

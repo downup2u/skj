@@ -35,7 +35,9 @@ const mySchema = { list: [ topics ] }
 // const docSchema = new schema.Object({ docs: new schema.Array(topics) });
 
 let normalizrtopiclist=(oldtopicdataobj)=>{
+   console.log("normalizrtopiclist:" + JSON.stringify(oldtopicdataobj));
    const newtopicdataobj = normalize(oldtopicdataobj, mySchema);
+  console.log("normalizrtopiclistnewtopicdataobj:" + JSON.stringify(newtopicdataobj));
    return newtopicdataobj;
 };
 

@@ -37,7 +37,7 @@ class Page extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="">
                 <NavBar lefttitle="返回" title="新增地址" onClickLeft={this.onClickReturn}/>
                 <AddressForm onClickOK={this.onClickNewAddress} formname='newaddress'
                              formvalues={{

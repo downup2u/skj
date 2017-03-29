@@ -20,11 +20,12 @@ export default class Page extends Component {
             <div className="PayPage"
                  style={{
                     height:(window.innerHeight)+"px",
-                    overflow:"scroll"
                  }}
                 >
-                <NavBar lefttitle="返回" title="订单详情" onClickLeft={this.onClickReturn}/>
-
+                <div className="PageHead">
+                    <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
+                    <span className="title">支付订单</span>
+                </div>
                 <div className="orderaddress">
                     <img src="img/shopping/mark.png" />
                     <div className="addressinfo">
@@ -75,15 +76,15 @@ export default class Page extends Component {
                             <span>微信</span>
                             <span>推荐微信用户使用</span>
                         </div>
-                        <Checkbox />
+                        <Checkbox name="paycheck" />
                     </div>
                     <div className="li">
-                        <img src="img/shopping/15.png" />
+                        <img src="img/shopping/16.png" />
                         <div className="txt">
                             <span>支付宝</span>
                             <span>推荐支付宝用户使用</span>
                         </div>
-                        <Checkbox />
+                        <Checkbox name="paycheck" />
                     </div>
                 </div>
 

@@ -10,7 +10,8 @@ import newtopicfileupload from './newtopicfileupload';
 import devicedata from './devicedata';
 import notifymessage from './notifymessage';
 import wifi from './wifi';
+import shop from './shop';
 
 export default combineReducers(
-  { app,userlogin,forum,device,devicedata,address,newtopicfileupload,notifymessage,wifi,form: formReducer}
+  { app,userlogin,forum,device,devicedata,address,newtopicfileupload,notifymessage,wifi,shop,form: formReducer}
 );

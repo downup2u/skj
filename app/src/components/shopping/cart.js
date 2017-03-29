@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import NavBar from '../nav.js';
-import { Input, Button, Menu, Radio, Label } from 'semantic-ui-react';
+import { Input, Button, Menu, Radio, Label, Icon } from 'semantic-ui-react';
 import '../../../public/css/shoppingcart.css';
 
 
@@ -18,10 +18,12 @@ export default class Page extends Component {
             <div className="shoppingCartPage"
                  style={{
                     height:(window.innerHeight)+"px",
-                    overflow:"scroll"
                  }}
                 >
-                <NavBar lefttitle="返回" title="购物车" onClickLeft={this.onClickReturn}/>
+                <div className="PageHead">
+                    <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
+                    <span className="title">购物车</span>
+                </div>
                 <div className="proinfo">
                     <div className="li">
                         <Radio />
@@ -66,7 +68,7 @@ export default class Page extends Component {
                             合计: <span>¥499.00</span>
                         </div>
                     </div>
-                    <div className="btn">
+                    <div className="btn" onClick={()=>{this.onClickPage('/pay')}}>
                         <span>去结算</span>
                     </div>
                 </div>

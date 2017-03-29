@@ -150,6 +150,10 @@
     border-right: none;
 }
 
+.ProlistPage .sortList .sortlistmore{
+    display: none;
+}
+
 .ProlistPage .sortList .sortlistmore span {
     border-bottom: 1px solid #EEE;
     width: 100%;

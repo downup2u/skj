@@ -20,12 +20,15 @@ export default class Page extends Component {
             <div className="PayPage"
                  style={{
                     height:(window.innerHeight)+"px",
-                    overflow:"scroll"
                  }}
                 >
-                <NavBar lefttitle="返回" title="订单详情" onClickLeft={this.onClickReturn}/>
 
-                <div className="orderaddress">
+                <div className="PageHead">
+                    <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
+                    <span className="title">提交订单</span>
+                </div>
+
+                <div className="orderaddress" onClick={()=>{this.onClickPage('/addresslist')}}>
                     <img src="img/shopping/mark.png" />
                     <div className="addressinfo">
                         <div className="userinfo">
@@ -72,7 +75,7 @@ export default class Page extends Component {
                     <div className="i">
                         实付金额: <span>¥400.00</span>
                     </div>
-                    <div className="b">
+                    <div className="b" onClick={()=>{this.onClickPage('/payend')}}>
                         <span>提交订单</span>
                     </div>
                 </div>
