@@ -1,30 +1,58 @@
 import React,{ Component, PropTypes } from 'react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import {  Button, Icon, Input, List, Radio, Label, Checkbox } from 'semantic-ui-react';
-import '../controls/iosSelect.css';
-import IosSelect from '../controls/iosSelect';
-
+import 'iosselect/src/iosSelect.css';
+import IosSelect from 'iosselect';
+import {iosProvinces,iosCitys,iosCountys} from '../areaData_v2.js';
+import { Segment } from 'semantic-ui-react';
+//地址下拉框输入格式定义:
+// seladdr:{
+//   selprovice:{
+//     {'id': '320000', 'value': '江苏省'},
+//   },
+//   selcity:{
+//     {"id":"320100","value":"南京市"},
+//   },
+//   seldistict:{
+//     {"id":"320105","value":"建邺区"},
+//   }
+// }
 let renderNewaddressForm = (fields)=> {
+  let addrsel = fields.seladdr.input.value;
+  console.log("addrsel=====>" + JSON.stringify(addrsel));
   let setOption=(e)=>{
-          var _this = this;
-          var data = [
-              {'id': 0, 'value': '离家模式' },
-              {'id': 1, 'value': '回家模式' },
-              {'id': 2, 'value': '灯全开' },
-              {'id': 3, 'value': '看电影'}
-          ];
-          var temperatureSelect = new IosSelect(1,
-              [data],
+          let temperatureSelect = new IosSelect(3,
+              [iosProvinces, iosCitys, iosCountys],
               {
-                  container: '.container',
-                  title: '',
-                  itemHeight: 40,
-                  headerHeight: window.innerHeight - 40*3,
-                  itemShowCount: 3,
-                  oneLevelId: 1,
-                  callback: function (selectOneObj) {
-                      //模式设置
-                      console.log(selectOneObj);
+                title: '地址选择',
+                itemHeight: 35,
+                relation: [1, 1, 0, 0],
+                oneLevelId: addrsel.selprovice.id,
+                twoLevelId: addrsel.selcity.id,
+                threeLevelId: addrsel.seldistict.id,
+                callback: (selectOneObj, selectTwoObj, selectThreeObj)=> {
+                      let addrselvalue = {
+                        selprovice:{
+                            id: '320000',
+                            value: '江苏省',
+                          },
+                          selcity:{
+                              id:"320100",
+                              value:"南京市",
+                          },
+                          seldistict:{
+                            id:"320105",
+                            value:"建邺区",
+                          }
+                      };
+                      addrselvalue.selprovice.id = selectOneObj.id;
+                      addrselvalue.selprovice.value = selectOneObj.value;
+                      addrselvalue.selcity.id = selectTwoObj.id;
+                      addrselvalue.selcity.value = selectTwoObj.value;
+                      addrselvalue.seldistict.id = selectThreeObj.id;
+                      addrselvalue.seldistict.value = selectThreeObj.value;
+                      fields.seladdr.input.onChange(addrselvalue);
+                      //console.log(selectOneObj);
                   }
               });
       };
@@ -48,23 +76,11 @@ let renderNewaddressForm = (fields)=> {
                     </List.Content>
                 </List.Item>
                 <List.Item>
-                    <div className="tit" onClick={setOption}>所在省:</div>
-                    <List.Content>
-                        <Input  {...fields.provicename.input} placeholder='请填写所在省'/>
-                    </List.Content>
-                </List.Item>
-                <List.Item>
-                    <div className="tit">所在市:</div>
-                    <List.Content>
-                        <Input  {...fields.cityname.input} placeholder='请填写所在市'/>
-                    </List.Content>
-
-                </List.Item>
-                <List.Item>
-                    <div className="tit">所在区:</div>
-                    <List.Content>
-                        <Input  {...fields.distinctname.input} placeholder='请填写所在区'/>
-                    </List.Content>
+                    <Segment.Group horizontal onClick={setOption}>
+                      <Segment>{addrsel.selprovice.value}</Segment>
+                      <Segment>{addrsel.selcity.value}</Segment>
+                      <Segment>{addrsel.seldistict.value}</Segment>
+                    </Segment.Group>
                 </List.Item>
                 <List.Item>
                     <div className="tit">详细地址:</div>
@@ -111,7 +127,7 @@ let NewaddressForm = (props)=> {
     let {handleSubmit,onClickOK} = props;
     return (<Form onSubmit={handleSubmit(onClickOK)}>
         <div className="loginPageTop">
-            <Fields names={['truename','phonenumber','provicename','cityname','distinctname','addressname']}
+            <Fields names={['truename','phonenumber','seladdr','addressname']}
                     component={renderNewaddressForm}/>
 
             <div className="loginBotton AddressAddPageBottom">

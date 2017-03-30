@@ -20,9 +20,7 @@ class Page extends React.Component {
         _id:this.props.match.params.addressid,
         truename:values.truename,
         phonenumber:values.phonenumber,
-        provicename:values.provicename,
-        cityname:values.cityname,
-        distinctname:values.distinctname,
+        seladdr:values.seladdr,
         addressname:values.addressname,
     }
     //this.props.dispatch(editaddress_request(payload));
@@ -46,9 +44,7 @@ class Page extends React.Component {
           formvalues={{
             truename:this.props.truename,
             phonenumber:this.props.phonenumber,
-            provicename:this.props.provicename,
-            cityname:this.props.cityname,
-            distinctname:this.props.distinctname,
+            seladdr:this.props.seladdr,
             addressname:this.props.addressname,
             }}/>
         </div>);

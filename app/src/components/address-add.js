@@ -20,9 +20,7 @@ class Page extends React.Component {
         let payload = {
             truename: values.truename,
             phonenumber: values.phonenumber,
-            provicename: values.provicename,
-            cityname: values.cityname,
-            distinctname: values.distinctname,
+            seladdr:values.seladdr,
             addressname: values.addressname,
         }
         this.props.dispatch(createaddress(payload)).then((result)=> {
@@ -43,9 +41,20 @@ class Page extends React.Component {
                              formvalues={{
               truename:'',
               phonenumber:'',
-              provicename:'',
-              cityname:'',
-              distinctname:'',
+              seladdr:{
+                selprovice:{
+                  id: '320000',
+                  value: '江苏省',
+                },
+                selcity:{
+                    id:"320100",
+                    value:"南京市",
+                },
+                seldistict:{
+                  id:"320105",
+                  value:"建邺区",
+                }
+              },
               addressname:'',
             }}/>
             </div>);
