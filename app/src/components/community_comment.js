@@ -9,6 +9,8 @@ import {
     uicommentshow,
 } from '../actions/index.js';
 import '../../public/css/feed.css';
+import moment from 'moment';
+
 
 let CommentExampleComment = ({loginsuccess,history,comment,users,dispatch}) => {
     let islovedbyme = false;//判断loave数组是否有自己
@@ -45,7 +47,7 @@ let CommentExampleComment = ({loginsuccess,history,comment,users,dispatch}) => {
                     </Comment.Text>
                     <Comment.Actions className="myCommentAction">
                         <Comment.Metadata>
-                            <div>{comment.created_at}</div>
+                            <div>{moment(comment.created_at).format("MM月DD日 HH时mm分")}</div>
                         </Comment.Metadata>
 
                         <div className="myCommentLnk">

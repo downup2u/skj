@@ -14,7 +14,7 @@ let swiperOptions = {
     scrollBar: false
 };
 
-const Page = (props) => {
+let Page = (props) => {
     let onClickPage = (name)=> {
         props.history.push(name);
     };
