@@ -1,9 +1,33 @@
 import React,{ Component, PropTypes } from 'react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import {  Button, Icon, Input, List, Radio, Label, Checkbox } from 'semantic-ui-react';
+import '../controls/iosSelect.css';
+import IosSelect from '../controls/iosSelect';
 
 let renderNewaddressForm = (fields)=> {
-
+  let setOption=(e)=>{
+          var _this = this;
+          var data = [
+              {'id': 0, 'value': '离家模式' },
+              {'id': 1, 'value': '回家模式' },
+              {'id': 2, 'value': '灯全开' },
+              {'id': 3, 'value': '看电影'}
+          ];
+          var temperatureSelect = new IosSelect(1,
+              [data],
+              {
+                  container: '.container',
+                  title: '',
+                  itemHeight: 40,
+                  headerHeight: window.innerHeight - 40*3,
+                  itemShowCount: 3,
+                  oneLevelId: 1,
+                  callback: function (selectOneObj) {
+                      //模式设置
+                      console.log(selectOneObj);
+                  }
+              });
+      };
     return (
         <div className="AddressAddPage" style={{minHeight:(window.innerHeight-46)+"px"}}>
             <List selection verticalAlign='middle' className="addAddress">
@@ -24,7 +48,7 @@ let renderNewaddressForm = (fields)=> {
                     </List.Content>
                 </List.Item>
                 <List.Item>
-                    <div className="tit">所在省:</div>
+                    <div className="tit" onClick={setOption}>所在省:</div>
                     <List.Content>
                         <Input  {...fields.provicename.input} placeholder='请填写所在省'/>
                     </List.Content>
