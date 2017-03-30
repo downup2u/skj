@@ -7,6 +7,7 @@ import AddressForm from './address_form.js';
 import {createaddress_request} from '../actions/index.js';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import {createaddress} from '../actions/sagacallback.js';
+import {defaultaddrselvalue,setdefaultaddrselvalue} from '../areaData_v2.js';
 
 class Page extends React.Component {
     componentWillMount() {
@@ -22,9 +23,11 @@ class Page extends React.Component {
             phonenumber: values.phonenumber,
             seladdr:values.seladdr,
             addressname: values.addressname,
-        }
+        };
+
         this.props.dispatch(createaddress(payload)).then((result)=> {
             console.log("新建地址成功:" + JSON.stringify(result));
+            setdefaultaddrselvalue(values.seladdr);
             this.props.history.goBack();
         }).catch((error)=> {
             //弹出错误框
@@ -41,20 +44,7 @@ class Page extends React.Component {
                              formvalues={{
               truename:'',
               phonenumber:'',
-              seladdr:{
-                selprovice:{
-                  id: '320000',
-                  value: '江苏省',
-                },
-                selcity:{
-                    id:"320100",
-                    value:"南京市",
-                },
-                seldistict:{
-                  id:"320105",
-                  value:"建邺区",
-                }
-              },
+              seladdr:defaultaddrselvalue,
               addressname:'',
             }}/>
             </div>);

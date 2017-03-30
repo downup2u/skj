@@ -3,7 +3,7 @@ import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import {  Button, Icon, Input, List, Radio, Label, Checkbox } from 'semantic-ui-react';
 import 'iosselect/src/iosSelect.css';
 import IosSelect from 'iosselect';
-import {iosProvinces,iosCitys,iosCountys} from '../areaData_v2.js';
+import {iosProvinces,iosCitys,iosCountys,defaultaddrselvalue} from '../areaData_v2.js';
 import { Segment } from 'semantic-ui-react';
 //地址下拉框输入格式定义:
 // seladdr:{
@@ -31,20 +31,7 @@ let renderNewaddressForm = (fields)=> {
                 twoLevelId: addrsel.selcity.id,
                 threeLevelId: addrsel.seldistict.id,
                 callback: (selectOneObj, selectTwoObj, selectThreeObj)=> {
-                      let addrselvalue = {
-                        selprovice:{
-                            id: '320000',
-                            value: '江苏省',
-                          },
-                          selcity:{
-                              id:"320100",
-                              value:"南京市",
-                          },
-                          seldistict:{
-                            id:"320105",
-                            value:"建邺区",
-                          }
-                      };
+                      let addrselvalue = defaultaddrselvalue;
                       addrselvalue.selprovice.id = selectOneObj.id;
                       addrselvalue.selprovice.value = selectOneObj.value;
                       addrselvalue.selcity.id = selectTwoObj.id;

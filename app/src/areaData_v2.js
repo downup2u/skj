@@ -3610,4 +3610,32 @@ const iosCountys = [
     {"id":"659004","value":"五家渠市","parentId":"659004"}
 ];
 
-export {iosProvinces,iosCitys,iosCountys};
+let defaultaddrselvalue = {
+  selprovice:{
+      id: '320000',
+      value: '江苏省',
+    },
+    selcity:{
+        id:"320100",
+        value:"南京市",
+    },
+    seldistict:{
+      id:"320105",
+      value:"建邺区",
+    }
+};
+if(localStorage.getItem('defaultaddrselvalue')){
+  try{
+    defaultaddrselvalue = JSON.parse(localStorage.getItem('defaultaddrselvalue'));
+  }
+  catch(e){
+
+  }
+
+}
+
+let setdefaultaddrselvalue = (v)=>{
+  defaultaddrselvalue = v;
+  localStorage.setItem('defaultaddrselvalue',JSON.stringify(v));
+}
+export {iosProvinces,iosCitys,iosCountys,defaultaddrselvalue,setdefaultaddrselvalue};

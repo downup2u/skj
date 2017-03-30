@@ -7,6 +7,7 @@ import AddressForm from './address_form.js';
 import {editaddress_request} from '../actions/index.js';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import {editaddress} from '../actions/sagacallback.js';
+import {setdefaultaddrselvalue} from '../areaData_v2.js';
 
 class Page extends React.Component {
   componentWillMount () {
@@ -26,6 +27,7 @@ class Page extends React.Component {
     //this.props.dispatch(editaddress_request(payload));
     this.props.dispatch(editaddress(payload)).then((result)=>{
       console.log("编辑地址成功:" + JSON.stringify(result));
+      setdefaultaddrselvalue(values.seladdr);
       this.props.history.goBack();
     }).catch((error)=>{
       //弹出错误框
