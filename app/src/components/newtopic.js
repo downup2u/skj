@@ -83,7 +83,7 @@ export class Page extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="feedPage">
                 <NavBar lefttitle="返回" title="发布帖子" onClickLeft={this.onClickReturn}/>
                 <NewtopicForm onClickNewTopic={this.onClickNewTopic}/>
             </div>

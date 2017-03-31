@@ -12,6 +12,8 @@ export default function MyPage(props){
         }
     };
     return (
-        <div onClick={()=>{onClickPage(props.url)}}>{props.value}</div>
+        <div onClick={()=>{onClickPage(props.url)}}>
+            {props.children}
+        </div>
     );
 }

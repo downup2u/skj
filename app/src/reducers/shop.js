@@ -5,13 +5,13 @@ import { createReducer } from 'redux-act';
 
 
 const initial = {
+	//
     shop: {
         s: "aaaa"
     }
 };
 
 const shop = createReducer({
-
 
 }, initial.shop);
 

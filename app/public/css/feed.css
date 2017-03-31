@@ -6,7 +6,7 @@
     background: #FFF;
     margin-bottom: 15px;
 }
-.ui.feed{
+.feedHead .ui.feed{
     border-bottom: 1px solid #EEE;
     background: #FFF;
     margin:0;
@@ -31,6 +31,75 @@
     align-items: flex-start;
 }
 
+
+.feedPage .PageHead {
+    background: #5596d6;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 48px;
+    width: 100%;
+    z-index: 1000;
+}
+
+.feedPage .PageHead .title {
+    flex-grow: 1;
+    text-align: center;
+    line-height: 48px;
+    color: #FFF;
+    font-size: 16px;
+}
+
+.feedPage .PageHead .imgcont {
+    display: flex;
+    width: 50px;
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.feedPage .PageHead .imgcont img {
+    width: 48px;
+}
+
+.feedPage .PageHead i.icon {
+    font-size: 30px;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.feedPage .PageHead .ui.grid{
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 48px;
+}
+
+.feedPage .PageHead .ui.grid>.row{
+    padding: 0
+}
+.feedPage .PageHead .ui.grid>.row>[class*="right aligned"].column.column{
+    margin: 0;
+    padding: 0;
+    padding-right: 10px;
+}
+.feedPage .PageHead .ui.grid img{
+    width: 48px;
+}
+
 .ui.feed>.event>.content>.feedContent .extra.images img{
     margin: 3px;
     flex-grow: 1;
@@ -48,6 +117,11 @@
 .feedHead .summary {
     display: flex;
     flex-direction: column
+}
+
+.feedHead .ui.grid>.column:not(.row), 
+.feedHead .ui.grid>.row>.column{
+    padding:0;
 }
 
 .ui.feed > .event > .content .summary > .date {
@@ -167,8 +241,8 @@
 .feedBottomReply .ui.input{
     flex-grow: 1;
     padding: 5px 15px;
-
 }
+
 .feedBottomReply span{
     padding-right: 15px;
 }

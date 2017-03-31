@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input, Grid, Popup  } from 'semantic-ui-react';
+import Lnk from './lnk.js';
 
 import { connect } from 'react-redux';
 import {
@@ -105,7 +106,35 @@ export class Page extends React.Component {
         }
         return (
             <div className="feedPage" style={{paddingBottom:"60px"}}>
-                <NavBar titlename="圈子" {...this.props}/>
+
+
+                <div className="PageHead">
+                    <span className="title">圈子</span>
+                    <Grid>
+                        <Grid.Row>
+                            <Grid.Column textAlign='right'>
+                                <Popup
+                                    trigger={
+                                        <img src="img/head/1.png" />
+                                    }
+                                    position='top right'
+                                    >
+                                    <div className="communityMoreLnk">
+                                        <Lnk value="" url="/newtopic" {...this.props}>
+                                            <Icon name="add circle"/>
+                                            <span>发布</span>
+                                        </Lnk>
+                                        <Lnk value="" url="/mytopiclist" {...this.props}>
+                                            <Icon name="commenting"/>
+                                            <span>我的发布</span>
+                                        </Lnk>
+                                    </div>
+                                </Popup>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </div>
+
                 <Icon name="add circle" color='blue' size='huge' className="addcommunityHotlnk"
                       onClick={this.addNewCommunityHotlnk.bind(this)}
                     />
