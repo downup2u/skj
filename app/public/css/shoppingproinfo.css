@@ -89,6 +89,7 @@
 .ProinfoPage .proinfoHead .proname {
     font-size: 16px;
     margin-right: 15px;
+    flex-grow: 1
 }
 
 .ProinfoPage .proinfoHead .collectionLnk {

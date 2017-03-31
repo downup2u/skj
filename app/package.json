@@ -13,6 +13,7 @@
     "antd": "^2.8.0",
     "axios": "^0.15.3",
     "iosselect": "0.0.5",
+    "lodash": "^4.17.4",
     "normalizr": "^3.2.2",
     "querystring": "^0.2.0",
     "rc-swipeout": "^1.2.4",

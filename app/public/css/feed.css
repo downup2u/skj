@@ -1,6 +1,8 @@
 .feedPage{
     width: 100%;
-    background: #EEE;
+    padding-bottom: 60px;
+    padding-top: 48px;
+    background: #FFF;
 }
 .commentlistcontent{
     background: #FFF;

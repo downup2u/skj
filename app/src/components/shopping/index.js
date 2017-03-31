@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import _ from 'lodash'; 
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shopping.css';
@@ -18,6 +19,7 @@ let Page = (props) => {
     let onClickPage = (name)=> {
         props.history.push(name);
     };
+    //let proid = this.props.match.params.id;
     return (
         <div className="shoppingPage">
             <div className="shoppingHead">
@@ -28,15 +30,13 @@ let Page = (props) => {
                 <Swiper
                     swiperOptions={{slidesPerView: 'auto'}}
                     {...swiperOptions}>
-
-                    <Slide className="Demo-swiper__slide">
-                        <img src='img/shopping/banner.png'/>
-                    </Slide>
-
-                    <Slide className="Demo-swiper__slide">
-                        <img src='img/shopping/banner.png'/>
-                    </Slide>
-
+                    {_.map(props.shop.banner1, (banner)=>{
+                        return (
+                            <Slide className="Demo-swiper__slide">
+                                <img src={banner.url}/>
+                            </Slide>
+                        )
+                    })}
                 </Swiper>
             </div>
             <div className="listTitle">
@@ -65,33 +65,35 @@ let Page = (props) => {
                 品质生活
             </span>
             </div>
-            <div className="listTitle2" onClick={()=>{onClickPage('/shoppingprolist')}}>
-                <span>水智能产品1</span>
-                <span>更多 <Icon name="angle right"/></span>
-            </div>
-            <div className="proList">
-                <div className="li" onClick={()=>{onClickPage('/shoppingproinfo')}}>
-                    <img src="img/shopping/8.png"/>
-                    <span className="name">水可净智能水盒子</span>
-                    <span className="price">
-                        <span>¥499.00</span>
-                        <img src="img/shopping/9.png"/>
-                    </span>
-                </div>
-                <div className="li" onClick={()=>{onClickPage('/shoppingproinfo')}}>
-                    <img src="img/shopping/8.png"/>
-                    <span className="name">水可净智能水盒子</span>
-                    <span className="price">
-                        <span>¥499.00</span>
-                        <img src="img/shopping/9.png"/>
-                    </span>
-                </div>
-            </div>
+            {_.map(props.shop.prolist, (list, typeid)=>{
+                return (
+                    <div>
+                        <div className="listTitle2" onClick={()=>{onClickPage(`/shoppingprolist/${typeid}`)}}>
+                            <span>{props.shop.protype[typeid].name}</span>
+                            <span>更多 <Icon name="angle right"/></span>
+                        </div>
+                        <div className="proList">
+                            {_.map(list, (pro)=>{
+                                return (
+                                    <div className="li" onClick={()=>{onClickPage(`/shoppingproinfo/${pro.proid}`)}}>
+                                        <img src="img/shopping/8.png"/>
+                                        <span className="name">{pro.name}</span>
+                                        <span className="price">
+                                            <span>{pro.price}</span>
+                                            <img src={pro.avatar} />
+                                        </span>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                )
+            })}
         </div>
     );
 }
 
-const mapStateToProps = ({shop}) => {
+let mapStateToProps = ({shop}) => {
     return {shop};
 }
 

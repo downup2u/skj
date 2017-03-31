@@ -105,7 +105,7 @@ export class Page extends React.Component {
                                  onClickTopic={this.onClickTopic} {...this.props}/> );
         }
         return (
-            <div className="feedPage" style={{paddingBottom:"60px"}}>
+            <div className="feedPage">
 
 
                 <div className="PageHead">

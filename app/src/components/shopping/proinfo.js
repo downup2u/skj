@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import _ from 'lodash'; 
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shoppingproinfo.css';
@@ -21,6 +22,8 @@ const Page = (props) => {
     let onClickPage = (name)=> {
         props.history.push(name);
     };
+    let proid = props.match.params.id;
+    let proinfo = props.shop.prolistall[proid];
     return (
         <div className="ProinfoPage">
             <div className="ProinfoPageHead">
@@ -35,27 +38,25 @@ const Page = (props) => {
                 <Swiper
                     swiperOptions={{slidesPerView: 'auto'}}
                     {...swiperOptions}>
-
-                    <Slide className="Demo-swiper__slide">
-                        <img src='img/shopping/12.png'/>
-                    </Slide>
-
-                    <Slide className="Demo-swiper__slide">
-                        <img src='img/shopping/12.png'/>
-                    </Slide>
-
+                    {_.map(proinfo.imglist, (proimg)=>{
+                        return (
+                            <Slide className="Demo-swiper__slide">
+                                <img src={proimg}/>
+                            </Slide>
+                        )
+                    })}
                 </Swiper>
             </div>
             <div className="proinfoHead">
                 <div className="p1">
-                    <span className="proname">海尔家用净水器海尔家用净水器海尔家用净水器海尔家用净水器海尔家用净水器</span>
+                    <span className="proname">{proinfo.name}</span>
                 <span className="collectionLnk">
                     <img src="img/shopping/star.png"/>
                     <span>收藏</span>
                 </span>
                 </div>
                 <div className="p2">
-                    ¥1564.00
+                    ¥{proinfo.price}
                 </div>
                 <div className="p3">
                     运费:0元
@@ -81,7 +82,7 @@ const Page = (props) => {
                     商品详情
                 </div>
                 <div className="proinfoBodyBody">
-                    <img src='img/shopping/banner3.png'/>
+                    {proinfo.info}
                 </div>
 
             </div>
@@ -93,4 +94,9 @@ const Page = (props) => {
     )
 }
 
-export default Page
+let mapStateToProps = ({shop}) => {
+    return {shop};
+}
+
+Page = connect(mapStateToProps)(Page);
+export default Page;
