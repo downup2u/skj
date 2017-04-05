@@ -20,14 +20,13 @@ export class Topic extends React.Component {
   render() {
     let commentsco = [];
     for(let commentid of this.props.topic.comments){
-      commentsco.push(<CommentExampleComment key={commentid} comment={this.props.comments[commentid]} {...this.props} />);
+      commentsco.push(<CommentExampleComment showchild={true} key={commentid} comment={this.props.comments[commentid]} {...this.props} />);
     }
     return  (<div>
                 <FeedExampleBasic topic={this.props.topic} {...this.props} />
-                  <Comment.Group>
-                    <div className="title">最热评论</div>
-                    {commentsco}
-                  </Comment.Group>
+                    <Comment.Group>
+                        {commentsco}
+                    </Comment.Group>
             </div>);
 
   }
