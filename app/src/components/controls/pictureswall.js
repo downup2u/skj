@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { Upload, Icon, Modal,message} from 'antd';
-import {newtopicfileuploadsetpreview} from '../../actions/index.js';
+import {newtopicfileuploadsetpreview,newtopicfileuploadreset} from '../../actions/index.js';
 import { connect } from 'react-redux';
 import './pictureswall.css';
 import 'antd/dist/antd.css';
@@ -18,6 +18,9 @@ class PicturesWall extends React.Component {
   //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
   //   }],
   // };
+   componentWillUnmount() {
+    this.props.dispatch(newtopicfileuploadreset());
+  }
 
   handleCancel = () =>{
     this.props.dispatch(newtopicfileuploadsetpreview({ previewVisible: false }));

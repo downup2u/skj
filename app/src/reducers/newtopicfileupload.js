@@ -3,7 +3,8 @@
  */
 import { createReducer } from 'redux-act';
 import {
-    newtopicfileuploadsetpreview
+    newtopicfileuploadsetpreview,
+    newtopicfileuploadreset
 } from '../actions/index.js';
 
 const initial = {
@@ -29,6 +30,9 @@ const newtopicfileupload = createReducer({
         }
         return newstate;
     },
+    [newtopicfileuploadreset]: (state, payload) => {
+        return {...initial.newtopicfileupload};
+    }
 },initial.newtopicfileupload);
 
 export default newtopicfileupload;

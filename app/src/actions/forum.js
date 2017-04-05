@@ -48,3 +48,4 @@ export const setuseralerttopicreaded_request = createAction('setuseralerttopicre
 export const setuseralerttopicreaded_result = createAction('setuseralerttopicreaded_result');
 
 export const newtopicfileuploadsetpreview =  createAction('newtopicfileupload.setpreview');
+export const newtopicfileuploadreset =  createAction('newtopicfileupload.newtopicfileuploadreset');
