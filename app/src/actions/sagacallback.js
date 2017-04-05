@@ -10,7 +10,7 @@ import {
 } from '../actions/index.js';
 import { fork, take, call, put, cancel,race } from 'redux-saga/effects';
 import {delay} from 'redux-saga';
-import config from '../config.js';
+import config from '../env/config.js';
 
 let synccall=(payload,waitfn,fn)=>{
   return (dispatch) => {

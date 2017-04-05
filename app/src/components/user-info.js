@@ -5,7 +5,7 @@ import NavBar from './nav.js';
 import { connect } from 'react-redux';
 import {fileupload} from '../util/fileupload.js';
 import {fillprofile_request} from '../actions';
-import config from '../config.js';
+import config from '../env/config.js';
 import {logout_request} from '../actions';
 
 class Page extends Component {

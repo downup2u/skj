@@ -5,7 +5,7 @@ import {newtopicfileuploadsetpreview} from '../../actions/index.js';
 import { connect } from 'react-redux';
 import './pictureswall.css';
 import 'antd/dist/antd.css';
-import config from '../../config.js';
+import config from '../../env/config.js';
 
 class PicturesWall extends React.Component {
   // state = {

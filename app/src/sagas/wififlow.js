@@ -4,7 +4,7 @@
 import {getwifilist_request,getwifilist_result} from '../actions';
 import { fork, take, call, put, cancel,race } from 'redux-saga/effects';
 import {delay} from 'redux-saga';
-import config from '../config.js';
+import config from '../env/config.js';
 
 function getwifilist() {
     return new Promise(resolve => {

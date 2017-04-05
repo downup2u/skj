@@ -2,7 +2,7 @@
  * Created by wangxiaoqing on 2017/3/26.
  */
 import request from 'request';
-import config from '../config.js';
+import config from '../env/config.js';
 import querystring from 'querystring';
 import axios from 'axios';
 const api = axios.create({

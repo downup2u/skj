@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import { eventChannel } from 'redux-saga';
 import { fork, take, call, put, cancel } from 'redux-saga/effects';
 
-import config from '../config.js';
+import config from '../env/config.js';
 import {
     showpopmessage,
     login_request,login_result,login_err,
