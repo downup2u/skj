@@ -12,32 +12,34 @@ import {
 import '../../public/css/feed.css';
 import NavBar from './nav2.js';
 
-
 import CommentExampleComment from './community_comment.js';
 import FeedExampleBasic from './community_topic.js';
 import FeedReplyForm from './community_reply.js';
 import TopTip from './community_topictip';
 
-
 export class Topic extends React.Component {
-    componentWillMount() {
-    }
-
     render() {
         let commentsco = [];
-        for (let commentid of this.props.topic.comments) {
-            commentsco.push(<CommentExampleComment key={commentid}
-                                                   comment={this.props.comments[commentid]} {...this.props} />);
+        let length = this.props.topic.comments.length > 2?2:this.props.topic.comments.length;
+        let showmore = this.props.topic.comments.length>2 ? (<div className="comentShowMore"  onClick={()=>{this.props.onClickTopic(this.props.topic._id);}}>查看更多...</div>) :'';
+        for (let i = 0; i<length; i++) {
+            let commentid = this.props.topic.comments[i];
+            commentsco.push(
+                <CommentExampleComment 
+                    key={commentid}
+                    comment={this.props.comments[commentid]}
+                    {...this.props} />
+                );
         }
         return (
-            <div onClick={()=>{this.props.onClickTopic(this.props.topic._id);}}>
+            <div>
                 <FeedExampleBasic topic={this.props.topic} {...this.props} />
-
                 <div className="commentlistcontent">
                     <Comment.Group>
-                        <div className="title">最热评论</div>
                         {commentsco}
+                        {showmore}
                     </Comment.Group>
+                    
                 </div>
             </div>);
     }
@@ -57,7 +59,6 @@ export class Page extends React.Component {
                 limit: 10,
             }
         }));
-
         console.log("--------->comm:componentWillMount");
     }
 

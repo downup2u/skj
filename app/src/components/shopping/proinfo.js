@@ -15,7 +15,7 @@ let swiperOptions = {
     scrollBar: false
 };
 
-const Page = (props) => {
+let Page = (props) => {
     let onClickReturn = ()=> {
         props.history.goBack();
     };
@@ -24,6 +24,7 @@ const Page = (props) => {
     };
     let proid = props.match.params.id;
     let proinfo = props.shop.prolistall[proid];
+
     return (
         <div className="ProinfoPage">
             <div className="ProinfoPageHead">
@@ -81,9 +82,7 @@ const Page = (props) => {
                 <div className="proinfoBodyHead">
                     商品详情
                 </div>
-                <div className="proinfoBodyBody">
-                    {proinfo.info}
-                </div>
+                <div className="proinfoBodyBody" dangerouslySetInnerHTML={{__html: proinfo.info}} />
 
             </div>
             <div className="proinfoFoot">

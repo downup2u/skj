@@ -32,24 +32,6 @@ const initial = {
                     price : "302.00",
                     info : "<div><img src='img/shopping/banner3.png'></div>"
                 }
-            ],
-            "2" : [
-                {
-                    proid : "3",
-                    name : "水可净智能水盒子3",
-                    avatar : "img/shopping/9.png",
-                    imglist : ['img/shopping/12.png','img/shopping/12.png','img/shopping/12.png'],
-                    price : "303.00",
-                    info : "<div><img src='img/shopping/banner3.png'></div>"
-                },
-                {
-                    proid : "4",
-                    name : "水可净智能水盒子4",
-                    avatar : "img/shopping/9.png",
-                    imglist : ['img/shopping/12.png','img/shopping/12.png','img/shopping/12.png'],
-                    price : "304.00",
-                    info : "<div><img src='img/shopping/banner3.png'></div>"
-                }
             ]
         },
         //所有的产品列表
@@ -61,7 +43,19 @@ const initial = {
                 imglist : ['img/shopping/12.png','img/shopping/12.png','img/shopping/12.png'],
                 price : "301.00",
                 info : "<div><img src='img/shopping/banner3.png'></div>",
-                type : "1"
+                type : "1",
+                comment : [
+                    {
+                        uid : "01",
+                        content : "这里是评论内容，这里是评论内容，这里是评论内容，1111",
+                        createtime : "2017-09-09 09:22",
+                    },
+                    {
+                        uid : "02",
+                        content : "这里是评论内容，这里是评论内容，这里是评论内容，2222",
+                        createtime : "2017-09-10 09:22",
+                    }
+                ]
             },
             "2" : {
                 proid : "2",
@@ -70,7 +64,19 @@ const initial = {
                 imglist : ['img/shopping/12.png','img/shopping/12.png','img/shopping/12.png'],
                 price : "302.00",
                 info : "<div><img src='img/shopping/banner3.png'></div>",
-                type : "1"
+                type : "1",
+                comment : [
+                    {
+                        uid : "03",
+                        content : "这里是评论内容，这里是评论内容，这里是评论内容，3333",
+                        createtime : "2017-09-11 09:22",
+                    },
+                    {
+                        uid : "04",
+                        content : "这里是评论内容，这里是评论内容，这里是评论内容，4444",
+                        createtime : "2017-09-12 09:22",
+                    }
+                ]
             }
         },
         //产品类型列表
@@ -87,7 +93,18 @@ const initial = {
             "4" : {
                 name : "品质生活"
             }
-        }
+        },
+        //购物车
+        cartlist : [
+            {
+                proid : "1",
+                number : 2
+            },
+            {
+                proid : "2",
+                number : 3
+            }
+        ]
     }
 };
 

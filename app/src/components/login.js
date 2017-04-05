@@ -35,7 +35,7 @@ let renderLoginForm = (fields)=> {
             {fields.password.meta.touched && fields.password.meta.error &&
             <Label basic color='red' pointing>{fields.password.meta.error}</Label>}
             <Icon name="lock" className='lefticon'/>
-            <Icon name={ispasswordvisiable?"eye sel":"eye"} onClick={onChangePasswordvisiable}/>
+            <Icon name="eye" className={ispasswordvisiable?"eye sel":"eye"} onClick={onChangePasswordvisiable}/>
         </div>
         <div className="remember">
             <Checkbox label='记住密码' checked={ischeckedpassword} onChange={onChangeRememberpassword}/>

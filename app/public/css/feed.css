@@ -2,7 +2,7 @@
     width: 100%;
     padding-bottom: 60px;
     padding-top: 48px;
-    background: #FFF;
+    background: #EEE;
 }
 .commentlistcontent{
     background: #FFF;
@@ -101,7 +101,10 @@
 .feedPage .PageHead .ui.grid img{
     width: 48px;
 }
-
+.ui.feed{
+    padding-top: 10px;
+    margin: 0;
+}
 .ui.feed>.event>.content>.feedContent .extra.images img{
     margin: 3px;
     flex-grow: 1;
@@ -247,5 +250,25 @@
 
 .feedBottomReply span{
     padding-right: 15px;
+}
+.commentlistcontent .ui.comments{
+    /*padding-top: 1;*/
+    border-top: 1px solid #EEE;
+}
+.feedPage .ui.feed{
+    padding-top: 10px;
+    background: #FFF
+}
+.commentlistcontent .ui.comments .comment{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #EEE;
+    padding-bottom: 10px;
+}
+.commentlistcontent .ui.comments .comment:last-child{
+    margin-bottom: 0;
+    border: none;
+}
+.ui.comments .comentShowMore{
+    text-align: center;
 }
 

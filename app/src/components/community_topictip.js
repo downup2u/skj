@@ -31,11 +31,11 @@ export class Page extends React.Component {
     render() {
         return (
             <div className="topTip" onClick={this.onClick}>
-            <div className="con">
-            <img src={this.props.data.avatar}/>
-            <span>{this.props.data.text}</span>
-            <Icon name='chevron right' size="small"/>
-            </div>
+                <div className="con">
+                    <img src={this.props.data.avatar}/>
+                    <span>{this.props.data.text}</span>
+                    <Icon name='chevron right' size="small"/>
+                </div>
             </div>
 
         );
