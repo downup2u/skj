@@ -314,8 +314,8 @@ const forum = createReducer({
         let { newcomments,updatedcomment } = payload;
         if(newcomments){
             return { ...state,
-                comments:{
-                    ...state.comments,
+                subcomment:{
+                    ...state.subcomment,
                     [newcomments._id]:newcomments
                 },
                 users:{
