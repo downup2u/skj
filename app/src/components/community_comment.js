@@ -39,10 +39,11 @@ let CommentExampleComment = ({loginsuccess,history,comment,subcomment,users,disp
     };
 
     let childComments = (commentid)=>{
+        return (<div>
         {_.map(commentid, (id)=>{
             let child = subcomment[id];
             return (
-                <Comment>
+                <Comment key={id}>
                     <Comment.Avatar src={users[child.creator].profile.avatar}/>
                     <Comment.Content>
                         <Comment.Author as='a'>{users[child.creator].profile.nickname}</Comment.Author>
@@ -57,7 +58,7 @@ let CommentExampleComment = ({loginsuccess,history,comment,subcomment,users,disp
                     </Comment.Content>
                 </Comment>
             )
-        })}
+        })}</div>);
     }
     return (
         <div id={'comment_'+comment._id}>
