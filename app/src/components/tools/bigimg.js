@@ -1,0 +1,34 @@
+import React, { Component, PropTypes } from 'react';
+import '../../../public/css/home.css';
+import _ from 'lodash'; 
+import { Swiper, Slide } from 'react-dynamic-swiper';
+import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
+
+let Page = (imglist, showindex)=>{
+    let swiperOptions = {
+        navigation: false,
+        pagination: true,
+        scrollBar: false
+    };
+    return (
+        <div className="showBigImg">
+            <Swiper
+                swiperOptions={{slidesPerView: 'auto'}}
+                {...swiperOptions}
+                onSlideChangeEnd={(swiper, event) => {
+                    console.log("change swiper");
+                }}
+                >
+                {_.map(imglist,(img)=>{
+                    return (
+                        <Slide className="Demo-swiper__slide">
+                            <img src={img} />
+                        </Slide>
+                    );
+                })}
+            </Swiper>
+        </div>
+    )
+};
+
+export default Page

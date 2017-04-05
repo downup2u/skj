@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input, Grid, Popup  } from 'semantic-ui-react';
 import Lnk from './lnk.js';
+import Bigimg from './tools/bigimg.js';
 
 import { connect } from 'react-redux';
 import {
@@ -151,6 +152,7 @@ export class Page extends React.Component {
                 <div onClick={this.stopDefault}>
                     {this.props.iscommentshow ? <FeedReplyForm {...this.props} /> : null}
                 </div>
+                <Bigimg imglist={['img/1.png','img/2.png']} showindex={1}/>
             </div>);
     }
 }
