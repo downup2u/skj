@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Comment, Header,Feed, Icon,Input  } from 'semantic-ui-react';
-import { Field,Fields, reduxForm,Form  } from 'redux-form';
+import { Field,Fields, reduxForm,Form ,reset } from 'redux-form';
 import {
     insertcommentstotopic_request,
     insertcommentstocomments_request,
@@ -26,6 +26,7 @@ let FeedReplyForm = (props)=>{
           title:values.title,
         }
       }));
+      props.dispatch(reset('feedreply'));
     }
     else if(props.selectedtype === 'comment'){
       props.dispatch(insertcommentstocomments_request({
@@ -34,6 +35,7 @@ let FeedReplyForm = (props)=>{
           title:values.title,
         }
       }));
+      props.dispatch(reset('feedreply'));
     }
   }
   return (
