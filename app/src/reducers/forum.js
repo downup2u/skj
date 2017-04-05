@@ -33,6 +33,7 @@ const initial = {
         useralerttopics:{},
         topics: {},
         comments: {},
+        subcomment:{},
         users: {},
         selectedid: '',
         iscommentshow: false,
@@ -88,6 +89,9 @@ const forum = createReducer({
             comments:{
                 ...state.comments,...newdoc.entities.comments
             },
+            subcomment:{
+                    ...state.subcomment,...newdoc.entities.subcomment
+                },
             users: {
                 ...state.users,...newdoc.entities.users
             }
@@ -108,6 +112,9 @@ const forum = createReducer({
             },
             comments:{
                 ...state.comments,...newdocs.entities.comments
+            },
+            subcomment:{
+                    ...state.subcomment,...newdocs.entities.subcomment
             },
             users: {
                 ...state.users,...newdocs.entities.users
@@ -144,6 +151,9 @@ const forum = createReducer({
                 users: {
                     ...state.users,...newdocs.entities.users
                 },
+                subcomment:{
+                    ...state.subcomment,...newdocs.entities.subcomment
+                },
                 topicremoteRowCount:0,
                 topicinited:true,
                 topiclist: [],
@@ -160,7 +170,10 @@ const forum = createReducer({
             },
             users: {
                 ...state.users,...newdocs.entities.users
-            }
+            },
+            subcomment:{
+                    ...state.subcomment,...newdocs.entities.subcomment
+                },
         };
     },
     [ui_settopiclistinited]: (state, topicinited) => {
@@ -185,6 +198,9 @@ const forum = createReducer({
                 users: {
                     ...state.users,...newdocs.entities.users
                 },
+                subcomment:{
+                    ...state.subcomment,...newdocs.entities.subcomment
+                },
                 mytopicremoteRowCount:0,
                 mytopicinited:true,
                 mytopiclist: [],
@@ -201,7 +217,10 @@ const forum = createReducer({
             },
             users: {
                 ...state.users,...newdocs.entities.users
-            }
+            },
+            subcomment:{
+                    ...state.subcomment,...newdocs.entities.subcomment
+                },
         };
     },
     [inserttopic_result]: (state, payload, prev) => {
