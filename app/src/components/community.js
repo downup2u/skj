@@ -28,6 +28,7 @@ export class Topic extends React.Component {
                 <CommentExampleComment 
                     key={commentid}
                     comment={this.props.comments[commentid]}
+                    showchild={false} 
                     {...this.props} />
                 );
         }
@@ -119,17 +120,21 @@ export class Page extends React.Component {
                                         <img src="img/head/1.png" />
                                     }
                                     position='top right'
+                                    on='click'
+                                    hideOnScroll
                                     >
-                                    <div className="communityMoreLnk">
-                                        <Lnk value="" url="/newtopic" {...this.props}>
-                                            <Icon name="add circle"/>
-                                            <span>发布</span>
-                                        </Lnk>
-                                        <Lnk value="" url="/mytopiclist" {...this.props}>
-                                            <Icon name="commenting"/>
-                                            <span>我的发布</span>
-                                        </Lnk>
-                                    </div>
+                                    <Popup.Content>
+                                        <div className="communityMoreLnk">
+                                            <Lnk value="" url="/newtopic" {...this.props}>
+                                                <Icon name="add circle"/>
+                                                <span>发布</span>
+                                            </Lnk>
+                                            <Lnk value="" url="/mytopiclist" {...this.props}>
+                                                <Icon name="commenting"/>
+                                                <span>我的发布</span>
+                                            </Lnk>
+                                        </div>
+                                    </Popup.Content>
                                 </Popup>
                             </Grid.Column>
                         </Grid.Row>

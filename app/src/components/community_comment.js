@@ -10,9 +10,10 @@ import {
 } from '../actions/index.js';
 import '../../public/css/feed.css';
 import moment from 'moment';
+import _ from 'lodash';
 
 
-let CommentExampleComment = ({loginsuccess,history,comment,users,dispatch}) => {
+let CommentExampleComment = ({loginsuccess,history,comment,subcomment,users,dispatch,showchild}) => {
     let islovedbyme = false;//判断loave数组是否有自己
     let showcommenttocomment = (e)=> {
         if (loginsuccess) {
@@ -36,6 +37,28 @@ let CommentExampleComment = ({loginsuccess,history,comment,users,dispatch}) => {
             history.push('/login');
         }
     };
+
+    let childComments = (commentid)=>{
+        {_.map(commentid, (id)=>{
+            let child = subcomment[id];
+            return (
+                <Comment>
+                    <Comment.Avatar src={users[child.creator].profile.avatar}/>
+                    <Comment.Content>
+                        <Comment.Author as='a'>{users[child.creator].profile.nickname}</Comment.Author>
+                        <Comment.Text>
+                            <p>{child.title}</p>
+                        </Comment.Text>
+                        <Comment.Actions className="myCommentAction">
+                            <Comment.Metadata>
+                                <div>{moment(child.created_at).format("MM月DD日 HH时mm分")}</div>
+                            </Comment.Metadata>
+                        </Comment.Actions>
+                    </Comment.Content>
+                </Comment>
+            )
+        })}
+    }
     return (
         <div id={'comment_'+comment._id}>
             <Comment>
@@ -49,7 +72,6 @@ let CommentExampleComment = ({loginsuccess,history,comment,users,dispatch}) => {
                         <Comment.Metadata>
                             <div>{moment(comment.created_at).format("MM月DD日 HH时mm分")}</div>
                         </Comment.Metadata>
-
                         <div className="myCommentLnk">
                             <div className="lnkAddCommunity" onClick={showcommenttocomment}>
                                 <Icon name="commenting outline"/>
@@ -60,6 +82,9 @@ let CommentExampleComment = ({loginsuccess,history,comment,users,dispatch}) => {
                                 {comment.loves.length}
                             </div>
                         </div>
+                        <div className="childComments">
+                            {showchild? childComments(comment.comments):""}
+                        </div>
                     </Comment.Actions>
                 </Comment.Content>
             </Comment>
@@ -67,8 +92,8 @@ let CommentExampleComment = ({loginsuccess,history,comment,users,dispatch}) => {
     );
 };
 
-const mapStateToProps = ({userlogin}) => {
-    return userlogin;
+const mapStateToProps = ({userlogin,forum}) => {
+    return {...userlogin,...forum};
 };
 
 CommentExampleComment = connect(mapStateToProps)(CommentExampleComment);
