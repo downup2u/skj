@@ -31,9 +31,9 @@ let Page = (props) => {
                     <Swiper
                         swiperOptions={{slidesPerView: 'auto'}}
                         {...swiperOptions}>
-                        {_.map(props.shop.banner1, (banner)=>{
+                        {_.map(props.shop.banner1, (banner,index)=>{
                             return (
-                                <Slide className="Demo-swiper__slide">
+                                <Slide key={index} className="Demo-swiper__slide">
                                     <img src={banner.url}/>
                                 </Slide>
                             )
@@ -74,9 +74,9 @@ let Page = (props) => {
                                 <span>更多 <Icon name="angle right"/></span>
                             </div>
                             <div className="proList">
-                                {_.map(list, (pro)=>{
+                                {_.map(list, (pro,index)=>{
                                     return (
-                                        <div className="li" onClick={()=>{onClickPage(`/shoppingproinfo/${pro.proid}`)}}>
+                                        <div key={index} className="li" onClick={()=>{onClickPage(`/shoppingproinfo/${pro.proid}`)}}>
                                             <img src="img/shopping/8.png"/>
                                             <span className="name">{pro.name}</span>
                                             <span className="price">

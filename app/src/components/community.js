@@ -146,7 +146,7 @@ export class Page extends React.Component {
                 <div onClick={this.onClickPage}>
                     {ToptipCo}
                 </div>
-                <div className="tc">
+                <div className="tc" onClick={this.onClickPage}>
                     {topicsco}
                 </div>
                 <div onClick={this.stopDefault}>

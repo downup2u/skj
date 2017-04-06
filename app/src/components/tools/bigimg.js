@@ -39,9 +39,9 @@ let Page = ({imglist, showindex, show, dispatch})=>{
                     console.log("change swiper");
                 }}
                 >
-                {_.map(imglist,(img)=>{
+                {_.map(imglist,(img,index)=>{
                     return (
-                        <Slide className="Demo-swiper__slide">
+                        <Slide key={index} className="Demo-swiper__slide">
                             <img src={img} />
                         </Slide>
                     );
