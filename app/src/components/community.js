@@ -52,6 +52,7 @@ export class Topic extends React.Component {
 export class Page extends React.Component {
 
     componentWillMount() {
+        this.props.dispatch(uicommenthide());
         this.props.dispatch(ui_settopiclistinited(true));
         let queryobj = {};
         this.props.dispatch(gettopiclist_request({

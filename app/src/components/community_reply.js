@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Comment, Header,Feed, Icon,Input  } from 'semantic-ui-react';
 import { Field,Fields, reduxForm,Form ,reset } from 'redux-form';
+import { connect } from 'react-redux';
 import {
     insertcommentstotopic_request,
     insertcommentstocomments_request,
@@ -10,11 +11,26 @@ import {
 import '../../public/css/feed.css';
 
 
-const renderInput =(props)=>{
-  const { input: { value, onChange } } = props;
-  return (<Input value={value} onChange={onChange}  type="text" placeholder="请输入你的评语"/>);
+let renderInput =(props)=>{
+  const { input: { value, onChange } ,replyplaceholder} = props;
+  return (<Input value={value} onChange={onChange}  type="text" placeholder={replyplaceholder}/>);
 }
 
+const mapStateToProps = ({forum}) => {
+    let replyplaceholder = '请输入你的评语';
+    if(forum.selectedtype === 'topic'){
+      let username = forum.users[forum.topics[forum.selectedid].creator].profile.nickname;
+      replyplaceholder = `评论${username}的帖子:`;
+    }
+    else if(forum.selectedtype === 'comment'){
+      let username = forum.users[forum.comments[forum.selectedid].creator].profile.nickname;
+      replyplaceholder = `回复${username}的评论:`;
+    }
+    return {replyplaceholder};
+}
+renderInput = connect(mapStateToProps)(renderInput);
+
+ 
 
 let FeedReplyForm = (props)=>{
   const {handleSubmit} = props;
