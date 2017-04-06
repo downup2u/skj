@@ -110,8 +110,6 @@ export class Page extends React.Component {
         }
         return (
             <div className="feedPage">
-
-
                 <div className="PageHead">
                     <span className="title">圈子</span>
                     <Grid>
@@ -142,12 +140,13 @@ export class Page extends React.Component {
                         </Grid.Row>
                     </Grid>
                 </div>
-
                 <Icon name="add circle" color='blue' size='huge' className="addcommunityHotlnk"
                       onClick={this.addNewCommunityHotlnk.bind(this)}
                     />
                 <div onClick={this.onClickPage}>
                     {ToptipCo}
+                </div>
+                <div className="tc">
                     {topicsco}
                 </div>
                 <div onClick={this.stopDefault}>

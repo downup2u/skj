@@ -1,7 +1,5 @@
 .feedPage{
     width: 100%;
-    padding-bottom: 60px;
-    padding-top: 48px;
     background: #EEE;
 }
 .commentlistcontent{
@@ -41,12 +39,13 @@
     background: #5596d6;
     display: flex;
     align-items: center;
-    position: fixed;
     left: 0;
     top: 0;
     height: 48px;
     width: 100%;
     z-index: 1000;
+    flex-shrink: 0;
+    position: relative;
 }
 
 .feedPage .PageHead .title {
@@ -297,10 +296,10 @@
 .commentInfoPage .ui.comments .childComments > div:last-child{
     padding-bottom: 0
 }
-.commentInfoPage{
+.pageWamp >div.commentInfoPage{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: stretch;
 }
 .commentInfoPage .tc{
@@ -309,6 +308,7 @@
     align-items: stretch;
     justify-content: space-between;
     overflow: scroll;
+    flex-grow: 1;
 } 
 .commentInfoPage .tc > div{
     width: 100%
@@ -317,4 +317,26 @@
     display: flex;
     position: relative;
 }
+.feedPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    overflow: hidden;
+}
 
+.feedPage .tc{
+    flex-shrink: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    overflow: scroll;
+    flex-direction: column;
+} 
+.feedPage .tc > div{
+    width: 100%
+}
+.feedPage .tb .feedBottomReply{
+    display: flex;
+    position: relative;
+}

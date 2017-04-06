@@ -7,7 +7,9 @@ import Page1 from './community.js';
 //import Page2 from './test';
 import Page2 from './shopping/index.js';
 import Page3 from './myprofile.js';
+import HomeBottom from './homebottom.js';
 import '../../public/css/index.css';
+
 
 export class Page extends React.Component {
     componentWillMount() {
@@ -24,9 +26,6 @@ export class Page extends React.Component {
         pagesz.push(<Page1 key="page1"  {...this.props} />);
         pagesz.push(<Page2 key="page2"  {...this.props} />);
         pagesz.push(<Page3 key="page3"  {...this.props} />);
-        let pagewamp = {
-            height: window.height,
-        }
         let btnsz = [
             {
                 title: '首页',
@@ -65,13 +64,11 @@ export class Page extends React.Component {
             }
         });
         return (
-            <div style={pagewamp}>
+            <div style={{height:window.innerHeight+"px"}}>
                 <div className="pageStyle">
                     {pagesz[this.props.curtabindex]}
                 </div>
-                <div className="homeBottom">
-                    {btncosz}
-                </div>
+                <HomeBottom />
             </div>
         );
     }
