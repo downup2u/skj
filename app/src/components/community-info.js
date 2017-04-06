@@ -36,7 +36,7 @@ export class Topic extends React.Component {
 export class Page extends React.Component {
 
     componentWillMount () {
-
+        this.props.dispatch(uicommenthide());
     }
     HotLnk = (data)=> {
         // props.navigator.pushPage({
