@@ -37,6 +37,10 @@ let CommentExampleComment = ({loginsuccess,history,comment,subcomment,users,disp
             history.push('/login');
         }
     };
+    let childCommentstyle = (commentid)=>{
+        return commentid.length>0?"childComments":"childComments hide";
+    }
+    //"childComments"
 
     let childComments = (commentid)=>{
         return (<div>
@@ -83,10 +87,10 @@ let CommentExampleComment = ({loginsuccess,history,comment,subcomment,users,disp
                                 {comment.loves.length}
                             </div>
                         </div>
-                        <div className="childComments">
-                            {showchild? childComments(comment.comments):""}
-                        </div>
                     </Comment.Actions>
+                    <div className={childCommentstyle(comment.comments)}>
+                        {showchild? childComments(comment.comments):""}
+                    </div>
                 </Comment.Content>
             </Comment>
         </div>

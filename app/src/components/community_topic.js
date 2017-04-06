@@ -8,10 +8,12 @@ import {gettopiclist_request,
     lovetopicadd_request,
     lovetopicunadd_request,
     uicommentshow,
-    uicommenthide
+    uicommenthide,
+    uicommentimg
 } from '../actions/index.js';
 import '../../public/css/feed.css';
 import moment from 'moment';
+import _ from 'lodash';
 
 let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
   let islovedbyme = false;//判断loave数组是否有自己
@@ -38,10 +40,21 @@ let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
       history.push('/login');
     }
   }
-  let imgcos = [];
-  for(let url in topic.picurl){
-    imgcos.push(<div key={url}><img src={topic.picurl[url]}/></div>);
+  //点击显示大图
+  let clickimg = (pic, index)=>{
+    let imgObj = {
+      bigimgshow : true,
+      bigimglist : pic,
+      bigimgindex : index
+    }
+    this.props.dispatch(uicommentimg(imgObj));
   }
+  
+  let imgcos = _.map(topic.picurl,(url,index)=>{
+    return (
+        <div key={url}><img src={url} onclick={()=>{clickimg(topic.picurl, index)}}/></div>
+      );
+  })
 
 
     if (typeof topic.created_at === 'string') {

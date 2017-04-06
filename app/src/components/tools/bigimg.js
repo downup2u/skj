@@ -1,20 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import '../../../public/css/home.css';
+import '../../../public/css/bigimg.css';
 import _ from 'lodash'; 
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 
-let Page = (imglist, showindex)=>{
+let Page = ({imglist, showindex, show})=>{
     let swiperOptions = {
         navigation: false,
         pagination: true,
         scrollBar: false
     };
+    let showstyle = show?"showBigImg":"showBigImg hide";
     return (
-        <div className="showBigImg">
+        <div className={showstyle}>
             <Swiper
                 swiperOptions={{slidesPerView: 'auto'}}
                 {...swiperOptions}
+
                 onSlideChangeEnd={(swiper, event) => {
                     console.log("change swiper");
                 }}

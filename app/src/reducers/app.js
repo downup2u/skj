@@ -3,7 +3,9 @@ import {
     clickTab,
     showpopmessage,
     hidepopmessage,
+    uicommentimg,
 } from '../actions/index.js';
+
 
 const initial = {
     app: {
@@ -11,8 +13,12 @@ const initial = {
         type: 'error',
         title: '',
         msg: '',
-        ispop: false
+        ispop: false,
+        bigimgshow : false,
+        bigimglist : [],
+        bigimgindex : 0
     },
+
 };
 
 const app = createReducer({
@@ -24,7 +30,10 @@ const app = createReducer({
     },
     [hidepopmessage]:(state, payload) => {
         return { ...state,msg:'',title:'',ispop:false};
-    }
+    },
+    [uicommentimg]: (state, payload) => {
+        return { ...state, ...payload };
+    },
 }, initial.app);
 
 export default app;

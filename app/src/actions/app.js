@@ -7,3 +7,6 @@ import { createAction } from 'redux-act';
 export const clickTab = createAction('click bottom tab');
 export const showpopmessage = createAction('showpopmessage');
 export const hidepopmessage = createAction('hidepopmessage');
+
+//点击显示大图
+export const uicommentimg = createAction('forum.uicommentimg');

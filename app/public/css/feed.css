@@ -8,6 +8,9 @@
     background: #FFF;
     margin-bottom: 15px;
 }
+.commentlistcontent.hide{
+    display: none;
+}
 .feedHead .ui.feed{
     border-bottom: 1px solid #EEE;
     background: #FFF;
@@ -105,6 +108,12 @@
     padding-top: 10px;
     margin: 0;
 }
+.childComments > div{
+    padding: 10px 0;
+}
+.childComments.hide{
+    display: none;
+}
 .ui.feed>.event>.content>.feedContent .extra.images img{
     margin: 3px;
     flex-grow: 1;
@@ -193,6 +202,8 @@
 
 .ui.comments {
     padding: 15px;
+    padding-bottom: 0;
+    margin: 0;
 }
 .myCommentAction{
     display: flex;
@@ -259,16 +270,33 @@
     padding-top: 10px;
     background: #FFF
 }
-.commentlistcontent .ui.comments .comment{
+.commentlistcontent .ui.comments>div{
     margin-bottom: 10px;
     border-bottom: 1px solid #EEE;
     padding-bottom: 10px;
 }
-.commentlistcontent .ui.comments .comment:last-child{
+.commentlistcontent .ui.comments>div:last-child{
     margin-bottom: 0;
     border: none;
 }
 .ui.comments .comentShowMore{
     text-align: center;
 }
+.commentInfoPage .ui.comments{
+    margin: 0;
+}
+.commentInfoPage .ui.comments > div{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #EEE;
+}
+.commentInfoPage .ui.comments .childComments > div{
+    border-top: 1px solid #EEE;
+    margin-top: 10px;
+}
+.commentInfoPage .ui.comments .childComments > div:last-child{
+    padding-bottom: 0
+}
+
+
 

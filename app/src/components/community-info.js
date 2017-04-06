@@ -22,7 +22,7 @@ export class Topic extends React.Component {
     for(let commentid of this.props.topic.comments){
       commentsco.push(<CommentExampleComment showchild={true} key={commentid} comment={this.props.comments[commentid]} {...this.props} />);
     }
-    return  (<div>
+    return  (<div >
                 <FeedExampleBasic topic={this.props.topic} {...this.props} />
                     <Comment.Group>
                         {commentsco}
@@ -71,15 +71,10 @@ export class Page extends React.Component {
                 };
                 ToptipCo = <TopTip data={toptipData} useralerttopic={useralerttopicnew}  frompage='thispage'/>;
             }
-
-
         }
-
-
         let topicsco = <Topic key={topicid} topic={this.props.topics[topicid]} {...this.props}/>;
-
         return (
-            <div>
+            <div className="commentInfoPage">
                 <NavBar lefttitle="返回" title="帖子详情" onClickLeft={this.onClickReturn} />
                  {ToptipCo}
                 {topicsco}

@@ -21,8 +21,10 @@ import TopTip from './community_topictip';
 export class Topic extends React.Component {
     render() {
         let commentsco = [];
-        let length = this.props.topic.comments.length > 2?2:this.props.topic.comments.length;
-        let showmore = this.props.topic.comments.length>2 ? (<div className="comentShowMore"  onClick={()=>{this.props.onClickTopic(this.props.topic._id);}}>查看更多...</div>) :'';
+        let commentslength = this.props.topic.comments.length;
+        let showcomments = commentslength>0?"commentlistcontent":"commentlistcontent hide";
+        let length = commentslength>2?2:this.props.topic.comments.length;
+        let showmore = commentslength>2?(<div className="comentShowMore" onClick={()=>{this.props.onClickTopic(this.props.topic._id);}}>查看更多...</div>) :'';
         for (let i = 0; i<length; i++) {
             let commentid = this.props.topic.comments[i];
             commentsco.push(
@@ -34,14 +36,13 @@ export class Topic extends React.Component {
                 );
         }
         return (
-            <div>
+            <div style={{marginBottom:"10px"}}>
                 <FeedExampleBasic topic={this.props.topic} {...this.props} />
-                <div className="commentlistcontent">
+                <div className={showcomments}>
                     <Comment.Group>
                         {commentsco}
                         {showmore}
                     </Comment.Group>
-                    
                 </div>
             </div>);
     }
@@ -152,13 +153,13 @@ export class Page extends React.Component {
                 <div onClick={this.stopDefault}>
                     {this.props.iscommentshow ? <FeedReplyForm {...this.props} /> : null}
                 </div>
-                <Bigimg imglist={['img/1.png','img/2.png']} showindex={1}/>
+                <Bigimg imglist={this.props.bigimglist} showindex={this.props.bigimgindex} show={this.props.bigimgshow} />
             </div>);
     }
 }
 
-const mapStateToProps = ({forum}) => {
-    return forum;
+const mapStateToProps = ({forum,app}) => {
+    return {...forum,...app};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;
