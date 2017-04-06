@@ -1,0 +1,30 @@
+.showBigImg{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.2);
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+.showBigImg img{
+    max-width: 100%;
+}
+.showBigImg .swiper-container-horizontal > .swiper-pagination-bullets{
+    bottom: 10px;
+}
+.showBigImg .swiper-slide {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.showBigImg.hide{
+    display: none
+}
+.showBigImg .swiper-container{
+    width: 100%;
+}
