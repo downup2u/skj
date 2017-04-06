@@ -75,11 +75,11 @@ let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
                       </Feed.Summary>
                   </div>
                   <div className="feedContent">
-                      <Feed.Extra images key='image'>
-                          {imgcos}
-                      </Feed.Extra>
                       <Feed.Extra text key='text'>
                           {topic.title}
+                      </Feed.Extra>
+                      <Feed.Extra images key='image'>
+                          {imgcos}
                       </Feed.Extra>
                   </div>
                   <Feed.Meta className="myMeta">
