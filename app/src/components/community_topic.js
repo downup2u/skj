@@ -46,13 +46,13 @@ let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
       bigimgshow : true,
       bigimglist : pic,
       bigimgindex : index
-    }
-    this.props.dispatch(uicommentimg(imgObj));
+    };
+    dispatch(uicommentimg(imgObj));
   }
-  
+
   let imgcos = _.map(topic.picurl,(url,index)=>{
     return (
-        <div key={url}><img src={url} onclick={()=>{clickimg(topic.picurl, index)}}/></div>
+        <div key={url}><img src={url} onClick={()=>{clickimg(topic.picurl, index)}}/></div>
       );
   })
 

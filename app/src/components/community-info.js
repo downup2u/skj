@@ -74,11 +74,19 @@ export class Page extends React.Component {
         }
         let topicsco = <Topic key={topicid} topic={this.props.topics[topicid]} {...this.props}/>;
         return (
-            <div className="commentInfoPage">
-                <NavBar lefttitle="返回" title="帖子详情" onClickLeft={this.onClickReturn} />
-                 {ToptipCo}
-                {topicsco}
-                {this.props.iscommentshow?<FeedReplyForm {...this.props}/>:null}
+            <div className="commentInfoPage" style={{height:window.innerHeight+"px"}}>
+                <div className="th">
+                    <NavBar lefttitle="返回" title="帖子详情" onClickLeft={this.onClickReturn} />
+                </div>
+                <div className="tt">
+                    {ToptipCo}
+                </div>
+                <div className="tc">
+                    {topicsco}
+                </div>
+                <div className="tb">
+                    {this.props.iscommentshow?<FeedReplyForm {...this.props}/>:null}
+                </div>
             </div>);
   }
 }

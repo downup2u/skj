@@ -297,6 +297,24 @@
 .commentInfoPage .ui.comments .childComments > div:last-child{
     padding-bottom: 0
 }
-
-
+.commentInfoPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.commentInfoPage .tc{
+    flex-shrink: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    overflow: scroll;
+} 
+.commentInfoPage .tc > div{
+    width: 100%
+}
+.commentInfoPage .tb .feedBottomReply{
+    display: flex;
+    position: relative;
+}
 
