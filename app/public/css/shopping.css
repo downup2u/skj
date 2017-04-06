@@ -1,11 +1,20 @@
 .shoppingPage{
-    padding-bottom: 60px;
+    overflow: hidden;
+    align-self: stretch;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
 }
 .shoppingPage .shoppingHead{
     background: #5596d6;
     display: flex;
     align-items: center;
     padding: 15px;
+}
+.shoppingPage .shoppingBody{
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: scroll;
 }
 .shoppingPage .shoppingHead .ui.input{
     flex-grow: 1;
