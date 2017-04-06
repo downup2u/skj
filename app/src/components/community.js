@@ -24,7 +24,7 @@ export class Topic extends React.Component {
         let commentslength = this.props.topic.comments.length;
         let showcomments = commentslength>0?"commentlistcontent":"commentlistcontent hide";
         let length = commentslength>2?2:this.props.topic.comments.length;
-        let showmore = commentslength>2?(<div className="comentShowMore" onClick={()=>{this.props.onClickTopic(this.props.topic._id);}}>查看更多...</div>) :'';
+        let showmore = commentslength>0?(<div className="comentShowMore" onClick={()=>{this.props.onClickTopic(this.props.topic._id);}}>查看更多...</div>) :'';
         for (let i = 0; i<length; i++) {
             let commentid = this.props.topic.comments[i];
             commentsco.push(

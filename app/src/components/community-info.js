@@ -2,9 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import NavBar from './nav.js';
 import { Button, Comment, Header,Feed, Icon,Input  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import Bigimg from './tools/bigimg.js';
 import {gettopiclist_request,
     uicommentshow,
-    uicommenthide
+    uicommenthide,
 } from '../actions/index.js';
 import '../../public/css/feed.css';
 
@@ -87,12 +88,13 @@ export class Page extends React.Component {
                 <div className="tb">
                     {this.props.iscommentshow?<FeedReplyForm {...this.props}/>:null}
                 </div>
+                <Bigimg imglist={this.props.bigimglist} showindex={this.props.bigimgindex} show={this.props.bigimgshow} />
             </div>);
   }
 }
 
-const mapStateToProps = ({forum}) => {
-    return forum;
+const mapStateToProps = ({forum,app}) => {
+    return {...forum,...app};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

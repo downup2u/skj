@@ -1,5 +1,15 @@
 .myTopicListPage{
     background: #F5F5F5;
+    overflow: hidden;
+    display: flex;
+}
+.myTopicListPage .ui.segment.headContent{
+    flex-shrink: 0;
+}
+.myTopicListPage .cont {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: scroll;
 }
 .myTopicListPage .cont .li{
     background: #FFF;
