@@ -34,6 +34,10 @@ import {
     fillprofile_request,
     findpwd_request,
 
+    getbanner_request,
+    getcategory_request,
+    getproduct_request
+
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -48,7 +52,9 @@ let sendmsgwhenreconnect =(socket)=>{
     if (token !== null) {
         socket.emit('message',{cmd:'loginwithtoken',data:{token:token}});
     }
-
+    socket.emit('message',{cmd:'getbanner',data:{}});
+    socket.emit('message',{cmd:'getcategory',data:{}});
+    socket.emit('message',{cmd:'getproduct',data:{}});
 }
 
 function connect() {
@@ -149,6 +155,9 @@ function* handleIO(socket) {
         'gettopiclist':`${gettopiclist_request}`,
         'getnotifymessage':`${getnotifymessage_request}`,
         'findpwd':`${findpwd_request}`,
+        'getbanner':`${getbanner_request}`,
+        'getcategory':`${getcategory_request}`,
+        'getproduct':`${getproduct_request}`,
     };
 
 

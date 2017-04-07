@@ -6,3 +6,4 @@ export * from './forum';
 export * from './notifymessage';
 export * from './userlogin';
 export * from './wifi';
+export * from './shop';

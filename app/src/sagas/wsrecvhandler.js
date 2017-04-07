@@ -1,6 +1,6 @@
 import {
   showpopmessage,
-login_result,login_err,
+  login_result,login_err,
 
 
   inserttopic_result,
@@ -16,8 +16,8 @@ login_result,login_err,
   createdevice_result,
   getdevicelist_result,
   deletedevice_result,
-    getnotifymessage_result,
-    wait_getnotifymessage_result,
+  getnotifymessage_result,
+  wait_getnotifymessage_result,
   createaddress_result,
   deleteaddress_result,
   editaddress_result,
@@ -36,6 +36,10 @@ login_result,login_err,
     serverpush_useralerttopic,
     serverpush_useralerttopiclist,
     setuseralerttopicreaded_result,
+
+    getbanner_result,
+    getcategory_result,
+    getproduct_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -46,6 +50,21 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+  ['shop.getbanner_result']: (socket, emit)=> {
+    return ((payload) => {
+      emit(getbanner_result(payload));
+    });
+  },
+  ['shop.getcategory_result']: (socket, emit)=> {
+    return ((payload) => {
+      emit(getcategory_result(payload));
+    });
+  },
+  ['shop.getproduct_result']: (socket, emit)=> {
+    return ((payload) => {
+      emit(getproduct_result(payload));
+    });
+  },
   ['serverpush_useralerttopic']: (socket, emit)=> {
     return ((payload) => {
       emit(serverpush_useralerttopic(payload));

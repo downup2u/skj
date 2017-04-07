@@ -62,6 +62,40 @@ const normalizruseralerttopiclist = (result)=>{
   return norresult;
 };
 
+//====================商城====================
+const banners = new schema.Entity('banners',{},{
+  idAttribute: '_id',
+});
+const bannersSchma = { list: [ banners ] };
 
+const categories = new schema.Entity('categories',{},{
+  idAttribute: '_id',
+});
+const categoriesSchma = { list: [ categories ] };
 
-export {normalizrtopiclist,normalizr_notifymessageslist,normalizruseralerttopic,normalizruseralerttopiclist};
+const products = new schema.Entity('products',{},{
+  idAttribute: '_id',
+});
+const productsSchma = { list: [ products ] };
+
+const normalizrbanners=(list)=>{
+  const banners = normalize(list, bannersSchma);
+  return banners;
+};
+const normalizrcategories=(list)=>{
+  const categories = normalize(list, categoriesSchma);
+  return categories;
+};
+const normalizrproducts=(list)=>{
+  const products = normalize(list, productsSchma);
+  return products;
+};
+export {
+  normalizrbanners,
+  normalizrcategories,
+  normalizrproducts,
+  normalizrtopiclist,
+  normalizr_notifymessageslist,
+  normalizruseralerttopic,
+  normalizruseralerttopiclist
+};
