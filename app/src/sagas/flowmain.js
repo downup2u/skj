@@ -36,8 +36,18 @@ import {
 
     getbanner_request,
     getcategory_request,
-    getproduct_request
+    getproduct_request,
 
+    mycartaddone_request,
+    mycartdelone_request,
+    mycartgetall_request,
+    mycollectionaddone_request,
+    mycollectiondelone_request,
+    mycollectiongetall_request,
+    myorderaddone_request,
+    myorderupdateone_request,
+    myorderdelone_request,
+    myordergetall_request
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -129,6 +139,17 @@ function* handleIOWithAuth(socket) {
             'fillprofile':`${fillprofile_request}`,
             'logout':`${logout_request}`,
             'setuseralerttopicreaded':`${setuseralerttopicreaded_request}`,
+
+            'mycartaddone':`${mycartaddone_request}`,
+            'mycartdelone':`${mycartdelone_request}`,
+            'mycartgetall':`${mycartgetall_request}`,
+            'mycollectionaddone':`${mycollectionaddone_request}`,
+            'mycollectiondelone':`${mycollectiondelone_request}`,
+            'mycollectiongetall':`${mycollectiongetall_request}`,
+            'myorderaddone':`${myorderaddone_request}`,
+            'myorderupdateone':`${myorderupdateone_request}`,
+            'myorderdelone':`${myorderdelone_request}`,    
+            'myordergetall':`${myordergetall_request}`, 
         };
 
         let tasksz =[];

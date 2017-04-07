@@ -11,7 +11,25 @@ import devicedata from './devicedata';
 import notifymessage from './notifymessage';
 import wifi from './wifi';
 import shop from './shop';
+import shopcart from './shopcart';
+import shopcollection from './shopcollection';
+import shoporder from './shoporder';
 
 export default combineReducers(
-  { app,userlogin,forum,device,devicedata,address,newtopicfileupload,notifymessage,wifi,shop,form: formReducer}
+  { 
+    app,
+    userlogin,
+    forum,
+    device,
+    devicedata,
+    address,
+    newtopicfileupload,
+    notifymessage,
+    wifi,
+    shop,
+    shopcart,
+    shopcollection,
+    shoporder,
+    form: formReducer
+  }
 );

@@ -40,6 +40,17 @@ import {
     getbanner_result,
     getcategory_result,
     getproduct_result,
+
+    mycartaddone_result,
+    mycartdelone_result,
+    mycartgetall_result,
+    mycollectionaddone_result,
+    mycollectiondelone_result,
+    mycollectiongetall_result,
+    myorderaddone_result,
+    myorderupdateone_result,
+    myorderdelone_result,
+    myordergetall_result
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -50,6 +61,56 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+     ['shop.myorderaddone_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(myorderaddone_result(payload));
+      });
+     },
+    ['shop.myorderupdateone_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(myorderupdateone_result(payload));
+      });
+    },
+    ['shop.myorderdelone_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(myorderdelone_result(payload));
+      });
+    },
+    ['shop.myordergetall_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(myordergetall_result(payload));
+      });
+    },
+    ['shop.mycartaddone_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(mycartaddone_result(payload));
+      });
+    },
+    ['shop.mycartdelone_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(mycartdelone_result(payload));
+      });
+    },
+    ['shop.mycartgetall_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(mycartgetall_result(payload));
+      });
+    },
+    ['shop.mycollectionaddone_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(mycollectionaddone_result(payload));
+      });
+    },
+    ['shop.mycollectiondelone_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(mycollectiondelone_result(payload));
+      });
+    },
+    ['shop.mycollectiongetall_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(mycollectiongetall_result(payload));
+      });
+    },
   ['shop.getbanner_result']: (socket, emit)=> {
     return ((payload) => {
       emit(getbanner_result(payload));

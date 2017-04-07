@@ -122,7 +122,7 @@ const initial = {
         shopcategorylist2:[],//商城首页竖排分类
         banners:{},//所有广告集合
         categories:{},//所有分类即集合
-        products:{}//所有产品集合
+        products:{},//所有产品集合
     }
 };
 

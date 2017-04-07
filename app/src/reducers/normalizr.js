@@ -90,6 +90,32 @@ const normalizrproducts=(list)=>{
   const products = normalize(list, productsSchma);
   return products;
 };
+
+const carts = new schema.Entity('carts',{},{
+  idAttribute: '_id',
+});
+const cartsSchma = {list:[carts]};
+const normalizr_cartslist=(list)=>{
+  const carts = normalize(list, cartsSchma);
+  return carts;
+};
+const collections = new schema.Entity('collections',{},{
+  idAttribute: '_id',
+});
+const collectionsSchma = {list:[collections]};
+const normalizr_collectionslist=(list)=>{
+  const collections = normalize(list, collectionsSchma);
+  return collections;
+};
+const orders = new schema.Entity('orders',{},{
+  idAttribute: '_id',
+});
+const ordersSchma = {list:[orders]};
+const normalizr_orderslist=(list)=>{
+  const orders = normalize(list, ordersSchma);
+  return orders;
+};
+
 export {
   normalizrbanners,
   normalizrcategories,
@@ -97,5 +123,8 @@ export {
   normalizrtopiclist,
   normalizr_notifymessageslist,
   normalizruseralerttopic,
-  normalizruseralerttopiclist
+  normalizruseralerttopiclist,
+  normalizr_cartslist,
+  normalizr_collectionslist,
+  normalizr_orderslist
 };
