@@ -17,6 +17,10 @@ const initial = {
         list:[],
         notifymessages:{
 
+        },
+        options: {
+            mouseWheel: true,
+            scrollbars: true
         }
     },
 };
