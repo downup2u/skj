@@ -23,6 +23,10 @@ export class Page extends Component {
     };
 
     componentWillMount =()=> {
+        document.addEventListener('touchmove', function(e){
+            let event = e || window.event;
+            event.preventDefault();
+        }, false);
         // this.props.dispatch(ui_setnotifymessageinited(true));
         // let queryobj = {};
         // this.props.dispatch(getnotifymessage_request({
@@ -51,12 +55,10 @@ export class Page extends Component {
         this.myScroll = new IScroll('#wrapper', {
             mouseWheel: true,
             infiniteElements: '#scroller .row',
-            //infiniteLimit: 2000,
             dataset: this.getData,
             dataFiller: this.updateContent,
-            cacheSize: 1000
+            cacheSize: 10
         });
-        document.addEventListener('touchmove', (e)=>{ e.preventDefault(); }, false);
     }
 
     getData =(start, count)=>{
@@ -139,13 +141,20 @@ export class Page extends Component {
             <div className="myMessage" style={{minHeight:(window.innerHeight)+"px"}}>
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn}/>
                 <div className="messageList" style={{height:(window.innerHeight-46)+"px"}}>
-                    <div style={{height: '100vh'}}>
-                        <div id="wrapper">
-                            <div id="scroller">
-                                <ul>
-			                        <li className="row">Row 1</li>
-                                    </ul>
-                                </div>
+                    <div id="wrapper">
+                        <div id="scroller">
+                            <ul>
+		                        <li className="row"></li>
+                                <li className="row"></li>
+                                <li className="row"></li>
+                                <li className="row"></li>
+                                <li className="row"></li>
+                                <li className="row"></li>
+                                <li className="row"></li>
+                                <li className="row"></li>
+                                <li className="row"></li>
+                                <li className="row"></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
