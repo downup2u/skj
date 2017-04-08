@@ -14,6 +14,7 @@ import shop from './shop';
 import shopcart from './shopcart';
 import shopcollection from './shopcollection';
 import shoporder from './shoporder';
+import infinitepage from './infinitepage';
 
 export default combineReducers(
   { 
@@ -24,12 +25,12 @@ export default combineReducers(
     devicedata,
     address,
     newtopicfileupload,
-    notifymessage,
     wifi,
     shop,
     shopcart,
     shopcollection,
     shoporder,
+    infinitepage,
     form: formReducer
   }
 );

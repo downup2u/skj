@@ -13,11 +13,7 @@ import {normalizr_notifymessageslist} from './normalizr';
 const initial = {
     notifymessage: {
         remoteRowCount:0,
-        inited:true,
-        list:[],
-        notifymessages:{
-
-        },
+        rendered:false,
         options: {
             mouseWheel: true,
             scrollbars: true
@@ -26,8 +22,8 @@ const initial = {
 };
 
 const notifymessage = createReducer({
-        [ui_setnotifymessageinited]:(state, inited) => {
-            return  {...state,inited};
+        [ui_setnotifymessageinited]:(state, rendered) => {
+            return  {...state,rendered};
         },
         [getnotifymessage_result]:(state, {result}) => {
             // docs {Array} - Array of documents
@@ -60,16 +56,6 @@ const notifymessage = createReducer({
 
             };
 
-        },
-        [notifymessages_addone]:(state, payload) => {
-            let list = [payload._id,...state.list];
-            let notifymessages = state.notifymessages;
-            notifymessages[payload._id] = payload;
-            return {
-                ...state,
-                list,
-                notifymessages
-            };
         },
 
 }, initial.notifymessage);
