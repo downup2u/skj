@@ -8,7 +8,7 @@ import 'react-virtualized/styles.css'; // only needs to be imported once
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { getnotifymessage } from '../../actions/sagacallback';
-import IScroll from 'iscroll';
+import IScroll from 'iscroll/build/iscroll-infinite.js';
 
 
 
@@ -50,7 +50,7 @@ export class Page extends Component {
     componentDidMount = ()=>{
         this.myScroll = new IScroll('#wrapper', {
             mouseWheel: true,
-            //infiniteElements: '#scroller .row',
+            infiniteElements: '#scroller .row',
             //infiniteLimit: 2000,
             dataset: this.getData,
             dataFiller: this.updateContent,
@@ -68,8 +68,13 @@ export class Page extends Component {
                 offset: start,
                 limit: count,
             }
-        })).then((result)=> {
-            this.myScroll.updateCache(start, result.docs);
+        })).then(({result})=> {
+            let datas = [];
+            let arraydocs = result.docs;
+            arraydocs.forEach((d)=>{
+                datas.push(d.messagetitle);
+            })
+            this.myScroll.updateCache(start, datas);
         });
     }
 
@@ -135,7 +140,13 @@ export class Page extends Component {
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn}/>
                 <div className="messageList" style={{height:(window.innerHeight-46)+"px"}}>
                     <div style={{height: '100vh'}}>
-                        <div id="wrapper"></div>
+                        <div id="wrapper">
+                            <div id="scroller">
+                                <ul>
+			                        <li className="row">Row 1</li>
+                                    </ul>
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>
