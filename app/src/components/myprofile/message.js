@@ -10,7 +10,7 @@ import moment from 'moment';
 import { getnotifymessage } from '../../actions/sagacallback';
 import IScroll from 'iscroll/build/iscroll-infinite.js';
 
-
+const cachesizetotal = 100;
 
 export class Page extends Component {
 
@@ -23,41 +23,20 @@ export class Page extends Component {
     };
 
     componentWillMount =()=> {
-        document.addEventListener('touchmove', function(e){
-            let event = e || window.event;
-            event.preventDefault();
-        }, false);
-        // this.props.dispatch(ui_setnotifymessageinited(true));
-        // let queryobj = {};
-        // this.props.dispatch(getnotifymessage_request({
-        //     query: queryobj,
-        //     options: {
-        //         sort: {created_at: -1},
-        //         offset: 0,
-        //         limit: 5,
-        //     }
-        // }));
-        // let queryobj = {};
-        // this.props.dispatch(getnotifymessage({
-        //     query: queryobj,
-        //     options: {
-        //         sort: {created_at: -1},
-        //         offset: 0,
-        //         limit: 10,
-        //     }
-        // })).then((result)=> {
-        //     console.log('--->result' + JSON.stringify(result));
-        //     return result.docs;
-        // });
+        this.myScroll = null;
     };
 
     componentDidMount = ()=>{
+       document.getElementById('scroller').addEventListener('touchmove', function(e){
+            let event = e || window.event;
+            event.preventDefault();
+        }, false);
         this.myScroll = new IScroll('#wrapper', {
             mouseWheel: true,
             infiniteElements: '#scroller .row',
             dataset: this.getData,
             dataFiller: this.updateContent,
-            cacheSize: 10
+            cacheSize: cachesizetotal
         });
     }
 
@@ -71,20 +50,32 @@ export class Page extends Component {
                 limit: count,
             }
         })).then(({result})=> {
-            let datas = [];
-            let arraydocs = result.docs;
-            arraydocs.forEach((d)=>{
-                datas.push(d.messagetitle);
-            })
-            this.myScroll.updateCache(start, datas);
+            if(result.total > start){
+                let datas = [];
+                let arraydocs = result.docs;
+                console.log(`${start}开始${count}个,${arraydocs.length}`);
+                // arraydocs.forEach((d)=>{
+                //     datas.push(d.messagetitle);
+                // })
+                for(let i = 0 ;i < arraydocs.length; i ++ ){
+                    let index = (i+start);
+                    datas.push(index+arraydocs[i].messagetitle);
+                }
+                console.log(`datas:` + JSON.stringify(datas));
+                if(this.myScroll && datas.length > 0){
+                    this.myScroll.updateCache(start, datas);
+                }
+            }
+            
         });
     }
 
     updateContent = (el, data)=> {
+        console.log('--->updateContent:' +data);
         el.innerHTML = data;
     }
 
-    getrender =(data)=>{
+    /*getrender =(data)=>{
 
     }
 
@@ -129,12 +120,12 @@ export class Page extends Component {
             </div> );
         }
         return (<div key={key}>loading...</div>);
-    }
+    }*/
 
     render() {
-        var i = 0, len = 1000, listOfLi = [];
+        let i = 0, len = 20, listOfLi = [];
         for(i; i < len; i++) {
-          listOfLi.push(<li key={i}>Row {i+1}</li>)
+          listOfLi.push(<li key={i} className="row"></li>);
         }
         let options = this.props.options;
         return (
@@ -144,16 +135,7 @@ export class Page extends Component {
                     <div id="wrapper">
                         <div id="scroller">
                             <ul>
-		                        <li className="row"></li>
-                                <li className="row"></li>
-                                <li className="row"></li>
-                                <li className="row"></li>
-                                <li className="row"></li>
-                                <li className="row"></li>
-                                <li className="row"></li>
-                                <li className="row"></li>
-                                <li className="row"></li>
-                                <li className="row"></li>
+		                       {listOfLi}
                             </ul>
                         </div>
                     </div>
