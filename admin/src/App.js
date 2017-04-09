@@ -15,12 +15,12 @@ import Menu from './Menu';
 import CustomRoutes from './routes';
 import translations from './i18n';
 import {BannerlistCreate,BannerlistList,BannerlistEdit,BannerlistShow} from './components/banner/index.js';
-import {CategorylistList,CategorylistEdit,CategorylistShow} from './components/category/index.js';
-import {ExpresslistList,ExpresslistEdit,ExpresslistShow} from './components/express/index.js';
-import {NotifymessagelistList,NotifymessagelistEdit,NotifymessagelistShow} from './components/notifymessage/index.js';
-import {ProductlistList,ProductlistEdit,ProductlistShow} from './components/product/index.js';
+import {CategorylistCreate,CategorylistList,CategorylistEdit,CategorylistShow} from './components/category/index.js';
+import {ProductlistCreate,ProductlistList,ProductlistEdit,ProductlistShow} from './components/product/index.js';
+import {ExpresslistCreate,ExpresslistList,ExpresslistEdit,ExpresslistShow} from './components/express/index.js';
+import {NotifymessageCreate,NotifymessagelistList,NotifymessagelistEdit,NotifymessagelistShow} from './components/notifymessage/index.js';
 import {TopiclistList,TopiclistEdit,TopiclistShow} from './components/topic/index.js';
-
+import {FeedbackList,FeedbackShow} from './components/feedback/index.js';
 
 import restClient from './restClient';
 class App extends Component {
@@ -40,11 +40,12 @@ class App extends Component {
                 messages={translations}
             >
                 <Resource name="banner" list={BannerlistList} edit={BannerlistEdit} create={BannerlistCreate}  remove={Delete} />
-                <Resource name="product" list={ProductlistList} edit={ProductlistEdit} />
-                <Resource name="category" list={CategorylistList} edit={CategorylistEdit} />
-                <Resource name="express" list={ExpresslistList} edit={ExpresslistEdit} />
+                <Resource name="product" list={ProductlistList} edit={ProductlistEdit} create={ProductlistCreate}  remove={Delete} />
+                <Resource name="category" list={CategorylistList} edit={CategorylistEdit} create={CategorylistCreate}  remove={Delete} />
+                <Resource name="express" list={ExpresslistList} edit={ExpresslistEdit}  create={ExpresslistCreate}  remove={Delete} />
                 <Resource name="topic" list={TopiclistList} edit={TopiclistEdit} />
-                <Resource name="notifymessage" list={NotifymessagelistList} edit={NotifymessagelistEdit} />
+                <Resource name="notifymessage" list={NotifymessagelistList} edit={NotifymessagelistEdit} create={NotifymessageCreate}  remove={Delete} />
+                <Resource name="feedback" list={FeedbackList} show={FeedbackShow} />
             </Admin>
         );
     }

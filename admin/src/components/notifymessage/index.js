@@ -3,8 +3,27 @@ import { List, EmailField } from 'admin-on-rest/lib/mui';
 import { CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh';
-import {CreateButton,RichTextField, NumberInput,Create, Edit, SimpleForm, DisabledInput, TextInput,  Show,SimpleShowLayout,ShowButton,
-   DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, EditButton} from 'admin-on-rest/lib/mui';
+import {
+    CreateButton
+    ,RichTextField, 
+    NumberInput,
+    Edit, 
+    SimpleForm, 
+    DisabledInput, 
+    TextInput,  
+    Create,
+    Show,
+    SimpleShowLayout,
+    BooleanInput,
+    ShowButton,
+    DateInput, 
+    LongTextInput, 
+    ReferenceManyField, 
+    Datagrid, 
+    TextField, 
+    DateField, 
+    EditButton
+} from 'admin-on-rest/lib/mui';
 
 import RichTextInput from '../controls/richtoolbar.js';
 
@@ -16,17 +35,29 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
 
+const NotifymessagecreateTitle = ({ record }) => {
+   return <span>新建 系统消息</span>;
+};
+const NotifymessageCreate = (props) => (
+       <Create {...props} title={<NotifymessagecreateTitle />} >
+           <SimpleForm>
+              <TextInput label="标题" source="messagetitle" />
+              <RichTextInput label="详细信息" source="messagecontent" addLabel={false}/>
+           </SimpleForm>
+       </Create>
+);
+
 const NotifymessagelistTitle = ({ record }) => {
-   return <span>编辑 图片广告信息</span>;
+   return <span>编辑 系统信息</span>;
 };
 
 const NotifymessagelistEdit = (props) => {
       return (<Edit title={<NotifymessagelistTitle />} {...props}>
           <SimpleForm>
               <DisabledInput label="Id" source="id" />
-              <DisabledInput label="类型" source="keyname" />
-              <TextInput label="标题"  source="title" />
-              <RichTextInput label="详细信息" source="desc" addLabel={false}/>
+              <DisabledInput label="消息类型" source="messagetype" />
+              <TextInput label="标题"  source="messagetitle" />
+              <RichTextInput label="详细信息" source="messagecontent" addLabel={false}/>
           </SimpleForm>
       </Edit>);
 
@@ -37,9 +68,9 @@ const NotifymessagelistShow = (props) => (
        <Show title={<NotifymessagelistTitle />} {...props}>
            <SimpleShowLayout>
                <TextField source="id" />
-               <TextField label="类型" source="keyname" />
-               <TextField label="标题" source="title" />
-               <RichTextField label="详细信息"  source="desc" stripTags={false} />
+               <TextField label="类型" source="messagetype" />
+               <TextField label="标题" source="messagetitle" />
+               <RichTextField label="详细信息"  source="messagecontent" stripTags={false} />
            </SimpleShowLayout>
        </Show>
 );
@@ -47,11 +78,11 @@ const NotifymessagelistShow = (props) => (
 
 
 const NotifymessagelistList = (props) => (//
-     <List title="关于信息列表" {...props} >
+     <List title="系统消息列表" {...props} >
         <Datagrid>
-        <TextField label="类型" source="keyname" />
-        <TextField label="标题" source="title" />
-        <RichTextField label="详细信息"  source="desc" stripTags={false} />
+        <TextField label="类型" source="messagetype" />
+        <TextField label="标题" source="messagetitle" />
+        <RichTextField label="详细信息"  source="messagecontent" stripTags={false} />
         <EditButton />
         <ShowButton />
         </Datagrid>
@@ -59,4 +90,4 @@ const NotifymessagelistList = (props) => (//
 );
 
 
-export  {NotifymessagelistList,NotifymessagelistEdit,NotifymessagelistShow};
+export  {NotifymessageCreate,NotifymessagelistList,NotifymessagelistEdit,NotifymessagelistShow};

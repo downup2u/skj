@@ -3,8 +3,26 @@ import { List, EmailField } from 'admin-on-rest/lib/mui';
 import { CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh';
-import {CreateButton,RichTextField, NumberInput,Create, Edit, SimpleForm, DisabledInput, TextInput,  Show,SimpleShowLayout,ShowButton,
-   DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, EditButton} from 'admin-on-rest/lib/mui';
+import {
+    CreateButton
+    ,RichTextField, 
+    NumberInput,
+    Edit, 
+    SimpleForm, 
+    DisabledInput, 
+    TextInput,  
+    Show,
+    SimpleShowLayout,
+    BooleanInput,
+    ShowButton,
+    DateInput, 
+    LongTextInput, 
+    ReferenceManyField, 
+    Datagrid, 
+    TextField, 
+    DateField, 
+    EditButton
+} from 'admin-on-rest/lib/mui';
 
 import RichTextInput from '../controls/richtoolbar.js';
 
@@ -17,16 +35,15 @@ import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
 
 const TopiclistTitle = ({ record }) => {
-   return <span>编辑 图片广告信息</span>;
+   return <span>编辑 帖子信息</span>;
 };
 
 const TopiclistEdit = (props) => {
       return (<Edit title={<TopiclistTitle />} {...props}>
           <SimpleForm>
               <DisabledInput label="Id" source="id" />
-              <DisabledInput label="类型" source="keyname" />
-              <TextInput label="标题"  source="title" />
-              <RichTextInput label="详细信息" source="desc" addLabel={false}/>
+              <DisabledInput label="标题"  source="title" />
+              <BooleanInput label="是否显示" source="isvisiable" defaultValue={true} />
           </SimpleForm>
       </Edit>);
 
@@ -37,9 +54,7 @@ const TopiclistShow = (props) => (
        <Show title={<TopiclistTitle />} {...props}>
            <SimpleShowLayout>
                <TextField source="id" />
-               <TextField label="类型" source="keyname" />
                <TextField label="标题" source="title" />
-               <RichTextField label="详细信息"  source="desc" stripTags={false} />
            </SimpleShowLayout>
        </Show>
 );
@@ -47,11 +62,9 @@ const TopiclistShow = (props) => (
 
 
 const TopiclistList = (props) => (//
-     <List title="关于信息列表" {...props} >
+     <List title="帖子信息列表" {...props} >
         <Datagrid>
-        <TextField label="类型" source="keyname" />
         <TextField label="标题" source="title" />
-        <RichTextField label="详细信息"  source="desc" stripTags={false} />
         <EditButton />
         <ShowButton />
         </Datagrid>

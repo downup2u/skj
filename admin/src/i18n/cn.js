@@ -9,20 +9,14 @@ export default {
     },
   },
   resources: {
-    topmenuitem:{
-      platformbaseinfo:'基本信息维护',
-      platformorder:'平台订单',
-      platformoperate:'经营信息',
-      platformposition:'定位信息',
-      platformrated:'服务质量',
-      sysinfo:'系统功能',
-      usermgr:'用户管理',
-    },
     banner:{
       name: '广告编辑 |||| 广告编辑',
     },
     product:{
       name: '产品管理 |||| 产品管理',
+      fields:{
+        categoryid:'类别',
+      }
     },
     category:{
       name: '类别管理 |||| 类别管理',
@@ -35,6 +29,9 @@ export default {
     },
     notifymessage:{
       name: '通知消息 |||| 通知消息',
+    },
+    feedback:{
+      name: '用户反馈 |||| 用户反馈',
     },
   }
 

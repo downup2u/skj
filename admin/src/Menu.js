@@ -4,18 +4,27 @@ import { Link } from 'react-router';
 import compose from 'recompose/compose';
 import MenuItem from 'material-ui/MenuItem';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
-import LabelIcon from 'material-ui/svg-icons/action/label';
 import { translate } from 'admin-on-rest';
 import { DashboardMenuItem } from 'admin-on-rest/lib/mui';
 import Icon from 'material-ui/svg-icons/social/person';
 
+import FeedbackIcon from 'material-ui/svg-icons/action/feedback';
+import MessageIcon from 'material-ui/svg-icons/communication/message';
+import TopicIcon from 'material-ui/svg-icons/communication/forum';
+import CategoryIcon from 'material-ui/svg-icons/action/list';
+import BannerIcon from 'material-ui/svg-icons/action/view-carousel';
+import ExpressIcon from 'material-ui/svg-icons/content/send';
+import ProductIcon from 'material-ui/svg-icons/hardware/toys';
+
+
 const items = [
-    { name: 'banner', icon: <Icon /> },
+    { name: 'banner', icon: <BannerIcon /> },
+    { name: 'category', icon: <CategoryIcon /> },
     { name: 'product', icon: <Icon /> },
-    { name: 'category', icon: <Icon /> },
-    { name: 'express', icon: <Icon /> },
-    { name: 'topic', icon: <Icon /> },
-    { name: 'notifymessage', icon: <Icon /> },
+    { name: 'express', icon: <ExpressIcon /> },
+    { name: 'topic', icon: <TopicIcon /> },
+    { name: 'notifymessage', icon: <MessageIcon /> },
+    { name: 'feedback', icon: <FeedbackIcon /> },
 ];
 
 const styles = {

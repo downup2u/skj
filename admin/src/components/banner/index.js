@@ -34,7 +34,6 @@ import TimePicker from 'material-ui/TimePicker';
 
 import moment from 'moment';
 
-import RichTextInput from '../controls/richtoolbar.js';
 import {ImageInputUpload} from '../controls/imageupload.js';
 import {Titlewithimage} from '../controls/Titlewithimage';
 
@@ -50,7 +49,7 @@ const BannerlistCreate = (props) => (
                  { id: '首页设备图片', name: '首页设备图片' },
              ]} />
              <NumberInput label="排序字段"  source="sortflag" />
-             <ImageInputUpload label="图片"  source="pic" />
+             <ImageInputUpload label="图片"  source="picurl" />
              <BooleanInput label="是否启用" source="isenabled" defaultValue={true} />
            </SimpleForm>
        </Create>
@@ -71,7 +70,7 @@ const BannerlistEdit = (props) => {
                   { id: '首页设备图片', name: '首页设备图片' },
               ]} />
               <NumberInput label="排序字段"  source="sortflag" />
-              <ImageInputUpload label="图片"  source="pic" />
+              <ImageInputUpload label="图片"  source="picurl" />
               <BooleanInput label="是否启用" source="isenabled" defaultValue={true} />
           </SimpleForm>
       </Edit>);
@@ -84,7 +83,7 @@ const BannerlistShow = (props) => (
            <SimpleShowLayout>
                <TextField source="id" />
                <TextField label="类型" source="type" />
-               <Titlewithimage label="名字" icon="pic" name="name"/>
+               <Titlewithimage label="名字" icon="picurl" name="name"/>
                <TextField label="排序字段" source="sortflag" />
                <BooleanField label="是否启用" source="isenabled" />
            </SimpleShowLayout>
@@ -94,11 +93,11 @@ const BannerlistShow = (props) => (
 
 
 const BannerlistList = (props) => (//
-     <List title="关于信息列表" {...props} >
+     <List title="广告条列表" {...props} >
         <Datagrid>
         <TextField source="id" />
         <TextField label="类型" source="type" />
-        <Titlewithimage label="名字" icon="pic" name="name"/>
+        <Titlewithimage label="名字" icon="picurl" name="name"/>
         <TextField label="排序字段" source="sortflag" />
         <BooleanField label="是否启用" source="isenabled" />
         <EditButton />

@@ -1,9 +1,7 @@
 export default {
   pos:{
-    tabname: {
-        basicinfo: 'basic info',
-        citystation:'city stations'
-      },
+    configuration: 'perfer',
+    language:'language',
     theme: {
         name: 'Theme',
         light: 'Clair',
@@ -11,32 +9,29 @@ export default {
     },
   },
   resources: {
-    price: {
-        name: 'price |||| price',
+     banner:{
+      name: 'banner |||| banner',
     },
-    about: {
-        name: 'about |||| about',
+    product:{
+      name: 'product |||| product',
+      fields:{
+        categoryid:'category',
+      }
     },
-    buscarpool: {
-        name: 'buscarpool |||| buscarpool',
+    category:{
+      name: 'category |||| category',
     },
-    tourbusinfo: {
-        name: 'tourbusinfo |||| tourbusinfo',
+    express:{
+      name: 'express |||| express',
     },
-    coupon: {
-        name: 'coupon |||| coupon',
+    topic:{
+      name: 'topic |||| topic',
     },
-    order: {
-        name: 'order |||| order',
+    notifymessage:{
+      name: 'notifymessage |||| notifymessage',
     },
-    triprequest: {
-        name: 'triprequest |||| triprequest',
-    },
-    userdriver: {
-        name: 'userdriver |||| userdriver',
-    },
-    userrider: {
-        name: 'userrider |||| userrider',
+    feedback:{
+      name: 'feedback |||| feedback',
     },
   }
 };
