@@ -6,7 +6,7 @@ import moment from 'moment';
 import { getnotifymessage } from '../../actions/sagacallback';
 import InfinitePage from '../controls/infinitecontrol';
 
-
+// http://www.cnblogs.com/qq120848369/p/5920420.html
 export class Page extends Component {
 
     onClickReturn = ()=> {
@@ -29,19 +29,29 @@ export class Page extends Component {
 // "all"
 
                 
-       return  (<li key={item._id}>{item._id}</li>);
+       return  (<li key={item._id}>
+           <div>{item._id} </div>
+           <p />
+           <div>{item.messagetitle} </div>
+           <p />
+           <div>{item.messagecontent} </div>
+           <p />
+           <div>{moment(item.created_at).format("MM月DD日 HH时mm分")} </div>
+       </li>);
         // console.log('--->updateContent:' +data);
         // el.innerHTML = data.index + data.messagecontent;
     }
 
+    onClickItem = (item)=>{
 
+    }
     render() {
         return (
             <div className="myMessage" style={{minHeight:(window.innerHeight)+"px"}}>
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn}/>
-                <div className="messageList" style={{height:(window.innerHeight-46)+"px"}}>
+                <div className="messageList">
                     <InfinitePage updateContent={this.updateContent} 
-                        queryfun={getnotifymessage}/>
+                        queryfun={getnotifymessage} />
                 </div>
             </div>
         )
