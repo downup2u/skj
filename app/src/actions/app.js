@@ -13,4 +13,4 @@ export const uicommentimg = createAction('forum.uicommentimg');
 
 //滚动事件
 export const uiinfinitepage_init = createAction('uiinfinitepage_init');
-export const uiinfinitepage_getrowcount = createAction('uiinfinitepage_getrowcount');
+export const uiinfinitepage_getdata = createAction('uiinfinitepage_getdata');

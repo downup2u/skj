@@ -14,7 +14,7 @@ export class Page extends Component {
     };
 
 
-    updateContent = (el, data)=> {
+    updateContent = (item)=> {
 //         created_at
 // :
 // "2017-04-08T01:32:04.354Z"
@@ -27,8 +27,11 @@ export class Page extends Component {
 // messagetype
 // :
 // "all"
-        console.log('--->updateContent:' +data);
-        el.innerHTML = data.index + data.messagecontent;
+
+                
+       return  (<li key={item._id}>{item._id}</li>);
+        // console.log('--->updateContent:' +data);
+        // el.innerHTML = data.index + data.messagecontent;
     }
 
 
