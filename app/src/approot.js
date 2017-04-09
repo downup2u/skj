@@ -266,6 +266,7 @@ export class AppRoot extends React.Component {
     }
 
     componentWillMount() {
+
     }
 
     componentWillReceiveProps(nextProps) {

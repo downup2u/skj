@@ -45,21 +45,15 @@ export class Page extends Component {
         this.onTouchStart = this.onTouchStart.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
     }
-    // componentWillMount =()=> {
-    //     this.props.dispatch(this.props.queryfun({
-    //          query: {},
-    //          options: {
-    //              sort: {created_at: -1},
-    //              offset: 0,
-    //             limit: 1,
-    //          }
-    //      })).then(({result})=> {
-    //               this.setState({
-    //                     items: result.docs
-    //                });
-    //      });
-    // }
+    componentWillUnmount =()=> {
+       document.getElementById('ScrollContainer').removeEventListener('touchmove', (ev) => {
+            
+        });
+    }
     componentDidMount() {
+        document.getElementById('ScrollContainer').addEventListener('touchmove', (ev) => {
+            ev.preventDefault();
+        });
         const options = {
             // 默认iscroll会拦截元素的默认事件处理函数，我们需要响应onClick，因此要配置
             preventDefault: false,
