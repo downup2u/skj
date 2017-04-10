@@ -8,14 +8,18 @@ export const ui_settopiclistinited = createAction('ui_settopiclistinited');
 
 export const wait_inserttopic_request= createAction('wait_inserttopic_request');
 export const wait_inserttopic_result= createAction('wait_inserttopic_result');
-
-//forum.
-export const getmytopic_request = createAction('forum.getmytopic_request');
-export const getmytopic_result = createAction('forum.getmytopic_result');
-
 export const inserttopic_request = createAction('forum.inserttopic_request');
 export const inserttopic_result = createAction('forum.inserttopic_result');
 
+//forum.
+export const wait_getmytopic_request = createAction('forum.wait_getmytopic_request');
+export const wait_getmytopic_result = createAction('forum.wait_getmytopic_result');
+export const getmytopic_request = createAction('forum.getmytopic_request');
+export const getmytopic_result = createAction('forum.getmytopic_result');
+
+
+export const wait_gettopiclist_request = createAction('forum.wait_gettopiclist_request');
+export const wait_gettopiclist_result = createAction('forum.wait_gettopiclist_result');
 export const gettopiclist_request = createAction('forum.gettopiclist_request');
 export const gettopiclist_result = createAction('forum.gettopiclist_result');
 

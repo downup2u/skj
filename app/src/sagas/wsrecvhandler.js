@@ -6,6 +6,8 @@ import {
   inserttopic_result,
   getmytopic_result,
   gettopiclist_result,
+  wait_getmytopic_result,
+  wait_gettopiclist_result,
   insertcommentstotopic_result,
   insertcommentstocomments_result,
   lovetopicadd_result,
@@ -232,11 +234,13 @@ const handlerlist = {
   },
   ['forum.getmytopic_result']: (socket, emit)=> {
     return ( (result) => {
+      emit(wait_getmytopic_result(result));
       emit(getmytopic_result(result));
     });
   },
   ['forum.gettopiclist_result']: (socket, emit)=> {
     return ( (result) => {
+      emit(wait_gettopiclist_result(result));
       emit(gettopiclist_result(result));
     });
   },
