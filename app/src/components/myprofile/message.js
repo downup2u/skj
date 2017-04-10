@@ -45,7 +45,7 @@ export class Page extends Component {
     render() {
         return (
             <div className="myMessage" style={{height:(window.innerHeight)+"px"}}>
-                <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn}/>
+                <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn} />
                 <div className="messageList">
                     <InfinitePage
                         updateContent={this.updateContent} 

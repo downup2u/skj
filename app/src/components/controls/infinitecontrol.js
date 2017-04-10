@@ -29,8 +29,8 @@ export class Page extends Component {
 
         this.pullUpTips = {
             // 上拉状态
-            0: '上拉发起加载',
-            1: '松手即可加载',
+            0: '上拉加载更多',
+            1: '上拉加载更多',
             2: '正在加载',
             3: '加载成功',
         };
@@ -258,10 +258,14 @@ export class Page extends Component {
                             className={this.pullDownImgStyle[this.state.pullDownStatus]}
                         >
                             <img src={this.pullDownTransitionImg[this.state.pullDownStatus]} />
+                            <i></i>
                             <span>{this.pullDownTips[this.state.pullDownStatus]}</span>
                         </p>
                         {lis}
-                        <p ref="PullUp" id='PullUp'>{this.pullUpTips[this.state.pullUpStatus]}</p>
+                        <p ref="PullUp" id='PullUp'>
+                            <i></i>
+                            {this.pullUpTips[this.state.pullUpStatus]}
+                        </p>
                     </ul>
                 </div>
             </div>
