@@ -27,19 +27,16 @@ export class Page extends Component {
 // messagetype
 // :
 // "all"
-
-                
-       return  (<li key={item._id}>
-           <div>{item._id} </div>
-           <p />
-           <div>{item.messagetitle} </div>
-           <p />
-           <div>{item.messagecontent} </div>
-           <p />
-           <div>{moment(item.created_at).format("MM月DD日 HH时mm分")} </div>
-       </li>);
-        // console.log('--->updateContent:' +data);
-        // el.innerHTML = data.index + data.messagecontent;
+        return  (
+            <div className="items" key={item._id}>
+                <div className="tt">{item.messagetitle}</div>
+                <div className="cont">{item.messagecontent}</div>
+                <div className="lnk">
+                    <span>{moment(item.created_at).format("MM月DD日 HH时mm分")}</span>
+                    <span onClick={()=>{this.props.history.push(`/mymessagedetail/${item._id}`);}}>查看详情</span>
+                </div>
+            </div>
+        );
     }
 
     onClickItem = (item)=>{
@@ -47,11 +44,13 @@ export class Page extends Component {
     }
     render() {
         return (
-            <div className="myMessage" style={{minHeight:(window.innerHeight)+"px"}}>
+            <div className="myMessage" style={{height:(window.innerHeight)+"px"}}>
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn}/>
                 <div className="messageList">
-                    <InfinitePage updateContent={this.updateContent} 
-                        queryfun={getnotifymessage} />
+                    <InfinitePage
+                        updateContent={this.updateContent} 
+                        queryfun={getnotifymessage}
+                    />
                 </div>
             </div>
         )

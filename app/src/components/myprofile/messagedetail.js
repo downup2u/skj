@@ -34,8 +34,8 @@ export class Page extends React.Component {
                     <span>{moment(notifymessageitem.created_at).format("MM月DD日 HH时mm分")}</span>
                 </div>
                 <div className="cont">{notifymessageitem.messagecontent}</div>
-
-            </div>);
+            </div>
+        );
     }
 }
 
