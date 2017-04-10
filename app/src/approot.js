@@ -244,7 +244,7 @@ const CoApp = (props) => {
             <CustomRoute path="/forgetpwd" component={ForgetPwd}/>
             <CustomRoute path="/logisticsinfo" component={LogisticsInfo}/>
             <CustomRoute path="/shoppingpackage" component={ShoppingPackage}/>
-            <CustomRoute path="/shoppingprolist" component={ShoppingProlist}/>
+            <CustomRoute path="/shoppingprolist/:type" component={ShoppingProlist}/>
             <CustomRoute path="/shoppingproinfo/:id" component={ShoppingProinfo}/>
             <CustomRoute path="/shoppingproevaluate" component={ShoppingProevaluate}/>
             <CustomRoute path="/shoppingcart" component={ShoppingCart} />

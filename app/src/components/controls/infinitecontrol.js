@@ -12,8 +12,7 @@ export class Page extends Component {
             items: [],
             pullDownStatus: 3,
             pullUpStatus: 0,
-            pageEnd : false,
-            pageEndStyle : ''
+            pageEnd : false,//判断是否加载到最后一页
         };
 
         this.page = 1;
@@ -64,6 +63,7 @@ export class Page extends Component {
             
         });
     }
+
     componentDidMount() {
         document.getElementById('ScrollContainer').addEventListener('touchmove', (ev) => {
             ev.preventDefault();
@@ -93,16 +93,16 @@ export class Page extends Component {
         if (isRefresh) {
             this.page = 1;
         }
-        this.props.dispatch(this.props.queryfun({
-            query: {},
-            options: {
-                sort: {created_at: -1},
-                page: this.page,
-                limit: this.props.pagenumber,
-            }
-        })).then(({result})=> {
-            if(result){
-                if(!this.state.pageEnd){
+        if(!this.state.pageEnd){
+            this.props.dispatch(this.props.queryfun({
+                query: {},
+                options: {
+                    sort: {created_at: -1},
+                    page: this.page,
+                    limit: this.props.pagenumber,
+                }
+            })).then(({result})=> {
+                if(result){
                     if(result.page>=result.pages){//最后一页
                         this.setState({
                             pageEnd : true,
@@ -127,40 +127,11 @@ export class Page extends Component {
                             }
                         }
                         ++this.page;
-                     }
+                    }
+                //this.props.dispatch(uiinfinitepage_getdata({result,append:false}));
                 }
-    
-                
-            //this.props.dispatch(uiinfinitepage_getdata({result,append:false}));
-            }
-        });
-
-        // $.ajax({
-        //     url: '/msg-list',
-        //     data: {page: this.page},
-        //     type: 'GET',
-        //     dataType: 'json',
-        //     success: (response) => {
-        //         if (isRefresh) {    // 刷新操作
-        //             if (this.state.pullDownStatus == 3) {
-        //                 this.setState({
-        //                     pullDownStatus: 4,
-        //                     items: response.data.items
-        //                 });
-        //                 this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 500);
-        //             }
-        //         } else {    // 加载操作
-        //             if (this.state.pullUpStatus == 2) {
-        //                 this.setState({
-        //                     pullUpStatus: 0,
-        //                     items: this.state.items.concat(response.data.items)
-        //                 });
-        //             }
-        //         }
-        //         ++this.page;
-        //         console.log(`fetchItems=effected isRefresh=${isRefresh}`);
-        //     }
-        // });
+            });
+        }
     }
 
     onTouchStart(ev) {
@@ -175,9 +146,9 @@ export class Page extends Component {
         // 手势
         if (this.isTouching) {
             if (this.iScrollInstance.y > 5) {
-                this.state.pullDownStatus != 2 && this.setState({pullDownStatus: 2});
+                this.state.pullDownStatus != 2 && this.setState({pullDownStatus: 2,pageEnd : false});
             } else {
-                this.state.pullDownStatus != 1 && this.setState({pullDownStatus: 1});
+                this.state.pullDownStatus != 1 && this.setState({pullDownStatus: 1,pageEnd : false});
             }
         }
     }
@@ -189,6 +160,9 @@ export class Page extends Component {
                 this.state.pullUpStatus != 1 && this.setState({pullUpStatus: 1});
             } else {
                 this.state.pullUpStatus != 0 && this.setState({pullUpStatus: 0});
+            }
+            if(this.state.pageEnd){
+                this.setState({pullUpStatus: 4});
             }
         }
     }
@@ -252,13 +226,14 @@ export class Page extends Component {
         this.state.items.forEach((item, index) => {
             lis.push(this.props.updateContent(item));
         });
-        let PullDownHeight =  $(this.refs.PullDown).height();
+        let PullUpHeight =  $(this.refs.PullUp).height();
+        console.log("PullUpHeight:::"+PullUpHeight);
 
         // 外层容器要固定高度，才能使用滚动条
         return (
             <div id='ScrollContainer'>
                 <div id='ListOutsite'
-                    style={{height: (this.props.listheight)+"px"}}
+                    style={{height: (this.props.listheight+PullUpHeight)+"px"}}
                     onTouchStart={this.onTouchStart}
                     onTouchEnd={this.onTouchEnd}
                     >
@@ -272,7 +247,7 @@ export class Page extends Component {
                             <span>{this.pullDownTips[this.state.pullDownStatus]}</span>
                         </p>
                         {lis}
-                        <p ref="PullUp" id='PullUp' className={this.state.pageEndStyle}>
+                        <p ref="PullUp" id='PullUp' className={this.state.pageEnd?"pageEnd":""}>
                             <i></i>
                             <span>{this.pullUpTips[this.state.pullUpStatus]}</span>
                         </p>
@@ -281,66 +256,6 @@ export class Page extends Component {
             </div>
         );
     }
-
-    /*componentWillMount =()=> {
-        this.props.dispatch(uiinfinitepage_init(false));
-        this.props.dispatch(this.props.queryfun({
-            query: {},
-            options: {
-                sort: {created_at: -1},
-                page: 1,
-                limit: numperpage,
-            }
-        })).then(({result})=> {
-            this.props.dispatch(uiinfinitepage_getdata({result,append:false}));
-        });
-    };
-
-    //调用 IScroll refresh 后回调函数
-    handleRefresh(downOrUp, callback) {
-        console.log(`handleRefresh:${downOrUp}`);
-        //真实的世界中是从后端取页面和判断是否是最后一页
-        let {currentPage,totalPage, lastPage} = this.props;
-        if (downOrUp === 'up') { // 加载更多
-            if (!lastPage) {
-                currentPage++;
-            }
-        } 
-        else 
-        { // 刷新
-            currentPage = 1;
-        }
-
-        if(currentPage !== this.props.currentPage){
-            this.props.dispatch(this.props.queryfun({
-                query: {},
-                options: {
-                    sort: {created_at: -1},
-                    page: currentPage,
-                    limit: numperpage,
-                }
-            })).then(({result})=> {
-                this.props.dispatch(uiinfinitepage_getdata({result,append:downOrUp === 'up'}));
-            });
-        }
-
-    }
-    
-  
-
-    render() {
-        const {list} = this.props;
-        return (<ReactIScroll iScroll={iScroll} handleRefresh={this.handleRefresh.bind(this)} className="example">
-          <ul className="example-paging">
-            {
-                list.map((item) =>{
-                    return this.props.updateContent(item);
-                }
-            )}
-          </ul>
-        </ReactIScroll>
-        );
-    }*/
 }
 
 Page.propTypes = {

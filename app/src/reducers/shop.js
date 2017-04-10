@@ -6,6 +6,7 @@ import {
     getbanner_result,
     getcategory_result,
     getproduct_result,
+    search_shoptxt,
 } from '../actions/index.js';
 import {
     normalizrbanners,
@@ -18,104 +19,7 @@ import _ from 'lodash';
 const initial = {
 	//商城
     shop: {
-    	//顶部滚动广告
-        banner1: [
-        	{url : "img/shopping/banner.png"},
-        	{url : "img/shopping/banner.png"},
-        	{url : "img/shopping/banner.png"}
-        ],
-        //产品列表类型分类：每个类型的产品取前两个产品
-        prolist: {
-            "1" : [
-            	{
-                    proid : "1",
-                    name : "水可净智能水盒子1",
-                    avatar : "img/shopping/9.png",
-                    imglist : ['img/shopping/12.png','img/shopping/12.png','img/shopping/12.png'],
-                    price : "301.00",
-                    info : "<div><img src='img/shopping/banner3.png'></div>"
-                },
-                {
-                    proid : "2",
-                    name : "水可净智能水盒子2",
-                    avatar : "img/shopping/9.png",
-                    imglist : ['img/shopping/12.png','img/shopping/12.png','img/shopping/12.png'],
-                    price : "302.00",
-                    info : "<div><img src='img/shopping/banner3.png'></div>"
-                }
-            ]
-        },
-        //所有的产品列表
-        prolistall : {
-            "1" : {
-                proid : "1",
-                name : "水可净智能水盒子1",
-                avatar : "img/shopping/9.png",
-                imglist : ['img/shopping/12.png','img/shopping/12.png','img/shopping/12.png'],
-                price : "301.00",
-                info : "<div><img src='img/shopping/banner3.png'></div>",
-                type : "1",
-                comment : [
-                    {
-                        uid : "01",
-                        content : "这里是评论内容，这里是评论内容，这里是评论内容，1111",
-                        createtime : "2017-09-09 09:22",
-                    },
-                    {
-                        uid : "02",
-                        content : "这里是评论内容，这里是评论内容，这里是评论内容，2222",
-                        createtime : "2017-09-10 09:22",
-                    }
-                ]
-            },
-            "2" : {
-                proid : "2",
-                name : "水可净智能水盒子2",
-                avatar : "img/shopping/9.png",
-                imglist : ['img/shopping/12.png','img/shopping/12.png','img/shopping/12.png'],
-                price : "302.00",
-                info : "<div><img src='img/shopping/banner3.png'></div>",
-                type : "1",
-                comment : [
-                    {
-                        uid : "03",
-                        content : "这里是评论内容，这里是评论内容，这里是评论内容，3333",
-                        createtime : "2017-09-11 09:22",
-                    },
-                    {
-                        uid : "04",
-                        content : "这里是评论内容，这里是评论内容，这里是评论内容，4444",
-                        createtime : "2017-09-12 09:22",
-                    }
-                ]
-            }
-        },
-        //产品类型列表
-        protype : {
-            "1" : {
-                name : "净水系统"
-            },
-            "2" : {
-                name : "卫浴系统"
-            },
-            "3" : {
-                name : "管道系统"
-            },
-            "4" : {
-                name : "品质生活"
-            }
-        },
-        //购物车
-        cartlist : [
-            {
-                proid : "1",
-                number : 2
-            },
-            {
-                proid : "2",
-                number : 3
-            }
-        ],
+        'searchtxt':'',
         //以下数据从后台取
         shopbanners:[],//商城首页广告
         shopcategorylist1:[],//商城首页横排分类
@@ -127,6 +31,9 @@ const initial = {
 };
 
 const shop = createReducer({
+    [search_shoptxt]:(state,searchtxt)=>{
+        return {...state,searchtxt};
+    },
     [getbanner_result]:(state, payload)=>{
         let bannerslist = normalizrbanners(payload);
         let shopbanners = [];

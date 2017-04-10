@@ -8,6 +8,10 @@ import _ from 'lodash';
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shopping.css';
+import {
+    search_shoptxt,
+    mycartaddone_request
+} from '../../actions';
 
 let swiperOptions = {
     navigation: false,
@@ -16,14 +20,38 @@ let swiperOptions = {
 };
 
 let Page = (props) => {
-    let onClickPage = (name)=> {
+    let onClickPage = (e,name)=> {
+        stopDefault(e);
         props.history.push(name);
     };
+    let shopcategorylist2ProList =(categoryid)=> {
+        let products = [];
+        _.map(props.products,(product,productid)=>{
+            if(product.categoryid === categoryid){
+                products.push(product);
+            }
+        });
+        return products;
+    }
+    //加入购物车
+    let addShoppingCart =(e, pro)=>{
+        e.stopPropagation(e);
+        props.dispatch(mycartaddone_request({
+            product:pro._id,
+            number:1,
+        }));  
+    }
+    //取消时间冒泡
+    let stopDefault =(e)=>{
+        e.stopPropagation
+    }
     //let proid = this.props.match.params.id;
     return (
         <div className="shoppingPage">
             <div className="shoppingHead">
-                <Input placeholder="请输入关键字" value="净水器"/>
+                <Input placeholder="请输入关键字" value={props.searchtxt} onFocus={()=>{
+                    onClickPage('/shoppingprolist/search');
+                }} />
                 <img src="img/shopping/10.png"/>
             </div>
             <div className="shoppingBody">
@@ -31,10 +59,10 @@ let Page = (props) => {
                     <Swiper
                         swiperOptions={{slidesPerView: 'auto'}}
                         {...swiperOptions}>
-                        {_.map(props.shop.banner1, (banner,index)=>{
+                        {_.map(props.shopbanners, (bannerid,index)=>{
                             return (
                                 <Slide key={index} className="Demo-swiper__slide">
-                                    <img src={banner.url}/>
+                                    <img src={props.banners[bannerid].picurl} />
                                 </Slide>
                             )
                         })}
@@ -49,39 +77,34 @@ let Page = (props) => {
                     <img src="img/shopping/3.png" onClick={()=>{onClickPage('/shoppingpackage')}}/>
                 </div>
                 <div className="shoppingBannerLnk">
-                <span onClick={()=>{onClickPage('/shoppingprolist')}}>
-                    <img src='img/shopping/4.png'/>
-                    净水系统
-                </span>
-                <span onClick={()=>{onClickPage('/shoppingprolist')}}>
-                    <img src='img/shopping/5.png'/>
-                    卫浴系统
-                </span>
-                <span onClick={()=>{onClickPage('/shoppingprolist')}}>
-                    <img src='img/shopping/6.png'/>
-                    管道系统
-                </span>
-                <span onClick={()=>{onClickPage('/shoppingprolist')}}>
-                    <img src='img/shopping/7.png'/>
-                    品质生活
-                </span>
+                    {_.map(props.shopcategorylist1, (categoryid, index)=>{
+                        let category = props.categories[categoryid];
+                        return (
+                            <span key={index} onClick={()=>{onClickPage('/shoppingprolist')}}>
+                                <img src={category.picurl}/>
+                                {category.name}
+                            </span>
+                        )
+                    })}
                 </div>
-                {_.map(props.shop.prolist, (list, typeid)=>{
+                {_.map(props.shopcategorylist2, (categoryid, index)=>{
+                    let category = props.categories[categoryid];
+                    let prolist = shopcategorylist2ProList(categoryid);
                     return (
-                        <div>
-                            <div className="listTitle2" onClick={()=>{onClickPage(`/shoppingprolist/${typeid}`)}}>
-                                <span>{props.shop.protype[typeid].name}</span>
+                        <div key={index}>
+                            <div className="listTitle2" onClick={(e)=>{onClickPage(e,`/shoppingprolist/${index}`)}}>
+                                <span>{category.name}</span>
                                 <span>更多 <Icon name="angle right"/></span>
                             </div>
                             <div className="proList">
-                                {_.map(list, (pro,index)=>{
+                                {_.map(prolist, (product,index)=>{
                                     return (
-                                        <div key={index} className="li" onClick={()=>{onClickPage(`/shoppingproinfo/${pro.proid}`)}}>
-                                            <img src="img/shopping/8.png"/>
-                                            <span className="name">{pro.name}</span>
+                                        <div key={index} className="li" onClick={(e)=>{onClickPage(e,`/shoppingproinfo/${product.proid}`)}}>
+                                            <img src={product.picurl}/>
+                                            <span className="name">{product.name}</span>
                                             <span className="price">
-                                                <span>{pro.price}</span>
-                                                <img src={pro.avatar} />
+                                                <span>{product.pricenow}</span>
+                                                <img src='img/shopping/9.png' onClick={(e)=>{addShoppingCart(e,product)}}/>
                                             </span>
                                         </div>
                                     )
@@ -95,8 +118,10 @@ let Page = (props) => {
     );
 }
 
+
+
 let mapStateToProps = ({shop}) => {
-    return {shop};
+    return {...shop};
 }
 
 Page = connect(mapStateToProps)(Page);

@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import NavBar from '../nav.js';
+import { connect } from 'react-redux';
 import { Input, Button, Menu, Radio, Label, Icon } from 'semantic-ui-react';
 import '../../../public/css/shoppingcart.css';
 
 
-export default class Page extends Component {
+export class Page extends React.Component {
 
     onClickReturn = ()=> {
         this.props.history.goBack();
@@ -78,3 +79,8 @@ export default class Page extends Component {
         );
     }
 }
+
+let mapStateToProps = ({shop}) => {
+    return {...shop};
+}
+export default connect(mapStateToProps)(Page);

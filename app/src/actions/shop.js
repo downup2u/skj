@@ -2,6 +2,7 @@
  * Created by wangxiaoqing on 2017/4/7.
  */
 import { createAction } from 'redux-act';
+export const search_shoptxt = createAction('search_shoptxt');
 
 export const getbanner_request = createAction('getbanner_request');
 export const getbanner_result = createAction('getbanner_result');
@@ -9,11 +10,12 @@ export const getbanner_result = createAction('getbanner_result');
 export const getcategory_request = createAction('getcategory_request');
 export const getcategory_result = createAction('getcategory_result');
 
+//产品分页数据
 export const getproduct_request = createAction('getproduct_request');
 export const getproduct_result = createAction('getproduct_result');
 
 //购物车
-export const mycartaddone_request = createAction('mycartaddone_request');
+export const mycartaddone_request = createAction('mycartaddone_request');//添加购物车
 export const mycartaddone_result = createAction('mycartaddone_result');
 export const mycartdelone_request = createAction('mycartdelone_request');
 export const mycartdelone_result = createAction('mycartdelone_result');

@@ -83,11 +83,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    background: #EEE;
 }
 .shoppingPage .proList .li{
     width: 49.5%;
     display: flex;
     flex-direction: column;
+    background: #FFF;
 }
 .shoppingPage .proList .li > img{
     width: 100%;

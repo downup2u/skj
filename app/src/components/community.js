@@ -41,7 +41,7 @@ export class Topic extends React.Component {
                 );
         }
         return (
-            <div style={{marginBottom:"10px"}}>
+            <div>
                 <FeedExampleBasic topic={this.props.topic} {...this.props} />
                 <div className={showcomments}>
                     <Comment.Group>
@@ -171,7 +171,7 @@ export class Page extends React.Component {
                 </div>
                 <div className="tc" onClick={this.onClickPage}>
                     <InfinitePage
-                        pagenumber = {3}
+                        pagenumber = {15}
                         updateContent= {this.updateContent} 
                         queryfun= { gettopiclist }
                         listheight= { this.props.communityListHeight }
