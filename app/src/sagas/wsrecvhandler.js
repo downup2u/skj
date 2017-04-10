@@ -234,14 +234,14 @@ const handlerlist = {
   },
   ['forum.getmytopic_result']: (socket, emit)=> {
     return ( (result) => {
-      emit(wait_getmytopic_result(result));
       emit(getmytopic_result(result));
+      emit(wait_getmytopic_result({result:result}));
     });
   },
   ['forum.gettopiclist_result']: (socket, emit)=> {
     return ( (result) => {
-      emit(wait_gettopiclist_result(result));
       emit(gettopiclist_result(result));
+      emit(wait_gettopiclist_result({result:result}));
     });
   },
   ['forum.lovetopicadd_result']: (socket, emit)=> {
