@@ -49,8 +49,8 @@ let Page = (props) => {
     return (
         <div className="shoppingPage">
             <div className="shoppingHead">
-                <Input placeholder="请输入关键字" value={props.searchtxt} onFocus={()=>{
-                    onClickPage('/shoppingprolist/search');
+                <Input placeholder="请输入关键字" value={props.searchtxt} onClick={(e)=>{
+                    onClickPage(e,'/shoppingprolist/search');
                 }} />
                 <img src="img/shopping/10.png"/>
             </div>
