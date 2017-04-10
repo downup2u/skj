@@ -20,7 +20,8 @@ let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
   let showtopictocomment = (e)=>{
     if(loginsuccess){
       dispatch(uicommentshow({
-        selectedid:topic._id,
+        selectedcommentid:'',
+        selectedtopicid:topic._id,
         selectedtype:'topic'
       }));
       e.stopPropagation();

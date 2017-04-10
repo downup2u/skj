@@ -39,3 +39,7 @@ export const myorderdelone_request = createAction('myorderdelone_request');
 export const myorderdelone_result = createAction('myorderdelone_result');
 export const myordergetall_request = createAction('myordergetall_request');
 export const myordergetall_result = createAction('myordergetall_result');
+
+//动态（自动获取）
+export const getnews_request = createAction('getnews_request');
+export const getnews_result = createAction('getnews_result');

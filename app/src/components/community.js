@@ -35,6 +35,7 @@ export class Topic extends React.Component {
             commentsco.push(
                 <CommentExampleComment 
                     key={commentid}
+                    topicid={this.props.topic._id}
                     comment={this.props.comments[commentid]}
                     showchild={false} 
                     {...this.props} />

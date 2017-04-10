@@ -50,6 +50,8 @@ export const serverpush_useralerttopic = createAction('serverpush_useralerttopic
 export const serverpush_useralerttopiclist= createAction('serverpush_useralerttopiclist');
 export const setuseralerttopicreaded_request = createAction('setuseralerttopicreaded_request');
 export const setuseralerttopicreaded_result = createAction('setuseralerttopicreaded_result');
+export const setuseralerttopicdeleted_request = createAction('setuseralerttopicdeleted_request');
+export const setuseralerttopicdeleted_result = createAction('setuseralerttopicdeleted_result');
 
 export const newtopicfileuploadsetpreview =  createAction('newtopicfileupload.setpreview');
 export const newtopicfileuploadreset =  createAction('newtopicfileupload.newtopicfileuploadreset');

@@ -37,7 +37,8 @@ const initial = {
         comments: {},
         subcomment:{},
         users: {},
-        selectedid: '',
+        selectedtopicid: '',
+        selectedcommentid: '',
         iscommentshow: false,
         selectedtype: 'topic'
     },
@@ -343,7 +344,9 @@ const forum = createReducer({
         }
     },
     [uicommentshow]: (state, payload) => {
-        return {...state,selectedid:payload.selectedid,selectedtype:payload.selectedtype,iscommentshow:true};
+        let selectedtopicid = payload.selectedtopicid;
+        let selectedcommentid = payload.selectedcommentid;
+        return {...state,selectedtopicid,selectedcommentid,selectedtype:payload.selectedtype,iscommentshow:true};
     },
     [uicommenthide]: (state, payload) => {
         return {...state,iscommentshow:false};

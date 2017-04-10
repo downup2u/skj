@@ -13,12 +13,13 @@ import moment from 'moment';
 import _ from 'lodash';
 
 
-let CommentExampleComment = ({loginsuccess,history,comment,subcomment,users,dispatch,showchild}) => {
+let CommentExampleComment = ({loginsuccess,history,topicid,comment,subcomment,users,dispatch,showchild}) => {
     let islovedbyme = false;//判断loave数组是否有自己
     let showcommenttocomment = (e)=> {
         if (loginsuccess) {
             dispatch(uicommentshow({
-                selectedid: comment._id,
+                selectedcommentid: comment._id,
+                selectedtopicid:topicid,
                 selectedtype: 'comment'
             }));
             e.stopPropagation();
@@ -29,6 +30,7 @@ let CommentExampleComment = ({loginsuccess,history,comment,subcomment,users,disp
     let clicklove = ()=> {
         if (loginsuccess) {
             let payload = {
+                topicid:topicid,
                 commentid: comment._id,
             };
             dispatch(islovedbyme ? lovecommentsunadd_request(payload) : lovecommentsadd_request(payload));

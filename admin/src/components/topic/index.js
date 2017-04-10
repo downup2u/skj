@@ -4,8 +4,8 @@ import { CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh';
 import {
-    CreateButton
-    ,RichTextField, 
+    CreateButton,
+    RichTextField, 
     NumberInput,
     Edit, 
     SimpleForm, 

@@ -62,6 +62,8 @@ let sendmsgwhenreconnect =(socket)=>{
     if (token !== null) {
         socket.emit('message',{cmd:'loginwithtoken',data:{token:token}});
     }
+
+    socket.emit('message',{cmd:'getnews',data:{}});
     socket.emit('message',{cmd:'getbanner',data:{}});
     socket.emit('message',{cmd:'getcategory',data:{}});
     socket.emit('message',{cmd:'getproduct',data:{}});

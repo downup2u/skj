@@ -6,6 +6,7 @@ import {
     getbanner_result,
     getcategory_result,
     getproduct_result,
+    getnews_result,
     search_shoptxt,
 } from '../actions/index.js';
 import {
@@ -19,7 +20,8 @@ import _ from 'lodash';
 const initial = {
 	//商城
     shop: {
-        'searchtxt':'',
+        news:[],
+        searchtxt:'',
         //以下数据从后台取
         shopbanners:[],//商城首页广告
         shopcategorylist1:[],//商城首页横排分类
@@ -31,8 +33,12 @@ const initial = {
 };
 
 const shop = createReducer({
-    [search_shoptxt]:(state,searchtxt)=>{
+    [search_shoptxt]:(state, searchtxt)=>{
         return {...state,searchtxt};
+    },
+    [getnews_result]:(state, payload)=>{
+        let news = payload.list;
+        return {...state,news};
     },
     [getbanner_result]:(state, payload)=>{
         let bannerslist = normalizrbanners(payload);

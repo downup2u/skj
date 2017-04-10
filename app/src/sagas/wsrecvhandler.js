@@ -52,7 +52,8 @@ import {
     myorderaddone_result,
     myorderupdateone_result,
     myorderdelone_result,
-    myordergetall_result
+    myordergetall_result,
+    getnews_result
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -63,6 +64,11 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+     ['shop.getnews_result']:(socket,emit)=>{
+       return  ((payload) => {
+         emit(getnews_result(payload));
+      });
+     },
      ['shop.myorderaddone_result']: (socket, emit)=> {
       return ((payload) => {
         emit(myorderaddone_result(payload));

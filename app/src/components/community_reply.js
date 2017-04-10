@@ -19,11 +19,11 @@ let renderInput =(props)=>{
 const mapStateToProps = ({forum}) => {
     let replyplaceholder = '请输入你的评语';
     if(forum.selectedtype === 'topic'){
-      let username = forum.users[forum.topics[forum.selectedid].creator].profile.nickname;
+      let username = forum.users[forum.topics[forum.selectedtopicid].creator].profile.nickname;
       replyplaceholder = `评论${username}的帖子:`;
     }
     else if(forum.selectedtype === 'comment'){
-      let username = forum.users[forum.comments[forum.selectedid].creator].profile.nickname;
+      let username = forum.users[forum.comments[forum.selectedcommentid].creator].profile.nickname;
       replyplaceholder = `回复${username}的评论:`;
     }
     return {replyplaceholder};
@@ -37,7 +37,7 @@ let FeedReplyForm = (props)=>{
   let onClickSendComment=(values)=>{
     if(props.selectedtype === 'topic'){
       props.dispatch(insertcommentstotopic_request({
-        topicid:props.selectedid,
+        topicid:props.selectedtopicid,
         comment:{
           title:values.title,
         }
@@ -46,7 +46,8 @@ let FeedReplyForm = (props)=>{
     }
     else if(props.selectedtype === 'comment'){
       props.dispatch(insertcommentstocomments_request({
-        commentid:props.selectedid,
+        commentid:props.selectedcommentid,
+        topicid:props.selectedtopicid,
         comment:{
           title:values.title,
         }

@@ -36,6 +36,15 @@ export default {
     feedback:{
       name: '用户反馈 |||| 用户反馈',
     },
+    coupon:{
+      name: '优惠券管理 |||| 优惠券管理',
+    },
+    user:{
+      name: '用户管理 |||| 用户管理',
+    },
+    news:{
+      name: '动态管理 |||| 动态管理',
+    },
   }
 
 };
