@@ -30,6 +30,7 @@ export default combineReducers(
     shopcart,
     shopcollection,
     shoporder,
+    notifymessage,
     infinitepage,
     form: formReducer
   }

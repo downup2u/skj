@@ -42,7 +42,7 @@ export class Page extends React.Component {
 
 const mapStateToProps = ({notifymessage}, props) => {
     let msgid = props.match.params.msgid;
-    let notifymessageitem = notifymessage.notifymessages[msgid];
+    let notifymessageitem = notifymessage.mynotifymessages;
     return {notifymessageitem};
 };
 

@@ -3,7 +3,8 @@ import NavBar from '../nav.js';
 import '../../../public/css/mymessage.css';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { getnotifymessage } from '../../actions/sagacallback';
+import {getnotifymessage} from '../../actions/sagacallback';
+import { ui_setnotifymessage } from '../../actions';
 import InfinitePage from '../controls/infinitecontrol';
 
 // http://www.cnblogs.com/qq120848369/p/5920420.html
@@ -29,7 +30,7 @@ export class Page extends Component {
 // "all"
 
                 
-       return  (<li key={item._id}>
+       return  (<li key={item._id} onClick={()=>{this.onClickItem(item)}}>
            <div>{item._id} </div>
            <p />
            <div>{item.messagetitle} </div>
@@ -43,7 +44,8 @@ export class Page extends Component {
     }
 
     onClickItem = (item)=>{
-
+        this.props.dispatch(ui_setnotifymessage(item));
+        this.props.history.push(`/mymessagedetail/${item._id}`);
     }
     render() {
         return (
@@ -58,12 +60,7 @@ export class Page extends Component {
     }
 }
 
-const mapStateToProps = ({notifymessage}) => {
-    return notifymessage;
-};
-
-export default connect(
-)(Page);
+export default connect()(Page);
 
 
 /*
