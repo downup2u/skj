@@ -10,6 +10,9 @@ import moment from 'moment';
 import {ui_setmytopiclistinited,getmytopic_request} from '../../actions';
 import { uicommentimg } from '../../actions/index.js';
 
+import { getmytopic } from '../../actions/sagacallback';
+import InfinitePage from '../controls/infinitecontrol';
+
 let TopicInfo = (props)=>{
     const {iteminfo, dispatch} = props;
     let piccos = [];
@@ -100,15 +103,22 @@ class Page extends Component {
             }
             return (
                 <TopicInfo 
-                dispatch={this.props.dispatch}
-                key={`mytopic${key}`} 
-                onClick={()=>{this.onClick(iteminfo);}}
-                iteminfo={iteminfo}/>
+                    dispatch={this.props.dispatch}
+                    key={`mytopic${key}`} 
+                    onClick={()=>{this.onClick(iteminfo);}}
+                    iteminfo={iteminfo}/>
             );
 
         }
         return (<div key={key}>loading...</div>);
 
+    }
+
+
+    updateContent = (item)=> {
+        return  (
+            <div>{item._id}</div>
+        );
     }
 
 
@@ -118,23 +128,11 @@ class Page extends Component {
             <div className="myTopicListPage" style={{height:window.innerHeight+"px"}}>
                 <NavBar lefttitle="返回" title="我的帖子" onClickLeft={this.onClickReturn} />
                 <div className="cont">
-                    <InfiniteLoader
-                        isRowLoaded={this.isRowLoaded}
-                        loadMoreRows={this.loadMoreRows}
-                        rowCount={this.props.remoteRowCount}
-                    >
-                        {({ onRowsRendered, registerChild }) => (
-                            <List
-                                height={this.props.mytopiclist.length*207}
-                                onRowsRendered={onRowsRendered}
-                                ref={registerChild}
-                                rowCount={this.props.mytopicremoteRowCount}
-                                rowHeight={207}
-                                rowRenderer={this.rowRenderer}
-                                width={window.innerWidth}
-                            />
-                        )}
-                    </InfiniteLoader>
+                    <InfinitePage
+                        pagenumber = {20}
+                        updateContent= {this.updateContent} 
+                        queryfun= { getmytopic }
+                    />
                 </div>
                 <Bigimg imglist={this.props.bigimglist} showindex={this.props.bigimgindex} show={this.props.bigimgshow} />
             </div>

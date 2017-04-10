@@ -41,6 +41,7 @@ export class Page extends Component {
                         pagenumber = {30}
                         updateContent= {this.updateContent} 
                         queryfun= {getnotifymessage}
+                        listheight= {window.innerHeight}
                     />
                 </div>
             </div>

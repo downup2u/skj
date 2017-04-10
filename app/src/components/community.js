@@ -8,7 +8,8 @@ import {
     ui_settopiclistinited,
     gettopiclist_request,
     uicommentshow,
-    uicommenthide
+    uicommenthide,
+    setCommunityListHeight
 } from '../actions/index.js';
 import '../../public/css/feed.css';
 import NavBar from './nav2.js';
@@ -52,22 +53,32 @@ export class Topic extends React.Component {
     }
 }
 
-
 export class Page extends React.Component {
 
     componentWillMount() {
         this.props.dispatch(uicommenthide());
-        this.props.dispatch(ui_settopiclistinited(true));
-        let queryobj = {};
-        this.props.dispatch(gettopiclist_request({
-            query:queryobj,
-            options:{
-                sort:{created_at:-1},
-                offset: 0,
-                limit: 10,
-            }
-        }));
+        if(this.props.useralerttopiclist.length > 0){
+            this.props.dispatch(setCommunityListHeight(window.innerHeight-140));
+        }else{
+            this.props.dispatch(setCommunityListHeight(window.innerHeight-98));
+        }
+        // this.props.dispatch(ui_settopiclistinited(true));
+        // let queryobj = {};
+        // this.props.dispatch(gettopiclist_request({
+        //     query:queryobj,
+        //     options:{
+        //         sort:{created_at:-1},
+        //         offset: 0,
+        //         limit: 8,
+        //     }
+        // }));
         console.log("--------->comm:componentWillMount");
+    }
+
+   componentWillReceiveProps(nextProps) {
+        if (nextProps.useralerttopiclist.length > 0 && this.props.useralerttopiclist.length === 0) {
+           this.props.dispatch(setCommunityListHeight(window.innerHeight-140));
+        }
     }
 
     HotLnk = (data)=> {
@@ -97,9 +108,13 @@ export class Page extends React.Component {
     };
 
     updateContent = (item)=> {
-        console.log("item._id====="+item._id);
         return  (
-            <div>{item._id}</div>
+            <Topic 
+                key = {`topic${item._id}`} 
+                topic = {this.props.topics[item._id]}
+                onClickTopic = {this.onClickTopic}
+                {...this.props}
+            />
         );
     }
 
@@ -115,12 +130,6 @@ export class Page extends React.Component {
             ToptipCo = <TopTip data={toptipData} useralerttopic={useralerttopicnew} frompage='nextpage'/>;
         }
 
-        let topicsco = [];
-        for (let topicid of this.props.topiclist) {
-            console.log(`FeedExampleBasic,topicid:${topicid}`);
-            topicsco.push(<Topic key={`topic${topicid}`} topic={this.props.topics[topicid]}
-                                 onClickTopic={this.onClickTopic} {...this.props}/> );
-        }
 
         return (
             <div className="feedPage">
@@ -162,9 +171,10 @@ export class Page extends React.Component {
                 </div>
                 <div className="tc" onClick={this.onClickPage}>
                     <InfinitePage
-                        pagenumber = {20}
+                        pagenumber = {5}
                         updateContent= {this.updateContent} 
                         queryfun= { gettopiclist }
+                        listheight= { this.props.communityListHeight }
                     />
                 </div>
                 <div onClick={this.stopDefault}>

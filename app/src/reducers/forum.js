@@ -16,12 +16,14 @@ import {
     login_result,
     serverpush_useralerttopic,
     serverpush_useralerttopiclist,
-    setuseralerttopicreaded_result
+    setuseralerttopicreaded_result,
+    setCommunityListHeight
 } from '../actions/index.js';
 import {normalizrtopiclist,normalizruseralerttopiclist,normalizruseralerttopic} from './normalizr.js';
 
 const initial = {
     forum: {
+        communityListHeight : 0,
         selfuser:{},
         mytopicremoteRowCount:0,
         mytopicinited:true,
@@ -60,6 +62,9 @@ const initial = {
      }
      */
 const forum = createReducer({
+    [setCommunityListHeight]:(state,communityListHeight)=> {
+        return {...state,communityListHeight};
+    },
     [setuseralerttopicreaded_result]:(state,payload)=> {
         let newuseralerttopiclist = [];
         for(let id of state.useralerttopiclist){

@@ -12,6 +12,8 @@ export class Page extends Component {
             items: [],
             pullDownStatus: 3,
             pullUpStatus: 0,
+            pageEnd : false,
+            pageEndStyle : ''
         };
 
         this.page = 1;
@@ -32,6 +34,7 @@ export class Page extends Component {
             1: '上拉加载更多',
             2: '正在加载',
             3: '加载成功',
+            4: '没有更多数据',
         };
 
         //下啦刷新尖头动画
@@ -115,8 +118,15 @@ export class Page extends Component {
                         });
                     }
                 }
-                ++this.page;
-                console.log(`fetchItems=effected isRefresh=${isRefresh}`);
+                if(result.page>=result.pages){//最后一页
+                    this.setState({
+                        pageEnd : true,
+                        pullUpStatus: 4,
+                        pageEndStyle : "pageEnd"
+                    });
+                }else{
+                    ++this.page;
+                }
             //this.props.dispatch(uiinfinitepage_getdata({result,append:false}));
             }
         });
@@ -242,7 +252,7 @@ export class Page extends Component {
         // 外层容器要固定高度，才能使用滚动条
         return (
             <div id='ScrollContainer'>
-                <div id='ListOutsite' style={{height: window.innerHeight+"px"}}
+                <div id='ListOutsite' style={{height: (this.props.listheight+60)+"px"}}
                      onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}>
                     <ul id='ListInside'>
                         <p ref="PullDown" 
@@ -254,7 +264,7 @@ export class Page extends Component {
                             <span>{this.pullDownTips[this.state.pullDownStatus]}</span>
                         </p>
                         {lis}
-                        <p ref="PullUp" id='PullUp'>
+                        <p ref="PullUp" id='PullUp' className={this.state.pageEndStyle}>
                             <i></i>
                             <span>{this.pullUpTips[this.state.pullUpStatus]}</span>
                         </p>
@@ -328,7 +338,8 @@ export class Page extends Component {
 Page.propTypes = {
     queryfun: PropTypes.func.isRequired,
     updateContent: PropTypes.func.isRequired,
-    pagenumber: PropTypes.number.isRequired
+    pagenumber: PropTypes.number.isRequired,
+    listheight: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({infinitepage}) => {

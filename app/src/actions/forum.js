@@ -53,3 +53,5 @@ export const setuseralerttopicreaded_result = createAction('setuseralerttopicrea
 
 export const newtopicfileuploadsetpreview =  createAction('newtopicfileupload.setpreview');
 export const newtopicfileuploadreset =  createAction('newtopicfileupload.newtopicfileuploadreset');
+
+export const setCommunityListHeight = createAction('setCommunityListHeight');
