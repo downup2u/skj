@@ -98,6 +98,7 @@ export class Page extends Component {
                 limit: this.props.pagenumber,
             }
         })).then(({result})=> {
+            if(result){
                 if (isRefresh) {    // 刷新操作
                     if (this.state.pullDownStatus == 3) {
                         this.setState({
@@ -117,6 +118,7 @@ export class Page extends Component {
                 ++this.page;
                 console.log(`fetchItems=effected isRefresh=${isRefresh}`);
             //this.props.dispatch(uiinfinitepage_getdata({result,append:false}));
+            }
         });
 
         // $.ajax({
@@ -326,7 +328,7 @@ export class Page extends Component {
 Page.propTypes = {
     queryfun: PropTypes.func.isRequired,
     updateContent: PropTypes.func.isRequired,
-    pagenumber: PropTypes.func.isRequired
+    pagenumber: PropTypes.number.isRequired
 };
 
 const mapStateToProps = ({infinitepage}) => {

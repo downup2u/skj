@@ -29,7 +29,7 @@ export class Page extends Component {
     }
 
     onClickItem = (item)=>{
-        this.props.dispatch(ui_setnotifymessage(item));
+        this.props.dispatch( ui_setnotifymessage(item) );
         this.props.history.push(`/mymessagedetail/${item._id}`);
     }
     render() {

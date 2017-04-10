@@ -18,6 +18,10 @@ import FeedExampleBasic from './community_topic.js';
 import FeedReplyForm from './community_reply.js';
 import TopTip from './community_topictip';
 
+import { gettopiclist } from '../actions/sagacallback';
+import InfinitePage from './controls/infinitecontrol';
+
+
 export class Topic extends React.Component {
     render() {
         let commentsco = [];
@@ -72,6 +76,7 @@ export class Page extends React.Component {
         // props: data
         // });
     };
+
     onClickPage = ()=> {//点击空白处，隐藏?如何判断点击空白
         this.props.dispatch(uicommenthide());
     };
@@ -91,6 +96,13 @@ export class Page extends React.Component {
         this.props.history.push('/newtopic');
     };
 
+    updateContent = (item)=> {
+        console.log("item._id====="+item._id);
+        return  (
+            <div>{item._id}</div>
+        );
+    }
+
     render() {
         let ToptipCo = null;
         if(this.props.useralerttopiclist.length > 0){
@@ -109,6 +121,7 @@ export class Page extends React.Component {
             topicsco.push(<Topic key={`topic${topicid}`} topic={this.props.topics[topicid]}
                                  onClickTopic={this.onClickTopic} {...this.props}/> );
         }
+
         return (
             <div className="feedPage">
                 <div className="PageHead">
@@ -148,7 +161,11 @@ export class Page extends React.Component {
                     {ToptipCo}
                 </div>
                 <div className="tc" onClick={this.onClickPage}>
-                    {topicsco}
+                    <InfinitePage
+                        pagenumber = {20}
+                        updateContent= {this.updateContent} 
+                        queryfun= { gettopiclist }
+                    />
                 </div>
                 <div onClick={this.stopDefault}>
                     {this.props.iscommentshow ? <FeedReplyForm {...this.props} /> : null}
