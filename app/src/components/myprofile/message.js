@@ -24,7 +24,7 @@ export class Page extends Component {
                     <span>{moment(item.created_at).format("MM月DD日 HH时mm分")}</span>
                     <span onClick={()=>{this.onClickItem(item);}}>查看详情</span>
                 </div>
-            </div>
+            </div> 
         );
     }
 
@@ -38,8 +38,9 @@ export class Page extends Component {
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn} />
                 <div className="messageList">
                     <InfinitePage
-                        updateContent={this.updateContent} 
-                        queryfun={getnotifymessage}
+                        pagenumber = {30}
+                        updateContent= {this.updateContent} 
+                        queryfun= {getnotifymessage}
                     />
                 </div>
             </div>
