@@ -89,7 +89,7 @@ export class Page extends Component {
         this.fetchItems(true);
     }
 
-    fetchItems(isRefresh) {
+    fetchItems = (isRefresh)=> {
         if (isRefresh) {
             this.page = 1;
         }
@@ -102,31 +102,35 @@ export class Page extends Component {
             }
         })).then(({result})=> {
             if(result){
-                if (isRefresh) {    // 刷新操作
-                    if (this.state.pullDownStatus == 3) {
+                if(!this.state.pageEnd){
+                    if(result.page>=result.pages){//最后一页
                         this.setState({
-                            pullDownStatus: 4,
-                            items: result.docs
-                        });
-                        this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 500);
-                    }
-                } else {    // 加载操作
-                    if (this.state.pullUpStatus == 2) {
-                        this.setState({
+                            pageEnd : true,
                             pullUpStatus: 0,
                             items: this.state.items.concat(result.docs)
                         });
-                    }
+                    }else{
+                        if (isRefresh) {    // 刷新操作
+                            if (this.state.pullDownStatus == 3) {
+                                this.setState({
+                                    pullDownStatus: 4,
+                                    items: result.docs
+                                });
+                                this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 500);
+                            }
+                        } else {    // 加载操作
+                            if (this.state.pullUpStatus == 2) {
+                                this.setState({
+                                    pullUpStatus: 0,
+                                    items: this.state.items.concat(result.docs)
+                                });
+                            }
+                        }
+                        ++this.page;
+                     }
                 }
-                if(result.page>=result.pages){//最后一页
-                    this.setState({
-                        pageEnd : true,
-                        pullUpStatus: 4,
-                        pageEndStyle : "pageEnd"
-                    });
-                }else{
-                    ++this.page;
-                }
+    
+                
             //this.props.dispatch(uiinfinitepage_getdata({result,append:false}));
             }
         });
@@ -248,12 +252,16 @@ export class Page extends Component {
         this.state.items.forEach((item, index) => {
             lis.push(this.props.updateContent(item));
         });
+        let PullDownHeight =  $(this.refs.PullDown).height();
 
         // 外层容器要固定高度，才能使用滚动条
         return (
             <div id='ScrollContainer'>
-                <div id='ListOutsite' style={{height: (this.props.listheight+60)+"px"}}
-                     onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}>
+                <div id='ListOutsite'
+                    style={{height: (this.props.listheight)+"px"}}
+                    onTouchStart={this.onTouchStart}
+                    onTouchEnd={this.onTouchEnd}
+                    >
                     <ul id='ListInside'>
                         <p ref="PullDown" 
                             id='PullDown' 

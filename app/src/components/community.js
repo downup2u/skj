@@ -171,7 +171,7 @@ export class Page extends React.Component {
                 </div>
                 <div className="tc" onClick={this.onClickPage}>
                     <InfinitePage
-                        pagenumber = {5}
+                        pagenumber = {3}
                         updateContent= {this.updateContent} 
                         queryfun= { gettopiclist }
                         listheight= { this.props.communityListHeight }
