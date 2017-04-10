@@ -16,31 +16,16 @@ export class Page extends Component {
 
 
     updateContent = (item)=> {
-//         created_at
-// :
-// "2017-04-08T01:32:04.354Z"
-// messagecontent
-// :
-// "消息内容，仅供测试"
-// messagetitle
-// :
-// "这是一条系统消息Sat Apr 08 2017"
-// messagetype
-// :
-// "all"
-
-                
-       return  (<li key={item._id} onClick={()=>{this.onClickItem(item)}}>
-           <div>{item._id} </div>
-           <p />
-           <div>{item.messagetitle} </div>
-           <p />
-           <div>{item.messagecontent} </div>
-           <p />
-           <div>{moment(item.created_at).format("MM月DD日 HH时mm分")} </div>
-       </li>);
-        // console.log('--->updateContent:' +data);
-        // el.innerHTML = data.index + data.messagecontent;
+        return  (
+            <div className="items" key={item._id}>
+                <div className="tt">{item.messagetitle}</div>
+                <div className="cont">{item.messagecontent}</div>
+                <div className="lnk">
+                    <span>{moment(item.created_at).format("MM月DD日 HH时mm分")}</span>
+                    <span onClick={()=>{this.onClickItem(item);}}>查看详情</span>
+                </div>
+            </div>
+        );
     }
 
     onClickItem = (item)=>{
@@ -49,11 +34,13 @@ export class Page extends Component {
     }
     render() {
         return (
-            <div className="myMessage" style={{minHeight:(window.innerHeight)+"px"}}>
-                <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn}/>
+            <div className="myMessage" style={{height:(window.innerHeight)+"px"}}>
+                <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn} />
                 <div className="messageList">
-                    <InfinitePage updateContent={this.updateContent} 
-                        queryfun={getnotifymessage} />
+                    <InfinitePage
+                        updateContent={this.updateContent} 
+                        queryfun={getnotifymessage}
+                    />
                 </div>
             </div>
         )
