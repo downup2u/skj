@@ -20,6 +20,9 @@ export default {
     },
     category:{
       name: '类别管理 |||| 类别管理',
+      fields:{
+        product:'产品'
+      }
     },
     express:{
       name: '快递管理 |||| 快递管理',

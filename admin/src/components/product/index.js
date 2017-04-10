@@ -9,6 +9,7 @@ import {
   NumberInput,
   Create,
   Edit,
+  Filter,
   SimpleForm,
   DisabledInput,
   TextInput,
@@ -38,6 +39,14 @@ import moment from 'moment';
 import {ImageInputUpload} from '../controls/imageupload.js';
 import {Titlewithimage} from '../controls/Titlewithimage';
 import RichTextInput from '../controls/richtoolbar.js';
+
+export const ProductFilter = props => (
+    <Filter {...props}>
+         <ReferenceInput source="categoryid" reference="category">
+            <SelectInput source="name" />
+        </ReferenceInput>
+    </Filter>
+);
 
 const ProductcreateTitle = ({ record }) => {
    return <span>新建 产品</span>;
@@ -104,7 +113,7 @@ const ProductlistShow = (props) => (
 
 
 const ProductlistList = (props) => (//
-     <List title="产品信息列表" {...props} >
+     <List title="产品信息列表"  filters={<ProductFilter />}  {...props} >
         <Datagrid>
         <TextField label="名字" source="name" />
         <TextField label="现价" source="pricenow" />

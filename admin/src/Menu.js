@@ -36,6 +36,8 @@ const styles = {
     },
 };
 
+
+
 const Menu = ({ onMenuTap, translate, logout }) => (
     <div style={styles.main}>
         <DashboardMenuItem onTouchTap={onMenuTap} />

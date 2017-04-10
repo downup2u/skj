@@ -36,6 +36,7 @@ import moment from 'moment';
 
 import {ImageInputUpload} from '../controls/imageupload.js';
 import {Titlewithimage} from '../controls/Titlewithimage';
+import LinkToRelatedProducts from './LinkToRelatedProducts';
 
 const CategorycreateTitle = ({ record }) => {
    return <span>新建 类别</span>;
@@ -43,7 +44,7 @@ const CategorycreateTitle = ({ record }) => {
 const CategorylistCreate = (props) => (
        <Create {...props} title={<CategorycreateTitle />} >
            <SimpleForm>
-             <TextInput label="名字" source="name" />
+             <TextInput label="名字" source="name" validation={{ required: true }}/>
              <SelectInput  label="显示位置"  source="showflag" choices={[
                  { id: 0, name: '不显示' },
                  { id: 1, name: '显示在横排' },
@@ -65,7 +66,7 @@ const CategorylistTitle = ({ record }) => {
 const CategorylistEdit = (props) => {
       return (<Edit title={<CategorylistTitle />} {...props}>
           <SimpleForm>
-             <TextInput label="名字" source="name" />
+             <TextInput label="名字" source="name" validation={{ required: true }}/>
              <SelectInput  label="显示位置"  source="showflag" choices={[
                  { id: 0, name: '不显示' },
                  { id: 1, name: '显示在横排' },
@@ -102,6 +103,7 @@ const CategorylistList = (props) => (//
         <TextField label="显示位置" source="showflag" />
         <Titlewithimage label="名字" icon="picurl" name="name"/>
         <TextField label="排序字段" source="sortflag" />
+        <LinkToRelatedProducts />
         <BooleanField label="是否启用" source="isenabled" />
         <EditButton />
         <ShowButton />
