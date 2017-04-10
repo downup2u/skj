@@ -55,7 +55,7 @@ export class Page extends React.Component {
                     <span>综合</span>
                     <span>热门</span>
                     <span>新品</span>
-                    <span onClickPage={this.toggleSortlistmore}>价格<Icon name="sort"/></span>
+                    <span onClick={this.toggleSortlistmore}>价格<Icon name="sort"/></span>
                     <div className={this.state.showSortlistmore?"sortlistmore":"sortlistmore hide"}>
                         <span>销量</span>
                         <span>价格</span>
