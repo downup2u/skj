@@ -3,6 +3,7 @@ import {
   mycollectiongetall_request,
   myordergetall_request,
   mycartaddone_request,
+  mycollectionaddone_request,
 } from '../actions';
 
 import {
@@ -37,7 +38,15 @@ let test_mycartgetall_request=(dispatch)=>{
     console.log("mycartgetall result=>" + JSON.stringify(result));
   });
 }
+//测试新增我的收藏
+let test_mycollectionaddone_request=(dispatch)=>{
+  let payload = {
+    product:'58eaecea130f4809a747d2f8',
+    number:1
+  };
+  dispatch(mycollectionaddone_request(payload));
 
+}
 //测试获取我的收藏
 let test_mycollectiongetall_request=(dispatch)=>{
   let page = 1;
@@ -72,7 +81,9 @@ let test_myordergetall_request=(dispatch)=>{
   });
 }
 export {
+  test_mycartaddone_request,
   test_mycartgetall_request,
   test_mycollectiongetall_request,
+  test_mycollectionaddone_request,
   test_myordergetall_request
 };

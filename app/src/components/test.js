@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import {
     test_mycartgetall_request,
     test_mycollectiongetall_request,
-    test_myordergetall_request
+    test_myordergetall_request,
+    test_mycartaddone_request,
+    test_mycollectionaddone_request
 } from '../test/testshop';
 
 let Page =(props)=>{
@@ -19,6 +21,9 @@ let Page =(props)=>{
     <Button onClick={()=>{test_mycartgetall_request(props.dispatch)}}>测试获取购物车</Button><br />
    <Button onClick={()=>{test_mycollectiongetall_request(props.dispatch)}}>测试获取我的收藏</Button><br />
    <Button onClick={()=>{test_myordergetall_request(props.dispatch)}}>测试获取我的订单</Button><br />
+ 
+   <Button onClick={()=>{test_mycartaddone_request(props.dispatch)}}>测试新增购物车</Button><br />
+   <Button onClick={()=>{test_mycollectionaddone_request(props.dispatch)}}>测试新增我的收藏</Button><br />
 
     <Button onClick={()=>{onClickPage('/register')}}>注册</Button><br />
     <Button onClick={()=>{onClickPage('/devicelist')}}>设备列表</Button><br />

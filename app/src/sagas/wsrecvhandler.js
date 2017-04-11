@@ -57,7 +57,10 @@ import {
 
     wait_mycartgetall_result,
     wait_mycollectiongetall_result,
-    wait_myordergetall_result
+    wait_myordergetall_result,
+
+    serverpush_mycollectioncount,
+    serverpush_mycartcount
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -68,6 +71,16 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+    ['serverpush_mycartcount']:(socket,emit)=>{
+       return  ((payload) => {
+         emit(serverpush_mycartcount(payload));
+      });
+     },
+     ['serverpush_mycollectioncount']:(socket,emit)=>{
+       return  ((payload) => {
+         emit(serverpush_mycollectioncount(payload));
+      });
+     },
      ['shop.getnews_result']:(socket,emit)=>{
        return  ((payload) => {
          emit(getnews_result(payload));
