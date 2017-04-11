@@ -13,6 +13,8 @@ import {
     mycartaddone_request,
     mycartgetall
 } from '../../actions';
+import Addcartdilog from './addcartdilog.js';
+import { uiaddcartdilog } from '../../actions/index.js';
 
 let swiperOptions = {
     navigation: false,
@@ -21,8 +23,17 @@ let swiperOptions = {
 };
 
 let Page = (props) => {
+
+    let showaddcartdilog =(e, proid)=>{
+        e.stopPropagation(e);
+        props.dispatch(uiaddcartdilog({
+            addcartdilogshow : true,
+            addcartdilogproid : proid
+        }));
+    }
+
     let onClickPage = (e,name)=> {
-        stopDefault(e);
+        e.stopPropagation(e);
         props.history.push(name);
     };
     let shopcategorylist2ProList =(categoryid)=> {
@@ -36,10 +47,10 @@ let Page = (props) => {
     }
     //加入购物车
     let addShoppingCart =(e, pro)=>{
-        e.stopPropagation(e);
-        props.dispatch(mycartaddone_request({
-            product:pro._id
-        }));  
+        // e.stopPropagation(e);
+        // props.dispatch(mycartaddone_request({
+        //     product:pro._id
+        // }));  
     }
     //取消时间冒泡
     let stopDefault =(e)=>{
@@ -68,9 +79,31 @@ let Page = (props) => {
                         })}
                     </Swiper>
                 </div>
-                <div className="listTitle">
+                <div className="listTitle" style={{height:"42px"}}>
                     <img src="img/shopping/1.png"/>
-                    <span>家用套餐特惠价活动进行中</span>
+                    <div className="shoppingNews">
+                        <Swiper
+                            swiperOptions={{
+                                slidesPerView: 'auto',
+                                pagination: '.swiper-pagination',
+                                direction: 'vertical',
+                                pagination : false,
+                                initialSlide : 1,
+                                loop: true,
+                                autoplay : 5000,
+                                scrollBar: false
+                            }}
+                            navigation={false}
+                            >
+                            {_.map(props.news, (newsinfo,index)=>{
+                                return (
+                                    <Slide key={newsinfo._id} className="Demo-swiper__slide" style={{height:"42px"}}>
+                                        <span>{newsinfo.textname}</span>
+                                    </Slide>
+                                )
+                            })}
+                        </Swiper>
+                    </div>
                 </div>
                 <div className="shoppingBanner2">
                     <img src="img/shopping/2.png" onClick={()=>{onClickPage('/shoppingpackage')}} />
@@ -92,7 +125,7 @@ let Page = (props) => {
                     let prolist = shopcategorylist2ProList(categoryid);
                     return (
                         <div key={index}>
-                            <div className="listTitle2" onClick={(e)=>{onClickPage(e,`/shoppingprolist/${index}`)}}>
+                            <div className="listTitle2" onClick={(e)=>{onClickPage(e,`/shoppingprolist/${categoryid}`)}}>
                                 <span>{category.name}</span>
                                 <span>更多 <Icon name="angle right"/></span>
                             </div>
@@ -104,7 +137,7 @@ let Page = (props) => {
                                             <span className="name">{product.name}</span>
                                             <span className="price">
                                                 <span>{product.pricenow}</span>
-                                                <img src='img/shopping/9.png' onClick={(e)=>{addShoppingCart(e,product)}}/>
+                                                <img src='img/shopping/9.png' onClick={(e)=>{showaddcartdilog(e,product._id)}}/>
                                             </span>
                                         </div>
                                     )
@@ -114,14 +147,15 @@ let Page = (props) => {
                     )
                 })}
             </div>
+            <Addcartdilog show={props.addcartdilogshow} proid={props.addcartdilogproid} />
         </div>
     );
 }
 
 
 
-let mapStateToProps = ({shop}) => {
-    return {...shop};
+let mapStateToProps = ({shop,app}) => {
+    return {...shop,...app};
 }
 
 Page = connect(mapStateToProps)(Page);

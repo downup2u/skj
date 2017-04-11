@@ -14,6 +14,9 @@ export const getbanner_result = createAction('getbanner_result');
 export const getcategory_request = createAction('getcategory_request');
 export const getcategory_result = createAction('getcategory_result');
 
+//添加购物车控件
+export const uiaddcartdilog = createAction('uiaddcartdilog');
+
 //产品分页数据
 export const getproduct_request = createAction('getproduct_request');
 export const getproduct_result = createAction('getproduct_result');

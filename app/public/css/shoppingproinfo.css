@@ -32,7 +32,6 @@
     top: 0;
     justify-content: center;
     align-items: center;
-
 }
 
 .ProinfoPage .ProinfoPageHead .imgcont span{
@@ -209,4 +208,17 @@
 
 .ProinfoPage .proinfoBodyBody img {
     width: 100%;
+}
+
+.shoppingNews {
+    height:"42px";
+    flex-grow: 1;
+}
+.shoppingNews .swiper-container{
+    height: 42px;
+}
+.shoppingNews .swiper-container .swiper-slide{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }

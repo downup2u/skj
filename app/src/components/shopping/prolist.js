@@ -43,7 +43,10 @@ export class Page extends React.Component {
                 <div className="searchHead">
                     <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
                     <Input placeholder="请输入关键字" focus={this.state.searchInputFocus}/>
-                    <img src="img/shopping/11.png"  onClick={()=>{this.onClickPage('/shoppingcart')}} />
+                    <span className="imgcont" onClick={()=>{this.onClickPage('/shoppingcart')}} >
+                        <img src="img/shopping/11.png"/>
+                        <span className={this.props.remoteRowCount==0?"hide":""}>{this.props.remoteRowCount}</span>
+                    </span>
                 </div>
                 <div className="hotLnk">
                     <span className="sel">净水器·滤芯</span>
@@ -79,7 +82,7 @@ export class Page extends React.Component {
     }
 }
 
-let mapStateToProps = ({shop}) => {
-    return {...shop};
+let mapStateToProps = ({shop,shopcart}) => {
+    return {...shop,...shopcart};
 }
 export default connect(mapStateToProps)(Page);

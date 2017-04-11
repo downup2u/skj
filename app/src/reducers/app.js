@@ -4,6 +4,7 @@ import {
     showpopmessage,
     hidepopmessage,
     uicommentimg,
+    uiaddcartdilog
 } from '../actions/index.js';
 
 
@@ -14,9 +15,15 @@ const initial = {
         title: '',
         msg: '',
         ispop: false,
+
+        //是否显示大图控件
         bigimgshow : false,
         bigimglist : [],
-        bigimgindex : 0
+        bigimgindex : 0,
+        
+        //是否显示添加购物车控件
+        addcartdilogshow : false,
+        addcartdilogproid : ''
     },
 
 };
@@ -30,6 +37,10 @@ const app = createReducer({
     },
     [hidepopmessage]:(state, payload) => {
         return { ...state,msg:'',title:'',ispop:false};
+    },
+    //添加购物车
+    [uiaddcartdilog] : (state, payload) => {
+        return { ...state, ...payload };
     },
     [uicommentimg]: (state, payload) => {
         return { ...state, ...payload };

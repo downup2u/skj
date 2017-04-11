@@ -38,16 +38,21 @@ let renderRegisterForm = (fields)=> {
             <Input placeholder='输入验证码'  {...fields.authcode.input} type="text"/>
             {fields.authcode.meta.touched && fields.authcode.meta.error &&
             <Label basic color='red' pointing>{fields.authcode.meta.error}</Label>}
-            <Icon name="lock" className='lefticon'/>
+            <img src="img/rg2.png" className='lefticon'/>
             <Button type="button" className="yanzhenBtn" primary onClick={onClickAuth}>发送验证码</Button>
         </div>
         <div className="password logininput">
             <Input placeholder='输入密码'  {...fields.password.input} type={ispasswordvisiable?"text":"password"}/>
             {fields.password.meta.touched && fields.password.meta.error &&
             <Label basic color='red' pointing>{fields.password.meta.error}</Label>}
-            <Icon name="lock" className='lefticon'/>
-            <Icon name="eye" className={ispasswordvisiable?"eye sel":"eye"} onClick={onChangePasswordvisiable}/>
+            <img src="img/rg3.png" className='lefticon'/>
+            <img className="eye" src={ispasswordvisiable?"img/eye.png":"img/eye2.png"} onClick={onChangePasswordvisiable} />
         </div>
+        <div className="password logininput">
+            <Input placeholder='请输入邀请码(选填)' />
+            <img src="img/rg4.png" className='lefticon'/>
+        </div>
+
     </div>);
 }
 renderRegisterForm = connect()(renderRegisterForm);

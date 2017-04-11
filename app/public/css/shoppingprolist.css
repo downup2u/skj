@@ -11,6 +11,7 @@
 .ProlistPage .searchHead .ui.input {
     flex-grow: 1;
     margin: 10px 0;
+    margin-right: 45px;
 }
 
 .ProlistPage .searchHead .ui.input input {
@@ -163,4 +164,43 @@
 
 .ProlistPage .sortList .sortlistmore span:last-child {
     border-bottom: none;
+}
+.ProlistPage .searchHead {
+    background: #5596d6;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left:0;
+    top:0;
+    height: 48px;
+    width: 100%;
+    z-index: 1000;
+}
+.ProlistPage .searchHead .imgcont {
+    display: flex;
+    width: 50px;
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProlistPage .searchHead .imgcont span{
+    position: absolute;
+    background: #C00;
+    color: #FFF;
+    border-radius: 20px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    padding: 0 3px;
+    right: 5px;
+    top: 5px;
+}
+.ProlistPage .searchHead .imgcont span.hide{
+    display: none;
 }
