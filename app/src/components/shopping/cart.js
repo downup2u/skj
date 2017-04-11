@@ -1,3 +1,6 @@
+/*
+ * 购物车
+ * */
 import React, { Component, PropTypes } from 'react';
 import NavBar from '../nav.js';
 import { connect } from 'react-redux';
@@ -6,11 +9,11 @@ import '../../../public/css/shoppingcart.css';
 import { mycartgetall } from '../../actions/sagacallback.js';
 import InfinitePage from '../controls/infinitecontrol';
 import Swipeout from 'rc-swipeout';
+import { Field, FieldArray, reduxForm } from 'redux-form'
 
-export class Page extends React.Component {
-
-    updateContent = (item)=> {
-        let proinfo = this.props.products[item.product];
+let Page = (props) => {
+    let updateContent = (item)=> {
+        let proinfo = props.products[item.product];
         if(proinfo){
             return  (
                 <div key={item._id}>
@@ -32,7 +35,9 @@ export class Page extends React.Component {
                                         <span>{proinfo.pricenow}</span>
                                         <div className="btnControl">
                                             <div className="add">+</div>
-                                            <div className="num"><Input value={item.number} /></div>
+                                            <div className="num">
+                                                <Field name="firstName" component="input" type="text" placeholder="First Name" value={item.number} />
+                                            </div>
                                             <div className="del">-</div>
                                         </div>
                                     </div>
@@ -45,29 +50,29 @@ export class Page extends React.Component {
         }
     };
 
-    onClickReturn = ()=> {
-        this.props.history.goBack();
+    let onClickReturn = ()=> {
+        props.history.goBack();
     };
 
-    onClickPage = (name)=> {
-        this.props.history.push(name);
+    let onClickPage = (name)=> {
+        props.history.push(name);
     };
 
-    render() {
-        return (
+    return (
+        <form>
             <div className="shoppingCartPage"
                 style={{
                     height:(window.innerHeight)+"px",
                 }}
                 >
                 <div className="PageHead">
-                    <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
+                    <Icon name="angle left" onClick={()=>{onClickReturn()}} />
                     <span className="title">购物车</span>
                 </div>
                 <div className="proinfo" style={{height:(window.innerHeight-92)+"px"}}>
                     <InfinitePage
                         pagenumber = {30}
-                        updateContent= {this.updateContent.bind(this)} 
+                        updateContent= {updateContent.bind(this)} 
                         queryfun= {mycartgetall}
                         listheight= {window.innerHeight-92}
                         query = {{}}
@@ -81,19 +86,20 @@ export class Page extends React.Component {
                             合计: <span>¥499.00</span>
                         </div>
                     </div>
-                    <div className="btn" onClick={()=>{this.onClickPage('/pay')}}>
+                    <div className="btn" onClick={()=>{onClickPage('/pay')}}>
                         <span>去结算</span>
                     </div>
                 </div>
-
-
             </div>
-        );
-    }
+        </form>
+    );
 }
 
 let mapStateToProps = ({shop}) => {
     return {...shop};
 }
-export default connect(mapStateToProps)(Page);
+
+Page = connect(mapStateToProps)(Page);
+export default reduxForm({form: 'simple'})(Page);
+
 
