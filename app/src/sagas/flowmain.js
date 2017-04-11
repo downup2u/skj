@@ -39,9 +39,11 @@ import {
     getproduct_request,
 
     mycartaddone_request,
+    mycartupdateone_request,
     mycartdelone_request,
     mycartgetall_request,
     mycollectionaddone_request,
+    mycollectionupdateone_request,
     mycollectiondelone_request,
     mycollectiongetall_request,
     myorderaddone_request,
@@ -144,8 +146,10 @@ function* handleIOWithAuth(socket) {
 
             'mycartaddone':`${mycartaddone_request}`,
             'mycartdelone':`${mycartdelone_request}`,
+            'mycartupdateone':`${mycartupdateone_request}`,
             'mycartgetall':`${mycartgetall_request}`,
             'mycollectionaddone':`${mycollectionaddone_request}`,
+            'mycollectionupdateone':`${mycollectionupdateone_request}`,
             'mycollectiondelone':`${mycollectiondelone_request}`,
             'mycollectiongetall':`${mycollectiongetall_request}`,
             'myorderaddone':`${myorderaddone_request}`,

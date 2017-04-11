@@ -4,6 +4,11 @@ import {
   myordergetall_request,
   mycartaddone_request,
   mycollectionaddone_request,
+
+  mycartupdateone_request,
+  mycartdelone_request,
+  mycollectionupdateone_request,
+  mycollectiondelone_request
 } from '../actions';
 
 import {
@@ -80,10 +85,65 @@ let test_myordergetall_request=(dispatch)=>{
     console.log("myordergetall result=>" + JSON.stringify(result));
   });
 }
+
+
+
+
+//测试修改购物车
+let test_mycartupdateone_request=(dispatch)=>{
+  let payload = {
+    _id:'58ec680f38b16714c4ad1474',
+    data:{
+      "product" :"58eaecea130f4809a747d2f8",
+      "number" : 14,
+    }
+  };
+  dispatch(mycartupdateone_request(payload));
+
+}
+
+
+//测试删除购物车
+let test_mycartdelone_request=(dispatch)=>{
+  let payload = {
+    _id:'58ec680f38b16714c4ad1474',
+  };
+  dispatch(mycartdelone_request(payload));
+
+}
+
+
+//测试修改我的收藏
+let test_mycollectionupdateone_request=(dispatch)=>{
+  let payload = {
+    _id:'58ec7712b2eb6219a84f150f',
+    data:{
+      "product" :"58eaecea130f4809a747d2f8",
+      "number" : 14,
+    }
+  };
+  dispatch(mycollectionupdateone_request(payload));
+
+}
+
+
+//测试删除我的收藏
+let test_mycollectiondelone_request=(dispatch)=>{
+  let payload = {
+    _id:'58ec7712b2eb6219a84f150f',
+  };
+  dispatch(mycollectiondelone_request(payload));
+
+}
+
 export {
   test_mycartaddone_request,
   test_mycartgetall_request,
   test_mycollectiongetall_request,
   test_mycollectionaddone_request,
-  test_myordergetall_request
+  test_myordergetall_request,
+  test_mycartupdateone_request,
+  test_mycartdelone_request,
+  test_mycollectionupdateone_request,
+  test_mycollectiondelone_request
 };

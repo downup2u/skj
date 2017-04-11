@@ -9,7 +9,13 @@ import {
     test_mycollectiongetall_request,
     test_myordergetall_request,
     test_mycartaddone_request,
-    test_mycollectionaddone_request
+    test_mycollectionaddone_request,
+
+    test_mycartupdateone_request,
+    test_mycartdelone_request,
+    test_mycollectionupdateone_request,
+    test_mycollectiondelone_request,
+
 } from '../test/testshop';
 
 let Page =(props)=>{
@@ -24,6 +30,12 @@ let Page =(props)=>{
  
    <Button onClick={()=>{test_mycartaddone_request(props.dispatch)}}>测试新增购物车</Button><br />
    <Button onClick={()=>{test_mycollectionaddone_request(props.dispatch)}}>测试新增我的收藏</Button><br />
+   
+   <Button onClick={()=>{test_mycartupdateone_request(props.dispatch)}}>测试修改购物车</Button><br />
+   <Button onClick={()=>{test_mycartdelone_request(props.dispatch)}}>测试删除我的购物车</Button><br />
+   
+   <Button onClick={()=>{test_mycollectionupdateone_request(props.dispatch)}}>测试修改我的收藏</Button><br />
+   <Button onClick={()=>{test_mycollectiondelone_request(props.dispatch)}}>测试删除我的收藏</Button><br />
 
     <Button onClick={()=>{onClickPage('/register')}}>注册</Button><br />
     <Button onClick={()=>{onClickPage('/devicelist')}}>设备列表</Button><br />
