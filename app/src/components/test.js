@@ -6,16 +6,19 @@ import { Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import {
     test_mycartgetall_request,
-    test_mycollectiongetall_request,
-    test_myordergetall_request,
     test_mycartaddone_request,
-    test_mycollectionaddone_request,
-
     test_mycartupdateone_request,
     test_mycartdelone_request,
-    test_mycollectionupdateone_request,
-    test_mycollectiondelone_request,
 
+    test_mycollectiongetall_request,
+    test_mycollectionaddone_request,
+    test_mycollectiondelone_request,
+    test_mycollectionisproductexits,
+
+    test_myordergetall_request,
+    test_myorderaddone_request,
+    test_myorderupdateone_request,
+    test_myorderdelone_request
 } from '../test/testshop';
 
 let Page =(props)=>{
@@ -24,18 +27,22 @@ let Page =(props)=>{
     };
     return (<div>
         <p style={{textAlign: 'center'}}>
-    <Button onClick={()=>{test_mycartgetall_request(props.dispatch)}}>测试获取购物车</Button><br />
-   <Button onClick={()=>{test_mycollectiongetall_request(props.dispatch)}}>测试获取我的收藏</Button><br />
-   <Button onClick={()=>{test_myordergetall_request(props.dispatch)}}>测试获取我的订单</Button><br />
- 
+   <Button onClick={()=>{test_mycartgetall_request(props.dispatch)}}>测试获取购物车</Button><br />
    <Button onClick={()=>{test_mycartaddone_request(props.dispatch)}}>测试新增购物车</Button><br />
-   <Button onClick={()=>{test_mycollectionaddone_request(props.dispatch)}}>测试新增我的收藏</Button><br />
-   
    <Button onClick={()=>{test_mycartupdateone_request(props.dispatch)}}>测试修改购物车</Button><br />
    <Button onClick={()=>{test_mycartdelone_request(props.dispatch)}}>测试删除我的购物车</Button><br />
-   
-   <Button onClick={()=>{test_mycollectionupdateone_request(props.dispatch)}}>测试修改我的收藏</Button><br />
+   <br />
+   <Button onClick={()=>{test_mycollectiongetall_request(props.dispatch)}}>测试获取我的收藏</Button><br />
+   <Button onClick={()=>{test_mycollectionaddone_request(props.dispatch)}}>测试新增我的收藏</Button><br />
    <Button onClick={()=>{test_mycollectiondelone_request(props.dispatch)}}>测试删除我的收藏</Button><br />
+   <Button onClick={()=>{test_mycollectionisproductexits(props.dispatch)}}>测试是否某产品被我收藏过</Button><br />
+   <br />
+
+   <Button onClick={()=>{test_myordergetall_request(props.dispatch)}}>测试获取我的订单</Button><br />
+   <Button onClick={()=>{test_myorderaddone_request(props.dispatch)}}>测试新增我的订单</Button><br />
+   <Button onClick={()=>{test_myorderupdateone_request(props.dispatch)}}>测试修改我的订单</Button><br />
+   <Button onClick={()=>{test_myorderdelone_request(props.dispatch)}}>测试删除我的订单</Button><br />
+    <br />
 
     <Button onClick={()=>{onClickPage('/register')}}>注册</Button><br />
     <Button onClick={()=>{onClickPage('/devicelist')}}>设备列表</Button><br />

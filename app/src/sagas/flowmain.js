@@ -43,13 +43,13 @@ import {
     mycartdelone_request,
     mycartgetall_request,
     mycollectionaddone_request,
-    mycollectionupdateone_request,
     mycollectiondelone_request,
     mycollectiongetall_request,
     myorderaddone_request,
     myorderupdateone_request,
     myorderdelone_request,
-    myordergetall_request
+    myordergetall_request,
+    mycollectionisproductexits_request
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -149,9 +149,10 @@ function* handleIOWithAuth(socket) {
             'mycartupdateone':`${mycartupdateone_request}`,
             'mycartgetall':`${mycartgetall_request}`,
             'mycollectionaddone':`${mycollectionaddone_request}`,
-            'mycollectionupdateone':`${mycollectionupdateone_request}`,
             'mycollectiondelone':`${mycollectiondelone_request}`,
             'mycollectiongetall':`${mycollectiongetall_request}`,
+            'mycollectionisproductexits':`${mycollectionisproductexits_request}`,
+            
             'myorderaddone':`${myorderaddone_request}`,
             'myorderupdateone':`${myorderupdateone_request}`,
             'myorderdelone':`${myorderdelone_request}`,    

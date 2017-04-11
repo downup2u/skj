@@ -44,6 +44,7 @@ import {
     getproduct_result,
 
     mycartaddone_result,
+    mycartupdateone_result,
     mycartdelone_result,
     mycartgetall_result,
     mycollectionaddone_result,
@@ -54,12 +55,19 @@ import {
     myorderdelone_result,
     myordergetall_result,
     getnews_result,
-
+  
     wait_mycartgetall_result,
     wait_mycollectiongetall_result,
     wait_myordergetall_result,
 
-    serverpush_mycollectioncount,
+    wait_mycartupdateone_result,
+    wait_mycartdelone_result,
+    wait_mycollectiondelone_result,
+
+    wait_mycollectionisproductexits_result,
+    mycollectionisproductexits_result,
+
+
     serverpush_mycartcount
 } from '../actions';
 import {
@@ -74,11 +82,6 @@ const handlerlist = {
     ['serverpush_mycartcount']:(socket,emit)=>{
        return  ((payload) => {
          emit(serverpush_mycartcount(payload));
-      });
-     },
-     ['serverpush_mycollectioncount']:(socket,emit)=>{
-       return  ((payload) => {
-         emit(serverpush_mycollectioncount(payload));
       });
      },
      ['shop.getnews_result']:(socket,emit)=>{
@@ -112,9 +115,16 @@ const handlerlist = {
         emit(mycartaddone_result(payload));
       });
     },
+    ['shop.mycartupdateone_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(mycartupdateone_result(payload));
+        emit(wait_mycartupdateone_result({result:payload}));
+      });
+    },
     ['shop.mycartdelone_result']: (socket, emit)=> {
       return ((payload) => {
         emit(mycartdelone_result(payload));
+        emit(wait_mycartdelone_result({result:payload}));
       });
     },
     ['shop.mycartgetall_result']: (socket, emit)=> {
@@ -131,6 +141,13 @@ const handlerlist = {
     ['shop.mycollectiondelone_result']: (socket, emit)=> {
       return ((payload) => {
         emit(mycollectiondelone_result(payload));
+        emit(wait_mycollectiondelone_result({result:payload}));
+      });
+    },
+    ['shop.mycollectionisproductexits_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(mycollectionisproductexits_result(payload));
+        emit(wait_mycollectionisproductexits_result({result:payload}));
       });
     },
     ['shop.mycollectiongetall_result']: (socket, emit)=> {

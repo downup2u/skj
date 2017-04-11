@@ -15,3 +15,5 @@ export const uicommentimg = createAction('forum.uicommentimg');
 export const uiinfinitepage_init = createAction('uiinfinitepage_init');
 export const uiinfinitepage_getdata = createAction('uiinfinitepage_getdata');
 export const uiinfinitepage_setstate = createAction('uiinfinitepage_setstate');
+export const uiinfinitepage_deleteitem = createAction('uiinfinitepage_deleteitem');
+export const uiinfinitepage_updateitem = createAction('uiinfinitepage_updateitem');
