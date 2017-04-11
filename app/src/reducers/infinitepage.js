@@ -5,6 +5,7 @@
 import { createReducer } from 'redux-act';
 import {
     uiinfinitepage_init,
+    uiinfinitepage_setstate,
     uiinfinitepage_getdata,
 } from '../actions';
 import {normalizr_notifymessageslist} from './normalizr';
@@ -12,16 +13,23 @@ import union from 'lodash/union';
 
 const initial = {
     infinitepage: {
-        list: [],
-        currentPage: 1,
-        totalPage:1,
-        lastPage: false
+         items: [],
+         pullDownStatus: 3,
+         pullUpStatus: 0,
+         pageEnd : false,//判断是否加载到最后一页
+         page:1,
+         totalPage:1,
+         itemsChanged:false,
+         isTouching:false
     },
 };
 
 const infinitepage = createReducer({
-        [uiinfinitepage_init]:(state, rendered) => {
+        [uiinfinitepage_init]:(state, payload) => {
             return  {...state,...initial.infinitepage};
+        },
+        [uiinfinitepage_setstate]:(state, payload) => {
+            return  {...state,...payload};
         },
         [uiinfinitepage_getdata]:(state, {result,append}) => {
             // docs {Array} - Array of documents
@@ -30,11 +38,11 @@ const infinitepage = createReducer({
             //     [page] {Number} - Only if specified or default page/offset values were used
             //     [pages] {Number} - Only if page specified or default page/offset values were used
             //     [offset] {Number} - Only if specified or default page/offset values were used
-            let list = append?union(state.list, result.docs) : result.docs;//result.docs;
-            let currentPage = result.page;
+            let items = append?union(state.items, result.docs) : result.docs;//result.docs;
+            let page = result.page;
             let totalPage = result.pages;
-            let lastPage = result.page === result.pages;
-            return {...state,currentPage,list,lastPage,totalPage};
+            let pageEnd = result.page === result.pages;
+            return {...state,page,items,pageEnd,totalPage};
         },
 
 }, initial.infinitepage);
