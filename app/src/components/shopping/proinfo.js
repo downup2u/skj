@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shoppingproinfo.css';
+import { mycollectionaddone_request } from '../../actions';
 
 let swiperOptions = {
     navigation: false,
@@ -26,6 +27,14 @@ let Page = (props) => {
     let proinfo = props.products[proid];
     console.log(proinfo);
 
+    //加入收藏
+    let addCollection =(pro)=>{
+        props.dispatch(mycollectionaddone_request({
+            product:pro._id,
+            number:1
+        }));  
+    }
+
     return (
         <div className="ProinfoPage">
             <div className="ProinfoPageHead">
@@ -33,6 +42,7 @@ let Page = (props) => {
                 <span className="title">商品详情</span>
                 <span className="imgcont" onClick={()=>{onClickPage('/shoppingcart')}} >
                     <img src="img/shopping/11.png"/>
+                    <span className={props.remoteRowCount==0?"hide":""}>{props.remoteRowCount}</span>
                 </span>
             </div>
 
@@ -52,10 +62,10 @@ let Page = (props) => {
             <div className="proinfoHead">
                 <div className="p1">
                     <span className="proname">{proinfo.name}</span>
-                <span className="collectionLnk">
-                    <img src="img/shopping/star.png"/>
-                    <span>收藏</span>
-                </span>
+                    <span className="collectionLnk" onClick={()=>{addCollection(proinfo)}}>
+                        <img src="img/shopping/star.png"/>
+                        <span>收藏</span>
+                    </span>
                 </div>
                 <div className="p2">
                     ¥{proinfo.pricenow}
@@ -93,8 +103,8 @@ let Page = (props) => {
     )
 }
 
-let mapStateToProps = ({shop}) => {
-    return {...shop};
+let mapStateToProps = ({shop,shopcart}) => {
+    return {...shop,...shopcart};
 }
 
 Page = connect(mapStateToProps)(Page);

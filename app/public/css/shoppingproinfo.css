@@ -32,6 +32,25 @@
     top: 0;
     justify-content: center;
     align-items: center;
+
+}
+
+.ProinfoPage .ProinfoPageHead .imgcont span{
+    position: absolute;
+    background: #C00;
+    color: #FFF;
+    border-radius: 20px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    padding: 0 3px;
+    right: 5px;
+    top: 5px;
+}
+.ProinfoPage .ProinfoPageHead .imgcont span.hide{
+    display: none;
 }
 
 .ProinfoPage .ProinfoPageHead .imgcont img {

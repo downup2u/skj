@@ -10,7 +10,8 @@ import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shopping.css';
 import {
     search_shoptxt,
-    mycartaddone_request
+    mycartaddone_request,
+    mycartgetall
 } from '../../actions';
 
 let swiperOptions = {
@@ -37,8 +38,7 @@ let Page = (props) => {
     let addShoppingCart =(e, pro)=>{
         e.stopPropagation(e);
         props.dispatch(mycartaddone_request({
-            product:pro._id,
-            number:1,
+            product:pro._id
         }));  
     }
     //取消时间冒泡
