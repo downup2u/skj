@@ -2,6 +2,7 @@ import {
   mycartgetall_request,
   mycollectiongetall_request,
   myordergetall_request,
+  mycartaddone_request,
 } from '../actions';
 
 import {
@@ -9,6 +10,16 @@ import {
   mycollectiongetall,
   myordergetall
 } from '../actions/sagacallback.js';
+
+//测试新增购物车
+let test_mycartaddone_request=(dispatch)=>{
+  let payload = {
+    product:'58eaecea130f4809a747d2f8',
+    number:1
+  };
+  dispatch(mycartaddone_request(payload));
+
+}
 
 //测试获取购物车
 let test_mycartgetall_request=(dispatch)=>{

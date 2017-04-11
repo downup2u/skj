@@ -26,15 +26,15 @@ export default class Page extends Component {
                     }}>
                     <List.Item>
                         <Swipeout autoClose={true}
-                                  right={[
+                                right={[
                                     {
                                         text: '删除',
                                         //onPress:onDelete,
                                         style: { backgroundColor: 'red', color: 'white' }
                                     }
-                                  ]}
-                                  onOpen={() => console.log('open')}
-                                  onClose={() => console.log('close')}
+                                ]}
+                                onOpen={() => console.log('open')}
+                                onClose={() => console.log('close')}
                             >
                             <div className="myCollectionLi">
                                 <div className="pic"><img src="img/5.png"/></div>

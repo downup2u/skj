@@ -3,13 +3,52 @@ import NavBar from '../nav.js';
 import { connect } from 'react-redux';
 import { Input, Button, Menu, Radio, Label, Icon } from 'semantic-ui-react';
 import '../../../public/css/shoppingcart.css';
-
+import { mycartgetall } from '../../actions/sagacallback.js';
+import InfinitePage from '../controls/infinitecontrol';
+import Swipeout from 'rc-swipeout';
 
 export class Page extends React.Component {
+
+    updateContent = (item)=> {
+        let proinfo = this.props.products[item.product];
+        if(proinfo){
+            return  (
+                <div key={item._id}>
+                    <Swipeout autoClose={true}
+                        right={[{
+                            text: '删除',
+                            style: { backgroundColor: 'red', color: 'white' }}
+                        ]}
+                        onOpen={() => console.log('open')}
+                        onClose={() => console.log('close')}
+                    >
+                        <div className="li" >
+                            <Radio />
+                            <div className="l">
+                                <img src={proinfo.picurl}/>
+                                <div>
+                                    <span>{proinfo.name}</span>
+                                    <div className="price">
+                                        <span>{proinfo.pricenow}</span>
+                                        <div className="btnControl">
+                                            <div className="add">+</div>
+                                            <div className="num"><Input value={item.number} /></div>
+                                            <div className="del">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Swipeout>
+                </div>
+            );
+        }
+    };
 
     onClickReturn = ()=> {
         this.props.history.goBack();
     };
+
     onClickPage = (name)=> {
         this.props.history.push(name);
     };
@@ -17,51 +56,24 @@ export class Page extends React.Component {
     render() {
         return (
             <div className="shoppingCartPage"
-                 style={{
+                style={{
                     height:(window.innerHeight)+"px",
-                 }}
+                }}
                 >
                 <div className="PageHead">
                     <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
                     <span className="title">购物车</span>
                 </div>
-                <div className="proinfo">
-                    <div className="li">
-                        <Radio />
-                        <div className="l">
-                            <img src="./img/myprofile/16.png"/>
-                            <div>
-                                <span>这是产品标题内容这是产品标题内容这是产品标题内容这是产品标题内容</span>
-                                <div className="price">
-                                    <span>¥499.00</span>
-                                    <div className="btnControl">
-                                        <div className="add">+</div>
-                                        <div className="num"><Input  /></div>
-                                        <div className="del">-</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="li">
-                        <Radio />
-                        <div className="l">
-                            <img src="./img/myprofile/16.png"/>
-                            <div>
-                                <span>这是产品标题内容这是产品标题内容这是产品标题内容这是产品标题内容</span>
-                                <div className="price">
-                                    <span>¥499.00</span>
-                                    <div className="btnControl">
-                                        <div className="add">+</div>
-                                        <div className="num"><Input  /></div>
-                                        <div className="del">-</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div className="proinfo" style={{height:(window.innerHeight-92)+"px"}}>
+                    <InfinitePage
+                        pagenumber = {30}
+                        updateContent= {this.updateContent.bind(this)} 
+                        queryfun= {mycartgetall}
+                        listheight= {window.innerHeight-92}
+                        query = {{}}
+                        sort = {{created_at: -1}}
+                    />
                 </div>
-
                 <div className="footBtn">
                     <div className="left">
                         <Radio label='全选'/>
@@ -84,3 +96,4 @@ let mapStateToProps = ({shop}) => {
     return {...shop};
 }
 export default connect(mapStateToProps)(Page);
+

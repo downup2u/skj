@@ -2,6 +2,8 @@
     background: #EEE;
     overflow: scroll;
     padding-top: 48px;
+    display: flex;
+    flex-direction: column;
 }
 
 .shoppingCartPage .PageHead {
@@ -53,7 +55,9 @@
 }
 
 .shoppingCartPage .proinfo {
-    margin-bottom: 20px;
+    overflow: hidden;
+    flex-grow: 1;
+    flex-shrink: 0;
 }
 
 .shoppingCartPage .proinfo .li {
@@ -80,10 +84,12 @@
     justify-content: space-between;
     padding-left: 15px;
     font-size: 14px;
+    flex-grow: 1;
 }
 
 .shoppingCartPage .proinfo .li div.l > div {
     padding-left: 15px;
+    flex-grow: 1
 }
 
 .shoppingCartPage .proinfo .li div.l .price {
@@ -106,10 +112,9 @@
     padding: 0 0 0 15px;
     display: flex;
     align-items: center;
-    position: fixed;
-    bottom: 0px;
     width: 100%;
     height: 44px;
+    flex-shrink: 0;
 }
 
 .shoppingCartPage .footBtn .left {
