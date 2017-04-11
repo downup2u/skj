@@ -2,6 +2,10 @@
  * Created by wangxiaoqing on 2017/4/7.
  */
 import { createAction } from 'redux-act';
+export const ui_cartooder_additem = createAction('ui_cartooder_additem');
+export const ui_cartooder_delitem = createAction('ui_cartooder_delitem');
+export const ui_cartooder_updateitem = createAction('ui_cartooder_updateitem');
+
 export const search_shoptxt = createAction('search_shoptxt');
 
 export const getbanner_request = createAction('getbanner_request');

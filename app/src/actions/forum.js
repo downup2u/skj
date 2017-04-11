@@ -3,6 +3,8 @@
  */
 import { createAction } from 'redux-act';
 
+
+
 export const ui_setmytopiclistinited = createAction('ui_setmytopiclistinited');
 export const ui_settopiclistinited = createAction('ui_settopiclistinited');
 

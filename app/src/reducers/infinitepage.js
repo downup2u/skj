@@ -31,25 +31,27 @@ const infinitepage = createReducer({
         [uiinfinitepage_updateitem]:(state, payload) => {
             let newitems = [];
             _.map(state.items,(item)=>{
-                if(item.id === payload.id){
+                if(item._id === payload._id){
                     newitems.push(payload);
                 }
                 else{
                     newitems.push(item);
                 }
             });
-            return  {...state,items:[...newitems]};
+            let itemsChanged = true;
+            return  {...state,itemsChanged,items:[...newitems]};
         },
         [uiinfinitepage_deleteitem]:(state, payload) => {
             let newitems = [];
             _.map(state.items,(item)=>{
-                if(item.id === payload.id){
+                if(item._id === payload._id){
                 }
                 else{
                     newitems.push(item);
                 }
             });
-            return  {...state,items:[...newitems]};
+            let itemsChanged = true;
+            return  {...state,itemsChanged,items:[...newitems]};
         },
         [uiinfinitepage_init]:(state, payload) => {
             return  {...state,...initial.infinitepage};
