@@ -69,16 +69,16 @@ const orders = createReducer({
                 orders
             };
         },
-        [myorderdelone_result]:(state, payload) => {
-            let orders =  state.orders;
-            let neworders = [];
-            for(let item of orders){
-                if(item._id !== payload._id){
-                    neworders.push(item);
-                }
-            }
-            return { ...state,orders:[...neworders]};
-        },
+        // [myorderdelone_result]:(state, payload) => {
+        //     let orders =  state.orders;
+        //     let neworders = [];
+        //     for(let item of orders){
+        //         if(item._id !== payload._id){
+        //             neworders.push(item);
+        //         }
+        //     }
+        //     return { ...state,orders:[...neworders]};
+        // },
 }, initial.orders);
 
 export default orders;

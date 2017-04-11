@@ -46,7 +46,23 @@ import {
 
   wait_myordergetall_request,
   wait_myordergetall_result,
-  myordergetall_request
+  myordergetall_request,
+
+  wait_mycartupdateone_request,
+  wait_mycartupdateone_result,
+  mycartupdateone_request,
+
+  wait_mycartdelone_request,
+  wait_mycartdelone_result,
+  mycartdelone_request,
+
+  wait_mycollectiondelone_request,
+  wait_mycollectiondelone_result,
+  mycollectiondelone_request,
+
+  mycollectionisproductexits_request,
+  wait_mycollectionisproductexits_request,
+  wait_mycollectionisproductexits_result
 
 } from '../actions/index.js';
 
@@ -111,6 +127,23 @@ export function mycollectiongetall(payload){
 export function myordergetall(payload){
   return synccall(payload,wait_myordergetall_request,myordergetall_request);
 }
+//==========
+export function mycartupdateone(payload){
+  return synccall(payload,wait_mycartupdateone_request,mycartupdateone_request);
+}
+
+export function mycartdelone(payload){
+  return synccall(payload,wait_mycartdelone_request,mycartdelone_request);
+}
+
+export function mycollectiondelone(payload){
+  return synccall(payload,wait_mycollectiondelone_request,mycollectiondelone_request);
+}
+
+export function mycollectionisproductexits(payload){
+  return synccall(payload,wait_mycollectionisproductexits_request,mycollectionisproductexits_request);
+}
+
 
 //2.
 function* createflowsz(fnwatres,action){
@@ -148,8 +181,14 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_mycartgetall_request}`,`${wait_mycartgetall_result}`]);
   waitfnsz.push([`${wait_mycollectiongetall_request}`,`${wait_mycollectiongetall_result}`]);
   waitfnsz.push([`${wait_myordergetall_request}`,`${wait_myordergetall_result}`]);
+  waitfnsz.push([`${wait_mycartupdateone_request}`,`${wait_mycartupdateone_result}`]);
+  waitfnsz.push([`${wait_mycartdelone_request}`,`${wait_mycartdelone_result}`]);
+  waitfnsz.push([`${wait_mycollectiondelone_request}`,`${wait_mycollectiondelone_result}`]);
+  waitfnsz.push([`${wait_mycollectionisproductexits_request}`,`${wait_mycollectionisproductexits_result}`]);
+
   for(let fnsz of waitfnsz){
      yield takeLatest(fnsz[0],createflowsz, fnsz[1]);
   }
-  
+
 }
+

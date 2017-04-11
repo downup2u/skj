@@ -7,9 +7,12 @@ import {
     uiinfinitepage_init,
     uiinfinitepage_setstate,
     uiinfinitepage_getdata,
+    uiinfinitepage_deleteitem,
+    uiinfinitepage_updateitem
 } from '../actions';
 import {normalizr_notifymessageslist} from './normalizr';
 import union from 'lodash/union';
+import _ from 'lodash';
 
 const initial = {
     infinitepage: {
@@ -25,6 +28,29 @@ const initial = {
 };
 
 const infinitepage = createReducer({
+        [uiinfinitepage_updateitem]:(state, payload) => {
+            let newitems = [];
+            _.map(state.items,(item)=>{
+                if(item.id === payload.id){
+                    newitems.push(payload);
+                }
+                else{
+                    newitems.push(item);
+                }
+            });
+            return  {...state,items:[...newitems]};
+        },
+        [uiinfinitepage_deleteitem]:(state, payload) => {
+            let newitems = [];
+            _.map(state.items,(item)=>{
+                if(item.id === payload.id){
+                }
+                else{
+                    newitems.push(item);
+                }
+            });
+            return  {...state,items:[...newitems]};
+        },
         [uiinfinitepage_init]:(state, payload) => {
             return  {...state,...initial.infinitepage};
         },
