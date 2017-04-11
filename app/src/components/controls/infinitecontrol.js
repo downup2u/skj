@@ -92,15 +92,18 @@ export class Page extends Component {
                 if(result){
                     if(result.page>=result.pages){//最后一页
                         this.props.dispatch(uiinfinitepage_getdata({result,append:!isRefresh}));
-                        this.props.dispatch(uiinfinitepage_setstate({ pullUpStatus: 0}));
+                        this.props.dispatch(uiinfinitepage_setstate({ pullUpStatus: 0,pullDownStatus: 4}));
+                        if(result.page===1){
+                            this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 500);
+                        }
                     }else{
-                        if (isRefresh) {    // 刷新操作
+                        if (isRefresh) {// 刷新操作
                             if (this.props.pullDownStatus == 3) {
                                 this.props.dispatch(uiinfinitepage_getdata({result,append:!isRefresh}));
                                 this.props.dispatch(uiinfinitepage_setstate({ pullDownStatus: 4}));
                                 this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 500);
                             }
-                        } else {    // 加载操作
+                        } else {// 加载操作
                             if (this.props.pullUpStatus == 2) {
                                 this.props.dispatch(uiinfinitepage_getdata({result,append:!isRefresh}));
                                 this.props.dispatch(uiinfinitepage_setstate({ pullUpStatus: 0}));
