@@ -3,15 +3,23 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { Button } from 'semantic-ui-react';
-//import { browserHistory,} from 'react-router-dom';
+import { connect } from 'react-redux';
+import {
+    test_mycartgetall_request,
+    test_mycollectiongetall_request,
+    test_myordergetall_request
+} from '../test/testshop';
 
-export default function MyPage(props){
+let Page =(props)=>{
     let onClickPage=(name)=>{
         props.history.push(name);
     };
     return (<div>
         <p style={{textAlign: 'center'}}>
-    <Button onClick={()=>{onClickPage('/login')}}>登录</Button><br />
+    <Button onClick={()=>{test_mycartgetall_request(props.dispatch)}}>测试获取购物车</Button><br />
+   <Button onClick={()=>{test_mycollectiongetall_request(props.dispatch)}}>测试获取我的收藏</Button><br />
+   <Button onClick={()=>{test_myordergetall_request(props.dispatch)}}>测试获取我的订单</Button><br />
+
     <Button onClick={()=>{onClickPage('/register')}}>注册</Button><br />
     <Button onClick={()=>{onClickPage('/devicelist')}}>设备列表</Button><br />
     <Button onClick={()=>{onClickPage('/newdevice')}}>新增设备</Button><br />
@@ -23,3 +31,7 @@ export default function MyPage(props){
     </p>
     </div>);
 }
+
+
+Page = connect()(Page);
+export default Page;

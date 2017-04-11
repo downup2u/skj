@@ -3,30 +3,51 @@ import {
   createaddress_request,
   wait_createaddress_request,
   wait_createaddress_result,
+
   editaddress_request,
   wait_editaddress_request,
   wait_editaddress_result,
+
   register_request,
   wait_register_request,
   wait_register_result,
+
   inserttopic_request,
   wait_inserttopic_request,
   wait_inserttopic_result,
+
   createdevice_request,
   wait_createdevice_request,
   wait_createdevice_result,
+
   getnotifymessage_request, 
   wait_getnotifymessage_request,
   wait_getnotifymessage_result,
+
   findpwd_request,
   wait_findpwd_request,
   wait_findpwd_result,
+
   wait_getmytopic_request,
   wait_getmytopic_result,
   getmytopic_request,
+
   wait_gettopiclist_request,
   wait_gettopiclist_result,
   gettopiclist_request,
+
+  wait_mycartgetall_request,
+  wait_mycartgetall_result,
+  mycartgetall_request,
+
+  wait_mycollectiongetall_request,
+  wait_mycollectiongetall_result,
+  mycollectiongetall_request,
+
+  wait_myordergetall_request,
+  wait_myordergetall_result,
+  myordergetall_request
+
 } from '../actions/index.js';
 
 import { fork, take, call, put, cancel,race,takeLatest } from 'redux-saga/effects';
@@ -79,6 +100,18 @@ export function getnotifymessage(payload){
   return synccall(payload,wait_getnotifymessage_request,getnotifymessage_request);
 }
 
+export function mycartgetall(payload){
+  return synccall(payload,wait_mycartgetall_request,mycartgetall_request);
+}
+
+export function mycollectiongetall(payload){
+  return synccall(payload,wait_mycollectiongetall_request,mycollectiongetall_request);
+}
+
+export function myordergetall(payload){
+  return synccall(payload,wait_myordergetall_request,myordergetall_request);
+}
+
 //2.
 function* createflowsz(fnwatres,action){
     let {payload:{resolve,reject,payload:data}} = action;
@@ -112,6 +145,9 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_getnotifymessage_request}`,`${wait_getnotifymessage_result}`]);
   waitfnsz.push([`${wait_getmytopic_request}`,`${wait_getmytopic_result}`]);
   waitfnsz.push([`${wait_gettopiclist_request}`,`${wait_gettopiclist_result}`]);
+  waitfnsz.push([`${wait_mycartgetall_request}`,`${wait_mycartgetall_result}`]);
+  waitfnsz.push([`${wait_mycollectiongetall_request}`,`${wait_mycollectiongetall_result}`]);
+  waitfnsz.push([`${wait_myordergetall_request}`,`${wait_myordergetall_result}`]);
   for(let fnsz of waitfnsz){
      yield takeLatest(fnsz[0],createflowsz, fnsz[1]);
   }

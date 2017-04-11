@@ -53,7 +53,11 @@ import {
     myorderupdateone_result,
     myorderdelone_result,
     myordergetall_result,
-    getnews_result
+    getnews_result,
+
+    wait_mycartgetall_result,
+    wait_mycollectiongetall_result,
+    wait_myordergetall_result
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -85,8 +89,9 @@ const handlerlist = {
       });
     },
     ['shop.myordergetall_result']: (socket, emit)=> {
-      return ((payload) => {
-        emit(myordergetall_result(payload));
+      return ((result) => {
+        emit(myordergetall_result(result));
+        emit(wait_myordergetall_result({result:result}));
       });
     },
     ['shop.mycartaddone_result']: (socket, emit)=> {
@@ -100,8 +105,9 @@ const handlerlist = {
       });
     },
     ['shop.mycartgetall_result']: (socket, emit)=> {
-      return ((payload) => {
-        emit(mycartgetall_result(payload));
+      return ((result) => {
+        emit(mycartgetall_result(result));
+        emit(wait_mycartgetall_result({result:result}));
       });
     },
     ['shop.mycollectionaddone_result']: (socket, emit)=> {
@@ -115,8 +121,9 @@ const handlerlist = {
       });
     },
     ['shop.mycollectiongetall_result']: (socket, emit)=> {
-      return ((payload) => {
-        emit(mycollectiongetall_result(payload));
+      return ((result) => {
+        emit(mycollectiongetall_result(result));
+        emit(wait_mycollectiongetall_result({result:result}));
       });
     },
   ['shop.getbanner_result']: (socket, emit)=> {

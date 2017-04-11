@@ -83,6 +83,8 @@ import Pay from './components/shopping/pay.js';
 //结算
 import PayEnd from './components/shopping/payend.js';
 
+import Test from './components/test.js';
+
 import {requireAuthentication} from './components/requireauthentication';
 import '../public/css/page.css';
 
@@ -250,7 +252,7 @@ const CoApp = (props) => {
             <CustomRoute path="/shoppingcart" component={ShoppingCart} />
             <CustomRoute path="/pay" component={Pay} />
             <CustomRoute path="/payend" component={PayEnd} />
-
+            <CustomRoute path="/test" component={Test} />
             <CustomRoute component={App}/>
         </Switch>
     );

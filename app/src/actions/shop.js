@@ -21,6 +21,8 @@ export const mycartdelone_request = createAction('mycartdelone_request');
 export const mycartdelone_result = createAction('mycartdelone_result');
 export const mycartgetall_request = createAction('mycartgetall_request');
 export const mycartgetall_result = createAction('mycartgetall_result');
+export const wait_mycartgetall_request = createAction('wait_mycartgetall_request');
+export const wait_mycartgetall_result = createAction('wait_mycartgetall_result');
 
 //我的收藏
 export const mycollectionaddone_request = createAction('mycollectionaddone_request');
@@ -29,6 +31,8 @@ export const mycollectiondelone_request = createAction('mycollectiondelone_reque
 export const mycollectiondelone_result = createAction('mycollectiondelone_result');
 export const mycollectiongetall_request = createAction('mycollectiongetall_request');
 export const mycollectiongetall_result = createAction('mycollectiongetall_result');
+export const wait_mycollectiongetall_request = createAction('wait_mycollectiongetall_request');
+export const wait_mycollectiongetall_result = createAction('wait_mycollectiongetall_result');
 
 //我的订单
 export const myorderaddone_request = createAction('myorderaddone_request');
@@ -37,6 +41,9 @@ export const myorderupdateone_request = createAction('myorderupdateone_request')
 export const myorderupdateone_result = createAction('myorderupdateone_result');
 export const myorderdelone_request = createAction('myorderdelone_request');
 export const myorderdelone_result = createAction('myorderdelone_result');
+
+export const wait_myordergetall_request = createAction('wait_myordergetall_request');
+export const wait_myordergetall_result = createAction('wait_myordergetall_result');
 export const myordergetall_request = createAction('myordergetall_request');
 export const myordergetall_result = createAction('myordergetall_result');
 
