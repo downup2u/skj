@@ -32,6 +32,7 @@ export class Page extends Component {
         this.props.dispatch( ui_setnotifymessage(item) );
         this.props.history.push(`/mymessagedetail/${item._id}`);
     }
+
     render() {
         return (
             <div className="myMessage" style={{height:(window.innerHeight)+"px"}}>
@@ -42,6 +43,8 @@ export class Page extends Component {
                         updateContent= {this.updateContent} 
                         queryfun= {getnotifymessage}
                         listheight= {window.innerHeight}
+                        query = {{}}
+                        sort = {{created_at: -1}}
                     />
                 </div>
             </div>

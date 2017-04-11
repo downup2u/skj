@@ -172,10 +172,12 @@ export class Page extends React.Component {
                 </div>
                 <div className="tc" onClick={this.onClickPage}>
                     <InfinitePage
-                        pagenumber = {15}
+                        pagenumber = {16}
                         updateContent= {this.updateContent} 
                         queryfun= { gettopiclist }
                         listheight= { this.props.communityListHeight }
+                        sort = {{created_at: -1}}
+                        query = {{}}
                     />
                 </div>
                 <div onClick={this.stopDefault}>

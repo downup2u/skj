@@ -99,7 +99,7 @@ let Page = (props) => {
                             <div className="proList">
                                 {_.map(prolist, (product,index)=>{
                                     return (
-                                        <div key={index} className="li" onClick={(e)=>{onClickPage(e,`/shoppingproinfo/${product.proid}`)}}>
+                                        <div key={index} className="li" onClick={(e)=>{onClickPage(e,`/shoppingproinfo/${product._id}`)}}>
                                             <img src={product.picurl}/>
                                             <span className="name">{product.name}</span>
                                             <span className="price">

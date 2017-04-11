@@ -23,7 +23,8 @@ let Page = (props) => {
         props.history.push(name);
     };
     let proid = props.match.params.id;
-    let proinfo = props.shop.prolistall[proid];
+    let proinfo = props.products[proid];
+    console.log(proinfo);
 
     return (
         <div className="ProinfoPage">
@@ -39,10 +40,10 @@ let Page = (props) => {
                 <Swiper
                     swiperOptions={{slidesPerView: 'auto'}}
                     {...swiperOptions}>
-                    {_.map(proinfo.imglist, (proimg)=>{
+                    {_.map(proinfo.picurl, (proimg, index)=>{
                         return (
-                            <Slide className="Demo-swiper__slide">
-                                <img src={proimg}/>
+                            <Slide key={index} className="Demo-swiper__slide">
+                                <img src={proinfo.picurl}/>
                             </Slide>
                         )
                     })}
@@ -57,7 +58,7 @@ let Page = (props) => {
                 </span>
                 </div>
                 <div className="p2">
-                    ¥{proinfo.price}
+                    ¥{proinfo.pricenow}
                 </div>
                 <div className="p3">
                     运费:0元
@@ -65,10 +66,10 @@ let Page = (props) => {
             </div>
             <div className="discountlist">
                 <div className="li">
-                <span className="tt">
-                    <img src="img/shopping/13.png"/>
-                    抵扣20元
-                </span>
+                    <span className="tt">
+                        <img src="img/shopping/13.png"/>
+                        抵扣20元
+                    </span>
                     <span className="btn getdiscountlnk">领取</span>
                 </div>
                 <div className="li" onClick={()=>{onClickPage('/shoppingproevaluate')}} >
@@ -83,7 +84,6 @@ let Page = (props) => {
                     商品详情
                 </div>
                 <div className="proinfoBodyBody" dangerouslySetInnerHTML={{__html: proinfo.info}} />
-
             </div>
             <div className="proinfoFoot">
                 <span><i>加入购物车</i></span>
@@ -94,7 +94,7 @@ let Page = (props) => {
 }
 
 let mapStateToProps = ({shop}) => {
-    return {shop};
+    return {...shop};
 }
 
 Page = connect(mapStateToProps)(Page);

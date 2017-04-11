@@ -95,9 +95,9 @@ export class Page extends Component {
         }
         if(!this.state.pageEnd){
             this.props.dispatch(this.props.queryfun({
-                query: {},
+                query: this.props.query,
                 options: {
-                    sort: {created_at: -1},
+                    sort: this.props.sort,
                     page: this.page,
                     limit: this.props.pagenumber,
                 }
@@ -227,7 +227,6 @@ export class Page extends Component {
             lis.push(this.props.updateContent(item));
         });
         let PullUpHeight =  $(this.refs.PullUp).height();
-        console.log("PullUpHeight:::"+PullUpHeight);
 
         // 外层容器要固定高度，才能使用滚动条
         return (
@@ -263,6 +262,8 @@ Page.propTypes = {
     updateContent: PropTypes.func.isRequired,
     pagenumber: PropTypes.number.isRequired,
     listheight: PropTypes.number.isRequired,
+    query : PropTypes.object.isRequired,
+    sort : PropTypes.object.isRequired,
 };
 
 const mapStateToProps = ({infinitepage}) => {
