@@ -22,7 +22,11 @@ import {
 
     test_productcommentsfromproduct_request,
     test_productcommentaddone_request,
-    test_productcommentsfromproductgetcount_request
+    test_productcommentsfromproductgetcount_request,
+
+    test_withdrawcashapplyaddone_request,
+    test_withdrawcashapplyauth_request
+
 } from '../test/testshop';
 
 let Page =(props)=>{
@@ -51,6 +55,10 @@ let Page =(props)=>{
    <Button onClick={()=>{test_productcommentsfromproduct_request(props.dispatch)}}>根据产品获取所有评论</Button><br />
    <Button onClick={()=>{test_productcommentaddone_request(props.dispatch)}}>插入一条评论</Button><br />
    <Button onClick={()=>{test_productcommentsfromproductgetcount_request(props.dispatch)}}>根据产品获取所有评论个数</Button><br />
+    <br />
+
+    <Button onClick={()=>{test_withdrawcashapplyaddone_request(props.dispatch)}}>提现申请</Button><br />
+    <Button onClick={()=>{test_withdrawcashapplyauth_request(props.dispatch)}}>提现手机验证</Button><br />
     <br />
 
     <Button onClick={()=>{onClickPage('/register')}}>注册</Button><br />

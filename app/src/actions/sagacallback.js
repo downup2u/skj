@@ -84,6 +84,14 @@ import {
   wait_productcommentsfromproductgetcount_result,
   productcommentsfromproductgetcount_request,
 
+  wait_withdrawcashapplyaddone_request,
+  wait_withdrawcashapplyaddone_result,
+  withdrawcashapplyaddone_request,
+
+  wait_withdrawcashapplyauth_request,
+  wait_withdrawcashapplyauth_result,
+  withdrawcashapplyauth_request
+
 } from '../actions/index.js';
 
 import { fork, take, call, put, cancel,race,takeLatest } from 'redux-saga/effects';
@@ -187,6 +195,16 @@ export function productcommentsfromproductgetcount(payload){
   return synccall(payload,wait_productcommentsfromproductgetcount_request,productcommentsfromproductgetcount_request);
 }
 
+//==========提现相关================
+
+export function withdrawcashapplyaddone(payload){
+  return synccall(payload,wait_withdrawcashapplyaddone_request,withdrawcashapplyaddone_request);
+}
+
+export function withdrawcashapplyauth(payload){
+  return synccall(payload,wait_withdrawcashapplyauth_request,withdrawcashapplyauth_request);
+}
+
 //2.
 function* createflowsz(fnwatres,action){
     let {payload:{resolve,reject,payload:data}} = action;
@@ -232,6 +250,8 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_productcommentsfromproduct_request}`,`${wait_productcommentsfromproduct_result}`]);
   waitfnsz.push([`${wait_productcommentaddone_request}`,`${wait_productcommentaddone_result}`]);
   waitfnsz.push([`${wait_productcommentsfromproductgetcount_request}`,`${wait_productcommentsfromproductgetcount_result}`]);
+  waitfnsz.push([`${wait_withdrawcashapplyaddone_request}`,`${wait_withdrawcashapplyaddone_result}`]);
+  waitfnsz.push([`${wait_withdrawcashapplyauth_request}`,`${wait_withdrawcashapplyauth_result}`]);
 
   for(let fnsz of waitfnsz){
      yield takeLatest(fnsz[0],createflowsz, fnsz[1]);

@@ -54,6 +54,9 @@ import {
     productcommentsfromproduct_request,
     productcommentaddone_request,
     productcommentsfromproductgetcount_request,
+
+    withdrawcashapplyaddone_request,
+    withdrawcashapplyauth_request,
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -165,6 +168,9 @@ function* handleIOWithAuth(socket) {
             'productcommentsfromproduct':`${productcommentsfromproduct_request}`,
             'productcommentaddone':`${productcommentaddone_request}`,    
             'productcommentsfromproductgetcount':`${productcommentsfromproductgetcount_request}`, 
+       
+            'withdrawcashapplyaddone':`${withdrawcashapplyaddone_request}`,    
+            'withdrawcashapplyauth':`${withdrawcashapplyauth_request}`, 
         };
 
         let tasksz =[];

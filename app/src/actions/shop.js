@@ -101,3 +101,16 @@ export const wait_productcommentsfromproductgetcount_request = createAction('wai
 export const wait_productcommentsfromproductgetcount_result = createAction('wait_productcommentsfromproductgetcount_result');
 export const productcommentsfromproductgetcount_request = createAction('productcommentsfromproductgetcount_request');
 export const productcommentsfromproductgetcount_result = createAction('productcommentsfromproductgetcount_result');
+
+//============提现============
+//提现申请
+export const wait_withdrawcashapplyaddone_request = createAction('wait_withdrawcashapplyaddone_request');
+export const wait_withdrawcashapplyaddone_result = createAction('wait_withdrawcashapplyaddone_result');
+export const withdrawcashapplyaddone_request = createAction('withdrawcashapplyaddone_request');
+export const withdrawcashapplyaddone_result = createAction('withdrawcashapplyaddone_result');
+
+//提现手机验证
+export const wait_withdrawcashapplyauth_request = createAction('wait_withdrawcashapplyauth_request');
+export const wait_withdrawcashapplyauth_result = createAction('wait_withdrawcashapplyauth_result');
+export const withdrawcashapplyauth_request = createAction('withdrawcashapplyauth_request');
+export const withdrawcashapplyauth_result = createAction('withdrawcashapplyauth_result');

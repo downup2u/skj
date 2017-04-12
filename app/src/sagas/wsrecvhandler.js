@@ -75,12 +75,19 @@ import {
 
       
     productcommentsfromproduct_result,
-    productcommentaddone_result,
-    productcommentsfromproductgetcount_result,
     wait_productcommentsfromproduct_result,
+
+    productcommentaddone_result,
     wait_productcommentaddone_result,
+
+    productcommentsfromproductgetcount_result,
     wait_productcommentsfromproductgetcount_result,
 
+    withdrawcashapplyaddone_result,
+    wait_withdrawcashapplyaddone_result,
+    
+    withdrawcashapplyauth_result,
+    wait_withdrawcashapplyauth_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -90,6 +97,18 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+      ['shop.withdrawcashapplyaddone_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(withdrawcashapplyaddone_result(payload));
+        emit(wait_withdrawcashapplyaddone_result({result:payload}));
+      });
+     },
+      ['shop.withdrawcashapplyauth_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(withdrawcashapplyauth_result(payload));
+        emit(wait_withdrawcashapplyauth_result({result:payload}));
+      });
+     },
      ['shop.productcommentsfromproduct_result']: (socket, emit)=> {
       return ((payload) => {
         emit(productcommentsfromproduct_result(payload));
