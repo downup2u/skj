@@ -12,6 +12,8 @@ import {
   myorderaddone_request,
   myorderupdateone_request,
   myorderdelone_request,
+
+
 } from '../actions';
 
 import {
@@ -23,7 +25,10 @@ import {
   mycollectiondelone,
   mycollectionisproductexits,
   myorderaddone,
-  myorderupdateone
+  myorderupdateone,
+  productcommentsfromproduct,
+  productcommentaddone,
+  productcommentsfromproductgetcount
 } from '../actions/sagacallback.js';
 
 //测试新增购物车
@@ -221,6 +226,49 @@ let test_myorderdelone_request=(dispatch)=>{
 
 }
 
+//================================================================
+//产品评论相关
+let test_productcommentsfromproduct_request=(dispatch)=>{
+  let payload = {
+     productid:'58e71be6ef4e8d02eca6e0e8',
+  };
+  dispatch(productcommentsfromproduct(payload)).then((result)=>{
+    //productcommentsfromproduct result=>{"list":[{"_id":"58ed937d5a7eff0a1e579a3a","product":"58e71be6ef4e8d02eca6e0e8","order":"5
+    console.log("productcommentsfromproduct result=>" + JSON.stringify(result));
+  });
+
+}
+let test_productcommentaddone_request=(dispatch)=>{
+    //   product:{ type: Schema.Types.ObjectId, ref: 'Product' },
+    // creator:{ type: Schema.Types.ObjectId, ref: 'User' },
+    // order:{ type: Schema.Types.ObjectId, ref: 'Order' },
+    // ratenum:Number,
+    // commenttxt:String,
+    // created_at: Date,
+    // isshow:Boolean
+  let payload = {
+    product:'58e71be6ef4e8d02eca6e0e8',
+    order:'58ed8391d3f83a025b8067b9',
+    ratenum:5,
+    commenttxt:'这个挺好'
+  };
+  dispatch(productcommentaddone(payload)).then((result)=>{
+    //productcommentaddone result=>{"newitem":{"__v":0,"product":"58e71be6ef4e8d02eca6e0e8","order":"58ed8391d3f83a025b8067b9","ratenum":5,"commenttxt":"这个挺好","creator":"58d6ae16e9eeb16b217bba0c","created_at":"2017-04-12T02:40:21.010Z","_id":"58ed93955a7eff0a1e579a3c"}}
+    console.log("productcommentaddone result=>" + JSON.stringify(result));
+  });
+
+}
+let test_productcommentsfromproductgetcount_request=(dispatch)=>{
+  let payload = {
+    productid:'58e71be6ef4e8d02eca6e0e8',
+  };
+  dispatch(productcommentsfromproductgetcount(payload)).then((result)=>{
+    //productcommentsfromproductgetcount result=>{"count":3}
+    console.log("productcommentsfromproductgetcount result=>" + JSON.stringify(result));
+  });
+
+}
+//================================================================
 
 export {
     test_mycartgetall_request,
@@ -236,5 +284,9 @@ export {
     test_myordergetall_request,
     test_myorderaddone_request,
     test_myorderupdateone_request,
-    test_myorderdelone_request
+    test_myorderdelone_request,
+
+    test_productcommentsfromproduct_request,
+    test_productcommentaddone_request,
+    test_productcommentsfromproductgetcount_request
 };

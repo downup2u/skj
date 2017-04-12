@@ -49,7 +49,11 @@ import {
     myorderupdateone_request,
     myorderdelone_request,
     myordergetall_request,
-    mycollectionisproductexits_request
+    mycollectionisproductexits_request,
+
+    productcommentsfromproduct_request,
+    productcommentaddone_request,
+    productcommentsfromproductgetcount_request,
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -157,6 +161,10 @@ function* handleIOWithAuth(socket) {
             'myorderupdateone':`${myorderupdateone_request}`,
             'myorderdelone':`${myorderdelone_request}`,    
             'myordergetall':`${myordergetall_request}`, 
+
+            'productcommentsfromproduct':`${productcommentsfromproduct_request}`,
+            'productcommentaddone':`${productcommentaddone_request}`,    
+            'productcommentsfromproductgetcount':`${productcommentsfromproductgetcount_request}`, 
         };
 
         let tasksz =[];

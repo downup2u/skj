@@ -72,6 +72,15 @@ import {
     
     wait_myorderaddone_result,
     wait_myorderupdateone_result,
+
+      
+    productcommentsfromproduct_result,
+    productcommentaddone_result,
+    productcommentsfromproductgetcount_result,
+    wait_productcommentsfromproduct_result,
+    wait_productcommentaddone_result,
+    wait_productcommentsfromproductgetcount_result,
+
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -80,8 +89,25 @@ import {
 import {store} from '../env/store.js';
 
 
-
 const handlerlist = {
+     ['shop.productcommentsfromproduct_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(productcommentsfromproduct_result(payload));
+        emit(wait_productcommentsfromproduct_result({result:payload}));
+      });
+     },
+      ['shop.productcommentaddone_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(productcommentaddone_result(payload));
+        emit(wait_productcommentaddone_result({result:payload}));
+      });
+     },
+     ['shop.productcommentsfromproductgetcount_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(productcommentsfromproductgetcount_result(payload));
+        emit(wait_productcommentsfromproductgetcount_result({result:payload}));
+      });
+     },
     ['serverpush_mycartcount']:(socket,emit)=>{
        return  ((payload) => {
          emit(serverpush_mycartcount(payload));
@@ -96,7 +122,6 @@ const handlerlist = {
       return ((payload) => {
         emit(myorderaddone_result(payload));
         emit(wait_myorderaddone_result({result:payload}));
-        
       });
      },
     ['shop.myorderupdateone_result']: (socket, emit)=> {

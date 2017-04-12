@@ -79,3 +79,25 @@ export const myordergetall_result = createAction('myordergetall_result');
 //动态（自动获取）
 export const getnews_request = createAction('getnews_request');
 export const getnews_result = createAction('getnews_result');
+
+
+
+//产品评论相关
+//获取一个产品下所有评论
+export const wait_productcommentsfromproduct_request = createAction('wait_productcommentsfromproduct_request');
+export const wait_productcommentsfromproduct_result = createAction('wait_productcommentsfromproduct_result');
+export const productcommentsfromproduct_request = createAction('productcommentsfromproduct_request');
+export const productcommentsfromproduct_result = createAction('productcommentsfromproduct_result');
+
+//新增一个商品评论 productcommentaddone
+export const wait_productcommentaddone_request = createAction('wait_productcommentaddone_request');
+export const wait_productcommentaddone_result = createAction('wait_productcommentaddone_result');
+export const productcommentaddone_request = createAction('productcommentaddone_request');
+export const productcommentaddone_result = createAction('productcommentaddone_result');
+
+
+//获取一个商品评论个数 productcommentsfromproductgetcount
+export const wait_productcommentsfromproductgetcount_request = createAction('wait_productcommentsfromproductgetcount_request');
+export const wait_productcommentsfromproductgetcount_result = createAction('wait_productcommentsfromproductgetcount_result');
+export const productcommentsfromproductgetcount_request = createAction('productcommentsfromproductgetcount_request');
+export const productcommentsfromproductgetcount_result = createAction('productcommentsfromproductgetcount_result');

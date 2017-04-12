@@ -70,7 +70,19 @@ import {
   
   wait_myorderupdateone_request,
   wait_myorderupdateone_result,
-  myorderupdateone_request
+  myorderupdateone_request,
+
+  wait_productcommentsfromproduct_request,
+  wait_productcommentsfromproduct_result,
+  productcommentsfromproduct_request,
+
+  wait_productcommentaddone_request,
+  wait_productcommentaddone_result,
+  productcommentaddone_request,
+  
+  wait_productcommentsfromproductgetcount_request,
+  wait_productcommentsfromproductgetcount_result,
+  productcommentsfromproductgetcount_request,
 
 } from '../actions/index.js';
 
@@ -161,6 +173,19 @@ export function mycollectionisproductexits(payload){
   return synccall(payload,wait_mycollectionisproductexits_request,mycollectionisproductexits_request);
 }
 
+//==========商品评论相关================
+
+export function productcommentsfromproduct(payload){
+  return synccall(payload,wait_productcommentsfromproduct_request,productcommentsfromproduct_request);
+}
+
+export function productcommentaddone(payload){
+  return synccall(payload,wait_productcommentaddone_request,productcommentaddone_request);
+}
+
+export function productcommentsfromproductgetcount(payload){
+  return synccall(payload,wait_productcommentsfromproductgetcount_request,productcommentsfromproductgetcount_request);
+}
 
 //2.
 function* createflowsz(fnwatres,action){
@@ -204,6 +229,9 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_mycollectionisproductexits_request}`,`${wait_mycollectionisproductexits_result}`]);
   waitfnsz.push([`${wait_myorderaddone_request}`,`${wait_myorderaddone_result}`]);
   waitfnsz.push([`${wait_myorderupdateone_request}`,`${wait_myorderupdateone_result}`]);
+  waitfnsz.push([`${wait_productcommentsfromproduct_request}`,`${wait_productcommentsfromproduct_result}`]);
+  waitfnsz.push([`${wait_productcommentaddone_request}`,`${wait_productcommentaddone_result}`]);
+  waitfnsz.push([`${wait_productcommentsfromproductgetcount_request}`,`${wait_productcommentsfromproductgetcount_result}`]);
 
   for(let fnsz of waitfnsz){
      yield takeLatest(fnsz[0],createflowsz, fnsz[1]);
