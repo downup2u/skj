@@ -27,14 +27,19 @@ export const getproduct_result = createAction('getproduct_result');
 //购物车
 export const mycartaddone_request = createAction('mycartaddone_request');//添加购物车
 export const mycartaddone_result = createAction('mycartaddone_result');
+export const wait_mycartaddone_request = createAction('wait_mycartaddone_request');//添加购物车
+export const wait_mycartaddone_result = createAction('wait_mycartaddone_result');
+
 export const wait_mycartupdateone_request = createAction('wait_mycartupdateone_request');//修改购物车
 export const wait_mycartupdateone_result = createAction('wait_mycartupdateone_result');
 export const mycartupdateone_request = createAction('mycartupdateone_request');//修改购物车
 export const mycartupdateone_result = createAction('mycartupdateone_result');
+
 export const wait_mycartdelone_request = createAction('wait_mycartdelone_request');
 export const wait_mycartdelone_result = createAction('wait_mycartdelone_result');
 export const mycartdelone_request = createAction('mycartdelone_request');
 export const mycartdelone_result = createAction('mycartdelone_result');
+
 export const mycartgetall_request = createAction('mycartgetall_request');
 export const mycartgetall_result = createAction('mycartgetall_result');
 export const wait_mycartgetall_request = createAction('wait_mycartgetall_request');
@@ -43,14 +48,17 @@ export const serverpush_mycartcount = createAction('serverpush_mycartcount');
 //我的收藏
 export const mycollectionaddone_request = createAction('mycollectionaddone_request');
 export const mycollectionaddone_result = createAction('mycollectionaddone_result');
+
 export const wait_mycollectiondelone_request = createAction('wait_mycollectiondelone_request');
 export const wait_mycollectiondelone_result = createAction('wait_mycollectiondelone_result');
 export const mycollectiondelone_request = createAction('mycollectiondelone_request');
 export const mycollectiondelone_result = createAction('mycollectiondelone_result');
+
 export const mycollectiongetall_request = createAction('mycollectiongetall_request');
 export const mycollectiongetall_result = createAction('mycollectiongetall_result');
 export const wait_mycollectiongetall_request = createAction('wait_mycollectiongetall_request');
 export const wait_mycollectiongetall_result = createAction('wait_mycollectiongetall_result');
+
 export const serverpush_mycollectioncount = createAction('serverpush_mycollectioncount');
 
 export const mycollectionisproductexits_request = createAction('mycollectionisproductexits_request');
@@ -117,3 +125,9 @@ export const wait_withdrawcashapplyauth_request = createAction('wait_withdrawcas
 export const wait_withdrawcashapplyauth_result = createAction('wait_withdrawcashapplyauth_result');
 export const withdrawcashapplyauth_request = createAction('withdrawcashapplyauth_request');
 export const withdrawcashapplyauth_result = createAction('withdrawcashapplyauth_result');
+
+//获取我的优惠券
+export const mycoupongetall_request = createAction('mycoupongetall_request');
+export const mycoupongetall_result = createAction('mycoupongetall_result');
+export const wait_mycoupongetall_request = createAction('wait_mycoupongetall_request');
+export const wait_mycoupongetall_result = createAction('wait_mycoupongetall_result');

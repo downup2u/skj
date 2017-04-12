@@ -48,6 +48,10 @@ import {
   wait_myordergetall_result,
   myordergetall_request,
 
+  wait_mycartaddone_request,
+  wait_mycartaddone_result,
+  mycartaddone_request,
+
   wait_mycartupdateone_request,
   wait_mycartupdateone_result,
   mycartupdateone_request,
@@ -90,8 +94,11 @@ import {
 
   wait_withdrawcashapplyauth_request,
   wait_withdrawcashapplyauth_result,
-  withdrawcashapplyauth_request
+  withdrawcashapplyauth_request,
 
+  wait_mycoupongetall_request,
+  wait_mycoupongetall_result,
+  mycoupongetall_request,
 } from '../actions/index.js';
 
 import { fork, take, call, put, cancel,race,takeLatest } from 'redux-saga/effects';
@@ -165,6 +172,10 @@ export function myorderupdateone(payload){
 }
 
 //==========
+export function mycartaddone(payload){
+  return synccall(payload,wait_mycartaddone_request,mycartaddone_request);
+}
+
 export function mycartupdateone(payload){
   return synccall(payload,wait_mycartupdateone_request,mycartupdateone_request);
 }
@@ -204,6 +215,12 @@ export function withdrawcashapplyaddone(payload){
 export function withdrawcashapplyauth(payload){
   return synccall(payload,wait_withdrawcashapplyauth_request,withdrawcashapplyauth_request);
 }
+//==========我的优惠券相关================
+
+export function mycoupongetall(payload){
+  return synccall(payload,wait_mycoupongetall_request,mycoupongetall_request);
+}
+
 
 //2.
 function* createflowsz(fnwatres,action){
@@ -241,6 +258,7 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_mycartgetall_request}`,`${wait_mycartgetall_result}`]);
   waitfnsz.push([`${wait_mycollectiongetall_request}`,`${wait_mycollectiongetall_result}`]);
   waitfnsz.push([`${wait_myordergetall_request}`,`${wait_myordergetall_result}`]);
+  waitfnsz.push([`${wait_mycartaddone_request}`,`${wait_mycartaddone_result}`]);
   waitfnsz.push([`${wait_mycartupdateone_request}`,`${wait_mycartupdateone_result}`]);
   waitfnsz.push([`${wait_mycartdelone_request}`,`${wait_mycartdelone_result}`]);
   waitfnsz.push([`${wait_mycollectiondelone_request}`,`${wait_mycollectiondelone_result}`]);
@@ -252,6 +270,7 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_productcommentsfromproductgetcount_request}`,`${wait_productcommentsfromproductgetcount_result}`]);
   waitfnsz.push([`${wait_withdrawcashapplyaddone_request}`,`${wait_withdrawcashapplyaddone_result}`]);
   waitfnsz.push([`${wait_withdrawcashapplyauth_request}`,`${wait_withdrawcashapplyauth_result}`]);
+  waitfnsz.push([`${wait_mycoupongetall_request}`,`${wait_mycoupongetall_result}`]);
 
   for(let fnsz of waitfnsz){
      yield takeLatest(fnsz[0],createflowsz, fnsz[1]);

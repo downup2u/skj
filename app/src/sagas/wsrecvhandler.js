@@ -60,6 +60,7 @@ import {
     wait_mycollectiongetall_result,
     wait_myordergetall_result,
 
+    wait_mycartaddone_result,
     wait_mycartupdateone_result,
     wait_mycartdelone_result,
     wait_mycollectiondelone_result,
@@ -88,6 +89,9 @@ import {
     
     withdrawcashapplyauth_result,
     wait_withdrawcashapplyauth_result,
+
+    mycoupongetall_result,
+    wait_mycoupongetall_result
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -97,6 +101,12 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+     ['shop.mycoupongetall_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(mycoupongetall_result(payload));
+        emit(wait_mycoupongetall_result({result:payload}));
+      });
+     },
       ['shop.withdrawcashapplyaddone_result']: (socket, emit)=> {
       return ((payload) => {
         emit(withdrawcashapplyaddone_result(payload));
@@ -161,8 +171,9 @@ const handlerlist = {
       });
     },
     ['shop.mycartaddone_result']: (socket, emit)=> {
-      return ((payload) => {
-        emit(mycartaddone_result(payload));
+      return ((result) => {
+        emit(mycartaddone_result(result));
+        emit(wait_mycartaddone_result({result:result}));
       });
     },
     ['shop.mycartupdateone_result']: (socket, emit)=> {
