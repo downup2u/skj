@@ -23,7 +23,8 @@ const initial = {
         
         //是否显示添加购物车控件
         addcartdilogshow : false,
-        addcartdilogproid : ''
+        addcartdilogproid : '',
+        addcartdilogpronumber : 1
     },
 
 };

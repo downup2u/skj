@@ -128,6 +128,7 @@ let test_mycollectiondelone_request=(dispatch)=>{
   });
 }
 
+//判断产品是否被收藏
 let test_mycollectionisproductexits=(dispatch)=>{
   let payload = {
     productid:'58ec7d3f3be8bb1e329c9c95',
@@ -238,6 +239,7 @@ let test_productcommentsfromproduct_request=(dispatch)=>{
   });
 
 }
+//新增产品评论
 let test_productcommentaddone_request=(dispatch)=>{
     //   product:{ type: Schema.Types.ObjectId, ref: 'Product' },
     // creator:{ type: Schema.Types.ObjectId, ref: 'User' },
@@ -258,6 +260,7 @@ let test_productcommentaddone_request=(dispatch)=>{
   });
 
 }
+//获取产品以一个多少条评论
 let test_productcommentsfromproductgetcount_request=(dispatch)=>{
   let payload = {
     productid:'58e71be6ef4e8d02eca6e0e8',

@@ -88,7 +88,6 @@ let Page = (props) => {
                                 pagination: '.swiper-pagination',
                                 direction: 'vertical',
                                 pagination : false,
-                                initialSlide : 1,
                                 loop: true,
                                 autoplay : 5000,
                                 scrollBar: false
@@ -147,7 +146,7 @@ let Page = (props) => {
                     )
                 })}
             </div>
-            <Addcartdilog show={props.addcartdilogshow} proid={props.addcartdilogproid} />
+            <Addcartdilog show={props.addcartdilogshow} proid={props.addcartdilogproid} number={props.addcartdilogpronumber} />
         </div>
     );
 }
