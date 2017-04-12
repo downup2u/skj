@@ -21,6 +21,11 @@ import {ExpresslistCreate,ExpresslistList,ExpresslistEdit,ExpresslistShow} from 
 import {NotifymessageCreate,NotifymessagelistList,NotifymessagelistEdit,NotifymessagelistShow} from './components/notifymessage/index.js';
 import {TopiclistList,TopiclistEdit,TopiclistShow} from './components/topic/index.js';
 import {FeedbackList,FeedbackShow} from './components/feedback/index.js';
+import {CouponlistList,CouponlistCreate,CouponlistEdit,CouponlistShow} from './components/coupon/index.js';
+import {UserlistList,UserlistShow} from './components/user/index.js';
+import {NewslistCreate,NewslistList,NewslistEdit,NewslistShow} from './components/news/index.js';
+import {WithdrawcashlistList,WithdrawcashlistEdit,WithdrawcashlistShow} from './components/withdrawcash/index.js';
+import {OrderlistList,OrderlistEdit,OrderlistShow} from './components/orders/index.js';
 
 import restClient from './restClient';
 class App extends Component {
@@ -46,7 +51,12 @@ class App extends Component {
                 <Resource name="topic" list={TopiclistList} edit={TopiclistEdit} />
                 <Resource name="notifymessage" list={NotifymessagelistList} edit={NotifymessagelistEdit} create={NotifymessageCreate}  remove={Delete} />
                 <Resource name="feedback" list={FeedbackList} show={FeedbackShow} />
-            </Admin>
+                <Resource name="coupon" list={CouponlistList} edit={CouponlistEdit} create={CouponlistCreate}  remove={Delete} />
+                <Resource name="user" list={UserlistList} show={UserlistShow} />
+                <Resource name="news" list={NewslistList} edit={NewslistEdit} create={NewslistCreate}  remove={Delete} />
+                <Resource name="withdrawcash" list={WithdrawcashlistList} show={WithdrawcashlistShow}  edit={WithdrawcashlistEdit}/>
+                <Resource name="order" list={OrderlistList} show={OrderlistShow}  edit={OrderlistEdit}/>
+           </Admin>
         );
     }
 }

@@ -28,6 +28,8 @@ const items = [
     { name: 'notifymessage', icon: <MessageIcon /> },
     { name: 'feedback', icon: <FeedbackIcon /> },
     { name: 'coupon', icon: <CouponIcon /> },
+    { name: 'withdrawcash', icon: <UserIcon /> },
+    { name: 'order', icon: <UserIcon /> },
     { name: 'user', icon: <UserIcon /> },
 ];
 

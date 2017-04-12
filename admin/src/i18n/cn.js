@@ -45,6 +45,12 @@ export default {
     news:{
       name: '动态管理 |||| 动态管理',
     },
+    withdrawcash:{
+      name: '提现管理 |||| 提现管理',
+    },
+    order:{
+      name: '订单管理 |||| 订单管理',
+    },
   }
 
 };
