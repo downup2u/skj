@@ -56,12 +56,21 @@ export const wait_mycollectionisproductexits_request = createAction('wait_mycoll
 export const wait_mycollectionisproductexits_result = createAction('wait_mycollectionisproductexits_result');
 
 //我的订单
+//新增一个订单
+export const wait_myorderaddone_request = createAction('wait_myorderaddone_request');
+export const wait_myorderaddone_result = createAction('wait_myorderaddone_result');
 export const myorderaddone_request = createAction('myorderaddone_request');
 export const myorderaddone_result = createAction('myorderaddone_result');
+
+//更新一个订单
+export const wait_myorderupdateone_request = createAction('wait_myorderupdateone_request');
+export const wait_myorderupdateone_result = createAction('wait_myorderupdateone_result');
 export const myorderupdateone_request = createAction('myorderupdateone_request');
 export const myorderupdateone_result = createAction('myorderupdateone_result');
+
 export const myorderdelone_request = createAction('myorderdelone_request');
 export const myorderdelone_result = createAction('myorderdelone_result');
+
 export const wait_myordergetall_request = createAction('wait_myordergetall_request');
 export const wait_myordergetall_result = createAction('wait_myordergetall_result');
 export const myordergetall_request = createAction('myordergetall_request');

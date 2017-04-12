@@ -1,35 +1,35 @@
 import {
-  showpopmessage,
-  login_result,login_err,
+    showpopmessage,
+    login_result,login_err,
 
 
-  inserttopic_result,
-  getmytopic_result,
-  gettopiclist_result,
-  wait_getmytopic_result,
-  wait_gettopiclist_result,
-  insertcommentstotopic_result,
-  insertcommentstocomments_result,
-  lovetopicadd_result,
-  lovetopicunadd_result,
-  lovecommentsadd_result,
-  lovecommentsunadd_result,
+    inserttopic_result,
+    getmytopic_result,
+    gettopiclist_result,
+    wait_getmytopic_result,
+    wait_gettopiclist_result,
+    insertcommentstotopic_result,
+    insertcommentstocomments_result,
+    lovetopicadd_result,
+    lovetopicunadd_result,
+    lovecommentsadd_result,
+    lovecommentsunadd_result,
 
-  createdevice_result,
-  getdevicelist_result,
-  deletedevice_result,
-  getnotifymessage_result,
-  wait_getnotifymessage_result,
-  createaddress_result,
-  deleteaddress_result,
-  editaddress_result,
-  getaddresslist_result,
+    createdevice_result,
+    getdevicelist_result,
+    deletedevice_result,
+    getnotifymessage_result,
+    wait_getnotifymessage_result,
+    createaddress_result,
+    deleteaddress_result,
+    editaddress_result,
+    getaddresslist_result,
 
-  wait_createaddress_result,
-  wait_editaddress_result,
-  wait_register_result,
-  wait_inserttopic_result,
-  wait_createdevice_result,
+    wait_createaddress_result,
+    wait_editaddress_result,
+    wait_register_result,
+    wait_inserttopic_result,
+    wait_createdevice_result,
     fillprofile_result,
     logout_result,
     findpwd_result,
@@ -67,8 +67,11 @@ import {
     wait_mycollectionisproductexits_result,
     mycollectionisproductexits_result,
 
+    serverpush_mycartcount,
 
-    serverpush_mycartcount
+    
+    wait_myorderaddone_result,
+    wait_myorderupdateone_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -92,11 +95,14 @@ const handlerlist = {
      ['shop.myorderaddone_result']: (socket, emit)=> {
       return ((payload) => {
         emit(myorderaddone_result(payload));
+        emit(wait_myorderaddone_result({result:payload}));
+        
       });
      },
     ['shop.myorderupdateone_result']: (socket, emit)=> {
       return ((payload) => {
         emit(myorderupdateone_result(payload));
+        emit(wait_myorderupdateone_result({result:payload}));
       });
     },
     ['shop.myorderdelone_result']: (socket, emit)=> {

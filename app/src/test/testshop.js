@@ -11,7 +11,7 @@ import {
   myordergetall_request,
   myorderaddone_request,
   myorderupdateone_request,
-  myorderdelone_request
+  myorderdelone_request,
 } from '../actions';
 
 import {
@@ -21,7 +21,9 @@ import {
   mycartupdateone,
   mycartdelone,
   mycollectiondelone,
-  mycollectionisproductexits
+  mycollectionisproductexits,
+  myorderaddone,
+  myorderupdateone
 } from '../actions/sagacallback.js';
 
 //测试新增购物车
@@ -186,21 +188,27 @@ let test_myorderaddone_request=(dispatch)=>{
     couponprice:10,//抵扣价
     productprice:80,//产品总价
   };
-  dispatch(myorderaddone_request(payload));
-
+  //dispatch(myorderaddone_request(payload));
+  dispatch(myorderaddone(payload)).then((result)=>{
+    //myorderaddone result=>{"newitem":{"__v":0,"payway"
+    console.log("myorderaddone result=>" + JSON.stringify(result));
+  });
 }
 
 //测试修改我的订单
 let test_myorderupdateone_request=(dispatch)=>{
   let payload = {
-    _id:'58ec860847e29e219f293e90',
+    _id:'58ed8391d3f83a025b8067b9',
     data:{
       payway:'alipay',
       orderstatus:'已支付',
     }
   };
-  dispatch(myorderupdateone_request(payload));
-
+ // dispatch(myorderupdateone_request(payload));
+  dispatch(myorderupdateone(payload)).then((result)=>{
+    //{"updateditem":{"_id":"58ed8391d3f83a025b8067b9","payway":"alipay"
+    console.log("myorderaddone result=>" + JSON.stringify(result));
+  });
 }
 
 

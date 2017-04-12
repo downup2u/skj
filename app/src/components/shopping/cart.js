@@ -135,7 +135,7 @@ let Page = (props) => {
         let number = parseInt(item.number);
         let price = parseInt(props.products[item.product].pricenow);
         let priceitem = number*price;
-        priceitem = priceitem.toFixed(2);
+        priceitem = parseInt(priceitem.toFixed(2));
         totalprice += priceitem;
     });
     return (

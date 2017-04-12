@@ -62,7 +62,15 @@ import {
 
   mycollectionisproductexits_request,
   wait_mycollectionisproductexits_request,
-  wait_mycollectionisproductexits_result
+  wait_mycollectionisproductexits_result,
+
+  wait_myorderaddone_request,
+  wait_myorderaddone_result,
+  myorderaddone_request,
+  
+  wait_myorderupdateone_request,
+  wait_myorderupdateone_result,
+  myorderupdateone_request
 
 } from '../actions/index.js';
 
@@ -127,6 +135,15 @@ export function mycollectiongetall(payload){
 export function myordergetall(payload){
   return synccall(payload,wait_myordergetall_request,myordergetall_request);
 }
+
+export function myorderaddone(payload){
+  return synccall(payload,wait_myorderaddone_request,myorderaddone_request);
+}
+
+export function myorderupdateone(payload){
+  return synccall(payload,wait_myorderupdateone_request,myorderupdateone_request);
+}
+
 //==========
 export function mycartupdateone(payload){
   return synccall(payload,wait_mycartupdateone_request,mycartupdateone_request);
@@ -185,6 +202,8 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_mycartdelone_request}`,`${wait_mycartdelone_result}`]);
   waitfnsz.push([`${wait_mycollectiondelone_request}`,`${wait_mycollectiondelone_result}`]);
   waitfnsz.push([`${wait_mycollectionisproductexits_request}`,`${wait_mycollectionisproductexits_result}`]);
+  waitfnsz.push([`${wait_myorderaddone_request}`,`${wait_myorderaddone_result}`]);
+  waitfnsz.push([`${wait_myorderupdateone_request}`,`${wait_myorderupdateone_result}`]);
 
   for(let fnsz of waitfnsz){
      yield takeLatest(fnsz[0],createflowsz, fnsz[1]);
