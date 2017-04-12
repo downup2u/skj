@@ -8,6 +8,8 @@ import {
     getproduct_result,
     getnews_result,
     search_shoptxt,
+    uiiscollection,
+    mycollectiondelone_result
 } from '../actions/index.js';
 import {
     normalizrbanners,
@@ -29,12 +31,28 @@ const initial = {
         banners:{},//所有广告集合
         categories:{},//所有分类即集合
         products:{},//所有产品集合
+
+        //判断是否已收藏
+        iscollection:{},
     }
 };
 
 const shop = createReducer({
+    //商品是否已经被收藏
+    [mycollectiondelone_result]:(state, payload)=>{
+        console.log("mycollectiondelone_result payload"+JSON.stringify(payload));
+        let newcollection = {}
+        newcollection[payload.productid] = true;
+        let iscollection = {...state.iscollection,...newcollection};
+        return {...state,iscollection};
+    },
+    //
+    [uiiscollection]:(state, payload)=>{
+        let iscollection = {...state.iscollection,payload};
+        return {...state,iscollection};
+    },
     [search_shoptxt]:(state, searchtxt)=>{
-        return {...state,searchtxt};
+        return {...state, searchtxt};
     },
     [getnews_result]:(state, payload)=>{
         let news = payload.list;
