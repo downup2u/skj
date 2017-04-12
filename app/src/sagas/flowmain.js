@@ -57,6 +57,8 @@ import {
 
     withdrawcashapplyaddone_request,
     withdrawcashapplyauth_request,
+
+    mycoupongetall_request
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -170,7 +172,9 @@ function* handleIOWithAuth(socket) {
             'productcommentsfromproductgetcount':`${productcommentsfromproductgetcount_request}`, 
        
             'withdrawcashapplyaddone':`${withdrawcashapplyaddone_request}`,    
-            'withdrawcashapplyauth':`${withdrawcashapplyauth_request}`, 
+            'withdrawcashapplyauth':`${withdrawcashapplyauth_request}`,
+
+            'mycoupongetall' :`${mycoupongetall_request}`,
         };
 
         let tasksz =[];

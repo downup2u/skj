@@ -40,14 +40,17 @@ export const serverpush_mycartcount = createAction('serverpush_mycartcount');
 //我的收藏
 export const mycollectionaddone_request = createAction('mycollectionaddone_request');
 export const mycollectionaddone_result = createAction('mycollectionaddone_result');
+
 export const wait_mycollectiondelone_request = createAction('wait_mycollectiondelone_request');
 export const wait_mycollectiondelone_result = createAction('wait_mycollectiondelone_result');
 export const mycollectiondelone_request = createAction('mycollectiondelone_request');
 export const mycollectiondelone_result = createAction('mycollectiondelone_result');
+
 export const mycollectiongetall_request = createAction('mycollectiongetall_request');
 export const mycollectiongetall_result = createAction('mycollectiongetall_result');
 export const wait_mycollectiongetall_request = createAction('wait_mycollectiongetall_request');
 export const wait_mycollectiongetall_result = createAction('wait_mycollectiongetall_result');
+
 export const serverpush_mycollectioncount = createAction('serverpush_mycollectioncount');
 
 export const mycollectionisproductexits_request = createAction('mycollectionisproductexits_request');
@@ -114,3 +117,9 @@ export const wait_withdrawcashapplyauth_request = createAction('wait_withdrawcas
 export const wait_withdrawcashapplyauth_result = createAction('wait_withdrawcashapplyauth_result');
 export const withdrawcashapplyauth_request = createAction('withdrawcashapplyauth_request');
 export const withdrawcashapplyauth_result = createAction('withdrawcashapplyauth_result');
+
+//获取我的优惠券
+export const mycoupongetall_request = createAction('mycoupongetall_request');
+export const mycoupongetall_result = createAction('mycoupongetall_result');
+export const wait_mycoupongetall_request = createAction('wait_mycoupongetall_request');
+export const wait_mycoupongetall_result = createAction('wait_mycoupongetall_result');

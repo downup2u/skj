@@ -25,7 +25,9 @@ import {
     test_productcommentsfromproductgetcount_request,
 
     test_withdrawcashapplyaddone_request,
-    test_withdrawcashapplyauth_request
+    test_withdrawcashapplyauth_request,
+
+    test_mycoupongetall_request
 
 } from '../test/testshop';
 
@@ -60,6 +62,10 @@ let Page =(props)=>{
     <Button onClick={()=>{test_withdrawcashapplyaddone_request(props.dispatch)}}>提现申请</Button><br />
     <Button onClick={()=>{test_withdrawcashapplyauth_request(props.dispatch)}}>提现手机验证</Button><br />
     <br />
+
+   <Button onClick={()=>{test_mycoupongetall_request(props.dispatch)}}>获取我的优惠券</Button><br />
+    <br />
+
 
     <Button onClick={()=>{onClickPage('/register')}}>注册</Button><br />
     <Button onClick={()=>{onClickPage('/devicelist')}}>设备列表</Button><br />

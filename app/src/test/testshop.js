@@ -28,7 +28,10 @@ import {
   myorderupdateone,
   productcommentsfromproduct,
   productcommentaddone,
-  productcommentsfromproductgetcount
+  productcommentsfromproductgetcount,
+  withdrawcashapplyaddone,
+  withdrawcashapplyauth,
+  mycoupongetall
 } from '../actions/sagacallback.js';
 
 //测试新增购物车
@@ -128,7 +131,6 @@ let test_mycollectiondelone_request=(dispatch)=>{
   });
 }
 
-//判断产品是否被收藏
 let test_mycollectionisproductexits=(dispatch)=>{
   let payload = {
     productid:'58ec7d3f3be8bb1e329c9c95',
@@ -239,7 +241,6 @@ let test_productcommentsfromproduct_request=(dispatch)=>{
   });
 
 }
-//新增产品评论
 let test_productcommentaddone_request=(dispatch)=>{
     //   product:{ type: Schema.Types.ObjectId, ref: 'Product' },
     // creator:{ type: Schema.Types.ObjectId, ref: 'User' },
@@ -260,7 +261,6 @@ let test_productcommentaddone_request=(dispatch)=>{
   });
 
 }
-//获取产品以一个多少条评论
 let test_productcommentsfromproductgetcount_request=(dispatch)=>{
   let payload = {
     productid:'58e71be6ef4e8d02eca6e0e8',
@@ -272,6 +272,53 @@ let test_productcommentsfromproductgetcount_request=(dispatch)=>{
 
 }
 //================================================================
+// 提现相关
+//================================================================
+//提现申请，表单数据合并发送
+let test_withdrawcashapplyaddone_request=(dispatch)=>{
+  let payload = {
+    truename:'wangxiaoqing',//真实姓名
+    bankaccount:'62258842089912234',//银行账号
+    bankname:'招商银行',//银行名称
+    cashmoney:50.00,//提现金额
+  };
+  dispatch(withdrawcashapplyaddone(payload)).then((result)=>{
+    //withdrawcashapplyaddone result=>{"newitem":{"__v":0,"truename":"wangxiaoqing","bankaccount":"62258842089912234","bankname":"招商银行","cashmoney":50,"creator":"58d6ae16e9eeb16b217bba0c","created_at":"2017-04-12T05:59:06.827Z","status":"未验证","authcode":"5513","_id":"58edc22a77c9631304958fcf"}}
+    console.log("withdrawcashapplyaddone result=>" + JSON.stringify(result));
+  });
+
+}
+//提现手机验证，输入手机验证码后发送
+let test_withdrawcashapplyauth_request=(dispatch)=>{
+  let payload = {
+    _id:'58edc22a77c9631304958fcf',
+    authcode:'5513'
+  };
+  dispatch(withdrawcashapplyauth(payload)).then((result)=>{
+    //withdrawcashapplyauth result=>{"result":"OK","updateditem":{....}
+    //withdrawcashapplyauth result=>{"result":"验证失败"
+    console.log("withdrawcashapplyauth result=>" + JSON.stringify(result));
+  });
+}
+
+//测试获取我的优惠券
+let test_mycoupongetall_request=(dispatch)=>{
+  let page = 1;
+  let perpagenumber = 10;
+  let payload = {
+    query:{},
+    options:{
+      page: page,
+      limit: perpagenumber,
+    }
+  };
+  //dispatch(mycollectiongetall_request(payload));
+  dispatch(mycoupongetall(payload)).then(({result})=>{
+    //mycoupongetall result=>{"docs":[],"total":0,"limit":10,"page":1,"pages":1}
+    console.log("mycoupongetall result=>" + JSON.stringify(result));
+  });
+}
+
 
 export {
     test_mycartgetall_request,
@@ -291,5 +338,10 @@ export {
 
     test_productcommentsfromproduct_request,
     test_productcommentaddone_request,
-    test_productcommentsfromproductgetcount_request
+    test_productcommentsfromproductgetcount_request,
+
+    test_withdrawcashapplyaddone_request,
+    test_withdrawcashapplyauth_request,
+
+    test_mycoupongetall_request
 };
