@@ -24,14 +24,19 @@ export const getproduct_result = createAction('getproduct_result');
 //购物车
 export const mycartaddone_request = createAction('mycartaddone_request');//添加购物车
 export const mycartaddone_result = createAction('mycartaddone_result');
+export const wait_mycartaddone_request = createAction('wait_mycartaddone_request');//添加购物车
+export const wait_mycartaddone_result = createAction('wait_mycartaddone_result');
+
 export const wait_mycartupdateone_request = createAction('wait_mycartupdateone_request');//修改购物车
 export const wait_mycartupdateone_result = createAction('wait_mycartupdateone_result');
 export const mycartupdateone_request = createAction('mycartupdateone_request');//修改购物车
 export const mycartupdateone_result = createAction('mycartupdateone_result');
+
 export const wait_mycartdelone_request = createAction('wait_mycartdelone_request');
 export const wait_mycartdelone_result = createAction('wait_mycartdelone_result');
 export const mycartdelone_request = createAction('mycartdelone_request');
 export const mycartdelone_result = createAction('mycartdelone_result');
+
 export const mycartgetall_request = createAction('mycartgetall_request');
 export const mycartgetall_result = createAction('mycartgetall_result');
 export const wait_mycartgetall_request = createAction('wait_mycartgetall_request');

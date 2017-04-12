@@ -48,6 +48,10 @@ import {
   wait_myordergetall_result,
   myordergetall_request,
 
+  wait_mycartaddone_request,
+  wait_mycartaddone_result,
+  mycartaddone_request,
+
   wait_mycartupdateone_request,
   wait_mycartupdateone_result,
   mycartupdateone_request,
@@ -168,6 +172,10 @@ export function myorderupdateone(payload){
 }
 
 //==========
+export function mycartaddone(payload){
+  return synccall(payload,wait_mycartaddone_request,mycartaddone_request);
+}
+
 export function mycartupdateone(payload){
   return synccall(payload,wait_mycartupdateone_request,mycartupdateone_request);
 }
@@ -250,6 +258,7 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_mycartgetall_request}`,`${wait_mycartgetall_result}`]);
   waitfnsz.push([`${wait_mycollectiongetall_request}`,`${wait_mycollectiongetall_result}`]);
   waitfnsz.push([`${wait_myordergetall_request}`,`${wait_myordergetall_result}`]);
+  waitfnsz.push([`${wait_mycartaddone_request}`,`${wait_mycartaddone_result}`]);
   waitfnsz.push([`${wait_mycartupdateone_request}`,`${wait_mycartupdateone_result}`]);
   waitfnsz.push([`${wait_mycartdelone_request}`,`${wait_mycartdelone_result}`]);
   waitfnsz.push([`${wait_mycollectiondelone_request}`,`${wait_mycollectiondelone_result}`]);

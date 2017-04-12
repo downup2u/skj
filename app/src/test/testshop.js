@@ -20,6 +20,7 @@ import {
   mycartgetall,
   mycollectiongetall,
   myordergetall,
+  mycartaddone,
   mycartupdateone,
   mycartdelone,
   mycollectiondelone,
@@ -40,7 +41,12 @@ let test_mycartaddone_request=(dispatch)=>{
     product:'58eaecea130f4809a747d2f8',
     number:1
   };
-  dispatch(mycartaddone_request(payload));
+  dispatch(mycartaddone(payload)).then((result)=>{
+    //mycartaddone result=>{"updateditem":{"_id":"58ed7e34d3f83a025b8067b5","product":"58eaecea130f4809a747d2f8","creator":"58d6ae16e9eeb16b217bba0c","created_at":"2017-04-12T01:09:08.078Z","__v":0,"number":19}}
+    //mycartaddone result=>{"newitem":{"__v":0,"product":"58eaecea130f4809a747d2f8","number":1,"creator":"58d6ae16e9eeb16b217bba0c","created_at":"2017-04-12T07:20:37.989Z","_id":"58edd545bad97c1b2c33f362"}}   
+    let item = result.updateditem || result.newitem;
+    console.log("mycartaddone result=>" + JSON.stringify(item));
+  });
 
 }
 

@@ -60,6 +60,7 @@ import {
     wait_mycollectiongetall_result,
     wait_myordergetall_result,
 
+    wait_mycartaddone_result,
     wait_mycartupdateone_result,
     wait_mycartdelone_result,
     wait_mycollectiondelone_result,
@@ -170,8 +171,9 @@ const handlerlist = {
       });
     },
     ['shop.mycartaddone_result']: (socket, emit)=> {
-      return ((payload) => {
-        emit(mycartaddone_result(payload));
+      return ((result) => {
+        emit(mycartaddone_result(result));
+        emit(wait_mycartaddone_result({result:result}));
       });
     },
     ['shop.mycartupdateone_result']: (socket, emit)=> {
