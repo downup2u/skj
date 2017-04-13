@@ -202,7 +202,7 @@ export class Page extends Component {
         }
 
         // 滑动结束后，停在刷新区域
-        if (iScrollInstance_y > -1 * pullDown.height() && this.props.isTouching) {
+        if (iScrollInstance_y > -1 * pullDown.height() && this.iScrollInstance.maxScrollY!=0) {
             if (this.props.pullDownStatus <= 1) {//没有发起刷新,那么弹回去
                 this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 200);
             } else if (this.props.pullDownStatus == 2) { //发起了刷新,那么更新状态

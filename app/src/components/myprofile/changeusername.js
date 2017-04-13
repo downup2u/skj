@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 class Page extends Component {
 
     onClickReturn = ()=> {
-        this.props.dispatch(ui_changeusername(this.profile.nickname));
+        this.props.dispatch(ui_changeusername(this.props.profile.nickname));
         this.props.history.goBack();
     };
     onClickOK = ()=>{
@@ -21,7 +21,7 @@ class Page extends Component {
     }
     render() {
 
-        return (
+        return (    
             <div className="ChangeUsernamePage">
                 <NavBar lefttitle="返回" title="修改用户名" onClickLeft={this.onClickReturn} />
                 <div className="inputContent">

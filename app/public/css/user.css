@@ -119,7 +119,9 @@
 .UserInfoPage .ui.list {
     border: none;
 }
-
+.UserInfoPage .ui.list .item:first-child{
+    position: relative;
+}
 .UserInfoPage .ui.selection.list > .item:after {
     content: none;
 }

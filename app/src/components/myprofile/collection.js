@@ -4,17 +4,21 @@ import { connect } from 'react-redux';
 import { Input, Button, Select, List } from 'semantic-ui-react';
 import '../../../public/css/mycollection.css';
 import Swipeout from 'rc-swipeout';
-import { mycollectiongetall } from '../../actions/sagacallback.js';
+import { mycollectiongetall,mycollectiondelone } from '../../actions/sagacallback.js';
+import { uiinfinitepage_deleteitem } from '../../actions';
 import InfinitePage from '../controls/infinitecontrol';
 
 let Page =(props)=> {
 
     //删除收藏
-    let delCollection = (proid)=>{
+    let delCollection = (id)=>{
         if(confirm("确定删除收藏吗？")){
-            
+            props.dispatch(mycollectiondelone({_id:id})).then((result)=>{
+                props.dispatch(uiinfinitepage_deleteitem({_id:result._id}));
+            });
         }
     }
+
     //收藏列表数据
     let updateContent = (item)=> {
         let proinfo = props.products[item.product];
@@ -25,7 +29,7 @@ let Page =(props)=> {
                         autoClose={true}
                         right={[{
                             text: '删除',
-                            onPress:() => delCollection(item._id),
+                            onPress: ()=>{delCollection(item._id)},
                             style: {
                                 backgroundColor: 'red',
                                 color: 'white',

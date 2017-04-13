@@ -66,15 +66,13 @@ const shop = createReducer({
         let iscollection = {...state.iscollection,...newitem};
         return {...state,iscollection};
     },
-    //删除商品
-    // payload = {
-    //     "newitem": {
-    //         "__v": 0,
-    //         "product": "58e74f9fc965ed04e8768ae7",
-    //         "creator": "58e455e7f6de2471258b292d",
-    //         "created_at": "2017-04-12T09:35:09.545Z",
-    //         "_id": "58edf4cd65071a04fa554b48"
-    //     }
+    //取消收藏
+    // {
+    //     "_id":"58edf4cd65071a04fa554b48",
+    //     "product":"58e74f9fc965ed04e8768ae7",
+    //     "creator":"58e455e7f6de2471258b292d",
+    //     "created_at":"2017-04-12T09:35:09.545Z",
+    //     "__v":0
     // }
     [mycollectiondelone_result]:(state, payload)=>{
         console.log("mycollectiondelone_result:::"+JSON.stringify(payload));

@@ -6,6 +6,7 @@ import { mycoupongetall } from '../../actions/sagacallback.js';
 import { setulcoupontype } from '../../actions';
 import { connect } from 'react-redux';
 import InfinitePage from '../controls/infinitecontrol';
+import moment from 'moment';
 
 export class Page extends Component {
 
@@ -24,13 +25,18 @@ export class Page extends Component {
                 key = {item._id} 
                 >
                 <div className="leftcont">
-                    <span><span>20</span>元</span>
-                    <span>优惠券</span>
+                    <span><span>{item.pricediscount}</span>元</span>
+                    <span>{item.name}</span>
                 </div>
                 <div className="cont">
                     <div>
-                        <span className="tt">满1000抵20元</span>
-                        <span>有效期2017-01-01至2017-03-31</span>
+                        <span className="tt">{item.pricecondition}</span>
+                        <span>
+                            有效期
+                            {moment(item.created_at).format("YY-MM-DD")}
+                            至
+                            {moment(item.expdate).format("YY-MM-DD")}
+                        </span>
                     </div>
                 </div>
             </div>

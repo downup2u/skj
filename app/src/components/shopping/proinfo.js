@@ -134,7 +134,7 @@ export class Page extends React.Component {
                     </div>
                 </div>
                 <div className="discountlist">
-                    <div className="li" onClick={()=>{this.onClickPage('/shoppingproevaluate')}} >
+                    <div className="li" onClick={()=>{this.onClickPage(`/shoppingproevaluate/${proinfo._id}`)}} >
                         <span className="tt">
                             商品评论(22条评论)
                         </span>

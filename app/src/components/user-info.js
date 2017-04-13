@@ -48,7 +48,9 @@ class Page extends Component {
                                 {
                                     filter:"alpha(opacity=0)","MozOpacity":"0.0",
                                     "KhtmlOpacity":0.0,opacity:0.0,position:"absolute",
-                                    right: "5px",top:"10px",zIndex:"9"
+                                    right: 0,top:0,zIndex:"9",
+                                    height:"63px",
+                                    left:0,width:"100%"
                                 }
                             }
                             />

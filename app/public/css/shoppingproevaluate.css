@@ -52,16 +52,10 @@
 }
 
 .ShoppingproevaluatePage .proList {
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 .ShoppingproevaluatePage .proList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-self: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
 }
 
 .ShoppingproevaluatePage .proList .li {
