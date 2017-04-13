@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import NavBar from '../nav.js';
 import { Input, Button, Select, List, Menu } from 'semantic-ui-react';
 import '../../../public/css/mycoupon.css';
-import { mycoupongetall } from '../actions/index.js';
+import { mycoupongetall } from '../../actions/index.js';
 import InfinitePage from '../controls/infinitecontrol';
 
 export default class Page extends Component {

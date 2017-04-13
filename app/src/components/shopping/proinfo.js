@@ -83,7 +83,7 @@ export class Page extends React.Component {
 
     //删除收藏
     delCollection =(_id)=>{
-        this.props.dispatch(mycollectiondelone_request({_id}));
+        this.props.dispatch(mycollectiondelone_request({product:_id}));
     };
 
     //显示加入购物车弹框

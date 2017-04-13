@@ -75,7 +75,7 @@ const shop = createReducer({
     [mycollectiondelone_result]:(state, payload)=>{
         console.log("mycollectiondelone_result:::"+JSON.stringify(payload));
         let newitem = {};
-        newitem[payload.newitem.product] = false;
+        newitem[payload.product] = false;
         let iscollection = {...state.iscollection,...newitem};
         return {...state,iscollection};
     },
