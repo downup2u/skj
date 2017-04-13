@@ -52,7 +52,6 @@ const ExpresslistTitle = ({ record }) => {
 const ExpresslistEdit = (props) => {
       return (<Edit title={<ExpresslistTitle />} {...props}>
           <SimpleForm>
-              <DisabledInput label="Id" source="id" />
               <DisabledInput label="公司名" source="expressname" />
           </SimpleForm>
       </Edit>);
@@ -63,7 +62,6 @@ const ExpresslistEdit = (props) => {
 const ExpresslistShow = (props) => (
        <Show title={<ExpresslistTitle />} {...props}>
            <SimpleShowLayout>
-               <TextField source="id" />
                <TextField label="公司名" source="expressname" />
            </SimpleShowLayout>
        </Show>
@@ -77,7 +75,6 @@ const ExpresslistList = (props) => (//
         <TextField source="id" />
         <TextField label="公司名" source="expressname" />
         <EditButton />
-        <ShowButton />
         </Datagrid>
     </List>
 );

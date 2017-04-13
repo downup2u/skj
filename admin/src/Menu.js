@@ -8,6 +8,7 @@ import { translate } from 'admin-on-rest';
 import { DashboardMenuItem } from 'admin-on-rest/lib/mui';
 import Icon from 'material-ui/svg-icons/social/person';
 
+import SystemconfigIcon from 'material-ui/svg-icons/action/settings-brightness';//系统设置
 import FeedbackIcon from 'material-ui/svg-icons/action/feedback';
 import MessageIcon from 'material-ui/svg-icons/communication/message';
 import TopicIcon from 'material-ui/svg-icons/communication/forum';
@@ -19,6 +20,7 @@ import CouponIcon from 'material-ui/svg-icons/action/card-giftcard';//优惠券�
 import UserIcon from 'material-ui/svg-icons/action/account-circle';//乘客信息
 
 const items = [
+    { name: 'systemconfig', icon: <SystemconfigIcon /> },
     { name: 'news', icon: <UserIcon /> },
     { name: 'banner', icon: <BannerIcon /> },
     { name: 'category', icon: <CategoryIcon /> },
@@ -56,12 +58,12 @@ const Menu = ({ onMenuTap, translate, logout }) => (
                 onTouchTap={onMenuTap}
             />
         ))}
-        <MenuItem
+        {/*<MenuItem
             containerElement={<Link to="/configuration" />}
             primaryText={translate('pos.configuration')}
             leftIcon={<SettingsIcon />}
             onTouchTap={onMenuTap}
-        />
+        />*/}
         {logout}
     </div>
 );

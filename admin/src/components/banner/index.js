@@ -24,7 +24,8 @@ import {
   EditButton,
   SelectInput,
   BooleanInput,
-  BooleanField
+  BooleanField,
+  ImageField
 } from 'admin-on-rest/lib/mui';
 
 import { Field,FieldArray } from 'redux-form';
@@ -35,7 +36,7 @@ import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
 
 import {ImageInputUpload} from '../controls/imageupload.js';
-import {Titlewithimage} from '../controls/Titlewithimage';
+
 
 const BannercreateTitle = ({ record }) => {
    return <span>新建 图片广告</span>;
@@ -63,7 +64,6 @@ const BannerlistEdit = (props) => {
   console.log("BannerlistEdit==>" + JSON.stringify(props));
       return (<Edit title={<BannerlistTitle />} {...props}>
           <SimpleForm>
-              <DisabledInput label="Id" source="id" />
               <TextInput label="名字" source="name" />
               <SelectInput  label="图片类型"  source="type" choices={[
                   { id: '商城首页广告', name: '商城首页广告' },
@@ -81,10 +81,10 @@ const BannerlistEdit = (props) => {
 const BannerlistShow = (props) => (
        <Show title={<BannerlistTitle />} {...props}>
            <SimpleShowLayout>
-               <TextField source="id" />
                <TextField label="类型" source="type" />
-               <Titlewithimage label="名字" icon="picurl" name="name"/>
-               <TextField label="排序字段" source="sortflag" />
+                <ImageField source="picurl" label="图片"/>
+                <TextField label="名字" source="name" />
+                <TextField label="排序字段" source="sortflag" />
                <BooleanField label="是否启用" source="isenabled" />
            </SimpleShowLayout>
        </Show>
@@ -95,13 +95,12 @@ const BannerlistShow = (props) => (
 const BannerlistList = (props) => (//
      <List title="广告条列表" {...props} >
         <Datagrid>
-        <TextField source="id" />
         <TextField label="类型" source="type" />
-        <Titlewithimage label="名字" icon="picurl" name="name"/>
+        <ImageField source="picurl" label="图片"/>
+        <TextField label="名字" source="name" />
         <TextField label="排序字段" source="sortflag" />
         <BooleanField label="是否启用" source="isenabled" />
         <EditButton />
-        <ShowButton />
         </Datagrid>
     </List>
 );

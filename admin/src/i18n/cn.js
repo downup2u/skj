@@ -51,6 +51,14 @@ export default {
     order:{
       name: '订单管理 |||| 订单管理',
     },
+    systemconfig:{
+      name: '系统配置 |||| 系统配置',
+      fields:{
+        productid1:'显示在商城首页的产品1',
+        productid2:'显示在商城首页的产品2',
+      }
+
+    },
   }
 
 };

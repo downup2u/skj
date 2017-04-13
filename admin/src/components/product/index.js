@@ -26,7 +26,8 @@ import {
   EditButton,
   SelectInput,
   BooleanInput,
-  BooleanField
+  BooleanField,
+  ImageField,
 } from 'admin-on-rest/lib/mui';
 
 import { Field,FieldArray } from 'redux-form';
@@ -37,7 +38,6 @@ import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
 
 import {ImageInputUpload} from '../controls/imageupload.js';
-import {Titlewithimage} from '../controls/Titlewithimage';
 import RichTextInput from '../controls/richtoolbar.js';
 
 export const ProductFilter = props => (
@@ -119,11 +119,11 @@ const ProductlistList = (props) => (//
         <Datagrid>
         <TextField label="名字" source="name" />
         <TextField label="现价" source="pricenow" />
-        <Titlewithimage label="名字" icon="picurl" name="name"/>
+        <ImageField source="picurl" label="图片"/>
+        <TextField label="名字" source="name" />
         <TextField label="摘要" source="brief" />
         <BooleanField label="是否启用" source="isenabled" />
         <EditButton />
-        <ShowButton />
         </Datagrid>
     </List>
 );

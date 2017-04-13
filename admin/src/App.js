@@ -14,6 +14,7 @@ import Menu from './Menu';
 //import { Dashboard } from './dashboard';
 import CustomRoutes from './routes';
 import translations from './i18n';
+import {SystemconfigCreate,SystemconfigList,SystemconfigShow,SystemconfigEdit} from './components/systemconfig/index.js';
 import {BannerlistCreate,BannerlistList,BannerlistEdit,BannerlistShow} from './components/banner/index.js';
 import {CategorylistCreate,CategorylistList,CategorylistEdit,CategorylistShow} from './components/category/index.js';
 import {ProductlistCreate,ProductlistList,ProductlistEdit,ProductlistShow} from './components/product/index.js';
@@ -44,6 +45,7 @@ class App extends Component {
                 locale="cn"
                 messages={translations}
             >
+                <Resource name="systemconfig" list={SystemconfigList} show={SystemconfigShow} edit={SystemconfigEdit}  create={SystemconfigCreate} />
                 <Resource name="banner" list={BannerlistList} edit={BannerlistEdit} create={BannerlistCreate}  remove={Delete} />
                 <Resource name="product" list={ProductlistList} edit={ProductlistEdit} create={ProductlistCreate}  remove={Delete} />
                 <Resource name="category" list={CategorylistList} edit={CategorylistEdit} create={CategorylistCreate}  remove={Delete} />
