@@ -21,14 +21,17 @@ let Page =(props)=> {
         if(proinfo){
             return  (
                 <div key={item._id}>
-                    <Swipeout autoClose={true}
+                    <Swipeout 
+                        autoClose={true}
                         right={[{
                             text: '删除',
-                            //onPress:onDelete,
-                            style: { backgroundColor: 'red', color: 'white' }
+                            onPress:() => delCollection(item._id),
+                            style: {
+                                backgroundColor: 'red',
+                                color: 'white',
+                                fontSize: '16px'
+                            }
                         }]}
-                        onOpen={() => console.log('open')}
-                        onClose={() => console.log('close')}
                     >
                         <div className="myCollectionLi">
                             <div className="pic"><img src={proinfo.picurl}/></div>

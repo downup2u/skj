@@ -20,6 +20,9 @@ export const uiaddcartdilog = createAction('uiaddcartdilog');
 //显示商品是否被收藏
 export const uiiscollection = createAction("uiiscollection");
 
+//我的优惠券类型
+export const setulcoupontype = createAction("setulcoupontype");
+
 //产品分页数据
 export const getproduct_request = createAction('getproduct_request');
 export const getproduct_result = createAction('getproduct_result');

@@ -11,10 +11,10 @@ import '../../../public/css/shopping.css';
 import {
     search_shoptxt,
     mycartaddone_request,
-    mycartgetall
+    mycartgetall,
+    uiaddcartdilog
 } from '../../actions';
 import Addcartdilog from './addcartdilog.js';
-import { uiaddcartdilog } from '../../actions/index.js';
 
 let swiperOptions = {
     navigation: false,
