@@ -96,6 +96,8 @@ import {
     getnextusers_result,
     getdistsalesorderstat_result,
     getdistsalesorders_result,    
+
+    getsystemconfig_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -105,6 +107,11 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+    ['getsystemconfig_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(getsystemconfig_result(payload));
+      });
+     },
      ['shop.getnextusers_result']: (socket, emit)=> {
       return ((payload) => {
         emit(getnextusers_result(payload));

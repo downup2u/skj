@@ -14,7 +14,8 @@ import {
   myorderdelone_request,
 
   getnextusers_request,
-  getdistsalesorderstat_request
+  getdistsalesorderstat_request,
+  getdistsalesorders_request
 } from '../actions';
 
 import {
@@ -214,7 +215,7 @@ let test_myorderaddone_request=(dispatch)=>{
 //测试修改我的订单
 let test_myorderupdateone_request=(dispatch)=>{
   let payload = {
-    _id:'58ef3d51032a812ea6f1d223',
+    _id:'58ef69ed510c6f3752e889c0',
     data:{
       payway:'alipay',
       paystatus:'已支付',
@@ -223,7 +224,7 @@ let test_myorderupdateone_request=(dispatch)=>{
  // dispatch(myorderupdateone_request(payload));
   dispatch(myorderupdateone(payload)).then((result)=>{
     //{"updateditem":{"_id":"58ed8391d3f83a025b8067b9","payway":"alipay"
-    console.log("myorderaddone result=>" + JSON.stringify(result));
+    console.log("myorderupdateone result=>" + JSON.stringify(result));
   });
 }
 
@@ -325,18 +326,26 @@ let test_mycoupongetall_request=(dispatch)=>{
     //mycoupongetall result=>{"docs":[],"total":0,"limit":10,"page":1,"pages":1}
     console.log("mycoupongetall result=>" + JSON.stringify(result));
   });
-} 
+}
 //=============分销相关================
-//测试获取下级用户个数
+//测试获取下级用户个数（我的分销页面）
 let test_getnextusers_request=(dispatch)=>{
   dispatch(getnextusers_request({}));
   //返回数据：{level1:1,level2:0}
 }
 
 let test_getdistsalesorderstat_request=(dispatch)=>{
+  //下线订单统计页面
   dispatch(getdistsalesorderstat_request({}));
-  //[{_id:2,totalnumbers:1.5}],表示二级分销总奖金1.5
+  //[{_id:2,totalorders:1,totalnumbers:1.5}],表示二2级分销,订单个数1,总奖金1.5
 }
+
+let test_getdistsalesorders_request=(dispatch)=>{
+  //下线订单统计页面
+  dispatch(getdistsalesorders_request({}));
+  //[{"_id":"58ef3c3a80703c2e7a144339","levelflag":1,"totalorderprices":300,"totalfeebonus":30,"fromuserprofile":[{"avatar":"img/myprofile/1.png","nickname":"游客0130"}],"phonenumber":["15961123513"]},{"_id":"58ef3c8380703c2e7a14433a","levelflag":2,"totalorderprices":30,"totalfeebonus":1.5,"fromuserprofile":[{"avatar":"img/myprofile/1.png","nickname":"游客8859"}],"phonenumber":["13861174733"]}]
+}
+
 
 export {
     test_mycartgetall_request,
@@ -365,5 +374,5 @@ export {
 
     test_getnextusers_request,
     test_getdistsalesorderstat_request,
-
+    test_getdistsalesorders_request,
 };

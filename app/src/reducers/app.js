@@ -4,7 +4,8 @@ import {
     showpopmessage,
     hidepopmessage,
     uicommentimg,
-    uiaddcartdilog
+    uiaddcartdilog,
+    getsystemconfig_result
 } from '../actions/index.js';
 
 
@@ -24,12 +25,20 @@ const initial = {
         //是否显示添加购物车控件
         addcartdilogshow : false,
         addcartdilogproid : '',
-        addcartdilogpronumber : 1
+        addcartdilogpronumber : 1,
+
+        expressfee : 10,
+        expressfeeforfree: 100,
+        productid1: '',
+        productid2: '',
     },
 
 };
 
 const app = createReducer({
+    [getsystemconfig_result]: (state, payload) => {
+        return { ...state, ...payload };
+    },
     [clickTab]: (state, payload) => {
         return { ...state, curtabindex: payload.curtabindex };
     },
