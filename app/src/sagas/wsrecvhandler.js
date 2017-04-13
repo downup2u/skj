@@ -91,7 +91,10 @@ import {
     wait_withdrawcashapplyauth_result,
 
     mycoupongetall_result,
-    wait_mycoupongetall_result
+    wait_mycoupongetall_result,
+
+    getnextusers_result,
+    getdistsalesorderstat_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -101,6 +104,16 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+     ['shop.getnextusers_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(getnextusers_result(payload));
+      });
+     },
+      ['shop.getdistsalesorderstat_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(getdistsalesorderstat_result(payload));
+      });
+     },
      ['shop.mycoupongetall_result']: (socket, emit)=> {
       return ((payload) => {
         emit(mycoupongetall_result(payload));
