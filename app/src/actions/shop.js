@@ -139,3 +139,7 @@ export const getnextusers_result = createAction('getnextusers_result');
 
 export const getdistsalesorderstat_request = createAction('getdistsalesorderstat_request');
 export const getdistsalesorderstat_result = createAction('getdistsalesorderstat_result');
+
+
+export const getdistsalesorders_request = createAction('getdistsalesorders_request');
+export const getdistsalesorders_result = createAction('getdistsalesorders_result');

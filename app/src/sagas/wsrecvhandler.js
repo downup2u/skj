@@ -95,6 +95,7 @@ import {
 
     getnextusers_result,
     getdistsalesorderstat_result,
+    getdistsalesorders_result,    
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -114,7 +115,12 @@ const handlerlist = {
         emit(getdistsalesorderstat_result(payload));
       });
      },
-     ['shop.mycoupongetall_result']: (socket, emit)=> {
+     ['shop.getdistsalesorders_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(getdistsalesorders_result(payload));
+      });
+     },
+      ['shop.mycoupongetall_result']: (socket, emit)=> {
       return ((payload) => {
         emit(mycoupongetall_result(payload));
         emit(wait_mycoupongetall_result({result:payload}));

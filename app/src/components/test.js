@@ -27,8 +27,11 @@ import {
     test_withdrawcashapplyaddone_request,
     test_withdrawcashapplyauth_request,
 
-    test_mycoupongetall_request
+    test_mycoupongetall_request,
 
+    test_getnextusers_request,
+    test_getdistsalesorderstat_request,
+    test_getdistsalesorders_request,
 } from '../test/testshop';
 
 let Page =(props)=>{
@@ -37,6 +40,12 @@ let Page =(props)=>{
     };
     return (<div>
         <p style={{textAlign: 'center'}}>
+    <Button onClick={()=>{test_getnextusers_request(props.dispatch)}}>分销-获取下级用户个数</Button><br />
+    <Button onClick={()=>{test_getdistsalesorderstat_request(props.dispatch)}}>分销-获取下级用户订单统计</Button><br />
+    <Button onClick={()=>{test_getdistsalesorders_request(props.dispatch)}}>分销-获取下级用户订单</Button><br />
+    <br />
+
+
    <Button onClick={()=>{test_mycartgetall_request(props.dispatch)}}>测试获取购物车</Button><br />
    <Button onClick={()=>{test_mycartaddone_request(props.dispatch)}}>测试新增购物车</Button><br />
    <Button onClick={()=>{test_mycartupdateone_request(props.dispatch)}}>测试修改购物车</Button><br />
@@ -65,7 +74,8 @@ let Page =(props)=>{
 
    <Button onClick={()=>{test_mycoupongetall_request(props.dispatch)}}>获取我的优惠券</Button><br />
     <br />
-
+  
+ 
 
     <Button onClick={()=>{onClickPage('/register')}}>注册</Button><br />
     <Button onClick={()=>{onClickPage('/devicelist')}}>设备列表</Button><br />
