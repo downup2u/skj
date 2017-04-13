@@ -1,5 +1,7 @@
 .myCouponPage{
     background: #F5F5F5;
+    display: flex;
+    flex-direction: column;
 }
 .myCouponPage .ui.secondary.pointing.menu .item{
     width: 33.33%;
@@ -19,6 +21,8 @@
     background: #FFF;
 }
 .myCouponList{
+    flex-grow: 1;
+    overflow: hidden;
 }
 .myCouponList .item{
     display: flex;

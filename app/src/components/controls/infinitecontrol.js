@@ -159,6 +159,22 @@ export class Page extends Component {
 
     onScroll =()=> {
         let pullDown = $(this.refs.PullDown);
+        let pullUp = $(this.refs.PullUp);
+        let Nodata = $(this.refs.Nodata);
+
+        //没有数据的情况下
+        if( this.iScrollInstance.maxScrollY==0 ){
+            Nodata.show();
+        }else{
+            Nodata.hide();
+        }
+
+        //超过一页数据的时候才会有上划加载更多的功能
+        if(this.iScrollInstance.maxScrollY > this.props.listheight){
+            pullUp.show();
+        }else{
+            pullUp.hide();
+        }
 
         // 上拉区域
         if (this.iScrollInstance.y > -1 * pullDown.height()) {
@@ -176,15 +192,20 @@ export class Page extends Component {
     }
 
     onScrollEnd=()=> {
-        console.log("onScrollEnd" + this.props.pullDownStatus);
-
         let pullDown = $(this.refs.PullDown);
+        let iScrollInstance_y = this.iScrollInstance.y;
+
+        if( this.iScrollInstance.maxScrollY==0 ){
+            pullDown.css("margin-top","-"+pullDown.height()+"px");
+        }else{
+            pullDown.css("margin-top","0");
+        }
 
         // 滑动结束后，停在刷新区域
-        if (this.iScrollInstance.y > -1 * pullDown.height()) {
-            if (this.props.pullDownStatus <= 1) {   // 没有发起刷新,那么弹回去
+        if (iScrollInstance_y > -1 * pullDown.height() && this.props.isTouching) {
+            if (this.props.pullDownStatus <= 1) {//没有发起刷新,那么弹回去
                 this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 200);
-            } else if (this.props.pullDownStatus == 2) { // 发起了刷新,那么更新状态
+            } else if (this.props.pullDownStatus == 2) { //发起了刷新,那么更新状态
                 this.props.dispatch(uiinfinitepage_setstate({pullDownStatus: 3}));
                 this.fetchItems(true);
             }
@@ -243,6 +264,14 @@ export class Page extends Component {
                             <i></i>
                             <span>{pullUpTips[this.props.pullUpStatus]}</span>
                         </p>
+                        <div ref="Nodata" id="Nodata" className="nodata" 
+                            style={{
+                                display:"none",
+                                textAlign:"center",
+                                lineHeight:"80px",
+                                color:"#999999",
+                                fontSize:"16px"
+                            }}>- 暂无数据 -</div>
                     </ul>
                 </div>
             </div>

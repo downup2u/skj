@@ -325,7 +325,7 @@ let test_mycoupongetall_request=(dispatch)=>{
     //mycoupongetall result=>{"docs":[],"total":0,"limit":10,"page":1,"pages":1}
     console.log("mycoupongetall result=>" + JSON.stringify(result));
   });
-}
+} 
 //=============分销相关================
 //测试获取下级用户个数
 let test_getnextusers_request=(dispatch)=>{

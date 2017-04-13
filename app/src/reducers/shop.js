@@ -11,7 +11,8 @@ import {
     uiiscollection,
     mycollectionisproductexits_result,
     mycollectiondelone_result,
-    mycollectionaddone_result
+    mycollectionaddone_result,
+    setulcoupontype,
 } from '../actions/index.js';
 import {
     normalizrbanners,
@@ -36,6 +37,9 @@ const initial = {
 
         //判断是否已收藏
         iscollection:{},
+
+        //选择优惠券类型
+        ulcoupontype:0,
     }
 };
 
@@ -78,6 +82,10 @@ const shop = createReducer({
         newitem[payload.product] = false;
         let iscollection = {...state.iscollection,...newitem};
         return {...state,iscollection};
+    },
+    //选择优惠券类型
+    [setulcoupontype]:(state, payload)=>{
+        return {...state, ulcoupontype:payload};
     },
     //
     [uiiscollection]:(state, payload)=>{
