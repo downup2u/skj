@@ -9,10 +9,11 @@ import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shoppingproinfo.css';
 import { 
-    mycollectionaddone_request,
     uiaddcartdilog,
     uiiscollection,
-    mycollectiondelone_result
+    mycollectionaddone_request,
+    mycollectiondelone_request,
+    mycollectionisproductexits_request
  } from '../../actions';
  import Addcartdilog from './addcartdilog.js';
  import {
@@ -30,7 +31,7 @@ export class Page extends React.Component {
 
     componentWillMount () {
         this.checkCollection();
-    }
+    };
 
     //检测是否已经收藏
     checkCollection =()=>{
@@ -38,8 +39,8 @@ export class Page extends React.Component {
         let payload = {
             productid:proid,
         };
-        this.props.dispatch(mycollectiondelone_result(payload));
-    }
+        this.props.dispatch(mycollectionisproductexits_request(payload));
+    };
 
     onClickReturn = ()=> {
         this.props.history.goBack();
@@ -50,25 +51,40 @@ export class Page extends React.Component {
     };
 
     //加入收藏
-    addCollection =(pro)=>{
-        let _this = this;
-        this.props.dispatch(mycollectionisproductexits({productid:pro._id})).then(({result})=>{
-            if(result[pro._id]){
-                //删除收藏
-                _this.props.dispatch(mycollectiondelone({
-                    _id:pro._id
-                }));
-            }else{
-                //加入收藏
-                _this.props.dispatch(mycollectionaddone_request({
-                    product:pro._id
-                }));
-            }
-            _this.checkCollection();
-        });
-    }
+    clickCollection =(pro)=>{
+        //let _this = this;
+        let issellection = this.props.iscollection[pro._id];
+        if(issellection){
+            this.delCollection(pro._id);
+        }else{
+            this.addCollection(pro._id);
+        }
 
+        // this.props.dispatch(mycollectionisproductexits({productid:pro._id})).then(({result})=>{
+        //     if(result[pro._id]){
+        //         //删除收藏
+        //         _this.props.dispatch(mycollectiondelone({
+        //             _id:pro._id
+        //         }));
+        //     }else{
+        //         //加入收藏
+        //         _this.props.dispatch(mycollectionaddone_request({
+        //             product:pro._id
+        //         }));
+        //     }
+        //     _this.checkCollection();
+        // });
+    };
 
+    //加入收藏
+    addCollection =(product)=>{
+        this.props.dispatch(mycollectionaddone_request({product}));
+    };
+
+    //删除收藏
+    delCollection =(_id)=>{
+        this.props.dispatch(mycollectiondelone_request({_id}));
+    };
 
     //显示加入购物车弹框
     showaddcartdilog =(proid)=>{
@@ -76,7 +92,7 @@ export class Page extends React.Component {
             addcartdilogshow : true,
             addcartdilogproid : proid
         }));
-    }
+    };
 
     render(){
         let proid = this.props.match.params.id;
@@ -108,8 +124,8 @@ export class Page extends React.Component {
                             <span className="proname">{proinfo.name}</span>
                             <span className="p2">¥{proinfo.pricenow}</span>
                         </div>
-                        <span className="collectionLnk" onClick={()=>{this.addCollection(proinfo)}}>
-                            <img src={this.props.iscollection?"img/shopping/star2.png":"img/shopping/star.png"} />
+                        <span className="collectionLnk" onClick={()=>{this.clickCollection(proinfo)}}>
+                            <img src={this.props.iscollection[proinfo._id]?"img/shopping/star2.png":"img/shopping/star.png"} />
                             <span>收藏</span>
                         </span>
                     </div>

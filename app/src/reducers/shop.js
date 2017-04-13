@@ -9,7 +9,9 @@ import {
     getnews_result,
     search_shoptxt,
     uiiscollection,
-    mycollectiondelone_result
+    mycollectionisproductexits_result,
+    mycollectiondelone_result,
+    mycollectionaddone_result
 } from '../actions/index.js';
 import {
     normalizrbanners,
@@ -39,11 +41,42 @@ const initial = {
 
 const shop = createReducer({
     //商品是否已经被收藏
+    [mycollectionisproductexits_result]:(state, payload)=>{
+        console.log("mycollectionisproductexits_result"+JSON.stringify(payload));
+        let iscollection = {...state.iscollection,...payload.result};
+        return {...state,iscollection};
+    },
+    //添加商品收藏
+    // payload = {
+    //     "newitem": {
+    //         "__v": 0,
+    //         "product": "58e74f9fc965ed04e8768ae7",
+    //         "creator": "58e455e7f6de2471258b292d",
+    //         "created_at": "2017-04-12T09:35:09.545Z",
+    //         "_id": "58edf4cd65071a04fa554b48"
+    //     }
+    // }
+    [mycollectionaddone_result]:(state, payload)=>{
+        let newitem = {};
+        newitem[payload.newitem.product] = true;
+        let iscollection = {...state.iscollection,...newitem};
+        return {...state,iscollection};
+    },
+    //删除商品
+    // payload = {
+    //     "newitem": {
+    //         "__v": 0,
+    //         "product": "58e74f9fc965ed04e8768ae7",
+    //         "creator": "58e455e7f6de2471258b292d",
+    //         "created_at": "2017-04-12T09:35:09.545Z",
+    //         "_id": "58edf4cd65071a04fa554b48"
+    //     }
+    // }
     [mycollectiondelone_result]:(state, payload)=>{
-        console.log("mycollectiondelone_result payload"+JSON.stringify(payload));
-        let newcollection = {}
-        newcollection[payload.productid] = true;
-        let iscollection = {...state.iscollection,...newcollection};
+        console.log("mycollectiondelone_result:::"+JSON.stringify(payload));
+        let newitem = {};
+        newitem[payload.newitem.product] = false;
+        let iscollection = {...state.iscollection,...newitem};
         return {...state,iscollection};
     },
     //

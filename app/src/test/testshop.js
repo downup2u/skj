@@ -137,6 +137,7 @@ let test_mycollectiondelone_request=(dispatch)=>{
   });
 }
 
+//判断我的收藏里面是否有产品
 let test_mycollectionisproductexits=(dispatch)=>{
   let payload = {
     productid:'58ec7d3f3be8bb1e329c9c95',
