@@ -13,6 +13,8 @@
  * CREATE       => POST http://my.api.url/posts/123
  * DELETE       => DELETE http://my.api.url/posts/123
  */
+
+// https://marmelab.com/admin-on-rest//RestClients.html#json-server-rest
 export default (apiUrl, httpClient = fetchJson) => {
 
    console.log("rest apiUrl:" + JSON.stringify(apiUrl));
@@ -61,7 +63,10 @@ export default (apiUrl, httpClient = fetchJson) => {
               delete obj._id;
               data.push(obj);
             });
-            //console.log("json data:" + JSON.stringify(data));
+            console.log("GET_LIST|json data:" + JSON.stringify( {
+                data: data,
+                total: json.total,
+            }));
             return {
                 data: data,
                 total: json.total,
@@ -72,16 +77,18 @@ export default (apiUrl, httpClient = fetchJson) => {
         case DELETE:
             json.id = json._id;
             delete json._id;
+            console.log("UPDATE| json data:" + JSON.stringify( {data:json}));
             return {data:json};
         case GET_MANY:
-            json.docs.forEach((obj)=>{
+            json.forEach((obj)=>{
               obj.id = obj._id;
               delete obj._id;
               data.push(obj);
             });
-            //console.log("json data:" + JSON.stringify(data));
+            console.log("GET_MANY json data:" + JSON.stringify({data}));
             return {data};
         default:
+            console.log("default json data:" + JSON.stringify(json));
             return json;
         }
     };

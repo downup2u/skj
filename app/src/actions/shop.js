@@ -134,3 +134,11 @@ export const mycoupongetall_request = createAction('mycoupongetall_request');
 export const mycoupongetall_result = createAction('mycoupongetall_result');
 export const wait_mycoupongetall_request = createAction('wait_mycoupongetall_request');
 export const wait_mycoupongetall_result = createAction('wait_mycoupongetall_result');
+
+//获取我的分销相关信息
+//获取下级用户个数
+export const getnextusers_request = createAction('getnextusers_request');
+export const getnextusers_result = createAction('getnextusers_result');
+
+export const getdistsalesorderstat_request = createAction('getdistsalesorderstat_request');
+export const getdistsalesorderstat_result = createAction('getdistsalesorderstat_result');

@@ -13,7 +13,8 @@ import {
   myorderupdateone_request,
   myorderdelone_request,
 
-
+  getnextusers_request,
+  getdistsalesorderstat_request
 } from '../actions';
 
 import {
@@ -213,10 +214,10 @@ let test_myorderaddone_request=(dispatch)=>{
 //测试修改我的订单
 let test_myorderupdateone_request=(dispatch)=>{
   let payload = {
-    _id:'58ed8391d3f83a025b8067b9',
+    _id:'58ef3d51032a812ea6f1d223',
     data:{
       payway:'alipay',
-      orderstatus:'已支付',
+      paystatus:'已支付',
     }
   };
  // dispatch(myorderupdateone_request(payload));
@@ -325,7 +326,17 @@ let test_mycoupongetall_request=(dispatch)=>{
     console.log("mycoupongetall result=>" + JSON.stringify(result));
   });
 } 
+//=============分销相关================
+//测试获取下级用户个数
+let test_getnextusers_request=(dispatch)=>{
+  dispatch(getnextusers_request({}));
+  //返回数据：{level1:1,level2:0}
+}
 
+let test_getdistsalesorderstat_request=(dispatch)=>{
+  dispatch(getdistsalesorderstat_request({}));
+  //[{_id:2,totalnumbers:1.5}],表示二级分销总奖金1.5
+}
 
 export {
     test_mycartgetall_request,
@@ -350,5 +361,9 @@ export {
     test_withdrawcashapplyaddone_request,
     test_withdrawcashapplyauth_request,
 
-    test_mycoupongetall_request
+    test_mycoupongetall_request,
+
+    test_getnextusers_request,
+    test_getdistsalesorderstat_request,
+
 };

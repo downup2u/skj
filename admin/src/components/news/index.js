@@ -66,7 +66,6 @@ const NewslistEdit = (props) => {
 const NewslistShow = (props) => (
        <Show title={<NewslistTitle />} {...props}>
            <SimpleShowLayout>
-               <TextField source="id" />
                <TextField label="名字" source="textname" />
                <BooleanField label="是否启用" source="isenabled" />
            </SimpleShowLayout>
@@ -76,13 +75,11 @@ const NewslistShow = (props) => (
 
 
 const NewslistList = (props) => (//
-     <List title="类别信息列表" {...props} >
+     <List title="动态信息列表" {...props} >
         <Datagrid>
-          <TextField source="id" />
           <TextField label="名字" source="textname" />
           <BooleanField label="是否启用" source="isenabled" />
         <EditButton />
-        <ShowButton />
         </Datagrid>
     </List>
 );
