@@ -54,7 +54,7 @@ const Page = (props) => {
                     updateContent= {updateContent.bind(this)} 
                     queryfun= {productcommentsfromproduct}
                     listheight= {window.innerHeight-48}
-                    query = {{productid: props.match.params.id}}
+                    query = {{product: props.match.params.id}}
                     sort = {{created_at: -1}}
                 />
                 <div className="li">
