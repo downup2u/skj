@@ -17,6 +17,7 @@ import {
   ShowButton,
   DateInput,
   LongTextInput,
+  ReferenceField,
   ReferenceManyField,
   Datagrid,
   TextField,
@@ -32,7 +33,7 @@ import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
-
+import {EditStatus} from './editstatus';
 
 const WithdrawcashlistTitle = ({ record }) => {
    return <span>编辑 提现</span>;
@@ -41,8 +42,18 @@ const WithdrawcashlistTitle = ({ record }) => {
 const WithdrawcashlistEdit = (props) => {
       return (<Edit title={<WithdrawcashlistTitle />} {...props}>
           <SimpleForm>
-              <DisabledInput label="Id" source="id" />
-              <DisabledInput label="公司名" source="Withdrawcashname" />
+             <ReferenceField label="提现用户" source="creator" reference="user" addLabel={true}>
+                <TextField source="username" />
+             </ReferenceField>
+             <DisabledInput label="真实姓名" source="truename" />
+             <DisabledInput label="银行卡号" source="bankaccount" />
+             <DisabledInput label="银行名" source="bankname" />
+             <DisabledInput label="提现金额" source="cashmoney" />
+             <EditStatus  label="状态"  source="status" choices={[
+                    { id: '未验证', name: '未验证' },
+                    { id: '已验证', name: '已验证' },
+                    { id: '已支付', name: '已支付' },
+                ]}/>
           </SimpleForm>
       </Edit>);
 
@@ -53,8 +64,7 @@ const WithdrawcashlistShow = (props) => (
        <Show title={<WithdrawcashlistTitle />} {...props}>
            <SimpleShowLayout>
                <TextField source="id" />
-               <TextField label="公司名" source="Withdrawcashname" />
-           </SimpleShowLayout>
+            </SimpleShowLayout>
        </Show>
 );
 
@@ -63,10 +73,14 @@ const WithdrawcashlistShow = (props) => (
 const WithdrawcashlistList = (props) => (//
      <List title="提现列表" {...props} >
         <Datagrid>
-        <TextField source="id" />
-        <TextField label="公司名" source="Withdrawcashname" />
+        <ReferenceField label="提现用户" source="creator" reference="user" addLabel={true}>
+           <TextField source="username" />
+        </ReferenceField>
+        <TextField label="真实姓名" source="truename" />
+        <TextField label="银行卡号" source="bankaccount" />
+        <TextField label="银行名" source="bankname" />
+        <TextField label="提现金额" source="cashmoney" />
         <EditButton />
-        <ShowButton />
         </Datagrid>
     </List>
 );
