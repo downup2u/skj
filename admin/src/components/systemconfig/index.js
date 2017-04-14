@@ -44,6 +44,8 @@ const SystemconfigShow = (props) => (
                  <ReferenceField label="显示在商城首页的产品2" source="productid2" reference="product" addLabel={true}>
                  <TextField source="name" />
                  </ReferenceField>
+                 <TextField  label="一级分销佣金" source="bonuslevel1" />
+                 <TextField  label="二级分销佣金" source="bonuslevel2" />
            </SimpleShowLayout>
        </ShowPage>
 );
@@ -68,6 +70,8 @@ export const SystemconfigCreate = (props) => (
            <ReferenceInput source="productid2" reference="product" allowEmpty>
               <SelectInput optionText="name" />
             </ReferenceInput>
+                <TextInput  label="一级分销佣金" source="bonuslevel1" />
+                <TextInput  label="二级分销佣金" source="bonuslevel2" />
            </SimpleForm>
        </Create>
 );
@@ -84,6 +88,8 @@ export const SystemconfigEdit = (props) => (
            <ReferenceInput source="productid2" reference="product" allowEmpty>
               <SelectInput optionText="name" />
             </ReferenceInput>
+            <TextInput  label="一级分销佣金" source="bonuslevel1" />
+            <TextInput  label="二级分销佣金" source="bonuslevel2" />
         </SimpleForm>
     </EditPage>
 );
