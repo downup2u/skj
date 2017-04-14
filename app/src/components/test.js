@@ -32,6 +32,7 @@ import {
     test_getnextusers_request,
     test_getdistsalesorderstat_request,
     test_getdistsalesorders_request,
+    test_getdistsalesorderdetails_request
 } from '../test/testshop';
 
 let Page =(props)=>{
@@ -43,6 +44,7 @@ let Page =(props)=>{
     <Button onClick={()=>{test_getnextusers_request(props.dispatch)}}>分销-获取下级用户个数</Button><br />
     <Button onClick={()=>{test_getdistsalesorderstat_request(props.dispatch)}}>分销-获取下级用户订单统计</Button><br />
     <Button onClick={()=>{test_getdistsalesorders_request(props.dispatch)}}>分销-获取下级用户订单</Button><br />
+    <Button onClick={()=>{test_getdistsalesorderdetails_request(props.dispatch)}}>分销-获取所有订单提现记录（分页）</Button><br />
     <br />
 
 

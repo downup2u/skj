@@ -99,6 +99,11 @@ import {
   wait_mycoupongetall_request,
   wait_mycoupongetall_result,
   mycoupongetall_request,
+
+  getdistsalesorderdetails_request,
+  wait_getdistsalesorderdetails_request,
+  wait_getdistsalesorderdetails_result,
+
 } from '../actions/index.js';
 
 import { fork, take, call, put, cancel,race,takeLatest } from 'redux-saga/effects';
@@ -220,6 +225,12 @@ export function withdrawcashapplyauth(payload){
 export function mycoupongetall(payload){
   return synccall(payload,wait_mycoupongetall_request,mycoupongetall_request);
 }
+//==========分销相关================
+
+export function getdistsalesorderdetails(payload){
+  return synccall(payload,wait_getdistsalesorderdetails_request,getdistsalesorderdetails_request);
+}
+
 
 
 //2.
@@ -271,6 +282,8 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_withdrawcashapplyaddone_request}`,`${wait_withdrawcashapplyaddone_result}`]);
   waitfnsz.push([`${wait_withdrawcashapplyauth_request}`,`${wait_withdrawcashapplyauth_result}`]);
   waitfnsz.push([`${wait_mycoupongetall_request}`,`${wait_mycoupongetall_result}`]);
+  waitfnsz.push([`${wait_getdistsalesorderdetails_request}`,`${wait_getdistsalesorderdetails_result}`]);
+
 
   for(let fnsz of waitfnsz){
      yield takeLatest(fnsz[0],createflowsz, fnsz[1]);

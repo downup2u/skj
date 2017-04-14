@@ -30,7 +30,7 @@ import {
   ImageField,
 } from 'admin-on-rest/lib/mui';
 
-import { Field,FieldArray } from 'redux-form';
+import { Field } from 'redux-form';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
@@ -38,6 +38,7 @@ import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
 
 import {ImageInputUpload} from '../controls/imageupload.js';
+import {ImageInputUploadArray} from '../controls/imageuploadarray.js';
 import RichTextInput from '../controls/richtoolbar.js';
 
 export const ProductFilter = props => (
@@ -65,6 +66,7 @@ const ProductlistCreate = (props) => (
               <NumberInput label="库存"  source="stock" />
               <NumberInput label="销量"  source="salesvolume" />
               <ImageInputUpload label="图片"  source="picurl" />
+              <ImageInputUploadArray label="图片列表"  source="picurls" />
               <DateInput label="发布时间"  source="publishdate" />
               <RichTextInput label="详细信息" source="desc" addLabel={false}/>
               <BooleanInput label="是否启用" source="isenabled" defaultValue={true} />
@@ -92,6 +94,7 @@ const ProductlistEdit = (props) => {
               <NumberInput label="库存"  source="stock" />
               <NumberInput label="销量"  source="salesvolume" />
               <ImageInputUpload label="图片"  source="picurl" />
+              <ImageInputUploadArray label="图片列表"  source="picurls" />
               <DateInput label="发布时间"  source="publishdate" />
               <RichTextInput label="详细信息" source="desc" addLabel={false}/>
               <BooleanInput label="是否启用" source="isenabled" defaultValue={true} />

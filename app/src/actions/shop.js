@@ -149,3 +149,9 @@ export const getdistsalesorderstat_result = createAction('getdistsalesorderstat_
 
 export const getdistsalesorders_request = createAction('getdistsalesorders_request');
 export const getdistsalesorders_result = createAction('getdistsalesorders_result');
+
+//获取分销明细（放分页里面）
+export const getdistsalesorderdetails_request = createAction('getdistsalesorderdetails_request');
+export const getdistsalesorderdetails_result = createAction('getdistsalesorderdetails_result');
+export const wait_getdistsalesorderdetails_request = createAction('wait_getdistsalesorderdetails_request');
+export const wait_getdistsalesorderdetails_result = createAction('wait_getdistsalesorderdetails_result');
