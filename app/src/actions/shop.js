@@ -14,6 +14,13 @@ export const getbanner_result = createAction('getbanner_result');
 export const getcategory_request = createAction('getcategory_request');
 export const getcategory_result = createAction('getcategory_result');
 
+//获取支付验证字符串
+export const wait_getpaysign_request= createAction('wait_getpaysign_request');
+export const wait_getpaysign_result= createAction('wait_getpaysign_result');
+export const getpaysign_request = createAction('getpaysign_request');
+export const getpaysign_result = createAction('getpaysign_result');
+export const getpaysign_err = createAction('getpaysign_err');
+
 //添加购物车控件
 export const uiaddcartdilog = createAction('uiaddcartdilog');
 

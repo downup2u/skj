@@ -103,6 +103,10 @@ import {
     wait_getdistsalesorderdetails_result,
 
     serverpush_defaultaddress,
+
+    wait_getpaysign_result,
+    getpaysign_result,
+    getpaysign_err
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -112,6 +116,16 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+ ['getpaysign_result']:(socket,emit)=>{
+    return (result)=>{
+      emit(wait_getpaysign_result({result:result}));
+    }
+  },
+  ['getpaysign_err']:(socket,emit)=>{
+    return ({errmsg})=>{
+      emit(wait_getpaysign_result({err:errmsg}));
+    }
+  },
     ['serverpush_defaultaddress']: (socket, emit)=> {
       return ((payload) => {
         emit(serverpush_defaultaddress(payload));
