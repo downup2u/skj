@@ -27,6 +27,9 @@ export const setulcoupontype = createAction("setulcoupontype");
 export const getproduct_request = createAction('getproduct_request');
 export const getproduct_result = createAction('getproduct_result');
 
+//设置产品列表页面配置参数
+export const set_productlist = createAction('set_productlist');
+
 //购物车
 export const mycartaddone_request = createAction('mycartaddone_request');//添加购物车
 export const mycartaddone_result = createAction('mycartaddone_result');

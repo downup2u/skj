@@ -6,6 +6,7 @@
     background: #5596d6;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .ProlistPage .searchHead .ui.input {
@@ -84,17 +85,19 @@
     padding-left: 0;
     width: 100%;
     overflow-x: scroll;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     background: #FFF;
     border-bottom: 1px solid #EEE;
 }
 
 .ProlistPage .hotLnk span {
-    margin: 10px 10px 10px 15px;
+    margin: 10px 0;
     margin-right: 0;
     font-size: 14px;
     flex-shrink: 0;
+    flex-grow: 1;
+    text-align: center;
 }
 
 .ProlistPage .hotLnk span:last-child {
@@ -169,9 +172,6 @@
     background: #5596d6;
     display: flex;
     align-items: center;
-    position: fixed;
-    left:0;
-    top:0;
     height: 48px;
     width: 100%;
     z-index: 1000;

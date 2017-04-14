@@ -7,6 +7,13 @@ import { connect } from 'react-redux';
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shoppingprolist.css';
+import _ from 'lodash';
+import { 
+    uiaddcartdilog,
+    getproduct_request,
+    set_productlist
+} from '../../actions';
+import Addcartdilog from './addcartdilog.js';
 
 export class Page extends React.Component {
 
@@ -16,11 +23,27 @@ export class Page extends React.Component {
             showSortlistmore: false,
             searchInputFocus: false
         };
+        //_.sortBy(users, ['user', 'age']);
+        this.sortfn = {
+            0: ['name'],//综合排序按照name排序
+            1: ['salesvolume'],//人气根据销量排序
+            2: ['publishdate'],//最新根据发布时间排序
+            3: ['pricenow'],//根据价格排序
+            4: ['-pricenow']//根据价格倒序排序
+        };
+        //排序列表
+        this.sortlist = [
+            {name : "综合"},
+            {name : "热门"},
+            {name : "新品"},
+            {name : "价格"}
+        ]
     }
 
     componentWillMount = ()=> {
         let protype = this.props.match.params.type;
         this.setState({searchInputFocus: (protype==="search")});
+        this.setCategoryid(protype==="search"?0:protype);
     }
 
     onClickReturn = ()=> {
@@ -35,54 +58,147 @@ export class Page extends React.Component {
 
     }
 
+    showaddcartdilog =(e, proid)=>{
+        e.stopPropagation(e);
+        this.props.dispatch(uiaddcartdilog({
+            addcartdilogshow : true,
+            addcartdilogproid : proid
+        }));
+    }
+
+    //筛选产品类型
+    setCategoryid =(id)=>{
+        let payload = {
+            productslistType : id
+        }
+        this.props.dispatch(set_productlist(payload));
+    }
+    //配置排序条件
+    setSorttype =(index)=>{
+        let payload = {
+            productslistSorttype : index
+        }
+        this.props.dispatch(set_productlist(payload));
+    }
+
+    //根据查询条件查询产品
+    //此时产品类型被设为全部
+    setSearchtxt =(e)=>{
+        let payload = {
+            productslistSearchtxt : e.target.value,
+            productslistType : 0
+        }
+        this.props.dispatch(set_productlist(payload));
+    }
+    //产品列表页面配置参数set_productlist
+    // productslistType : 0,
+    // productslistSorttype : 0,
+    // productslistSearchtxt: '',
+
     render() {
-        console.log(this.state.searchInputFocus)
+
+        //更具类型筛选产品
+        let fillerList = {};
+        if(this.props.productslistType!=0){
+            fillerList = _.filter(this.props.products, { 'categoryid': this.props.productslistType });
+        }else{
+            fillerList = this.props.products;
+        }
+
+        //根据查询筛选
+        let searchKey = this.props.productslistSearchtxt;
+        let fillerSearchList = fillerList;
+        if(searchKey!=''){
+            fillerSearchList = _.filter(fillerList, (o)=>{
+                return o.name.indexOf(searchKey)!=-1;
+            });
+            console.log(fillerSearchList);
+        }
+
+        //排序
+        let newsortlist = _.sortBy(fillerSearchList, this.sortfn[this.props.productslistSorttype]);
+
         return (
             <div className="ProlistPage">
 
                 <div className="searchHead">
                     <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
-                    <Input placeholder="请输入关键字" focus={this.state.searchInputFocus}/>
+                    <Input
+                        placeholder="请输入关键字"
+                        focus={this.state.searchInputFocus}
+                        onChange = {(e)=>{this.setSearchtxt(e)}}
+                        />
                     <span className="imgcont" onClick={()=>{this.onClickPage('/shoppingcart')}} >
                         <img src="img/shopping/11.png"/>
                         <span className={this.props.remoteRowCount==0?"hide":""}>{this.props.remoteRowCount}</span>
                     </span>
                 </div>
                 <div className="hotLnk">
-                    <span className="sel">净水器·滤芯</span>
-                    <span>净水器·水龙头</span>
-                    <span>净水器·配件</span>
-                    <span>净水器·净水装置</span>
+                    <span 
+                        key="all" 
+                        onClick={()=>{this.setCategoryid(0)}}
+                        className={this.props.productslistType==0?"sel":""}
+                        >
+                        全部
+                    </span>
+                    {_.map(this.props.categories, (category, index)=>{
+                        let selstyle = this.props.productslistType==category._id?"sel":"";
+                        if(this.props.productslistType==4 && index==3){
+                            selstyle = "sel";
+                        }
+                        return (
+                            <span 
+                                key={index}
+                                onClick={()=>{this.setCategoryid(category._id)}}
+                                className={selstyle}
+                                >
+                                {category.name}
+                            </span>
+                        )
+                    })}
                 </div>
                 <div className="sortList">
-                    <span>综合</span>
-                    <span>热门</span>
-                    <span>新品</span>
-                    <span onClick={this.toggleSortlistmore}>价格<Icon name="sort"/></span>
-                    <div className={this.state.showSortlistmore?"sortlistmore":"sortlistmore hide"}>
-                        <span>销量</span>
-                        <span>价格</span>
-                    </div>
-                </div>
-
-                <div className="proList" style={{height:(window.innerHeight-58-42-43)+"px"}}>
-
-                    <div className="li" onClick={()=>{this.onClickPage('/shoppingproinfo')}}>
-                        <img src="img/shopping/8.png"/>
-                        <span className="name">水可净智能水盒子</span>
-                        <span className="price">
-                            <span>¥499.00</span>
-                            <img src="img/shopping/9.png"/>
-                        </span>
-                    </div>
+                    {_.map(this.sortlist, (sortlistitem, index)=>{
+                        return (
+                            <span 
+                                key={index}
+                                onClick={()=>{this.setSorttype(index)}}
+                                className={this.props.productslistSorttype==index?"sel":""}
+                                >
+                                {sortlistitem.name}
+                            </span>
+                        )
+                    })}
                     
                 </div>
+
+                <div className="proList" style={{height:(window.innerHeight-48-42-43)+"px"}}>
+                    {
+                        _.map(newsortlist,(proinfo, index)=>{
+                            return (
+                                <div className="li" key={index} onClick={()=>{this.onClickPage(`/shoppingproinfo/${proinfo._id}`)}}>
+                                    <img src="img/shopping/8.png"/>
+                                    <span className="name">{proinfo.name}</span>
+                                    <span className="price">
+                                        <span>¥{proinfo.pricenow}</span>
+                                        <img src='img/shopping/9.png' onClick={(e)=>{this.showaddcartdilog(e,proinfo._id)}}/>
+                                    </span>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <Addcartdilog 
+                    show={this.props.addcartdilogshow} 
+                    proid={this.props.addcartdilogproid} 
+                    number={this.props.addcartdilogpronumber}
+                />
             </div>
         )
     }
 }
 
-let mapStateToProps = ({shop,shopcart}) => {
-    return {...shop,...shopcart};
+let mapStateToProps = ({shop,shopcart,app}) => {
+    return {...shop,...shopcart,...app};
 }
 export default connect(mapStateToProps)(Page);

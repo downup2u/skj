@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import '../../../public/css/addcartdilog.css';
 import { 
     uiaddcartdilog,
-    mycartaddone_request
+    mycartaddone_request,
+    showpopmessage
 } from '../../actions/index.js';
+import { mycartaddone } from '../../actions/sagacallback.js';
 
 
 let Page = ({proid, show, number, dispatch, products})=>{
@@ -39,10 +41,17 @@ let Page = ({proid, show, number, dispatch, products})=>{
     }
     //加入购物车
     let addcart =()=>{
-        dispatch(mycartaddone_request({
+        dispatch(mycartaddone({
             product: proid,
             number: number
-        }));
+        })).then((result)=>{
+            hidedilog();
+            dispatch((showpopmessage({
+                title: '成功加入购物车',
+                msg: '',
+                type: 'success'
+            })))
+        });
     }
 
     let showstyle = show?"addcartdilog":"addcartdilog hide";

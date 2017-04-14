@@ -13,6 +13,7 @@ import {
     mycollectiondelone_result,
     mycollectionaddone_result,
     setulcoupontype,
+    set_productlist
 } from '../actions/index.js';
 import {
     normalizrbanners,
@@ -26,7 +27,7 @@ const initial = {
 	//商城
     shop: {
         news:[],
-        searchtxt:'',
+        
         //以下数据从后台取
         shopbanners:[],//商城首页广告
         shopcategorylist1:[],//商城首页横排分类
@@ -40,13 +41,24 @@ const initial = {
 
         //选择优惠券类型
         ulcoupontype:0,
+
+        //产品列表页面配置参数getproductlist
+        productslistType : 0,
+        productslistSorttype : 0,
+        productslistSearchtxt: '',
+
+        //生成订单确认页
+        
     }
 };
 
 const shop = createReducer({
+    //设置产品列表页面参数
+    [set_productlist]:(state, payload)=>{
+        return {...state, ...payload};
+    },
     //商品是否已经被收藏
     [mycollectionisproductexits_result]:(state, payload)=>{
-        console.log("mycollectionisproductexits_result"+JSON.stringify(payload));
         let iscollection = {...state.iscollection,...payload.result};
         return {...state,iscollection};
     },

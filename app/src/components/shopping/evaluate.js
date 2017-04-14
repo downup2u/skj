@@ -57,19 +57,6 @@ const Page = (props) => {
                     query = {{product: props.match.params.id}}
                     sort = {{created_at: -1}}
                 />
-                <div className="li">
-                    <div className="tt">
-                        <img src="img/shopping/14.png"/>
-
-                        <div>
-                            <span className="name">水可净智能水盒子</span>
-                            <span className="data">2016-09-09</span>
-                        </div>
-                    </div>
-                    <span className="content">
-                        <span>这里是评价内容这里是评价内容这里是评价内容这里是评价内容这里是评价内容</span>
-                    </span>
-                </div>
             </div>
         </div>
     )
@@ -80,5 +67,4 @@ let mapStateToProps = ({shop,shopcart}) => {
 }
 
 Page = connect(mapStateToProps)(Page);
-
 export default Page;
