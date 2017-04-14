@@ -113,9 +113,16 @@ export class Page extends React.Component {
                     <Swiper
                         swiperOptions={{slidesPerView: 'auto'}}
                         {...swiperOptions}>
-                        <Slide className="Demo-swiper__slide">
-                            <img src={proinfo.picurl}/>
-                        </Slide>
+                        {_.map(proinfo.picurls.length>0?proinfo.picurls:[proinfo.picurl], (piclist,index)=>{
+                            return (
+                                <Slide
+                                    key={index}
+                                    className="Demo-swiper__slide">
+                                    <img src={piclist}/>
+                                </Slide>
+                            )
+                        })}
+                        
                     </Swiper>
                 </div>
                 <div className="proinfoHead">
@@ -128,9 +135,6 @@ export class Page extends React.Component {
                             <img src={this.props.iscollection[proinfo._id]?"img/shopping/star2.png":"img/shopping/star.png"} />
                             <span>收藏</span>
                         </span>
-                    </div>
-                    <div className="p3">
-                        运费:0元
                     </div>
                 </div>
                 <div className="discountlist">

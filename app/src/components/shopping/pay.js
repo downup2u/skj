@@ -5,8 +5,10 @@ import React, { Component, PropTypes } from 'react';
 import { Input, Button, Menu, Icon } from 'semantic-ui-react';
 import NavBar from '../nav.js';
 import '../../../public/css/pay.css';
+import { connect } from 'react-redux';
+import _ from 'lodash'; 
 
-export default class Page extends Component {
+export class Page extends Component {
 
     onClickReturn = ()=> {
         this.props.history.goBack();
@@ -84,3 +86,10 @@ export default class Page extends Component {
         );
     }
 }
+
+let mapStateToProps = ({shop,app}) => {
+    return {...shop,...app};
+}
+
+Page = connect(mapStateToProps)(Page);
+export default Page;

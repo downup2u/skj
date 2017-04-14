@@ -151,8 +151,6 @@ let Page = (props) => {
     );
 }
 
-
-
 let mapStateToProps = ({shop,app}) => {
     return {...shop,...app};
 }

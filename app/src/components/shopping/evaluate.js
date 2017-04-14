@@ -8,7 +8,7 @@ import '../../../public/css/shoppingproevaluate.css';
 import { productcommentsfromproduct } from '../../actions/sagacallback.js';
 import InfinitePage from '../controls/infinitecontrol';
 
-const Page = (props) => {
+let Page = (props) => {
     let onClickReturn = ()=> {
         props.history.goBack();
     };

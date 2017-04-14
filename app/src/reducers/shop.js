@@ -13,7 +13,8 @@ import {
     mycollectiondelone_result,
     mycollectionaddone_result,
     setulcoupontype,
-    set_productlist
+    set_productlist,
+    set_orderSurePage,
 } from '../actions/index.js';
 import {
     normalizrbanners,
@@ -48,11 +49,45 @@ const initial = {
         productslistSearchtxt: '',
 
         //生成订单确认页
+        orderAddressId : '',
+        
+
+        
+        // creator:{ type: Schema.Types.ObjectId, ref: 'User' },
+        // payway:String,
+        // realprice:Number,//实付价
+        // orderprice:Number,//订单价=应付价
+        // orderstatus:String,
+        // paystatus:{ type: String, default:'未支付'},
+        // provincename:String,
+        // cityname:String,
+        // distinctname:String,
+        // address:String,
+        // isdeleted:{ type:Boolean, default: false },
+        // productsdetail:[
+        //     {
+        //         productid:String,
+        //         number:Number,
+        //         price:Number
+        //     }
+        // ],
+        // couponprice:Number,//抵扣价
+        // couponid:{ type: Schema.Types.ObjectId, ref: 'Coupon' },
+        // productprice:Number,//产品总价
+        // expressid:{ type: Schema.Types.ObjectId, ref: 'Express' },
+        // expressbarid:String,
+        // created_at: Date,
+        // pay_at:Date,
         
     }
 };
 
 const shop = createReducer({
+    //生成订单确认页
+    [set_orderSurePage]:(state, payload)=>{
+        return {state, ...payload}
+    }
+    ,
     //设置产品列表页面参数
     [set_productlist]:(state, payload)=>{
         return {...state, ...payload};
