@@ -17,3 +17,6 @@ export const uiinfinitepage_getdata = createAction('uiinfinitepage_getdata');
 export const uiinfinitepage_setstate = createAction('uiinfinitepage_setstate');
 export const uiinfinitepage_deleteitem = createAction('uiinfinitepage_deleteitem');
 export const uiinfinitepage_updateitem = createAction('uiinfinitepage_updateitem');
+
+export const getsystemconfig_request = createAction('getsystemconfig_request');
+export const getsystemconfig_result = createAction('getsystemconfig_result');
