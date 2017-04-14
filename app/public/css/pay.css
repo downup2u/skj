@@ -1,6 +1,6 @@
 .PayPage{
     background: #EEE;
-    overflow-y: scroll;
+    overflow-y: hidden;
     padding-top: 48px;
 }
 .PayPage .PageHead {
@@ -13,6 +13,10 @@
     height: 48px;
     width: 100%;
     z-index: 1000;
+}
+.PayPage .PayPageBody{
+    flex-grow: 1;
+    overflow-y: scroll;
 }
 
 .PayPage .PageHead .title {
@@ -125,8 +129,6 @@
 .PayPage .subBtn{
     display: flex;
     justify-content: space-between;
-    position: fixed;
-    bottom: 0;
     width: 100%;
     background: #FFF;
     align-items: center;

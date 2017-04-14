@@ -33,6 +33,9 @@ export const set_productlist = createAction('set_productlist');
 //生成订单确认页面
 export const set_orderSurePage = createAction('set_orderSurePage');
 
+//新增一个订单数据
+export const myorderlist_addreducers = createAction('myorderlist_addreducers');
+
 //购物车
 export const mycartaddone_request = createAction('mycartaddone_request');//添加购物车
 export const mycartaddone_result = createAction('mycartaddone_result');

@@ -11,6 +11,7 @@ import devicedata from './devicedata';
 import notifymessage from './notifymessage';
 import wifi from './wifi';
 import shop from './shop';
+import order from './orderdetail';
 import shopcart from './shopcart';
 import shopcollection from './shopcollection';
 import shoporder from './shoporder';
@@ -27,6 +28,7 @@ export default combineReducers(
     newtopicfileupload,
     wifi,
     shop,
+    order,
     shopcart,
     shopcollection,
     shoporder,

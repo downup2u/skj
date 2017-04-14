@@ -92,9 +92,12 @@ export class Page extends Component {
                 if(result){
                     if(result.page>=result.pages){//最后一页
                         this.props.dispatch(uiinfinitepage_getdata({result,append:!isRefresh}));
-                        this.props.dispatch(uiinfinitepage_setstate({ pullUpStatus: 0,pullDownStatus: 4}));
+                        this.props.dispatch(uiinfinitepage_setstate({ pullUpStatus: 4,pullDownStatus: 4}));
                         if(result.page===1){
                             this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 500);
+                        }
+                        if(this.iScrollInstance.maxScrollY<this.props.listheight){
+                            $(this.refs.PullDown).hide();
                         }
                     }else{
                         if (isRefresh) {// 刷新操作
@@ -159,22 +162,6 @@ export class Page extends Component {
 
     onScroll =()=> {
         let pullDown = $(this.refs.PullDown);
-        let pullUp = $(this.refs.PullUp);
-        let Nodata = $(this.refs.Nodata);
-
-        //没有数据的情况下
-        if( this.iScrollInstance.maxScrollY==0 ){
-            Nodata.show();
-        }else{
-            Nodata.hide();
-        }
-
-        //超过一页数据的时候才会有上划加载更多的功能
-        if(this.iScrollInstance.maxScrollY > this.props.listheight){
-            pullUp.show();
-        }else{
-            pullUp.hide();
-        }
 
         // 上拉区域
         if (this.iScrollInstance.y > -1 * pullDown.height()) {
@@ -192,13 +179,20 @@ export class Page extends Component {
     }
 
     onScrollEnd=()=> {
-        let pullDown = $(this.refs.PullDown);
         let iScrollInstance_y = this.iScrollInstance.y;
+        let pullDown = $(this.refs.PullDown);
+        let pullUp = $(this.refs.PullUp);
+        let Nodata = $(this.refs.Nodata);
 
+        console.log(this.iScrollInstance);
+        
+        //没有数据的情况下
         if( this.iScrollInstance.maxScrollY==0 ){
             pullDown.css("margin-top","-"+pullDown.height()+"px");
+            Nodata.show();
         }else{
             pullDown.css("margin-top","0");
+            Nodata.hide();
         }
 
         // 滑动结束后，停在刷新区域

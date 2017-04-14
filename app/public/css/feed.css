@@ -124,6 +124,7 @@
 .feedHead .label img {
     border-radius: 50%;
     width: 44px;
+    height: 44px;
     align-self: flex-start;
 }
 

@@ -13,7 +13,8 @@ import {
     uiiscollection,
     mycollectionaddone_request,
     mycollectiondelone_request,
-    mycollectionisproductexits_request
+    mycollectionisproductexits_request,
+    set_orderSurePage,
  } from '../../actions';
  import Addcartdilog from './addcartdilog.js';
  import {
@@ -50,6 +51,27 @@ export class Page extends React.Component {
         this.props.history.push(name);
     };
 
+    //生成订单确认页
+    setOrderSurePage =(proinfo)=>{
+        let prolist = [{
+            productid: proinfo._id,
+            number:1,
+            price:proinfo.pricenow,
+            productinfo: proinfo
+        }];
+        let express = proinfo.pricenow>this.props.expressfeeforfree?0:this.props.expressfee;
+        let orderprice = proinfo.pricenow + express; 
+        let payload = {
+            orderAddressId:'',//地址id
+            orderProductsdetail:prolist,//产品列表
+            orderExpress:express,//运费
+            orderPrice:orderprice,//订单价格
+            orderProductPrice : proinfo.pricenow, //产品总价格
+        }
+        this.props.dispatch(set_orderSurePage(payload));
+        this.props.history.push("/pay");
+    }
+
     //加入收藏
     clickCollection =(pro)=>{
         //let _this = this;
@@ -59,7 +81,6 @@ export class Page extends React.Component {
         }else{
             this.addCollection(pro._id);
         }
-
         // this.props.dispatch(mycollectionisproductexits({productid:pro._id})).then(({result})=>{
         //     if(result[pro._id]){
         //         //删除收藏
@@ -153,7 +174,7 @@ export class Page extends React.Component {
                 </div>
                 <div className="proinfoFoot">
                     <span onClick={()=>{this.showaddcartdilog(proinfo._id)}}><i>加入购物车</i></span>
-                    <span onClick={()=>{this.onClickPage('/pay')}}><i>立刻购买</i></span>
+                    <span onClick={()=>{this.setOrderSurePage(proinfo)}}><i>立刻购买</i></span>
                 </div>
                 <Addcartdilog show={this.props.addcartdilogshow} proid={this.props.addcartdilogproid} number={this.props.addcartdilogpronumber} />
             </div>
@@ -161,8 +182,8 @@ export class Page extends React.Component {
     }
 }
 
-let mapStateToProps = ({shop,shopcart,app}) => {
-    return {...shop,...shopcart,...app};
+let mapStateToProps = ({shop,shopcart,app,order}) => {
+    return {...shop,...shopcart,...app,...order};
 }
 
 Page = connect(mapStateToProps)(Page);

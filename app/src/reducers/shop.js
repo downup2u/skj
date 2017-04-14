@@ -15,6 +15,7 @@ import {
     setulcoupontype,
     set_productlist,
     set_orderSurePage,
+    myorderlist_addreducers
 } from '../actions/index.js';
 import {
     normalizrbanners,
@@ -47,55 +48,20 @@ const initial = {
         productslistType : 0,
         productslistSorttype : 0,
         productslistSearchtxt: '',
-
-        //生成订单确认页
-        orderAddressId : '',
-        
-
-        
-        // creator:{ type: Schema.Types.ObjectId, ref: 'User' },
-        // payway:String,
-        // realprice:Number,//实付价
-        // orderprice:Number,//订单价=应付价
-        // orderstatus:String,
-        // paystatus:{ type: String, default:'未支付'},
-        // provincename:String,
-        // cityname:String,
-        // distinctname:String,
-        // address:String,
-        // isdeleted:{ type:Boolean, default: false },
-        // productsdetail:[
-        //     {
-        //         productid:String,
-        //         number:Number,
-        //         price:Number
-        //     }
-        // ],
-        // couponprice:Number,//抵扣价
-        // couponid:{ type: Schema.Types.ObjectId, ref: 'Coupon' },
-        // productprice:Number,//产品总价
-        // expressid:{ type: Schema.Types.ObjectId, ref: 'Express' },
-        // expressbarid:String,
-        // created_at: Date,
-        // pay_at:Date,
         
     }
 };
 
 const shop = createReducer({
-    //生成订单确认页
-    [set_orderSurePage]:(state, payload)=>{
-        return {state, ...payload}
-    }
-    ,
+
     //设置产品列表页面参数
     [set_productlist]:(state, payload)=>{
-        return {...state, ...payload};
+        return {...state, payload};
     },
     //商品是否已经被收藏
     [mycollectionisproductexits_result]:(state, payload)=>{
         let iscollection = {...state.iscollection,...payload.result};
-        return {...state,iscollection};
+        return {...state, iscollection};
     },
     //添加商品收藏
     // payload = {
@@ -111,7 +77,7 @@ const shop = createReducer({
         let newitem = {};
         newitem[payload.newitem.product] = true;
         let iscollection = {...state.iscollection,...newitem};
-        return {...state,iscollection};
+        return {...state, iscollection};
     },
     //取消收藏
     // {

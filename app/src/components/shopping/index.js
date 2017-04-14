@@ -105,14 +105,14 @@ let Page = (props) => {
                     </div>
                 </div>
                 <div className="shoppingBanner2">
-                    <img src="img/shopping/2.png" onClick={()=>{onClickPage('/shoppingpackage')}} />
-                    <img src="img/shopping/3.png" onClick={()=>{onClickPage('/shoppingpackage')}}/>
+                    <img src="img/shopping/2.png" onClick={(e)=>{onClickPage(e, '/shoppingpackage')}} />
+                    <img src="img/shopping/3.png" onClick={(e)=>{onClickPage(e, '/shoppingpackage')}}/>
                 </div>
                 <div className="shoppingBannerLnk">
                     {_.map(props.shopcategorylist1, (categoryid, index)=>{
                         let category = props.categories[categoryid];
                         return (
-                            <span key={index} onClick={()=>{onClickPage('/shoppingprolist')}}>
+                            <span key={index} onClick={(e)=>{onClickPage(e,'/shoppingprolist')}}>
                                 <img src={category.picurl}/>
                                 {category.name}
                             </span>

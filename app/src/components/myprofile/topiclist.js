@@ -93,32 +93,17 @@ class Page extends Component {
         console.log(JSON.stringify(iteminfo));
         this.props.history.push(`/communityinfo/${iteminfo._id}`);
     }
-    rowRenderer= ({ key, index, style})=> {
-        if(this.isRowLoaded({index})){
-            let topicid = this.props.mytopiclist[index];
-            let iteminfo = this.props.topics[topicid];
 
-            if (typeof iteminfo.created_at === 'string') {
-                iteminfo.created_at = new Date(Date.parse(iteminfo.created_at));
-            }
-            return (
-                <TopicInfo 
-                    dispatch={this.props.dispatch}
-                    key={`mytopic${key}`} 
-                    onClick={()=>{this.onClick(iteminfo);}}
-                    iteminfo={iteminfo}/>
-            );
-
-        }
-        return (<div key={key}>loading...</div>);
-
-    }
-
-
-    updateContent = (item)=> {
-        return  (
-            <div>{item._id}</div>
+    rowRenderer = (item)=> {
+        return (
+            <TopicInfo 
+                dispatch={this.props.dispatch}
+                key={item._id} 
+                onClick={()=>{this.onClick(item)}}
+                iteminfo={item}
+                />
         );
+
     }
 
 
@@ -130,8 +115,10 @@ class Page extends Component {
                 <div className="cont">
                     <InfinitePage
                         pagenumber = {20}
-                        updateContent= {this.updateContent} 
+                        updateContent= {this.rowRenderer} 
                         queryfun= { getmytopic }
+                        sort = {{created_at: -1}}
+                        query = {{}}
                     />
                 </div>
                 <Bigimg imglist={this.props.bigimglist} showindex={this.props.bigimgindex} show={this.props.bigimgshow} />
