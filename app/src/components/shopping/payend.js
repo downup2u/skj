@@ -10,13 +10,13 @@ import _ from 'lodash';
 import {
     myordergetall
 } from '../../actions/sagacallback.js';
+import {
+    payway_set
+} from '../../actions';
+
+import {onclickpay} from '../../env/pay';
 
 export class Page extends Component {
-
-    constructor(props, context) {
-        super(props, context);
-        this.orderinfo = {};
-    }
 
     //获取订单详情
     // __v:0
@@ -45,9 +45,6 @@ export class Page extends Component {
             // }
     // isdeleted:false
     // paystatus:"未支付"
-    componentWillMount = ()=> {
-        this.orderinfo = this.props.myOrderList[this.props.match.params.id];
-    };
 
     onClickReturn = ()=> {
         this.props.history.goBack();
@@ -57,9 +54,16 @@ export class Page extends Component {
         this.props.history.push(name);
     };
 
-    
+    onClickPay =()=> {
+        onclickpay(this.props);
+    }
+    //设置支付方式
+    setpayway =(payway)=>{
+        this.props.dispatch(payway_set(payway));
+    }
 
     render() {
+        const {orderinfo} = this.props;
         return (
             <div className="PayPage"
                  style={{
@@ -84,12 +88,12 @@ export class Page extends Component {
                         </div>
                     </div>
                     <div className="proinfo">
-                        {_.map(this.orderinfo.productsdetail,(proinfo,index)=>{
+                        {_.map(orderinfo.productsdetail,(proinfo,index)=>{
                             return (
                                 <div className="li" key={index}>
-                                    <img src={proinfo.productidinfo.picurl} />
+                                    <img src={proinfo.productinfo.picurl} />
                                     <div>
-                                        <span>{proinfo.productidinfo.name}</span>
+                                        <span>{proinfo.productinfo.name}</span>
                                         <span className="price">
                                             <span>¥{proinfo.price}</span>
                                             <span>X{proinfo.number}</span>
@@ -103,7 +107,7 @@ export class Page extends Component {
                     <div className="list">
                         <div className="li">
                             <span>运费</span>
-                            <span>¥{this.orderinfo.orderexpress}</span>
+                            <span>¥{orderinfo.orderexpress}</span>
                         </div>
                         <div className="li">
                             <span>使用积分</span>
@@ -122,7 +126,11 @@ export class Page extends Component {
                                 <span>微信</span>
                                 <span>推荐微信用户使用</span>
                             </div>
-                            <Checkbox name="paycheck" />
+                            <Checkbox 
+                                name="paycheck" 
+                                onClick={()=>{this.setpayway("weixin")}} 
+                                checked={this.props.payway=="weixin"}
+                                />
                         </div>
                         <div className="li">
                             <img src="img/shopping/16.png" />
@@ -130,7 +138,11 @@ export class Page extends Component {
                                 <span>支付宝</span>
                                 <span>推荐支付宝用户使用</span>
                             </div>
-                            <Checkbox name="paycheck" />
+                            <Checkbox 
+                                name="paycheck" 
+                                onClick={()=>{this.setpayway("alipay")}} 
+                                checked={this.props.payway=="alipay"}
+                                />
                         </div>
                     </div>
                 </div>
@@ -139,7 +151,7 @@ export class Page extends Component {
                     <div className="i">
                         实付金额: <span>¥400.00</span>
                     </div>
-                    <div className="b">
+                    <div className="b" onClick={()=>{this.onClickPay()}}>
                         <span>提交订单</span>
                     </div>
 
@@ -150,8 +162,9 @@ export class Page extends Component {
     }
 }
 
-let mapStateToProps = ({shop,app}) => {
-    return {...shop,...app};
+let mapStateToProps = ({shop,app,order},props) => {
+    let orderinfo = order.myOrderList[props.match.params.id];
+    return {...shop, ...app, ...order, orderinfo};
 }
 
 Page = connect(mapStateToProps)(Page);

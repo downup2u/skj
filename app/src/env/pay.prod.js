@@ -2,7 +2,7 @@
 import {getpaysign} from '../actions/sagacallback';
  import Common from '../xview/Common.js';
 
-export const onclickpay = ({orderinfo,paytype,dispatch})=> {
+export const onclickpay = ({orderinfo,paytype,dispatch},callbackfn)=> {
    let orderdoc = {
       out_trade_no: orderinfo._id,
       subject: orderinfo.ordertitle,//$('#subject').val(),//'WL144626511265842',//$('#subject').val(),
@@ -17,10 +17,12 @@ export const onclickpay = ({orderinfo,paytype,dispatch})=> {
 
        if(this.props.paytype === 'weixin'){
          Common.wxpayUrl(paysign,(result)=>{
+          callbackfn(result);
         });
        }
        else if(this.props.paytype === 'alipay'){
           Common.alipayUrl(paysign,(result)=>{
+            callbackfn(result);
          });
        }
     });
