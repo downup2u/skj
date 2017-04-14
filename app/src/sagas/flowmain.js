@@ -63,6 +63,8 @@ import {
     getnextusers_request,
     getdistsalesorderstat_request,
     getdistsalesorders_request,    
+
+    getdistsalesorderdetails_request,
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -183,6 +185,7 @@ function* handleIOWithAuth(socket) {
             'getnextusers' :`${getnextusers_request}`,
             'getdistsalesorderstat' :`${getdistsalesorderstat_request}`,
             'getdistsalesorders' :`${getdistsalesorders_request}`,
+            'getdistsalesorderdetails':`${getdistsalesorderdetails_request}`,
         };
 
         let tasksz =[];

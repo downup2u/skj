@@ -34,7 +34,8 @@ import {
   productcommentsfromproductgetcount,
   withdrawcashapplyaddone,
   withdrawcashapplyauth,
-  mycoupongetall
+  mycoupongetall,
+  getdistsalesorderdetails
 } from '../actions/sagacallback.js';
 
 //测试新增购物车
@@ -346,6 +347,26 @@ let test_getdistsalesorders_request=(dispatch)=>{
   //[{"_id":"58ef3c3a80703c2e7a144339","levelflag":1,"totalorderprices":300,"totalfeebonus":30,"fromuserprofile":[{"avatar":"img/myprofile/1.png","nickname":"游客0130"}],"phonenumber":["15961123513"]},{"_id":"58ef3c8380703c2e7a14433a","levelflag":2,"totalorderprices":30,"totalfeebonus":1.5,"fromuserprofile":[{"avatar":"img/myprofile/1.png","nickname":"游客8859"}],"phonenumber":["13861174733"]}]
 }
 
+let test_getdistsalesorderdetails_request=(dispatch)=>{
+  //分销页面详情（分页）
+    let page = 1;
+  let perpagenumber = 10;
+  let payload = {
+    query:{srctype : "order"},//
+    options:{
+      page: page,
+      limit: perpagenumber,
+    }
+  };
+  //dispatch(mycollectiongetall_request(payload));
+  dispatch(getdistsalesorderdetails(payload)).then(({result})=>{
+    //mycoupongetall result=>{"docs":[],"total":0,"limit":10,"page":1,"pages":1}
+    console.log("getdistsalesorderdetails result=>" + JSON.stringify(result));
+  });
+
+}
+
+
 
 export {
     test_mycartgetall_request,
@@ -375,4 +396,5 @@ export {
     test_getnextusers_request,
     test_getdistsalesorderstat_request,
     test_getdistsalesorders_request,
+    test_getdistsalesorderdetails_request,
 };

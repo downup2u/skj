@@ -98,6 +98,9 @@ import {
     getdistsalesorders_result,    
 
     getsystemconfig_result,
+
+    getdistsalesorderdetails_result,
+    wait_getdistsalesorderdetails_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -107,6 +110,7 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+    
     ['getsystemconfig_result']: (socket, emit)=> {
       return ((payload) => {
         emit(getsystemconfig_result(payload));
@@ -125,6 +129,12 @@ const handlerlist = {
      ['shop.getdistsalesorders_result']: (socket, emit)=> {
       return ((payload) => {
         emit(getdistsalesorders_result(payload));
+      });
+     },
+     ['shop.getdistsalesorderdetails_result']: (socket, emit)=> {
+      return ((payload) => {
+        emit(getdistsalesorderdetails_result(payload));
+        emit(wait_getdistsalesorderdetails_result({result:payload}));
       });
      },
       ['shop.mycoupongetall_result']: (socket, emit)=> {
