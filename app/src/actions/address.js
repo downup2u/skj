@@ -24,3 +24,5 @@ export const getaddresslist_result = createAction('address.getaddresslist_result
 
 export const deleteaddress_confirmpopshow = createAction('address.deleteaddress_confirmpopshow');
 export const deleteaddress_confirmpophide = createAction('address.deleteaddress_confirmpophide');
+
+export const serverpush_defaultaddress = createAction('address.serverpush_defaultaddress');

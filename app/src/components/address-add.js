@@ -23,6 +23,7 @@ class Page extends React.Component {
             phonenumber: values.phonenumber,
             seladdr:values.seladdr,
             addressname: values.addressname,
+            isdefaultaddress:values.isdefaultaddress
         };
 
         this.props.dispatch(createaddress(payload)).then((result)=> {
@@ -46,6 +47,7 @@ class Page extends React.Component {
               phonenumber:'',
               seladdr:defaultaddrselvalue,
               addressname:'',
+              isdefaultaddress:false
             }}/>
             </div>);
     }

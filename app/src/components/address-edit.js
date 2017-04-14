@@ -23,6 +23,7 @@ class Page extends React.Component {
         phonenumber:values.phonenumber,
         seladdr:values.seladdr,
         addressname:values.addressname,
+        isdefaultaddress:values.isdefaultaddress
     }
     //this.props.dispatch(editaddress_request(payload));
     this.props.dispatch(editaddress(payload)).then((result)=>{
@@ -48,11 +49,12 @@ class Page extends React.Component {
             phonenumber:this.props.phonenumber,
             seladdr:this.props.seladdr,
             addressname:this.props.addressname,
+            isdefaultaddress:this.props.isdefaultaddress,
             }}/>
         </div>);
   }
 }
-const mapStateToProps = ({address},props) => {
+const mapStateToProps = ({address,userlogin},props) => {
   let addressid = props.match.params.addressid;
   let curaddressitem = {};
   for(let addressitem of address.addresslist){
@@ -60,6 +62,13 @@ const mapStateToProps = ({address},props) => {
       curaddressitem = addressitem;
     }
   }
+  curaddressitem.isdefaultaddress = false;
+  if(userlogin.defaultaddress.hasOwnProperty('_id')){
+    if(curaddressitem._id === userlogin.defaultaddress._id){
+      curaddressitem.isdefaultaddress = true;
+    }
+  }
+  
   return curaddressitem;
 }
 

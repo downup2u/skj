@@ -9,6 +9,7 @@ import {
     fillprofile_result,
     ui_changeusername,
     logout_result,
+    serverpush_defaultaddress,
 } from '../actions/index.js';
 
 const initial = {
@@ -19,12 +20,16 @@ const initial = {
         userid:'',
         token:'',
         profile:{},
+        defaultaddress:{}
     },
 };
 
 const userlogin = createReducer({
+    [serverpush_defaultaddress]:(state, defaultaddress)=>{
+        return { ...state,defaultaddress:{...defaultaddress}};
+    },
     [logout_result]:(state, payload)=>{
-        return { ...initial.userlogin};
+        return { ...initial.userlogin,defaultaddress:{}};
     },
     [ui_changeusername]:(state,editusername)=>{
         return {...state,editusername};

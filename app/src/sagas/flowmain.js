@@ -65,6 +65,7 @@ import {
     getdistsalesorders_request,    
 
     getdistsalesorderdetails_request,
+    getpaysign_request,
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -172,6 +173,7 @@ function* handleIOWithAuth(socket) {
             'myorderupdateone':`${myorderupdateone_request}`,
             'myorderdelone':`${myorderdelone_request}`,    
             'myordergetall':`${myordergetall_request}`, 
+            'getpaysign':`${getpaysign_request}`,
 
             'productcommentsfromproduct':`${productcommentsfromproduct_request}`,
             'productcommentaddone':`${productcommentaddone_request}`,    

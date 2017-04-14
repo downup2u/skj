@@ -8,14 +8,24 @@ import { connect } from 'react-redux';
 import {getaddresslist_request,deleteaddress_request} from '../actions/index.js';
 import {deleteaddress_confirmpopshow,deleteaddress_confirmpophide} from '../actions/index.js';
 import { Confirm } from 'semantic-ui-react';
+import {editaddress} from '../actions/sagacallback.js';
 
 const AddressItem = (props)=> {
-    const {addressitem} = props;
+    const {addressitem,isdefaultaddress} = props;
     let onDelete = ()=> {
         props.onClickDelete(addressitem);
     };
     let onEdit = ()=> {
         props.onClickEdit(addressitem);
+    }
+    let onClickDefault =()=>{
+        addressitem.isdefaultaddress = true;
+        props.dispatch(editaddress(addressitem)).then((result)=>{
+
+        }).catch((error)=>{
+            //弹出错误框
+            console.log("编辑地址成功:" + JSON.stringify(error));
+        });
     }
     return (
         <List.Item key={addressitem._id}>
@@ -38,9 +48,10 @@ const AddressItem = (props)=> {
                     <span>{addressitem.addressname}</span>
                 </div>
                 <div className="listControl">
-                    <div className="rad">
-                        <Radio label='设为默认'/>
-                    </div>
+                    {!isdefaultaddress?
+                    (<div className="rad">
+                        <Radio onClick={onClickDefault}/>
+                    </div>):null}
                     <div className="lnk">
                         <div onClick={onEdit}><Icon link name='edit'/>编辑</div>
                         <div onClick={onDelete}><Icon link name='trash outline'/>删除</div>
@@ -95,7 +106,16 @@ export class Page extends React.Component {
     render() {
         let itemsco = [];
         this.props.addresslist.forEach((addressitem)=> {
-            itemsco.push(<AddressItem key={addressitem._id} addressitem={addressitem}
+            let isdefaultaddress = false;
+            if(this.props.defaultaddress.hasOwnProperty('_id')){
+                if(addressitem._id === this.props.defaultaddress._id){
+                    isdefaultaddress = true;
+                }
+            }
+            itemsco.push(<AddressItem key={addressitem._id} 
+                                      dispatch={this.props.dispatch}
+                                      isdefaultaddress={isdefaultaddress}
+                                      addressitem={addressitem}
                                       onClickEdit={this.onClickEdit}
                                       onClickDelete={this.onClickDelete}/>);
         });
@@ -126,8 +146,8 @@ export class Page extends React.Component {
 }
 ;
 //
-const mapStateToProps = ({address}) => {
-    return address;
+const mapStateToProps = ({address,userlogin}) => {
+    return {...address,defaultaddress:userlogin.defaultaddress};
 };
 Page = connect(mapStateToProps)(Page);
 export default Page;

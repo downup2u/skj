@@ -104,6 +104,9 @@ import {
   wait_getdistsalesorderdetails_request,
   wait_getdistsalesorderdetails_result,
 
+  getpaysign_request,
+  wait_getpaysign_request,
+  wait_getpaysign_result,
 } from '../actions/index.js';
 
 import { fork, take, call, put, cancel,race,takeLatest } from 'redux-saga/effects';
@@ -231,6 +234,9 @@ export function getdistsalesorderdetails(payload){
   return synccall(payload,wait_getdistsalesorderdetails_request,getdistsalesorderdetails_request);
 }
 
+export function getpaysign(payload){
+  return synccall(payload,wait_getpaysign_request,getpaysign_request);
+}
 
 
 //2.
@@ -283,6 +289,7 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_withdrawcashapplyauth_request}`,`${wait_withdrawcashapplyauth_result}`]);
   waitfnsz.push([`${wait_mycoupongetall_request}`,`${wait_mycoupongetall_result}`]);
   waitfnsz.push([`${wait_getdistsalesorderdetails_request}`,`${wait_getdistsalesorderdetails_result}`]);
+  waitfnsz.push([`${wait_getpaysign_request}`,`${wait_getpaysign_result}`]);
 
 
   for(let fnsz of waitfnsz){
