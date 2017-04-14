@@ -4,6 +4,9 @@ import {  Button, Icon, Input, List, Radio, Label, Checkbox } from 'semantic-ui-
 import Addresssellevel3 from './controls/addresssellevel3';
 
 let renderNewaddressForm = (fields)=> {
+    let onClickDefault =()=>{
+        fields.isdefaultaddress.input.onChange(true);
+    }
     return (
         <div className="AddressAddPage" style={{minHeight:(window.innerHeight-46)+"px"}}>
             <List selection verticalAlign='middle' className="addAddress">
@@ -35,10 +38,11 @@ let renderNewaddressForm = (fields)=> {
                     </List.Content>
                 </List.Item>
             </List>
-            <div className="setForm">
+            {!fields.isdefaultaddress.input.value?
+            (<div className="setForm">
                 <span>是否设为默认地址</span>
-                <Radio toggle label=''/>
-            </div>
+                <Radio onClick={onClickDefault}/>
+            </div>):null}
         </div>);
 };
 

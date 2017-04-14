@@ -31,9 +31,12 @@ const address = createReducer({
     [editaddress_result]: (state, payload) => {
         let addresslist =  state.addresslist;
         let newaddresslist = [];
-        for(let item of newaddresslist){
+        for(let item of addresslist){
             if(item._id===payload._id){
                 newaddresslist.push(payload);
+            }
+            else{
+                newaddresslist.push(item);
             }
         }
         return { ...state,addresslist:[...newaddresslist]};

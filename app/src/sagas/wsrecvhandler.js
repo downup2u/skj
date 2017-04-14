@@ -101,6 +101,8 @@ import {
 
     getdistsalesorderdetails_result,
     wait_getdistsalesorderdetails_result,
+
+    serverpush_defaultaddress,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -110,7 +112,11 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
-    
+    ['serverpush_defaultaddress']: (socket, emit)=> {
+      return ((payload) => {
+        emit(serverpush_defaultaddress(payload));
+      });
+     },
     ['getsystemconfig_result']: (socket, emit)=> {
       return ((payload) => {
         emit(getsystemconfig_result(payload));
