@@ -57,16 +57,9 @@ let Page = (props) => {
         e.stopPropagation
     }
     //let proid = this.props.match.params.id;
-    return (
-        <div className="shoppingPage">
-            <div className="shoppingHead">
-                <Input placeholder="请输入关键字" value={props.searchtxt} onClick={(e)=>{
-                    onClickPage(e,'/shoppingprolist/search');
-                }} />
-                <img src="img/shopping/10.png"/>
-            </div>
-            <div className="shoppingBody">
-                <div className="shoppingBanner">
+    let shoppingBanner;
+    if(props.shopbanners.length > 0){
+        shoppingBanner =   (<div className="shoppingBanner">
                     <Swiper
                         swiperOptions={{slidesPerView: 'auto'}}
                         {...swiperOptions}>
@@ -78,10 +71,11 @@ let Page = (props) => {
                             )
                         })}
                     </Swiper>
-                </div>
-                <div className="listTitle" style={{height:"42px"}}>
-                    <img src="img/shopping/1.png"/>
-                    <div className="shoppingNews">
+                </div>);
+    }
+    let shoppingNews;
+    if(props.news.length > 0){
+        shoppingNews = (<div className="shoppingNews">
                         <Swiper
                             swiperOptions={{
                                 slidesPerView: 'auto',
@@ -102,7 +96,21 @@ let Page = (props) => {
                                 )
                             })}
                         </Swiper>
-                    </div>
+                    </div>);
+    }
+    return (
+        <div className="shoppingPage">
+            <div className="shoppingHead">
+                <Input placeholder="请输入关键字" value={props.searchtxt} onClick={(e)=>{
+                    onClickPage(e,'/shoppingprolist/search');
+                }} />
+                <img src="img/shopping/10.png"/>
+            </div>
+            <div className="shoppingBody">
+                {shoppingBanner}
+                <div className="listTitle" style={{height:"42px"}}>
+                    <img src="img/shopping/1.png"/>
+                    {shoppingNews}
                 </div>
                 <div className="shoppingBanner2">
                     <img src="img/shopping/2.png" onClick={(e)=>{onClickPage(e, '/shoppingpackage')}} />

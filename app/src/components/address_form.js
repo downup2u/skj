@@ -74,7 +74,7 @@ let NewaddressForm = (props)=> {
     let {handleSubmit,onClickOK} = props;
     return (<Form onSubmit={handleSubmit(onClickOK)}>
         <div className="loginPageTop">
-            <Fields names={['truename','phonenumber','seladdr','addressname']}
+            <Fields names={['truename','phonenumber','seladdr','addressname','isdefaultaddress']}
                     component={renderNewaddressForm}/>
 
             <div className="loginBotton AddressAddPageBottom">

@@ -2,7 +2,7 @@
 import {getpaysign} from '../actions/sagacallback';
  
 
-export const onclickpay = ({orderinfo,payway,dispatch},callback)=> {
+export const onclickpay = ({orderinfo,payway,dispatch},callbackfn)=> {
    let orderdoc = {
       out_trade_no: orderinfo._id,
       subject: orderinfo.ordertitle,//$('#subject').val(),//'WL144626511265842',//$('#subject').val(),
@@ -14,7 +14,8 @@ export const onclickpay = ({orderinfo,payway,dispatch},callback)=> {
         paypage:'orderdetailpage',
         orderdoc:orderdoc,
     })).then((paysign)=>{
-        callback(paysign);
+        console.log(`getpaysign:${paysign}`);
+        callbackfn(paysign);
         // console.log('----->获取到sign:' + paysign);
         //     let payinfo = {
         //         paystatus:'已支付',

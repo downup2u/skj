@@ -55,7 +55,9 @@ export class Page extends Component {
     };
 
     onClickPay =()=> {
-        onclickpay(this.props);
+        onclickpay(this.props,(result)=>{
+            console.log(`获得数据：${result}`);
+        });
     }
     //设置支付方式
     setpayway =(payway)=>{
