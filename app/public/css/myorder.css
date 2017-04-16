@@ -10,6 +10,7 @@
     position: relative;
     z-index: 1000;
     background: #FFF;
+    border-bottom: 1px solid #EEE;
 }
 .myOrder .actionItem span{
     line-height: 40px;
@@ -69,11 +70,13 @@
 }
 
 .orderList .items > div.cont {
+    border-top: 1px solid #EEE;
+}
+.orderList .items > div.cont .li{
     display: flex;
     align-items: flex-start;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-top: 1px solid #EEE;
 }
 
 .orderList .items > div.cont img {

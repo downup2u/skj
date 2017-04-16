@@ -57,6 +57,11 @@ export class Page extends Component {
                 this.fetchItems(true);
             },0);
         }
+        if(!_.eq(nextProps.items, this.props.items)){
+            window.setTimeout(()=>{
+                this.fetchItems(true);
+            },0);
+        }
     }
 
     componentDidMount() {
@@ -226,7 +231,7 @@ export class Page extends Component {
 
     shouldComponentUpdate(nextProps) {
         // 列表发生了变化, 那么应该在componentDidUpdate时调用iscroll进行refresh
-        let itemsChanged = nextProps.items.length !== this.props.items.length;
+        let itemsChanged = !_.eq(nextProps.items, this.props.items)
         this.props.dispatch(uiinfinitepage_setstate({itemsChanged}));
         return true;
     }
