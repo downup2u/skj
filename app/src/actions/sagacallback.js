@@ -107,6 +107,10 @@ import {
   getpaysign_request,
   wait_getpaysign_request,
   wait_getpaysign_result,
+
+  getuserpointdetails_request,
+  wait_getuserpointdetails_request,
+  wait_getuserpointdetails_result,
 } from '../actions/index.js';
 
 import { fork, take, call, put, cancel,race,takeLatest } from 'redux-saga/effects';
@@ -238,6 +242,10 @@ export function getpaysign(payload){
   return synccall(payload,wait_getpaysign_request,getpaysign_request);
 }
 
+export function getuserpointdetails(payload){
+  return synccall(payload,wait_getuserpointdetails_request,getuserpointdetails_request);
+}
+
 
 //2.
 function* createflowsz(fnwatres,action){
@@ -290,6 +298,7 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_mycoupongetall_request}`,`${wait_mycoupongetall_result}`]);
   waitfnsz.push([`${wait_getdistsalesorderdetails_request}`,`${wait_getdistsalesorderdetails_result}`]);
   waitfnsz.push([`${wait_getpaysign_request}`,`${wait_getpaysign_result}`]);
+  waitfnsz.push([`${wait_getuserpointdetails_request}`,`${wait_getuserpointdetails_result}`]);
 
 
   for(let fnsz of waitfnsz){

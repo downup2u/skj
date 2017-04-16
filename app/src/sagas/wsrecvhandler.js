@@ -106,7 +106,12 @@ import {
 
     wait_getpaysign_result,
     getpaysign_result,
-    getpaysign_err
+    getpaysign_err,
+
+    serverpush_usermoney,
+    getusergetpointsigntoday_result,
+    getuserpointdetails_result,
+    wait_getuserpointdetails_result
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -116,6 +121,22 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+  ['serverpush_usermoney']:(socket,emit)=>{
+    return (result)=>{
+      emit(serverpush_usermoney(result));
+    }
+  },
+  ['shop.getusergetpointsigntoday_result']:(socket,emit)=>{
+    return (result)=>{
+      emit(getusergetpointsigntoday_result(result));
+    }
+  },
+   ['shop.getuserpointdetails_result']:(socket,emit)=>{
+    return (result)=>{
+      emit(getuserpointdetails_result(result));
+      emit(wait_getuserpointdetails_result({result:result}));
+    }
+  },
  ['getpaysign_result']:(socket,emit)=>{
     return (result)=>{
       emit(wait_getpaysign_result({result:result}));

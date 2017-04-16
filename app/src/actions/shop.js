@@ -2,6 +2,8 @@
  * Created by wangxiaoqing on 2017/4/7.
  */
 import { createAction } from 'redux-act';
+
+
 export const ui_cartooder_additem = createAction('ui_cartooder_additem');
 export const ui_cartooder_delitem = createAction('ui_cartooder_delitem');
 export const ui_cartooder_updateitem = createAction('ui_cartooder_updateitem');
@@ -171,3 +173,15 @@ export const getdistsalesorderdetails_request = createAction('getdistsalesorderd
 export const getdistsalesorderdetails_result = createAction('getdistsalesorderdetails_result');
 export const wait_getdistsalesorderdetails_request = createAction('wait_getdistsalesorderdetails_request');
 export const wait_getdistsalesorderdetails_result = createAction('wait_getdistsalesorderdetails_result');
+
+
+//积分相关接口
+export const serverpush_usermoney = createAction('serverpush_usermoney');
+export const getusermoney = createAction('getusermoney');//进入个人中心时发送，刷新积分和用户余额，返回即：serverpush_usermoney，因此不需要专门写request,result
+export const useraddpoint = createAction('useraddpoint');//签到或分享，返回即：serverpush_usermoney，并新增明细
+export const getusergetpointsigntoday_request = createAction('getusergetpointsigntoday_request');//今日是否签到过
+export const getusergetpointsigntoday_result = createAction('getusergetpointsigntoday_result');
+export const getuserpointdetails_request = createAction('getuserpointdetails_request');
+export const getuserpointdetails_result = createAction('getuserpointdetails_result');
+export const wait_getuserpointdetails_request = createAction('wait_getuserpointdetails_request');
+export const wait_getuserpointdetails_result = createAction('wait_getuserpointdetails_result');

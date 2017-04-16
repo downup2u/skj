@@ -35,12 +35,34 @@ import {
     test_getdistsalesorderdetails_request
 } from '../test/testshop';
 
+import {
+    test_getusermoney,
+    test_useraddpoint,
+    test_getusergetpointsigntoday_request,
+    test_getuserpointdetails,
+} from '../test/testpoint';
+
+import {
+  zfbPay,
+  wxPay,
+} from '../test/testpay';
+
 let Page =(props)=>{
     let onClickPage=(name)=>{
         props.history.push(name);
     };
     return (<div>
         <p style={{textAlign: 'center'}}>
+        <Button onClick={()=>{test_getusermoney(props.dispatch)}}>获取积分&余额</Button><br />
+        <Button onClick={()=>{test_useraddpoint(props.dispatch,'签到')}}>签到得积分</Button><br />
+        <Button onClick={()=>{test_useraddpoint(props.dispatch,'分享')}}>分享得积分</Button><br />
+        <Button onClick={()=>{test_getusergetpointsigntoday_request(props.dispatch)}}>今日是否已分享</Button><br />
+        <Button onClick={()=>{test_getuserpointdetails(props.dispatch)}}>获取积分明细（分页）</Button><br />
+        <br />
+
+         <Button onClick={()=>{zfbPay()}}>测试支付宝</Button><br />
+      <Button onClick={()=>{wxPay()}}>测试微信</Button><br />
+    <br />
     <Button onClick={()=>{test_getnextusers_request(props.dispatch)}}>分销-获取下级用户个数</Button><br />
     <Button onClick={()=>{test_getdistsalesorderstat_request(props.dispatch)}}>分销-获取下级用户订单统计</Button><br />
     <Button onClick={()=>{test_getdistsalesorders_request(props.dispatch)}}>分销-获取下级用户订单</Button><br />

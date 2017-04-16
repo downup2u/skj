@@ -10,6 +10,8 @@ import {
     ui_changeusername,
     logout_result,
     serverpush_defaultaddress,
+    serverpush_usermoney,
+    getusergetpointsigntoday_result
 } from '../actions/index.js';
 
 const initial = {
@@ -20,11 +22,21 @@ const initial = {
         userid:'',
         token:'',
         profile:{},
-        defaultaddress:{}
+        defaultaddress:{},
+        balance:0,
+        point:0,
+        isusergetpointsigntoday:true,
     },
 };
 
 const userlogin = createReducer({
+    [getusergetpointsigntoday_result]:(state, isusergetpointsigntoday)=>{
+        return { ...state,isusergetpointsigntoday};
+    },
+    [serverpush_usermoney]:(state, payload)=>{
+        const {balance,point} = payload;
+        return { ...state,balance,point};
+    },
     [serverpush_defaultaddress]:(state, defaultaddress)=>{
         return { ...state,defaultaddress:{...defaultaddress}};
     },

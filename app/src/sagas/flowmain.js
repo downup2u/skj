@@ -66,6 +66,11 @@ import {
 
     getdistsalesorderdetails_request,
     getpaysign_request,
+
+    getusermoney,
+    useraddpoint,
+    getusergetpointsigntoday_request,
+    getuserpointdetails_request
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -188,6 +193,11 @@ function* handleIOWithAuth(socket) {
             'getdistsalesorderstat' :`${getdistsalesorderstat_request}`,
             'getdistsalesorders' :`${getdistsalesorders_request}`,
             'getdistsalesorderdetails':`${getdistsalesorderdetails_request}`,
+
+            'getusermoney':`${getusermoney}`,
+            'useraddpoint':`${useraddpoint}`,
+            'getusergetpointsigntoday':`${getusergetpointsigntoday_request}`,
+            'getuserpointdetails':`${getuserpointdetails_request}`,
         };
 
         let tasksz =[];
