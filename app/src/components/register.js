@@ -49,7 +49,9 @@ let renderRegisterForm = (fields)=> {
             <img className="eye" src={ispasswordvisiable?"img/eye.png":"img/eye2.png"} onClick={onChangePasswordvisiable} />
         </div>
         <div className="password logininput">
-            <Input placeholder='请输入邀请码(选填)' />
+            <Input placeholder='输入邀请码'  {...fields.invitecode.input} type="text"/>
+            {fields.invitecode.meta.touched && fields.invitecode.meta.error &&
+            <Label basic color='red' pointing>{fields.invitecode.meta.error}</Label>}
             <img src="img/rg4.png" className='lefticon'/>
         </div>
 
@@ -65,7 +67,7 @@ let RegisterForm = (props)=> {
                 <Icon name='angle left' onClick={onClickReturn}/>
                 <img src="img/4.png" className="loginhead"/>
             </div>
-            <Fields names={['username','ispasswordvisiable','password','authcode']} component={renderRegisterForm}/>
+            <Fields names={['username','ispasswordvisiable','password','authcode','invitecode']} component={renderRegisterForm}/>
 
             <div className="loginBotton">
                 <Button primary>注册</Button>
@@ -115,6 +117,13 @@ const validate = values => {
             errors.password = '密码太长';
         }
     }
+
+   if (values.invitecode) {
+        let invitecode = values.invitecode;
+        if (invitecode.match(/\D/g) || invitecode.length !== 8) {
+            errors.invitecode = '邀请码必须是八位数字(也可不填)';
+        }
+    }
     return errors;
 }
 
@@ -125,6 +134,7 @@ RegisterForm = reduxForm({
         username: '',
         password: '',
         authcode: '',
+        invitecode:'',
         ispasswordvisiable: false,
     }
 })(RegisterForm);
@@ -145,7 +155,8 @@ export class Page extends React.Component {
         let payload = {
             username: values.username,
             password: values.password,
-            authcode: values.authcode
+            authcode: values.authcode,
+            invitecode:values.invitecode
         }
         //alert(JSON.stringify(formdata));
         this.props.dispatch(register(payload)).then((result)=> {
@@ -165,7 +176,7 @@ export class Page extends React.Component {
             <div className="UserLoginPage">
                 <RegisterForm onClickRegister={this.onClickRegister}
                               onClickLogin={this.onClickLogin}
-        onClickReturn={this.onClickReturn}/>
+                              onClickReturn={this.onClickReturn}/>
             </div>
         );
     }
