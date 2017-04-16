@@ -56,7 +56,7 @@ const shop = createReducer({
 
     //设置产品列表页面参数
     [set_productlist]:(state, payload)=>{
-        return {...state, payload};
+        return {...state, ...payload};
     },
     //商品是否已经被收藏
     [mycollectionisproductexits_result]:(state, payload)=>{

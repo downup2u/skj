@@ -142,15 +142,11 @@ export class Page extends React.Component {
                         全部
                     </span>
                     {_.map(this.props.categories, (category, index)=>{
-                        let selstyle = this.props.productslistType==category._id?"sel":"";
-                        if(this.props.productslistType==4 && index==3){
-                            selstyle = "sel";
-                        }
                         return (
                             <span 
                                 key={index}
                                 onClick={()=>{this.setCategoryid(category._id)}}
-                                className={selstyle}
+                                className={this.props.productslistType==category._id?"sel":""}
                                 >
                                 {category.name}
                             </span>
@@ -189,8 +185,8 @@ export class Page extends React.Component {
                     }
                 </div>
                 <Addcartdilog 
-                    show={this.props.addcartdilogshow} 
-                    proid={this.props.addcartdilogproid} 
+                    show={this.props.addcartdilogshow}
+                    proid={this.props.addcartdilogproid}
                     number={this.props.addcartdilogpronumber}
                 />
             </div>
@@ -201,4 +197,7 @@ export class Page extends React.Component {
 let mapStateToProps = ({shop,shopcart,app}) => {
     return {...shop,...shopcart,...app};
 }
+
 export default connect(mapStateToProps)(Page);
+
+

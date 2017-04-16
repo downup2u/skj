@@ -16,7 +16,8 @@ import {
     set_productlist,
     set_orderSurePage,
     myorderlist_addreducers,
-    payway_set
+    payway_set,
+    myOrderList_filler_set
 } from '../actions/index.js';
 import {
     normalizrbanners,
@@ -27,7 +28,7 @@ import {
 import _ from 'lodash';
 
 const initial = {
-	//商城
+	//订单
     order: {
 
         //生成订单确认页
@@ -36,6 +37,7 @@ const initial = {
         //     number:Number,
         //     price:Number
         // }]
+
         orderAddressId : '',//地址id
         orderProductsdetail:[],//产品列表
         orderExpress:"",//运费
@@ -43,10 +45,11 @@ const initial = {
         orderProductPrice: 0,//产品总价格
 
         //我的订单列表
-        myOrderList : {},
-        //选择支付方式
-        payway:'alipay'
+        myOrderList : {},//我的临时订单列表,不是我的所有订单
+        myOrderListFiller : "全部", //订单过滤条件
 
+        //选择支付方式
+        payway:'alipay',
 
         // creator:{ type: Schema.Types.ObjectId, ref: 'User' },
         // payway:String,
@@ -90,7 +93,12 @@ const order = createReducer({
     //生成订单确认页
     [set_orderSurePage]:(state, payload)=>{
         return {...state, ...payload}
-    }
+    },
+    //设置订单列表页面筛选条件
+    [myOrderList_filler_set]:(state, payload)=>{
+        return {...state, myOrderListFiller:payload}
+    },
 }, initial.order);
 
 export default order;
+

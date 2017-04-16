@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import $ from 'jquery';
 import iScroll from 'iscroll/build/iscroll-probe';
 import './infinitecontrol.css';
+import _ from 'lodash';
 
 const pullDownTips = {
             // 下拉状态
@@ -49,6 +50,15 @@ export class Page extends Component {
     componentWillMount() {
         this.props.dispatch(uiinfinitepage_init());
     }
+    componentWillReceiveProps(nextProps) {
+        if (!_.eq(nextProps.query, this.props.query)) {
+            this.props.dispatch(uiinfinitepage_init());
+            window.setTimeout(()=>{
+                this.fetchItems(true);
+            },0);
+        }
+    }
+
     componentDidMount() {
         
         document.getElementById('ScrollContainer').addEventListener('touchmove', (ev) => {
@@ -85,7 +95,7 @@ export class Page extends Component {
                 query: this.props.query,
                 options: {
                     sort: this.props.sort,
-                    page: this.page,
+                    page: querypage,
                     limit: this.props.pagenumber,
                 }
             })).then(({result})=> {

@@ -348,7 +348,7 @@ let test_getdistsalesorders_request=(dispatch)=>{
 }
 
 let test_getdistsalesorderdetails_request=(dispatch)=>{
-  //分销页面详情（分页）
+  //分销列表（分页）
     let page = 1;
   let perpagenumber = 10;
   let payload = {

@@ -106,12 +106,8 @@ styles.fill = {
 
 styles.content = {
     ...styles.fill,
-    top
-:
-'40px',
-    textAlign
-:
-'center'
+    top: '40px',
+    textAlign:'center'
 }
 
 styles.nav = {
@@ -133,15 +129,9 @@ styles.navItem = {
 
 styles.hsl = {
     ...styles.fill,
-    color
-:
-'white',
-    paddingTop
-:
-'20px',
-    fontSize
-:
-'30px'
+    color:'white',
+    paddingTop:'20px',
+    fontSize:'30px'
 }
 
 const FadeRoute = ({ component: Component, ...rest }) => {
@@ -160,7 +150,8 @@ const FadeRoute = ({ component: Component, ...rest }) => {
             movelength = -300;//返回页面
         }
         let prvleft = movelength;
-        return (<TransitionMotion
+        return (
+            <TransitionMotion
                 willLeave={()=>{willLeave(movelength)}}
                 styles={match ? [ {
                 key: location.pathname,
