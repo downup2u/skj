@@ -282,7 +282,7 @@ export class AppRoot extends React.Component {
             if (this.props.type === 'error') {
                 MessageCo = (
                     <div className="messageCo" style={fullheight}>
-                        <Message onDismiss={this.onDismiss}
+                        <Message 
                                  error
                                  header={this.props.title}
                                  content={this.props.msg}
@@ -293,7 +293,7 @@ export class AppRoot extends React.Component {
             else if (this.props.type === 'warning') {
                 MessageCo = (
                     <div className="messageCo" style={fullheight}>
-                        <Message onDismiss={this.onDismiss}
+                        <Message 
                                  warning
                                  header={this.props.title}
                                  content={this.props.msg}
@@ -304,7 +304,7 @@ export class AppRoot extends React.Component {
             else if (this.props.type === 'success') {
                 MessageCo = (
                     <div className="messageCo" style={fullheight}>
-                        <Message onDismiss={this.onDismiss}
+                        <Message 
                                  success
                                  header={this.props.title}
                                  content={this.props.msg}
@@ -314,7 +314,12 @@ export class AppRoot extends React.Component {
             }
         }
 
-        return (<div className="pageWamp">{MessageCo}<CoApp {...this.props} /></div>);
+        return (
+            <div>
+                {MessageCo}
+                <div className="pageWamp"><CoApp {...this.props} /></div>
+            </div>
+            );
     }
 
 }

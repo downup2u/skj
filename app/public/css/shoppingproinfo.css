@@ -100,6 +100,11 @@
     font-size: 18px;
     margin: 5px 0;
 }
+.ProinfoPage .proinfoHead .p2>span:last-child {
+    color: #888;
+    text-decoration:line-through;
+    margin-left: 10px;
+}
 
 .ProinfoPage .shoppingBanner .swiper-slide {
     display: flex;

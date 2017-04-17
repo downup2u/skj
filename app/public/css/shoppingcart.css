@@ -1,6 +1,6 @@
 .shoppingCartPage {
     background: #EEE;
-    overflow: scroll;
+    overflow: hidden;
     padding-top: 48px;
     display: flex;
     flex-direction: column;

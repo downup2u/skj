@@ -93,7 +93,7 @@ export class Page extends React.Component {
         this.props.history.push("/pay");
     }
 
-    //加入收藏
+    //点击加入收藏
     clickCollection =(pro)=>{
         //let _this = this;
         let issellection = this.props.iscollection[pro._id];
@@ -157,7 +157,10 @@ export class Page extends React.Component {
                     <div className="p1">
                         <div>
                             <span className="proname">{proinfo.name}</span>
-                            <span className="p2">¥{proinfo.pricenow}</span>
+                            <span className="p2">
+                                <span>¥{proinfo.pricenow}</span>
+                                <span>¥{proinfo.pricemarket}</span>
+                            </span>
                         </div>
                         <span className="collectionLnk" onClick={()=>{this.clickCollection(proinfo)}}>
                             <img src={this.props.iscollection[proinfo._id]?"img/shopping/star2.png":"img/shopping/star.png"} />

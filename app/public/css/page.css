@@ -13,5 +13,21 @@
     background: rgba(0,0,0,.5);
 }
 .ui.message{
-    width: 60%;
+    max-width: 60%;
+    min-height: 140px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    min-width: 160px;
+
+}
+.ui.success.message .header{
+    font-size:18px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.ui.success.message{
+    background-color: rgba(51,204,51, .3);
+    color: #2c662d;
 }

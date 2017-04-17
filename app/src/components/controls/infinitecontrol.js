@@ -115,7 +115,8 @@ export class Page extends Component {
                         if(result.page===1){
                             this.iScrollInstance.scrollTo(0, -1*pullDown.height(), 500);
                             pullUp.hide();
-                            Nodata.show();
+                            //暂无数据
+                            if(result.total==0){Nodata.show()};
                         }
                     }else{
                         if (isRefresh) {// 刷新操作

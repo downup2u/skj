@@ -173,7 +173,7 @@ export class Page extends React.Component {
                         _.map(newsortlist,(proinfo, index)=>{
                             return (
                                 <div className="li" key={index} onClick={()=>{this.onClickPage(`/shoppingproinfo/${proinfo._id}`)}}>
-                                    <img src="img/shopping/8.png"/>
+                                    <img src={proinfo.picurl}/>
                                     <span className="name">{proinfo.name}</span>
                                     <span className="price">
                                         <span>¥{proinfo.pricenow}</span>
