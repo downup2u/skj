@@ -5,3 +5,5 @@ import { createAction } from 'redux-act';
 
 //设置订单列表页面筛选参数
 export const myOrderList_filler_set = createAction('myOrderList_filler_set');
+
+export const serverpush_orderinfo = createAction('serverpush_orderinfo');

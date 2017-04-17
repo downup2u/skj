@@ -344,7 +344,7 @@ let test_getdistsalesorderstat_request=(dispatch)=>{
 let test_getdistsalesorders_request=(dispatch)=>{
   //下线订单统计页面
   dispatch(getdistsalesorders_request({}));
-  //[{"_id":"58ef3c3a80703c2e7a144339","levelflag":1,"totalorderprices":300,"totalfeebonus":30,"fromuserprofile":[{"avatar":"img/myprofile/1.png","nickname":"游客0130"}],"phonenumber":["15961123513"]},{"_id":"58ef3c8380703c2e7a14433a","levelflag":2,"totalorderprices":30,"totalfeebonus":1.5,"fromuserprofile":[{"avatar":"img/myprofile/1.png","nickname":"游客8859"}],"phonenumber":["13861174733"]}]
+  //{"level1users":{"58ef3c3a80703c2e7a144339":{"username":"15961123513","nickname":"游客0130","avatar":"img/myprofile/1.png","totalorderprices":0,"totalfeebonus":0}},"level2users":{"58ef3c8380703c2e7a14433a":{"username":"13861174733","nickname":"游客8859","avatar":"img/myprofile/1.png","totalorderprices":0,"totalfeebonus":0}}}
 }
 
 let test_getdistsalesorderdetails_request=(dispatch)=>{
