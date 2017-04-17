@@ -1,4 +1,8 @@
   import * as xview from '../env/xview/Common';
+import {
+  requestpost,
+} from '../util/util.js';
+
 
   let zfbPay=()=>{
     let param="partner=\"2088521376976114\"&seller_id=\"1742688357@qq.com\"&out_trade_no=\"PC_D1488616952710292\"&subject=\"PC_D1488616952710292\"&body=\"XVIEW alipay\"&total_fee=\"10.01\"&notify_url=\"http://www.yaoquan.com28.cn/servlet/NotifyAlipayServlet\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay=\"30m\"&sign=\"Ee%2Fo%2B%2BGhOpktpKDw1iJ51glG9wdd0UJ2gji0z5VNeBPZRuKj7OHVp0S%2F6XOgUK7xrPJVqUFWuO06%2Fr4AYzMumH%2F4jI%2B2G3OULhDONmJsBJYCz4%2FVZk9TTWIY7YVlH5Kl28ztJRS5KsfpPbOvXpCytTYwVcydGgVvzDhRXsGIVq8%3D\"&sign_type=\"RSA\"";
@@ -14,9 +18,18 @@
       alert(JSON.stringify(data));
     });
   }
-
+ let testnotifypay =()=>{
+   let postdata = {
+     "out_trade_no":"58f309cb557992246cae894a"
+   };
+   requestpost('/pay/alipaytest',postdata,(err,result)=>{
+        console.log("testpost err:" + JSON.stringify(err));
+        console.log("testpost result:" + JSON.stringify(result));
+    });
+ }
 
 export {
   zfbPay,
   wxPay,
+  testnotifypay
 };

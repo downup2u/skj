@@ -111,7 +111,9 @@ import {
     serverpush_usermoney,
     getusergetpointsigntoday_result,
     getuserpointdetails_result,
-    wait_getuserpointdetails_result
+    wait_getuserpointdetails_result,
+
+    serverpush_orderinfo
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -121,6 +123,11 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+  ['serverpush_orderinfo']:(socket,emit)=>{
+    return (result)=>{
+      emit(serverpush_orderinfo(result));
+    }
+  },
   ['serverpush_usermoney']:(socket,emit)=>{
     return (result)=>{
       emit(serverpush_usermoney(result));
