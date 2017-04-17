@@ -200,6 +200,7 @@
     padding: 0 3px;
     right: 5px;
     top: 5px;
+    min-width: 20px;
 }
 .ProlistPage .searchHead .imgcont span.hide{
     display: none;

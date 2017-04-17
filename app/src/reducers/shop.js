@@ -57,7 +57,11 @@ const shop = createReducer({
 
     //产品详情添加评论数
     [set_productevaluatenumber]:(state, payload)=>{
-        let products = {...state.products, ...payload}
+        let productall = {...state.products};
+        let productinfo = {...productall[payload.proid], evaluatenumber: payload.evaluatenumber};
+        let newproinfo = {};
+        newproinfo[payload.proid] = productinfo;
+        let products = {...productall, ...newproinfo}
         return {...state, products};
     },
     //设置产品列表页面参数

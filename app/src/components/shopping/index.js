@@ -120,7 +120,7 @@ let Page = (props) => {
                     {_.map(props.shopcategorylist1, (categoryid, index)=>{
                         let category = props.categories[categoryid];
                         return (
-                            <span key={index} onClick={(e)=>{onClickPage(e,'/shoppingprolist')}}>
+                            <span key={index} onClick={(e)=>{onClickPage(e,`/shoppingprolist/${categoryid}`)}}>
                                 <img src={category.picurl}/>
                                 {category.name}
                             </span>

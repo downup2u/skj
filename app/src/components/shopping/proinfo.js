@@ -45,8 +45,12 @@ export class Page extends React.Component {
         //evaluatenumber:set_productevaluatenumber
         let payload = {productid:proid};
         this.props.dispatch(productcommentsfromproduct(payload)).then((result)=>{
-            //productcommentsfromproduct result=>{"list":[{"_id":"58ed937d5a7eff0a1e579a3a","product":"58e71be6ef4e8d02eca6e0e8","order":"5
-            console.log("productcommentsfromproduct result=>" + JSON.stringify(result));
+            let count = result.result.total;
+            let evaluatenumber = {
+                evaluatenumber: count,
+                proid : proid
+            }
+            this.props.dispatch(set_productevaluatenumber(evaluatenumber));
         });
         
     };
@@ -164,16 +168,16 @@ export class Page extends React.Component {
                 <div className="discountlist">
                     <div className="li" onClick={()=>{this.onClickPage(`/shoppingproevaluate/${proinfo._id}`)}} >
                         <span className="tt">
-                            商品评论(22条评论)
+                            商品评论
                         </span>
-                        <span className="btn"><Icon name="angle right"/></span>
+                        <span className="btn">{proinfo.evaluatenumber} 条评论 <Icon name="angle right"/></span>
                     </div>
                 </div>
                 <div className="proinfoBody">
                     <div className="proinfoBodyHead">
                         商品详情
                     </div>
-                    <div className="proinfoBodyBody" dangerouslySetInnerHTML={{__html: proinfo.info}} />
+                    <div className="proinfoBodyBody" dangerouslySetInnerHTML={{__html: proinfo.desc}} />
                 </div>
                 <div className="proinfoFoot">
                     <span onClick={()=>{this.showaddcartdilog(proinfo._id)}}><i>加入购物车</i></span>

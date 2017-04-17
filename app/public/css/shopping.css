@@ -97,6 +97,7 @@
 .shoppingPage .proList .li .name{
     font-size: 14px;
     padding: 10px 10px 0 10px;
+    flex-grow: 1;
 }
 .shoppingPage .proList .li .price{
     display: flex;

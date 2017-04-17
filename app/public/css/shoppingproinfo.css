@@ -209,6 +209,13 @@
 
 .ProinfoPage .proinfoBodyBody {
     padding-bottom: 50px;
+    background: #FFF;
+    overflow:hidden;
+}
+
+.ProinfoPage .proinfoBodyBody *{
+    max-width: 100%;
+
 }
 
 .ProinfoPage .proinfoBodyBody img {

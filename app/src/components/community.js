@@ -78,7 +78,9 @@ export class Page extends React.Component {
 
    componentWillReceiveProps(nextProps) {
         if (nextProps.useralerttopiclist.length > 0 && this.props.useralerttopiclist.length === 0) {
-           this.props.dispatch(setCommunityListHeight(window.innerHeight-140));
+            this.props.dispatch(setCommunityListHeight(window.innerHeight-140));
+        }else{
+            this.props.dispatch(setCommunityListHeight(window.innerHeight-98));
         }
     }
 
@@ -170,7 +172,7 @@ export class Page extends React.Component {
                 <div onClick={this.onClickPage}>
                     {ToptipCo}
                 </div>
-                <div className="tc" onClick={this.onClickPage}>
+                <div className="tc" onClick={this.onClickPage} style={{height:this.props.communityListHeight+"px"}}>
                     <InfinitePage
                         pagenumber = {16}
                         updateContent= {this.updateContent} 
