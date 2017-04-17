@@ -105,14 +105,17 @@ export class Page extends Component {
                 }
             })).then(({result})=> {
                 if(result){
+                    console.log("result.page::"+result.page);
                     if(result.page>=result.pages){//最后一页
+                        let pullDown = $(this.refs.PullDown);
+                        let pullUp = $(this.refs.PullUp);
+                        let Nodata = $(this.refs.Nodata);
                         this.props.dispatch(uiinfinitepage_getdata({result,append:!isRefresh}));
                         this.props.dispatch(uiinfinitepage_setstate({ pullUpStatus: 4,pullDownStatus: 4}));
                         if(result.page===1){
-                            this.iScrollInstance.scrollTo(0, -1 * $(this.refs.PullDown).height(), 500);
-                        }
-                        if(this.iScrollInstance.maxScrollY<this.props.listheight){
-                            $(this.refs.PullDown).hide();
+                            this.iScrollInstance.scrollTo(0, -1*pullDown.height(), 500);
+                            pullUp.hide();
+                            Nodata.show();
                         }
                     }else{
                         if (isRefresh) {// 刷新操作
@@ -196,19 +199,6 @@ export class Page extends Component {
     onScrollEnd=()=> {
         let iScrollInstance_y = this.iScrollInstance.y;
         let pullDown = $(this.refs.PullDown);
-        let pullUp = $(this.refs.PullUp);
-        let Nodata = $(this.refs.Nodata);
-
-        console.log(this.iScrollInstance);
-        
-        //没有数据的情况下
-        if( this.iScrollInstance.maxScrollY==0 ){
-            pullDown.css("margin-top","-"+pullDown.height()+"px");
-            Nodata.show();
-        }else{
-            pullDown.css("margin-top","0");
-            Nodata.hide();
-        }
 
         // 滑动结束后，停在刷新区域
         if (iScrollInstance_y > -1 * pullDown.height() && this.iScrollInstance.maxScrollY!=0) {

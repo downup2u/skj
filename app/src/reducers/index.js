@@ -11,6 +11,7 @@ import devicedata from './devicedata';
 import notifymessage from './notifymessage';
 import wifi from './wifi';
 import shop from './shop';
+import nextusers from './nextusers';
 import order from './orderdetail';
 import shopcart from './shopcart';
 import shopcollection from './shopcollection';
@@ -34,6 +35,7 @@ export default combineReducers(
     shoporder,
     notifymessage,
     infinitepage,
+    nextusers,
     form: formReducer
   }
 );

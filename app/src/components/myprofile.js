@@ -3,11 +3,18 @@ import NavBar from './nav.js';
 import { Input, Button, Select } from 'semantic-ui-react';
 import '../../public/css/myprofile.css';
 import { connect } from 'react-redux';
-let countryOptions = [{key: 'af', value: 'af', flag: 'af', text: 'Afghanistan'}];
+import {
+    myOrderList_filler_set
+} from '../actions';
 
 let Page =(props)=> {
     let onClickPage = (name)=> {
         props.history.push(name);
+    };
+
+    let handleOrderClick = (status) => {
+        props.dispatch(myOrderList_filler_set(status));
+        onClickPage("/myorder");
     };
     return (
         <div className="myProfilePage"
@@ -16,43 +23,45 @@ let Page =(props)=> {
                 overflow:"scroll"
              }}>
             <div className="headCont">
-    {props.loginsuccess?(
-                <div className="userInfo" onClick={()=>{onClickPage('/userinfo')}}>
-                    <img src={props.profile.avatar} className="avatar"/>
-                    <span className="username">{props.profile.nickname}</span>
-                    <span className="usertype">普通会员</span>
-                </div>):
-    (<div className="userInfo" onClick={()=>{onClickPage('/login')}}>
-    <img src="img/myprofile/1.png" className="avatar"/>
-        <span className="username">未登录</span>
-    <span className="usertype"></span>
-        </div>)}
-                <div className="userCode">我的积分 <span>0</span></div>
-                <div className="userMessageLnk"  onClick={()=>{onClickPage('/mymessage')}}>
-                    <img src="img/message.png"/>
-                    <span>0</span>
-                </div>
+                {
+                    props.loginsuccess?(
+                    <div className="userInfo" onClick={()=>{onClickPage('/userinfo')}}>
+                        <img src={props.profile.avatar} className="avatar"/>
+                        <span className="username">{props.profile.nickname}</span>
+                        <span className="usertype">普通会员</span>
+                    </div>):
+                    (<div className="userInfo" onClick={()=>{onClickPage('/login')}}>
+                        <img src="img/myprofile/1.png" className="avatar"/>
+                            <span className="username">未登录</span>
+                        <span className="usertype"></span>
+                    </div>)
+                }
+                    <div className="userCode">我的积分 <span>0</span></div>
+                    <div className="userMessageLnk"  onClick={()=>{onClickPage('/mymessage')}}>
+                        <img src="img/message.png"/>
+                        <span>0</span>
+                    </div>
             </div>
             <div className="myProfileBannerCont">
                 <div className="l1con">
                     <div className="l1">
                         <span>我的订单</span>
-                        <span onClick={()=>{onClickPage('/myorder')}}>全部订单</span>
+                        <span onClick={()=>{handleOrderClick('全部')}}>全部订单</span>
                     </div>
                     <div className="l2">
-                        <div onClick={()=>{onClickPage('/myorder')}}>
+                        <div onClick={()=>{handleOrderClick('未支付')}}>
                             <img src="img/myprofile/2.png"/>
                             <span>待付款</span>
                         </div>
-                        <div onClick={()=>{onClickPage('/myorder')}}>
+                        <div onClick={()=>{handleOrderClick('待发货')}}>
                             <img src="img/myprofile/3.png"/>
                             <span>待发货</span>
                         </div>
-                        <div onClick={()=>{onClickPage('/myorder')}}>
+                        <div onClick={()=>{handleOrderClick('待收货')}}>
                             <img src="img/myprofile/4.png"/>
                             <span>待收货</span>
                         </div>
-                        <div onClick={()=>{onClickPage('/myorder')}}>
+                        <div onClick={()=>{handleOrderClick('退货')}}>
                             <img src="img/myprofile/5.png"/>
                             <span>退货</span>
                         </div>

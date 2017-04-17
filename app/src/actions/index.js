@@ -8,3 +8,4 @@ export * from './userlogin';
 export * from './wifi';
 export * from './shop';
 export * from './order';
+export * from './nextusers';

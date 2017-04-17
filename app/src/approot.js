@@ -49,7 +49,7 @@ import TiXian2 from './components/myprofile/tixian2.js';
 //提现3-短信验证
 import TiXian3 from './components/myprofile/messageCode.js';
 //订单统计
-import OrderTotal from './components/myprofile/orderTotal.js';
+import OrderTotal from './components/myprofile/ordertotal.js';
 //我的分销
 import Distribution from './components/myprofile/distribution.js';
 //分销详情
@@ -82,6 +82,8 @@ import ShoppingCart from './components/shopping/cart.js';
 import Pay from './components/shopping/pay.js';
 //结算
 import PayEnd from './components/shopping/payend.js';
+//我的邀请码
+import Share from './components/myprofile/share.js';
 
 import Test from './components/test.js';
 
@@ -175,10 +177,10 @@ const FadeRoute = ({ component: Component, ...rest }) => {
                                     <div
                                         key={config.key}
                                         style={{
-                ...styles.fill,
-                ...config.style,
-                        left: `${x}px`,
-                }}
+                                            ...styles.fill,
+                                            ...config.style,
+                                            left: `${x}px`,
+                                        }}
                                         >
                                         <Component {...config.data} {...props}/>
                                     </div>
@@ -244,6 +246,7 @@ const CoApp = (props) => {
             <CustomRoute path="/pay" component={Pay} />
             <CustomRoute path="/payend/:id" component={PayEnd} />
             <CustomRoute path="/test" component={Test} />
+            <CustomRoute path="/share" component={Share} />
             <CustomRoute component={App}/>
         </Switch>
     );

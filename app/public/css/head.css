@@ -13,7 +13,8 @@
     height:48px;
     width: 100%;
     position: relative;
-    z-index: 1000
+    z-index: 1000;
+    flex-shrink: 0;
 }
 .ui.segment.headContent .leftlnk{
     width: 25%;
