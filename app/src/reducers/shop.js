@@ -15,7 +15,8 @@ import {
     setulcoupontype,
     set_productlist,
     set_orderSurePage,
-    myorderlist_addreducers
+    myorderlist_addreducers,
+    set_productevaluatenumber
 } from '../actions/index.js';
 import {
     normalizrbanners,
@@ -36,7 +37,7 @@ const initial = {
         shopcategorylist2:[],//商城首页竖排分类
         banners:{},//所有广告集合
         categories:{},//所有分类即集合
-        products:{},//所有产品集合
+        products:{},//所有产品集合//evaluatenumber:
 
         //判断是否已收藏
         iscollection:{},
@@ -54,6 +55,11 @@ const initial = {
 
 const shop = createReducer({
 
+    //产品详情添加评论数
+    [set_productevaluatenumber]:(state, payload)=>{
+        let products = {...state.products, ...payload}
+        return {...state, products};
+    },
     //设置产品列表页面参数
     [set_productlist]:(state, payload)=>{
         return {...state, ...payload};

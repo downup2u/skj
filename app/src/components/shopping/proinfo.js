@@ -14,12 +14,14 @@ import {
     mycollectionaddone_request,
     mycollectiondelone_request,
     mycollectionisproductexits_request,
+    set_productevaluatenumber,
     set_orderSurePage,
  } from '../../actions';
  import Addcartdilog from './addcartdilog.js';
  import {
   mycollectionisproductexits,
   mycollectiondelone,
+  productcommentsfromproduct
 } from '../../actions/sagacallback.js';
 
 let swiperOptions = {
@@ -32,6 +34,21 @@ export class Page extends React.Component {
 
     componentWillMount () {
         this.checkCollection();
+        this.getEvaluate();
+    };
+
+    //获取产品的评论条数
+    getEvaluate =()=>{
+        let proid = this.props.match.params.id
+        let proinfo = this.props.products[proid];
+        //productcommentsfromproduct
+        //evaluatenumber:set_productevaluatenumber
+        let payload = {productid:proid};
+        this.props.dispatch(productcommentsfromproduct(payload)).then((result)=>{
+            //productcommentsfromproduct result=>{"list":[{"_id":"58ed937d5a7eff0a1e579a3a","product":"58e71be6ef4e8d02eca6e0e8","order":"5
+            console.log("productcommentsfromproduct result=>" + JSON.stringify(result));
+        });
+        
     };
 
     //检测是否已经收藏
@@ -81,20 +98,6 @@ export class Page extends React.Component {
         }else{
             this.addCollection(pro._id);
         }
-        // this.props.dispatch(mycollectionisproductexits({productid:pro._id})).then(({result})=>{
-        //     if(result[pro._id]){
-        //         //删除收藏
-        //         _this.props.dispatch(mycollectiondelone({
-        //             _id:pro._id
-        //         }));
-        //     }else{
-        //         //加入收藏
-        //         _this.props.dispatch(mycollectionaddone_request({
-        //             product:pro._id
-        //         }));
-        //     }
-        //     _this.checkCollection();
-        // });
     };
 
     //加入收藏
