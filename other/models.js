@@ -10,6 +10,10 @@ let SystemConfigSchema = new Schema({
     expressfeeforfree:Number,
     bonuslevel1:{ type: Schema.Types.Number,default: 0.1 },//一级分销提成百分比
     bonuslevel2:{ type: Schema.Types.Number,default: 0.05 },//二级分销提成百分比
+    pointvsmoney:{ type: Schema.Types.Number,default: 1},//换算,例1积分换1分
+    getpointfromsign:{ type: Schema.Types.Number,default: 10},//每天签到一次
+    getpointfromshare:{ type: Schema.Types.Number,default: 5},//分享得到积分
+    pointlimitshare:{ type: Schema.Types.Number,default: 30},//每天最多获得分享的积分
 });
 SystemConfigSchema.plugin(mongoosePaginate);
 let SystemConfig  = mongoose.model('SystemConfig',  SystemConfigSchema);
@@ -26,6 +30,8 @@ let UserSchema = new Schema({
     userfrom2:{ type: Schema.Types.ObjectId, ref: 'User' },
     invitecode:String,
     balance:{ type: Schema.Types.Number,default: 0 },//用户余额
+    point:{ type: Schema.Types.Number,default: 0 },//用户积分
+    lastpointforsigndate:Date,
     isenabled:Boolean
 });
 UserSchema.plugin(mongoosePaginate);
@@ -189,6 +195,7 @@ let OrderSchema = new Schema({
     productsdetail:[
         {
             productid:String,
+            productinfo:Schema.Types.Mixed,
             number:Number,
             price:Number
         }
@@ -198,6 +205,7 @@ let OrderSchema = new Schema({
     productprice:Number,//产品总价
     expressid:{ type: Schema.Types.ObjectId, ref: 'Express' },
     expressbarid:String,
+    expressprice:Number,//运费
     created_at: Date,
     pay_at:Date,
 });
@@ -298,6 +306,20 @@ let WithdrawcashapplySchema =  new Schema({
 WithdrawcashapplySchema.plugin(mongoosePaginate);
 let Withdrawcashapply  = mongoose.model('Withdrawcashapply',  WithdrawcashapplySchema);
 
+//积分表
+let PointrecordSchema = new Schema({
+    creator:{ type: Schema.Types.ObjectId, ref: 'User' },
+    pointold:Number,//旧积分
+    pointnew:Number, //新积分
+    pointbonus:Number,//积分抵扣
+    fromorder:{ type: Schema.Types.ObjectId, ref: 'Order' },
+    srctype:String,//‘order'来自订单
+    reason:String,//原因,例如：'签到’
+    created_at: Date,
+    getdate:String,//获得日期,YYYY-MM-DD
+});
+PointrecordSchema.plugin(mongoosePaginate);
+let Pointrecord  = mongoose.model('Pointrecord',  PointrecordSchema);
 //用户余额表
 // let UserbalanceSchema= new Schema({
 //     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
@@ -327,6 +349,7 @@ exports.CouponSchema = CouponSchema;
 exports.ProductcommentSchema = ProductcommentSchema;
 exports.FeedbackSchema = FeedbackSchema;
 exports.WithdrawcashapplySchema = WithdrawcashapplySchema;
+exports.PointrecordSchema = PointrecordSchema;
 
 exports.SystemConfigModel = SystemConfig;
 exports.NewsModel = News;
@@ -350,3 +373,4 @@ exports.ProductcommentModel = Productcomment;
 exports.FeedbackModel = Feedback;
 exports.RechargerecordModel = Rechargerecord;
 exports.WithdrawcashapplyModel = Withdrawcashapply;
+exports.PointrecordModel = Pointrecord;
