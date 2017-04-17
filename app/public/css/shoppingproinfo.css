@@ -47,6 +47,7 @@
     padding: 0 3px;
     right: 5px;
     top: 5px;
+    min-width: 20px;
 }
 .ProinfoPage .ProinfoPageHead .imgcont span.hide{
     display: none;

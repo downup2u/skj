@@ -48,6 +48,9 @@ export const myorderlist_addreducers = createAction('myorderlist_addreducers');
 //选择当前支付组件
 export const payway_set = createAction('payway_set');
 
+//设置产品详情的评论数
+export const set_productevaluatenumber = createAction('set_productevaluatenumber');
+
 //购物车
 export const mycartaddone_request = createAction('mycartaddone_request');//添加购物车
 export const mycartaddone_result = createAction('mycartaddone_result');
