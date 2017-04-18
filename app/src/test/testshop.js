@@ -302,11 +302,12 @@ let test_withdrawcashapplyaddone_request=(dispatch)=>{
 let test_withdrawcashapplyauth_request=(dispatch)=>{
   let payload = {
     _id:'58edc22a77c9631304958fcf',
+    username:'15961125167',
     authcode:'5513'
   };
   dispatch(withdrawcashapplyauth(payload)).then((result)=>{
     //withdrawcashapplyauth result=>{"result":"OK","updateditem":{....}
-    //withdrawcashapplyauth result=>{"result":"验证失败"
+    //withdrawcashapplyauth result=>{"result":"Error",errmsg:'验证码不对'};
     console.log("withdrawcashapplyauth result=>" + JSON.stringify(result));
   });
 }
