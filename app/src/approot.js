@@ -229,7 +229,7 @@ const CoApp = (props) => {
             <CustomRoute path="/tixian3" component={requireAuthentication(TiXian3)}/>
             <CustomRoute path="/ordertotal" component={requireAuthentication(OrderTotal)}/>
             <CustomRoute path="/distribution" component={requireAuthentication(Distribution)}/>
-            <CustomRoute path="/distributioninfo" component={requireAuthentication(DistributionInfo)}/>
+            <CustomRoute path="/distributioninfo/:id" component={requireAuthentication(DistributionInfo)}/>
             <CustomRoute path="/applicationreturns" component={requireAuthentication(ApplicationReturns)}/>
             <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
             <CustomRoute path="/mytopiclist" component={Topiclist}/>

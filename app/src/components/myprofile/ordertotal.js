@@ -3,9 +3,6 @@ import NavBar from '../nav.js';
 import { Input, Button, Menu } from 'semantic-ui-react';
 import '../../../public/css/ordertotal.css';
 import { connect } from 'react-redux';
-import {
-    getdistsalesorderstat_request
-} from '../../actions';
 
 export class Page extends Component {
 
@@ -13,15 +10,12 @@ export class Page extends Component {
         this.props.history.goBack();
     };
 
-    componentWillMount () {
-        //获取下线代理数
-        this.getnextuserstotal();
-    };
-
-    //获取我的分销统计
-    getnextuserstotal =()=>{
-        this.props.dispatch(getdistsalesorderstat_request({}));
-    };
+    nextnumbers : {
+            level1_totalorderprices: 0,
+            level1_totalfeebonus: 0,
+            level2_totalorderprices: 0,
+            level2_totalfeebonus: 0,
+        }
 
     render() {
         return (
@@ -36,8 +30,29 @@ export class Page extends Component {
                     <div className="item">
                         <span className="tit">我的订单</span>
                         <div className="cont">
-                            <span className="li"><span>订单数量</span><span>122</span></span>
-                            <span className="li"><span>累计收益</span><span>¥ 47394.0元</span></span>
+                            <span className="li">
+                                <span>订单总额</span>
+                                <span>{this.props.nextnumbers.level1_totalorderprices+this.props.nextnumbers.level2_totalorderprices}</span>
+                            </span>
+                            <span className="li"><span>累计收益</span><span>¥ {this.props.nextnumbers.level1_totalfeebonus+this.props.nextnumbers.level2_totalfeebonus}元</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div className="orderTotalPageContent">
+                    <div className="item">
+                        <span className="tit">一级分销</span>
+                        <div className="cont">
+                            <span className="li"><span>订单总额</span><span>{this.props.nextnumbers.level1_totalorderprices}</span></span>
+                            <span className="li"><span>累计收益</span><span>¥ {this.props.nextnumbers.level1_totalfeebonus}元</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div className="orderTotalPageContent">
+                    <div className="item">
+                        <span className="tit">二级分销</span>
+                        <div className="cont">
+                            <span className="li"><span>订单总额</span><span>{this.props.nextnumbers.level2_totalorderprices}</span></span>
+                            <span className="li"><span>累计收益</span><span>¥ {this.props.nextnumbers.level2_totalfeebonus}元</span></span>
                         </div>
                     </div>
                 </div>
