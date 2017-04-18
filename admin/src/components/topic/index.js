@@ -21,7 +21,8 @@ import {
     Datagrid, 
     TextField, 
     DateField, 
-    EditButton
+    EditButton,
+    ReferenceField
 } from 'admin-on-rest/lib/mui';
 
 import RichTextInput from '../controls/richtoolbar.js';
@@ -65,7 +66,10 @@ const TopiclistList = (props) => (//
      <List title="帖子信息列表" {...props} >
         <Datagrid>
         <TextField label="标题" source="title" />
-        <EditButton />
+         <ReferenceField label="用户" source="creator" reference="user" addLabel={false}>
+            <TextField source="username" />
+        </ReferenceField>
+        <DateField label="发帖时间" source="created_at" showTime />
         <ShowButton />
         </Datagrid>
     </List>

@@ -24,7 +24,8 @@ import {
   EditButton,
   SelectInput,
   BooleanInput,
-  BooleanField
+  BooleanField,
+  ReferenceField
 } from 'admin-on-rest/lib/mui';
 
 import { Field,FieldArray } from 'redux-form';
@@ -51,9 +52,11 @@ const FeedbackShow = (props) => (
 const FeedbackList = (props) => (//
      <List title="用户反馈列表" {...props} >
         <Datagrid>
-        <TextField source="id" />
+        <ReferenceField label="反馈用户" source="creator" reference="user" addLabel={false}>
+            <TextField source="username" />
+        </ReferenceField>
+        <DateField label="反馈时间" source="created_at" showTime />
         <TextField label="反馈内容" source="feedbacktxt" />
-        <ShowButton />
         </Datagrid>
     </List>
 );

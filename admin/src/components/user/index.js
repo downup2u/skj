@@ -43,8 +43,8 @@ const UserlistShow = (props) => (
            <SimpleShowLayout>
                <TextField source="id" />
                <TextField label="手机号" source="username" />
-               <TextField label="注册时间"  source="created_at" />
-               <TextField label="上次登录时间"  source="updated_at" />
+               <DateField label="注册时间" source="created_at"  showTime/>
+               <DateField label="上次登录时间" source="updated_at"  showTime/>
                <TextField label="昵称" source="profile.nickname" />
                <TextField label="性别" source="profile.sex" />
            </SimpleShowLayout>
@@ -57,8 +57,8 @@ const UserlistList = (props) => (//
      <List title="用户列表" {...props} >
         <Datagrid>
         <TextField label="手机号" source="username" />
-        <TextField label="注册时间"  source="created_at" />
-        <TextField label="上次登录时间"  source="updated_at" />
+        <DateField label="注册时间" source="created_at"  showTime/>
+        <DateField label="上次登录时间" source="updated_at"  showTime/>
         <TextField label="昵称" source="profile.nickname" />
         <TextField label="性别" source="profile.sex" />
         <ShowButton />

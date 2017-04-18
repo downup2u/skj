@@ -7,6 +7,7 @@ import {
   CreateButton,
   RichTextField,
   NumberInput,
+  DateField,
   Create,
   Edit,
   SimpleForm,
@@ -18,9 +19,10 @@ import {
   DateInput,
   LongTextInput,
   ReferenceManyField,
+  NumberField,
   Datagrid,
   TextField,
-  DateField,
+  ReferenceField,
   EditButton,
   SelectInput,
   BooleanInput,
@@ -63,10 +65,14 @@ const OrderlistShow = (props) => (
 const OrderlistList = (props) => (//
      <List title="订单列表" {...props} >
         <Datagrid>
-        <TextField source="id" />
-        <TextField label="公司名" source="Ordername" />
+        <DateField label="生成时间" source="created_at" showTime />
+        <ReferenceField label="订单用户" source="creator" reference="user" addLabel={false}>
+            <TextField source="username" />
+        </ReferenceField>
+        <NumberField label="订单金额" source="orderprice" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
+        <TextField label="订单状态" source="orderstatus" />
+        <TextField label="支付状态"  source="paystatus" />
         <EditButton />
-        <ShowButton />
         </Datagrid>
     </List>
 );

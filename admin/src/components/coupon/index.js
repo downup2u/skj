@@ -24,7 +24,8 @@ import {
   EditButton,
   SelectInput,
   BooleanInput,
-  BooleanField
+  BooleanField,
+  NumberField
 } from 'admin-on-rest/lib/mui';
 
 import { Field,FieldArray } from 'redux-form';
@@ -77,7 +78,7 @@ const CouponlistShow = (props) => (
                <TextField label="过期时间"  source="expdate" />
                <TextField label="价格条件"  source="pricecondition" />
                <TextField label="最高抵扣"  source="pricediscount" />
-               <TextField label="总库存" source="onlyctotalstockity" />
+               <TextField label="总库存" source="totalstock" />
                <TextField label="剩余库存" source="leftstock" />
            </SimpleShowLayout>
        </Show>
@@ -89,13 +90,13 @@ const CouponlistList = (props) => (//
      <List title="优惠券列表" {...props} >
         <Datagrid>
             <TextField label="名字" source="name" />
-            <TextField label="过期时间"  source="expdate" />
-            <TextField label="价格条件"  source="pricecondition" />
-            <TextField label="最高抵扣"  source="pricediscount" />
+            <DateField label="过期时间" source="expdate"  />
+            <NumberField label="价格条件" source="pricecondition" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
+            <NumberField label="最高抵扣" source="pricediscount" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
+
             <TextField label="总库存" source="onlyctotalstockity" />
             <TextField label="剩余库存" source="leftstock" />
         <EditButton />
-        <ShowButton />
         </Datagrid>
     </List>
 );

@@ -305,7 +305,6 @@ let Rechargerecord  = mongoose.model('Rechargerecord',  RechargerecordSchema);
 //提现申请
 let WithdrawcashapplySchema =  new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
-    authcode:String,//短信验证码
     truename:String,//真实姓名
     bankaccount:String,//银行账号
     bankname:String,//银行名称

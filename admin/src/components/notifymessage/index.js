@@ -84,7 +84,6 @@ const NotifymessagelistList = (props) => (//
         <TextField label="标题" source="messagetitle" />
         <RichTextField label="详细信息"  source="messagecontent" stripTags={false} />
         <EditButton />
-        <ShowButton />
         </Datagrid>
     </List>
 );

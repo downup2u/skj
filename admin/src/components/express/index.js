@@ -72,7 +72,6 @@ const ExpresslistShow = (props) => (
 const ExpresslistList = (props) => (//
      <List title="快递公司列表" {...props} >
         <Datagrid>
-        <TextField source="id" />
         <TextField label="公司名" source="expressname" />
         <EditButton />
         </Datagrid>

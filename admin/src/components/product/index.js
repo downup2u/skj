@@ -28,6 +28,7 @@ import {
   BooleanInput,
   BooleanField,
   ImageField,
+  NumberField
 } from 'admin-on-rest/lib/mui';
 
 import { Field } from 'redux-form';
@@ -123,7 +124,7 @@ const ProductlistList = (props) => (//
      <List title="产品信息列表"  filters={<ProductFilter />}  {...props} >
         <Datagrid>
         <TextField label="名字" source="name" />
-        <TextField label="现价" source="pricenow" />
+        <NumberField label="现价" source="pricenow" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
         <ImageField source="picurl" label="图片"/>
         <TextField label="名字" source="name" />
         <TextField label="摘要" source="brief" />
