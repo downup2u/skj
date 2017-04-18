@@ -45,6 +45,7 @@ import {
 import {
   zfbPay,
   wxPay,
+  testnotifypay
 } from '../test/testpay';
 
 let Page =(props)=>{
@@ -53,6 +54,10 @@ let Page =(props)=>{
     };
     return (<div>
         <p style={{textAlign: 'center'}}>
+            <Button onClick={()=>{testnotifypay()}}>测试服务端回调</Button><br />
+             <br />
+
+
         <Button onClick={()=>{test_getusermoney(props.dispatch)}}>获取积分&余额</Button><br />
         <Button onClick={()=>{test_useraddpoint(props.dispatch,'签到')}}>签到得积分</Button><br />
         <Button onClick={()=>{test_useraddpoint(props.dispatch,'分享')}}>分享得积分</Button><br />

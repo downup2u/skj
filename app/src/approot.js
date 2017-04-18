@@ -85,7 +85,12 @@ import PayEnd from './components/shopping/payend.js';
 //我的邀请码
 import Share from './components/myprofile/share.js';
 
+//一键登录绑定用户
+import Userbind from './components/userbind.js';
+
 import Test from './components/test.js';
+
+
 
 import {requireAuthentication} from './components/requireauthentication';
 import '../public/css/page.css';
@@ -247,6 +252,7 @@ const CoApp = (props) => {
             <CustomRoute path="/payend/:id" component={PayEnd} />
             <CustomRoute path="/test" component={Test} />
             <CustomRoute path="/share" component={Share} />
+            <CustomRoute path="/userbind" component={Userbind} /> 
             <CustomRoute component={App}/>
         </Switch>
     );

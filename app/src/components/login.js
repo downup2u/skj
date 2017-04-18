@@ -4,6 +4,8 @@ import { Input, List, Radio, Button, Icon, Image, Checkbox,Label} from 'semantic
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import NavBar from './nav.js';
+import {loginQQ,loginWx} from '../env/login.js';
+import {loginwithoauth_result,loginwithoauth_request} from '../actions';
 //import 'semantic-ui/dist/semantic.min.css';
 let renderLoginForm = (fields)=> {
     let ispasswordvisiable = fields.ispasswordvisiable.input.value;
@@ -114,6 +116,7 @@ import {login_request} from '../actions/index.js';
 export class Page extends React.Component {
 
     componentWillMount() {
+        this.props.dispatch(loginwithoauth_result({bindtype:'',openid:''}));
     }
 
     onClickRegister = ()=> {
@@ -149,11 +152,27 @@ export class Page extends React.Component {
             }
             return;
         }
+        else{
+            if(nextProps.bindtype !== '' && this.props.bindtype === '' &&
+            nextProps.openid !== '' && this.props.openid === ''){
+                this.props.history.push('/userbind');
+            }
+        }
     }
 
 
-
     render() {
+        let loginwithqq = ()=>{
+            loginQQ((result)=>{
+                this.props.dispatch(loginwithoauth_request({bindtype:'qq',openid:result.openId}));
+            });
+        }
+        let loginwithwechat = ()=>{
+            loginWx((result)=>{
+                this.props.dispatch(loginwithoauth_request({bindtype:'weixin',openid:result.openId}));
+            });
+
+        }
         return (
             <div className="UserLoginPage">
                 <LoginForm onClickRegister={this.onClickRegister}
@@ -165,9 +184,11 @@ export class Page extends React.Component {
                     <div className="tit"><span>其他登录方式</span></div>
                     <div className="lnk">
                         <div><Icon name="qq" onClick={()=>{
-                      this.props.history.push('/');
+                      loginwithqq();
                     }}/></div>
-                        <div><Icon name="weixin"/></div>
+                        <div><Icon name="weixin" onClick={()=>{
+                      loginwithwechat();
+                    }}/></div>
                     </div>
                 </div>
             </div>

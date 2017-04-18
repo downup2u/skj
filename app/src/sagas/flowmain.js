@@ -70,7 +70,9 @@ import {
     getusermoney,
     useraddpoint,
     getusergetpointsigntoday_request,
-    getuserpointdetails_request
+    getuserpointdetails_request,
+    loginwithoauth_request,
+    oauthbinduser_request,
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -198,6 +200,7 @@ function* handleIOWithAuth(socket) {
             'useraddpoint':`${useraddpoint}`,
             'getusergetpointsigntoday':`${getusergetpointsigntoday_request}`,
             'getuserpointdetails':`${getuserpointdetails_request}`,
+            
         };
 
         let tasksz =[];
@@ -218,6 +221,8 @@ function* handleIOWithAuth(socket) {
 
 function* handleIO(socket) {
     let fnsz =  {
+        'oauthbinduser':`${oauthbinduser_request}`,
+        'loginwithoauth':`${loginwithoauth_request}`,
         'login':`${login_request}`,
         'sendauth':`${sendauth_request}`,
         'register':`${register_request}`,

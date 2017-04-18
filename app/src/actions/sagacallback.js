@@ -111,6 +111,11 @@ import {
   getuserpointdetails_request,
   wait_getuserpointdetails_request,
   wait_getuserpointdetails_result,
+
+  oauthbinduser_request,
+  wait_oauthbinduser_request,
+  wait_oauthbinduser_result,
+  
 } from '../actions/index.js';
 
 import { fork, take, call, put, cancel,race,takeLatest } from 'redux-saga/effects';
@@ -246,7 +251,9 @@ export function getuserpointdetails(payload){
   return synccall(payload,wait_getuserpointdetails_request,getuserpointdetails_request);
 }
 
-
+export function oauthbinduser(payload){
+  return synccall(payload,wait_oauthbinduser_request,oauthbinduser_request);
+}
 //2.
 function* createflowsz(fnwatres,action){
     let {payload:{resolve,reject,payload:data}} = action;
@@ -299,6 +306,7 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_getdistsalesorderdetails_request}`,`${wait_getdistsalesorderdetails_result}`]);
   waitfnsz.push([`${wait_getpaysign_request}`,`${wait_getpaysign_result}`]);
   waitfnsz.push([`${wait_getuserpointdetails_request}`,`${wait_getuserpointdetails_result}`]);
+  waitfnsz.push([`${wait_oauthbinduser_request}`,`${wait_oauthbinduser_result}`]);
 
 
   for(let fnsz of waitfnsz){

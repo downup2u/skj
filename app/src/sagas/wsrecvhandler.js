@@ -113,7 +113,11 @@ import {
     getuserpointdetails_result,
     wait_getuserpointdetails_result,
 
-    serverpush_orderinfo
+    serverpush_orderinfo,
+    loginwithoauth_result,
+
+    oauthbinduser_result,
+    wait_oauthbinduser_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -123,6 +127,32 @@ import {store} from '../env/store.js';
 
 
 const handlerlist = {
+  ['oauthbinduser_err']: (socket, emit)=> {
+    return (({errmsg})=> {
+      emit(showpopmessage({
+        title: '绑定失败',
+        msg: errmsg,
+        type: 'error'
+      }));
+      emit(wait_oauthbinduser_result({err: errmsg}));
+    });
+  },
+  ['oauthbinduser_result']:(socket,emit)=>{
+    return (result)=>{
+      emit(showpopmessage({
+        title: '成功',
+        msg: '绑定成功',
+        type: 'success'
+      }));
+      emit(oauthbinduser_result(result));
+      emit(wait_oauthbinduser_result({result:result}));
+    }
+  },
+  ['loginwithoauth_result']:(socket,emit)=>{
+    return (result)=>{
+      emit(loginwithoauth_result(result));
+    }
+  },
   ['serverpush_orderinfo']:(socket,emit)=>{
     return (result)=>{
       emit(serverpush_orderinfo(result));

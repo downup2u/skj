@@ -11,7 +11,8 @@ import {
     logout_result,
     serverpush_defaultaddress,
     serverpush_usermoney,
-    getusergetpointsigntoday_result
+    getusergetpointsigntoday_result,
+    loginwithoauth_result
 } from '../actions/index.js';
 
 const initial = {
@@ -26,10 +27,16 @@ const initial = {
         balance:0,
         point:0,
         isusergetpointsigntoday:true,
+        bindtype:'',
+        openid:'',
     },
 };
 
 const userlogin = createReducer({
+    [loginwithoauth_result]:(state,payload)=>{
+        const {bindtype,openid} = payload;
+        return  {...state,bindtype,openid};
+    },
     [getusergetpointsigntoday_result]:(state, isusergetpointsigntoday)=>{
         return { ...state,isusergetpointsigntoday};
     },
