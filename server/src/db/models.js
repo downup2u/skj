@@ -144,7 +144,7 @@ let ProductSchema = new Schema({
     name:String,
     picurl:String,
     picurls:[],
-    picurldetail:String,
+    picurldetails:[],
     pricenow:Number,
     pricemarket:Number,
     brief:String,
