@@ -4,21 +4,20 @@ import { Input, Button, Menu } from 'semantic-ui-react';
 import '../../../public/css/distribution.css';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import InfinitePage from '../controls/infinitecontrol';
 import {
     getnextusers_request,
     getdistsalesorderstat_request,
-    set_nextusersfiller
+    set_nextusersfiller,
+    getdistsalesorders_request
 } from '../../actions';
-import {
-    getdistsalesorderdetails
-} from '../../actions/sagacallback.js';
 
 export class Page extends Component {
 
     componentWillMount () {
         //获取下线代理数
         this.getnextusers();
+        //获取下线用户列表
+        this.props.dispatch(getdistsalesorders_request({}));
     };
 
     handleItemClick =(type)=>{
@@ -74,14 +73,22 @@ export class Page extends Component {
                 </Menu>
 
                 <div className="cont">
-                    <InfinitePage
-                        pagenumber = {30}
-                        updateContent= {this.updateContent.bind(this)}
-                        queryfun= {getdistsalesorderdetails}
-                        listheight= {window.innerHeight-92}
-                        query = {this.props.nextusersfiller}
-                        sort = {{}}
-                    />
+
+                    {_.map(
+                        this.props.nextusersfiller.type==1?this.props.nextusersorder.level1users: this.props.nextusersorder.level2users,
+                        (nextlist, index)=>{
+                        return (
+                            <div className="li" onClick={this.onClickPage.bind(this, `/distributioninfo/${index}`)} key={index}>
+                                <span className="num">1</span>
+                                <img src={nextlist.avatar} className="avatar" />
+                                <div>
+                                    <span>姓名: {nextlist.nickname}</span>
+                                    <span>消费金额: <i>¥{nextlist.totalorderprices}</i></span>
+                                </div>
+                                <span>奖励金额: <i>¥{nextlist.totalfeebonus}</i></span>
+                            </div>
+                        )
+                    })}
                 </div>
                 <div className="bottomBttn" onClick={()=>{this.onClickPage("/ordertotal")}}><span>订单统计</span></div>
             </div>

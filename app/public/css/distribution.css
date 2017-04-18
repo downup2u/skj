@@ -132,40 +132,42 @@
 .distributionInfoPage{
     background: #EEE;
 }
-.distributionInfoPage .proinfo{
-    margin-bottom: 20px;
-}
-
-.distributionInfoPage .proinfo .li{
-    display: flex;
-    border-bottom: 1px solid #EEE;
-    padding: 15px;
-    background: #FFF;
-}
-
-.distributionInfoPage .proinfo .li img{
-    width: 80px;
-    align-self: flex-start;
-    border: 1px solid #EEE;
-}
 
 .distributionInfoPage .proinfo .li >div{
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;
-    padding-left: 15px;
+    padding: 15px;
     font-size:14px;
+    background: #FFF;
+    border-bottom: 1px solid #EEE;
+}
+.distributionInfoPage .proinfo .li >div>div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .distributionInfoPage .proinfo .li >div .price {
     display: flex;
     justify-content: space-between;
-}
-.distributionInfoPage .proinfo .li >div .price span:first-child{
+    font-size: 18px;
     color: #F00;
 }
+.distributionInfoPage .proinfo .li >div .time{
+    display: flex;
+    align-items: center;
+}
+.distributionInfoPage .proinfo .li >div .time span{
+    margin-right: 10px;
+}
+.distributionInfoPage .proinfo .li >div .time span:first-child{
+    font-weight: bold;
+    color: #111;
+}
 .distributionInfoPage .list{
-    border-top: 1px solid #EEE;
+    //border-top: 1px solid #EEE;
+    margin-bottom: 10px;
 }
 .distributionInfoPage .list .li{
     background: #FFF;
@@ -181,3 +183,5 @@
 .distributionInfoPage .list .li span.price {
     color: #F00;
 }
+
+
