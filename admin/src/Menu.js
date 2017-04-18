@@ -17,6 +17,7 @@ import BannerIcon from 'material-ui/svg-icons/action/view-carousel';
 import ExpressIcon from 'material-ui/svg-icons/content/send';
 import ProductIcon from 'material-ui/svg-icons/hardware/toys';
 import CouponIcon from 'material-ui/svg-icons/action/card-giftcard';//优惠券信息
+import MycouponIcon from 'material-ui/svg-icons/action/card-giftcard';//优惠券信息
 import UserIcon from 'material-ui/svg-icons/action/account-circle';//乘客信息
 
 const items = [
@@ -30,6 +31,7 @@ const items = [
     { name: 'notifymessage', icon: <MessageIcon /> },
     { name: 'feedback', icon: <FeedbackIcon /> },
     { name: 'coupon', icon: <CouponIcon /> },
+    { name: 'mycoupon', icon: <MycouponIcon /> },
     { name: 'withdrawcash', icon: <UserIcon /> },
     { name: 'order', icon: <UserIcon /> },
     { name: 'user', icon: <UserIcon /> },

@@ -50,13 +50,13 @@ export class Page extends Component {
                 <Menu pointing secondary>
                     <Menu.Item name='未使用' 
                         active={this.props.ulcoupontype === 0} 
-                        onClick={()=>{this.handleItemClick(0)}}/>
+                        onClick={()=>{this.handleItemClick('未使用')}}/>
                     <Menu.Item name='已使用' 
                         active={this.props.ulcoupontype === 1} 
-                        onClick={()=>{this.handleItemClick(1)}}/>
+                        onClick={()=>{this.handleItemClick('已使用')}}/>
                     <Menu.Item name='已过期' 
                         active={this.props.ulcoupontype === 2} 
-                        onClick={()=>{this.handleItemClick(2)}}/>
+                        onClick={()=>{this.handleItemClick('已过期')}}/>
                 </Menu>
                 <div className="myCouponList" style={{height:window.innerHeight-88}}>
                     <InfinitePage

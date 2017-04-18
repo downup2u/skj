@@ -39,6 +39,13 @@ export default {
     coupon:{
       name: '优惠券管理 |||| 优惠券管理',
     },
+    mycoupon:{
+      name: '用户优惠券管理 |||| 用户优惠券管理',
+      fields:{
+        coupon:'优惠券名',
+        creator:'目标用户',
+      }
+    },
     user:{
       name: '用户管理 |||| 用户管理',
     },

@@ -11,6 +11,7 @@ import {
   Edit,
   SimpleForm,
   DisabledInput,
+  ReferenceInput,
   TextInput,
   Show,
   SimpleShowLayout,
@@ -35,13 +36,19 @@ import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
 
 
-const CouponcreateTitle = ({ record }) => {
+const MycouponcreateTitle = ({ record }) => {
    return <span>新建 优惠券</span>;
 };
-const CouponlistCreate = (props) => (
-       <Create {...props} title={<CouponcreateTitle />} >
+const MycouponlistCreate = (props) => (
+       <Create {...props} title={<MycouponcreateTitle />} >
            <SimpleForm>
                <TextInput label="名字" source="name" />
+               <ReferenceInput source="coupon" reference="coupon" allowEmpty>
+                  <SelectInput optionText="name" />
+              </ReferenceInput>
+              <ReferenceInput source="creator" reference="user" allowEmpty>
+                  <SelectInput optionText="username" />
+              </ReferenceInput>
                <DateInput label="过期时间"  source="expdate" />
                <TextInput label="价格条件"  source="pricecondition" />
                <NumberInput label="最高抵扣"  source="pricediscount" />
@@ -50,15 +57,21 @@ const CouponlistCreate = (props) => (
        </Create>
 );
 
-const CouponlistTitle = ({ record }) => {
+const MycouponlistTitle = ({ record }) => {
     console.log("record=>" + JSON.stringify(record));
    return <span>编辑 优惠券</span>;
 };
 
-const CouponlistEdit = (props) => {
-      return (<Edit title={<CouponlistTitle />} {...props}>
+const MycouponlistEdit = (props) => {
+      return (<Edit title={<MycouponlistTitle />} {...props}>
           <SimpleForm>
                <TextInput label="名字" source="name" />
+              <ReferenceInput source="coupon" reference="coupon" allowEmpty>
+                  <SelectInput optionText="coupon" />
+              </ReferenceInput>
+              <ReferenceInput source="creator" reference="user" allowEmpty>
+                  <SelectInput optionText="username" />
+              </ReferenceInput>
                <DateInput label="过期时间"  source="expdate" />
                <TextInput label="价格条件"  source="pricecondition" />
                <NumberInput label="最高抵扣"  source="pricediscount" />
@@ -69,31 +82,29 @@ const CouponlistEdit = (props) => {
 };
 
 
-const CouponlistShow = (props) => (
-       <Show title={<CouponlistTitle />} {...props}>
+const MycouponlistShow = (props) => (
+       <Show title={<MycouponlistTitle />} {...props}>
            <SimpleShowLayout>
                <TextField source="id" />
                <TextField label="名字" source="name" />
                <TextField label="过期时间"  source="expdate" />
                <TextField label="价格条件"  source="pricecondition" />
                <TextField label="最高抵扣"  source="pricediscount" />
-               <TextField label="总库存" source="onlyctotalstockity" />
-               <TextField label="剩余库存" source="leftstock" />
+               <TextField label="总库存" source="totalstock" />
            </SimpleShowLayout>
        </Show>
 );
 
 
 
-const CouponlistList = (props) => (//
+const MycouponlistList = (props) => (//
      <List title="优惠券列表" {...props} >
         <Datagrid>
             <TextField label="名字" source="name" />
             <TextField label="过期时间"  source="expdate" />
             <TextField label="价格条件"  source="pricecondition" />
             <TextField label="最高抵扣"  source="pricediscount" />
-            <TextField label="总库存" source="onlyctotalstockity" />
-            <TextField label="剩余库存" source="leftstock" />
+            <TextField label="总库存" source="totalstock" />
         <EditButton />
         <ShowButton />
         </Datagrid>
@@ -101,4 +112,4 @@ const CouponlistList = (props) => (//
 );
 
 
-export  {CouponlistList,CouponlistCreate,CouponlistEdit,CouponlistShow};
+export  {MycouponlistList,MycouponlistCreate,MycouponlistEdit,MycouponlistShow};

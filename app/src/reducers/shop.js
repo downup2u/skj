@@ -43,7 +43,7 @@ const initial = {
         iscollection:{},
 
         //选择优惠券类型
-        ulcoupontype:0,
+        ulcoupontype:'未使用',
 
         //产品列表页面配置参数getproductlist
         productslistType : 0,
