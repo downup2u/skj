@@ -22,6 +22,8 @@ let UserSchema = new Schema({
     username:String,
     passwordhash: String,
     passwordsalt: String,
+    openidqq: String,
+    openidweixin: String,
     created_at: Date,
     updated_at: Date,
     profile:Schema.Types.Mixed,
@@ -183,15 +185,20 @@ let Mycart  = mongoose.model('Mycart',  MycartSchema);
 //订单：用户id,[订单详情id],支付方式,折扣金额,金额,订单状态,送货地址id,是否删除，优惠券抵扣金额，优惠券ID／商品总价
 let OrderSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
-    payway:String,
+    payway:String,//支付方式
+    ordertitle:String,  //订单标题（支付宝，微信用）
+    body:String,//订单内容（文字）
     realprice:Number,//实付价
     orderprice:Number,//订单价=应付价
     orderstatus:String,
     paystatus:{ type: String, default:'未支付'},
-    provincename:String,
-    cityname:String,
-    distinctname:String,
-    address:String,
+    orderaddress:{
+        addressid:String,
+        truename:String,
+        phonenumber:String,
+        seladdr: Schema.Types.Mixed,
+        addressname: String,
+    },
     isdeleted:{ type:Boolean, default: false },
     productsdetail:[
         {
@@ -203,6 +210,8 @@ let OrderSchema = new Schema({
     ],
     couponprice:Number,//抵扣价
     couponid:{ type: Schema.Types.ObjectId, ref: 'Coupon' },
+    pointprice:Number,//积分抵扣价
+    point:Number,//所花积分
     productprice:Number,//产品总价
     expressid:{ type: Schema.Types.ObjectId, ref: 'Express' },
     expressbarid:String,
@@ -235,7 +244,7 @@ let MyCouponSchema = new Schema({
     pricecondition:Number,//价格条件
     pricediscount:Number,//抵扣金额
     expdate: Date,// 过期时间
-    usestatus:String, //未使用／已使用／已失效
+    usestatus:{ type: Schema.Types.String,default: '未使用'},// //未使用／已使用／已失效
     created_at: Date,
     used_at:Date,
 });
@@ -370,6 +379,7 @@ exports.OrderModel = Order;
 exports.ExpressModel = Express;
 exports.MycollectionModel = Mycollection;
 exports.MyCouponModel = MyCoupon;
+exports.CouponModel = Coupon;
 exports.ProductcommentModel = Productcomment;
 exports.FeedbackModel = Feedback;
 exports.RechargerecordModel = Rechargerecord;

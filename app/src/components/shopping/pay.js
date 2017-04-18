@@ -44,6 +44,7 @@ export class Page extends Component {
             couponprice: 0,//抵扣价
             orderexpress: this.props.orderExpress,//运费
             productprice: this.props.orderProductPrice,//产品总价
+            
         };
         this.props.dispatch(myorderaddone(payload)).then((result)=>{
             let payload = {};
