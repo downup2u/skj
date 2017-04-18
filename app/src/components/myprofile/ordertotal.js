@@ -10,13 +10,6 @@ export class Page extends Component {
         this.props.history.goBack();
     };
 
-    nextnumbers : {
-            level1_totalorderprices: 0,
-            level1_totalfeebonus: 0,
-            level2_totalorderprices: 0,
-            level2_totalfeebonus: 0,
-        }
-
     render() {
         return (
             <div className="orderTotalPage"

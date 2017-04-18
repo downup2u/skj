@@ -9,3 +9,4 @@ export * from './wifi';
 export * from './shop';
 export * from './order';
 export * from './nextusers';
+export * from './profit';

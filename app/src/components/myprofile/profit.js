@@ -2,21 +2,54 @@ import React, { Component, PropTypes } from 'react';
 import NavBar from '../nav.js';
 import { Input, Button, Menu } from 'semantic-ui-react';
 import '../../../public/css/myprofit.css';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+import moment from 'moment';
+
+import {
+    profit_set_listtype
+} from '../../actions';
+import {
+    getdistsalesorderdetails
+} from '../../actions/sagacallback.js';
 
 
-export default class Page extends Component {
-    state = {activeItem: '全部'};
+export class Page extends Component {
 
-    handleItemClick = (e, { name }) => this.setState({activeItem: name});
+    componentWillMount () {
+        //order'来自订单,'withdrawcash'来自提现
+        this.menu = {"":"全部","order":"获得明细","withdrawcash":"提现明细"};
+        //获取收益列表
+        let query = this.props.set_listtype==''?{}:{srctype: this.props.set_listtype};
+        this.getprofitlist(query)
+    };
+
+    getprofitlist =(query)=>{
+        let payload = {
+            query: query,
+            options:{
+                page: 1,
+                limit: 10000,
+            }
+        };
+        this.props.dispatch(getdistsalesorderdetails(payload))
+    };
+
+    handleItemClick = (index) => { 
+        this.props.dispatch(profit_set_listtype(index));
+        let query = index==''?{}:{srctype: index};
+        this.getprofitlist(query)
+    };
+
     onClickReturn =()=>{
         this.props.history.goBack();
     };
+
     onClickPage = (name)=> {
         this.props.history.push(name);
     };
 
     render() {
-        const { activeItem } = this.state;
         return (
             <div className="myProfitPage"
                  style={{
@@ -27,41 +60,49 @@ export default class Page extends Component {
                 <div className="headCont">
                     <div className="info">
                         <span className="profittit">我的收益(元)</span>
-                        <span className="number">¥ 47394.0元</span>
+                        <span className="number">¥ {this.props.balance}元</span>
                     </div>
                     <div className="tixian"><span onClick={()=>{this.onClickPage('/tixian')}}>提现</span></div>
                 </div>
                 <Menu pointing secondary>
-                    <Menu.Item name='全部' active={activeItem === '全部'} onClick={this.handleItemClick}/>
-                    <Menu.Item name='获得明细' active={activeItem === '获得明细'} onClick={this.handleItemClick}/>
-                    <Menu.Item name='提现明细' active={activeItem === '提现明细'} onClick={this.handleItemClick}/>
+                    {_.map(this.menu,(menu,index)=>{
+                        return (
+                            <div key={index}>
+                                <Menu.Item name={menu} active={this.props.set_listtype==index} onClick={()=>{this.handleItemClick(index)}}/>
+                            </div>
+                        )
+                    })}
                 </Menu>
-
                 <div className="cont">
-                    <div className='tt'>
+                    <div className={this.props.profitlist.length>0?"tt":"tt hide"}>
                         <span>日期</span><span>金额</span>
                     </div>
+                    <div className={this.props.profitlist.length>0?"t2 hide":"t2"}>
+                        - 暂无数据 -
+                    </div>
                     <div className='ll'>
-
-
-                        <div className="l">
-                            <div className="i">
-                                <span className="code">订单:345354获得</span>
-                                <span className="date">2017-08-09</span>
-                            </div>
-                            <div className="p">
-                                <span>+4000</span>
-                            </div>
-                        </div>
-                        <div className="l">
-                            <div className="i">
-                                <span className="code">订单:345354获得</span>
-                                <span className="date">2017-08-09</span>
-                            </div>
-                            <div className="p">
-                                <span>+4000</span>
-                            </div>
-                        </div>
+                        
+                        {_.map(this.props.profitlist, (profitinfo, index)=>{
+                            return (
+                                <div className="l" key={index}>
+                                    <div className="i">
+                                        <span className="code">
+                                            {
+                                                this.props.set_listtype=="order"
+                                                ?
+                                                "订单:"+profitinfo.fromorder+"获得"
+                                                :
+                                                "提现记录:"
+                                            }
+                                        </span>
+                                        <span className="date"><span>{moment(profitinfo.created_at).format("MM月DD日 HH时mm分")}</span></span>
+                                    </div>
+                                    <div className="p">
+                                        <span>{profitinfo.feebonus>0?("+"+profitinfo.feebonus):("-"+profitinfo.feebonus*-1)}</span>
+                                    </div>
+                                </div>
+                            )
+                        })}
 
                     </div>
                 </div>
@@ -69,3 +110,7 @@ export default class Page extends Component {
         );
     }
 }
+
+const mapStateToProps =  ({userlogin,profit}) =>{ return {...userlogin, ...profit};};
+export default connect(mapStateToProps)(Page);
+

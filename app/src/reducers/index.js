@@ -17,6 +17,7 @@ import shopcart from './shopcart';
 import shopcollection from './shopcollection';
 import shoporder from './shoporder';
 import infinitepage from './infinitepage';
+import profit from './profit';
 
 export default combineReducers(
   { 
@@ -36,6 +37,7 @@ export default combineReducers(
     notifymessage,
     infinitepage,
     nextusers,
+    profit,
     form: formReducer
   }
 );
