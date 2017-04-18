@@ -46,6 +46,10 @@ const SystemconfigShow = (props) => (
                  </ReferenceField>
                  <TextField  label="一级分销佣金" source="bonuslevel1" />
                  <TextField  label="二级分销佣金" source="bonuslevel2" />
+                 <TextField  label="换算,例1积分换1分" source="pointvsmoney" />
+                 <TextField  label="每天签到一次" source="getpointfromsign" />
+                 <TextField  label="分享得到积分" source="getpointfromshare" />
+                 <TextField  label="每天最多获得的积分" source="pointlimitshare" />
            </SimpleShowLayout>
        </ShowPage>
 );
@@ -72,6 +76,10 @@ export const SystemconfigCreate = (props) => (
             </ReferenceInput>
                 <TextInput  label="一级分销佣金" source="bonuslevel1" />
                 <TextInput  label="二级分销佣金" source="bonuslevel2" />
+                <TextInput  label="换算,例1积分换1分" source="pointvsmoney" />
+                <TextInput  label="每天签到一次" source="getpointfromsign" />
+                <TextInput  label="分享得到积分" source="getpointfromshare" />
+                <TextInput  label="每天最多获得的积分" source="pointlimitshare" />
            </SimpleForm>
        </Create>
 );
@@ -90,6 +98,10 @@ export const SystemconfigEdit = (props) => (
             </ReferenceInput>
             <TextInput  label="一级分销佣金" source="bonuslevel1" />
             <TextInput  label="二级分销佣金" source="bonuslevel2" />
+             <TextInput  label="换算,例1积分换1分" source="pointvsmoney" />
+             <TextInput  label="每天签到一次" source="getpointfromsign" />
+             <TextInput  label="分享得到积分" source="getpointfromshare" />
+            <TextInput  label="每天最多获得的积分" source="pointlimitshare" />
         </SimpleForm>
     </EditPage>
 );

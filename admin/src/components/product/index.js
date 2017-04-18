@@ -66,6 +66,7 @@ const ProductlistCreate = (props) => (
               <NumberInput label="库存"  source="stock" />
               <NumberInput label="销量"  source="salesvolume" />
               <ImageInputUpload label="图片"  source="picurl" />
+              <ImageInputUpload label="产品详情图片"  source="picurldetail" />
               <ImageInputUploadArray label="图片列表"  source="picurls" />
               <DateInput label="发布时间"  source="publishdate" />
               <RichTextInput label="详细信息" source="desc" addLabel={false}/>
@@ -94,6 +95,7 @@ const ProductlistEdit = (props) => {
               <NumberInput label="库存"  source="stock" />
               <NumberInput label="销量"  source="salesvolume" />
               <ImageInputUpload label="图片"  source="picurl" />
+              <ImageInputUpload label="产品详情图片"  source="picurldetail" />
               <ImageInputUploadArray label="图片列表"  source="picurls" />
               <DateInput label="发布时间"  source="publishdate" />
               <RichTextInput label="详细信息" source="desc" addLabel={false}/>
