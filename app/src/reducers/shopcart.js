@@ -7,7 +7,8 @@ import {
     serverpush_mycartcount,
     ui_cartooder_additem,
     ui_cartooder_delitem,
-    ui_cartooder_updateitem
+    ui_cartooder_updateitem,
+    ui_cart_selectallitems
 } from '../actions';
 import {normalizr_cartslist} from './normalizr';
 import _ from 'lodash';
@@ -20,6 +21,19 @@ const initial = {
 };
 
 const carts = createReducer({
+        [ui_cart_selectallitems]:(state, payload) => {
+            const {isselectedall,items} = payload;
+            let toordercarts = state.toordercarts;
+            if(isselectedall){
+                _.map(items,(item,index)=>{
+                    toordercarts[item._id] = item;
+                });
+            }
+            else{
+                toordercarts = {};
+            }
+            return  {...state,toordercarts:{...toordercarts}};
+        },
         [serverpush_mycartcount]:(state, remoteRowCount) => {
             return  {...state,remoteRowCount};
         },

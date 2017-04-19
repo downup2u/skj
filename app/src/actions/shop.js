@@ -7,6 +7,7 @@ import { createAction } from 'redux-act';
 export const ui_cartooder_additem = createAction('ui_cartooder_additem');
 export const ui_cartooder_delitem = createAction('ui_cartooder_delitem');
 export const ui_cartooder_updateitem = createAction('ui_cartooder_updateitem');
+export const ui_cart_selectallitems =  createAction('ui_cart_selectallitems');
 
 export const search_shoptxt = createAction('search_shoptxt');
 

@@ -18,173 +18,209 @@ import {
     uiinfinitepage_updateitem,
     ui_cartooder_additem,
     ui_cartooder_updateitem,
-    ui_cartooder_delitem
+    ui_cartooder_delitem,
+    ui_cart_selectallitems
 } from '../../actions';
 import _ from 'lodash';
 
-let Caritem =(props)=>{
-    console.log('renderCaritem==>' + JSON.stringify(props));
-    let {item} = props;
-    let cartid = item._id;
-    let changeproductnumber = (number)=>{
-         let payload = {
-             _id:cartid,
-             data:{
-                 product:item.product,
-                 number
-            }
-          };
-          props.dispatch(mycartupdateone(payload)).then((result)=>{
-            console.log('mycartupdateone result:' + JSON.stringify(result));
-            if(result){
-                props.dispatch(uiinfinitepage_updateitem(result.updateditem));
-                props.dispatch(ui_cartooder_updateitem(result.updateditem));
-            }
-          });
-          
-    }
-     let onChangeNumber=(e)=>{
-         let number = e.target.value;
-         if(number > 0){
-            changeproductnumber(number);
-         }
-     }
-     let onChangeNumberPlus=(value)=>{
-         let number = item.number;
-         number = number + value;
-         if(number > 0){
-            changeproductnumber(number);
-         }
-     }
-     let onClickDeleteItem =()=>{
-          let payload = {
+export class Cartitem extends Component {
+    render(){
+        console.log('Cartitem renderCaritem==>' + JSON.stringify(this.props));
+        let {item,products,isselected,dispatch} = this.props;
+        let cartid = item._id;
+        let changeproductnumber = (number)=>{
+            let payload = {
                 _id:cartid,
-          };
-          props.dispatch(mycartdelone(payload)).then((result)=>{
-                console.log('mycartdelone result:' + JSON.stringify(result));
-                if(result){
-                    props.dispatch(uiinfinitepage_deleteitem(result));
-                    props.dispatch(ui_cartooder_delitem(item));
+                data:{
+                    product:item.product,
+                    number
                 }
-          });
-          
-     }
-     let onClickChecktedItem = ()=>{
-         if(props.isselected){
-            props.dispatch(ui_cartooder_delitem(item));
-         }
-         else{
-            props.dispatch(ui_cartooder_additem(item));
-         }
-     }
-    let proinfo = props.products[item.product];
-    return (
-        <Swipeout autoClose={true}
-              right={[{
-                        text: '删除',
-                        style: { backgroundColor: 'red', color: 'white' },
-                        onPress:onClickDeleteItem
-                        },
-                    ]}
-                    >
-                        <div className="li" >
-                            <Checkbox 
-                                onClick={onClickChecktedItem}
-                                checked={props.isselected}
-                                />
-                            <div className="l">
-                                <img src={proinfo.picurl}/>
-                                <div>
-                                    <span>{proinfo.name}</span>
-                                    <div className="price">
-                                        <span>{proinfo.pricenow}</span>
-                                        <div className="btnControl">
-                                            <div className="add" onClick={()=>{onChangeNumberPlus(1);}}>+</div>
-                                            <div className="num">
-                                                <Input name="firstName" type="text" value={item.number} onChange={onChangeNumber}/>
+            };
+            dispatch(mycartupdateone(payload)).then((result)=>{
+                console.log('mycartupdateone result:' + JSON.stringify(result));
+                if(result){
+                    dispatch(uiinfinitepage_updateitem(result.updateditem));
+                    dispatch(ui_cartooder_updateitem(result.updateditem));
+                }
+            });
+            
+        }
+        let onChangeNumber=(e)=>{
+            let number = e.target.value;
+            if(number > 0){
+                changeproductnumber(number);
+            }
+        }
+        let onChangeNumberPlus=(value)=>{
+            let number = item.number;
+            number = number + value;
+            if(number > 0){
+                changeproductnumber(number);
+            }
+        }
+        let onClickDeleteItem =()=>{
+            let payload = {
+                _id:cartid,
+            };
+            dispatch(mycartdelone(payload)).then((result)=>{
+                    console.log('mycartdelone result:' + JSON.stringify(result));
+                    if(result){
+                        dispatch(uiinfinitepage_deleteitem(result));
+                        dispatch(ui_cartooder_delitem(item));
+                    }
+            });
+            
+        }
+        let onClickChecktedItem = ()=>{
+            if(isselected){
+                dispatch(ui_cartooder_delitem(item));
+            }
+            else{
+                dispatch(ui_cartooder_additem(item));
+            }
+        }
+        let proinfo = products[item.product];
+        if(proinfo){
+            return (
+            <Swipeout autoClose={true}
+                right={[{
+                            text: '删除',
+                            style: { backgroundColor: 'red', color: 'white' },
+                            onPress:onClickDeleteItem
+                            },
+                        ]}
+                        >
+                            <div className="li" >
+                                <Checkbox 
+                                    onClick={onClickChecktedItem}
+                                    checked={isselected}
+                                    />
+                                <div className="l">
+                                    <img src={proinfo.picurl}/>
+                                    <div>
+                                        <span>{proinfo.name}</span>
+                                        <div className="price">
+                                            <span>{proinfo.pricenow}</span>
+                                            <div className="btnControl">
+                                                <div className="add" onClick={()=>{onChangeNumberPlus(1);}}>+</div>
+                                                <div className="num">
+                                                    <Input name="firstName" type="text" value={item.number} onChange={onChangeNumber}/>
+                                                </div>
+                                                <div className="del" onClick={()=>{onChangeNumberPlus(-1);}}>-</div>
                                             </div>
-                                            <div className="del" onClick={()=>{onChangeNumberPlus(-1);}}>-</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </Swipeout>);
+                        </Swipeout>);
+        }
+        return (<div>{item.product}产品不存在!</div>);
+    }
 }
 
-let Page = (props) => {
+let mapStateToPropsCartItem = ({shop:{products},shopcart:{toordercarts}},props) => {
+    let isselected = toordercarts.hasOwnProperty(props.item._id);
+    return {products,isselected};
+}
+Cartitem = connect(mapStateToPropsCartItem)(Cartitem);
 
-    let updateContent = (item)=> {
-            let isselected = props.toordercarts.hasOwnProperty(item._id);
-            return  (
-                <div key={item._id}>
-                    <Caritem item={item} isselected={isselected} products={props.products} dispatch={props.dispatch}/>
-                </div>
-            );
-        
-    };
 
-    let onClickReturn = ()=> {
-        props.history.goBack();
-    };
+export class Pricetotal extends Component {
+    render(){
+        console.log('Pricetotal renderCaritem==>' + JSON.stringify(this.props));
+        const {totalprice,onClickPage,isselected,dispatch,items} = this.props;
+        let onClickCheckSelall = ()=>{
+            dispatch(ui_cart_selectallitems({isselectedall:!isselected,items}));
+        }
 
-    let onClickPage = (name)=> {
-        props.history.push(name);
-    };
-
-    let totalprice = 0;
-    _.map(props.toordercarts,(item,key)=>{
-        let number = parseInt(item.number);
-        let price = parseInt(props.products[item.product].pricenow);
-        let priceitem = number*price;
-        priceitem = parseInt(priceitem.toFixed(2));
-        totalprice += priceitem;
-    });
-    return (
-            <div className="shoppingCartPage"
-                style={{
-                    height:(window.innerHeight)+"px",
-                }}
-                >
-                <div className="PageHead">
-                    <Icon name="angle left" onClick={()=>{onClickReturn()}} />
-                    <span className="title">购物车</span>
-                </div>
-                <div className="proinfo" style={{height:(window.innerHeight-98)+"px"}}>
-                    <InfinitePage
-                        pagenumber = {30}
-                        updateContent= {updateContent.bind(this)} 
-                        queryfun= {mycartgetall}
-                        listheight= {window.innerHeight-92}
-                        query = {{}}
-                        sort = {{created_at: -1}}
-                    />
-                </div>
-                <div className="footBtn">
-                    <div className="left">
-                        <Checkbox 
-                            checked={props.isselected}
-                            label='全选'
-                            />
-                        <div className="price">
-                            合计: <span>¥{totalprice}</span>
-                        </div>
-                    </div>
+        return (
+             <div className="left">
+                <Checkbox checked={isselected}
+                    onClick={onClickCheckSelall}
+                    label='全选'
+                />
+                <div className="price">
+                 合计: <span>¥{totalprice}</span>
+                 </div>
                     <div className="btn" onClick={()=>{onClickPage('/pay')}}>
-                        <span>去结算</span>
+                            <span>去结算</span>
                     </div>
                 </div>
-            </div>
-       
-    );
+        );
+    }
+}
+let mapStateToPropsPricetotal = ({shop:{products},shopcart:{toordercarts},infinitepage:{items}}) => {
+        let totalprice = 0;
+        let isselected = false;
+        let itemsel = 0;
+        _.map(toordercarts,(item,key)=>{
+            let number = parseInt(item.number);
+            let price = parseInt(products[item.product].pricenow);
+            let priceitem = number*price;
+            priceitem = parseInt(priceitem.toFixed(2));
+            totalprice += priceitem;
+            itemsel++;
+        });
+        isselected = itemsel === items.length;
+        return {totalprice,isselected,items}
+}
+Pricetotal = connect(mapStateToPropsPricetotal)(Pricetotal);
+
+
+
+export class Page extends Component {
+    // shouldComponentUpdate(nextProps) {
+    //       return false;
+    // }
+
+    render() {
+        let updateContent = (item)=> {
+                return  (
+                    <div key={item._id}>
+                        <Cartitem item={item} />
+                    </div>
+                );
+            
+        };
+
+        let onClickReturn = ()=> {
+            this.props.history.goBack();
+        };
+
+        let onClickPage = (name)=> {
+            this.props.history.push(name);
+        };
+
+
+        return (
+                <div className="shoppingCartPage"
+                    style={{
+                        height:(window.innerHeight)+"px",
+                    }}
+                    >
+                    <div className="PageHead">
+                        <Icon name="angle left" onClick={()=>{onClickReturn()}} />
+                        <span className="title">购物车</span>
+                    </div>
+                    <div className="proinfo" style={{height:(window.innerHeight-98)+"px"}}>
+                        <InfinitePage
+                            pagenumber = {30}
+                            updateContent= {updateContent} 
+                            queryfun= {mycartgetall}
+                            listheight= {window.innerHeight-92}
+                            query = {{}}
+                            sort = {{created_at: -1}}
+                        />
+                    </div>
+                    <div className="footBtn">
+                        <Pricetotal onClickPage={onClickPage}/>
+                    </div>
+                </div>
+        
+        );
+    }
 }
 
-
-
-let mapStateToProps = ({shop,shopcart}) => {
-    return {...shop,...shopcart};
-}
-Page = connect(mapStateToProps)(Page);
-
+Page = connect()(Page);
 
 export default Page;

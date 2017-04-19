@@ -14,6 +14,7 @@ let SystemConfigSchema = new Schema({
     getpointfromsign:{ type: Schema.Types.Number,default: 10},//每天签到一次
     getpointfromshare:{ type: Schema.Types.Number,default: 5},//分享得到积分
     pointlimitshare:{ type: Schema.Types.Number,default: 30},//每天最多获得分享的积分
+    sharesetting:String,
 });
 SystemConfigSchema.plugin(mongoosePaginate);
 let SystemConfig  = mongoose.model('SystemConfig',  SystemConfigSchema);

@@ -48,6 +48,7 @@ import {
   testnotifypay
 } from '../test/testpay';
 
+
 let Page =(props)=>{
     let onClickPage=(name)=>{
         props.history.push(name);
