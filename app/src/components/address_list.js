@@ -13,7 +13,7 @@ import {deleteaddress_confirmpopshow,deleteaddress_confirmpophide} from '../acti
 import { Confirm } from 'semantic-ui-react';
 import {editaddress} from '../actions/sagacallback.js';
 
-const AddressItem = (props)=> {
+let AddressItem = (props)=> {
     const { addressitem, defaultaddress } = props;
     let onDelete = ()=> {
         props.onClickDelete(addressitem);
