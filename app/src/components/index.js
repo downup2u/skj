@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {clickTab} from '../actions/index.js';
 import Page0 from './home.js';
 import Page1 from './community.js';
-//import Page2 from './test';
 import Page2 from './shopping/index.js';
 import Page3 from './myprofile.js';
 import HomeBottom from './homebottom.js';
@@ -78,6 +77,5 @@ export class Page extends React.Component {
 const mapStateToProps = ({app:{curtabindex}}) => {
     return {curtabindex};
 };
-
 Page = connect(mapStateToProps)(Page);
 export default Page;

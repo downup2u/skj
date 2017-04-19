@@ -4,7 +4,7 @@ import {  Button, Icon, Input, List, Radio} from 'semantic-ui-react'
 import '../../public/css/home.css';
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../node_modules/react-dynamic-swiper/lib/styles.css';
-
+import {withRouter} from 'react-router-dom';
 
 let swiperOptions = {
     navigation: false,
@@ -163,5 +163,6 @@ const mapStateToProps = ({devicedata}) => {
 };
 
 Page = connect(mapStateToProps)(Page);
+Page = withRouter(Page);
 export default Page;
 

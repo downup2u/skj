@@ -3,6 +3,7 @@ import NavBar from './nav.js';
 import { Input, Button, Select } from 'semantic-ui-react';
 import '../../public/css/myprofile.css';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import {
     myOrderList_filler_set
 } from '../actions';
@@ -126,7 +127,7 @@ let Page =(props)=> {
 const mapStateToProps =  ({userlogin}) =>{
     return userlogin;
 };
-
+Page = withRouter(Page);
 export default connect(
     mapStateToProps
 )(Page);
