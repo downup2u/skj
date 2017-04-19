@@ -14,8 +14,8 @@ import {
 import '../../public/css/feed.css';
 import NavBar from './nav2.js';
 
-import CommentExampleComment from './community_comment.js';
-import FeedExampleBasic from './community_topic.js';
+import ForumComment from './community_comment.js';
+import ForumTopic from './community_topic.js';
 import FeedReplyForm from './community_reply.js';
 import TopTip from './community_topictip';
 
@@ -25,25 +25,25 @@ import InfinitePage from './controls/infinitecontrol';
 
 export class Topic extends React.Component {
     render() {
+        const {topic,comments} = this.props;
         let commentsco = [];
-        let commentslength = this.props.topic.comments.length;
+        let commentslength = topic.comments.length;
         let showcomments = commentslength>0?"commentlistcontent":"commentlistcontent hide";
-        let length = commentslength>2?2:this.props.topic.comments.length;
-        let showmore = commentslength>0?(<div className="comentShowMore" onClick={()=>{this.props.onClickTopic(this.props.topic._id);}}>查看更多...</div>) :'';
+        let length = commentslength>2?2:topic.comments.length;
+        let showmore = commentslength>0?(<div className="comentShowMore" onClick={()=>{this.props.onClickTopic(topic._id);}}>查看更多...</div>) :'';
         for (let i = 0; i<length; i++) {
-            let commentid = this.props.topic.comments[i];
+            let commentid = topic.comments[i];
             commentsco.push(
-                <CommentExampleComment 
+                <ForumComment 
                     key={commentid}
-                    topicid={this.props.topic._id}
-                    comment={this.props.comments[commentid]}
-                    showchild={false} 
-                    {...this.props} />
+                    topicid={topic._id}
+                    comment={comments[commentid]}
+                    showchild={false} />
                 );
         }
         return (
             <div>
-                <FeedExampleBasic topic={this.props.topic} {...this.props} />
+                <ForumTopic topic={topic} />
                 <div className={showcomments}>
                     <Comment.Group>
                         {commentsco}
@@ -53,43 +53,40 @@ export class Topic extends React.Component {
             </div>);
     }
 }
+const mapStateToPropsTopic = ({forum:{comments,topics}},props) => {
+     let topic = topics[props.itemid];
+     return {comments,topic};
+}
+Topic = connect(mapStateToPropsTopic)(Topic);
+
+
+let ToptipCo = (props)=>{
+    const {useralerttopiclist,users,useralerttopics} = props;
+    let ToptipCo = null;
+    if(useralerttopiclist.length > 0){
+        let useralerttopicnew = useralerttopics[useralerttopiclist[0]]; //选取最新一条
+        let user = users[useralerttopicnew.userfrom];
+        let toptipData = {
+             avatar: user.profile.avatar,
+             text: `${useralerttopiclist.length}条新消息`
+        };
+        ToptipCo = <TopTip data={toptipData} useralerttopic={useralerttopicnew} frompage='nextpage'/>;
+     }
+    return (<div>{ToptipCo}</div>);
+}
+const mapStateToPropsToptip = ({forum:{useralerttopiclist,users,useralerttopics}}) => {
+     return {useralerttopiclist,users,useralerttopics};
+}
+ToptipCo = connect(mapStateToPropsToptip)(ToptipCo);
+
+
 
 export class Page extends React.Component {
 
     componentWillMount() {
         this.props.dispatch(uicommenthide());
-        if(this.props.useralerttopiclist.length > 0){
-            this.props.dispatch(setCommunityListHeight(window.innerHeight-140));
-        }else{
-            this.props.dispatch(setCommunityListHeight(window.innerHeight-98));
-        }
-        // this.props.dispatch(ui_settopiclistinited(true));
-        // let queryobj = {};
-        // this.props.dispatch(gettopiclist_request({
-        //     query:queryobj,
-        //     options:{
-        //         sort:{created_at:-1},
-        //         offset: 0,
-        //         limit: 8,
-        //     }
-        // }));
         console.log("--------->comm:componentWillMount");
     }
-
-   componentWillReceiveProps(nextProps) {
-        if (nextProps.useralerttopiclist.length > 0 && this.props.useralerttopiclist.length === 0) {
-            this.props.dispatch(setCommunityListHeight(window.innerHeight-140));
-        }else{
-            this.props.dispatch(setCommunityListHeight(window.innerHeight-98));
-        }
-    }
-
-    HotLnk = (data)=> {
-        // props.navigator.pushPage({
-        // comp: TopicDetail,
-        // props: data
-        // });
-    };
 
     onClickPage = ()=> {//点击空白处，隐藏?如何判断点击空白
         this.props.dispatch(uicommenthide());
@@ -114,25 +111,15 @@ export class Page extends React.Component {
         return  (
             <Topic 
                 key = {`topic${item._id}`} 
-                topic = {this.props.topics[item._id]}
+                itemid = {item._id}
                 onClickTopic = {this.onClickTopic}
-                {...this.props}
             />
         );
     }
 
     render() {
-        let ToptipCo = null;
-        if(this.props.useralerttopiclist.length > 0){
-            let useralerttopicnew = this.props.useralerttopics[this.props.useralerttopiclist[0]]; //选取最新一条
-            let user = this.props.users[useralerttopicnew.userfrom];
-            let toptipData = {
-                avatar: user.profile.avatar,
-                text: `${this.props.useralerttopiclist.length}条新消息`
-            };
-            ToptipCo = <TopTip data={toptipData} useralerttopic={useralerttopicnew} frompage='nextpage'/>;
-        }
 
+        const {communityListHeight,iscommentshow,bigimglist,bigimgshow,bigimgindex} = this.props;
 
         return (
             <div className="feedPage">
@@ -170,28 +157,30 @@ export class Page extends React.Component {
                       onClick={this.addNewCommunityHotlnk.bind(this)}
                     />
                 <div onClick={this.onClickPage}>
-                    {ToptipCo}
+                    <ToptipCo />
                 </div>
-                <div className="tc" onClick={this.onClickPage} style={{height:this.props.communityListHeight+"px"}}>
+                <div className="tc" onClick={this.onClickPage} style={{height:communityListHeight+"px"}}>
                     <InfinitePage
                         pagenumber = {16}
                         updateContent= {this.updateContent} 
                         queryfun= { gettopiclist }
-                        listheight= { this.props.communityListHeight }
+                        listheight= { communityListHeight }
                         sort = {{created_at: -1}}
                         query = {{}}
                     />
                 </div>
                 <div onClick={this.stopDefault}>
-                    {this.props.iscommentshow ? <FeedReplyForm {...this.props} /> : null}
+                    {iscommentshow ? <FeedReplyForm /> : null}
                 </div>
-                <Bigimg imglist={this.props.bigimglist} showindex={this.props.bigimgindex} show={this.props.bigimgshow} />
+                <Bigimg imglist={bigimglist} showindex={bigimgindex} show={bigimgshow} />
             </div>);
     }
 }
 
-const mapStateToProps = ({forum,app}) => {
-    return {...forum,...app};
+const mapStateToProps = ({forum:{useralerttopiclist,iscommentshow,bigimglist,bigimgshow,bigimgindex}}) => {
+    let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-140:window.innerHeight-98;
+    //所有使用到的属性列表：bigimgindex/iscommentshow/communityListHeight/useralerttopiclist
+    return {communityListHeight,iscommentshow,bigimglist,bigimgshow,bigimgindex};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

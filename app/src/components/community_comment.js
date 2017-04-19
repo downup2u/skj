@@ -11,9 +11,9 @@ import {
 import '../../public/css/feed.css';
 import moment from 'moment';
 import _ from 'lodash';
+import {withRouter} from 'react-router-dom';
 
-
-let CommentExampleComment = ({loginsuccess,history,topicid,comment,subcomment,users,dispatch,showchild}) => {
+let ForumComment = ({loginsuccess,history,topicid,comment,subcomment,users,dispatch,showchild}) => {
     let islovedbyme = false;//判断loave数组是否有自己
     let showcommenttocomment = (e)=> {
         if (loginsuccess) {
@@ -99,9 +99,12 @@ let CommentExampleComment = ({loginsuccess,history,topicid,comment,subcomment,us
     );
 };
 
-const mapStateToProps = ({userlogin,forum}) => {
-    return {...userlogin,...forum};
+//topicid/comment/showchild
+const mapStateToProps = ({userlogin:{loginsuccess},forum:{subcomment,users}}) => {
+    //loginsuccess,history,topicid,comment,subcomment,users,dispatch,showchild
+    return {loginsuccess,subcomment,users};
 };
 
-CommentExampleComment = connect(mapStateToProps)(CommentExampleComment);
-export default CommentExampleComment;
+ForumComment = connect(mapStateToProps)(ForumComment);
+ForumComment =withRouter(ForumComment);
+export default ForumComment;

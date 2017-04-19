@@ -15,7 +15,7 @@ import '../../public/css/feed.css';
 import moment from 'moment';
 import _ from 'lodash';
 
-let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
+let ForumTopic = ({loginsuccess,history,topic,users,dispatch}) => {
   let islovedbyme = false;//判断loave数组是否有自己
   let showtopictocomment = (e)=>{
     if(loginsuccess){
@@ -99,10 +99,11 @@ let FeedExampleBasic = ({loginsuccess,history,topic,users,dispatch}) => {
   );
 }
 
-const mapStateToProps =  ({userlogin,forum}) =>{
-  return {...userlogin,...forum};
+//loginsuccess,history,topic,users,dispatch
+const mapStateToProps =  ({userlogin:{loginsuccess},forum:{users}}) =>{
+  return {loginsuccess,users};
 };
 
-FeedExampleBasic = connect(mapStateToProps)(FeedExampleBasic);
-FeedExampleBasic =withRouter(FeedExampleBasic);
-export default FeedExampleBasic;
+ForumTopic = connect(mapStateToProps)(ForumTopic);
+ForumTopic =withRouter(ForumTopic);
+export default ForumTopic;

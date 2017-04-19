@@ -19,21 +19,23 @@ export class Page extends React.Component {
     }
 
     onClick = ()=>{
-        this.props.dispatch(setuseralerttopicreaded_request(this.props.useralerttopic._id));
+        const {useralerttopic,frompage,history,dispatch} = this.props;
+        dispatch(setuseralerttopicreaded_request(useralerttopic._id));
 
-        if(this.props.frompage === 'nextpage'){
-            this.props.history.push(`/communityinfo/${this.props.useralerttopic.topicself}#comment_${this.props.useralerttopic.comment}`);
+        if(frompage === 'nextpage'){
+            history.push(`/communityinfo/${useralerttopic.topicself}#comment_${useralerttopic.comment}`);
         }
         else{
-            this.scrollToAnchor('comment_' + this.props.useralerttopic.comment);
+            this.scrollToAnchor('comment_' + useralerttopic.comment);
         }
     }
     render() {
+        const {data} = this.props;
         return (
             <div className="topTip" onClick={this.onClick}>
                 <div className="con">
-                    <img src={this.props.data.avatar}/>
-                    <span>{this.props.data.text}</span>
+                    <img src={data.avatar}/>
+                    <span>{data.text}</span>
                     <Icon name='chevron right' size="small"/>
                 </div>
             </div>
@@ -43,9 +45,9 @@ export class Page extends React.Component {
 };
 
 
-const mapStateToProps = ({forum}) => {
-    return forum;
+const mapStateToProps = ({forum:{useralerttopic}}) => {
+    return {useralerttopic};
 }
 Page = connect(mapStateToProps)(Page);
-Page =withRouter(Page);
+Page = withRouter(Page);
 export default Page;

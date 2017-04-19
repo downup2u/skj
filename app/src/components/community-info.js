@@ -9,8 +9,8 @@ import {gettopiclist_request,
 } from '../actions/index.js';
 import '../../public/css/feed.css';
 
-import CommentExampleComment from './community_comment.js';
-import FeedExampleBasic from './community_topic.js';
+import ForumComment from './community_comment.js';
+import ForumTopic from './community_topic.js';
 import FeedReplyForm from './community_reply.js';
 import TopTip from './community_topictip';
 
@@ -19,12 +19,13 @@ export class Topic extends React.Component {
   }
 
   render() {
+    const {topic,comments} = this.props;
     let commentsco = [];
-    for(let commentid of this.props.topic.comments){
-      commentsco.push(<CommentExampleComment showchild={true} key={commentid} comment={this.props.comments[commentid]} {...this.props} />);
+    for(let commentid of topic.comments){
+      commentsco.push(<ForumComment showchild={true} key={commentid} comment={comments[commentid]} />);
     }
     return  (<div >
-                <FeedExampleBasic topic={this.props.topic} {...this.props} />
+                <ForumTopic topic={topic} />
                     <Comment.Group>
                         {commentsco}
                     </Comment.Group>
@@ -39,12 +40,7 @@ export class Page extends React.Component {
     componentWillMount () {
         this.props.dispatch(uicommenthide());
     }
-    HotLnk = (data)=> {
-        // props.navigator.pushPage({
-        //     comp: TopicDetail,
-        //     props: data
-        // });
-    };
+
     onClickPage =()=>{//点击空白处，隐藏?如何判断点击空白
         this.props.dispatch(uicommenthide());
     }
@@ -52,20 +48,21 @@ export class Page extends React.Component {
         this.props.history.goBack();
     }
     render() {
+        const {useralerttopiclist,useralerttopics,users,topics,bigimglist,bigimgindex,bigimgshow,comments,iscommentshow} = this.props;
         let topicid = this.props.match.params.topicid;
         let ToptipCo = null;
-        if(this.props.useralerttopiclist.length > 0){
+        if(useralerttopiclist.length > 0){
             let filterlist = [];
-            for(let useralerttopicid of this.props.useralerttopiclist){
-                if(this.props.useralerttopics[useralerttopicid].topicself === topicid){
+            for(let useralerttopicid of useralerttopiclist){
+                if(useralerttopics[useralerttopicid].topicself === topicid){
                     //关于该帖的评论
                     filterlist.push(useralerttopicid);
                 }
             }
 
             if(filterlist.length > 0){
-                let useralerttopicnew = this.props.useralerttopics[filterlist[0]]; //选取最新一条
-                let user = this.props.users[useralerttopicnew.userfrom];
+                let useralerttopicnew = useralerttopics[filterlist[0]]; //选取最新一条
+                let user = users[useralerttopicnew.userfrom];
                 let toptipData = {
                     avatar: user.profile.avatar,
                     text: `${filterlist.length}条新消息`
@@ -73,7 +70,7 @@ export class Page extends React.Component {
                 ToptipCo = <TopTip data={toptipData} useralerttopic={useralerttopicnew}  frompage='thispage'/>;
             }
         }
-        let topicsco = <Topic key={topicid} topic={this.props.topics[topicid]} {...this.props}/>;
+        let topicsco = <Topic key={topicid} topic={topics[topicid]} comments={comments}/>;
         return (
             <div className="commentInfoPage" style={{height:window.innerHeight+"px"}}>
                 <div className="th">
@@ -86,15 +83,15 @@ export class Page extends React.Component {
                     {topicsco}
                 </div>
                 <div className="tb">
-                    {this.props.iscommentshow?<FeedReplyForm {...this.props}/>:null}
+                    {iscommentshow?<FeedReplyForm />:null}
                 </div>
-                <Bigimg imglist={this.props.bigimglist} showindex={this.props.bigimgindex} show={this.props.bigimgshow} />
+                <Bigimg imglist={bigimglist} showindex={bigimgindex} show={bigimgshow}/>
             </div>);
   }
 }
 
-const mapStateToProps = ({forum,app}) => {
-    return {...forum,...app};
+const mapStateToProps = ({forum:{comments,useralerttopiclist,useralerttopics,users,topics,bigimglist,bigimgindex,bigimgshow,iscommentshow}}) => {
+    return {useralerttopiclist,comments,useralerttopics,users,topics,bigimglist,bigimgindex,bigimgshow,iscommentshow};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;
