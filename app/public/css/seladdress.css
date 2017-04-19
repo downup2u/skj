@@ -1,0 +1,26 @@
+.seladdressPage{
+    background: #EEE;
+    overflow-y: hidden;
+    justify-content: flex-start
+}
+.seladdressPage .listcont{
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+.seladdressPage .listcont .li{
+    background: #FFF;
+    border-bottom: 1px solid #EEE;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.seladdressPage .listcont .li .tit{
+    display: flex;
+    justify-content: space-between;
+}
+.seladdressPage .listcont .address{
+    color: #111;
+}
