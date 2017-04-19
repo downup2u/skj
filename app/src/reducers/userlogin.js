@@ -23,6 +23,7 @@ const initial = {
         userid:'',
         token:'',
         profile:{},
+        invitecode:'',
         defaultaddress:{},
         balance:0,
         point:0,
