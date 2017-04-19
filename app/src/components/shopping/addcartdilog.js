@@ -53,16 +53,14 @@ let Page = ({proid, show, number, dispatch, products})=>{
             })))
         });
     }
-
     let showstyle = show?"addcartdilog":"addcartdilog hide";
     let translatestyle = show?"weui-actionsheet weui-actionsheet_toggle":"weui-actionsheet";
     let proinfo = {};
     if(show){
         proinfo = products[proid];
     }
-
     return (
-        <div className={showstyle} 
+        <div className={showstyle}
              onClick={()=>{hidedilog()}}
              >
             <div 

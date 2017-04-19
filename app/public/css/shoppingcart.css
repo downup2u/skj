@@ -107,7 +107,7 @@
     padding: 0;
 }
 
-.shoppingCartPage .footBtn {
+.shoppingCartPage .footBtn >div{
     background: #FFF;
     padding: 0 0 0 15px;
     display: flex;

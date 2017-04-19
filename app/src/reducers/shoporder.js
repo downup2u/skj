@@ -19,56 +19,60 @@ const initial = {
         list:[],
         orders:{
 
-        }
+        },
+        //我的优惠券列表
+        couponlist:{},
+        //优惠券
+        couponid:"",
     },
 };
 
 const orders = createReducer({
-        [ui_setorderinited]:(state, inited) => {
-            return  {...state,inited};
-        },
-        [myordergetall_result]:(state, {result}) => {
-            // docs {Array} - Array of documents
-            // total {Number} - Total number of documents in collection that match a query
-            // limit {Number} - Limit that was used
-            //     [page] {Number} - Only if specified or default page/offset values were used
-            //     [pages] {Number} - Only if page specified or default page/offset values were used
-            //     [offset] {Number} - Only if specified or default page/offset values were used
-            let list = result.docs;
-            let remoteRowCount = result.total;
-            let orders = normalizr_orderslist({list});
+    [ui_setorderinited]:(state, inited) => {
+        return  {...state,inited};
+    },
+    [myordergetall_result]:(state, {result}) => {
+        // docs {Array} - Array of documents
+        // total {Number} - Total number of documents in collection that match a query
+        // limit {Number} - Limit that was used
+        //     [page] {Number} - Only if specified or default page/offset values were used
+        //     [pages] {Number} - Only if page specified or default page/offset values were used
+        //     [offset] {Number} - Only if specified or default page/offset values were used
+        let list = result.docs;
+        let remoteRowCount = result.total;
+        let orders = normalizr_orderslist({list});
 
-            if(state.inited){
-                //替换
-                return { ...state,
-                    list:[...orders.result.list],
-                    orders:{...orders.entities.orders},
-                    inited:false,
-                    remoteRowCount};
-            }
-            //追加记录
-            return {
-                    ...state,
-                     list:[...state.list,...orders.result.list],
-                     orders:{
-                        ...state.orders,
-                        ...orders.entities.orders
-
-                    }
-
-            };
-
-        },
-        [myorderaddone_result]:(state, payload) => {
-            let list = [payload._id,...state.list];
-            let orders = state.orders;
-            orders[payload._id] = payload;
-            return {
+        if(state.inited){
+            //替换
+            return { ...state,
+                list:[...orders.result.list],
+                orders:{...orders.entities.orders},
+                inited:false,
+                remoteRowCount};
+        }
+        //追加记录
+        return {
                 ...state,
-                list,
-                orders
-            };
-        },
+                 list:[...state.list,...orders.result.list],
+                 orders:{
+                    ...state.orders,
+                    ...orders.entities.orders
+
+                }
+
+        };
+
+    },
+    [myorderaddone_result]:(state, payload) => {
+        let list = [payload._id,...state.list];
+        let orders = state.orders;
+        orders[payload._id] = payload;
+        return {
+            ...state,
+            list,
+            orders
+        };
+    },
         // [myorderdelone_result]:(state, payload) => {
         //     let orders =  state.orders;
         //     let neworders = [];

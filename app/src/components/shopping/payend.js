@@ -68,9 +68,9 @@ export class Page extends Component {
         const {orderinfo} = this.props;
         return (
             <div className="PayPage"
-                 style={{
+                style={{
                     height:(window.innerHeight)+"px",
-                 }}
+                }}
                 >
                 <div className="PageHead">
                     <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />

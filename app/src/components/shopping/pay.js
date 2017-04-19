@@ -57,9 +57,9 @@ export class Page extends Component {
     render() {
         return (
             <div className="PayPage"
-                 style={{
+                style={{
                     height:(window.innerHeight)+"px",
-                 }}
+                }}
                 >
                 <div className="PageHead">
                     <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
@@ -80,7 +80,6 @@ export class Page extends Component {
                 </div>
                 <div className="proinfo">
                     {_.map(this.props.orderProductsdetail, (prodetail,index)=>{
-                        console.log(this.props);
                         let proinfo = this.props.products[prodetail.productid];
                         return (
                             <div className="li" key={index}>
@@ -119,9 +118,13 @@ export class Page extends Component {
     }
 }
 
-let mapStateToProps = ({shop,order}) => {
-    return {...shop,...order};
+let mapStateToProps = ({shop, order}) => {
+    let products = shop.products;
+    let orderPrice = order.orderPrice;
+    let orderProductsdetail = order.orderProductsdetail;
+    let orderExpress = order.orderExpress;
+    return {products, orderPrice, orderProductsdetail, orderExpress};
 }
-
 Page = connect(mapStateToProps)(Page);
 export default Page;
+

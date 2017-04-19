@@ -1,6 +1,9 @@
-import React,{ Component, PropTypes } from 'react';
+/*
+ * 收货地址管理
+ * */
+import React, { Component, PropTypes } from 'react';
 import '../../public/css/user.css';
-import { Input, List, Radio, Button, Icon } from 'semantic-ui-react'
+import { Input, List, Checkbox, Button, Icon } from 'semantic-ui-react'
 import NavBar from './nav.js';
 import Swipeout from 'rc-swipeout';
 import 'rc-swipeout/assets/index.css';
@@ -11,7 +14,7 @@ import { Confirm } from 'semantic-ui-react';
 import {editaddress} from '../actions/sagacallback.js';
 
 const AddressItem = (props)=> {
-    const {addressitem,isdefaultaddress} = props;
+    const { addressitem, defaultaddress } = props;
     let onDelete = ()=> {
         props.onClickDelete(addressitem);
     };
@@ -24,19 +27,21 @@ const AddressItem = (props)=> {
 
         }).catch((error)=>{
             //弹出错误框
-            console.log("编辑地址成功:" + JSON.stringify(error));
+            console.log("设置默认地址失败:" + JSON.stringify(error));
         });
     }
+    console.log(addressitem._id);
+    console.log(defaultaddress._id);
+    console.log(defaultaddress.hasOwnProperty('_id')&&(addressitem._id===defaultaddress._id))
+    let isdefaultaddress = defaultaddress.hasOwnProperty('_id')&&(addressitem._id===defaultaddress._id);
     return (
-        <List.Item key={addressitem._id}>
+        <div className="addressItem" key={addressitem._id}>
             <Swipeout autoClose={true}
-                      right={[
-      {
-        text: '删除',
-        onPress:onDelete,
-        style: { backgroundColor: 'red', color: 'white' }
-      }
-    ]}
+                    right={[{
+                        text: '删除',
+                        onPress:onDelete,
+                        style: { backgroundColor: 'red', color: 'white' }
+                    }]}
                 >
                 <div className="tit">
                     <span>{addressitem.truename}</span>
@@ -48,18 +53,34 @@ const AddressItem = (props)=> {
                     <span>{addressitem.addressname}</span>
                 </div>
                 <div className="listControl">
-                    {!isdefaultaddress?
-                    (<div className="rad">
-                        <Radio onClick={onClickDefault}/>
-                    </div>):null}
+                    {
+                        !isdefaultaddress?(
+                            <div className="rad">
+                                <Checkbox onClick={onClickDefault}
+                                    label="设为默认地址"
+                                    checked={false}
+                                />
+                            </div>):(
+                            <Checkbox 
+                                label="默认地址"
+                                checked={true}
+                            />
+                        )
+                    }
                     <div className="lnk">
                         <div onClick={onEdit}><Icon link name='edit'/>编辑</div>
                         <div onClick={onDelete}><Icon link name='trash outline'/>删除</div>
                     </div>
                 </div>
             </Swipeout>
-        </List.Item>);
+        </div>);
 };
+
+//
+const mapStateToProps2 = ({userlogin}) => {
+    return { defaultaddress:userlogin.defaultaddress} ;
+};
+AddressItem = connect(mapStateToProps2)(AddressItem);
 
 
 export class Page extends React.Component {
@@ -106,15 +127,8 @@ export class Page extends React.Component {
     render() {
         let itemsco = [];
         this.props.addresslist.forEach((addressitem)=> {
-            let isdefaultaddress = false;
-            if(this.props.defaultaddress.hasOwnProperty('_id')){
-                if(addressitem._id === this.props.defaultaddress._id){
-                    isdefaultaddress = true;
-                }
-            }
             itemsco.push(<AddressItem key={addressitem._id} 
                                       dispatch={this.props.dispatch}
-                                      isdefaultaddress={isdefaultaddress}
                                       addressitem={addressitem}
                                       onClickEdit={this.onClickEdit}
                                       onClickDelete={this.onClickDelete}/>);
@@ -124,9 +138,9 @@ export class Page extends React.Component {
                 <NavBar lefttitle="返回" title="地址列表" onClickLeft={this.onClickReturn}/>
 
                 <div className="AddressListPage">
-                    <List selection>
+                    <div className="listcont">
                         {itemsco}
-                    </List>
+                    </div>
                     <Confirm
                         header={this.props.poptitle}
                         content={this.props.popmsg}

@@ -14,7 +14,9 @@ import Userinfo from './components/user-info.js';
 import ProfileDetail from './components/profiledetail.js';
 import { TransitionMotion, spring } from 'react-motion';
 
-
+//订单选择地址
+import Seladdress from './components/shopping/seladdress.js';
+//添加设备
 import Devicelist from './components/devicelist.js';
 //添加设备
 import NewDevice from './components/newdevice.js';
@@ -253,6 +255,7 @@ const CoApp = (props) => {
             <CustomRoute path="/test" component={Test} />
             <CustomRoute path="/share" component={Share} />
             <CustomRoute path="/userbind" component={Userbind} /> 
+            <CustomRoute path="/seladdress" component={Seladdress} /> 
             <CustomRoute component={App}/>
         </Switch>
     );

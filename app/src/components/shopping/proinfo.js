@@ -198,3 +198,7 @@ let mapStateToProps = ({shop,shopcart,app,order}) => {
 
 Page = connect(mapStateToProps)(Page);
 export default Page;
+
+
+
+

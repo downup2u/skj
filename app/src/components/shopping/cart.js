@@ -19,9 +19,11 @@ import {
     ui_cartooder_additem,
     ui_cartooder_updateitem,
     ui_cartooder_delitem,
-    ui_cart_selectallitems
+    ui_cart_selectallitems,
+    set_orderSurePage
 } from '../../actions';
 import _ from 'lodash';
+import { withRouter } from 'react-router-dom';
 
 export class Cartitem extends Component {
     render(){
@@ -84,35 +86,34 @@ export class Cartitem extends Component {
             return (
             <Swipeout autoClose={true}
                 right={[{
-                            text: '删除',
-                            style: { backgroundColor: 'red', color: 'white' },
-                            onPress:onClickDeleteItem
-                            },
-                        ]}
-                        >
-                            <div className="li" >
-                                <Checkbox 
-                                    onClick={onClickChecktedItem}
-                                    checked={isselected}
-                                    />
-                                <div className="l">
-                                    <img src={proinfo.picurl}/>
-                                    <div>
-                                        <span>{proinfo.name}</span>
-                                        <div className="price">
-                                            <span>{proinfo.pricenow}</span>
-                                            <div className="btnControl">
-                                                <div className="add" onClick={()=>{onChangeNumberPlus(1);}}>+</div>
-                                                <div className="num">
-                                                    <Input name="firstName" type="text" value={item.number} onChange={onChangeNumber}/>
-                                                </div>
-                                                <div className="del" onClick={()=>{onChangeNumberPlus(-1);}}>-</div>
-                                            </div>
-                                        </div>
+                    text: '删除',
+                    style: { backgroundColor: 'red', color: 'white' },
+                    onPress:onClickDeleteItem
+                }]}
+                >
+                <div className="li" >
+                    <Checkbox 
+                        onClick={onClickChecktedItem}
+                        checked={isselected}
+                        />
+                    <div className="l">
+                        <img src={proinfo.picurl}/>
+                        <div>
+                            <span>{proinfo.name}</span>
+                            <div className="price">
+                                <span>¥{proinfo.pricenow}</span>
+                                <div className="btnControl">
+                                    <div className="add" onClick={()=>{onChangeNumberPlus(1);}}>+</div>
+                                    <div className="num">
+                                        <Input name="firstName" type="text" value={item.number} onChange={onChangeNumber}/>
                                     </div>
+                                    <div className="del" onClick={()=>{onChangeNumberPlus(-1);}}>-</div>
                                 </div>
                             </div>
-                        </Swipeout>);
+                        </div>
+                    </div>
+                </div>
+            </Swipeout>);
         }
         return (<div>{item.product}产品不存在!</div>);
     }
@@ -126,33 +127,62 @@ Cartitem = connect(mapStateToPropsCartItem)(Cartitem);
 
 
 export class Pricetotal extends Component {
+
+    createOrder =()=>{
+        let toordercarts = this.props.toordercarts;
+        let totalprice = this.props.totalprice;
+        let prolist = this.props.toordercartsproducts;
+        let express = totalprice>this.props.expressfeeforfree?0:this.props.expressfee;
+        let orderprice = totalprice + express; 
+        let payload = {
+            orderAddressId:'',//地址id
+            orderProductsdetail:prolist,//产品列表
+            orderExpress:express,//运费
+            orderPrice:orderprice,//订单价格
+            orderProductPrice : totalprice, //产品总价格
+        }
+        this.props.dispatch(set_orderSurePage(payload));
+        this.props.history.push("/pay");
+    }
+
     render(){
         console.log('Pricetotal renderCaritem==>' + JSON.stringify(this.props));
-        const {totalprice,onClickPage,isselected,dispatch,items} = this.props;
+        const {totalprice,isselected,dispatch,items} = this.props;
         let onClickCheckSelall = ()=>{
             dispatch(ui_cart_selectallitems({isselectedall:!isselected,items}));
         }
 
         return (
-             <div className="left">
-                <Checkbox checked={isselected}
-                    onClick={onClickCheckSelall}
-                    label='全选'
-                />
-                <div className="price">
-                 合计: <span>¥{totalprice}</span>
-                 </div>
-                    <div className="btn" onClick={()=>{onClickPage('/pay')}}>
-                            <span>去结算</span>
+            <div>
+                <div className="left">
+                    <Checkbox checked={isselected}
+                        onClick={onClickCheckSelall}
+                        label='全选'
+                    />
+                    <div className="price">
+                        合计: <span>¥{totalprice}</span>
                     </div>
                 </div>
+                <div className="btn" onClick={()=>{this.createOrder()}}>
+                    <span>去结算</span>
+                </div>
+            </div>
         );
     }
 }
-let mapStateToPropsPricetotal = ({shop:{products},shopcart:{toordercarts},infinitepage:{items}}) => {
+
+let mapStateToPropsPricetotal = (
+        {
+            shop:{products},
+            shopcart:{toordercarts},
+            infinitepage:{items},
+            app:{expressfee,expressfeeforfree}
+        }
+    ) => {
         let totalprice = 0;
         let isselected = false;
         let itemsel = 0;
+        let toordercartsproducts = [];
         _.map(toordercarts,(item,key)=>{
             let number = parseInt(item.number);
             let price = parseInt(products[item.product].pricenow);
@@ -160,13 +190,19 @@ let mapStateToPropsPricetotal = ({shop:{products},shopcart:{toordercarts},infini
             priceitem = parseInt(priceitem.toFixed(2));
             totalprice += priceitem;
             itemsel++;
+            let product = {
+                productid: item.product,
+                number: item.number,
+                price: price,
+                productinfo: products[item.product]
+            }
+            toordercartsproducts.push(product);
         });
         isselected = itemsel === items.length;
-        return {totalprice,isselected,items}
+        return {totalprice,isselected,items,toordercarts,toordercartsproducts,expressfee,expressfeeforfree}
 }
 Pricetotal = connect(mapStateToPropsPricetotal)(Pricetotal);
-
-
+Pricetotal = withRouter(Pricetotal);
 
 export class Page extends Component {
     // shouldComponentUpdate(nextProps) {
@@ -175,12 +211,11 @@ export class Page extends Component {
 
     render() {
         let updateContent = (item)=> {
-                return  (
-                    <div key={item._id}>
-                        <Cartitem item={item} />
-                    </div>
-                );
-            
+            return  (
+                <div key={item._id}>
+                    <Cartitem item={item} />
+                </div>
+            );
         };
 
         let onClickReturn = ()=> {
@@ -191,36 +226,35 @@ export class Page extends Component {
             this.props.history.push(name);
         };
 
-
         return (
-                <div className="shoppingCartPage"
-                    style={{
-                        height:(window.innerHeight)+"px",
-                    }}
-                    >
-                    <div className="PageHead">
-                        <Icon name="angle left" onClick={()=>{onClickReturn()}} />
-                        <span className="title">购物车</span>
-                    </div>
-                    <div className="proinfo" style={{height:(window.innerHeight-98)+"px"}}>
-                        <InfinitePage
-                            pagenumber = {30}
-                            updateContent= {updateContent} 
-                            queryfun= {mycartgetall}
-                            listheight= {window.innerHeight-92}
-                            query = {{}}
-                            sort = {{created_at: -1}}
-                        />
-                    </div>
-                    <div className="footBtn">
-                        <Pricetotal onClickPage={onClickPage}/>
-                    </div>
+            <div className="shoppingCartPage"
+                style={{
+                    height:(window.innerHeight)+"px",
+                }}
+                >
+                <div className="PageHead">
+                    <Icon name="angle left" onClick={()=>{onClickReturn()}} />
+                    <span className="title">购物车</span>
                 </div>
-        
+                <div className="proinfo" style={{height:(window.innerHeight-98)+"px"}}>
+                    <InfinitePage
+                        pagenumber = {30}
+                        updateContent= {updateContent} 
+                        queryfun= {mycartgetall}
+                        listheight= {window.innerHeight-92}
+                        query = {{}}
+                        sort = {{created_at: -1}}
+                    />
+                </div>
+                <div className="footBtn">
+                    <Pricetotal onClickPage={onClickPage} />
+                </div>
+            </div>
         );
     }
 }
 
 Page = connect()(Page);
-
 export default Page;
+
+
