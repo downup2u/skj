@@ -34,6 +34,15 @@ export class Topic extends React.Component {
   }
 }
 
+let FeedReplyFormShow = ({iscommentshow})=>{
+           return(<div className="tb">
+                    {iscommentshow?<FeedReplyForm />:null}
+                </div>);
+}
+const mapStateToPropsFeedReplyFormShow = ({forum:{iscommentshow}}) => {
+    return {iscommentshow};
+}
+FeedReplyFormShow = connect(mapStateToPropsFeedReplyFormShow)(FeedReplyFormShow);
 
 export class Page extends React.Component {
 
@@ -48,7 +57,7 @@ export class Page extends React.Component {
         this.props.history.goBack();
     }
     render() {
-        const {useralerttopiclist,useralerttopics,users,topics,bigimglist,bigimgindex,bigimgshow,comments,iscommentshow} = this.props;
+        const {useralerttopiclist,useralerttopics,users,topics,comments} = this.props;
         let topicid = this.props.match.params.topicid;
         let ToptipCo = null;
         if(useralerttopiclist.length > 0){
@@ -82,16 +91,14 @@ export class Page extends React.Component {
                 <div className="tc">
                     {topicsco}
                 </div>
-                <div className="tb">
-                    {iscommentshow?<FeedReplyForm />:null}
-                </div>
-                <Bigimg imglist={bigimglist} showindex={bigimgindex} show={bigimgshow}/>
+                <FeedReplyFormShow />
+                <Bigimg />
             </div>);
   }
 }
 
-const mapStateToProps = ({forum:{comments,useralerttopiclist,useralerttopics,users,topics,bigimglist,bigimgindex,bigimgshow,iscommentshow}}) => {
-    return {useralerttopiclist,comments,useralerttopics,users,topics,bigimglist,bigimgindex,bigimgshow,iscommentshow};
+const mapStateToProps = ({forum:{comments,useralerttopiclist,useralerttopics,users,topics}}) => {
+    return {useralerttopiclist,comments,useralerttopics,users,topics};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;
