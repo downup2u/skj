@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {
     profit_set_profityanzhen,
     showpopmessage,
+    sendauth_request
 } from '../../actions';
 import {
     withdrawcashapplyauth
@@ -17,24 +18,10 @@ export class Page extends Component {
         this.props.history.goBack();
     }
 
-    // profitform:{
-    //         truename:'',//真实姓名
-    //         bankaccount:'',//银行账号
-    //         bankname:'',//银行名称
-    //         cashmoney: 0,//提现金额
-    //     },
-    //     //申请提现记录id
-    //     profitid : '',
-    //     //申请提现输入验证码
-    //     profityanzhen : ''
-
-
-  //   let payload = {
-  //   _id:'58edc22a77c9631304958fcf',
-  //   username:'15961125167',
-  //   authcode:'5513'
-  // };
-  
+    //重新获取验证码
+    getSendCode =()=>{
+        this.props.dispatch(sendauth_request({username: this.props.username}));
+    }
 
     submitProfitform =()=>{
         let form = this.props.profitform;
@@ -44,9 +31,6 @@ export class Page extends Component {
             authcode: this.props.profityanzhen
         };
         this.props.dispatch(withdrawcashapplyauth(payload)).then((result)=>{
-            //withdrawcashapplyauth result=>{"result":"OK","updateditem":{....}
-            //withdrawcashapplyauth result=>{"result":"Error",errmsg:'验证码不对'};
-            //console.log("withdrawcashapplyauth result=>" + JSON.stringify(result));
             if(result.result=="OK"){
                 this.props.dispatch((showpopmessage({
                     title: '申请成功',
@@ -54,7 +38,7 @@ export class Page extends Component {
                     type: 'success'
                 })));
                 setTimeout(()=>{
-                    this.props.history.replace("/myprofit");
+                    this.props.history.goBack();
                 },2000)
             }
             if(result.result=="Error"){
@@ -87,7 +71,7 @@ export class Page extends Component {
                     <div className="messageCodeInput">
                         <span className="txt">验证码</span>
                         <Input placeholder='请输入验证码' onChange={(e)=>{this.setYanzhen(e)}} />
-                        <span className="getcode">获取验证码</span>
+                        <span className="getcode" onClick={()=>{this.getSendCode()}}>获取验证码</span>
                     </div>
 
                 </div>

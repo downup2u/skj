@@ -4,7 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 import NavBar from '../nav.js';
 import { connect } from 'react-redux';
-import { Input, Button, Menu, Radio, Label, Icon } from 'semantic-ui-react';
+import { Input, Button, Menu, Checkbox, Label, Icon } from 'semantic-ui-react';
 import '../../../public/css/shoppingcart.css';
 import { mycartgetall } from '../../actions/sagacallback.js';
 import InfinitePage from '../controls/infinitecontrol';
@@ -77,19 +77,21 @@ let Caritem =(props)=>{
             props.dispatch(ui_cartooder_additem(item));
          }
      }
-     let proinfo = props.products[item.product];
-     return (<Swipeout autoClose={true}
-                        right={[{
-                            text: '删除',
-                            style: { backgroundColor: 'red', color: 'white' },
-                            onPress:onClickDeleteItem
-                            },
-                        ]}
-                        onOpen={() => console.log('open')}
-                        onClose={() => console.log('close')}
+    let proinfo = props.products[item.product];
+    return (
+        <Swipeout autoClose={true}
+              right={[{
+                        text: '删除',
+                        style: { backgroundColor: 'red', color: 'white' },
+                        onPress:onClickDeleteItem
+                        },
+                    ]}
                     >
                         <div className="li" >
-                            <Radio checked={props.isselected} onClick={onClickChecktedItem}/>
+                            <Checkbox 
+                                onClick={onClickChecktedItem}
+                                checked={props.isselected}
+                                />
                             <div className="l">
                                 <img src={proinfo.picurl}/>
                                 <div>
@@ -148,7 +150,7 @@ let Page = (props) => {
                     <Icon name="angle left" onClick={()=>{onClickReturn()}} />
                     <span className="title">购物车</span>
                 </div>
-                <div className="proinfo" style={{height:(window.innerHeight-92)+"px"}}>
+                <div className="proinfo" style={{height:(window.innerHeight-98)+"px"}}>
                     <InfinitePage
                         pagenumber = {30}
                         updateContent= {updateContent.bind(this)} 
@@ -160,7 +162,10 @@ let Page = (props) => {
                 </div>
                 <div className="footBtn">
                     <div className="left">
-                        <Radio label='全选'/>
+                        <Checkbox 
+                            checked={props.isselected}
+                            label='全选'
+                            />
                         <div className="price">
                             合计: <span>¥{totalprice}</span>
                         </div>

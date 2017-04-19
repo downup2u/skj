@@ -113,7 +113,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: 44px;
+    height: 50px;
     flex-shrink: 0;
 }
 
@@ -126,9 +126,13 @@
 .shoppingCartPage .footBtn .left label {
     margin-right: 10px;
 }
-
+.shoppingCartPage .footBtn .left .price{
+    display: flex;
+    align-items: center;
+}
 .shoppingCartPage .footBtn .left .price > span {
     color: #F00;
+    font-size: 16px;
 }
 
 .shoppingCartPage .footBtn .btn {
@@ -137,14 +141,12 @@
     color: #FFF;
     align-self: stretch;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 30px;
 }
-
 .shoppingCartPage .proinfo .li div .btnControl {
     display: flex;
     flex-direction: row;
 }
-
 .shoppingCartPage .proinfo .btnControl > div {
     border: 1px solid #EEE;
     width: 30px;
@@ -155,18 +157,15 @@
     font-size: 16px;
     line-height: 30px;
 }
-
 .shoppingCartPage .proinfo .btnControl > div.num {
     border: none;
 }
-
 .shoppingCartPage .proinfo .btnControl > div.num .ui.input {
     width: 30px;
     height: 30px;
     overflow: hidden;
     text-align: center;
 }
-
 .shoppingCartPage .proinfo .btnControl > div.num .ui.input input {
     border-radius: 0;
     line-height: 30px;
@@ -175,4 +174,29 @@
     width: 30px;
     font-size: 14px;
 
+}
+.shoppingCartPage .ui.checkbox{
+    min-width: 24px;
+    height: 24px;
+    line-height: 24px;
+}
+.shoppingCartPage .ui.checkbox .box:before,
+.shoppingCartPage .ui.checkbox label:before{
+    border-radius: 50px;
+    width: 24px;
+    height: 24px;
+}
+.shoppingCartPage .ui.checkbox .box:after,
+.shoppingCartPage .ui.checkbox label:after{
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    background: #5596d6;
+    border-radius: 40px;
+    color: #FFF;
+    font-weight: 100;
+}
+.shoppingCartPage .ui.checkbox input:checked~.box:after,
+.shoppingCartPage .ui.checkbox input:checked~label:after{
+    color: #FFF;
 }

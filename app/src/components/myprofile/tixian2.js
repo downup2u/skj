@@ -42,7 +42,7 @@ export class Page extends Component {
                 this.props.dispatch(profit_set_profitid(result.newitem._id));
 
                 setTimeout(()=>{
-                    this.props.history.push("/tixian3");
+                    this.props.history.replace("/tixian3");
                 },2000)
             });
         }

@@ -33,7 +33,7 @@ export class Page extends Component {
                 type: 'error'
             })))
         }else{
-            this.props.history.push(name);
+            this.props.history.replace(name);
         }
     };
 
