@@ -134,6 +134,7 @@
     align-items: center;
     height: 44px;
     padding: 0 0 0 15px;
+    border-top: 1px solid #EEE;
 }
 .PayPage .subBtn .ui.button{
     background: none;

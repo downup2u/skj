@@ -145,14 +145,22 @@ Cartitem = connect(mapStateToPropsCartItem)(Cartitem);
 export class Pricetotal extends Component {
 
     createOrder =()=>{
-        let toordercarts = this.props.toordercarts;
-        let totalprice = this.props.totalprice;
+        const {
+            totalprice,
+            isselected,
+            dispatch,
+            items,
+            expressfee,
+            expressfeeforfree,
+            defaultaddress,
+            history
+        } = this.props;
         let prolist = this.props.toordercartsproducts;
-        let express = totalprice>this.props.expressfeeforfree?0:this.props.expressfee;
+        let express = totalprice>expressfeeforfree?0:expressfee;
         let orderprice = totalprice + express; 
         let orderAddressInfo = {};
-        if(this.props.defaultaddress.hasOwnProperty("_id")){
-            orderAddressInfo = this.props.defaultaddress;
+        if(defaultaddress.hasOwnProperty("_id")){
+            orderAddressInfo = defaultaddress;
         }
         let payload = {
             orderAddressId:'',//地址id
@@ -162,20 +170,19 @@ export class Pricetotal extends Component {
             orderProductPrice : totalprice, //产品总价格
             orderAddressInfo : orderAddressInfo
         }
-        this.props.dispatch(set_orderSurePage(payload));
         if(prolist.length>0){
-            this.props.history.push("/pay");
+            dispatch(set_orderSurePage(payload));
+            history.push("/pay");
         }else{
-            this.props.dispatch((showpopmessage({
-                title: '订单提交失败',
-                msg: '请选择商品',
-                type: 'error'
-            })))
+            // dispatch((showpopmessage({
+            //     title: '订单提交失败',
+            //     msg: '请选择商品',
+            //     type: 'error'
+            // })))
         }
     }
 
     render(){
-        console.log('Pricetotal renderCaritem==>' + JSON.stringify(this.props));
         const {totalprice,isselected,dispatch,items} = this.props;
         let onClickCheckSelall = ()=>{
             dispatch(ui_cart_selectallitems({isselectedall:!isselected,items}));
