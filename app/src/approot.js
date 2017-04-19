@@ -255,7 +255,7 @@ const CoApp = (props) => {
             <CustomRoute path="/test" component={Test} />
             <CustomRoute path="/share" component={Share} />
             <CustomRoute path="/userbind" component={Userbind} /> 
-            <CustomRoute path="/seladdress" component={Seladdress} /> 
+            <CustomRoute path="/seladdress" component={requireAuthentication(Seladdress)} /> 
             <CustomRoute component={App}/>
         </Switch>
     );

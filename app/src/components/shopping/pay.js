@@ -11,7 +11,9 @@ import {
     myorderaddone,
 } from '../../actions/sagacallback.js';
 import {
-    myorderlist_addreducers
+    myorderlist_addreducers,
+    set_orderSurePage,
+    getaddresslist_request
 } from '../../actions';
 
 export class Page extends Component {
@@ -22,12 +24,7 @@ export class Page extends Component {
     onClickPage = (name)=> {
         this.props.history.push(name);
     };
-
-    // orderAddressId : '',//地址id
-    // orderProductsdetail:[],//产品列表
-    // orderExpress:"",//运费
-    // orderPrice:"",//订单价格
-
+    
     //提交订单,生成一条新的订单
     createNewOrder = ()=>{
         let productsdetail = this.props.orderProductsdetail;
@@ -37,14 +34,13 @@ export class Page extends Component {
             realprice: this.props.orderPrice,//实付价
             orderprice: this.props.orderPrice,//订单价=应付价
             orderstatus: '未支付',
-            provincename: '江苏省',
-            cityname: '常州市',
-            distinctname: '武进区',
-            address: '天润大厦',
+            provincename: this.props.orderAddressInfo.seladdr.selprovice.value,
+            cityname: this.props.orderAddressInfo.seladdr.selcity.value,
+            distinctname: this.props.orderAddressInfo.seladdr.seldistict.value,
+            address: this.props.orderAddressInfo.addressname,
             couponprice: 0,//抵扣价
-            orderexpress: this.props.orderExpress,//运费
+            expressprice: this.props.orderExpress,//运费
             productprice: this.props.orderProductPrice,//产品总价
-            
         };
         this.props.dispatch(myorderaddone(payload)).then((result)=>{
             let payload = {};
@@ -55,6 +51,7 @@ export class Page extends Component {
     };
 
     render() {
+        const {products, orderPrice, orderProductsdetail, orderExpress, orderAddressInfo, defaultaddress} = this.props;
         return (
             <div className="PayPage"
                 style={{
@@ -66,21 +63,32 @@ export class Page extends Component {
                     <span className="title">提交订单</span>
                 </div>
                 <div className="PayPageBody">
-                <div className="orderaddress" onClick={()=>{this.onClickPage('/addresslist')}}>
+                <div className="orderaddress" onClick={()=>{this.onClickPage('/seladdress')}}>
                     <img src="img/shopping/mark.png" />
                     <div className="addressinfo">
-                        <div className="userinfo">
-                            <span>收货人:小胖</span>
-                            <span>18088888888</span>
-                        </div>
-                        <div>
-                            收货地址: 江苏省 南京市 建邺区 沙洲街道9号
-                        </div>
+                        {orderAddressInfo.hasOwnProperty("_id")?(
+                            <div>
+                                <div className="userinfo">
+                                    <span>收货人:{orderAddressInfo.truename}</span>
+                                    <span>{orderAddressInfo.phonenumber}</span>
+                                </div>
+                                <div>
+                                    收货地址:
+                                    {orderAddressInfo.seladdr.selprovice.value}
+                                    {orderAddressInfo.seladdr.selcity.value}
+                                    {orderAddressInfo.seladdr.seldistict.value}
+                                    {orderAddressInfo.addressname}
+                                </div>
+                            </div>
+                        ):(
+                            <div className="goToseladdress">请选择收获地址</div>
+                        )}
+                        
                     </div>
                 </div>
                 <div className="proinfo">
-                    {_.map(this.props.orderProductsdetail, (prodetail,index)=>{
-                        let proinfo = this.props.products[prodetail.productid];
+                    {_.map(orderProductsdetail, (prodetail,index)=>{
+                        let proinfo = products[prodetail.productid];
                         return (
                             <div className="li" key={index}>
                                 <img src={proinfo.picurl} />
@@ -118,12 +126,15 @@ export class Page extends Component {
     }
 }
 
-let mapStateToProps = ({shop, order}) => {
+let mapStateToProps = ({shop, order, userlogin, address}) => {
     let products = shop.products;
     let orderPrice = order.orderPrice;
     let orderProductsdetail = order.orderProductsdetail;
     let orderExpress = order.orderExpress;
-    return {products, orderPrice, orderProductsdetail, orderExpress};
+    let defaultaddress = userlogin.defaultaddress;
+    //获取当前订单地址
+    let orderAddressInfo = order.orderAddressInfo;
+    return {products, orderPrice, orderProductsdetail, orderExpress, orderAddressInfo, defaultaddress};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

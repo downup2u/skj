@@ -43,6 +43,7 @@ const initial = {
         orderExpress:"",//运费
         orderPrice:"",//订单价格
         orderProductPrice: 0,//产品总价格
+        orderAddressInfo : {},
 
         //我的订单列表
         myOrderList : {},//我的临时订单列表,不是我的所有订单

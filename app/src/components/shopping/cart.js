@@ -20,12 +20,28 @@ import {
     ui_cartooder_updateitem,
     ui_cartooder_delitem,
     ui_cart_selectallitems,
-    set_orderSurePage
+    set_orderSurePage,
+    getaddresslist_request,
+    showpopmessage
 } from '../../actions';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 
 export class Cartitem extends Component {
+
+
+    //获取我的地址列表
+    componentWillMount() {
+        let payload = {
+            query: {},
+            options: {
+                page: 1,
+                limit: 1000,
+            }
+        };
+        this.props.dispatch(getaddresslist_request(payload));
+    }
+
     render(){
         console.log('Cartitem renderCaritem==>' + JSON.stringify(this.props));
         let {item,products,isselected,dispatch} = this.props;
@@ -134,15 +150,28 @@ export class Pricetotal extends Component {
         let prolist = this.props.toordercartsproducts;
         let express = totalprice>this.props.expressfeeforfree?0:this.props.expressfee;
         let orderprice = totalprice + express; 
+        let orderAddressInfo = {};
+        if(this.props.defaultaddress.hasOwnProperty("_id")){
+            orderAddressInfo = this.props.defaultaddress;
+        }
         let payload = {
             orderAddressId:'',//地址id
             orderProductsdetail:prolist,//产品列表
             orderExpress:express,//运费
             orderPrice:orderprice,//订单价格
             orderProductPrice : totalprice, //产品总价格
+            orderAddressInfo : orderAddressInfo
         }
         this.props.dispatch(set_orderSurePage(payload));
-        this.props.history.push("/pay");
+        if(prolist.length>0){
+            this.props.history.push("/pay");
+        }else{
+            this.props.dispatch((showpopmessage({
+                title: '订单提交失败',
+                msg: '请选择商品',
+                type: 'error'
+            })))
+        }
     }
 
     render(){
@@ -176,7 +205,9 @@ let mapStateToPropsPricetotal = (
             shop:{products},
             shopcart:{toordercarts},
             infinitepage:{items},
-            app:{expressfee,expressfeeforfree}
+            app:{expressfee,expressfeeforfree},
+            address:{addresslist},
+            userlogin:{defaultaddress}
         }
     ) => {
         let totalprice = 0;
@@ -199,7 +230,7 @@ let mapStateToPropsPricetotal = (
             toordercartsproducts.push(product);
         });
         isselected = itemsel === items.length;
-        return {totalprice,isselected,items,toordercarts,toordercartsproducts,expressfee,expressfeeforfree}
+        return {totalprice,isselected,items,toordercarts,toordercartsproducts,expressfee,expressfeeforfree,defaultaddress}
 }
 Pricetotal = connect(mapStateToPropsPricetotal)(Pricetotal);
 Pricetotal = withRouter(Pricetotal);

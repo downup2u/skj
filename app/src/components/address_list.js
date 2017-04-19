@@ -30,9 +30,9 @@ const AddressItem = (props)=> {
             console.log("设置默认地址失败:" + JSON.stringify(error));
         });
     }
-    console.log(addressitem._id);
-    console.log(defaultaddress._id);
-    console.log(defaultaddress.hasOwnProperty('_id')&&(addressitem._id===defaultaddress._id))
+    // console.log(addressitem._id);
+    // console.log(defaultaddress._id);
+    // console.log(defaultaddress.hasOwnProperty('_id')&&(addressitem._id===defaultaddress._id))
     let isdefaultaddress = defaultaddress.hasOwnProperty('_id')&&(addressitem._id===defaultaddress._id);
     return (
         <div className="addressItem" key={addressitem._id}>
@@ -157,8 +157,7 @@ export class Page extends React.Component {
 
     }
 
-}
-;
+};
 //
 const mapStateToProps = ({address,userlogin}) => {
     return {...address,defaultaddress:userlogin.defaultaddress};
