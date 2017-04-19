@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shopping.css';
+import {withRouter} from 'react-router-dom';
 import {
     search_shoptxt,
     mycartaddone_request,
@@ -164,5 +165,6 @@ let mapStateToProps = ({shop,app}) => {
 }
 
 Page = connect(mapStateToProps)(Page);
+Page = withRouter(Page);
 export default Page;
 

@@ -50,9 +50,9 @@ let Page = ({imglist, showindex, show, dispatch})=>{
         </div>
     )
 };
-
-const mapStateToProps =  ({userlogin,forum}) =>{
-  return {...userlogin,...forum};
+//imglist, showindex, show,
+const mapStateToProps =  ({app:{bigimglist:imglist,bigimgshow:show,bigimgindex:showindex}}) =>{
+  return {imglist, showindex, show};
 };
 Page = connect(mapStateToProps)(Page);
 export default Page;

@@ -45,9 +45,9 @@ export class Page extends React.Component {
 };
 
 
-const mapStateToProps = ({forum:{useralerttopic}}) => {
-    return {useralerttopic};
-}
-Page = connect(mapStateToProps)(Page);
+// const mapStateToProps = ({forum:{useralerttopic}}) => {
+//     return {useralerttopic};
+// }
+Page = connect()(Page);
 Page = withRouter(Page);
 export default Page;

@@ -80,6 +80,19 @@ const mapStateToPropsToptip = ({forum:{useralerttopiclist,users,useralerttopics}
 ToptipCo = connect(mapStateToPropsToptip)(ToptipCo);
 
 
+let FeedReplyFormShow = ({iscommentshow})=>{
+        let stopDefault = (e)=> {
+            e.stopPropagation();
+        };
+           return(<div onClick={stopDefault}>
+                    {iscommentshow?<FeedReplyForm />:null}
+                </div>);
+}
+const mapStateToPropsFeedReplyFormShow = ({forum:{iscommentshow}}) => {
+    return {iscommentshow};
+}
+FeedReplyFormShow = connect(mapStateToPropsFeedReplyFormShow)(FeedReplyFormShow);
+
 
 export class Page extends React.Component {
 
@@ -94,9 +107,7 @@ export class Page extends React.Component {
     onClickTopic = (topicid)=> {//点击空白处，隐藏?如何判断点击空白
         this.props.history.push(`/communityinfo/${topicid}`);
     };
-    stopDefault = (e)=> {
-        e.stopPropagation
-    };
+
 
     //新建帖子
     addNewCommunity = (topicid)=> {
@@ -118,8 +129,8 @@ export class Page extends React.Component {
     }
 
     render() {
-
-        const {communityListHeight,iscommentshow,bigimglist,bigimgshow,bigimgindex} = this.props;
+        console.log('export class Page extends React.Component render()??????????' + JSON.stringify(this.props));
+        const {communityListHeight} = this.props;
 
         return (
             <div className="feedPage">
@@ -169,18 +180,16 @@ export class Page extends React.Component {
                         query = {{}}
                     />
                 </div>
-                <div onClick={this.stopDefault}>
-                    {iscommentshow ? <FeedReplyForm /> : null}
-                </div>
-                <Bigimg imglist={bigimglist} showindex={bigimgindex} show={bigimgshow} />
+                <FeedReplyFormShow />
+                <Bigimg />
             </div>);
     }
 }
 
-const mapStateToProps = ({forum:{useralerttopiclist,iscommentshow,bigimglist,bigimgshow,bigimgindex}}) => {
+const mapStateToProps = ({forum:{useralerttopiclist}}) => {
     let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-140:window.innerHeight-98;
     //所有使用到的属性列表：bigimgindex/iscommentshow/communityListHeight/useralerttopiclist
-    return {communityListHeight,iscommentshow,bigimglist,bigimgshow,bigimgindex};
+    return {communityListHeight};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

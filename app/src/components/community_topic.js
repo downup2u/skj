@@ -15,8 +15,12 @@ import '../../public/css/feed.css';
 import moment from 'moment';
 import _ from 'lodash';
 
-let ForumTopic = ({loginsuccess,history,topic,users,dispatch}) => {
-  let islovedbyme = false;//判断loave数组是否有自己
+let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
+  let islovedbyme = false;//判断love数组是否有自己
+  if(topic.loves.indexOf(userid) !== -1){
+    islovedbyme = true;
+  }
+
   let showtopictocomment = (e)=>{
     if(loginsuccess){
       dispatch(uicommentshow({
@@ -31,6 +35,7 @@ let ForumTopic = ({loginsuccess,history,topic,users,dispatch}) => {
     }
   }
   let clicklove =()=>{
+      console.log('clicklove:${islovedbyme}');
     if(loginsuccess){
       let payload = {
         topicid:topic._id,
@@ -100,8 +105,8 @@ let ForumTopic = ({loginsuccess,history,topic,users,dispatch}) => {
 }
 
 //loginsuccess,history,topic,users,dispatch
-const mapStateToProps =  ({userlogin:{loginsuccess},forum:{users}}) =>{
-  return {loginsuccess,users};
+const mapStateToProps =  ({userlogin:{loginsuccess,userid},forum:{users}}) =>{
+  return {loginsuccess,userid,users};
 };
 
 ForumTopic = connect(mapStateToProps)(ForumTopic);

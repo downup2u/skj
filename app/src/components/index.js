@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {clickTab} from '../actions/index.js';
 import Page0 from './home.js';
 import Page1 from './community.js';
-//import Page2 from './test';
 import Page2 from './shopping/index.js';
 import Page3 from './myprofile.js';
 import HomeBottom from './homebottom.js';
@@ -22,10 +21,10 @@ export class Page extends React.Component {
 
     render() {
         let pagesz = [];
-        pagesz.push(<Page0 key="page0" {...this.props} />);
-        pagesz.push(<Page1 key="page1"  {...this.props} />);
-        pagesz.push(<Page2 key="page2"  {...this.props} />);
-        pagesz.push(<Page3 key="page3"  {...this.props} />);
+        pagesz.push(<Page0 key="page0" />);
+        pagesz.push(<Page1 key="page1" />);
+        pagesz.push(<Page2 key="page2" />);
+        pagesz.push(<Page3 key="page3" />);
         let btnsz = [
             {
                 title: '首页',
@@ -48,9 +47,10 @@ export class Page extends React.Component {
                 imghov: 'img/bottom7.png',
             },
         ];
+        const {curtabindex} = this.props;
         let btncosz = [];
         btnsz.forEach((obj,index)=> {
-            if (index === this.props.curtabindex) {
+            if (index === curtabindex) {
                 btncosz.push(<Button key={'btn'+index} onClick={this.onClickTab.bind(this,index)} className="action">
                     <img src={btnsz[index].imghov}/>
                     <span>{btnsz[index].title}</span>
@@ -66,7 +66,7 @@ export class Page extends React.Component {
         return (
             <div style={{height:window.innerHeight+"px"}}>
                 <div className="pageStyle">
-                    {pagesz[this.props.curtabindex]}
+                    {pagesz[curtabindex]}
                 </div>
                 <HomeBottom />
             </div>
@@ -74,9 +74,8 @@ export class Page extends React.Component {
     }
 }
 
-const mapStateToProps = ({app}) => {
-    return app;
+const mapStateToProps = ({app:{curtabindex}}) => {
+    return {curtabindex};
 };
-
 Page = connect(mapStateToProps)(Page);
 export default Page;

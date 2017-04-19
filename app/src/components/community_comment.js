@@ -13,8 +13,12 @@ import moment from 'moment';
 import _ from 'lodash';
 import {withRouter} from 'react-router-dom';
 
-let ForumComment = ({loginsuccess,history,topicid,comment,subcomment,users,dispatch,showchild}) => {
-    let islovedbyme = false;//判断loave数组是否有自己
+let ForumComment = ({loginsuccess,userid,history,topicid,comment,subcomment,users,dispatch,showchild}) => {
+    let islovedbyme = false;//判断love数组是否有自己
+    //判断userid是否在comment中loves
+    if(comment.loves.indexOf(userid) !== -1){
+        islovedbyme = true;
+    }
     let showcommenttocomment = (e)=> {
         if (loginsuccess) {
             dispatch(uicommentshow({
@@ -28,6 +32,7 @@ let ForumComment = ({loginsuccess,history,topicid,comment,subcomment,users,dispa
         }
     };
     let clicklove = ()=> {
+        console.log('clicklove:${islovedbyme}');
         if (loginsuccess) {
             let payload = {
                 topicid:topicid,
@@ -100,9 +105,9 @@ let ForumComment = ({loginsuccess,history,topicid,comment,subcomment,users,dispa
 };
 
 //topicid/comment/showchild
-const mapStateToProps = ({userlogin:{loginsuccess},forum:{subcomment,users}}) => {
+const mapStateToProps = ({userlogin:{loginsuccess,userid},forum:{subcomment,users}}) => {
     //loginsuccess,history,topicid,comment,subcomment,users,dispatch,showchild
-    return {loginsuccess,subcomment,users};
+    return {loginsuccess,userid,subcomment,users};
 };
 
 ForumComment = connect(mapStateToProps)(ForumComment);
