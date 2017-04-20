@@ -8,7 +8,9 @@ import {
     myorderaddone_result,
     myorderupdateone_result,
     myorderdelone_result,
-    myordergetall_result
+    myordergetall_result,
+    serverpush_orderinfo,
+    updata_orderinfo
 } from '../actions';
 import {normalizr_orderslist} from './normalizr';
 
@@ -28,6 +30,18 @@ const initial = {
 };
 
 const orders = createReducer({
+    [updata_orderinfo]:(state, orderinfo)=>{
+        let neworder = {};
+        neworder[orderinfo._id] = orderinfo;
+        orders = {...state.orders, ...neworder}
+        return  {...state, orders};
+    },
+    [serverpush_orderinfo]:(state, orderinfo)=>{
+        let neworder = {};
+        neworder[orderinfo._id] = orderinfo;
+        orders = {...state.orders, ...neworder}
+        return  {...state, orders};
+    },
     [ui_setorderinited]:(state, inited) => {
         return  {...state,inited};
     },

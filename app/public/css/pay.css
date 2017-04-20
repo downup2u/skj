@@ -88,6 +88,7 @@
 }
 .PayPage .list{
     border-top: 1px solid #EEE;
+    background: #FFF;
 }
 .PayPage .list .li{
     background: #FFF;
@@ -96,6 +97,12 @@
     border-bottom: 1px solid #EEE;
     padding: 2px 15px;
     line-height: 40px;
+}
+
+.PayPage .list .li.selcoupon{
+    background: url(/img/myprofile/15.png) no-repeat right center;
+    background-size: 40px 40px;
+    padding-right: 40px;
 }
 .PayPage .list .li span{
     font-size: 16px;

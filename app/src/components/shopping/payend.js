@@ -11,40 +11,13 @@ import {
     myordergetall
 } from '../../actions/sagacallback.js';
 import {
-    payway_set
+    payway_set,
+    updata_orderinfo
 } from '../../actions';
 
 import {onclickpay} from '../../env/pay';
 
 export class Page extends Component {
-
-    //获取订单详情
-    // __v:0
-    // payway:"alipay"
-    // realprice:1498
-    // orderprice:1498
-    // orderstatus:"未支付"
-    // provincename:"江苏省"
-    // cityname:"常州市"
-    // distinctname:"武进区"
-    // address:"天润大厦"
-    // couponprice:0
-    // orderexpress:0
-    // productprice:1498
-    // creator:"58e455e7f6de2471258b292d"
-    // created_at:"2017-04-14T12:47:35.589Z"
-    // _id:"58f0c4e7e1e039036e4193e2"
-    //productsdetail []
-            // {
-            //     productid:"58f075a5c2065a04efdb828b"
-            //     number:1
-            //     price:1498
-            //     _id:"58f0c56ae1e039036e4193e5"
-            //     productidinfo:{}
-
-            // }
-    // isdeleted:false
-    // paystatus:"未支付"
 
     onClickReturn = ()=> {
         this.props.history.goBack();
@@ -55,17 +28,23 @@ export class Page extends Component {
     };
 
     onClickPay =()=> {
-        onclickpay(this.props,(result)=>{
+        let orderinfo = this.props.orderinfo;
+        let dispatch = this.props.dispatch;
+        let payway = this.props.payway;
+        onclickpay({orderinfo,payway,dispatch},(result)=>{
             console.log(`获得数据：${result}`);
         });
     }
     //设置支付方式
-    setpayway =(payway)=>{
-        this.props.dispatch(payway_set(payway));
+    setpayway =(paytype)=>{
+        let orderinfo = this.props.orderinfo;
+        orderinfo.payway = paytype;
+        this.props.dispatch(updata_orderinfo(orderinfo));
     }
 
     render() {
-        const {orderinfo} = this.props;
+        const {orderinfo, orderAddressInfo, balance, point, pointmoney} = this.props;
+        console.log("orderinfo:::"+JSON.stringify(orderinfo));
         return (
             <div className="PayPage"
                 style={{
@@ -77,18 +56,29 @@ export class Page extends Component {
                     <span className="title">支付订单</span>
                 </div>
                 <div className="PayPageBody">
-                    <div className="orderaddress">
-                        <img src="img/shopping/mark.png" />
-                        <div className="addressinfo">
-                            <div className="userinfo">
-                                <span>收货人:小胖</span>
-                                <span>18088888888</span>
-                            </div>
+                    <div className="orderaddress" onClick={()=>{this.onClickPage('/seladdress')}}>
+                    <img src="img/shopping/mark.png" />
+                    <div className="addressinfo">
+                        {orderAddressInfo.hasOwnProperty("_id")?(
                             <div>
-                                收货地址: 江苏省 南京市 建邺区 沙洲街道9号
+                                <div className="userinfo">
+                                    <span>收货人:{orderAddressInfo.truename}</span>
+                                    <span>{orderAddressInfo.phonenumber}</span>
+                                </div>
+                                <div>
+                                    收货地址:
+                                    {orderAddressInfo.seladdr.selprovice.value}
+                                    {orderAddressInfo.seladdr.selcity.value}
+                                    {orderAddressInfo.seladdr.seldistict.value}
+                                    {orderAddressInfo.addressname}
+                                </div>
                             </div>
-                        </div>
+                        ):(
+                            <div className="goToseladdress">请选择收获地址</div>
+                        )}
+                        
                     </div>
+                </div>
                     <div className="proinfo">
                         {_.map(orderinfo.productsdetail,(proinfo,index)=>{
                             return (
@@ -112,10 +102,14 @@ export class Page extends Component {
                             <span>¥{orderinfo.orderexpress}</span>
                         </div>
                         <div className="li">
-                            <span>使用积分</span>
-                            <span>- ¥20.00</span>
+                            <span>余额支付</span>
+                            <span>- ¥{balance}</span>
                         </div>
                         <div className="li">
+                            <span>使用积分</span>
+                            <span>- ¥{pointmoney}</span>
+                        </div>
+                        <div className="li selcoupon">
                             <span>使用优惠券</span>
                             <span>- ¥4.00</span>
                         </div>
@@ -131,7 +125,7 @@ export class Page extends Component {
                             <Checkbox 
                                 name="paycheck" 
                                 onClick={()=>{this.setpayway("weixin")}} 
-                                checked={this.props.payway=="weixin"}
+                                checked={orderinfo.payway=="weixin"}
                                 />
                         </div>
                         <div className="li">
@@ -143,7 +137,7 @@ export class Page extends Component {
                             <Checkbox 
                                 name="paycheck" 
                                 onClick={()=>{this.setpayway("alipay")}} 
-                                checked={this.props.payway=="alipay"}
+                                checked={orderinfo.payway=="alipay"}
                                 />
                         </div>
                     </div>
@@ -164,9 +158,14 @@ export class Page extends Component {
     }
 }
 
-let mapStateToProps = ({shop,app,order},props) => {
-    let orderinfo = order.myOrderList[props.match.params.id];
-    return {...shop, ...app, ...order, orderinfo};
+let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point}},props) => {
+    let orderinfo = shoporder.orders[props.match.params.id];
+    //获取当前订单地址
+    let orderAddressInfo = order.orderAddressInfo;
+    //积分抵扣金额
+    let pointvsmoney = app.pointvsmoney;
+    let pointmoney = point * pointvsmoney * .01;
+    return { orderinfo, orderAddressInfo, balance, point, pointmoney};
 }
 
 Page = connect(mapStateToProps)(Page);
