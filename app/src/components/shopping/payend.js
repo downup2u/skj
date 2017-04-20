@@ -165,7 +165,7 @@ let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point}},prop
     //积分抵扣金额
     let pointvsmoney = app.pointvsmoney;
     let pointmoney = point * pointvsmoney * .01;
-    return { orderinfo, orderAddressInfo, balance, point, pointmoney};
+    return { orderinfo:{...orderinfo}, orderAddressInfo, balance, point, pointmoney};
 }
 
 Page = connect(mapStateToProps)(Page);

@@ -31,16 +31,14 @@ const initial = {
 
 const orders = createReducer({
     [updata_orderinfo]:(state, orderinfo)=>{
-        let neworder = {};
-        neworder[orderinfo._id] = orderinfo;
-        orders = {...state.orders, ...neworder}
-        return  {...state, orders};
+        let orders = state.orders;
+        orders[orderinfo._id] = orderinfo;
+        return  {...state, orders:{...orders}};
     },
     [serverpush_orderinfo]:(state, orderinfo)=>{
-        let neworder = {};
-        neworder[orderinfo._id] = orderinfo;
-        orders = {...state.orders, ...neworder}
-        return  {...state, orders};
+        let orders = state.orders;
+        orders[orderinfo._id] = orderinfo;
+        return  {...state, orders:{...orders}};
     },
     [ui_setorderinited]:(state, inited) => {
         return  {...state,inited};
