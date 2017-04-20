@@ -33,7 +33,7 @@ const orders = createReducer({
     [updata_orderinfo]:(state, orderinfo)=>{
         let neworder = {};
         neworder[orderinfo._id] = orderinfo;
-        orders = {...state.orders, ...neworder}
+        let orders = {...state.orders, ...neworder}
         return  {...state, orders};
     },
     [serverpush_orderinfo]:(state, orderinfo)=>{

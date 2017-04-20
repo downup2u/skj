@@ -21,6 +21,7 @@ export class Page extends Component {
     onClickReturn = ()=> {
         this.props.history.goBack();
     };
+    
     onClickPage = (name)=> {
         this.props.history.push(name);
     };

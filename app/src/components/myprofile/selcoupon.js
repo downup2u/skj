@@ -68,6 +68,7 @@ export class Page extends Component {
                         query = {{usestatus : this.props.ulcoupontype}}
                     />
                 </div>
+                <div className="selcouponBtn">不使用优惠券</div>
             </div>
         )
     }

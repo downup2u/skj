@@ -34,13 +34,13 @@ export class Page extends Component {
         onclickpay({orderinfo,payway,dispatch},(result)=>{
             console.log(`获得数据：${result}`);
         });
-    }
+    };
     //设置支付方式
     setpayway =(paytype)=>{
         let orderinfo = this.props.orderinfo;
         orderinfo.payway = paytype;
         this.props.dispatch(updata_orderinfo(orderinfo));
-    }
+    };
 
     render() {
         const {orderinfo, orderAddressInfo, balance, point, pointmoney} = this.props;
@@ -109,7 +109,7 @@ export class Page extends Component {
                             <span>使用积分</span>
                             <span>- ¥{pointmoney}</span>
                         </div>
-                        <div className="li selcoupon">
+                        <div className="li selcoupon" onClick={()=>{this.onClickPage()}}>
                             <span>使用优惠券</span>
                             <span>- ¥4.00</span>
                         </div>

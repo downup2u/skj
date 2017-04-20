@@ -14,6 +14,8 @@ import Userinfo from './components/user-info.js';
 import ProfileDetail from './components/profiledetail.js';
 import { TransitionMotion, spring } from 'react-motion';
 
+//订单选择优惠券
+import Selcoupon from './components/myprofile/selcoupon.js';
 //订单选择地址
 import Seladdress from './components/shopping/seladdress.js';
 //添加设备
