@@ -9,6 +9,12 @@ export default {
     },
   },
   resources: {
+    baseinfo:{
+      name: '基本信息 |||| 基本信息',
+    },
+    usermgr:{
+      name: '用户管理 |||| 用户管理',
+    },
     banner:{
       name: '广告编辑 |||| 广告编辑',
     },
@@ -57,12 +63,27 @@ export default {
     },
     order:{
       name: '订单管理 |||| 订单管理',
+      fields:{
+        orderstatus:'订单状态',
+        paystatus:'支付状态',
+        creator:'关联用户',
+        expressid:'选择快递公司(仅设为可见的快递公司才会列出)',
+        orderprice:'商品总额',
+        realprice:'实付价',
+        couponprice:'优惠价抵扣',
+        pointprice:'积分抵扣',
+        productname:'产品名',
+        productnumber:'购买数量',
+        productprice:'产品单价',
+        producttotalprice:'产品总价'
+      }
     },
     systemconfig:{
       name: '系统配置 |||| 系统配置',
       fields:{
-        productid1:'显示在商城首页的产品1',
-        productid2:'显示在商城首页的产品2',
+        productcategoryid1:'显示在商城首页的套餐(分类）',
+        productcategoryid2:'显示在商城首页的商用一体机(分类）',
+
       }
 
     },

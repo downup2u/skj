@@ -44,6 +44,7 @@ import RichTextInput from '../controls/richtoolbar.js';
 
 export const ProductFilter = props => (
     <Filter {...props}>
+        <TextInput label="搜索产品名" source="name_q" />
          <ReferenceInput source="categoryid" reference="category">
             <SelectInput source="name" />
         </ReferenceInput>
@@ -86,7 +87,7 @@ const ProductlistEdit = (props) => {
           <SimpleForm>
               <DisabledInput label="Id" source="id" />
               <TextInput label="名字" source="name" />
-              <ReferenceInput source="categoryid" reference="category">
+              <ReferenceInput source="categoryid" reference="category" allowEmpty>
                   <SelectInput optionText="name" />
               </ReferenceInput>
               <NumberInput label="现价"  source="pricenow" />

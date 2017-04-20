@@ -24,7 +24,8 @@ import {
   EditButton,
   SelectInput,
   BooleanInput,
-  BooleanField
+  BooleanField,
+  Filter
 } from 'admin-on-rest/lib/mui';
 
 import { Field,FieldArray } from 'redux-form';
@@ -33,6 +34,12 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 
 import moment from 'moment';
+
+export const NewsFilter = props => (
+    <Filter {...props}>
+        <TextInput label="搜索动态名" source="textname_q" />
+    </Filter>
+);
 
 
 const NewscreateTitle = ({ record }) => {
@@ -75,9 +82,10 @@ const NewslistShow = (props) => (
 
 
 const NewslistList = (props) => (//
-     <List title="动态信息列表" {...props} >
+     <List title="动态信息列表" {...props} filters={<NewsFilter />} >
         <Datagrid>
           <TextField label="名字" source="textname" />
+          <DateField label="生成时间" source="created_at" showTime />
           <BooleanField label="是否启用" source="isenabled" />
         <EditButton />
         </Datagrid>

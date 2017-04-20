@@ -1,41 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
+import { translate } from 'admin-on-rest';
 import compose from 'recompose/compose';
 import MenuItem from 'material-ui/MenuItem';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
-import { translate } from 'admin-on-rest';
+import LabelIcon from 'material-ui/svg-icons/action/label';
 import { DashboardMenuItem } from 'admin-on-rest/lib/mui';
 import Icon from 'material-ui/svg-icons/social/person';
 
-import SystemconfigIcon from 'material-ui/svg-icons/action/settings-brightness';//系统设置
-import FeedbackIcon from 'material-ui/svg-icons/action/feedback';
-import MessageIcon from 'material-ui/svg-icons/communication/message';
-import TopicIcon from 'material-ui/svg-icons/communication/forum';
-import CategoryIcon from 'material-ui/svg-icons/action/list';
-import BannerIcon from 'material-ui/svg-icons/action/view-carousel';
-import ExpressIcon from 'material-ui/svg-icons/content/send';
-import ProductIcon from 'material-ui/svg-icons/hardware/toys';
-import CouponIcon from 'material-ui/svg-icons/action/card-giftcard';//优惠券信息
-import MycouponIcon from 'material-ui/svg-icons/action/card-giftcard';//优惠券信息
-import UserIcon from 'material-ui/svg-icons/action/account-circle';//乘客信息
-
-const items = [
-    { name: 'systemconfig', icon: <SystemconfigIcon /> },
-    { name: 'news', icon: <UserIcon /> },
-    { name: 'banner', icon: <BannerIcon /> },
-    { name: 'category', icon: <CategoryIcon /> },
-    { name: 'product', icon: <Icon /> },
-    { name: 'express', icon: <ExpressIcon /> },
-    { name: 'topic', icon: <TopicIcon /> },
-    { name: 'notifymessage', icon: <MessageIcon /> },
-    { name: 'feedback', icon: <FeedbackIcon /> },
-    { name: 'coupon', icon: <CouponIcon /> },
-    { name: 'mycoupon', icon: <MycouponIcon /> },
-    { name: 'withdrawcash', icon: <UserIcon /> },
-    { name: 'order', icon: <UserIcon /> },
-    { name: 'user', icon: <UserIcon /> },
-];
+import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 
 const styles = {
     main: {
@@ -46,26 +20,61 @@ const styles = {
     },
 };
 
+import { List, ListItem } from 'material-ui/List';
+import allmenus from './LeftmenuData.js';
 
+let getallmenus = (valuesel, translate,onMenuTap)=>{
+  let getChildItems =(item, translate,onMenuTap)=>{
+     let itemsco =[];
+     item.children.map((child)=>{
+        let title = translate(`resources.${child.name}.name`, { smart_count: 2 });
+        let link = `/${child.name}`;
+        itemsco.push(<
+          MenuItem key={child.name}
+          primaryText={title}
+          leftIcon={child.icon}
+          onTouchTap={onMenuTap}
+          containerElement={<Link to={link} />}
+          insetChildren={true} className={child.name === valuesel ? 'active' : ''} />);
+      });
+      return itemsco;
+   }
+   let menuitemsco =[];
+   allmenus.map((item)=> {
+     let title = translate(`resources.${item.name}.name`, { smart_count: 2 });
+     if(item.children){
+        menuitemsco.push(<MenuItem
+            primaryText={title}
+            key={item.name}
+            leftIcon={item.icon}
+            rightIcon={<ArrowDropRight />}
+            menuItems={getChildItems(item,translate,onMenuTap)}
+        />);
+     }
+     else{
+          let link = `/${item.name}`;
+            menuitemsco.push(<MenuItem
+            primaryText={title}
+            key={item.name}
+            leftIcon={item.icon}
+            onTouchTap={onMenuTap}
+            containerElement={<Link to={link} />}
+        />);
+     }
+   });
+   return menuitemsco;
+}
 
 const Menu = ({ onMenuTap, translate, logout }) => (
     <div style={styles.main}>
         <DashboardMenuItem onTouchTap={onMenuTap} />
-        {items.map(item => (
-            <MenuItem
-                key={item.name}
-                containerElement={<Link to={`/${item.name}`} />}
-                primaryText={translate(`resources.${item.name}.name`, { smart_count: 2 })}
-                leftIcon={item.icon}
-                onTouchTap={onMenuTap}
-            />
-        ))}
-        {/*<MenuItem
+        {getallmenus('baseinfocompany', translate,onMenuTap)}
+        <MenuItem
             containerElement={<Link to="/configuration" />}
             primaryText={translate('pos.configuration')}
             leftIcon={<SettingsIcon />}
             onTouchTap={onMenuTap}
-        />*/}
+        />
         {logout}
     </div>
 );

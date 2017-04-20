@@ -48,8 +48,8 @@ class App extends Component {
             >
                 <Resource name="systemconfig" list={SystemconfigList} show={SystemconfigShow} edit={SystemconfigEdit}  create={SystemconfigCreate} />
                 <Resource name="banner" list={BannerlistList} edit={BannerlistEdit} create={BannerlistCreate}  remove={Delete} />
-                <Resource name="product" list={ProductlistList} edit={ProductlistEdit} create={ProductlistCreate}  remove={Delete} />
-                <Resource name="category" list={CategorylistList} edit={CategorylistEdit} create={CategorylistCreate}  remove={Delete} />
+                <Resource name="product" list={ProductlistList} edit={ProductlistEdit} create={ProductlistCreate}  />
+                <Resource name="category" list={CategorylistList} edit={CategorylistEdit} create={CategorylistCreate} />
                 <Resource name="express" list={ExpresslistList} edit={ExpresslistEdit}  create={ExpresslistCreate}  remove={Delete} />
                 <Resource name="topic" list={TopiclistList} edit={TopiclistEdit} />
                 <Resource name="notifymessage" list={NotifymessagelistList} edit={NotifymessagelistEdit} create={NotifymessageCreate}  remove={Delete} />

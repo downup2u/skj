@@ -24,7 +24,8 @@ import {
   EditButton,
   SelectInput,
   BooleanInput,
-  BooleanField
+  BooleanField,
+  Filter
 } from 'admin-on-rest/lib/mui';
 
 import { Field,FieldArray } from 'redux-form';
@@ -33,6 +34,17 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
 
+export const ExpressFilter = props => (
+    <Filter {...props}>
+        <TextInput label="搜索快递名" source="expressname_q" />
+        <SelectInput source="isvisiable" choices={[
+            { id: true, name: '可见' },
+            { id: false, name: '不可见' },
+        ]} />
+    </Filter>
+);
+
+
 const ExpresscreateTitle = ({ record }) => {
    return <span>新建 快递公司</span>;
 };
@@ -40,6 +52,9 @@ const ExpresslistCreate = (props) => (
        <Create {...props} title={<ExpresscreateTitle />} >
            <SimpleForm>
               <TextInput label="公司名" source="expressname" />
+              <TextInput label="快递代码"  source="expresscode" />
+              <TextInput label="备注"  source="memo" />
+             <BooleanInput label="是否显示" source="isvisiable" defaultValue={true} />
            </SimpleForm>
        </Create>
 );
@@ -53,6 +68,9 @@ const ExpresslistEdit = (props) => {
       return (<Edit title={<ExpresslistTitle />} {...props}>
           <SimpleForm>
               <DisabledInput label="公司名" source="expressname" />
+              <TextInput label="快递代码"  source="expresscode" />
+              <TextInput label="备注"  source="memo" />
+              <BooleanInput label="是否显示" source="isvisiable" defaultValue={true} />
           </SimpleForm>
       </Edit>);
 
@@ -62,7 +80,10 @@ const ExpresslistEdit = (props) => {
 const ExpresslistShow = (props) => (
        <Show title={<ExpresslistTitle />} {...props}>
            <SimpleShowLayout>
-               <TextField label="公司名" source="expressname" />
+            <TextField label="公司名" source="expressname" />
+            <TextField label="快递代码" source="expresscode" />
+            <TextField label="备注" source="memo" />
+             <BooleanField label="是否显示" source="isvisiable" />
            </SimpleShowLayout>
        </Show>
 );
@@ -70,9 +91,12 @@ const ExpresslistShow = (props) => (
 
 
 const ExpresslistList = (props) => (//
-     <List title="快递公司列表" {...props} >
+     <List title="快递公司列表" {...props} filters={<ExpressFilter />} >
         <Datagrid>
         <TextField label="公司名" source="expressname" />
+        <TextField label="快递代码" source="expresscode" />
+        <TextField label="备注" source="memo" />
+         <BooleanField label="是否显示" source="isvisiable" />
         <EditButton />
         </Datagrid>
     </List>

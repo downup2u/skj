@@ -27,7 +27,8 @@ import {
   BooleanInput,
   BooleanField,
   NumberField,
-  ReferenceField
+  ReferenceField,
+  Filter
 } from 'admin-on-rest/lib/mui';
 
 import { Field,FieldArray } from 'redux-form';
@@ -36,6 +37,14 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 
 import moment from 'moment';
+export const MycouponFilter = props => (
+    <Filter {...props}>
+         <TextInput label="名字" source="name_q" />
+         <ReferenceInput label="用户" source="creator" reference="user" addLabel={false}>
+            <SelectInput optionText="username" />
+        </ReferenceInput>
+    </Filter>
+);
 
 
 const MycouponcreateTitle = ({ record }) => {
@@ -54,7 +63,6 @@ const MycouponlistCreate = (props) => (
                <DateInput label="过期时间"  source="expdate" />
                <TextInput label="价格条件"  source="pricecondition" />
                <NumberInput label="最高抵扣"  source="pricediscount" />
-               <TextInput label="总库存" source="totalstock" />
            </SimpleForm>
        </Create>
 );
@@ -77,7 +85,6 @@ const MycouponlistEdit = (props) => {
                <DateInput label="过期时间"  source="expdate" />
                <TextInput label="价格条件"  source="pricecondition" />
                <NumberInput label="最高抵扣"  source="pricediscount" />
-               <TextInput label="总库存" source="totalstock" />
           </SimpleForm>
       </Edit>);
 
@@ -92,7 +99,6 @@ const MycouponlistShow = (props) => (
                <TextField label="过期时间"  source="expdate" />
                <TextField label="价格条件"  source="pricecondition" />
                <TextField label="最高抵扣"  source="pricediscount" />
-               <TextField label="总库存" source="totalstock" />
            </SimpleShowLayout>
        </Show>
 );
@@ -100,7 +106,7 @@ const MycouponlistShow = (props) => (
 
 
 const MycouponlistList = (props) => (//
-     <List title="优惠券列表" {...props} >
+     <List title="优惠券列表" {...props}  filters={<MycouponFilter />}>
         <Datagrid>
             <TextField label="名字" source="name" />
             <ReferenceField label="用户" source="creator" reference="user" addLabel={false}>

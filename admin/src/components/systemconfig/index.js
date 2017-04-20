@@ -18,6 +18,7 @@ import {
     TabbedForm,
     TextField,
     TextInput,
+    LongTextInput,
     SimpleShowLayout,
     Show as ShowPage,
     SimpleForm
@@ -38,10 +39,10 @@ const SystemconfigShow = (props) => (
            <SimpleShowLayout>
                <TextField  label="正常运费" source="expressfee" />
                <TextField  label="免运费金额" source="expressfeeforfree" />
-                 <ReferenceField label="显示在商城首页的产品1" source="productid1" reference="product" addLabel={true}>
+                 <ReferenceField label="显示在商城首页的套餐(分类）" source="productcategoryid1" reference="category" addLabel={true}>
                  <TextField source="name" />
                  </ReferenceField>
-                 <ReferenceField label="显示在商城首页的产品2" source="productid2" reference="product" addLabel={true}>
+                 <ReferenceField label="显示在商城首页的商用一体机(分类）" source="productcategoryid2" reference="category" addLabel={true}>
                  <TextField source="name" />
                  </ReferenceField>
                  <TextField  label="一级分销佣金" source="bonuslevel1" />
@@ -50,6 +51,8 @@ const SystemconfigShow = (props) => (
                  <TextField  label="每天签到一次" source="getpointfromsign" />
                  <TextField  label="分享得到积分" source="getpointfromshare" />
                  <TextField  label="每天最多获得的积分" source="pointlimitshare" />
+                 <TextField  label="分享设置(JSON格式)" source="sharesetting" />
+                 <TextField  label="会员等级设置(JSON格式)" source="memberlevelsetting" />
            </SimpleShowLayout>
        </ShowPage>
 );
@@ -68,10 +71,10 @@ export const SystemconfigCreate = (props) => (
            <SimpleForm>
                 <TextInput  label="正常运费" source="expressfee" />
                 <TextInput  label="免运费金额" source="expressfeeforfree" />
-            <ReferenceInput source="productid1" reference="product" allowEmpty>
+            <ReferenceInput source="productcategoryid1" reference="category" allowEmpty>
               <SelectInput optionText="name" />
            </ReferenceInput>
-           <ReferenceInput source="productid2" reference="product" allowEmpty>
+           <ReferenceInput source="productcategoryid2" reference="category"  allowEmpty>
               <SelectInput optionText="name" />
             </ReferenceInput>
                 <TextInput  label="一级分销佣金" source="bonuslevel1" />
@@ -80,6 +83,8 @@ export const SystemconfigCreate = (props) => (
                 <TextInput  label="每天签到一次" source="getpointfromsign" />
                 <TextInput  label="分享得到积分" source="getpointfromshare" />
                 <TextInput  label="每天最多获得的积分" source="pointlimitshare" />
+                <LongTextInput  label="分享设置(JSON格式)" source="sharesetting" />
+                <LongTextInput  label="会员等级设置(JSON格式)" source="memberlevelsetting" />
            </SimpleForm>
        </Create>
 );
@@ -90,10 +95,10 @@ export const SystemconfigEdit = (props) => (
         <SimpleForm>
             <TextInput  label="正常运费" source="expressfee" />
             <TextInput  label="免运费金额" source="expressfeeforfree" />
-            <ReferenceInput source="productid1" reference="product" allowEmpty>
+            <ReferenceInput source="productcategoryid1" reference="category" allowEmpty>
               <SelectInput optionText="name" />
            </ReferenceInput>
-           <ReferenceInput source="productid2" reference="product" allowEmpty>
+           <ReferenceInput source="productcategoryid2" reference="category"  allowEmpty>
               <SelectInput optionText="name" />
             </ReferenceInput>
             <TextInput  label="一级分销佣金" source="bonuslevel1" />
@@ -102,6 +107,8 @@ export const SystemconfigEdit = (props) => (
              <TextInput  label="每天签到一次" source="getpointfromsign" />
              <TextInput  label="分享得到积分" source="getpointfromshare" />
             <TextInput  label="每天最多获得的积分" source="pointlimitshare" />
+            <LongTextInput  label="分享设置(JSON格式)" source="sharesetting" />
+            <LongTextInput  label="会员等级设置(JSON格式)" source="memberlevelsetting" />
         </SimpleForm>
     </EditPage>
 );

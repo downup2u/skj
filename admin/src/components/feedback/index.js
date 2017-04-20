@@ -25,7 +25,9 @@ import {
   SelectInput,
   BooleanInput,
   BooleanField,
-  ReferenceField
+  ReferenceField,
+  ReferenceInput,
+  Filter
 } from 'admin-on-rest/lib/mui';
 
 import { Field,FieldArray } from 'redux-form';
@@ -33,6 +35,16 @@ import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
+
+export const FeedbackFilter = props => (
+    <Filter {...props}>
+         <TextInput label="反馈内容" source="feedbacktxt_q" />
+         <ReferenceInput label="用户" source="creator" reference="user" addLabel={false}>
+            <SelectInput optionText="username" />
+        </ReferenceInput>
+    </Filter>
+);
+
 
 const FeedbackTitle = ({ record }) => {
    return <span>显示 用户反馈</span>;
@@ -50,7 +62,7 @@ const FeedbackShow = (props) => (
 
 
 const FeedbackList = (props) => (//
-     <List title="用户反馈列表" {...props} >
+     <List title="用户反馈列表" {...props}  filters={<FeedbackFilter />} >
         <Datagrid>
         <ReferenceField label="反馈用户" source="creator" reference="user" addLabel={false}>
             <TextField source="username" />

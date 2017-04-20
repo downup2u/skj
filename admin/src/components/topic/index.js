@@ -22,7 +22,10 @@ import {
     TextField, 
     DateField, 
     EditButton,
-    ReferenceField
+    ReferenceField,
+    ReferenceInput,
+    SelectInput,
+    Filter
 } from 'admin-on-rest/lib/mui';
 
 import RichTextInput from '../controls/richtoolbar.js';
@@ -34,6 +37,15 @@ import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
+
+export const TopicFilter = props => (
+    <Filter {...props}>
+         <TextInput label="搜索帖子" source="title_q" />
+         <ReferenceInput label="用户" source="creator" reference="user" addLabel={false}>
+            <SelectInput optionText="username" />
+        </ReferenceInput>
+    </Filter>
+);
 
 const TopiclistTitle = ({ record }) => {
    return <span>编辑 帖子信息</span>;
@@ -63,7 +75,7 @@ const TopiclistShow = (props) => (
 
 
 const TopiclistList = (props) => (//
-     <List title="帖子信息列表" {...props} >
+     <List title="帖子信息列表" {...props}  filters={<TopicFilter />} >
         <Datagrid>
         <TextField label="标题" source="title" />
          <ReferenceField label="用户" source="creator" reference="user" addLabel={false}>

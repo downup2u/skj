@@ -25,7 +25,9 @@ import {
   EditButton,
   SelectInput,
   BooleanInput,
-  BooleanField
+  BooleanField,
+  ReferenceInput,
+  Filter
 } from 'admin-on-rest/lib/mui';
 
 import { Field,FieldArray } from 'redux-form';
@@ -34,6 +36,14 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
 import {EditStatus} from './editstatus';
+
+export const WithdrawcashFilter = props => (
+    <Filter {...props}>
+         <ReferenceInput label="用户" source="creator" reference="user" addLabel={false}>
+            <SelectInput optionText="username" />
+        </ReferenceInput>
+    </Filter>
+);
 
 const WithdrawcashlistTitle = ({ record }) => {
    return <span>编辑 提现</span>;
@@ -71,7 +81,7 @@ const WithdrawcashlistShow = (props) => (
 
 
 const WithdrawcashlistList = (props) => (//
-     <List title="提现列表" {...props} >
+     <List title="提现列表" {...props}  filters={<WithdrawcashFilter />}>
         <Datagrid>
         <ReferenceField label="提现用户" source="creator" reference="user" addLabel={true}>
            <TextField source="username" />
