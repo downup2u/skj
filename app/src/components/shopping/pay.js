@@ -43,8 +43,8 @@ export class Page extends Component {
             payway: 'alipay',//支付方式
             ordertitle: ordertitle,
             body: body,
-            realprice: this.props.orderPrice,//实付价
-            orderprice: this.props.orderPrice,//订单价=应付价
+            realprice: parseFloat(this.props.orderPrice),//实付价
+            orderprice: parseFloat(this.props.orderPrice),//订单价=应付价
             orderstatus: '未支付',
             paystatus: '未支付',
             isdeleted : false,
@@ -53,8 +53,8 @@ export class Page extends Component {
             couponid:"",
             pointprice: 0,
             point: 0,
-            expressprice: this.props.orderExpress,//运费
-            productprice: this.props.orderProductPrice,//产品总价
+            expressprice: parseFloat(this.props.orderExpress),//运费
+           // productprice: parseFloat(this.props.orderProductPrice),//产品总价
             expressid: '',//快递信息
             expressbarid: '',//快递运单号
         };
