@@ -63,7 +63,7 @@ export class Page extends Component {
     }
 
     render() {
-        const {orderinfo, orderAddressInfo, balance, point, pointmoney} = this.props;
+        const {orderinfo, orderAddressInfo, payprice} = this.props;
         console.log("orderinfo:::"+JSON.stringify(orderinfo));
         return (
             <div className="PayPage"
@@ -129,7 +129,7 @@ export class Page extends Component {
                         <div className="li">
                             <span>使用积分</span>
                             <span>- ¥{orderinfo.pointprice}</span>
-                            <Checkbox toggle checked={orderinfo.usepoint} onClick={()=>{this.updataUse("usebalance")}}/>
+                            <Checkbox toggle checked={orderinfo.usepoint} onClick={()=>{this.updataUse("usepoint")}}/>
                         </div>
                         <div className="li selcoupon" onClick={()=>{this.onClickPage(`/selcoupon/${orderinfo._id}`)}}>
                             <span>使用优惠券</span>
@@ -167,7 +167,7 @@ export class Page extends Component {
 
                 <div className="subBtn">
                     <div className="i">
-                        实付金额: <span>¥400.00</span>
+                        实付金额: <span>¥{payprice}</span>
                     </div>
                     <div className="b" onClick={()=>{this.onClickPay()}}>
                         <span>提交订单</span>
@@ -188,6 +188,11 @@ let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point}},prop
     let orderinfo = shoporder.orders[props.match.params.id];
     //获取当前订单地址
     let orderAddressInfo = order.orderAddressInfo;
+    //初始化抵扣金额
+    orderinfo.couponid = '';
+    orderinfo.couponprice = 0;
+    orderinfo.balanceprice = 0;
+    orderinfo.pointprice = 0;
     //积分抵扣金额
     if(orderinfo.usepoint && point>0){
         let pointvsmoney = app.pointvsmoney;
@@ -209,7 +214,10 @@ let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point}},prop
             })
         }
     }
-    return { orderinfo:{...orderinfo}, orderAddressInfo};
+    //最终支付金额
+    let payprice = orderinfo.orderprice - orderinfo.balanceprice - orderinfo.pointprice - orderinfo.couponprice;
+
+    return { orderinfo:{...orderinfo}, orderAddressInfo, payprice};
 }
 
 Page = connect(mapStateToProps)(Page);

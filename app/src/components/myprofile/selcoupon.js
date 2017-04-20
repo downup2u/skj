@@ -39,7 +39,7 @@ export class Page extends Component {
             <div 
                 className={classname}
                 key = {item._id}
-                onClick={(item)=>{this.updataOrderCoupon(true, item)}}
+                onClick={()=>{this.updataOrderCoupon(true, item)}}
                 >
                 <div className="leftcont">
                     <span><span>{item.pricediscount}</span>元</span>
