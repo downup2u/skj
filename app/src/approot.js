@@ -265,15 +265,11 @@ import {hidepopmessage} from './actions/index.js';
 import { Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-export class AppRoot extends React.Component {
+
+class MessageCo extends React.Component {
     onDismiss = ()=> {
         this.props.dispatch(hidepopmessage());
     }
-
-    componentWillMount() {
-
-    }
-
     componentWillReceiveProps(nextProps) {
         if (nextProps.ispop && !this.props.ispop) {
             window.setTimeout(()=> {
@@ -282,14 +278,14 @@ export class AppRoot extends React.Component {
         }
     }
 
-    render() {
+     render() {
         let fullheight = {
             height: window.innerHeight + "px"
         }
         let MessageCo = null;
         if (this.props.ispop) {
             if (this.props.type === 'error') {
-                MessageCo = (
+               MessageCo = (
                     <div className="messageCo" style={fullheight}>
                         <Message 
                                  error
@@ -300,7 +296,7 @@ export class AppRoot extends React.Component {
                 );
             }
             else if (this.props.type === 'warning') {
-                MessageCo = (
+                 MessageCo = (
                     <div className="messageCo" style={fullheight}>
                         <Message 
                                  warning
@@ -311,7 +307,7 @@ export class AppRoot extends React.Component {
                 );
             }
             else if (this.props.type === 'success') {
-                MessageCo = (
+                 MessageCo = (
                     <div className="messageCo" style={fullheight}>
                         <Message 
                                  success
@@ -322,20 +318,24 @@ export class AppRoot extends React.Component {
                 );
             }
         }
+        return MessageCo;
+     }
+}
+const mapStateToPropsMessageCo = ({app:{ispop,type,title,msg}}) => {
+    return {ispop,type,title,msg};
+}
+MessageCo = connect(mapStateToPropsMessageCo)(MessageCo);
 
+class AppRoot extends React.Component {
+    render() {        
         return (
             <div>
-                {MessageCo}
-                <div className="pageWamp"><CoApp {...this.props} /></div>
+                <MessageCo />
+                <div className="pageWamp"><CoApp /></div>
             </div>
             );
     }
 
 }
-
-const mapStateToProps = ({app}) => {
-    return app;
-}
-AppRoot = connect(mapStateToProps)(AppRoot);
 
 export default AppRoot;
