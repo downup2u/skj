@@ -8,7 +8,7 @@ import '../../../public/css/pay.css';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import {
-    myorderaddone,
+    myorderaddone
 } from '../../actions/sagacallback.js';
 import {
     myorderlist_addreducers,
@@ -16,12 +16,13 @@ import {
     getaddresslist_request
 } from '../../actions';
 
+
 export class Page extends Component {
 
     onClickReturn = ()=> {
         this.props.history.goBack();
     };
-    
+
     onClickPage = (name)=> {
         this.props.history.push(name);
     };
@@ -60,6 +61,10 @@ export class Page extends Component {
         this.props.dispatch(myorderaddone(payload)).then((result)=>{
             let payload = {};
             payload[result.newitem._id] = result.newitem;
+            payload.usecoupon = true;//是否适用优惠券
+            payload.usepoint = true;//是否适用积分
+            payload.usebalance = true;//是否适用余额
+            payload.balanceprice = 0;//余额抵扣金额
             this.props.dispatch(myorderlist_addreducers(payload));
             this.props.history.push(`/payend/${result.newitem._id}`);
         });
@@ -141,7 +146,7 @@ export class Page extends Component {
     }
 }
 
-let mapStateToProps = ({shop, order, userlogin, address}) => {
+let mapStateToProps = ({shop, order, shoporder, userlogin, address}) => {
     let products = shop.products;
     let orderPrice = order.orderPrice;
     let orderProductsdetail = order.orderProductsdetail;

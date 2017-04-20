@@ -228,8 +228,8 @@ const CoApp = (props) => {
             <CustomRoute path="/addnewdevice3" component={requireAuthentication(AddNewDevice3)}/>
             <CustomRoute path="/mycollection" component={requireAuthentication(MyCollection)}/>
             <CustomRoute path="/mycoupon" component={requireAuthentication(MyCoupon)}/>
-            <CustomRoute path="/mymessage" component={MyMessage}/>
-            <CustomRoute path="/mymessagedetail/:msgid" component={MyMessageDetail}/>
+            <CustomRoute path="/mymessage" component={requireAuthentication(MyMessage)}/>
+            <CustomRoute path="/mymessagedetail/:msgid" component={requireAuthentication(MyMessageDetail)}/>
             <CustomRoute path="/myorder" component={requireAuthentication(MyOrder)}/>
             <CustomRoute path="/usercenter" component={requireAuthentication(UserCenter)}/>
             <CustomRoute path="/myprofit" component={requireAuthentication(MyProfit)}/>
@@ -244,20 +244,22 @@ const CoApp = (props) => {
             <CustomRoute path="/mytopiclist" component={Topiclist}/>
             <CustomRoute path="/changeusername" component={requireAuthentication(ChangeUsername)}/>
             <CustomRoute path="/orderevaluation" component={OrderEvaluation}/>
-            <CustomRoute path="/orderinfo" component={OrderInfo}/>
+            <CustomRoute path="/orderinfo" component={requireAuthentication(OrderInfo)}/>
             <CustomRoute path="/forgetpwd" component={ForgetPwd}/>
             <CustomRoute path="/logisticsinfo" component={LogisticsInfo}/>
             <CustomRoute path="/shoppingpackage" component={ShoppingPackage}/>
             <CustomRoute path="/shoppingprolist/:type" component={ShoppingProlist}/>
             <CustomRoute path="/shoppingproinfo/:id" component={ShoppingProinfo}/>
             <CustomRoute path="/shoppingproevaluate/:id" component={ShoppingProevaluate}/>
-            <CustomRoute path="/shoppingcart" component={ShoppingCart} />
-            <CustomRoute path="/pay" component={Pay} />
-            <CustomRoute path="/payend/:id" component={PayEnd} />
+            <CustomRoute path="/shoppingcart" component={requireAuthentication(ShoppingCart)} />
+            <CustomRoute path="/pay" component={requireAuthentication(Pay)} />
+            <CustomRoute path="/payend/:id" component={requireAuthentication(PayEnd)} />
             <CustomRoute path="/test" component={Test} />
             <CustomRoute path="/share" component={Share} />
             <CustomRoute path="/userbind" component={Userbind} /> 
             <CustomRoute path="/seladdress" component={requireAuthentication(Seladdress)} /> 
+            <CustomRoute path="/selcoupon/:id" component={requireAuthentication(Selcoupon)} /> 
+
             <CustomRoute component={App}/>
         </Switch>
     );

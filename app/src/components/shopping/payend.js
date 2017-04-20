@@ -8,7 +8,8 @@ import '../../../public/css/pay.css';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import {
-    myordergetall
+    myordergetall,
+    mycoupongetall
 } from '../../actions/sagacallback.js';
 import {
     payway_set,
@@ -18,6 +19,18 @@ import {
 import {onclickpay} from '../../env/pay';
 
 export class Page extends Component {
+
+    //获取我的地址列表
+    componentWillMount() {
+        let payload = {
+            query: {usestatus : "未使用"},
+            options: {
+                page: 1,
+                limit: 1000,
+            }
+        };
+        this.props.dispatch(mycoupongetall(payload));
+    }
 
     onClickReturn = ()=> {
         this.props.history.goBack();
@@ -41,6 +54,13 @@ export class Page extends Component {
         orderinfo.payway = paytype;
         this.props.dispatch(updata_orderinfo(orderinfo));
     };
+
+    //设置是否是有优惠
+    updataUse =(type)=>{
+        let orderinfo = this.props.orderinfo;
+        orderinfo[type] = !orderinfo[type];
+        this.props.dispatch(updata_orderinfo(orderinfo));
+    }
 
     render() {
         const {orderinfo, orderAddressInfo, balance, point, pointmoney} = this.props;
@@ -103,15 +123,17 @@ export class Page extends Component {
                         </div>
                         <div className="li">
                             <span>余额支付</span>
-                            <span>- ¥{balance}</span>
+                            <span>- ¥{orderinfo.balanceprice}</span>
+                            <Checkbox toggle checked={orderinfo.usebalance} onClick={()=>{this.updataUse("usebalance")}}/>
                         </div>
                         <div className="li">
                             <span>使用积分</span>
-                            <span>- ¥{pointmoney}</span>
+                            <span>- ¥{orderinfo.pointprice}</span>
+                            <Checkbox toggle checked={orderinfo.usepoint} onClick={()=>{this.updataUse("usebalance")}}/>
                         </div>
-                        <div className="li selcoupon" onClick={()=>{this.onClickPage()}}>
+                        <div className="li selcoupon" onClick={()=>{this.onClickPage(`/selcoupon/${orderinfo._id}`)}}>
                             <span>使用优惠券</span>
-                            <span>- ¥4.00</span>
+                            <span>- ¥{orderinfo.couponprice}</span>
                         </div>
                     </div>
 
@@ -158,14 +180,36 @@ export class Page extends Component {
     }
 }
 
+// payload.usecoupon = true;//是否使用优惠券
+// payload.usepoint = true;//是否使用积分
+// payload.usebalance = true;//是否使用余额
+
 let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point}},props) => {
     let orderinfo = shoporder.orders[props.match.params.id];
     //获取当前订单地址
     let orderAddressInfo = order.orderAddressInfo;
     //积分抵扣金额
-    let pointvsmoney = app.pointvsmoney;
-    let pointmoney = point * pointvsmoney * .01;
-    return { orderinfo:{...orderinfo}, orderAddressInfo, balance, point, pointmoney};
+    if(orderinfo.usepoint && point>0){
+        let pointvsmoney = app.pointvsmoney;
+        orderinfo.pointprice = point * pointvsmoney * .01;
+    }
+    //设置余额抵扣
+    if(orderinfo.usebalance && balance>0){
+        orderinfo.balanceprice = balance;
+    }
+    //设置优惠券抵扣
+    if(orderinfo.usecoupon){
+        let couponlist = shoporder.couponlist;
+        if(_.isEmpty(couponlist)){
+            _.map(couponlist, (coupon,couponid)=>{
+                if(orderinfo.couponid==''&& orderinfo.orderPrice >= coupon.pricecondition){
+                    orderinfo.couponid = couponid;
+                    orderinfo.couponprice = coupon.pricediscount;
+                }
+            })
+        }
+    }
+    return { orderinfo:{...orderinfo}, orderAddressInfo};
 }
 
 Page = connect(mapStateToProps)(Page);

@@ -2,27 +2,44 @@ import React, { Component, PropTypes } from 'react';
 import NavBar from '../nav.js';
 import { Input, Button, Select, List, Menu } from 'semantic-ui-react';
 import '../../../public/css/mycoupon.css';
-import { mycoupongetall } from '../../actions/sagacallback.js';
-import { setulcoupontype } from '../../actions';
+import {
+    mycoupongetall
+} from '../../actions/sagacallback.js';
+import { 
+    setulcoupontype,
+    updata_orderinfo
+} from '../../actions';
 import { connect } from 'react-redux';
 import InfinitePage from '../controls/infinitecontrol';
 import moment from 'moment';
 
 export class Page extends Component {
 
-    handleItemClick =(type)=>{
-        this.props.dispatch(setulcoupontype(type));
-    }
-
     onClickReturn =()=>{
         this.props.history.goBack();
-    }
+    };
+
+    updataOrderCoupon =(usestatus, coupon)=>{
+        let orderinfo = this.props.orderinfo;
+        if(usestatus){
+            orderinfo.couponid = coupon._id;
+            orderinfo.couponprice = coupon.pricediscount;
+        }
+        orderinfo.usecoupon = usestatus;
+        this.props.dispatch(updata_orderinfo(orderinfo));
+        this.props.history.goBack();
+    };
 
     updateContent = (item)=> {
+        const {orderinfo} = this.props;
+        let classname = orderinfo.orderprice>=item.pricecondition?"item":"item noitem";
+        let sel = orderinfo.couponid==item._id?" sel":"";
+        classname += sel; 
         return  (
             <div 
-                className="item" 
-                key = {item._id} 
+                className={classname}
+                key = {item._id}
+                onClick={(item)=>{this.updataOrderCoupon(true, item)}}
                 >
                 <div className="leftcont">
                     <span><span>{item.pricediscount}</span>元</span>
@@ -46,36 +63,25 @@ export class Page extends Component {
     render() {
         return (
             <div className="myCouponPage" style={{minHeight:(window.innerHeight)+"px"}}>
-                <NavBar lefttitle="返回" title="优惠券" onClickLeft={this.onClickReturn} />
-                <Menu pointing secondary>
-                    <Menu.Item name='未使用' 
-                        active={this.props.ulcoupontype === 0} 
-                        onClick={()=>{this.handleItemClick('未使用')}}/>
-                    <Menu.Item name='已使用' 
-                        active={this.props.ulcoupontype === 1} 
-                        onClick={()=>{this.handleItemClick('已使用')}}/>
-                    <Menu.Item name='已过期' 
-                        active={this.props.ulcoupontype === 2} 
-                        onClick={()=>{this.handleItemClick('已过期')}}/>
-                </Menu>
+                <NavBar lefttitle="返回" title="选择优惠券" onClickLeft={this.onClickReturn} />
                 <div className="myCouponList" style={{height:window.innerHeight-88}}>
                     <InfinitePage
-                        pagenumber = { 20 }
+                        pagenumber = { 100 }
                         updateContent= { this.updateContent }
                         queryfun= {mycoupongetall}
                         listheight= {window.innerHeight-88}
-                        sort = {{created_at : -1 }}
-                        query = {{usestatus : this.props.ulcoupontype}}
+                        sort = {{pricecondition : 1}}
+                        query = {{usestatus : "未使用"}}
                     />
                 </div>
-                <div className="selcouponBtn">不使用优惠券</div>
+                <div className="selcouponBtn" onClick={()=>{this.updataOrderCoupon(false)}}>不使用优惠券</div>
             </div>
         )
     }
 }
-
-const mapStateToProps = ({shop, app}) => {
-    return {...shop, ...app};
+let mapStateToProps = ({shoporder},props) => {
+    let orderinfo = shoporder.orders[props.match.params.id];
+    return {orderinfo};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

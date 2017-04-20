@@ -2,6 +2,8 @@
     background: #EEE;
     overflow-y: hidden;
     padding-top: 48px;
+    display: flex;
+    flex-direction: column;
 }
 .PayPage .PageHead {
     background: #5596d6;

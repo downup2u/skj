@@ -10,9 +10,11 @@ import {
     myorderdelone_result,
     myordergetall_result,
     serverpush_orderinfo,
-    updata_orderinfo
+    updata_orderinfo,
+    mycoupongetall_result
 } from '../actions';
 import {normalizr_orderslist} from './normalizr';
+import _ from 'lodash';
 
 const initial = {
     orders: {
@@ -30,6 +32,15 @@ const initial = {
 };
 
 const orders = createReducer({
+    //获取我的可用优惠券列表
+    [mycoupongetall_result]:(state, {result})=>{
+        let couponlist = state.couponlist;
+        _.map(result.docs, (coupon, index)=>{
+            couponlist[coupon._id] = coupon;
+        })
+        return  {...state, couponlist};
+    },
+    //更新订单信息
     [updata_orderinfo]:(state, orderinfo)=>{
         let orders = state.orders;
         orders[orderinfo._id] = orderinfo;
