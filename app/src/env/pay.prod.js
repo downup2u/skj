@@ -23,10 +23,10 @@ export const onclickpay = ({orderinfo,payway,dispatch},callbackfn)=> {
       out_trade_no: orderinfo._id,
       subject: orderinfo.ordertitle || '商品名称',//$('#subject').val(),//'WL144626511265842',//$('#subject').val(),
       body: orderinfo.body || '商品详情',//$('#body').val(),//'WL144626511265842',//
-      total_fee: '0.01',//$('#fee').val(),//'9.00',
+      total_fee: orderinfo.realprice,//$('#fee').val(),//'9.00',
     };
     if(payway === 'weixin'){
-        orderdoc.total_fee = 1;
+        orderdoc.total_fee = orderdoc.total_fee*100;
     }
     dispatch(getpaysign({
         paytype:payway,
@@ -43,5 +43,7 @@ export const onclickpay = ({orderinfo,payway,dispatch},callbackfn)=> {
             callbackfn(result);
          });
        }
+    }).catch((err)=>{
+         console.log('err:' + JSON.stringify(err));
     });
 }
