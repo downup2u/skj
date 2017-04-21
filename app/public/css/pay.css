@@ -112,7 +112,13 @@
 .PayPage .list .li span.price {
     color: #F00;
 }
-
+.PayPage .list .li .setpaycoupon{
+    display: flex;
+    align-items: center
+}
+.PayPage .list .li .setpaycoupon span{
+    margin-right: 10px;
+}
 .PayPage .orderaddress{
     padding: 15px;
     display: flex;

@@ -63,7 +63,7 @@ export class Page extends Component {
     }
 
     render() {
-        const {orderinfo, orderAddressInfo, payprice} = this.props;
+        const {orderinfo, orderAddressInfo, payprice, balance, point} = this.props;
         console.log("orderinfo:::"+JSON.stringify(orderinfo));
         return (
             <div className="PayPage"
@@ -115,28 +115,30 @@ export class Page extends Component {
                             )
                         })}
                     </div>
-
                     <div className="list">
                         <div className="li">
                             <span>运费</span>
-                            <span>¥{orderinfo.orderexpress}</span>
+                            <span>{orderinfo.expressprice==0?'免运费':`¥${orderinfo.expressprice}`}</span>
                         </div>
                         <div className="li">
-                            <span>余额支付</span>
-                            <span>- ¥{orderinfo.balanceprice}</span>
-                            <Checkbox toggle checked={orderinfo.usebalance} onClick={()=>{this.updataUse("usebalance")}}/>
+                            <span>余额支付(¥{balance})</span>
+                            <div className="setpaycoupon">
+                                <span>{orderinfo.balanceprice==0?'':`- ¥${orderinfo.balanceprice}`}</span>
+                                <Checkbox toggle checked={orderinfo.usebalance} onClick={()=>{this.updataUse("usebalance")}}/>
+                            </div>
                         </div>
                         <div className="li">
-                            <span>使用积分</span>
-                            <span>- ¥{orderinfo.pointprice}</span>
-                            <Checkbox toggle checked={orderinfo.usepoint} onClick={()=>{this.updataUse("usepoint")}}/>
+                            <span>使用积分({point})</span>
+                            <div className="setpaycoupon">
+                                <span>{orderinfo.pointprice==0?'':`- ¥${orderinfo.pointprice}`}</span>
+                                <Checkbox toggle checked={orderinfo.usepoint} onClick={()=>{this.updataUse("usepoint")}}/>
+                            </div>
                         </div>
                         <div className="li selcoupon" onClick={()=>{this.onClickPage(`/selcoupon/${orderinfo._id}`)}}>
                             <span>使用优惠券</span>
-                            <span>- ¥{orderinfo.couponprice}</span>
+                            <span>{orderinfo.couponprice==0?'':`- ¥${orderinfo.couponprice}`}</span>
                         </div>
                     </div>
-
                     <div className="paytype">
                         <div className="li">
                             <img src="img/shopping/15.png" />
@@ -164,7 +166,6 @@ export class Page extends Component {
                         </div>
                     </div>
                 </div>
-
                 <div className="subBtn">
                     <div className="i">
                         实付金额: <span>¥{payprice}</span>
@@ -186,11 +187,13 @@ export class Page extends Component {
 
 let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point}},props) => {
     let orderinfo = shoporder.orders[props.match.params.id];
+    if(!orderinfo.hasOwnProperty("couponid")){
+        orderinfo = {...orderinfo, couponid: ''};
+    }
+    
     //获取当前订单地址
     let orderAddressInfo = order.orderAddressInfo;
     //初始化抵扣金额
-    orderinfo.couponid = '';
-    orderinfo.couponprice = 0;
     orderinfo.balanceprice = 0;
     orderinfo.pointprice = 0;
     //积分抵扣金额
@@ -202,22 +205,9 @@ let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point}},prop
     if(orderinfo.usebalance && balance>0){
         orderinfo.balanceprice = balance;
     }
-    //设置优惠券抵扣
-    if(orderinfo.usecoupon){
-        let couponlist = shoporder.couponlist;
-        if(_.isEmpty(couponlist)){
-            _.map(couponlist, (coupon,couponid)=>{
-                if(orderinfo.couponid==''&& orderinfo.orderPrice >= coupon.pricecondition){
-                    orderinfo.couponid = couponid;
-                    orderinfo.couponprice = coupon.pricediscount;
-                }
-            })
-        }
-    }
     //最终支付金额
     let payprice = orderinfo.orderprice - orderinfo.balanceprice - orderinfo.pointprice - orderinfo.couponprice;
-
-    return { orderinfo:{...orderinfo}, orderAddressInfo, payprice};
+    return { orderinfo:{...orderinfo}, orderAddressInfo, payprice, balance, point};
 }
 
 Page = connect(mapStateToProps)(Page);

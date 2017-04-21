@@ -28,6 +28,7 @@ const initial = {
         couponlist:{},
         //优惠券
         couponid:"",
+        //我的优惠券数量
     },
 };
 
@@ -87,9 +88,10 @@ const orders = createReducer({
 
     },
     [myorderaddone_result]:(state, payload) => {
-        let list = [payload._id,...state.list];
+        let newitem = payload.newitem;
+        let list = [newitem._id,...state.list];
         let orders = state.orders;
-        orders[payload._id] = payload;
+        orders[newitem._id] = newitem;
         return {
             ...state,
             list,
