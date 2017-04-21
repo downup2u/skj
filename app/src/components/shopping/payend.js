@@ -45,7 +45,7 @@ export class Page extends Component {
     onClickPay =()=> {
         let orderinfo = this.props.orderinfo;
         let dispatch = this.props.dispatch;
-        let payway = this.props.payway;
+        let payway = this.props.payway;//注意：这里是undefined!!!!!!!!!!
 
         let payload = {
             _id:orderinfo._id,

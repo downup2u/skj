@@ -186,7 +186,7 @@ export class Page extends React.Component {
                             proinfo.picurldetails.length>0
                             ?
                             _.map(proinfo.picurldetails, (picurl,index)=>{
-                                return (<img src={picurl} key="index" />)
+                                return (<img src={picurl} key={index} />)
                             })
                             :
                             (<div style={{textAlign:"center",lineHeight:"50px"}}>－{proinfo.picurldetails.length}暂无数据－</div>)

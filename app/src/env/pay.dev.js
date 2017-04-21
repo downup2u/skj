@@ -6,6 +6,7 @@ import {
 
 
 export const onclickpay = ({orderinfo,payway,dispatch},callbackfn)=> {
+    console.log(`支付方式为:${payway}`);
    let orderdoc = {
       out_trade_no: orderinfo._id,
       subject: orderinfo.ordertitle || '商品名称',//$('#subject').val(),//'WL144626511265842',//$('#subject').val(),
@@ -29,15 +30,6 @@ export const onclickpay = ({orderinfo,payway,dispatch},callbackfn)=> {
                 console.log("testpost err:" + JSON.stringify(err));
                 console.log("testpost result:" + JSON.stringify(result));
         });
-        // console.log('----->获取到sign:' + paysign);
-        //     let payinfo = {
-        //         paystatus:'已支付',
-        //         paytype:payway
-        //     }
-        //     dispatch(updateorder_request({
-        //         query:{_id:orderinfo._id},
-        //         data:payinfo
-        //     }));
     }).catch((err)=>{
          console.log('err:' + JSON.stringify(err));
     });
