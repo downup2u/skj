@@ -100,11 +100,20 @@
     padding: 2px 15px;
     line-height: 40px;
 }
-
+.PayPage .paytype .li .showbalanceprice{
+    line-height: 36px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+.PayPage .paytype .li .ui.checkbox{
+    width: 24px;
+    height: 24px;
+}
 .PayPage .list .li.selcoupon{
     background: url(/img/myprofile/15.png) no-repeat right center;
     background-size: 40px 40px;
     padding-right: 40px;
+    margin-bottom: 15px;
 }
 .PayPage .list .li span{
     font-size: 16px;

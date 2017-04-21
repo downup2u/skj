@@ -9,3 +9,5 @@ export const myOrderList_filler_set = createAction('myOrderList_filler_set');
 export const serverpush_orderinfo = createAction('serverpush_orderinfo');
 //用户操作更新订单状态
 export const updata_orderinfo = createAction('updata_orderinfo');
+//设置订单支付状态
+export const updata_orderpaydata = createAction('updata_orderpaydata');

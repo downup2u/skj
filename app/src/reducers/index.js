@@ -18,6 +18,7 @@ import shopcollection from './shopcollection';
 import shoporder from './shoporder';
 import infinitepage from './infinitepage';
 import profit from './profit';
+import paystatus from './paystatus';
 
 export default combineReducers(
   { 
@@ -38,6 +39,7 @@ export default combineReducers(
     infinitepage,
     nextusers,
     profit,
+    paystatus,
     form: formReducer
   }
 );

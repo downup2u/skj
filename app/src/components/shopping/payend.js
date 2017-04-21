@@ -9,11 +9,13 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import {
     myordergetall,
-    mycoupongetall
+    mycoupongetall,
+    myorderupdateone
 } from '../../actions/sagacallback.js';
 import {
     payway_set,
-    updata_orderinfo
+    updata_orderinfo,
+    updata_orderpaydata
 } from '../../actions';
 
 import {onclickpay} from '../../env/pay';
@@ -44,9 +46,20 @@ export class Page extends Component {
         let orderinfo = this.props.orderinfo;
         let dispatch = this.props.dispatch;
         let payway = this.props.payway;
-        onclickpay({orderinfo,payway,dispatch},(result)=>{
-            console.log(`获得数据：${result}`);
+
+        let payload = {
+            _id:orderinfo._id,
+            data:{...orderinfo}
+        };
+
+        dispatch(myorderupdateone(payload)).then((result)=>{
+            //{"updateditem":{"_id":"58ed8391d3f83a025b8067b9","payway":"alipay"
+            console.log("myorderupdateone result=>" + JSON.stringify(result));
+            onclickpay({orderinfo,payway,dispatch},(result)=>{
+                console.log(`获得数据：${result}`);
+            });
         });
+
     };
     //设置支付方式
     setpayway =(paytype)=>{
@@ -55,15 +68,29 @@ export class Page extends Component {
         this.props.dispatch(updata_orderinfo(orderinfo));
     };
 
-    //设置是否是有优惠
+    //设置是否使用优惠
     updataUse =(type)=>{
-        let orderinfo = this.props.orderinfo;
-        orderinfo[type] = !orderinfo[type];
-        this.props.dispatch(updata_orderinfo(orderinfo));
+        let payprice = this.props.payprice;
+        let paystatus = this.props.paystatus;
+        paystatus[type] = !paystatus[type];
+
+        if(type=="usebalance"){}
+        if(type=="usebalance"){}
+        if(type=="usepoint"){}
+
+        //选择余额支付
+        if(type=="usebalance"){
+            if(paystatus[type]){
+                this.setpayway("leftbalance");
+            }else{
+                this.setpayway("alipay");
+            }
+        }
+        this.props.dispatch(updata_orderpaydata(paystatus));
     }
 
     render() {
-        const {orderinfo, orderAddressInfo, payprice, balance, point} = this.props;
+        const {orderinfo, orderAddressInfo, payprice, newbalance, newpoint, paystatus,balance,point} = this.props;
         console.log("orderinfo:::"+JSON.stringify(orderinfo));
         return (
             <div className="PayPage"
@@ -121,17 +148,10 @@ export class Page extends Component {
                             <span>{orderinfo.expressprice==0?'免运费':`¥${orderinfo.expressprice}`}</span>
                         </div>
                         <div className="li">
-                            <span>余额支付(¥{balance})</span>
-                            <div className="setpaycoupon">
-                                <span>{orderinfo.balanceprice==0?'':`- ¥${orderinfo.balanceprice}`}</span>
-                                <Checkbox toggle checked={orderinfo.usebalance} onClick={()=>{this.updataUse("usebalance")}}/>
-                            </div>
-                        </div>
-                        <div className="li">
                             <span>使用积分({point})</span>
                             <div className="setpaycoupon">
                                 <span>{orderinfo.pointprice==0?'':`- ¥${orderinfo.pointprice}`}</span>
-                                <Checkbox toggle checked={orderinfo.usepoint} onClick={()=>{this.updataUse("usepoint")}}/>
+                                <Checkbox toggle checked={paystatus.usepoint} onClick={()=>{this.updataUse("usepoint")}}/>
                             </div>
                         </div>
                         <div className="li selcoupon" onClick={()=>{this.onClickPage(`/selcoupon/${orderinfo._id}`)}}>
@@ -147,7 +167,6 @@ export class Page extends Component {
                                 <span>推荐微信用户使用</span>
                             </div>
                             <Checkbox 
-                                name="paycheck" 
                                 onClick={()=>{this.setpayway("weixin")}} 
                                 checked={orderinfo.payway=="weixin"}
                                 />
@@ -159,9 +178,20 @@ export class Page extends Component {
                                 <span>推荐支付宝用户使用</span>
                             </div>
                             <Checkbox 
-                                name="paycheck" 
                                 onClick={()=>{this.setpayway("alipay")}} 
                                 checked={orderinfo.payway=="alipay"}
+                                />
+                        </div>
+                        <div className="li">
+                            <img src="img/shopping/17.png" />
+                            <div className="txt">
+                                <span>余额支付</span>
+                                <span>账户余额:¥{balance}</span>
+                            </div>
+                            <span className="showbalanceprice">{orderinfo.balanceprice==0?'':`- ¥${orderinfo.balanceprice}`}</span>
+                            <Checkbox 
+                                onClick={()=>{this.setpayway("leftbalance")}} 
+                                checked={orderinfo.payway=="leftbalance"}
                                 />
                         </div>
                     </div>
@@ -185,7 +215,7 @@ export class Page extends Component {
 // payload.usepoint = true;//是否使用积分
 // payload.usebalance = true;//是否使用余额
 
-let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point}},props) => {
+let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point,defaultaddress},paystatus},props) => {
     let orderinfo = shoporder.orders[props.match.params.id];
     if(!orderinfo.hasOwnProperty("couponid")){
         orderinfo = {...orderinfo, couponid: ''};
@@ -193,21 +223,59 @@ let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point}},prop
     
     //获取当前订单地址
     let orderAddressInfo = order.orderAddressInfo;
+    if(_.isEmpty(orderAddressInfo)){
+        orderAddressInfo = defaultaddress;
+    }
+
+    //最终支付金额
+    let payprice = orderinfo.orderprice;
+    //扣除优惠券
+    payprice -=  orderinfo.couponprice;
+
     //初始化抵扣金额
     orderinfo.balanceprice = 0;
     orderinfo.pointprice = 0;
+
+    //使用的积分
+    let point_used = 0;
+
     //积分抵扣金额
-    if(orderinfo.usepoint && point>0){
+    if(paystatus.usepoint && point>0 && payprice>0){
         let pointvsmoney = app.pointvsmoney;
-        orderinfo.pointprice = point * pointvsmoney * .01;
+        let pointprice = point * pointvsmoney * .01;
+        orderinfo.pointprice = pointprice<=payprice?pointprice:payprice;
+        point_used =  (orderinfo.pointprice * 100) / pointvsmoney;
+        payprice -= orderinfo.pointprice;
     }
+
+    //设置支付方式
+    if(payprice==0){
+        orderinfo.payway="leftbalance";
+    }else{
+        if(orderinfo.payway==''||orderinfo.payway=="leftbalance"){
+            orderinfo.payway = "alipay";
+        }
+    }
+
+    //判断是否可以余额支付
+    let balancePay = (balance>=payprice);
+
     //设置余额抵扣
-    if(orderinfo.usebalance && balance>0){
-        orderinfo.balanceprice = balance;
+    if(balancePay){
+        if(orderinfo.payway=="leftbalance" && balance>0 && payprice>0){
+            orderinfo.balanceprice = balance<=payprice?balance:payprice;
+            payprice -= orderinfo.balanceprice;
+        }
     }
-    //最终支付金额
-    let payprice = orderinfo.orderprice - orderinfo.balanceprice - orderinfo.pointprice - orderinfo.couponprice;
-    return { orderinfo:{...orderinfo}, orderAddressInfo, payprice, balance, point};
+
+    let newbalance = balance - orderinfo.balanceprice;
+    let newpoint = point - point_used;
+    
+    //修改订单积分抵扣数
+    orderinfo.point = point_used;
+
+
+    return { orderinfo:{...orderinfo}, orderAddressInfo, payprice, newbalance, newpoint, balance, point, paystatus };
 }
 
 Page = connect(mapStateToProps)(Page);

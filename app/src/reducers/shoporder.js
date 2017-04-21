@@ -11,7 +11,7 @@ import {
     myordergetall_result,
     serverpush_orderinfo,
     updata_orderinfo,
-    mycoupongetall_result
+    mycoupongetall_result,
 } from '../actions';
 import {normalizr_orderslist} from './normalizr';
 import _ from 'lodash';
@@ -29,6 +29,7 @@ const initial = {
         //优惠券
         couponid:"",
         //我的优惠券数量
+        
     },
 };
 

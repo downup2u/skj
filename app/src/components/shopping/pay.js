@@ -53,16 +53,13 @@ export class Page extends Component {
             pointprice: 0,
             point: 0,
             expressprice: parseFloat(this.props.orderExpress),//运费
-           // productprice: parseFloat(this.props.orderProductPrice),//产品总价
+            //productprice: parseFloat(this.props.orderProductPrice),//产品总价
             expressid: '',//快递信息
             expressbarid: '',//快递运单号
         };
         this.props.dispatch(myorderaddone(payload)).then((result)=>{
             let payload = {};
             payload[result.newitem._id] = result.newitem;
-            payload.usecoupon = true;//是否适用优惠券
-            payload.usepoint = true;//是否适用积分
-            payload.usebalance = true;//是否适用余额
             payload.balanceprice = 0;//余额抵扣金额
             this.props.dispatch(myorderlist_addreducers(payload));
             this.props.history.push(`/payend/${result.newitem._id}`);

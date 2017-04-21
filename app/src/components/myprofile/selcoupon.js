@@ -33,13 +33,17 @@ export class Page extends Component {
     updateContent = (item)=> {
         const {orderinfo} = this.props;
         let classname = orderinfo.orderprice>=item.pricecondition?"item":"item noitem";
-        let sel = orderinfo.couponid==item._id?" sel":"";
-        classname += sel; 
         return  (
             <div 
                 className={classname}
                 key = {item._id}
-                onClick={()=>{this.updataOrderCoupon(true, item)}}
+                onClick={()=>{
+                    if(orderinfo.orderprice>=item.pricecondition){
+                        this.updataOrderCoupon(true, item)
+                    }else{
+                        return;
+                    }
+                }}
                 >
                 <div className="leftcont">
                     <span><span>{item.pricediscount}</span>元</span>
@@ -64,17 +68,17 @@ export class Page extends Component {
         return (
             <div className="myCouponPage" style={{minHeight:(window.innerHeight)+"px"}}>
                 <NavBar lefttitle="返回" title="选择优惠券" onClickLeft={this.onClickReturn} />
-                <div className="myCouponList" style={{height:window.innerHeight-88}}>
+                <div className="myCouponList" style={{height:window.innerHeight-118}}>
                     <InfinitePage
                         pagenumber = { 100 }
                         updateContent= { this.updateContent }
                         queryfun= {mycoupongetall}
-                        listheight= {window.innerHeight-88}
+                        listheight= {window.innerHeight-118}
                         sort = {{pricecondition : 1}}
                         query = {{usestatus : "未使用"}}
                     />
                 </div>
-                <div className="selcouponBtn" onClick={()=>{this.updataOrderCoupon(false)}}>不使用优惠券</div>
+                <div className="selcouponBtn" onClick={()=>{this.updataOrderCoupon(false,{})}}>不使用优惠券</div>
             </div>
         )
     }
