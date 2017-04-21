@@ -93,8 +93,8 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
                           <Icon name="talk outline"/>
                           评论 ({topic.comments.length})
                       </div>
-                      <Feed.Like>
-                          <Icon name='like' onClick={clicklove}/>
+                      <Feed.Like onClick={clicklove}>
+                          <Icon name='like' />
                           赞 ({topic.loves.length})
                       </Feed.Like>
                   </Feed.Meta>

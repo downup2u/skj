@@ -180,7 +180,19 @@ export class Page extends React.Component {
                     <div className="proinfoBodyHead">
                         商品详情
                     </div>
-                    <div className="proinfoBodyBody" dangerouslySetInnerHTML={{__html: proinfo.desc}} />
+                    <div className="proinfoBodyBody">
+
+                        {
+                            proinfo.picurldetails.length>0
+                            ?
+                            _.map(proinfo.picurldetails, (picurl,index)=>{
+                                return (<img src={picurl} key="index" />)
+                            })
+                            :
+                            (<div style={{textAlign:"center",lineHeight:"50px"}}>－{proinfo.picurldetails.length}暂无数据－</div>)
+                        }
+
+                    </div>
                 </div>
                 <div className="proinfoFoot">
                     <span onClick={()=>{this.showaddcartdilog(proinfo._id)}}><i>加入购物车</i></span>

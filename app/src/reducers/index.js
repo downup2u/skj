@@ -19,6 +19,7 @@ import shoporder from './shoporder';
 import infinitepage from './infinitepage';
 import profit from './profit';
 import paystatus from './paystatus';
+import share from './share';
 
 export default combineReducers(
   { 
@@ -40,6 +41,7 @@ export default combineReducers(
     nextusers,
     profit,
     paystatus,
+    share,
     form: formReducer
   }
 );

@@ -2,9 +2,11 @@
     width: 100%;
     background: #EEE;
 }
+.feedPage #ListInside >div{
+    margin-bottom: 15px;
+}
 .commentlistcontent{
     background: #FFF;
-    margin-bottom: 15px;
 }
 .commentlistcontent.hide{
     display: none;

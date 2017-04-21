@@ -3,14 +3,17 @@
 }
 .AddressAddPage .setForm {
     display: flex;
-    justify-content: space-between;
-    padding: 10px 15px;
     background: #FFF;
+}
+.AddressAddPage .setForm > div {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     font-size: 14px;
+    height: 40px;
+    flex-grow: 1;
+    margin: 5px 15px;
 }
-
-
 .AddressListPage .listcont{
 
 }

@@ -22,6 +22,8 @@ import TopTip from './community_topictip';
 import { gettopiclist } from '../actions/sagacallback';
 import InfinitePage from './controls/infinitecontrol';
 
+import { withRouter } from 'react-router-dom';
+
 
 export class Topic extends React.Component {
     render() {
@@ -30,7 +32,7 @@ export class Topic extends React.Component {
         let commentslength = topic.comments.length;
         let showcomments = commentslength>0?"commentlistcontent":"commentlistcontent hide";
         let length = commentslength>2?2:topic.comments.length;
-        let showmore = commentslength>0?(<div className="comentShowMore" onClick={()=>{this.props.onClickTopic(topic._id);}}>查看更多...</div>) :'';
+        let showmore = commentslength>2?(<div className="comentShowMore" onClick={()=>{this.props.onClickTopic(topic._id);}}>查看更多...</div>) :'';
         for (let i = 0; i<length; i++) {
             let commentid = topic.comments[i];
             commentsco.push(
@@ -192,6 +194,7 @@ const mapStateToProps = ({forum:{useralerttopiclist}}) => {
     return {communityListHeight};
 }
 Page = connect(mapStateToProps)(Page);
+Page = withRouter(Page);
 export default Page;
 
 // 回复自己帖子？

@@ -14,6 +14,8 @@ import Userinfo from './components/user-info.js';
 import ProfileDetail from './components/profiledetail.js';
 import { TransitionMotion, spring } from 'react-motion';
 
+//我的邀请码
+import Mycode from './components/myprofile/mycode.js';
 //订单选择优惠券
 import Selcoupon from './components/myprofile/selcoupon.js';
 //订单选择地址
@@ -259,16 +261,18 @@ const CoApp = (props) => {
             <CustomRoute path="/userbind" component={Userbind} /> 
             <CustomRoute path="/seladdress" component={requireAuthentication(Seladdress)} /> 
             <CustomRoute path="/selcoupon/:id" component={requireAuthentication(Selcoupon)} /> 
+            <CustomRoute path="/mycode" component={requireAuthentication(Mycode)} /> 
+
 
             <CustomRoute component={App}/>
         </Switch>
     );
 }
 
-import {hidepopmessage} from './actions/index.js';
+import { hidepopmessage } from './actions/index.js';
 import { Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-
+import Sharebox from './components/tools/share';
 
 class MessageCo extends React.Component {
     onDismiss = ()=> {
@@ -336,6 +340,7 @@ class AppRoot extends React.Component {
             <div>
                 <MessageCo />
                 <div className="pageWamp"><CoApp /></div>
+                <Sharebox />
             </div>
             );
     }

@@ -1,0 +1,45 @@
+/*
+    我的邀请码
+*/
+import React, { Component, PropTypes } from 'react';
+import NavBar from '../nav.js';
+import { Input, Button, Menu, Icon } from 'semantic-ui-react';
+import '../../../public/css/mycode.css';
+import '../../../public/css/head.css';
+import { connect } from 'react-redux';
+import {
+    share_data_updata
+} from '../../actions';
+
+export class Page extends Component {
+
+    onClickReturn =()=>{
+        this.props.history.goBack();
+    }
+    showShare =()=>{
+        this.props.dispatch(share_data_updata(true));
+    }
+
+    render() {
+        return (
+            <div className="mycodePage">
+                <div className="PageHead">
+                    <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
+                    <span className="title">我的邀请码</span>
+                    <span className="imgcont" onClick={()=>{this.showShare()}} >
+                        <img src="img/head/1.png"/>
+                    </span>
+                </div>
+                <div className="content">
+                    <img src="img/10.png" />
+                    <span>扫描二维码</span>
+                    <span>邀请其他用户加入</span>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default connect()(Page);
+
+

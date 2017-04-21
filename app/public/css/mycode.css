@@ -1,0 +1,52 @@
+.mycodePage{
+
+}
+.mycodePage .content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.mycodePage .content img{
+    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.mycodePage .content span{
+    font-size: 16px;
+}
+
+.mycodePage .PageHead {
+    background: #5596d6;
+    display: flex;
+    align-items: center;
+}
+
+.mycodePage .PageHead .title {
+    flex-grow: 1;
+    text-align: center;
+    line-height: 48px;
+    color: #FFF;
+    font-size: 16px;
+}
+
+.mycodePage .PageHead .imgcont {
+    display: flex;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.mycodePage .PageHead .imgcont img {
+    width: 30px;
+}
+
+.mycodePage .PageHead i.icon {
+    font-size: 30px;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+}

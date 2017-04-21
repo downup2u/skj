@@ -5,7 +5,8 @@ import '../../public/css/myprofile.css';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {
-    myOrderList_filler_set
+    myOrderList_filler_set,
+    share_data_updata
 } from '../actions';
 
 let Page =(props)=> {
@@ -17,6 +18,11 @@ let Page =(props)=> {
         props.dispatch(myOrderList_filler_set(status));
         onClickPage("/myorder");
     };
+
+    let showShare =()=>{
+        props.dispatch(share_data_updata(true));
+    }
+
     return (
         <div className="myProfilePage"
              style={{
@@ -80,11 +86,11 @@ let Page =(props)=> {
                         </div>
                     </div>
                     <div className="ll">
-                        <div>
+                        <div onClick={()=>{onClickPage('/mycode')}}>
                             <img src="img/myprofile/8.png"/>
                             <span>推广产品</span>
                         </div>
-                        <div>
+                        <div onClick={()=>{showShare()}}>
                             <img src="img/myprofile/9.png"/>
                             <span>分享赚钱</span>
                         </div>

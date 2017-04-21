@@ -27,7 +27,8 @@ let renderNewaddressForm = (fields)=> {
                     </List.Content>
                 </List.Item>
                 <List.Item>
-                  <Addresssellevel3 {...fields.seladdr.input} />
+                    <div className="tit">选择地区:</div>
+                    <Addresssellevel3 {...fields.seladdr.input} />
                 </List.Item>
                 <List.Item>
                     <div className="tit">详细地址:</div>
@@ -38,11 +39,22 @@ let renderNewaddressForm = (fields)=> {
                     </List.Content>
                 </List.Item>
             </List>
-            {!fields.isdefaultaddress.input.value?
-            (<div className="setForm">
-                <span>是否设为默认地址</span>
-                <Radio onClick={onClickDefault}/>
-            </div>):null}
+            <div className="setForm">
+                {
+                    !fields.isdefaultaddress.input.value?
+                    (
+                        <div>
+                            <span>是否设为默认地址</span>
+                            <Checkbox onClick={onClickDefault} checked={false} />
+                        </div>
+                    ):(
+                        <div>
+                            <span>当前为默认地址</span>
+                            <Checkbox disabled checked={true} />
+                        </div>
+                    )
+                }
+            </div>
         </div>);
 };
 
