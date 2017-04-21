@@ -12,8 +12,7 @@ import {
 } from '../../actions/sagacallback.js';
 import {
     myorderlist_addreducers,
-    set_orderSurePage,
-    getaddresslist_request
+    set_orderSurePage
 } from '../../actions';
 
 
@@ -153,6 +152,9 @@ let mapStateToProps = ({shop, order, shoporder, userlogin, address}) => {
     let orderExpress = order.orderExpress;
     //获取当前订单地址
     let orderAddressInfo = order.orderAddressInfo;
+    if(_.isEmpty(orderAddressInfo)){
+        orderAddressInfo = userlogin.defaultaddress;
+    }
     return {products, orderPrice, orderProductsdetail, orderExpress, orderAddressInfo};
 }
 Page = connect(mapStateToProps)(Page);
