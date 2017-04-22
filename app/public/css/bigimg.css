@@ -23,8 +23,11 @@
     justify-content: center;
 }
 .showBigImg.hide{
-    display: none
+    display: none;
 }
 .showBigImg .swiper-container{
     width: 100%;
+}
+.showBigImg .swiper-container .swiper-wrapper{
+    position: absolute;
 }
