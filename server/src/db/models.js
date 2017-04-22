@@ -2,11 +2,13 @@ let mongoose     = require('mongoose');
 mongoose.Promise = global.Promise;
 let Schema       = mongoose.Schema;
 let mongoosePaginate = require('mongoose-paginate');
+const Chance = require('chance');
+const chance = new Chance();
 //系统设置
 let SystemConfigSchema = new Schema({
-    productid1: String,
-    productid2: String,
-    expressfee:String,
+    productcategoryid1: String,//套餐专题
+    productcategoryid2: String,//一体机专题
+    expressfee:Number,
     expressfeeforfree:Number,
     bonuslevel1:{ type: Schema.Types.Number,default: 0.1 },//一级分销提成百分比
     bonuslevel2:{ type: Schema.Types.Number,default: 0.05 },//二级分销提成百分比
@@ -14,7 +16,19 @@ let SystemConfigSchema = new Schema({
     getpointfromsign:{ type: Schema.Types.Number,default: 10},//每天签到一次
     getpointfromshare:{ type: Schema.Types.Number,default: 5},//分享得到积分
     pointlimitshare:{ type: Schema.Types.Number,default: 30},//每天最多获得分享的积分
-    sharesetting:String,
+    sharesetting:{ type:  Schema.Types.String,default:`{
+                    "title":"(后台需要设置分享标题)", 
+                    "descrption":"(后台需要设置分享详情内容)",
+                    "picture":"https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2378550344,2476789148&fm=58", 
+                    "url":"http://www.xiaheng.net/"
+                }`},
+    memberlevelsetting:{ type:  Schema.Types.String,default:`{
+                    "初级会员":0, 
+                    "中级会员":200,
+                    "高级会员":500, 
+                    "黄金会员":1000,
+                    "钻石会员":1500
+                }`}
 });
 SystemConfigSchema.plugin(mongoosePaginate);
 let SystemConfig  = mongoose.model('SystemConfig',  SystemConfigSchema);
@@ -25,9 +39,14 @@ let UserSchema = new Schema({
     passwordsalt: String,
     openidqq: String,
     openidweixin: String,
-    created_at: Date,
+    created_at: { type: Date, default:new Date()},
     updated_at: Date,
-    profile:Schema.Types.Mixed,
+    lastreadmsgtime_at: { type: Date, default:new Date()},
+    profile:{ type: Schema.Types.Mixed,default:{ 
+        nickname:`游客${chance.string({length: 4,pool: '0123456789'})}`,
+        avatar:'img/myprofile/1.png'},
+        sex:'男'
+    },
     defaultaddress:{ type: Schema.Types.ObjectId, ref: 'Address' },
     userfrom:{ type: Schema.Types.ObjectId, ref: 'User' },
     userfrom2:{ type: Schema.Types.ObjectId, ref: 'User' },
@@ -42,9 +61,8 @@ let User  = mongoose.model('User',  UserSchema);
 
 //动态管理
 let NewsSchema = new Schema({
-    creator:{ type: Schema.Types.ObjectId, ref: 'User' },
     textname:String,
-    created_at: Date,
+    created_at: { type: Date, default:new Date()},
     isenabled:Boolean
 });
 NewsSchema.plugin(mongoosePaginate);
@@ -56,7 +74,7 @@ let DeviceSchema = new Schema({
     devicename:String,
     devicebrand:String,
     devicemodel: String,
-    created_at: Date,
+    created_at:{ type: Date, default:new Date()},
 });
 DeviceSchema.plugin(mongoosePaginate);
 let Device  = mongoose.model('Device',  DeviceSchema);
@@ -67,7 +85,7 @@ let AddressSchema = new Schema({
     phonenumber:String,
     seladdr: Schema.Types.Mixed,
     addressname: String,
-    created_at: Date,
+    created_at: { type: Date, default:new Date()},
 });
 AddressSchema.plugin(mongoosePaginate);
 let Address  = mongoose.model('Address',  AddressSchema);
@@ -83,7 +101,7 @@ let UserAlertTopicSchema = new Schema({
     commentself:{ type: Schema.Types.ObjectId, ref: 'Comment' },//针对那条评论
     comment:{ type: Schema.Types.ObjectId, ref: 'Comment' },//新发的评论
     userfrom:{ type: Schema.Types.ObjectId, ref: 'User' },//来自用户
-    created_at: Date,//发表时间
+    created_at: { type: Date, default:new Date()},
     isreaded:{type:Schema.Types.Boolean,default:false}//是否已读
 });
 UserAlertTopicSchema.plugin(mongoosePaginate);
@@ -91,7 +109,7 @@ let UserAlertTopic  = mongoose.model('UserAlertTopic',  UserAlertTopicSchema);
 
 let TopicSchema = new Schema({
   creator:{ type: Schema.Types.ObjectId, ref: 'User' },
-  created_at: Date,
+  created_at: { type: Date, default:new Date()},
   title:String,
   picurl:[String],
   loves:[String],
@@ -103,7 +121,7 @@ let Topic  = mongoose.model('Topic',  TopicSchema);
 
 let CommentSchema = new Schema({
   creator:{ type: Schema.Types.ObjectId, ref: 'User' },
-  created_at: Date,
+  created_at: { type: Date, default:new Date()},
   title:String,
   loves:[{ type: Schema.Types.ObjectId, ref: 'User' }],
   comments:[{ type: Schema.Types.ObjectId, ref: 'Comment' , default: []}],
@@ -115,7 +133,7 @@ let Comment  = mongoose.model('Comment',  CommentSchema);
 UserAdminSchema = new Schema({
   username:String,
   password:String,
-  created_at: Date,
+  created_at: { type: Date, default:new Date()},
   updated_at: Date,
 });
 let UserAdmin  = mongoose.model('UserAdmin',  UserAdminSchema);
@@ -126,7 +144,7 @@ let NotifyMessageSchema = new Schema({
     touserid:String,
     messagetitle:String,
     messagecontent:String,
-    created_at:Date,
+    created_at:{ type: Date, default:new Date()},
 });
 NotifyMessageSchema.plugin(mongoosePaginate);
 let NotifyMessageModel =mongoose.model('notifymessage',  NotifyMessageSchema);
@@ -151,7 +169,6 @@ let ProductSchema = new Schema({
     pricenow:Number,
     pricemarket:Number,
     brief:String,
-    desc:String,
     categoryid:{ type: Schema.Types.ObjectId, ref: 'Category' },
     weight:Number,
     stock:{ type: Number, default:0},
@@ -168,7 +185,7 @@ let CategorySchema = new Schema({
     picurl:String,
     showflag:Number,
     sortflag:Number,
-    created_at: Date,
+    created_at: { type: Date, default:new Date()},
     isenabled:{ type: Boolean, default:true},
 });
 CategorySchema.plugin(mongoosePaginate);
@@ -178,7 +195,7 @@ let MycartSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
     product:{ type: Schema.Types.ObjectId, ref: 'Product' },
     number:Number,
-    created_at: Date,
+    created_at: { type: Date, default:new Date()},
     isenabled:Boolean
 });
 MycartSchema.plugin(mongoosePaginate);
@@ -191,7 +208,8 @@ let OrderSchema = new Schema({
     body:String,//订单内容（文字）
     realprice:Number,//实付价
     orderprice:Number,//订单价=应付价
-    orderstatus:String,
+    balanceprice:Number,//余额抵扣金额
+    orderstatus:String,//未支付|待发货|待收货|已完成|我的退货
     paystatus:{ type: String, default:'未支付'},
     orderaddress:{
         addressid:String,
@@ -217,7 +235,8 @@ let OrderSchema = new Schema({
     expressid:{ type: Schema.Types.ObjectId, ref: 'Express' },
     expressbarid:String,
     expressprice:Number,//运费
-    created_at: Date,
+    expresscode:String, //快递编码
+    created_at: { type: Date, default:new Date()},
     pay_at:Date,
 });
 OrderSchema.plugin(mongoosePaginate);
@@ -225,6 +244,9 @@ let Order  = mongoose.model('Order',  OrderSchema);
 //快递公司／快递单号／
 let ExpressSchema = new Schema({
     expressname:String,
+    expresscode:String, //快递编码
+    memo:String,//备注
+    isvisiable:Boolean
 });
 ExpressSchema.plugin(mongoosePaginate);
 let Express  = mongoose.model('Express',  ExpressSchema);
@@ -233,7 +255,7 @@ let Express  = mongoose.model('Express',  ExpressSchema);
 let MycollectionSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
     product:{ type: Schema.Types.ObjectId, ref: 'Product' },
-    created_at: Date,
+    created_at: { type: Date, default:new Date()},
 });
 MycollectionSchema.plugin(mongoosePaginate);
 let Mycollection  = mongoose.model('Mycollection',  MycollectionSchema);
@@ -246,7 +268,8 @@ let MyCouponSchema = new Schema({
     pricediscount:Number,//抵扣金额
     expdate: Date,// 过期时间
     usestatus:{ type: Schema.Types.String,default: '未使用'},// //未使用／已使用／已失效
-    created_at: Date,
+    fromorder:{ type: Schema.Types.ObjectId, ref: 'Order' },
+    created_at: { type: Date, default:new Date()},
     used_at:Date,
 });
 MyCouponSchema.plugin(mongoosePaginate);
@@ -258,7 +281,7 @@ let CouponSchema = new Schema({
     pricediscount:Number,//抵扣金额
     totalstock:Number,//总库存
     leftstock:Number,//剩余库存
-    created_at: Date,//生成时间
+    created_at: { type: Date, default:new Date()},//生成时间
     expdate: Date,// 过期时间
 });
 CouponSchema.plugin(mongoosePaginate);
@@ -271,7 +294,7 @@ let ProductcommentSchema = new Schema({
     order:{ type: Schema.Types.ObjectId, ref: 'Order' },
     ratenum:Number,
     commenttxt:String,
-    created_at: Date,
+    created_at: { type: Date, default:new Date()},
     isshow:Boolean
 });
 ProductcommentSchema.plugin(mongoosePaginate);
@@ -281,7 +304,7 @@ let Productcomment  = mongoose.model('Productcomment',  ProductcommentSchema);
 let FeedbackSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
     feedbacktxt:String,
-    created_at: Date,
+    created_at: { type: Date, default:new Date()},
 });
 FeedbackSchema.plugin(mongoosePaginate);
 let Feedback  = mongoose.model('Feedback',  FeedbackSchema);
@@ -298,7 +321,7 @@ let RechargerecordSchema = new Schema({
     feebonus:Number,//奖励金额
     orderprice:Number,//订单金额
     srctype:String,//‘order'来自订单,'withdrawcash'来自提现
-    created_at: Date,
+    created_at: { type: Date, default:new Date()},
 });
 RechargerecordSchema.plugin(mongoosePaginate);
 let Rechargerecord  = mongoose.model('Rechargerecord',  RechargerecordSchema);
@@ -325,7 +348,7 @@ let PointrecordSchema = new Schema({
     fromorder:{ type: Schema.Types.ObjectId, ref: 'Order' },
     srctype:String,//‘order'来自订单
     reason:String,//原因,例如：'签到’
-    created_at: Date,
+    created_at:{ type: Date, default:new Date()},
     getdate:String,//获得日期,YYYY-MM-DD
 });
 PointrecordSchema.plugin(mongoosePaginate);

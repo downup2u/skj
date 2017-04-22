@@ -75,7 +75,7 @@ const OrderlistEdit = (props) => {
                 <ReferenceInput source="expressid" reference="express" allowEmpty
                 filterToQuery={searchText => ({ expressname: searchText })}
                 filter={{ isvisiable: true }}>
-                  <SelectInput optionText="expressname" />
+                  <SelectInput optionText={item=>(`${item.expressname}(${item.expresscode})`)} />
                 </ReferenceInput>
                 <SelectInput source="orderstatus" choices={[
                     { id: '未支付', name: '未支付' },

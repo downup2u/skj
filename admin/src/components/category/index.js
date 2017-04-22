@@ -46,7 +46,7 @@ const CategorylistCreate = (props) => (
            <SimpleForm>
              <TextInput label="名字" source="name" validation={{ required: true }}/>
              <SelectInput  label="显示位置"  source="showflag" choices={[
-                 { id: 0, name: '不显示' },
+                 { id: 0, name: '不显示(套餐或一体机分类用）' },
                  { id: 1, name: '显示在横排' },
                  { id: 2, name: '显示在纵排' },
                  { id: 3, name: '横纵都显示' },
@@ -68,7 +68,7 @@ const CategorylistEdit = (props) => {
           <SimpleForm>
              <TextInput label="名字" source="name" validation={{ required: true }}/>
              <SelectInput  label="显示位置"  source="showflag" choices={[
-                 { id: 0, name: '不显示' },
+                 { id: 0, name: '不显示(套餐或一体机分类用）' },
                  { id: 1, name: '显示在横排' },
                  { id: 2, name: '显示在纵排' },
                  { id: 3, name: '横纵都显示' },

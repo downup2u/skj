@@ -69,8 +69,8 @@ const SystemconfigCreateTitle = ({ record }) => {
 export const SystemconfigCreate = (props) => (
        <Create {...props} title={<SystemconfigCreateTitle />} >
            <SimpleForm>
-                <TextInput  label="正常运费" source="expressfee" />
-                <TextInput  label="免运费金额" source="expressfeeforfree" />
+                <NumberInput  label="正常运费" source="expressfee" />
+                <NumberInput  label="免运费金额" source="expressfeeforfree" />
             <ReferenceInput source="productcategoryid1" reference="category" allowEmpty>
               <SelectInput optionText="name" />
            </ReferenceInput>
@@ -93,8 +93,8 @@ export const SystemconfigCreate = (props) => (
 export const SystemconfigEdit = (props) => (
     <EditPage {...props} title={<SystemconfigTitle />}>
         <SimpleForm>
-            <TextInput  label="正常运费" source="expressfee" />
-            <TextInput  label="免运费金额" source="expressfeeforfree" />
+            <NumberInput  label="正常运费" source="expressfee" />
+            <NumberInput  label="免运费金额" source="expressfeeforfree" />
             <ReferenceInput source="productcategoryid1" reference="category" allowEmpty>
               <SelectInput optionText="name" />
            </ReferenceInput>
