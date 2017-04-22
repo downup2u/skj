@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button,Segment } from 'semantic-ui-react';
-import {clickTab} from '../actions/index.js';
+import {clickTab,setmsgcount} from '../actions/index.js';
+import {getnotifymessage} from '../actions/sagacallback.js';
+
 import Page0 from './home.js';
 import Page1 from './community.js';
 //import Page2 from './test';
@@ -16,17 +18,31 @@ export class Page extends React.Component {
 
     onClickTab(curtabindex) {
         this.props.dispatch(clickTab({curtabindex: curtabindex}));
+        if(curtabindex === 3){
+            let payload = {
+                query:{created_at:{$gt:this.props.lastreadmsgtime_at}},
+                options:{
+                    page: 1,
+                    limit: 1,
+                }
+            };
+            this.props.dispatch(getnotifymessage(payload)).then(({result})=>{
+                console.log('setmsgcount:' + result.total);
+                this.props.dispatch(setmsgcount(result.total));
+                //getnotifymessage result=>{"docs":[],"total":0,"limit":10,"page":1,"pages":1}
+            });
+        }
     }
 
     render() {
-        let pagesz = [];
-        pagesz.push(<Page0 key="page0" {...this.props} />);
-        pagesz.push(<Page1 key="page1"  {...this.props} />);
-        pagesz.push(<Page2 key="page2"  {...this.props} />);
-        pagesz.push(<Page3 key="page3"  {...this.props} />);
-        let pagewamp = {
-            height: window.height,
-        }
+        // let pagesz = [];
+        // pagesz.push(<Page0 key="page0" {...this.props} />);
+        // pagesz.push(<Page1 key="page1"  {...this.props} />);
+        // pagesz.push(<Page2 key="page2"  {...this.props} />);
+        // pagesz.push(<Page3 key="page3"  {...this.props} />);
+        // let pagewamp = {
+        //     height: window.height,
+        // }
         let btnsz = [
             {
                 title: '首页',
@@ -72,8 +88,8 @@ export class Page extends React.Component {
     }
 }
 
-const mapStateToProps = ({app}) => {
-    return app;
+const mapStateToProps = ({app:{curtabindex},userlogin:{lastreadmsgtime_at}}) => {
+    return {curtabindex,lastreadmsgtime_at};
 };
 
 Page = connect(mapStateToProps)(Page);

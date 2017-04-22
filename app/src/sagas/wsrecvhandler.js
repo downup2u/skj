@@ -118,15 +118,20 @@ import {
 
     oauthbinduser_result,
     wait_oauthbinduser_result,
+    setlastreadmsgtime_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
   register_request,register_result,register_err,
 } from '../actions/index.js';
-import {store} from '../env/store.js';
 
 
 const handlerlist = {
+  ['setlastreadmsgtime_result']: (socket, emit)=> {
+      return (result)=>{
+        emit(setlastreadmsgtime_result(result));
+      }
+  },
   ['oauthbinduser_err']: (socket, emit)=> {
     return (({errmsg})=> {
       emit(showpopmessage({

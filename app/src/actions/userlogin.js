@@ -3,6 +3,9 @@
  */
 import { createAction } from 'redux-act';
 
+export const setlastreadmsgtime_request = createAction('setlastreadmsgtime_request');
+export const setlastreadmsgtime_result = createAction('setlastreadmsgtime_result');
+
 export const wait_register_request = createAction('wait_register_request');
 export const wait_register_result = createAction('wait_register_result');
 export const register_request = createAction('userlogin.register_request');

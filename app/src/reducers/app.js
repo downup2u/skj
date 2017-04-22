@@ -5,7 +5,8 @@ import {
     hidepopmessage,
     uicommentimg,
     uiaddcartdilog,
-    getsystemconfig_result
+    getsystemconfig_result,
+    setmsgcount
 } from '../actions/index.js';
 
 
@@ -31,11 +32,17 @@ const initial = {
         expressfeeforfree: 100,
         productid1: '',
         productid2: '',
+
+        newmsgnumber:0
     },
 
 };
 
 const app = createReducer({
+    [setmsgcount]: (state, newmsgnumber) => {
+        console.log('setmsgcount===>' + newmsgnumber);
+        return { ...state, newmsgnumber};
+    },
     [getsystemconfig_result]: (state, payload) => {
         return { ...state, ...payload };
     },

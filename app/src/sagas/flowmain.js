@@ -73,6 +73,8 @@ import {
     getuserpointdetails_request,
     loginwithoauth_request,
     oauthbinduser_request,
+
+    setlastreadmsgtime_request,
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -232,6 +234,7 @@ function* handleIO(socket) {
         'getbanner':`${getbanner_request}`,
         'getcategory':`${getcategory_request}`,
         'getproduct':`${getproduct_request}`,
+        'setlastreadmsgtime':`${setlastreadmsgtime_request}`,
     };
 
 

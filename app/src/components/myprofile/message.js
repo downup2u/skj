@@ -4,11 +4,16 @@ import '../../../public/css/mymessage.css';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import {getnotifymessage} from '../../actions/sagacallback';
-import { ui_setnotifymessage } from '../../actions';
+import { ui_setnotifymessage,setlastreadmsgtime_request } from '../../actions';
 import InfinitePage from '../controls/infinitecontrol';
+
 
 // http://www.cnblogs.com/qq120848369/p/5920420.html
 export class Page extends Component {
+
+   componentWillMount () {
+        this.props.dispatch(setlastreadmsgtime_request({}));
+    }
 
     onClickReturn = ()=> {
         this.props.history.goBack();

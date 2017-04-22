@@ -20,3 +20,5 @@ export const uiinfinitepage_updateitem = createAction('uiinfinitepage_updateitem
 
 export const getsystemconfig_request = createAction('getsystemconfig_request');
 export const getsystemconfig_result = createAction('getsystemconfig_result');
+
+export const setmsgcount = createAction('setmsgcount');

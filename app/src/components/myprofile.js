@@ -43,10 +43,10 @@ let Page =(props)=> {
                         <span className="usertype"></span>
                     </div>)
                 }
-                    <div className="userCode">我的积分 <span>0</span></div>
+                    <div className="userCode">我的积分 <span>{props.point}</span></div>
                     <div className="userMessageLnk"  onClick={()=>{onClickPage('/mymessage')}}>
                         <img src="img/message.png"/>
-                        <span>0</span>
+                        <span>{props.newmsgnumber}</span>
                     </div>
             </div>
             <div className="myProfileBannerCont">
@@ -130,8 +130,8 @@ let Page =(props)=> {
     );
 }
 
-const mapStateToProps =  ({userlogin}) =>{
-    return userlogin;
+const mapStateToProps =  ({userlogin,app:{newmsgnumber}}) =>{
+    return {...userlogin,newmsgnumber};
 };
 Page = withRouter(Page);
 export default connect(

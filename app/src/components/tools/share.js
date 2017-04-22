@@ -6,14 +6,24 @@ import '../../../public/css/share.css';
 import { 
     share_data_updata
 } from '../../actions/index.js';
+import {
+    shareQQ,
+    shareWechatFriend,
+    shareWechatCircle,
+    shareQQFriend
+}from '../../env/share';
 
-
-let Page = ({show,dispatch})=>{
+let Page = ({show,sharesetting,dispatch})=>{
 
     let hide = (type)=>{
         dispatch(share_data_updata(type));
     }
-
+    let onClickShare = (fn)=>{
+        fn(sharesetting,(result)=>{
+             alert(JSON.stringify(result));
+            console.log(`result:${JSON.stringify(result)}`);
+        });
+    }
     return (
         <div 
             className={show?"shareContent":"shareContent hide"}
@@ -22,19 +32,19 @@ let Page = ({show,dispatch})=>{
                 className="shareBox"
                 >
                 <div className="shareList">
-                    <div className="li">
+                    <div onClick={()=>{onClickShare(shareWechatFriend)}} className="li">
                         <img src="img/share/1.png" />
                         <span>微信</span>
                     </div>
-                    <div className="li">
+                    <div onClick={()=>{onClickShare(shareQQ)}} className="li">
                         <img src="img/share/2.png" />
                         <span>QQ空间</span>
                     </div>
-                    <div className="li">
+                    <div onClick={()=>{onClickShare(shareWechatCircle)}} className="li">
                         <img src="img/share/3.png" />
                         <span>微信朋友圈</span>
                     </div>
-                    <div className="li">
+                    <div onClick={()=>{onClickShare(shareQQFriend)}} className="li">
                         <img src="img/share/4.png" />
                         <span>QQ</span>
                     </div>
@@ -45,8 +55,8 @@ let Page = ({show,dispatch})=>{
     )
 };
 
-let mapStateToProps =  ({share}) =>{
-    return {...share};
+let mapStateToProps =  ({share:{show},app:{sharesetting}}) =>{
+    return {show,sharesetting};
 };
 Page = connect(mapStateToProps)(Page);
 export default Page;

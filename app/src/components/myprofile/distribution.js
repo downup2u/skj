@@ -37,7 +37,7 @@ export class Page extends Component {
         this.props.dispatch(getnextusers_request({}));
     };
 
-    updateContent =(item)=>{
+    /*updateContent =(item)=>{
         return  (
             <div className="li" onClick={this.onClickPage.bind(this, "/distributioninfo")} key={item._id}>
                 <span className="num">1</span>
@@ -49,7 +49,7 @@ export class Page extends Component {
                 <span>奖励金额: <i>¥499.00</i></span>
             </div>
         );
-    };
+    };*/
 
     render() {
         return (

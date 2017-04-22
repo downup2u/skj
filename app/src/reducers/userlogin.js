@@ -12,7 +12,8 @@ import {
     serverpush_defaultaddress,
     serverpush_usermoney,
     getusergetpointsigntoday_result,
-    loginwithoauth_result
+    loginwithoauth_result,
+    setlastreadmsgtime_result
 } from '../actions/index.js';
 
 const initial = {
@@ -23,6 +24,7 @@ const initial = {
         userid:'',
         token:'',
         profile:{},
+        lastreadmsgtime_at:localStorage.getItem('lastreadmsgtime_at'),
         invitecode:'',
         defaultaddress:{},
         balance:0,
@@ -34,6 +36,10 @@ const initial = {
 };
 
 const userlogin = createReducer({
+    [setlastreadmsgtime_result]:(state,lastreadmsgtime_at)=>{
+        localStorage.setItem('lastreadmsgtime_at',lastreadmsgtime_at);
+        return  {...state,lastreadmsgtime_at};
+    },
     [loginwithoauth_result]:(state,payload)=>{
         const {bindtype,openid} = payload;
         return  {...state,bindtype,openid};
