@@ -52,6 +52,10 @@ import {
   testnotifypay
 } from '../test/testpay';
 
+import
+{
+  test_getabouthtml_request,
+} from '../test/testabout';
 
 let Page =(props)=>{
     let onClickPage=(name)=>{
@@ -59,6 +63,8 @@ let Page =(props)=>{
     };
     return (<div>
         <p style={{textAlign: 'center'}}>
+            <Button onClick={()=>{test_getabouthtml_request(props.dispatch)}}>测试关于信息</Button><br />
+             <br />
             <Button onClick={()=>{test_feedbackaddone(props.dispatch)}}>测试用户反馈</Button><br />
              <br />
 

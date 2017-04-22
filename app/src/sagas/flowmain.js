@@ -76,7 +76,8 @@ import {
 
     setlastreadmsgtime_request,
 
-    feedbackaddone_request
+    feedbackaddone_request,
+    getabouthtml_request,
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -225,6 +226,7 @@ function* handleIOWithAuth(socket) {
 
 function* handleIO(socket) {
     let fnsz =  {
+        'getabouthtml':`${getabouthtml_request}`,
         'oauthbinduser':`${oauthbinduser_request}`,
         'loginwithoauth':`${loginwithoauth_request}`,
         'login':`${login_request}`,

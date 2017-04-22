@@ -9,6 +9,12 @@ export default {
     },
   },
   resources: {
+    about:{
+      name: '关于信息设置 |||| 关于信息设置',
+      fields:{
+        keyname:'设置类型',
+      }
+    },
     baseinfo:{
       name: '基本信息 |||| 基本信息',
     },

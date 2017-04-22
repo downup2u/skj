@@ -122,6 +122,7 @@ import {
 
     feedbackaddone_result,
     wait_feedbackaddone_result,
+    getabouthtml_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -130,6 +131,11 @@ import {
 
 
 const handlerlist = {
+  ['getabouthtml_result']:(socket,emit)=>{
+    return (result)=> {
+      emit(getabouthtml_result(result));
+    }
+  },
   ['app.feedbackaddone_result']:(socket,emit)=>{
     return (result)=>{
       emit(feedbackaddone_result(result));

@@ -20,9 +20,11 @@ import infinitepage from './infinitepage';
 import profit from './profit';
 import paystatus from './paystatus';
 import share from './share';
+import about from './about';
 
 export default combineReducers(
   { 
+    about,
     app,
     userlogin,
     forum,

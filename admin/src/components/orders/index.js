@@ -118,4 +118,4 @@ const OrderlistList = (props) => (//
 );
 
 
-export  {OrderlistList,OrderlistEdit,OrderlistShow};
+export  {OrderlistList,OrderlistEdit};
