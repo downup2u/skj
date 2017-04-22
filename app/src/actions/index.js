@@ -11,3 +11,4 @@ export * from './order';
 export * from './nextusers';
 export * from './profit';
 export * from './share';
+export * from './feedback';

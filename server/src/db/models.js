@@ -304,6 +304,7 @@ let Productcomment  = mongoose.model('Productcomment',  ProductcommentSchema);
 let FeedbackSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
     feedbacktxt:String,
+    picurl:[String],
     created_at: { type: Date, default:new Date()},
 });
 FeedbackSchema.plugin(mongoosePaginate);

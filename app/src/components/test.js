@@ -36,6 +36,10 @@ import {
 } from '../test/testshop';
 
 import {
+    test_feedbackaddone
+} from '../test/testfeedback';
+
+import {
     test_getusermoney,
     test_useraddpoint,
     test_getusergetpointsigntoday_request,
@@ -55,9 +59,11 @@ let Page =(props)=>{
     };
     return (<div>
         <p style={{textAlign: 'center'}}>
-            <Button onClick={()=>{testnotifypay()}}>测试服务端回调</Button><br />
+            <Button onClick={()=>{test_feedbackaddone(props.dispatch)}}>测试用户反馈</Button><br />
              <br />
 
+            <Button onClick={()=>{testnotifypay()}}>测试服务端回调</Button><br />
+             <br />
 
         <Button onClick={()=>{test_getusermoney(props.dispatch)}}>获取积分&余额</Button><br />
         <Button onClick={()=>{test_useraddpoint(props.dispatch,'签到')}}>签到得积分</Button><br />

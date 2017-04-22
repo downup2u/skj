@@ -119,6 +119,9 @@ import {
     oauthbinduser_result,
     wait_oauthbinduser_result,
     setlastreadmsgtime_result,
+
+    feedbackaddone_result,
+    wait_feedbackaddone_result,
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -127,6 +130,12 @@ import {
 
 
 const handlerlist = {
+  ['app.feedbackaddone_result']:(socket,emit)=>{
+    return (result)=>{
+      emit(feedbackaddone_result(result));
+      emit(wait_feedbackaddone_result({result:result}));
+    }
+  },
   ['setlastreadmsgtime_result']: (socket, emit)=> {
       return (result)=>{
         emit(setlastreadmsgtime_result(result));

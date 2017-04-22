@@ -47,7 +47,7 @@ export const OrderFilter = props => (
         <SelectInput source="orderstatus" choices={[
             { id: '未支付', name: '未支付' },
             { id: '待发货', name: '待发货' },
-            { id: '已发货', name: '已发货' },
+            { id: '待收货', name: '待收货' },
             { id: '已完成', name: '已完成' },
             { id: '已取消', name: '已取消' },
         ]} />
@@ -80,7 +80,7 @@ const OrderlistEdit = (props) => {
                 <SelectInput source="orderstatus" choices={[
                     { id: '未支付', name: '未支付' },
                     { id: '待发货', name: '待发货' },
-                    { id: '已发货', name: '已发货' },
+                    { id: '待收货', name: '待收货' },
                     { id: '已完成', name: '已完成' },
                     { id: '已取消', name: '已取消' },
                 ]} />

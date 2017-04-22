@@ -75,6 +75,8 @@ import {
     oauthbinduser_request,
 
     setlastreadmsgtime_request,
+
+    feedbackaddone_request
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -202,8 +204,8 @@ function* handleIOWithAuth(socket) {
             'useraddpoint':`${useraddpoint}`,
             'getusergetpointsigntoday':`${getusergetpointsigntoday_request}`,
             'getuserpointdetails':`${getuserpointdetails_request}`,
-            
-        };
+            'feedbackaddone':`${feedbackaddone_request}`,
+        };  
 
         let tasksz =[];
         for (let cmd in fnsz) {

@@ -68,6 +68,7 @@ export default {
         paystatus:'支付状态',
         creator:'关联用户',
         expressid:'选择快递公司(仅设为可见的快递公司才会列出)',
+        expresscode:'快递公司编码',
         orderprice:'商品总额',
         realprice:'实付价',
         couponprice:'优惠价抵扣',
