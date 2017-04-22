@@ -16,7 +16,6 @@ import {
     uiinfinitepage_updateitem
 } from '../../actions';
 
-
 export class Page extends React.Component {
 
     constructor(props, context) {
@@ -50,33 +49,6 @@ export class Page extends React.Component {
         }
     }
 
-//  列表数据模版
-//     {
-//     "_id": "58f0cec4e1e039036e4193f4",
-//     "payway": "alipay",
-//     "realprice": 1498,
-//     "orderprice": 1498,
-//     "orderstatus": "未支付",
-//     "provincename": "江苏省",
-//     "cityname": "常州市",
-//     "distinctname": "武进区",
-//     "address": "天润大厦",
-//     "couponprice": 0,
-//     "productprice": 1498,
-//     "creator": "58e455e7f6de2471258b292d",
-//     "created_at": "2017-04-14T13:29:40.601Z",
-//     "__v": 0,
-//     "productsdetail": [
-//         {
-//             "productid": "58f075a5c2065a04efdb828b",
-//             "number": 1,
-//             "price": 1498,
-//             "_id": "58f0cec4e1e039036e4193f5"
-//         }
-//     ],
-//     "isdeleted": false,
-//     "paystatus": "未支付"
-// }
     updateContent = (items)=> {
         return  (
             <div className="items" key={items._id}>
@@ -84,7 +56,7 @@ export class Page extends React.Component {
                     <span>订单号:{items._id}</span>
                     <span>{items.orderstatus}</span>
                 </div>
-                <div className="cont">
+                <div className="cont" onClick={()=>{this.payorder(items)}}>
                     {
                         _.map(items.productsdetail, (pro,index)=>{
                             let proinfo = this.props.products[pro.productid];
@@ -103,14 +75,32 @@ export class Page extends React.Component {
                         })
                     }
                 </div>
+
                 <div className="lnk">
                     <div className='txt'>
-                        合计：￥{items.realprice} (含运费)
+                        合计：￥{items.orderprice} (含运费)
                     </div>
-                    <div className='hotlnk'>
-                        <span className="btn del" onClick={()=>{this.delorder(items._id)}}>取消订单</span>
-                        <span className="btn pay" onClick={()=>{this.payorder(items)}}>立刻支付</span>
-                    </div>
+                    {items.orderstatus=="未支付"?(
+                        <div className='hotlnk'>
+                            <span className="btn del" onClick={()=>{this.delorder(items._id)}}>取消订单</span>
+                            <span className="btn pay" onClick={()=>{this.payorder(items)}}>立刻支付</span>
+                        </div>
+                    ):""}
+                    {items.orderstatus=="待发货"?(
+                        <div className='hotlnk' onClick={()=>{this.payorder(items)}}>
+                            订单已支付, 查看详情
+                        </div>
+                    ):""}
+                    {items.orderstatus=="待收货"?(
+                        <div className='hotlnk' onClick={()=>{this.payorder(items)}}>
+                            商家已发货, 查看详情
+                        </div>
+                    ):""}
+                    {items.orderstatus=="已完成"?(
+                        <div className='hotlnk' onClick={()=>{this.payorder(items)}}>
+                            订单已完成, 查看详情
+                        </div>
+                    ):""}
                 </div>
             </div>
         );

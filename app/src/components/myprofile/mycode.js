@@ -31,15 +31,20 @@ export class Page extends Component {
                     </span>
                 </div>
                 <div className="content">
-                    <img src="img/10.png" />
-                    <span>扫描二维码</span>
-                    <span>邀请其他用户加入</span>
+                    <span className="tt">邀请其他用户加入</span>
+                    <span className="code">{this.props.invitecode}</span>
+                </div>
+                <div className="zhu">
+                    注：邀请用户注册的时候，填写上您的邀请码，该用户就成为你的下级用户，下级用户在本平台的消费和使用，您也将获利！
                 </div>
             </div>
         );
     }
 }
 
-export default connect()(Page);
+let PageRedux =  ({userlogin:{invitecode}}) =>{
+    return invitecode;
+};
+export default connect(PageRedux)(Page);
 
 

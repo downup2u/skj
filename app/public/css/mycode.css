@@ -1,11 +1,22 @@
 .mycodePage{
-
+    background: #FFF;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }
 .mycodePage .content{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    flex-shrink: 0;
+    margin-bottom: 40px;
 }
 .mycodePage .content img{
     width: 50%;
@@ -21,6 +32,23 @@
     background: #5596d6;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
+}
+.mycodePage .content .tt{
+    font-size: 16px;
+    margin-top: 30px;
+}
+.mycodePage .content .code{
+    font-size: 3rem;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.mycodePage .zhu{
+    padding: 15px;
+    font-size: 16px;
+    background: rgba(255,242,104,.2);
+    margin: 20px;
 }
 
 .mycodePage .PageHead .title {

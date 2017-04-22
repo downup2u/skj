@@ -80,7 +80,7 @@ export class Page extends React.Component {
             price:proinfo.pricenow,
             productinfo: proinfo
         }];
-        let express = proinfo.pricenow>this.props.expressfeeforfree?0:this.props.expressfee;
+        let express = proinfo.pricenow>=this.props.expressfeeforfree?0:this.props.expressfee;
         let orderprice = proinfo.pricenow + express; 
         let payload = {
             orderAddressId:'',//地址id

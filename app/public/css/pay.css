@@ -140,6 +140,7 @@
 .PayPage .orderaddress img{
     width: 30px;
 }
+
 .PayPage .orderaddress .addressinfo{
     flex-grow: 1;
     padding-left: 10px;
@@ -150,6 +151,19 @@
     margin-bottom: 5px;
 }
 
+.PayPage .orderaddressInfo{
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    background: #FFF;
+    border-bottom: 1px solid #EEE;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.PayPage .orderaddressInfo .addressinfo{
+    flex-grow: 1;
+    padding-left: 10px;
+}
 .PayPage .subBtn{
     display: flex;
     justify-content: space-between;
@@ -216,6 +230,12 @@
     border-radius: 40px;
     color: #FFF;
     font-weight: 100;
+}
+.orderinfoPage .list{
+    margin-bottom: 15px;
+}
+.orderinfoPage .list .orderstatusinfo{
+    font-size: 16px;
 }
 
 

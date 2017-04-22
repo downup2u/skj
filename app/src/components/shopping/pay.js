@@ -61,7 +61,7 @@ export class Page extends Component {
             let payload = {};
             payload[result.newitem._id] = result.newitem;
             payload.balanceprice = 0;//余额抵扣金额
-            this.props.dispatch(myorderlist_addreducers(payload));
+            //this.props.dispatch(myorderlist_addreducers(payload));
             this.props.history.push(`/payend/${result.newitem._id}`);
         });
     };

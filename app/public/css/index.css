@@ -1,6 +1,16 @@
 *{
     overflow-scrolling:touch;
     -webkit-overflow-scrolling:touch;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+input, textarea{
+    -webkit-user-select:text;
+    -moz-user-select:text;
+    -ms-user-select:text;
+    user-select:text;
 }
 .root{
 
@@ -45,4 +55,7 @@
 }
 .homeBottom .ui.button img{
     width: 26px;
+}
+.logisticsinfoPage{
+    justify-content: flex-start;
 }

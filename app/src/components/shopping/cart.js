@@ -156,7 +156,7 @@ export class Pricetotal extends Component {
             history
         } = this.props;
         let prolist = this.props.toordercartsproducts;
-        let express = totalprice>expressfeeforfree?0:expressfee;
+        let express = totalprice>=expressfeeforfree?0:expressfee;
         let orderprice = totalprice + express; 
         let orderAddressInfo = {};
         if(defaultaddress.hasOwnProperty("_id")){
@@ -223,9 +223,9 @@ let mapStateToPropsPricetotal = (
         let toordercartsproducts = [];
         _.map(toordercarts,(item,key)=>{
             let number = parseInt(item.number);
-            let price = parseInt(products[item.product].pricenow);
+            let price = parseFloat(products[item.product].pricenow);
             let priceitem = number*price;
-            priceitem = parseInt(priceitem.toFixed(2));
+            priceitem = parseFloat(priceitem.toFixed(2));
             totalprice += priceitem;
             itemsel++;
             let product = {
