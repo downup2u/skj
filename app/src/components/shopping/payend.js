@@ -45,7 +45,7 @@ export class Page extends Component {
     onClickPay =()=> {
         let orderinfo = this.props.orderinfo;
         let dispatch = this.props.dispatch;
-        let payway = this.props.payway;//注意：这里是undefined!!!!!!!!!!
+        let payway = orderinfo.payway;
 
         let payload = {
             _id:orderinfo._id,
@@ -248,15 +248,6 @@ let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point,defaul
         payprice -= orderinfo.pointprice;
     }
 
-    //设置支付方式
-    if(payprice==0){
-        orderinfo.payway="leftbalance";
-    }else{
-        if(orderinfo.payway==''||orderinfo.payway=="leftbalance"){
-            orderinfo.payway = "alipay";
-        }
-    }
-
     //判断是否可以余额支付
     let balancePay = (balance>=payprice);
 
@@ -265,6 +256,15 @@ let mapStateToProps = ({shop,app,shoporder,order,userlogin:{balance,point,defaul
         if(orderinfo.payway=="leftbalance" && balance>0 && payprice>0){
             orderinfo.balanceprice = balance<=payprice?balance:payprice;
             payprice -= orderinfo.balanceprice;
+        }
+    }
+
+    //设置支付方式
+    if(payprice==0){
+        orderinfo.payway="leftbalance";
+    }else{
+        if(orderinfo.payway=='' || (orderinfo.payway=="leftbalance") ){
+            orderinfo.payway = "alipay";
         }
     }
 
