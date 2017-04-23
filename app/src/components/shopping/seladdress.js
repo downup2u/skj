@@ -2,7 +2,7 @@
  * 选择收货地址
  * */
 import React, { Component, PropTypes } from 'react';
-import NavBar from '../nav.js';
+import NavBar from '../newnav.js';
 import { connect } from 'react-redux';
 import {
     getaddresslist_request,
@@ -28,46 +28,58 @@ export class Page extends React.Component {
         this.props.history.goBack();
     }
 
+    pagePush = (name)=> {
+        this.props.history.push(name);
+    }
+
     onClickItem =(address)=>{
         let orderAddressInfo = {orderAddressInfo : address}
         this.props.dispatch(set_orderSurePage(orderAddressInfo));
         this.props.history.goBack();
     }
 
+    getItems =(address,index)=>{
+        return (
+            <div className="li" key={index} onClick={()=>{this.onClickItem(address)}}>
+                <div className="tit">
+                    <span>{address.truename}</span>
+                    <span>{address.phonenumber}</span>
+                </div>
+                <div className="address">
+                    <span>{address.seladdr.selprovice.value}</span>
+                    <span>{address.seladdr.selcity.value}</span>
+                    <span>{address.seladdr.seldistict.value}</span>
+                    <span>{address.addressname}</span>
+                </div>
+            </div>
+        )
+    }
+
     render() {
-        const {addresslist, orderAddressId} = this.props
+        const { addresslist, orderAddressId} = this.props
         return (
             <div className="seladdressPage" style={{height:window.innerHeight+"px"}}>
-                <NavBar lefttitle="返回" title="选择收获地址" onClickLeft={this.onClickReturn}/>
+                <NavBar
+                    back={true}
+                    title="选择收获地址"
+                />
                 <div className="listcont">
-                    {_.map(addresslist, (address, index)=>{
-                        return (
-                            <div className="li" key={index} onClick={()=>{this.onClickItem(address)}}>
-                                <div className="tit">
-                                    <span>{address.truename}</span>
-                                    <span>{address.phonenumber}</span>
-                                </div>
-                                <div className="address">
-                                    <span>{address.seladdr.selprovice.value}</span>
-                                    <span>{address.seladdr.selcity.value}</span>
-                                    <span>{address.seladdr.seldistict.value}</span>
-                                    <span>{address.addressname}</span>
-                                </div>
-                            </div>
-                        )
-                    })}
+                    {
+                        _.map(addresslist, (address, index)=>{
+                            return this.getItems(address, index);
+                        })
+                    }
                 </div>
+                <div className="addAddressLnk" onClick={()=>{this.pagePush("/newaddress")}}>＋ 添加地址</div>
             </div>
         );
     }
 
 };
 const mapStateToProps = ({address,order}) => {
-    let data = {
-        //我的收货地址列表
-        addresslist : address.addresslist,
-    }
-    return { ...data, order };
+    let addressArray = {...address};
+    let addresslist = addressArray.addresslist;
+    return { addresslist, order };
 };
 Page = connect(mapStateToProps)(Page);
 export default Page;

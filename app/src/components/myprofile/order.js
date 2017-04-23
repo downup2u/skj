@@ -21,7 +21,7 @@ export class Page extends React.Component {
     constructor(props, context) {
         super(props, context);
         //筛选列表
-        this.actionItem = ["全部","未支付","待发货","待收货","已完成","我的退货"];
+        this.actionItem = ["全部","未支付","待发货","待收货","已完成"];
     }
 
     //设置列表筛选条件
