@@ -69,16 +69,15 @@ const Menu = ({ onMenuTap, translate, logout }) => (
     <div style={styles.main}>
         <DashboardMenuItem onTouchTap={onMenuTap} />
         {getallmenus('baseinfocompany', translate,onMenuTap)}
-        <MenuItem
+        {logout}
+    </div>
+);
+        /*<MenuItem
             containerElement={<Link to="/configuration" />}
             primaryText={translate('pos.configuration')}
             leftIcon={<SettingsIcon />}
             onTouchTap={onMenuTap}
-        />
-        {logout}
-    </div>
-);
-
+        />*/
 const enhance = compose(
     connect(state => ({
         theme: state.theme,

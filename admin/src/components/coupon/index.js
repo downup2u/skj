@@ -93,9 +93,7 @@ const CouponlistList = (props) => (//
             <DateField label="过期时间" source="expdate"  />
             <NumberField label="价格条件" source="pricecondition" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
             <NumberField label="最高抵扣" source="pricediscount" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
-
-            <TextField label="总库存" source="onlyctotalstockity" />
-            <TextField label="剩余库存" source="leftstock" />
+            <TextField label="总库存" source="totalstock" />
         <EditButton />
         </Datagrid>
     </List>

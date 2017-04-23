@@ -54,12 +54,13 @@ import TriprequestIcon from 'material-ui/svg-icons/action/pan-tool';//请求信�
 
 import UsermgrIcon from 'material-ui/svg-icons/social/people-outline';//用户管理
 import UserdriverIcon from 'material-ui/svg-icons/action/account-box';//司机信息
-import UserriderIcon from 'material-ui/svg-icons/action/account-circle';//乘客信息
 
 //import SystemconfigIcon from 'material-ui/svg-icons/action/settings-brightness';//系统设置
 import FeedbackIcon from 'material-ui/svg-icons/action/feedback';
 import MessageIcon from 'material-ui/svg-icons/communication/message';
 import TopicIcon from 'material-ui/svg-icons/communication/forum';
+import TopiccommentIcon from 'material-ui/svg-icons/communication/forum';
+import ForumIcon from 'material-ui/svg-icons/communication/forum';
 import CategoryIcon from 'material-ui/svg-icons/action/list';
 import BannerIcon from 'material-ui/svg-icons/action/view-carousel';
 import ExpressIcon from 'material-ui/svg-icons/content/send';
@@ -69,27 +70,28 @@ import MycouponIcon from 'material-ui/svg-icons/action/card-giftcard';//优惠�
 import UserIcon from 'material-ui/svg-icons/action/account-circle';//乘客信息
 
 import Icon from 'material-ui/svg-icons/social/person';
-const items = [
-    { name: 'systemconfig', icon: <SystemconfigIcon /> },
-    { name: 'news', icon: <UserIcon /> },
-    { name: 'banner', icon: <BannerIcon /> },
-    { name: 'category', icon: <CategoryIcon /> },
-    { name: 'product', icon: <Icon /> },
-    { name: 'express', icon: <ExpressIcon /> },
-    { name: 'coupon', icon: <CouponIcon /> },
+// const items = [
+//     { name: 'systemconfig', icon: <SystemconfigIcon /> },
+//     { name: 'news', icon: <UserIcon /> },
+//     { name: 'banner', icon: <BannerIcon /> },
+//     { name: 'category', icon: <CategoryIcon /> },
+//     { name: 'product', icon: <Icon /> },
+//     { name: 'express', icon: <ExpressIcon /> },
+//     { name: 'coupon', icon: <CouponIcon /> },
 
-    { name: 'topic', icon: <TopicIcon /> },
-    { name: 'notifymessage', icon: <MessageIcon /> },
-    { name: 'feedback', icon: <FeedbackIcon /> },
+//     { name: 'topic', icon: <TopicIcon /> },
+//     { name: 'comment', icon: <TopiccommentIcon /> },
+//     { name: 'notifymessage', icon: <MessageIcon /> },
+//     { name: 'feedback', icon: <FeedbackIcon /> },
 
 
   
-  { name: 'order', icon: <UserIcon /> },
+//   { name: 'order', icon: <UserIcon /> },
   
-  { name: 'user', icon: <UserIcon /> },
-  { name: 'mycoupon', icon: <MycouponIcon /> },
-  { name: 'withdrawcash', icon: <UserIcon /> },
-];
+//   { name: 'user', icon: <UserIcon /> },
+//   { name: 'mycoupon', icon: <MycouponIcon /> },
+//   { name: 'withdrawcash', icon: <UserIcon /> },
+// ];
 
 
 export default [
@@ -104,16 +106,23 @@ export default [
       { name: 'product', icon: <Icon /> },
       { name: 'express', icon: <ExpressIcon /> },
       { name: 'coupon', icon: <CouponIcon /> },
+      { name: 'about', icon: <AboutIcon /> },
     ]
   },
- 
-    { name: 'topic', icon: <TopicIcon /> },
+   {
+    'name':'forum',
+    'icon': <ForumIcon />,
+    'children': [
+      { name: 'topic', icon: <TopicIcon /> },
+      { name: 'comments', icon: <TopiccommentIcon /> },
+    ]
+  },
+
+
+
     { name: 'notifymessage', icon: <MessageIcon /> },
     { name: 'feedback', icon: <FeedbackIcon /> },
-
-
-  
-  { name: 'order', icon: <UserIcon /> },
+    { name: 'order', icon: <UserIcon /> },
   {
     'name':'usermgr',
     'icon': <UsermgrIcon />,

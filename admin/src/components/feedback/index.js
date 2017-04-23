@@ -35,6 +35,7 @@ import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
+import ImageArrayField from '../controls/imagearrayfield.js';
 
 export const FeedbackFilter = props => (
     <Filter {...props}>
@@ -69,6 +70,7 @@ const FeedbackList = (props) => (//
         </ReferenceField>
         <DateField label="反馈时间" source="created_at" showTime />
         <TextField label="反馈内容" source="feedbacktxt" />
+        <ImageArrayField label="反馈图片" source="picurl" />
         </Datagrid>
     </List>
 );

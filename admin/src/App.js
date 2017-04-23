@@ -21,13 +21,15 @@ import {ProductlistCreate,ProductlistList,ProductlistEdit,ProductlistShow} from 
 import {ExpresslistCreate,ExpresslistList,ExpresslistEdit,ExpresslistShow} from './components/express/index.js';
 import {NotifymessageCreate,NotifymessagelistList,NotifymessagelistEdit,NotifymessagelistShow} from './components/notifymessage/index.js';
 import {TopiclistList,TopiclistEdit,TopiclistShow} from './components/topic/index.js';
+import {TopiccommentlistList,TopiccommentlistEdit,TopiccommentlistShow} from './components/topiccomment/index.js';
 import {FeedbackList,FeedbackShow} from './components/feedback/index.js';
 import {CouponlistList,CouponlistCreate,CouponlistEdit,CouponlistShow} from './components/coupon/index.js';
 import {MycouponlistList,MycouponlistCreate,MycouponlistEdit,MycouponlistShow} from './components/mycoupon/index.js';
-import {UserlistList,UserlistShow} from './components/user/index.js';
+import {UserlistList,UserlistShow,UserlistEdit} from './components/user/index.js';
 import {NewslistCreate,NewslistList,NewslistEdit,NewslistShow} from './components/news/index.js';
 import {WithdrawcashlistList,WithdrawcashlistEdit,WithdrawcashlistShow} from './components/withdrawcash/index.js';
-import {OrderlistList,OrderlistEdit,OrderlistShow} from './components/orders/index.js';
+import {OrderlistList,OrderlistEdit} from './components/orders/index.js';
+import {AboutlistList,AboutlistEdit,AboutlistCreate} from './components/abouts/index.js';
 
 import restClient from './restClient';
 class App extends Component {
@@ -46,20 +48,22 @@ class App extends Component {
                 locale="cn"
                 messages={translations}
             >
+                <Resource name="about" list={AboutlistList} edit={AboutlistEdit} create={AboutlistCreate}  />
                 <Resource name="systemconfig" list={SystemconfigList} show={SystemconfigShow} edit={SystemconfigEdit}  create={SystemconfigCreate} />
                 <Resource name="banner" list={BannerlistList} edit={BannerlistEdit} create={BannerlistCreate}  remove={Delete} />
                 <Resource name="product" list={ProductlistList} edit={ProductlistEdit} create={ProductlistCreate}  />
                 <Resource name="category" list={CategorylistList} edit={CategorylistEdit} create={CategorylistCreate} />
                 <Resource name="express" list={ExpresslistList} edit={ExpresslistEdit}  create={ExpresslistCreate}  remove={Delete} />
                 <Resource name="topic" list={TopiclistList} edit={TopiclistEdit} />
+                <Resource name="comments" list={TopiccommentlistList} edit={TopiccommentlistEdit} />
                 <Resource name="notifymessage" list={NotifymessagelistList} edit={NotifymessagelistEdit} create={NotifymessageCreate}  remove={Delete} />
                 <Resource name="feedback" list={FeedbackList} show={FeedbackShow} />
                 <Resource name="coupon" list={CouponlistList} edit={CouponlistEdit} create={CouponlistCreate}  remove={Delete} />
                 <Resource name="mycoupon" list={MycouponlistList} edit={MycouponlistEdit} create={MycouponlistCreate}  remove={Delete} />
-                <Resource name="user" list={UserlistList} show={UserlistShow} />
+                <Resource name="user" list={UserlistList} show={UserlistShow} edit={UserlistEdit} />
                 <Resource name="news" list={NewslistList} edit={NewslistEdit} create={NewslistCreate}  remove={Delete} />
-                <Resource name="withdrawcash" list={WithdrawcashlistList} show={WithdrawcashlistShow}  edit={WithdrawcashlistEdit}/>
-                <Resource name="order" list={OrderlistList} show={OrderlistShow}  edit={OrderlistEdit}/>
+                <Resource name="withdrawcash" list={WithdrawcashlistList}  edit={WithdrawcashlistEdit}/>
+                <Resource name="order" list={OrderlistList} edit={OrderlistEdit}/>
            </Admin>
         );
     }

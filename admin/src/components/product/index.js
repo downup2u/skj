@@ -28,7 +28,8 @@ import {
   BooleanInput,
   BooleanField,
   ImageField,
-  NumberField
+  NumberField,
+  ReferenceField
 } from 'admin-on-rest/lib/mui';
 
 import { Field } from 'redux-form';
@@ -71,7 +72,6 @@ const ProductlistCreate = (props) => (
               <ImageInputUploadArray label="产品详情图片列表"  source="picurldetails" />
               <ImageInputUploadArray label="图片列表"  source="picurls" />
               <DateInput label="发布时间"  source="publishdate" />
-              <RichTextInput label="详细信息" source="desc" addLabel={false}/>
               <BooleanInput label="是否启用" source="isenabled" defaultValue={true} />
            </SimpleForm>
        </Create>
@@ -96,11 +96,10 @@ const ProductlistEdit = (props) => {
               <NumberInput label="重量"  source="weight" />
               <NumberInput label="库存"  source="stock" />
               <NumberInput label="销量"  source="salesvolume" />
-              <ImageInputUpload label="图片"  source="picurl" />
-              <ImageInputUploadArray label="产品详情图片列表"  source="picurldetails" />
-              <ImageInputUploadArray label="图片列表"  source="picurls" />
+              <ImageInputUpload label="图片"  source="picurl"  label='产品封面图片'/>
+              <ImageInputUploadArray label="产品详情图片列表"  source="picurldetails" label='产品详情图片列表'/>
+              <ImageInputUploadArray label="图片列表"  source="picurls"  label='产品轮播图片'/>
               <DateInput label="发布时间"  source="publishdate" />
-              <RichTextInput label="详细信息" source="desc" addLabel={false}/>
               <BooleanInput label="是否启用" source="isenabled" defaultValue={true} />
           </SimpleForm>
       </Edit>);
@@ -124,11 +123,12 @@ const ProductlistShow = (props) => (
 const ProductlistList = (props) => (//
      <List title="产品信息列表"  filters={<ProductFilter />}  {...props} >
         <Datagrid>
+        <ImageField source="picurl" label="封面图片"/>
         <TextField label="名字" source="name" />
+         <ReferenceField label="类别" source="categoryid" reference="category" addLabel={false}>
+            <TextField source="name" />
+         </ReferenceField>
         <NumberField label="现价" source="pricenow" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
-        <ImageField source="picurl" label="图片"/>
-        <TextField label="名字" source="name" />
-        <TextField label="摘要" source="brief" />
         <BooleanField label="是否启用" source="isenabled" />
         <EditButton />
         </Datagrid>
@@ -136,4 +136,4 @@ const ProductlistList = (props) => (//
 );
 
 
-export  {ProductlistCreate,ProductlistList,ProductlistEdit,ProductlistShow};
+export  {ProductlistCreate,ProductlistList,ProductlistEdit};

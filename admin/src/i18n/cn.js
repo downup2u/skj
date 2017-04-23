@@ -18,6 +18,9 @@ export default {
     baseinfo:{
       name: '基本信息 |||| 基本信息',
     },
+    forum:{
+      name: '圈子管理 |||| 圈子管理',
+    },
     usermgr:{
       name: '用户管理 |||| 用户管理',
     },
@@ -40,7 +43,20 @@ export default {
       name: '快递管理 |||| 快递管理',
     },
     topic:{
-      name: '帖子管理 |||| 帖子管理',
+      name: '圈子帖子管理 |||| 圈子帖子管理',
+      tabs:{
+        basic:'基本信息',
+        comment:'评论信息'
+      }
+    },
+    comments:{
+      name: '圈子评论管理 |||| 圈子评论管理',
+       fields:{
+          id:'评论id',
+          title:'评论内容',
+          creator:'评论用户',
+          created_at:'评论时间'
+       }
     },
     notifymessage:{
       name: '通知消息 |||| 通知消息',

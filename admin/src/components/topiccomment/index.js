@@ -25,8 +25,6 @@ import {
     ReferenceField,
     ReferenceInput,
     SelectInput,
-    TabbedForm,
-    FormTab,
     Filter
 } from 'admin-on-rest/lib/mui';
 
@@ -41,39 +39,34 @@ import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
 import CommentDetail from '../topiccomment/commentdetail';
 
-export const TopicFilter = props => (
+export const TopiccommentFilter = props => (
     <Filter {...props}>
-         <TextInput label="搜索帖子" source="title_q" />
+         <TextInput label="搜索评论" source="title_q" />
          <ReferenceInput label="用户" source="creator" reference="user" addLabel={false}>
             <SelectInput optionText="username" />
         </ReferenceInput>
     </Filter>
 );
 
-const TopiclistTitle = ({ record }) => {
-   return <span>编辑 帖子信息</span>;
+const TopiccommentlistTitle = ({ record }) => {
+   return <span>编辑 评论信息</span>;
 };
 
-const TopiclistEdit = (props) => {
-      return (<Edit title={<TopiclistTitle />} {...props}>
-          <TabbedForm>
-              <FormTab label="resources.topic.tabs.basic">
+const TopiccommentlistEdit = (props) => {
+      return (<Edit title={<TopiccommentlistTitle />} {...props}>
+          <SimpleForm>
               <DisabledInput label="Id" source="id" />
               <DisabledInput label="标题"  source="title" />
-              <ImageArrayField label="图片" source="picurl"  addLabel={true}/>
               <BooleanInput label="是否显示" source="isvisiable" defaultValue={true} />
-              </FormTab>
-              <FormTab label="resources.topic.tabs.comment">
               <CommentDetail />
-              </FormTab>
-          </TabbedForm>
+          </SimpleForm>
       </Edit>);
 
 };
 
 
-/*const TopiclistShow = (props) => (
-       <Show title={<TopiclistTitle />} {...props}>
+/*const TopiccommentlistShow = (props) => (
+       <Show title={<TopiccommentlistTitle />} {...props}>
            <SimpleShowLayout>
                <TextField source="id" />
                <TextField label="标题" source="title" />
@@ -83,18 +76,18 @@ const TopiclistEdit = (props) => {
 
 
 
-const TopiclistList = (props) => (//
-     <List title="帖子信息列表" {...props}  filters={<TopicFilter />} >
+const TopiccommentlistList = (props) => (//
+     <List title="评论列表" {...props}  filters={<TopiccommentFilter />} >
         <Datagrid>
         <TextField label="标题" source="title" />
          <ReferenceField label="用户" source="creator" reference="user" addLabel={false}>
             <TextField source="username" />
         </ReferenceField>
-        <DateField label="发帖时间" source="created_at" showTime />
+        <DateField label="评论时间" source="created_at" showTime />
         <EditButton />
         </Datagrid>
     </List>
 );
 
 
-export  {TopiclistList,TopiclistEdit};
+export  {TopiccommentlistList,TopiccommentlistEdit};
