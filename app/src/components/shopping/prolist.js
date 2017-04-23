@@ -142,15 +142,22 @@ export class Page extends React.Component {
                         全部
                     </span>
                     {_.map(this.props.categories, (category, index)=>{
-                        return (
-                            <span 
-                                key={index}
-                                onClick={()=>{this.setCategoryid(category._id)}}
-                                className={this.props.productslistType==category._id?"sel":""}
-                                >
-                                {category.name}
-                            </span>
-                        )
+                        if(category.name!="套餐"&&category.name!="一体机"){
+                            return (
+                                <span 
+                                    key={index}
+                                    onClick={()=>{this.setCategoryid(category._id)}}
+                                    className={this.props.productslistType==category._id?"sel":""}
+                                    >
+                                    {category.name}
+                                </span>
+                            )
+                        }else{
+                            return (
+                                <span style={{display:"none"}}></span>
+                            )
+                        }
+                        
                     })}
                 </div>
                 <div className="sortList">

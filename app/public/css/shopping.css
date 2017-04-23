@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     padding: 15px;
+    flex-shrink: 0;
 }
 .shoppingPage .shoppingBody{
     flex-grow: 1;

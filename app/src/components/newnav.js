@@ -8,7 +8,51 @@ export class Page extends React.Component {
 
     pageBack=()=>{
         this.props.history.goBack();
+    };
+
+    pagePush=(name)=>{
+        this.props.history.push(name);
     }
+
+    //展示红点数字
+    showRedNumber =(number)=>{
+        if(number>0){
+            return (
+                <span className="number">{number}</span>
+            )
+        }else{
+            return "";
+        }
+    }
+
+    //用户自定义按钮
+    getuserbtn =(nav)=>{
+        let action = null;
+        if(nav.hasOwnProperty("action")){
+            action = nav.action;
+        }
+        if(nav.type=='push'){
+            action = this.pagePush;
+        }
+        return (
+            <span className="nli" onClick={()=>{nav.action}}>
+                {
+                    nav.icon==''?'':(
+                        <span className="iconBtn" onClick={()=>{action(nav.url)}}>
+                            <img src={nav.icon} style={{width:nav.width,height:nav.height}}/>
+                        </span>
+                    )
+                }
+                {
+                    nav.text==''?'':(<span>{nav.text}</span>)
+                }
+                {
+                    nav.hasOwnProperty('number')?this.showRedNumber(nav.number):""
+                }
+            </span>
+        )
+    }
+
 
     render() {
         const props = this.props;
@@ -24,9 +68,13 @@ export class Page extends React.Component {
         /*
             leftnav = [
                 {
-                    icon : "",
+                    icon : 'img/shopping/11.png',
                     text : '',
-                    action : fn
+                    type : 'push',//push, action, 
+                    url : '/shoppingcart',
+                    width : "10px",
+                    height: "10px",
+                    number : 0,
                 },
             ]
         */
@@ -38,9 +86,10 @@ export class Page extends React.Component {
          /*
             rightnav = [
                 {
-                    icon : "",
+                    icon : 'img/shopping/11.png',
                     text : '',
-                    action : fn
+                    type : 'push',//push, action, 
+                    url : '/shoppingcart'
                 },
             ]
         */
@@ -57,12 +106,7 @@ export class Page extends React.Component {
                 }
                 {
                     _.map(leftnav, (nav, index)=>{
-                        return (
-                            <span className="nli" onClick={()=>{nav.action}}>
-                                {nav.icon==''?'':(<Icon name={nav.icon} />)}
-                                {nav.text==''?'':(<span> {nav.text} </span>)}
-                            </span>
-                        )
+                        return this.getuserbtn(nav);
                     })
                 }
                 </span>
@@ -75,12 +119,7 @@ export class Page extends React.Component {
                 }
                 {
                     _.map(rightnav, (nav, index)=>{
-                        return (
-                            <span className="nli" onClick={()=>{nav.action}}>
-                                {nav.icon==''?'':(<Icon name={nav.icon} />)}
-                                {nav.text==''?'':(<span> {nav.text} </span>)}
-                            </span>
-                        )
+                        return this.getuserbtn(nav);
                     })
                 }
                 </span>

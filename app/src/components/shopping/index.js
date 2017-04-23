@@ -114,8 +114,20 @@ let Page = (props) => {
                     {shoppingNews}
                 </div>
                 <div className="shoppingBanner2">
-                    <img src="img/shopping/2.png" onClick={(e)=>{onClickPage(e, '/shoppingpackage')}} />
-                    <img src="img/shopping/3.png" onClick={(e)=>{onClickPage(e, '/shoppingpackage')}}/>
+                    {
+                        _.map(props.categories, (category, index)=>{
+                            if(category.name=="套餐"){
+                                return (
+                                    <img src="img/shopping/2.png" onClick={(e)=>{onClickPage(e, `/shoppingpackage/${category._id}`)}} />
+                                )
+                            }
+                            if(category.name=="一体机"){
+                                return (
+                                    <img src="img/shopping/3.png" onClick={(e)=>{onClickPage(e, `/shoppingpackage/${category._id}`)}}/>
+                                )
+                            }
+                        })
+                    }
                 </div>
                 <div className="shoppingBannerLnk">
                     {_.map(props.shopcategorylist1, (categoryid, index)=>{
