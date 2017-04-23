@@ -56,38 +56,38 @@ let TopicInfo = (props)=>{
 }
 
 class Page extends Component {
-    componentWillMount () {
-        this.props.dispatch(ui_setmytopiclistinited(true));
-        let queryobj = {};
-        this.props.dispatch(getmytopic_request({
-            query:queryobj,
-            options:{
-                sort:{created_at:-1},
-                offset: 0,
-                limit: 10,
-            }
-        }));
-    }
+    // componentWillMount () {
+    //     this.props.dispatch(ui_setmytopiclistinited(true));
+    //     let queryobj = {};
+    //     this.props.dispatch(getmytopic_request({
+    //         query:queryobj,
+    //         options:{
+    //             sort:{created_at:-1},
+    //             offset: 0,
+    //             limit: 10,
+    //         }
+    //     }));
+    // }
     onClickReturn =()=>{
         this.props.history.goBack();
     };
 
-    isRowLoaded = ({ index })=> {
-        return (this.props.mytopiclist.length > index);
-    }
+    // isRowLoaded = ({ index })=> {
+    //     return (this.props.mytopiclist.length > index);
+    // }
 
-    loadMoreRows= ({ startIndex, stopIndex })=> {
-        let queryobj = {};
-        this.props.dispatch(getmytopic_request({
-            query:queryobj,
-            options:{
-                sort:{created_at:-1},
-                offset: startIndex,
-                limit: (stopIndex-startIndex)+1,
-            }
-        }));
+    // loadMoreRows= ({ startIndex, stopIndex })=> {
+    //     let queryobj = {};
+    //     this.props.dispatch(getmytopic_request({
+    //         query:queryobj,
+    //         options:{
+    //             sort:{created_at:-1},
+    //             offset: startIndex,
+    //             limit: (stopIndex-startIndex)+1,
+    //         }
+    //     }));
 
-    }
+    // }
 
     onClick =(iteminfo)=>{
         console.log(JSON.stringify(iteminfo));
@@ -121,14 +121,12 @@ class Page extends Component {
                         query = {{}}
                     />
                 </div>
-                <Bigimg imglist={this.props.bigimglist} showindex={this.props.bigimgindex} show={this.props.bigimgshow} />
+                <Bigimg />
             </div>
         );
     }
 }
 
-const mapStateToProps = ({forum,app}) => {
-    return {...forum,...app};
-}
-Page = connect(mapStateToProps)(Page);
+
+Page = connect()(Page);
 export default Page;
