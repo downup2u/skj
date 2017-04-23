@@ -118,12 +118,12 @@ let Page = (props) => {
                         _.map(props.categories, (category, index)=>{
                             if(category.name=="套餐"){
                                 return (
-                                    <img src="img/shopping/2.png" onClick={(e)=>{onClickPage(e, `/shoppingpackage/${category._id}`)}} />
+                                    <img src="img/shopping/2.png" key={index} onClick={(e)=>{onClickPage(e, `/shoppingpackage/${category._id}`)}} />
                                 )
                             }
                             if(category.name=="一体机"){
                                 return (
-                                    <img src="img/shopping/3.png" onClick={(e)=>{onClickPage(e, `/shoppingpackage/${category._id}`)}}/>
+                                    <img src="img/shopping/3.png" key={index} onClick={(e)=>{onClickPage(e, `/shoppingpackage/${category._id}`)}}/>
                                 )
                             }
                         })

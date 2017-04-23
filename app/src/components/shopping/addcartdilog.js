@@ -9,9 +9,14 @@ import {
     showpopmessage
 } from '../../actions/index.js';
 import { mycartaddone } from '../../actions/sagacallback.js';
+import { withRouter } from 'react-router-dom';
 
+let Page = ({proid, show, number, dispatch, products, loginsuccess, history})=>{
 
-let Page = ({proid, show, number, dispatch, products})=>{
+    //判断是否登录
+    if(!loginsuccess&&show){
+        history.push("/login");
+    }
 
     let hidedilog = ()=>{
         dispatch(uiaddcartdilog({
@@ -59,6 +64,7 @@ let Page = ({proid, show, number, dispatch, products})=>{
     if(show){
         proinfo = products[proid];
     }
+
     return (
         <div className={showstyle}
              onClick={()=>{hidedilog()}}
@@ -90,7 +96,8 @@ let Page = ({proid, show, number, dispatch, products})=>{
 };
 
 const mapStateToProps =  ({userlogin, shop}) =>{
-  return {...userlogin,...shop};
+  return {...userlogin, ...shop};
 };
 Page = connect(mapStateToProps)(Page);
+Page = withRouter(Page);
 export default Page;

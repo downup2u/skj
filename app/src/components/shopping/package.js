@@ -41,7 +41,7 @@ const Page = (props) => {
                 {
                     _.map(props.prolist, (proinfo, index)=>{
                         return (
-                            <div className="li" key={index} onClick={()=>{this.onClickPage(`/shoppingproinfo/${proinfo._id}`)}}>
+                            <div className="li" key={index} onClick={()=>{onClickPage(`/shoppingproinfo/${proinfo._id}`)}}>
                                 <img src={proinfo.picurl}/>
                                 <span className="name">{proinfo.name}</span>
                                 <span className="price">
