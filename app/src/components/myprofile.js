@@ -8,6 +8,7 @@ import {
     myOrderList_filler_set,
     share_data_updata
 } from '../actions';
+import _ from "lodash";
 
 let Page =(props)=> {
     let onClickPage = (name)=> {
@@ -35,7 +36,7 @@ let Page =(props)=> {
                     <div className="userInfo" onClick={()=>{onClickPage('/userinfo')}}>
                         <img src={props.profile.avatar} className="avatar"/>
                         <span className="username">{props.profile.nickname}</span>
-                        <span className="usertype">普通会员</span>
+                        <span className="usertype">{props.usertype}</span>
                     </div>):
                     (<div className="userInfo" onClick={()=>{onClickPage('/login')}}>
                         <img src="img/myprofile/1.png" className="avatar"/>
@@ -46,7 +47,9 @@ let Page =(props)=> {
                     <div className="userCode">我的积分 <span>{props.point}</span></div>
                     <div className="userMessageLnk"  onClick={()=>{onClickPage('/mymessage')}}>
                         <img src="img/message.png"/>
-                        <span>{props.newmsgnumber}</span>
+                        {props.newmsgnumber>0?(
+                            <span>{props.newmsgnumber}</span>
+                        ):""}
                     </div>
             </div>
             <div className="myProfileBannerCont">
@@ -96,7 +99,7 @@ let Page =(props)=> {
                         </div>
                     </div>
                     <div className="ll">
-                        <div>
+                        <div onClick={()=>{onClickPage('/settings')}}>
                             <img src="img/myprofile/10.png"/>
                             <span>设置</span>
                         </div>
@@ -113,13 +116,13 @@ let Page =(props)=> {
                         </div>
                     </div>
                     <div className="ll">
-                        <div  onClick={()=>{onClickPage('/addresslist')}}>
+                        <div onClick={()=>{onClickPage('/addresslist')}}>
                             <img src="img/myprofile/13.png"/>
                             <span>地址管理</span>
                         </div>
                     </div>
                     <div className="ll">
-                        <div>
+                        <div onClick={()=>{onClickPage('/feedback')}}>
                             <img src="img/myprofile/14.png"/>
                             <span>意见反馈</span>
                         </div>
@@ -130,10 +133,25 @@ let Page =(props)=> {
     );
 }
 
-const mapStateToProps =  ({userlogin,app:{newmsgnumber}}) =>{
-    return {...userlogin,newmsgnumber};
+const mapStateToProps =  ({userlogin,app:{newmsgnumber,memberlevelsetting}}) =>{
+    let usertype = "";
+    let usertypeArry = [];
+    _.map(memberlevelsetting, (typepoint, index)=>{
+        let s = {};
+        s.number = typepoint;
+        s.name = index;
+        usertypeArry.push(s);
+    })
+    usertypeArry = _.sortBy(usertypeArry, ['number']);
+    _.forEach(usertypeArry, function(value) {
+        if(userlogin.point>=value.number){
+            usertype = value.name;
+        }
+    });
+    return {...userlogin,newmsgnumber,usertype};
 };
 Page = withRouter(Page);
 export default connect(
     mapStateToProps
 )(Page);
+

@@ -54,6 +54,8 @@
     border-radius: 10px;
     color: #FFF;
     padding: 0 3px;
+    min-width: 18px;
+    text-align: center;
 }
 .myProfileBannerCont .l1con{
     background: #FFF;

@@ -174,11 +174,11 @@ export class Pricetotal extends Component {
             dispatch(set_orderSurePage(payload));
             history.push("/pay");
         }else{
-            // dispatch((showpopmessage({
-            //     title: '订单提交失败',
-            //     msg: '请选择商品',
-            //     type: 'error'
-            // })))
+            dispatch((showpopmessage({
+                title: '订单提交失败',
+                msg: '请选择商品',
+                type: 'error'
+            })))
         }
     }
 

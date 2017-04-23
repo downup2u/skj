@@ -74,21 +74,21 @@ export class Page extends Component {
 
                 <div className="cont">
 
-                    {_.map(
-                        this.props.nextusersfiller.type==1?this.props.nextusersorder.level1users: this.props.nextusersorder.level2users,
-                        (nextlist, index)=>{
-                        return (
-                            <div className="li" onClick={this.onClickPage.bind(this, `/distributioninfo/${index}`)} key={index}>
-                                <span className="num">1</span>
-                                <img src={nextlist.avatar} className="avatar" />
-                                <div>
-                                    <span>姓名: {nextlist.nickname}</span>
-                                    <span>消费金额: <i>¥{nextlist.totalorderprices}</i></span>
-                                </div>
-                                <span>奖励金额: <i>¥{nextlist.totalfeebonus}</i></span>
-                            </div>
-                        )
-                    })}
+                    {
+                        _.map(
+                            this.props.nextusersfiller.type==1?this.props.nextusersorder.level1users: this.props.nextusersorder.level2users,
+                            (nextlist, index)=>{
+                                return (
+                                    <div className="li" onClick={this.onClickPage.bind(this, `/distributioninfo/${index}`)} key={index}>
+                                        <img src={nextlist.avatar} className="avatar" />
+                                        <div>
+                                            <span>姓名: {nextlist.nickname}</span>
+                                            <span>消费金额: <i>¥{nextlist.totalorderprices}</i></span>
+                                        </div>
+                                        <span>奖励金额: <i>¥{nextlist.totalfeebonus}</i></span>
+                                    </div>
+                                )
+                        })}
                 </div>
                 <div className="bottomBttn" onClick={()=>{this.onClickPage("/ordertotal")}}><span>订单统计</span></div>
             </div>

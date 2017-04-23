@@ -14,6 +14,13 @@ import Userinfo from './components/user-info.js';
 import ProfileDetail from './components/profiledetail.js';
 import { TransitionMotion, spring } from 'react-motion';
 
+
+//关于我们
+import Aboutus from './components/myprofile/aboutus.js';
+//意见反馈
+import Feedback from './components/myprofile/feedback.js';
+//设置页面
+import Settings from './components/settings.js';
 //订单页面选择地址
 import Orderseladdress from './components/shopping/orderseladdress.js';
 //我的邀请码
@@ -265,7 +272,9 @@ const CoApp = (props) => {
             <CustomRoute path="/selcoupon/:id" component={requireAuthentication(Selcoupon)} /> 
             <CustomRoute path="/mycode" component={requireAuthentication(Mycode)} /> 
             <CustomRoute path="/orderseladdress/:id" component={requireAuthentication(Orderseladdress)} /> 
-
+            <CustomRoute path="/settings" component={Settings} /> 
+            <CustomRoute path="/feedback" component={requireAuthentication(Feedback)} /> 
+            <CustomRoute path="/aboutus/:type" component={Aboutus} /> 
             <CustomRoute component={App}/>
         </Switch>
     );

@@ -1,0 +1,62 @@
+.pageWamp >div.settingPage{
+    background: #EEE;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.settingPage .list{
+    background: #FFF;
+    margin-bottom: 15px;
+}
+.settingPage .list .li{
+    border-bottom: 1px solid #EEE;
+    padding: 15px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+.settingPage .list .li img{
+    width: 40px;
+    margin-right: -10px;
+}
+
+.settingPage .ProinfoPageHead {
+    background: #5596d6;
+    display: flex;
+    align-items: center;
+    height: 48px;
+}
+
+.settingPage .title {
+    flex-grow: 1;
+    text-align: center;
+    line-height: 48px;
+    color: #FFF;
+    font-size: 16px;
+}
+
+.settingPage .ProinfoPageHead i.icon {
+    font-size: 30px;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+}
+.settingPage .loginOut{
+    margin: 50px 30px 0 30px;
+    background: #5596d6;
+    color: #FFF;
+    border-radius: 100px;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+}
