@@ -29,7 +29,7 @@ export class Page extends Component {
         }
         //获取收益列表
         let listQuery = this.query[this.props.type];
-        this.getIntegralList(listQuery)
+        this.getIntegralList(listQuery);
     };
 
     getIntegralList =(query)=>{
