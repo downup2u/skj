@@ -31,6 +31,12 @@ export default {
       name: '产品管理 |||| 产品管理',
       fields:{
         categoryid:'类别',
+      },
+      notification:{
+        enable_success:'上架成功',
+        enable_error:'上架失败',
+        disable_success:'下架成功',
+        disable_error:'下架失败',
       }
     },
     category:{
@@ -47,6 +53,12 @@ export default {
       tabs:{
         basic:'基本信息',
         comment:'评论信息'
+      },
+      notification:{
+        visiable_success:'设置可见成功',
+        visiable_error:'设置可见失败',
+        invisiable_success:'设置不可见成功',
+        invisiable_error:'设置不可见失败',
       }
     },
     comments:{

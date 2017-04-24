@@ -28,7 +28,10 @@ let SystemConfigSchema = new Schema({
                     "高级会员":500, 
                     "黄金会员":1000,
                     "钻石会员":1500
-                }`}
+                }`},
+    expressapiurl:String,
+    expressapicustomer:String,
+    expressapikey:String,
 });
 SystemConfigSchema.plugin(mongoosePaginate);
 let SystemConfig  = mongoose.model('SystemConfig',  SystemConfigSchema);
@@ -354,6 +357,15 @@ let PointrecordSchema = new Schema({
 });
 PointrecordSchema.plugin(mongoosePaginate);
 let Pointrecord  = mongoose.model('Pointrecord',  PointrecordSchema);
+
+let AboutSchema = new Schema({
+    keyname:String,
+    title:String,
+    desc:String,
+  });
+AboutSchema.plugin(mongoosePaginate);
+let About  = mongoose.model('About',  AboutSchema);
+
 //用户余额表
 // let UserbalanceSchema= new Schema({
 //     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
@@ -384,6 +396,7 @@ exports.ProductcommentSchema = ProductcommentSchema;
 exports.FeedbackSchema = FeedbackSchema;
 exports.WithdrawcashapplySchema = WithdrawcashapplySchema;
 exports.PointrecordSchema = PointrecordSchema;
+exports.AboutSchema = AboutSchema;
 
 exports.SystemConfigModel = SystemConfig;
 exports.NewsModel = News;
@@ -409,3 +422,4 @@ exports.FeedbackModel = Feedback;
 exports.RechargerecordModel = Rechargerecord;
 exports.WithdrawcashapplyModel = Withdrawcashapply;
 exports.PointrecordModel = Pointrecord;
+exports.AboutModel = About;

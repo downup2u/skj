@@ -40,6 +40,9 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 import moment from 'moment';
 import CommentDetail from '../topiccomment/commentdetail';
+import LoveItemsField from './loveitemsfield';
+import CommentItemsField from '../topiccomment/commentitemsfield';
+import VisiableButton from './setvisiablebtn';
 
 export const TopicFilter = props => (
     <Filter {...props}>
@@ -90,7 +93,10 @@ const TopiclistList = (props) => (//
          <ReferenceField label="用户" source="creator" reference="user" addLabel={false}>
             <TextField source="username" />
         </ReferenceField>
+        <LoveItemsField />
+        <CommentItemsField />
         <DateField label="发帖时间" source="created_at" showTime />
+        <VisiableButton />
         <EditButton />
         </Datagrid>
     </List>

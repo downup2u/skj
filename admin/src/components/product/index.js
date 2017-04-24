@@ -42,6 +42,7 @@ import moment from 'moment';
 import {ImageInputUpload} from '../controls/imageupload.js';
 import {ImageInputUploadArray} from '../controls/imageuploadarray.js';
 import RichTextInput from '../controls/richtoolbar.js';
+import EnableButton from './setenablebtn';
 
 export const ProductFilter = props => (
     <Filter {...props}>
@@ -129,7 +130,7 @@ const ProductlistList = (props) => (//
             <TextField source="name" />
          </ReferenceField>
         <NumberField label="现价" source="pricenow" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
-        <BooleanField label="是否启用" source="isenabled" />
+        <EnableButton />
         <EditButton />
         </Datagrid>
     </List>

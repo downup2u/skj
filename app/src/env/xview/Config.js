@@ -1,10 +1,10 @@
 //最终希望放入.json文件中
 export const config=
 {
-"appName":"Xview",
-"wxappid": "wx59d5d49c9d5f47df", //微信AppID
-"wxappsecret":"d4624c36b6795d1d99dcf0547af5443d",//微信Secret
-"qqappid":"1104714921", //QQAppID
+"appName":"水智盒",
+"wxappid": "wx372f956440964306", //微信AppID
+"wxappsecret":"0645a2e8170758dc34d9b87d2523e70c",//微信Secret
+"qqappid":"101393210", //QQAppID
 "wbappkey":"3067948552",//微博AppKey
 "wbappsecret":"bf69337ef871a364b92e174855f83138", //微博Secret
 "wbRedirectUrl":"https://api.weibo.com/oauth2/default.html",//微博回调网址（开放平台设置）
