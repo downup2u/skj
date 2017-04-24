@@ -13,17 +13,13 @@ import {
 } from '../actions/index.js';
 import '../../public/css/feed.css';
 import NavBar from './nav2.js';
-
 import ForumComment from './community_comment.js';
 import ForumTopic from './community_topic.js';
 import FeedReplyForm from './community_reply.js';
 import TopTip from './community_topictip';
-
 import { gettopiclist } from '../actions/sagacallback';
 import InfinitePage from './controls/infinitecontrol';
-
 import { withRouter } from 'react-router-dom';
-
 
 export class Topic extends React.Component {
     render() {
@@ -100,16 +96,15 @@ export class Page extends React.Component {
 
     componentWillMount() {
         this.props.dispatch(uicommenthide());
-        console.log("--------->comm:componentWillMount");
     }
 
     onClickPage = ()=> {//点击空白处，隐藏?如何判断点击空白
         this.props.dispatch(uicommenthide());
     };
+
     onClickTopic = (topicid)=> {//点击空白处，隐藏?如何判断点击空白
         this.props.history.push(`/communityinfo/${topicid}`);
     };
-
 
     //新建帖子
     addNewCommunity = (topicid)=> {
@@ -131,9 +126,6 @@ export class Page extends React.Component {
     }
 
     render() {
-        console.log('export class Page extends React.Component render()??????????' + JSON.stringify(this.props));
-        const {communityListHeight} = this.props;
-
         return (
             <div className="feedPage">
                 <div className="PageHead">
@@ -172,12 +164,18 @@ export class Page extends React.Component {
                 <div onClick={this.onClickPage}>
                     <ToptipCo />
                 </div>
-                <div className="tc" onClick={this.onClickPage} style={{height:communityListHeight+"px"}}>
+                <div
+                    className="tc"
+                    onClick={this.onClickPage}
+                    style={{
+                        height : this.props.communityListHeight+"px",
+                        top: this.props.tctop+"px"
+                    }}>
                     <InfinitePage
                         pagenumber = {16}
                         updateContent= {this.updateContent} 
                         queryfun= { gettopiclist }
-                        listheight= { communityListHeight }
+                        listheight= { this.props.communityListHeight }
                         sort = {{created_at: -1}}
                         query = {{}}
                     />
@@ -190,8 +188,9 @@ export class Page extends React.Component {
 
 const mapStateToProps = ({forum:{useralerttopiclist}}) => {
     let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-140:window.innerHeight-98;
+    let tctop = useralerttopiclist.length > 0?90:48;
     //所有使用到的属性列表：bigimgindex/iscommentshow/communityListHeight/useralerttopiclist
-    return {communityListHeight};
+    return {communityListHeight,tctop};
 }
 Page = connect(mapStateToProps)(Page);
 Page = withRouter(Page);

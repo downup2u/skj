@@ -335,6 +335,10 @@
     justify-content: space-between;
     flex-direction: column;
     overflow:hidden;
+    position: fixed;
+    top: -48px;
+    left: 0;
+    width: 100%;
 } 
 .feedPage .tc > div{
     width: 100%
