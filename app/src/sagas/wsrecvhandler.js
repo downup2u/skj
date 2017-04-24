@@ -124,7 +124,9 @@ import {
     wait_feedbackaddone_result,
     getabouthtml_result,
 
-    set_weui
+    set_weui,
+
+    expressquery_result
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -133,6 +135,11 @@ import {
 
 
 const handlerlist = {
+  ['shop.expressquery_result']:(socket,emit)=>{
+    return (result)=> {
+      emit(expressquery_result(result));
+    }
+  },
   ['getabouthtml_result']:(socket,emit)=>{
     return (result)=> {
       emit(getabouthtml_result(result));

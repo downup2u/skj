@@ -32,8 +32,14 @@ import {
     test_getnextusers_request,
     test_getdistsalesorderstat_request,
     test_getdistsalesorders_request,
-    test_getdistsalesorderdetails_request
+    test_getdistsalesorderdetails_request,
+
+    
 } from '../test/testshop';
+
+import {
+    test_expressquery_request
+}from '../test/testexpress';
 
 import {
     test_feedbackaddone
@@ -63,6 +69,8 @@ let Page =(props)=>{
     };
     return (<div>
         <p style={{textAlign: 'center'}}>
+            <Button onClick={()=>{test_expressquery_request(props.dispatch)}}>查询快递物流信息</Button><br />
+             <br />
             <Button onClick={()=>{test_getabouthtml_request(props.dispatch)}}>测试关于信息</Button><br />
              <br />
             <Button onClick={()=>{test_feedbackaddone(props.dispatch)}}>测试用户反馈</Button><br />

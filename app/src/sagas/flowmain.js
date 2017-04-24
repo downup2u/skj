@@ -78,6 +78,8 @@ import {
 
     feedbackaddone_request,
     getabouthtml_request,
+
+    expressquery_request,
 } from '../actions';
 import {
     sendauth_request,sendauth_result,sendauth_err,
@@ -206,6 +208,8 @@ function* handleIOWithAuth(socket) {
             'getusergetpointsigntoday':`${getusergetpointsigntoday_request}`,
             'getuserpointdetails':`${getuserpointdetails_request}`,
             'feedbackaddone':`${feedbackaddone_request}`,
+
+            'expressquery':`${expressquery_request}`,
         };  
 
         let tasksz =[];

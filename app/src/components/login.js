@@ -183,12 +183,8 @@ export class Page extends React.Component {
                 <div className="loginPageBottom">
                     <div className="tit"><span>其他登录方式</span></div>
                     <div className="lnk">
-                        <div><Icon name="qq" onClick={()=>{
-                      loginwithqq();
-                    }}/></div>
-                        <div><Icon name="weixin" onClick={()=>{
-                      loginwithwechat();
-                    }}/></div>
+                        <div onClick={()=>{loginwithqq();}}><Icon name="qq" /></div>
+                        <div onClick={()=>{loginwithwechat();}}><Icon name="weixin" /></div>
                     </div>
                 </div>
             </div>

@@ -189,3 +189,7 @@ export const getuserpointdetails_request = createAction('getuserpointdetails_req
 export const getuserpointdetails_result = createAction('getuserpointdetails_result');
 export const wait_getuserpointdetails_request = createAction('wait_getuserpointdetails_request');
 export const wait_getuserpointdetails_result = createAction('wait_getuserpointdetails_result');
+
+//查看物流
+export const expressquery_request = createAction('expressquery_request');
+export const expressquery_result = createAction('expressquery_result');
