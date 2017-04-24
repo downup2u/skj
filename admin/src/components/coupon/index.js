@@ -75,7 +75,7 @@ const CouponlistShow = (props) => (
            <SimpleShowLayout>
                <TextField source="id" />
                <TextField label="名字" source="name" />
-               <TextField label="过期时间"  source="expdate" />
+               <DateField label="过期时间" source="expdate"  />
                <TextField label="价格条件"  source="pricecondition" />
                <TextField label="最高抵扣"  source="pricediscount" />
                <TextField label="总库存" source="totalstock" />

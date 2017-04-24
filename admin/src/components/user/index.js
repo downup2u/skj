@@ -63,6 +63,9 @@ const UserlistEdit = (props) => {
           <SimpleForm>
               <DisabledInput label="Id" source="id" />
               <DisabledInput label="手机号"  source="username" />
+              <DateField label="注册时间" source="created_at"  showTime/>
+              <DateField label="上次登录时间" source="updated_at"  showTime/>
+              <TextField label="昵称" source="profile.nickname" />
           </SimpleForm>
       </Edit>);
 

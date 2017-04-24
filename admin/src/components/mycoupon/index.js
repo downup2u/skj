@@ -77,7 +77,7 @@ const MycouponlistEdit = (props) => {
           <SimpleForm>
                <TextInput label="名字" source="name" />
               <ReferenceInput source="coupon" reference="coupon" allowEmpty>
-                  <SelectInput optionText="coupon" />
+                  <SelectInput optionText="name" />
               </ReferenceInput>
               <ReferenceInput source="creator" reference="user" allowEmpty>
                   <SelectInput optionText="username" />
@@ -117,7 +117,6 @@ const MycouponlistList = (props) => (//
             <NumberField label="最高抵扣" source="pricediscount" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
             <TextField label="总库存" source="totalstock" />
         <EditButton />
-        <ShowButton />
         </Datagrid>
     </List>
 );
