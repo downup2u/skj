@@ -12,6 +12,7 @@ import {
     serverpush_orderinfo,
     updata_orderinfo,
     mycoupongetall_result,
+    logout_result
 } from '../actions';
 import {normalizr_orderslist} from './normalizr';
 import _ from 'lodash';
@@ -34,6 +35,9 @@ const initial = {
 };
 
 const orders = createReducer({
+    [logout_result]:(state, payload)=>{
+            return { ...initial.orders};
+    },
     //获取我的可用优惠券列表
     [mycoupongetall_result]:(state, {result})=>{
         let couponlist = state.couponlist;

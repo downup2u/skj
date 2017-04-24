@@ -160,7 +160,7 @@ export class Page extends React.Component {
         }
         //alert(JSON.stringify(formdata));
         this.props.dispatch(oauthbinduser(payload)).then((result)=> {
-            this.props.history.goBack();
+            this.props.history.replace('/');
         }).catch((error)=> {
             console.log("注册失败:" + JSON.stringify(error));
         });

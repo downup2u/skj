@@ -22,6 +22,7 @@ import {
     normalizrbanners,
     normalizrcategories,
     normalizrproducts,
+    logout_result
 }from './normalizr.js';
 
 import _ from 'lodash';
@@ -54,7 +55,9 @@ const initial = {
 };
 
 const shop = createReducer({
-
+    [logout_result]:(state, payload)=>{
+        return { ...initial.shop};
+    },
     //产品详情添加评论数
     [set_productevaluatenumber]:(state, payload)=>{
         let productall = {...state.products};

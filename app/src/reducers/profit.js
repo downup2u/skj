@@ -8,7 +8,8 @@ import {
     profit_set_listtype,
     profit_set_tixianform,
     profit_set_profitid,
-    profit_set_profityanzhen
+    profit_set_profityanzhen,
+    logout_result
 } from '../actions/index.js';
 
 const initial = {
@@ -35,6 +36,9 @@ const initial = {
 };
 
 const profit = createReducer({
+    [logout_result]:(state, payload)=>{
+        return { ...initial.profit};
+    },
     //申请提现输入验证码
     [profit_set_profityanzhen]:(state,payload)=>{
         return {...state, profityanzhen:payload}

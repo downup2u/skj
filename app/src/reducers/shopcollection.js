@@ -4,7 +4,8 @@
 
 import { createReducer } from 'redux-act';
 import {
-    serverpush_mycollectioncount
+    serverpush_mycollectioncount,
+    logout_result
 } from '../actions';
 import {normalizr_collectionslist} from './normalizr';
 
@@ -15,6 +16,9 @@ const initial = {
 };
 
 const collections = createReducer({
+        [logout_result]:(state, payload)=>{
+            return { ...initial.collections};
+        },
         [serverpush_mycollectioncount]:(state, remoteRowCount) => {
             return  {...state,remoteRowCount};
         },

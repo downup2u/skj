@@ -9,6 +9,7 @@ import {
     getdistsalesorderstat_result,
     getdistsalesorderdetails_result,
     getdistsalesorders_result,
+    logout_result
 } from '../actions/index.js';
 
 const initial = {
@@ -44,6 +45,9 @@ const initial = {
 };
 
 const nextusers = createReducer({
+    [logout_result]:(state, payload)=>{
+        return { ...initial.nextusers};
+    },
     //获取下级用户订单详情页面数据
     [getdistsalesorderdetails_result]:(state, payload)=>{
         let orderlist = payload.result.docs;

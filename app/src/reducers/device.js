@@ -7,7 +7,8 @@ import {
     getdevicelist_result,
     deletedevice_result,
     deletedevice_confirmpopshow,
-    deletedevice_confirmpophide
+    deletedevice_confirmpophide,
+    logout_result
 } from '../actions/index.js';
 
 const initial = {
@@ -23,6 +24,9 @@ const initial = {
 
 
 const device = createReducer({
+    [logout_result]:(state, payload)=>{
+        return { ...initial.device};
+    },
     [createdevice_result]: (state, payload) => {
         let newdevice = payload;
         return { ...state, mydevicelist:[newdevice,...state.mydevicelist],curdevice:newdevice };

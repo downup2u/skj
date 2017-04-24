@@ -8,7 +8,8 @@ import {
     getaddresslist_result,
     deleteaddress_result,
     deleteaddress_confirmpopshow,
-    deleteaddress_confirmpophide
+    deleteaddress_confirmpophide,
+    logout_result
 } from '../actions/index.js';
 
 const initial = {
@@ -24,6 +25,9 @@ const initial = {
 
 
 const address = createReducer({
+    [logout_result]:(state, payload)=>{
+        return { ...initial.address};
+    },
    [createaddress_result]: (state, payload) => {
         let newaddress = payload;
         return { ...state, addresslist:[newaddress,...state.addresslist] };

@@ -17,7 +17,8 @@ import {
     set_orderSurePage,
     myorderlist_addreducers,
     payway_set,
-    myOrderList_filler_set
+    myOrderList_filler_set,
+    logout_result
 } from '../actions/index.js';
 import {
     normalizrbanners,
@@ -82,6 +83,9 @@ const initial = {
 };
 
 const order = createReducer({
+    [logout_result]:(state, payload)=>{
+        return { ...initial.order};
+    },
     //设置支付方式
     [payway_set]:(state, payload)=>{
         return {...state, payway: payload};

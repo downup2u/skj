@@ -8,7 +8,8 @@ import {
     ui_cartooder_additem,
     ui_cartooder_delitem,
     ui_cartooder_updateitem,
-    ui_cart_selectallitems
+    ui_cart_selectallitems,
+    logout_result
 } from '../actions';
 import {normalizr_cartslist} from './normalizr';
 import _ from 'lodash';
@@ -21,6 +22,9 @@ const initial = {
 };
 
 const carts = createReducer({
+        [logout_result]:(state, payload)=>{
+            return { ...initial.carts};
+        },
         [ui_cart_selectallitems]:(state, payload) => {
             const {isselectedall,items} = payload;
             let toordercarts = state.toordercarts;
