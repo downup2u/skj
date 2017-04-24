@@ -3,7 +3,7 @@
 * */
 import React, { Component, PropTypes } from 'react';
 import { Input, Button, Menu, Icon } from 'semantic-ui-react';
-import NavBar from './nav.js';
+import NavBar from './newnav.js';
 import '../../public/css/logisticsinfo.css';
 
 export default class Page extends Component {
@@ -23,7 +23,7 @@ export default class Page extends Component {
                     overflow:"scroll"
                  }}
                 >
-                <NavBar lefttitle="返回" title="查看物流" onClickLeft={this.onClickReturn}/>
+                <NavBar back={true} title="查看物流" />
 
                 <div className="proinfo">
 

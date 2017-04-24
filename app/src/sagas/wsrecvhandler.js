@@ -123,6 +123,8 @@ import {
     feedbackaddone_result,
     wait_feedbackaddone_result,
     getabouthtml_result,
+
+    set_weui
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -149,21 +151,21 @@ const handlerlist = {
   },
   ['oauthbinduser_err']: (socket, emit)=> {
     return (({errmsg})=> {
-      emit(showpopmessage({
-        title: '绑定失败',
-        msg: errmsg,
-        type: 'error'
-      }));
+      emit(set_weui({toast:{
+          show : true,
+          text : errmsg,
+          type : "warning"
+      }}));
       emit(wait_oauthbinduser_result({err: errmsg}));
     });
   },
   ['oauthbinduser_result']:(socket,emit)=>{
     return (result)=>{
-      emit(showpopmessage({
-        title: '成功',
-        msg: '绑定成功',
-        type: 'success'
-      }));
+      emit(set_weui({toast:{
+          show : true,
+          text : "绑定成功:",
+          type : "success"
+      }}));
       emit(oauthbinduser_result(result));
       emit(wait_oauthbinduser_result({result:result}));
     }
@@ -394,68 +396,68 @@ const handlerlist = {
   ['users.login_err']: (socket, emit)=> {
     return (({errmsg})=> {
       emit(login_err());
-      emit(showpopmessage({
-        title: '登录失败',
-        msg: errmsg,
-        type: 'error'
-      }));
+      emit(set_weui({toast:{
+          show : true,
+          text : errmsg,
+          type : "warning"
+      }}));
     });
   },
   ['users.sendauth_result']: (socket, emit)=> {
     return (({authcode})=> {
-      emit(showpopmessage({
-        title: '成功',
-        msg: `发送验证码成功:${authcode}`,
-        type: 'success'
-      }));
+      emit(set_weui({toast:{
+          show : true,
+          text : "验证码:"+authcode,
+          type : "warning"
+      }}));
     });
   },
   ['users.sendauth_err']: (socket, emit)=> {
     return (({errmsg})=> {
-      emit(showpopmessage({
-        title: '发送验证码失败',
-        msg: errmsg,
-        type: 'error'
-      }));
+      emit(set_weui({toast:{
+          show : true,
+          text : errmsg,
+          type : "warning"
+      }}));
     });
   },
   ['users.register_result']: (socket, emit)=> {
     return (({errmsg})=> {
-      emit(showpopmessage({
-        title: '成功',
-        msg: '注册成功',
-        type: 'success'
-      }));
+      emit(set_weui({toast:{
+          show : true,
+          text : "注册成功",
+          type : "success"
+      }}));
       emit(wait_register_result({result: 'OK'}));
     });
   },
   ['users.register_err']: (socket, emit)=> {
     return (({errmsg})=> {
-      emit(showpopmessage({
-        title: '注册失败',
-        msg: errmsg,
-        type: 'error'
-      }));
+      emit(set_weui({toast:{
+          show : true,
+          text : errmsg,
+          type : "warning"
+      }}));
       emit(wait_register_result({err: errmsg}));
     });
   },
   ['findpwd_result']: (socket, emit)=> {
     return (({errmsg})=> {
-      emit(showpopmessage({
-        title: '成功',
-        msg: '找回密码成功',
-        type: 'success'
-      }));
+      emit(set_weui({toast:{
+          show : true,
+          text : "重置密码成功",
+          type : "success"
+      }}));
       emit(wait_findpwd_result({result: 'OK'}));
     });
   },
   ['findpwd_err']: (socket, emit)=> {
     return (({errmsg})=> {
-      emit(showpopmessage({
-        title: '找回密码失败',
-        msg: errmsg,
-        type: 'error'
-      }));
+      emit(set_weui({toast:{
+          show : true,
+          text : "重置密码失败:"+errmsg,
+          type : "success"
+      }}));
       emit(wait_findpwd_result({err: errmsg}));
     });
   },

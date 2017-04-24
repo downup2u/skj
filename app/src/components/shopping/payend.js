@@ -15,7 +15,8 @@ import {
 import {
     payway_set,
     updata_orderinfo,
-    updata_orderpaydata
+    updata_orderpaydata,
+    set_weui
 } from '../../actions';
 
 import {onclickpay} from '../../env/pay';

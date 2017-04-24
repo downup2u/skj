@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import NavBar from '../nav.js';
+import NavBar from '../newnav.js';
 import { Input, Button, Menu, Icon } from 'semantic-ui-react';
 import '../../../public/css/mytopiclist.css';
 import Bigimg from '../tools/bigimg.js';
@@ -56,41 +56,8 @@ let TopicInfo = (props)=>{
 }
 
 class Page extends Component {
-    // componentWillMount () {
-    //     this.props.dispatch(ui_setmytopiclistinited(true));
-    //     let queryobj = {};
-    //     this.props.dispatch(getmytopic_request({
-    //         query:queryobj,
-    //         options:{
-    //             sort:{created_at:-1},
-    //             offset: 0,
-    //             limit: 10,
-    //         }
-    //     }));
-    // }
-    onClickReturn =()=>{
-        this.props.history.goBack();
-    };
-
-    // isRowLoaded = ({ index })=> {
-    //     return (this.props.mytopiclist.length > index);
-    // }
-
-    // loadMoreRows= ({ startIndex, stopIndex })=> {
-    //     let queryobj = {};
-    //     this.props.dispatch(getmytopic_request({
-    //         query:queryobj,
-    //         options:{
-    //             sort:{created_at:-1},
-    //             offset: startIndex,
-    //             limit: (stopIndex-startIndex)+1,
-    //         }
-    //     }));
-
-    // }
 
     onClick =(iteminfo)=>{
-        console.log(JSON.stringify(iteminfo));
         this.props.history.push(`/communityinfo/${iteminfo._id}`);
     }
 
@@ -106,17 +73,22 @@ class Page extends Component {
 
     }
 
-
     render() {
-        //const { activeItem } = this.state;
         return (
-            <div className="myTopicListPage" style={{height:window.innerHeight+"px"}}>
-                <NavBar lefttitle="返回" title="我的帖子" onClickLeft={this.onClickReturn} />
+            <div 
+                className="myTopicListPage"
+                style={{height:window.innerHeight+"px"}}
+                >
+                <NavBar 
+                    back={true}
+                    title="我的帖子" 
+                    />
                 <div className="cont">
                     <InfinitePage
                         pagenumber = {20}
                         updateContent= {this.rowRenderer} 
                         queryfun= { getmytopic }
+                        listheight={window.innerHeight-48}
                         sort = {{created_at: -1}}
                         query = {{}}
                     />
