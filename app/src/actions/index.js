@@ -13,3 +13,4 @@ export * from './profit';
 export * from './share';
 export * from './feedback';
 export * from './about';
+export * from './weui';

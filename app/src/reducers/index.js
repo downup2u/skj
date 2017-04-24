@@ -22,6 +22,7 @@ import paystatus from './paystatus';
 import share from './share';
 import about from './about';
 import integral from './integral';
+import weui from './weui';
 
 export default combineReducers(
   { 
@@ -46,6 +47,7 @@ export default combineReducers(
     paystatus,
     share,
     integral,
+    weui,
     form: formReducer
   }
 );

@@ -287,6 +287,7 @@ import { hidepopmessage } from './actions/index.js';
 import { Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Sharebox from './components/tools/share';
+import Toast from './components/tools/toast';
 
 class MessageCo extends React.Component {
     onDismiss = ()=> {
@@ -300,7 +301,7 @@ class MessageCo extends React.Component {
         }
     }
 
-     render() {
+    render() {
         let fullheight = {
             height: window.innerHeight + "px"
         }
@@ -310,14 +311,13 @@ class MessageCo extends React.Component {
                MessageCo = (
                     <div className="messageCo" style={fullheight}>
                         <Message 
-                                 error
-                                 header={this.props.title}
-                                 content={this.props.msg}
-                            />
+                            error
+                            header={this.props.title}
+                            content={this.props.msg}
+                        />
                     </div>
                 );
-            }
-            else if (this.props.type === 'warning') {
+            }else if (this.props.type === 'warning') {
                  MessageCo = (
                     <div className="messageCo" style={fullheight}>
                         <Message 
@@ -348,17 +348,19 @@ const mapStateToPropsMessageCo = ({app:{ispop,type,title,msg}}) => {
 }
 MessageCo = connect(mapStateToPropsMessageCo)(MessageCo);
 
+
+//app
 class AppRoot extends React.Component {
     render() {        
         return (
             <div>
+                <Toast />
                 <MessageCo />
                 <div className="pageWamp"><CoApp /></div>
                 <Sharebox />
             </div>
-            );
+        );
     }
-
 }
 
 export default AppRoot;

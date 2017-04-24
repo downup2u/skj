@@ -25,6 +25,7 @@
     "react-redux": "^5.0.3",
     "react-router-dom": "^4.0.0-beta.7",
     "react-virtualized": "^9.3.0",
+    "react-weui": "^1.0.3",
     "redux": "^3.6.0",
     "redux-act": "^1.1.0",
     "redux-form": "^6.5.0",
@@ -32,7 +33,8 @@
     "redux-thunk": "^2.2.0",
     "request": "^2.81.0",
     "semantic-ui-react": "^0.67.0",
-    "socket.io-client": "^1.7.3"
+    "socket.io-client": "^1.7.3",
+    "weui": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
