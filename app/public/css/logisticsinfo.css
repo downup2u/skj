@@ -1,5 +1,21 @@
 .logisticsinfoPage{
     background: #EEE;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.logisticsinfoPage .content{
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    justify-self: stretch;
 }
 .logisticsinfoPage .proinfo{
     margin-bottom: 10px;
@@ -20,8 +36,11 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-    padding-left: 15px;
     font-size:14px;
+}
+.logisticsinfoPage .listContent{
+    flex-grow: 1;
+    overflow: scroll;
 }
 .logisticsinfoPage .list{
     border-top: 1px solid #EEE;

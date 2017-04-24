@@ -11,3 +11,6 @@ export const serverpush_orderinfo = createAction('serverpush_orderinfo');
 export const updata_orderinfo = createAction('updata_orderinfo');
 //设置订单支付状态
 export const updata_orderpaydata = createAction('updata_orderpaydata');
+//
+export const updata_logisticsinfo_order = createAction("updata_logisticsinfo_order");
+export const updata_logisticsinfo_logisticsinfo = createAction("updata_logisticsinfo_logisticsinfo");

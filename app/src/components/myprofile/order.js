@@ -13,7 +13,8 @@ import {
     myOrderList_filler_set,
     myorderlist_addreducers,
     myorderdelone_request,
-    uiinfinitepage_updateitem
+    uiinfinitepage_updateitem,
+    updata_logisticsinfo_logisticsinfo
 } from '../../actions';
 
 export class Page extends React.Component {
@@ -47,6 +48,12 @@ export class Page extends React.Component {
                 this.props.dispatch(uiinfinitepage_updateitem(updateditem));
             });
         }
+    };
+
+    //点击查看物流详情
+    getLogisticsinfo =(order)=>{
+        this.props.dispatch(updata_logisticsinfo_logisticsinfo({order}));
+        this.props.history.push('/logisticsinfo');
     }
 
     updateContent = (items)=> {
@@ -87,13 +94,13 @@ export class Page extends React.Component {
                         </div>
                     ):""}
                     {items.orderstatus=="待发货"?(
-                        <div className='hotlnk' onClick={()=>{this.payorder(items)}}>
+                        <div className='hotlnk' onClick={()=>{this.getLogisticsinfo(items)}}>
                             订单已支付, 查看详情
                         </div>
                     ):""}
                     {items.orderstatus=="待收货"?(
-                        <div className='hotlnk' onClick={()=>{this.payorder(items)}}>
-                            商家已发货, 查看详情
+                        <div className='hotlnk'>
+                            商家已发货, <span className="btn" onClick={()=>{this.getLogisticsinfo(items)}}>查看物流</span>
                         </div>
                     ):""}
                     {items.orderstatus=="已完成"?(

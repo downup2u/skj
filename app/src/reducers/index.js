@@ -23,6 +23,7 @@ import share from './share';
 import about from './about';
 import integral from './integral';
 import weui from './weui';
+import logisticsinfo from './logisticsinfo';
 
 export default combineReducers(
   { 
@@ -48,6 +49,7 @@ export default combineReducers(
     share,
     integral,
     weui,
+    logisticsinfo,
     form: formReducer
   }
 );

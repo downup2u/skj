@@ -4,6 +4,7 @@
     align-items: center;
     height: 48px;
     position: relative;
+    flex-shrink: 0;
 }
 #newNavHeadContent .title {
     flex-grow: 1;
