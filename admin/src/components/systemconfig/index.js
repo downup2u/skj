@@ -53,6 +53,9 @@ const SystemconfigShow = (props) => (
                  <TextField  label="每天最多获得的积分" source="pointlimitshare" />
                  <TextField  label="分享设置(JSON格式)" source="sharesetting" />
                  <TextField  label="会员等级设置(JSON格式)" source="memberlevelsetting" />
+                 <TextField  label="快递查询URL" source="expressapiurl" />
+                 <TextField  label="快递查询用户号" source="expressapicustomer" />
+                 <TextField  label="快递查询APIKEY" source="expressapikey" />
            </SimpleShowLayout>
        </ShowPage>
 );
@@ -71,12 +74,12 @@ export const SystemconfigCreate = (props) => (
            <SimpleForm>
                 <NumberInput  label="正常运费" source="expressfee" />
                 <NumberInput  label="免运费金额" source="expressfeeforfree" />
-            <ReferenceInput source="productcategoryid1" reference="category" allowEmpty>
-              <SelectInput optionText="name" />
-           </ReferenceInput>
-           <ReferenceInput source="productcategoryid2" reference="category"  allowEmpty>
-              <SelectInput optionText="name" />
-            </ReferenceInput>
+                <ReferenceInput source="productcategoryid1" reference="category" allowEmpty>
+                    <SelectInput optionText="name" />
+                </ReferenceInput>
+                <ReferenceInput source="productcategoryid2" reference="category"  allowEmpty>
+                    <SelectInput optionText="name" />
+                </ReferenceInput>
                 <TextInput  label="一级分销佣金" source="bonuslevel1" />
                 <TextInput  label="二级分销佣金" source="bonuslevel2" />
                 <TextInput  label="换算,例1积分换1分" source="pointvsmoney" />
@@ -85,6 +88,9 @@ export const SystemconfigCreate = (props) => (
                 <TextInput  label="每天最多获得的积分" source="pointlimitshare" />
                 <LongTextInput  label="分享设置(JSON格式)" source="sharesetting" />
                 <LongTextInput  label="会员等级设置(JSON格式)" source="memberlevelsetting" />
+                <TextInput  label="快递查询URL" source="expressapiurl" />
+                <TextInput  label="快递查询用户号" source="expressapicustomer" />
+                <TextInput  label="快递查询APIKEY" source="expressapikey" />
            </SimpleForm>
        </Create>
 );
@@ -109,6 +115,9 @@ export const SystemconfigEdit = (props) => (
             <TextInput  label="每天最多获得的积分" source="pointlimitshare" />
             <LongTextInput  label="分享设置(JSON格式)" source="sharesetting" />
             <LongTextInput  label="会员等级设置(JSON格式)" source="memberlevelsetting" />
+            <TextInput  label="快递查询URL" source="expressapiurl" />
+            <TextInput  label="快递查询用户号" source="expressapicustomer" />
+            <TextInput  label="快递查询APIKEY" source="expressapikey" />
         </SimpleForm>
     </EditPage>
 );
