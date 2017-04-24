@@ -21,11 +21,12 @@ export class Page extends Component {
             }, 1500);
         }
     }
-    
+
     render(){
         let icon = {
             "warning" : "warn",
-            "success" : "success-no-circle"
+            "success" : "success-no-circle",
+            "loading" : "loading"
         }
         return (
             <Toast 
