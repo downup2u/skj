@@ -1,5 +1,5 @@
 /*
-    我的收益
+    积分明细
 */
 import React, { Component, PropTypes } from 'react';
 import NavBar from '../newnav.js';
@@ -10,10 +10,10 @@ import _ from 'lodash';
 import moment from 'moment';
 
 import {
-    profit_set_listtype
+    integral_set_listtype
 } from '../../actions';
 import {
-    getdistsalesorderdetails
+    getuserpointdetails
 } from '../../actions/sagacallback.js';
 
 
@@ -21,13 +21,18 @@ export class Page extends Component {
 
     componentWillMount () {
         //order'来自订单,'withdrawcash'来自提现
-        this.menu = {"":"全部","order":"获得明细","withdrawcash":"提现明细"};
+        this.menu = {0:"全部",1:"获得明细",2:"消费明细"};
+        this.query = {
+            0: {},
+            1: {pointbonus:{ $gt: 0 }},
+            2: {pointbonus:{ $lt: 0 }},
+        }
         //获取收益列表
-        let query = this.props.set_listtype==''?{}:{srctype: this.props.set_listtype};
-        this.getprofitlist(query)
+        let listQuery = this.query[this.props.type];
+        this.getIntegralList(listQuery)
     };
 
-    getprofitlist =(query)=>{
+    getIntegralList =(query)=>{
         let payload = {
             query: query,
             options:{
@@ -35,13 +40,12 @@ export class Page extends Component {
                 limit: 10000,
             }
         };
-        this.props.dispatch(getdistsalesorderdetails(payload))
+        this.props.dispatch(getuserpointdetails(payload))
     };
 
     handleItemClick = (index) => { 
-        this.props.dispatch(profit_set_listtype(index));
-        let query = index==''?{}:{srctype: index};
-        this.getprofitlist(query)
+        this.props.dispatch(integral_set_listtype(index));
+        this.getIntegralList(this.query[index])
     };
 
     onClickReturn =()=>{
@@ -59,49 +63,43 @@ export class Page extends Component {
                 height:(window.innerHeight)+"px",
                 overflow:"scroll"
              }}>
-                <NavBar back={true} title="我的收益" />
+                <NavBar back={true} title="积分明细" />
                 <div className="headCont">
-                    <div className="info">
-                        <span className="profittit">我的收益(元)</span>
-                        <span className="number">¥ {this.props.balance}元</span>
+                    <div className="info integralInfo">
+                        <span className="profittit">总积分</span>
+                        <span className="number integralNumber">{this.props.point}</span>
+                        <img src="img/myprofile/18.png" className="integralNumberBg" />
                     </div>
-                    <div className="tixian"><span onClick={()=>{this.onClickPage('/tixian')}}>提现</span></div>
                 </div>
                 <Menu pointing secondary>
                     {_.map(this.menu,(menu,index)=>{
                         return (
                             <div key={index}>
-                                <Menu.Item name={menu} active={this.props.set_listtype==index} onClick={()=>{this.handleItemClick(index)}}/>
+                                <Menu.Item name={menu} active={this.props.type==index} onClick={()=>{this.handleItemClick(index)}}/>
                             </div>
                         )
                     })}
                 </Menu>
                 <div className="cont">
-                    <div className={this.props.profitlist.length>0?"tt":"tt hide"}>
-                        <span>日期</span><span>金额</span>
+                    <div className={this.props.list.length>0?"tt":"tt hide"}>
+                        <span>日期</span><span>积分</span>
                     </div>
-                    <div className={this.props.profitlist.length>0?"t2 hide":"t2"}>
+                    <div className={this.props.list.length>0?"t2 hide":"t2"}>
                         - 暂无数据 -
                     </div>
                     <div className='ll'>
                         
-                        {_.map(this.props.profitlist, (profitinfo, index)=>{
+                        {_.map(this.props.list, (integral, index)=>{
                             return (
                                 <div className="l" key={index}>
                                     <div className="i">
                                         <span className="code">
-                                            {
-                                                this.props.set_listtype=="order"
-                                                ?
-                                                "订单:"+profitinfo.fromorder+"获得"
-                                                :
-                                                "提现记录:"
-                                            }
+                                            {integral.reason}
                                         </span>
-                                        <span className="date"><span>{moment(profitinfo.created_at).format("MM月DD日 HH时mm分")}</span></span>
+                                        <span className="date"><span>{moment(integral.created_at).format("MM月DD日 HH时mm分")}</span></span>
                                     </div>
                                     <div className="p">
-                                        <span>{profitinfo.feebonus>0?("+"+profitinfo.feebonus):("-"+profitinfo.feebonus*-1)}</span>
+                                        <span>{integral.pointbonus>0?("+"+integral.pointbonus):("-"+integral.pointbonus*-1)}</span>
                                     </div>
                                 </div>
                             )
@@ -114,6 +112,7 @@ export class Page extends Component {
     }
 }
 
-const mapStateToProps =  ({userlogin,profit}) =>{ return {...userlogin, ...profit};};
+const mapStateToProps =  ({userlogin,integral}) =>{
+    return {...userlogin, ...integral};
+};
 export default connect(mapStateToProps)(Page);
-

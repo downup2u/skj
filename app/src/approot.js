@@ -99,6 +99,8 @@ import Pay from './components/shopping/pay.js';
 import PayEnd from './components/shopping/payend.js';
 //我的邀请码
 import Share from './components/myprofile/share.js';
+//我的邀请码
+import Integral from './components/myprofile/integral.js';
 
 //一键登录绑定用户
 import Userbind from './components/userbind.js';
@@ -274,6 +276,7 @@ const CoApp = (props) => {
             <CustomRoute path="/orderseladdress/:id" component={requireAuthentication(Orderseladdress)} /> 
             <CustomRoute path="/settings" component={Settings} /> 
             <CustomRoute path="/feedback" component={requireAuthentication(Feedback)} /> 
+            <CustomRoute path="/integral" component={requireAuthentication(Integral)} /> 
             <CustomRoute path="/aboutus/:type" component={Aboutus} /> 
             <CustomRoute component={App}/>
         </Switch>

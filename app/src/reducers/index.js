@@ -21,6 +21,7 @@ import profit from './profit';
 import paystatus from './paystatus';
 import share from './share';
 import about from './about';
+import integral from './integral';
 
 export default combineReducers(
   { 
@@ -44,6 +45,7 @@ export default combineReducers(
     profit,
     paystatus,
     share,
+    integral,
     form: formReducer
   }
 );

@@ -26,7 +26,7 @@ export class Page extends React.Component {
     }
 
     //用户自定义按钮
-    getuserbtn =(nav)=>{
+    getuserbtn =(nav,index)=>{
         let action = null;
         if(nav.hasOwnProperty("action")){
             action = nav.action;
@@ -35,7 +35,7 @@ export class Page extends React.Component {
             action = this.pagePush;
         }
         return (
-            <span className="nli" onClick={()=>{nav.action}}>
+            <span className="nli" onClick={()=>{nav.action}} key={index}>
                 {
                     nav.icon==''?'':(
                         <span className="iconBtn" onClick={()=>{action(nav.url)}}>
@@ -106,7 +106,7 @@ export class Page extends React.Component {
                 }
                 {
                     _.map(leftnav, (nav, index)=>{
-                        return this.getuserbtn(nav);
+                        return this.getuserbtn(nav,index);
                     })
                 }
                 </span>
@@ -119,7 +119,7 @@ export class Page extends React.Component {
                 }
                 {
                     _.map(rightnav, (nav, index)=>{
-                        return this.getuserbtn(nav);
+                        return this.getuserbtn(nav,index);
                     })
                 }
                 </span>

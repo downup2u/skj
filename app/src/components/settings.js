@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import NavBar from './nav.js';
+import NavBar from './newnav.js';
 import Config from '../env/config';
 import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
@@ -22,10 +22,7 @@ let Page =(props)=> {
 
     return (
         <div className="settingPage">
-            <div className="ProinfoPageHead">
-                <Icon name="angle left" onClick={()=>{onClickReturn()}} />
-                <span className="title">设置</span>
-            </div>
+            <NavBar back={true} title="设置" />
             <div className="list">
                 <div className="li" onClick={()=>{onClickPage("/aboutus/helpcenter")}}>
                     <span>帮助中心</span>

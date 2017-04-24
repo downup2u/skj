@@ -69,7 +69,7 @@ const userlogin = createReducer({
     },
     [login_err]: (state, payload) => {
         return { ...initial.userlogin};
-    },
+    }
 }, initial.userlogin);
 
 export default userlogin;

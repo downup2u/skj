@@ -30,6 +30,28 @@
 .myProfitPage .info span.number{
     font-size: 36px;
 }
+.myProfitPage .info span.integralNumber{
+    font-size: 26px;
+    line-height: 120px;
+}
+.myProfitPage .integralInfo{
+    position: relative;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.myProfitPage .integralInfo span.profittit{
+    position: absolute;
+    left: 15px;
+    top:0;
+}
+.myProfitPage .info img.integralNumberBg{
+    width: 120px;
+    height: 120px;
+    margin-top: -110px;
+}
+
 .myProfitPage .tixian{
     display: flex;
     justify-content: flex-end;

@@ -12,6 +12,24 @@
     position: relative;
     flex-shrink: 0;
 }
+.myProfilePage .headCont .signDom{
+    position: absolute;
+    top: 80px;
+    right: 15px;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+}
+.myProfilePage .headCont .signDom span.lnk{
+    background: #FFF;
+    height: 36px;
+    width: 36px;
+    color: #108ee9;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 36px;
+    margin-right: 5px;
+}
 .myProfilePage .userInfo{
     display: flex;
     justify-content: center;
