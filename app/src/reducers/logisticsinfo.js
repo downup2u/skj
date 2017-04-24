@@ -5,6 +5,7 @@
 import { createReducer } from 'redux-act';
 import {
     updata_logisticsinfo_logisticsinfo,
+    expressquery_result
 } from '../actions';
 import _ from 'lodash';
 
@@ -21,6 +22,11 @@ const logisticsinfo = createReducer({
     	let logisticsinfo = { ...state.logisticsinfo, ...payload }
         return  {...state, ...logisticsinfo};
     },
+    [expressquery_result]:(state, payload)=>{
+    	let info = JSON.parse(payload);
+    	let logisticsinfo = { ...state.logisticsinfo, info }
+        return  {...state, ...logisticsinfo};
+    }
 }, initial.logisticsinfo);
 
 export default logisticsinfo;
