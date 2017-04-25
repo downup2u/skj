@@ -93,10 +93,6 @@ export class Page extends Component {
                                 <img src="img/myprofile/4.png"/>
                                 <span>待收货</span>
                             </div>
-                            <div onClick={()=>{this.handleOrderClick('退货')}}>
-                                <img src="img/myprofile/5.png"/>
-                                <span>退货</span>
-                            </div>
                         </div>
                     </div>
                     <div className="llcont">

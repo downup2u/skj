@@ -100,6 +100,19 @@
 .orderList .items > div.cont .proinfo .proother {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.orderList .items > div.cont .proinfo .proother .evaluationLnk{
+    border: 1px solid #f38108;
+    color: #f38108;
+    border-radius: 6px;
+    display: flex;
+    width: 80px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 .orderList .items > div.cont .proinfo .proother .price {

@@ -15,7 +15,8 @@ import {
     myorderdelone_request,
     uiinfinitepage_updateitem,
     updata_logisticsinfo_logisticsinfo,
-    set_weui
+    set_weui,
+    evaluation_data
 } from '../../actions';
 
 export class Page extends React.Component {
@@ -64,6 +65,17 @@ export class Page extends React.Component {
         this.props.history.push('/logisticsinfo');
     };
 
+    //添加评论
+    addEvaluation=(e, orderid, productid)=>{
+        this.stopDefault(e);
+        let data = {
+            orderid : orderid,
+            productid : productid
+        }
+        this.props.dispatch(evaluation_data(data));
+        this.props.history.push('/orderevaluation');
+    }
+
     updateContent = (items)=> {
         return  (
             <div className="items" key={items._id}>
@@ -83,6 +95,20 @@ export class Page extends React.Component {
                                         <div className="proother">
                                             <span className="price">￥{pro.price}</span>
                                             <span className="num">X{pro.number}</span>
+                                            {
+                                                pro.hasOwnProperty("isevaluation")?(
+                                                    <span>
+                                                        {!pro.isevaluation?(
+                                                            <span 
+                                                                className="evaluationLnk"
+                                                                onClick={(e)=>{this.addEvaluation(e, items._id, pro.productid)}}
+                                                                >
+                                                                立刻评价
+                                                            </span>
+                                                        ):""}
+                                                    </span>
+                                                ):""
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +135,7 @@ export class Page extends React.Component {
                     {items.orderstatus=="待收货"?(
                         <div className='hotlnk'>
                             <span>商家已发货,</span>
-                            <span className="btn success" onClick={(e)=>{this.endOrder(e, items._id)}}>确认收货</span>
+                            <span className="btn success" onClick={(e)=>{this.endOrder(e, items)}}>确认收货</span>
                             <span className="btn" onClick={(e)=>{this.getLogisticsinfo(e, items)}}>查看物流</span>
                         </div>
                     ):""}
@@ -126,7 +152,8 @@ export class Page extends React.Component {
     
 
     //确认收货
-    endOrder =(e, _id)=>{
+    endOrder =(e, order)=>{
+        let _id = order._id;
         this.stopDefault(e);
         this.props.dispatch(
             set_weui({
@@ -138,10 +165,18 @@ export class Page extends React.Component {
                     buttonsClose : ()=>{},
                     //确认收货
                     buttonsClick : ()=>{
+                        //修改订单下的产品评论情况
+                        let newproductsdetail = [];
+                        _.map(order.productsdetail, (product, index)=>{
+                            let newproduct = product;
+                            newproduct["isevaluation"] = false;
+                            newproductsdetail.push(newproduct);
+                        })
                         let payload = {
                             _id: _id,
                             data:{
-                                orderstatus:'已完成'
+                                orderstatus : '已完成',
+                                productsdetail : newproductsdetail
                             }
                         };
                         this.props.dispatch(myorderupdateone(payload)).then(({updateditem})=>{

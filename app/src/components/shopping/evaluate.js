@@ -7,6 +7,30 @@ import { connect } from 'react-redux';
 import '../../../public/css/shoppingproevaluate.css';
 import { productcommentsfromproduct } from '../../actions/sagacallback.js';
 import InfinitePage from '../controls/infinitecontrol';
+import moment from 'moment';
+
+// commenttxt
+// :
+// "hahaha"
+// created_at
+// :
+// "2017-04-25T14:09:19.819Z"
+// creator
+// :
+// "58f078f3c2065a04efdb828d"
+// order
+// :
+// "58fae7ed451c4760ea54ab36"
+// product
+// :
+// "58f0744bc2065a04efdb8289"
+// __v
+// :
+// 0
+// _id
+// :
+// "58ff588f7ae81453021ab280"
+
 
 let Page = (props) => {
     let onClickReturn = ()=> {
@@ -16,18 +40,18 @@ let Page = (props) => {
         props.history.push(name);
     };
     let updateContent = (item)=> {
-        let isselected = props.toordercarts.hasOwnProperty(item._id);
+        let proinfo = props.products[item.product];
         return  (
             <div className="li" key={item._id}>
                 <div className="tt">
-                    <img src="img/shopping/14.png"/>
+                    <img src={proinfo.picurl}/>
                     <div>
-                        <span className="name">水可净智能水盒子</span>
-                        <span className="data">2016-09-09</span>
+                        <span className="name">{proinfo.name}</span>
+                        <span className="data">{moment(item.created_at).format("MM月DD日 HH时mm分")}</span>
                     </div>
                 </div>
                 <span className="content">
-                    <span>这里是评价内容这里是评价内容这里是评价内容这里是评价内容这里是评价内容</span>
+                    <span>{item.commenttxt}</span>
                 </span>
             </div>
         );
@@ -37,10 +61,7 @@ let Page = (props) => {
         <div className="ShoppingproevaluatePage">
             <div className="ProinfoPageHead">
                 <Icon name="angle left" onClick={()=>{onClickReturn()}} />
-                <span className="title">商品详情</span>
-                <span className="imgcont">
-                    <img src="img/head/1.png"/>
-                </span>
+                <span className="title">商品评价</span>
             </div>
 
             <div className="proList" 
@@ -62,8 +83,8 @@ let Page = (props) => {
     )
 }
 
-let mapStateToProps = ({shop,shopcart}) => {
-    return {...shop};
+let mapStateToProps = ({shop:{products}}) => {
+    return { products };
 }
 
 Page = connect(mapStateToProps)(Page);

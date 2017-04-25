@@ -16,7 +16,9 @@ import {
     payway_set,
     updata_orderinfo,
     updata_orderpaydata,
-    set_weui
+    set_weui,
+    updata_logisticsinfo_logisticsinfo,
+    evaluation_data
 } from '../../actions';
 
 import {onclickpay} from '../../env/pay';
@@ -83,6 +85,65 @@ export class Page extends Component {
             }
         }
         this.props.dispatch(updata_orderpaydata(paystatus));
+    };
+
+    //查看物流详情
+    getLogisticsinfo =(order)=>{
+        this.props.dispatch(updata_logisticsinfo_logisticsinfo({order}));
+        this.props.history.push('/logisticsinfo');
+    };
+
+    //确认收货
+    endOrder =(order)=>{
+        let _id = order._id;
+        this.props.dispatch(
+            set_weui({
+                confirm:{
+                    show : true,
+                    title : "确认收货",
+                    text : "请仔细核对收货情况后再确定",
+                    //
+                    buttonsClose : ()=>{},
+                    //确认收货
+                    buttonsClick : ()=>{
+
+                        //修改订单下的产品评论情况
+                        let newproductsdetail = [];
+                        _.map(order.productsdetail, (product, index)=>{
+                            let newproduct = product;
+                            newproduct["isevaluation"] = false;
+                            newproductsdetail.push(newproduct);
+                        })
+                        let payload = {
+                            _id: _id,
+                            data:{
+                                orderstatus : '已完成',
+                                productsdetail : newproductsdetail
+                            }
+                        };
+                        this.props.dispatch(myorderupdateone(payload)).then(({updateditem})=>{
+                            this.props.dispatch(
+                                set_weui({toast:{
+                                    show : true,
+                                    text : "给个评价吧",
+                                    type : "success"
+                                }})
+                            )
+                        });
+                    }
+                }}
+            )
+        )
+        
+    };
+    //添加评论
+    addEvaluation=(orderid, productid)=>{
+        let data = {
+            orderid : orderid,
+            productid : productid
+        }
+        this.props.dispatch(evaluation_data(data));
+        this.props.history.push('/orderevaluation');
     }
 
     render() {
@@ -236,6 +297,20 @@ export class Page extends Component {
                                                 <span className="price">
                                                     <span>¥{proinfo.price}</span>
                                                     <span>X{proinfo.number}</span>
+                                                    {
+                                                        proinfo.hasOwnProperty("isevaluation")?(
+                                                            <span>
+                                                                {!proinfo.isevaluation?(
+                                                                    <span 
+                                                                        className="evaluationLnk"
+                                                                        onClick={()=>{this.addEvaluation(orderinfo._id, proinfo.productid)}}
+                                                                        >
+                                                                        立刻评价
+                                                                    </span>
+                                                                ):""}
+                                                            </span>
+                                                        ):""
+                                                    }
                                                 </span>
                                             </div>
                                         </div>
@@ -273,14 +348,19 @@ export class Page extends Component {
                                     <span>订单状态</span>
                                     <div className="orderstatusinfo">
                                         <div>{orderinfo.orderstatus}</div>
-                                        {orderinfo.orderstatus=="待收货"?(
-                                            <div>
-                                                查看物流详情
-                                            </div>
-                                        ):""}
                                     </div>
                                 </div>
                             </div>
+                            {orderinfo.orderstatus=="待收货"?(
+                                <div className="list listLnk">
+                                    <div className="logisticsinfo" onClick={()=>{this.getLogisticsinfo(orderinfo)}}>
+                                        物流详情
+                                    </div>
+                                    <div className="endorder" onClick={()=>{this.endOrder(orderinfo)}}>
+                                        确认收货
+                                    </div>
+                                </div>
+                            ):""}
                         </div>
 
                     </div>

@@ -14,3 +14,7 @@ export const updata_orderpaydata = createAction('updata_orderpaydata');
 //
 export const updata_logisticsinfo_order = createAction("updata_logisticsinfo_order");
 export const updata_logisticsinfo_logisticsinfo = createAction("updata_logisticsinfo_logisticsinfo");
+
+//商品评价信息
+export const evaluation_data = createAction("evaluation_data");
+

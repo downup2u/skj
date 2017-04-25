@@ -24,6 +24,7 @@ import about from './about';
 import integral from './integral';
 import weui from './weui';
 import logisticsinfo from './logisticsinfo';
+import evaluation from './evaluation';
 
 export default combineReducers(
   { 
@@ -50,6 +51,7 @@ export default combineReducers(
     integral,
     weui,
     logisticsinfo,
+    evaluation,
     form: formReducer
   }
 );

@@ -1,5 +1,12 @@
-.orderevaluationPage{
+.pageWamp >div.orderevaluationPage{
     background: #EEE;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden
 }
 .orderevaluationPage .proinfo .li{
     display: flex;
@@ -55,4 +62,5 @@
 .orderevaluationPage .subBtn .ui.primary.button{
     border-radius: 50px;
     flex-grow: 1;
+    height: 42px;
 }

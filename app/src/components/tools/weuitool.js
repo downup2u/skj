@@ -38,7 +38,6 @@ const alertDefault = {
 }
 
 export class Page extends Component {
-
     componentWillReceiveProps(nextProps) {
         if (nextProps.toast.show && !this.props.toast.show) {
             window.setTimeout(()=> {
@@ -50,31 +49,28 @@ export class Page extends Component {
                 this.props.dispatch(set_weui({ toast }));
             }, 1500);
         }
-    }
-
+    };
     //confirm close
     confirmClose = (confirm,dispatch)=>{
         if(confirm.hasOwnProperty("buttonsClose")){
             confirm.buttonsClose();
         }
         dispatch(set_weui({ confirm:confirmDefault }));
-    }
+    };
     //confirm click
     confirmClick = (confirm,dispatch)=>{
         if(confirm.hasOwnProperty("buttonsClick")){
             confirm.buttonsClick();
         }
         dispatch(set_weui({ confirm:confirmDefault }));
-    }
-
+    };
     //alert click
     alertClick =(alert,dispatch)=>{
         if(alert.hasOwnProperty("buttonsClick")){
             alert.buttonsClick();
         }
         dispatch(set_weui({ alert:alertDefault }));
-    }
-
+    };
     render(){
         const { 
             toast, 

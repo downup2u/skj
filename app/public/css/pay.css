@@ -80,17 +80,31 @@
     justify-content: space-between;
     padding-left: 15px;
     font-size:14px;
+    position: relative;
+}
+.PayPage .proinfo .li >div .evaluationLnk{
+    border: 1px solid #f38108;
+    color: #f38108;
+    border-radius: 6px;
+    display: flex;
+    width: 80px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
 }
 .PayPage .proinfo .li >div .price {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-.PayPage .proinfo .li >div .price span:first-child{
+.PayPage .proinfo .li >div .price > span:first-child{
     color: #F00;
 }
 .PayPage .list{
     border-top: 1px solid #EEE;
     background: #FFF;
+    display: flex;
+    flex-direction: column
 }
 .PayPage .list .li{
     background: #FFF;
@@ -128,6 +142,29 @@
 .PayPage .list .li .setpaycoupon span{
     margin-right: 10px;
 }
+.PayPage .listLnk {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    justify-content: space-between;
+}
+.PayPage .listLnk > div{
+    display: flex;
+    justify-content: center;
+    width: 48%;
+    height: 40px;
+    align-items: center;
+    color: #FFF;
+    font-size: 16px;
+}
+.PayPage .listLnk .logisticsinfo{
+    background: #5596d6;
+
+}
+.PayPage .listLnk .endorder{
+    background: #00c40c;
+}
+
 .PayPage .orderaddress{
     padding: 15px;
     display: flex;
