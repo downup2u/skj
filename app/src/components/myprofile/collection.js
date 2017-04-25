@@ -7,6 +7,7 @@ import Swipeout from 'rc-swipeout';
 import { mycollectiongetall,mycollectiondelone } from '../../actions/sagacallback.js';
 import { uiinfinitepage_deleteitem } from '../../actions';
 import InfinitePage from '../controls/infinitecontrol';
+//import Paging from '../tools/paging';
 
 let Page =(props)=> {
 
@@ -62,7 +63,7 @@ let Page =(props)=> {
             <div className="myCollection"
                  style={{
                     height:(window.innerHeight-46)+"px",
-                    overflow:"scroll"
+                    overflow:"hidden"
                 }}>
                 <List.Item>
                     <InfinitePage
@@ -74,6 +75,7 @@ let Page =(props)=> {
                         sort = {{created_at: -1}}
                     />
                 </List.Item>
+                
             </div>
         </div>
     )

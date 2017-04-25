@@ -14,7 +14,8 @@ import {
     myorderlist_addreducers,
     myorderdelone_request,
     uiinfinitepage_updateitem,
-    updata_logisticsinfo_logisticsinfo
+    updata_logisticsinfo_logisticsinfo,
+    set_weui
 } from '../../actions';
 
 export class Page extends React.Component {
@@ -36,7 +37,8 @@ export class Page extends React.Component {
     };
 
     //取消订单
-    delorder = (_id)=>{
+    delorder = (e, _id)=>{
+        this.stopDefault(e);
         if(confirm("去定要删除订单吗?")){
             let payload = {
                 _id: _id,
@@ -50,11 +52,17 @@ export class Page extends React.Component {
         }
     };
 
+    //取消冒泡事件
+    stopDefault =(e)=>{
+        e.stopPropagation();
+    };
+
     //点击查看物流详情
-    getLogisticsinfo =(order)=>{
+    getLogisticsinfo =(e, order)=>{
+        this.stopDefault(e);
         this.props.dispatch(updata_logisticsinfo_logisticsinfo({order}));
         this.props.history.push('/logisticsinfo');
-    }
+    };
 
     updateContent = (items)=> {
         return  (
@@ -83,34 +91,67 @@ export class Page extends React.Component {
                     }
                 </div>
 
-                <div className="lnk">
+                <div className="lnk" onClick={()=>{this.payorder(items)}}>
                     <div className='txt'>
                         合计：￥{items.orderprice} (含运费)
                     </div>
                     {items.orderstatus=="未支付"?(
                         <div className='hotlnk'>
-                            <span className="btn del" onClick={()=>{this.delorder(items._id)}}>取消订单</span>
-                            <span className="btn pay" onClick={()=>{this.payorder(items)}}>立刻支付</span>
+                            <span className="btn del" onClick={(e)=>{this.delorder(e, items._id)}}>取消订单</span>
+                            <span className="btn pay">立刻支付</span>
                         </div>
                     ):""}
                     {items.orderstatus=="待发货"?(
-                        <div className='hotlnk' onClick={()=>{this.getLogisticsinfo(items)}}>
-                            订单已支付, 查看详情
+                        <div className='hotlnk'>
+                            <span>订单已支付, 等待商家发货</span>
                         </div>
                     ):""}
                     {items.orderstatus=="待收货"?(
                         <div className='hotlnk'>
-                            商家已发货, <span className="btn" onClick={()=>{this.getLogisticsinfo(items)}}>查看物流</span>
+                            <span>商家已发货,</span>
+                            <span className="btn success" onClick={(e)=>{this.endOrder(e, items._id)}}>确认收货</span>
+                            <span className="btn" onClick={(e)=>{this.getLogisticsinfo(e, items)}}>查看物流</span>
                         </div>
                     ):""}
                     {items.orderstatus=="已完成"?(
-                        <div className='hotlnk' onClick={()=>{this.payorder(items)}}>
-                            订单已完成, 查看详情
+                        <div className='hotlnk'>
+                            <span>订单已完成, 查看详情</span>
                         </div>
                     ):""}
                 </div>
             </div>
         );
+    };
+
+    
+
+    //确认收货
+    endOrder =(e, _id)=>{
+        this.stopDefault(e);
+        this.props.dispatch(
+            set_weui({
+                confirm:{
+                    show : true,
+                    title : "确认收货",
+                    text : "请仔细核对收货情况后再确定",
+                    //
+                    buttonsClose : ()=>{},
+                    //确认收货
+                    buttonsClick : ()=>{
+                        let payload = {
+                            _id: _id,
+                            data:{
+                                orderstatus:'已完成'
+                            }
+                        };
+                        this.props.dispatch(myorderupdateone(payload)).then(({updateditem})=>{
+                            this.props.dispatch(uiinfinitepage_updateitem(updateditem));
+                        });
+                    }
+                }}
+            )
+        )
+        
     };
 
     //点击支付订单
@@ -119,7 +160,7 @@ export class Page extends React.Component {
         payload[order._id] = order;
         this.props.dispatch(myorderlist_addreducers(payload));
         this.props.history.push(`/payend/${order._id}`);
-    }
+    };
 
     render() {
         let filler = {};

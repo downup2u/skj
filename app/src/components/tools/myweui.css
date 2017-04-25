@@ -1,3 +1,6 @@
+.weui-mask{
+	z-index: 5000;
+}
 .weui-toast{
     width: 10em;
     min-height: 10em;

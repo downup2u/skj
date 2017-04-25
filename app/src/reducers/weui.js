@@ -16,9 +16,21 @@ const initial = {
         	text : "",
         	type : ""
         },
+        alert : {
+            show : false,
+            title : "",
+            text : "",
+            buttonsClick : ()=>{}
+        },
+        confirm : {
+            show : false,
+            title : "",
+            text : "",
+            buttonsClose : ()=>{},
+            buttonsClick : ()=>{}
+        }
     },
 };
-
 
 const weui = createReducer({
     [set_weui]: (state, payload) => {

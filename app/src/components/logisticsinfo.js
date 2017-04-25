@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { requestUrlGet } from '../util/util';
 import _ from 'lodash';
 import { expressquery_request } from '../actions';
+import Express from "./express";
 
 export class Page extends Component {
 
@@ -32,7 +33,8 @@ export class Page extends Component {
                     <div className="proinfo">
                         <div className="li">
                             <div>
-                                <span>物流编号: 70328806203816</span>
+                                <span>物流编号: {this.props.order.expresscode}</span>
+                                <span>快递公司: {Express[this.props.info.com]}</span>
                                 <span>商品名称: {this.props.order.ordertitle}</span>
                             </div>
                         </div>

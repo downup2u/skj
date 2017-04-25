@@ -287,7 +287,7 @@ import { hidepopmessage } from './actions/index.js';
 import { Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Sharebox from './components/tools/share';
-import Toast from './components/tools/toast';
+import WeuiTool from './components/tools/weuitool';
 
 class MessageCo extends React.Component {
     onDismiss = ()=> {
@@ -354,7 +354,7 @@ class AppRoot extends React.Component {
     render() {        
         return (
             <div>
-                <Toast />
+                <WeuiTool />    
                 <MessageCo />
                 <div className="pageWamp"><CoApp /></div>
                 <Sharebox />

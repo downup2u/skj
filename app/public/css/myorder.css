@@ -123,12 +123,16 @@
 .orderList .items > div.lnk .hotlnk{
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+}
+.orderList .items > div.lnk .hotlnk span{
+    margin-left: 10px;
 }
 .orderList .items > div.lnk .hotlnk .btn{
     padding: 4px 8px;
     border: 1px solid #EEE;
     border-radius: 6px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 .orderList .items > div.lnk .hotlnk .btn.pay{
     border-color: #F00;
