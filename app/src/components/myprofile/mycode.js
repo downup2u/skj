@@ -43,7 +43,7 @@ export class Page extends Component {
 }
 
 let PageRedux =  ({userlogin:{invitecode}}) =>{
-    return invitecode;
+    return {invitecode};
 };
 export default connect(PageRedux)(Page);
 

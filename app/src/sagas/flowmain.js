@@ -68,7 +68,7 @@ import {
     getpaysign_request,
 
     getusermoney,
-    useraddpoint,
+    useraddpoint_request,
     getusergetpointsigntoday_request,
     getuserpointdetails_request,
     loginwithoauth_request,
@@ -204,7 +204,7 @@ function* handleIOWithAuth(socket) {
             'getdistsalesorderdetails':`${getdistsalesorderdetails_request}`,
 
             'getusermoney':`${getusermoney}`,
-            'useraddpoint':`${useraddpoint}`,
+            'useraddpoint':`${useraddpoint_request}`,
             'getusergetpointsigntoday':`${getusergetpointsigntoday_request}`,
             'getuserpointdetails':`${getuserpointdetails_request}`,
             'feedbackaddone':`${feedbackaddone_request}`,

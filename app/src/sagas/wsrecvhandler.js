@@ -126,7 +126,8 @@ import {
 
     set_weui,
 
-    expressquery_result
+    expressquery_result,
+    useraddpoint_result
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -165,6 +166,27 @@ const handlerlist = {
       }}));
       emit(wait_oauthbinduser_result({err: errmsg}));
     });
+  },
+  ['useraddpoint_result']:(socket,emit)=>{
+    return ({err,result})=>{
+      console.log(`err:${JSON.stringify(err)},result:${JSON.stringify(result)}`);
+      if(!result){
+        emit(set_weui({toast:{
+            show : true,
+            text : err,
+            type : "error"
+        }}));
+      }
+
+      if(!err){
+        emit(set_weui({toast:{
+            show : true,
+            text : `${result.reason}获得${result.pointbonus}积分`,
+            type : "success"
+        }}));
+      }
+
+    }
   },
   ['oauthbinduser_result']:(socket,emit)=>{
     return (result)=>{

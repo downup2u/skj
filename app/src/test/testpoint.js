@@ -1,6 +1,6 @@
 import {
   getusermoney,
-  useraddpoint,
+  useraddpoint_request,
   getusergetpointsigntoday_request,
 } from '../actions';
 
@@ -18,7 +18,7 @@ let test_getusermoney=(dispatch)=>{
 
 //测试新增一个签到获取积分／分享获取积分
 let test_useraddpoint=(dispatch,reason)=>{
-  dispatch(useraddpoint({reason}));
+  dispatch(useraddpoint_request({reason}));
 }
 
 //获取今日是否签到

@@ -182,7 +182,8 @@ export const wait_getdistsalesorderdetails_result = createAction('wait_getdistsa
 //积分相关接口
 export const serverpush_usermoney = createAction('serverpush_usermoney');
 export const getusermoney = createAction('getusermoney');//进入个人中心时发送，刷新积分和用户余额，返回即：serverpush_usermoney，因此不需要专门写request,result
-export const useraddpoint = createAction('useraddpoint');//签到或分享，返回即：serverpush_usermoney，并新增明细
+export const useraddpoint_request = createAction('useraddpoint_request');//签到或分享，返回即：serverpush_usermoney，并新增明细
+export const useraddpoint_result = createAction('useraddpoint_result');//签到或分享，返回即：serverpush_usermoney，并新增明细
 export const getusergetpointsigntoday_request = createAction('getusergetpointsigntoday_request');//今日是否签到过
 export const getusergetpointsigntoday_result = createAction('getusergetpointsigntoday_result');
 export const getuserpointdetails_request = createAction('getuserpointdetails_request');
