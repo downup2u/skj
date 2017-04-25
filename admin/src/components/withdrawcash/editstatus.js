@@ -26,12 +26,14 @@ const EditStatus = (props) => {
   const {input} = props;
   console.log('EditStatus======>' + JSON.stringify(props));
 
-  if(input.value === '已支付' || input.value === '未验证'){
-      return <DisabledInput  {...props}  />
-  }
-  return(
-        <SelectInput  {...props}  />
-    );
+//   if(input.value === '已支付' || input.value === '未验证'){
+//       return <DisabledInput  {...props}  />
+//   }
+//   return(
+//         <SelectInput  {...props}  />
+//     );
+
+   return <SelectInput  {...props}  />
 };
 
 EditStatus.propTypes = {

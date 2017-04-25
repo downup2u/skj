@@ -4,7 +4,8 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import '../../../public/css/share.css';
 import { 
-    share_data_updata
+    share_data_updata,
+    useraddpoint_request
 } from '../../actions/index.js';
 import {
     shareQQ,
@@ -20,8 +21,12 @@ let Page = ({show,sharesetting,dispatch})=>{
     }
     let onClickShare = (fn)=>{
         fn(sharesetting,(result)=>{
-             alert(JSON.stringify(result));
+            // alert(JSON.stringify(result));
             console.log(`result:${JSON.stringify(result)}`);
+            if(result.code == 0){
+                dispatch(useraddpoint_request({reason:'分享'}));
+            }
+            
         });
     }
     return (

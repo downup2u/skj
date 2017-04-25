@@ -154,7 +154,7 @@ export class Page extends React.Component {
                             )
                         }else{
                             return (
-                                <span style={{display:"none"}}></span>
+                                <span key={index} style={{display:"none"}}></span>
                             )
                         }
                         

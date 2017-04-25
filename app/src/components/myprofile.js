@@ -8,7 +8,7 @@ import {
     myOrderList_filler_set,
     share_data_updata,
     getusergetpointsigntoday_request,
-    useraddpoint
+    useraddpoint_request
 } from '../actions';
 import _ from "lodash";
 
@@ -33,7 +33,7 @@ export class Page extends Component {
     }
 
     signAdd =(reason)=>{
-        this.props.dispatch(useraddpoint({reason}));
+        this.props.dispatch(useraddpoint_request({reason}));
         // setTimeout(()=>{
         //     this.props.dispatch(getusergetpointsigntoday_request({}));
         // },10)
