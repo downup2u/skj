@@ -45,6 +45,7 @@ export class Page extends Component {
         this.props.history.push(name);
     };
 
+    //
     onClickPay =()=> {
         let orderinfo = this.props.orderinfo;
         let dispatch = this.props.dispatch;
@@ -58,6 +59,15 @@ export class Page extends Component {
 
         dispatch(myorderupdateone(payload)).then((result)=>{
             onclickpay({orderinfo, payway, dispatch},(result)=>{
+                if(payway=="leftbalance"){
+                    this.props.dispatch(
+                        set_weui({toast:{
+                            show : true,
+                            text : "订单支付成功",
+                            type : "success"
+                        }})
+                    )
+                }
                 //console.log(`获得数据：${result}`);
             });
         });
@@ -100,7 +110,7 @@ export class Page extends Component {
             set_weui({
                 confirm:{
                     show : true,
-                    title : "确认收货",
+                    title : "是否已收到货物？",
                     text : "请仔细核对收货情况后再确定",
                     //
                     buttonsClose : ()=>{},
@@ -253,7 +263,7 @@ export class Page extends Component {
                                 实付金额: <span>¥{payprice}</span>
                             </div>
                             <div className="b" onClick={()=>{this.onClickPay()}}>
-                                <span>提交订单</span>
+                                <span>支付订单</span>
                             </div>
 
                         </div>
@@ -298,16 +308,12 @@ export class Page extends Component {
                                                     <span>¥{proinfo.price}</span>
                                                     <span>X{proinfo.number}</span>
                                                     {
-                                                        proinfo.hasOwnProperty("isevaluation")?(
-                                                            <span>
-                                                                {!proinfo.isevaluation?(
-                                                                    <span 
-                                                                        className="evaluationLnk"
-                                                                        onClick={()=>{this.addEvaluation(orderinfo._id, proinfo.productid)}}
-                                                                        >
-                                                                        立刻评价
-                                                                    </span>
-                                                                ):""}
+                                                        proinfo.hasOwnProperty("isevaluation")&&!proinfo.isevaluation?(
+                                                            <span 
+                                                                className="evaluationLnk"
+                                                                onClick={()=>{this.addEvaluation(orderinfo._id, proinfo.productid)}}
+                                                                >
+                                                                立刻评价
                                                             </span>
                                                         ):""
                                                     }
@@ -343,14 +349,31 @@ export class Page extends Component {
                                     </span>
                                 </div>
                             </div>
-                            <div className="list">
-                                <div className="li">
-                                    <span>订单状态</span>
-                                    <div className="orderstatusinfo">
-                                        <div>{orderinfo.orderstatus}</div>
+
+                            {orderinfo.orderstatus=="待发货"?(
+                                <div className="list">
+                                    <div className="li orderstatusinfoContent">
+                                        <div className="orderstatusinfo">
+                                            <div>
+                                                <span className="warning">已支付,等待商家发货...</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            ):""}
+
+                            {orderinfo.orderstatus=="已完成"?(
+                                <div className="list">
+                                    <div className="li orderstatusinfoContent">
+                                        <div className="orderstatusinfo">
+                                            <div>
+                                                <span className="green">订单已完成</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ):""}
+
                             {orderinfo.orderstatus=="待收货"?(
                                 <div className="list listLnk">
                                     <div className="logisticsinfo" onClick={()=>{this.getLogisticsinfo(orderinfo)}}>

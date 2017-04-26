@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import NavBar from '../nav.js';
+import NavBar from '../newnav.js';
 import { Input, Button, Select, List, Menu } from 'semantic-ui-react';
 import '../../../public/css/myorder.css';
 import { connect } from 'react-redux';
@@ -30,11 +30,6 @@ export class Page extends React.Component {
     //设置列表筛选条件
     handleItemClick = (status) => {
         this.props.dispatch(myOrderList_filler_set(status));
-    };
-
-    //返回
-    onClickReturn = ()=> {
-        this.props.history.goBack();
     };
 
     //取消订单
@@ -96,16 +91,12 @@ export class Page extends React.Component {
                                             <span className="price">￥{pro.price}</span>
                                             <span className="num">X{pro.number}</span>
                                             {
-                                                pro.hasOwnProperty("isevaluation")?(
-                                                    <span>
-                                                        {!pro.isevaluation?(
-                                                            <span 
-                                                                className="evaluationLnk"
-                                                                onClick={(e)=>{this.addEvaluation(e, items._id, pro.productid)}}
-                                                                >
-                                                                立刻评价
-                                                            </span>
-                                                        ):""}
+                                                pro.hasOwnProperty("isevaluation")&&!pro.isevaluation?(
+                                                    <span 
+                                                        className="evaluationLnk"
+                                                        onClick={(e)=>{this.addEvaluation(e, items._id, pro.productid)}}
+                                                        >
+                                                        立刻评价
                                                     </span>
                                                 ):""
                                             }
@@ -205,7 +196,7 @@ export class Page extends React.Component {
 
         return (
             <div className="myOrder" style={{height:(window.innerHeight)+"px"}}>
-                <NavBar lefttitle="返回" title="我的订单" onClickLeft={this.onClickReturn}/>
+                <NavBar back={true} title="我的订单" />
                 <div className="actionItem">
                     {_.map(this.actionItem, (status,index)=>{
                         return (

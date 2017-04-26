@@ -47,7 +47,7 @@ export class Page extends Component {
                     type : ""
                 }
                 this.props.dispatch(set_weui({ toast }));
-            }, 1500);
+            }, 2000);
         }
     };
     //confirm close

@@ -21,7 +21,7 @@ import {
  import {
   mycollectionisproductexits,
   mycollectiondelone,
-  productcommentsfromproduct
+  productcommentsfromproductgetcount
 } from '../../actions/sagacallback.js';
 
 let swiperOptions = {
@@ -44,8 +44,8 @@ export class Page extends React.Component {
         //productcommentsfromproduct
         //evaluatenumber:set_productevaluatenumber
         let payload = {productid:proid};
-        this.props.dispatch(productcommentsfromproduct(payload)).then((result)=>{
-            let count = result.result.total;
+        this.props.dispatch(productcommentsfromproductgetcount(payload)).then((result)=>{
+            let count = result.count;
             let evaluatenumber = {
                 evaluatenumber: count,
                 proid : proid
@@ -189,7 +189,7 @@ export class Page extends React.Component {
                                 return (<img src={picurl} key={index} />)
                             })
                             :
-                            (<div style={{textAlign:"center",lineHeight:"50px"}}>－{proinfo.picurldetails.length}暂无数据－</div>)
+                            (<div style={{textAlign:"center",lineHeight:"50px",color:"#999999"}}>－暂无数据－</div>)
                         }
 
                     </div>

@@ -274,5 +274,9 @@
 .orderinfoPage .list .orderstatusinfo{
     font-size: 16px;
 }
-
+.orderinfoPage .list .li.orderstatusinfoContent{
+    justify-content: center;
+}
+.orderinfoPage .list .li.orderstatusinfoContent .warning{color: #f38108}
+.orderinfoPage .list .li.orderstatusinfoContent .green{color: #00c40c}
 

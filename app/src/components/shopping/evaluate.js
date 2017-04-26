@@ -8,45 +8,22 @@ import '../../../public/css/shoppingproevaluate.css';
 import { productcommentsfromproduct } from '../../actions/sagacallback.js';
 import InfinitePage from '../controls/infinitecontrol';
 import moment from 'moment';
-
-// commenttxt
-// :
-// "hahaha"
-// created_at
-// :
-// "2017-04-25T14:09:19.819Z"
-// creator
-// :
-// "58f078f3c2065a04efdb828d"
-// order
-// :
-// "58fae7ed451c4760ea54ab36"
-// product
-// :
-// "58f0744bc2065a04efdb8289"
-// __v
-// :
-// 0
-// _id
-// :
-// "58ff588f7ae81453021ab280"
-
+import NavBar from '../newnav.js';
+import $ from "jquery";
 
 let Page = (props) => {
-    let onClickReturn = ()=> {
-        props.history.goBack();
-    };
+
     let onClickPage = (name)=> {
         props.history.push(name);
     };
+
     let updateContent = (item)=> {
-        let proinfo = props.products[item.product];
         return  (
             <div className="li" key={item._id}>
                 <div className="tt">
-                    <img src={proinfo.picurl}/>
+                    <img src={item.creator.profile.avatar} />
                     <div>
-                        <span className="name">{proinfo.name}</span>
+                        <span className="name">{item.creator.profile.nickname}</span>
                         <span className="data">{moment(item.created_at).format("MM月DD日 HH时mm分")}</span>
                     </div>
                 </div>
@@ -55,13 +32,22 @@ let Page = (props) => {
                 </span>
             </div>
         );
-        
     };
+
     return (
         <div className="ShoppingproevaluatePage">
-            <div className="ProinfoPageHead">
-                <Icon name="angle left" onClick={()=>{onClickReturn()}} />
-                <span className="title">商品评价</span>
+
+            <NavBar back={true} title="商品评价" />
+
+            <div className="proinfo" id="proinfoContent">
+                <img src={props.proinfo.picurl} />
+                <div>
+                    <span>{props.proinfo.name}</span>
+                    <span>
+                        <span className="price">{props.proinfo.pricenow}</span>
+                        <span className="markprice">{props.proinfo.pricemarket}</span>
+                    </span>
+                </div>
             </div>
 
             <div className="proList" 
@@ -74,7 +60,7 @@ let Page = (props) => {
                     pagenumber = {30}
                     updateContent= {updateContent.bind(this)} 
                     queryfun= {productcommentsfromproduct}
-                    listheight= {window.innerHeight-48}
+                    listheight= {window.innerHeight-147}
                     query = {{product: props.match.params.id}}
                     sort = {{created_at: -1}}
                 />
@@ -83,8 +69,9 @@ let Page = (props) => {
     )
 }
 
-let mapStateToProps = ({shop:{products}}) => {
-    return { products };
+let mapStateToProps = ({shop:{products}},props) => {
+    let proinfo = products[props.match.params.id];
+    return { proinfo };
 }
 
 Page = connect(mapStateToProps)(Page);

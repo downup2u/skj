@@ -1,54 +1,11 @@
 .ShoppingproevaluatePage {
     background: #EEE;
-    padding-top: 48px;
-}
-
-.ShoppingproevaluatePage .ProinfoPageHead {
-    background: #5596d6;
-    display: flex;
-    align-items: center;
     position: fixed;
     left: 0;
-    top: 0;
-    height: 48px;
-    width: 100%;
-    z-index: 1000;
-}
-
-.ShoppingproevaluatePage .title {
-    flex-grow: 1;
-    text-align: center;
-    line-height: 48px;
-    color: #FFF;
-    font-size: 16px;
-}
-
-.ShoppingproevaluatePage .ProinfoPageHead .imgcont {
-    display: flex;
-    width: 50px;
-    position: absolute;
-    height: 100%;
     right: 0;
+    bottom: 0;
     top: 0;
-    justify-content: center;
-    align-items: center;
-}
-
-.ShoppingproevaluatePage .ProinfoPageHead .imgcont img {
-    width: 48px;
-}
-
-.ShoppingproevaluatePage .ProinfoPageHead i.icon {
-    font-size: 30px;
-    color: #FFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 10px;
-    position: absolute;
-    height: 100%;
-    top: 0;
-    left: 0;
+    overflow: hidden;
 }
 
 .ShoppingproevaluatePage .proList {
@@ -63,7 +20,7 @@
     flex-direction: column;
     background: #FFF;
     align-self: flex-start;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     padding: 15px;
     font-size: 14px;
 }
@@ -72,7 +29,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    align-items: flex-start;
 }
 
 .ShoppingproevaluatePage .proList .li .tt img {
@@ -84,10 +41,48 @@
 .ShoppingproevaluatePage .proList .li .tt > div {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     flex-grow: 1;
 }
 
 .ShoppingproevaluatePage .proList .li .content {
-
+    padding-left: 55px;
 }
+
+.ShoppingproevaluatePage .proinfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFF;
+    padding: 15px;
+    flex-shrink: 0;
+    margin-bottom: 15px;
+}
+.ShoppingproevaluatePage .proinfo img{
+    width: 60px;
+}
+.ShoppingproevaluatePage .proinfo > div{
+    padding-left: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.ShoppingproevaluatePage .proinfo > div span{
+    display: flex;
+    align-items: center;
+}
+.ShoppingproevaluatePage .proinfo > div span span.price{
+    font-size: 18px;
+    margin-right: 10px;
+    color: #C00
+}
+.ShoppingproevaluatePage .proinfo > div > span:first-child{
+    font-size: 16px;
+}
+.ShoppingproevaluatePage .proinfo > div span span.markprice{
+    color: #999;
+    text-decoration:line-through;
+    font-size: 18px;
+}
+
+
+

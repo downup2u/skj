@@ -114,12 +114,10 @@
     justify-content: center;
     
 }
-
 .orderList .items > div.cont .proinfo .proother .price {
     color: #F00;
     font-size: 16px;
 }
-
 .orderList .items > div.lnk {
     display: flex;
     flex-direction: column;
@@ -128,7 +126,6 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
 .orderList .items > div.lnk .txt {
     text-align: right;
     margin-bottom: 5px;
@@ -143,7 +140,7 @@
 }
 .orderList .items > div.lnk .hotlnk .btn{
     padding: 4px 8px;
-    border: 1px solid #EEE;
+    border: 1px solid #999;
     border-radius: 6px;
     margin-left: 10px;
 }
@@ -151,6 +148,9 @@
     border-color: #F00;
     color: #F00;
 }
-
+.orderList .items > div.lnk .hotlnk .btn.success{
+    color: #00c40c;
+    border-color: #00c40c;
+}
 
 
