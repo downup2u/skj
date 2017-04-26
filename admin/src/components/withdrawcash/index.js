@@ -81,7 +81,7 @@ const WithdrawcashlistShow = (props) => (
 
 
 const WithdrawcashlistList = (props) => (//
-     <List title="提现列表" {...props}  filters={<WithdrawcashFilter />}>
+     <List title="提现列表" {...props}  filters={<WithdrawcashFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
         <ReferenceField label="提现用户" source="creator" reference="user" addLabel={true}>
            <TextField source="username" />

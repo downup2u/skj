@@ -87,7 +87,7 @@ const TopiclistEdit = (props) => {
 
 
 const TopiclistList = (props) => (//
-     <List title="帖子信息列表" {...props}  filters={<TopicFilter />} >
+     <List title="帖子信息列表" {...props}  filters={<TopicFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
         <TextField label="标题" source="title" />
          <ReferenceField label="用户" source="creator" reference="user" addLabel={false}>

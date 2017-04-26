@@ -55,7 +55,7 @@ const TopiccommentlistTitle = ({ record }) => {
 };
 
 const TopiccommentlistEdit = (props) => {
-      return (<Edit title={<TopiccommentlistTitle />} {...props}>
+      return (<Edit title={<TopiccommentlistTitle />} {...props} sort={{ field: 'created_at', order: 'DESC' }}>
           <SimpleForm>
               <DisabledInput label="Id" source="id" />
               <DisabledInput label="标题"  source="title" />

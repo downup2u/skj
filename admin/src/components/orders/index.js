@@ -103,7 +103,7 @@ const OrderlistShow = (props) => (
 
 
 const OrderlistList = (props) => (//
-     <List title="订单列表" {...props}  filters={<OrderFilter />} >
+     <List title="订单列表" {...props}  filters={<OrderFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
         <DateField label="生成时间" source="created_at" showTime />
         <ReferenceField label="订单用户" source="creator" reference="user" addLabel={false}>

@@ -73,7 +73,7 @@ const UserlistEdit = (props) => {
 
 
 const UserlistList = (props) => (//
-     <List title="用户列表" {...props}  filters={<UserFilter />} >
+     <List title="用户列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
         <TextField label="手机号" source="username" />
         <DateField label="注册时间" source="created_at"  showTime/>

@@ -63,7 +63,7 @@ const FeedbackShow = (props) => (
 
 
 const FeedbackList = (props) => (//
-     <List title="用户反馈列表" {...props}  filters={<FeedbackFilter />} >
+     <List title="用户反馈列表" {...props}  filters={<FeedbackFilter />}  sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
         <ReferenceField label="反馈用户" source="creator" reference="user" addLabel={false}>
             <TextField source="username" />
