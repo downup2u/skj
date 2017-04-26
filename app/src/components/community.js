@@ -83,7 +83,7 @@ let FeedReplyFormShow = ({iscommentshow,dispatch})=>{
             e.stopPropagation();
         };
            return(<div onClick={stopDefault}>
-                    {iscommentshow?<FeedReplyForm dispatch={dispatch}/>:null}
+                    {iscommentshow?<FeedReplyForm />:null}
                 </div>);
 }
 const mapStateToPropsFeedReplyFormShow = ({forum:{iscommentshow}}) => {

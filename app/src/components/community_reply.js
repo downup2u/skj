@@ -74,6 +74,12 @@ const validate = values => {
   return errors;
 }
 
+const mapStateToPropsFeedReply = ({forum:{selectedtype,selectedtopicid,selectedcommentid}}) => {
+
+     return {selectedtype,selectedtopicid,selectedcommentid};
+}
+FeedReplyForm = connect(mapStateToPropsFeedReply)(FeedReplyForm);
+
 FeedReplyForm = reduxForm({
   form: 'feedreply',
   initialValues:{
@@ -81,5 +87,6 @@ FeedReplyForm = reduxForm({
   },
   validate
 })(FeedReplyForm);
+
 
 export default FeedReplyForm;
