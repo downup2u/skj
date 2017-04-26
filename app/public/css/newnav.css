@@ -5,6 +5,7 @@
     height: 48px;
     position: relative;
     flex-shrink: 0;
+    z-index: 1000;
 }
 #newNavHeadContent .title {
     flex-grow: 1;

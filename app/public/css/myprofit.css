@@ -87,11 +87,14 @@
 .myProfitPage .cont{
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
 }
 .myProfitPage .cont .tt{
     display: flex;
     justify-content: space-between;
     padding: 10px 15px;
+    flex-shrink: 0;
 }
 .myProfitPage .cont .tt.hide{
     display: none
@@ -107,6 +110,10 @@
 }
 .myProfitPage .cont .t2.hide{
     display: none
+}
+.myProfitPage .cont .ll{
+    flex-grow: 1;
+    overflow: scroll;
 }
 .myProfitPage .cont .ll .l{
     background: #FFF;

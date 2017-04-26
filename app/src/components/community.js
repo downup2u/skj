@@ -126,6 +126,10 @@ export class Page extends React.Component {
     }
 
     render() {
+        const {useralerttopiclist} = this.props;
+        let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-140:window.innerHeight-98;
+        let tctop = useralerttopiclist.length > 0?90:48;
+ 
         return (
             <div className="feedPage">
                 <div className="PageHead">
@@ -168,14 +172,14 @@ export class Page extends React.Component {
                     className="tc"
                     onClick={this.onClickPage}
                     style={{
-                        height : this.props.communityListHeight+"px",
-                        top: this.props.tctop+"px"
+                        height : communityListHeight+"px",
+                        top: tctop+"px"
                     }}>
                     <InfinitePage
                         pagenumber = {16}
                         updateContent= {this.updateContent} 
                         queryfun= { gettopiclist }
-                        listheight= { this.props.communityListHeight }
+                        listheight= { communityListHeight }
                         sort = {{created_at: -1}}
                         query = {{}}
                     />
@@ -187,10 +191,8 @@ export class Page extends React.Component {
 }
 
 const mapStateToProps = ({forum:{useralerttopiclist}}) => {
-    let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-140:window.innerHeight-98;
-    let tctop = useralerttopiclist.length > 0?90:48;
-    //所有使用到的属性列表：bigimgindex/iscommentshow/communityListHeight/useralerttopiclist
-    return {communityListHeight,tctop};
+       //所有使用到的属性列表：bigimgindex/iscommentshow/communityListHeight/useralerttopiclist
+    return {useralerttopiclist};
 }
 Page = connect(mapStateToProps)(Page);
 Page = withRouter(Page);
