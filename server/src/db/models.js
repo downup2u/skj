@@ -227,7 +227,8 @@ let OrderSchema = new Schema({
             productid:String,
             productinfo:Schema.Types.Mixed,
             number:Number,
-            price:Number
+            price:Number,
+            isevaluation:Boolean
         }
     ],
     couponprice:Number,//抵扣价
