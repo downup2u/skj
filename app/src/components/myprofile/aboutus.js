@@ -2,8 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import NavBar from '../newnav.js';
 import '../../../public/css/aboutus.css';
 import { connect } from 'react-redux';
-
+import {getabouthtml_request} from '../../actions';
 export class Page extends Component {
+    componentWillMount () {
+        this.props.dispatch(getabouthtml_request({keyname:this.props.type}));
+    }
 
     render() {
         const { title, desc } = this.props;
@@ -23,7 +26,7 @@ export class Page extends Component {
 const mapStateToProps =  ({about},props) =>{
     let type = props.match.params.type;
     let data = about[type];
-    return { ...data };
+    return { ...data,type };
 };
 export default connect(mapStateToProps)(Page);
 
