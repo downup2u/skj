@@ -78,12 +78,12 @@ const mapStateToPropsToptip = ({forum:{useralerttopiclist,users,useralerttopics}
 ToptipCo = connect(mapStateToPropsToptip)(ToptipCo);
 
 
-let FeedReplyFormShow = ({iscommentshow})=>{
+let FeedReplyFormShow = ({iscommentshow,dispatch})=>{
         let stopDefault = (e)=> {
             e.stopPropagation();
         };
            return(<div onClick={stopDefault}>
-                    {iscommentshow?<FeedReplyForm />:null}
+                    {iscommentshow?<FeedReplyForm dispatch={dispatch}/>:null}
                 </div>);
 }
 const mapStateToPropsFeedReplyFormShow = ({forum:{iscommentshow}}) => {
