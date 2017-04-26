@@ -7,7 +7,7 @@ import PicturesWall from '../controls/pictureswall.js';
 import NavBar from '../newnav.js';
 import { connect } from 'react-redux';
 import { feedbackaddone } from '../../actions/sagacallback.js';
-import { showpopmessage } from '../../actions';
+import { set_weui } from '../../actions';
 
 let renderNewFeedbackForm = (fields)=> {
     console.dir(fields);
@@ -15,9 +15,10 @@ let renderNewFeedbackForm = (fields)=> {
         <div className='loginform newtopic'>
             <div className="newtopicinput">
                 <TextArea placeholder='提出您的宝贵意见' {...fields.feedbacktxt.input} type="text"/>
-            </div>
-            {fields.feedbacktxt.meta.touched && fields.feedbacktxt.meta.error &&
+                {fields.feedbacktxt.meta.touched && fields.feedbacktxt.meta.error &&
             <Label basic color='red' pointing>{fields.feedbacktxt.meta.error}</Label>}
+            </div>
+            
             <PicturesWall {...fields.picurl.input} />
         </div>
     );
@@ -66,11 +67,18 @@ export class Page extends React.Component {
         this.props.dispatch(feedbackaddone(payload)).then((result)=>{
             if(result.hasOwnProperty('newitem')){
                 // alert("感谢您的宝贵意见");
-                this.props.dispatch((showpopmessage({
-                    title: '',
-                    msg: '感谢您的宝贵意见',
-                    type: 'success'
-                })))
+                // this.props.dispatch((showpopmessage({
+                //     title: '',
+                //     msg: '感谢您的宝贵意见',
+                //     type: 'success'
+                // })))
+                this.props.dispatch(
+                    set_weui({toast:{
+                        show : true,
+                        text : "提交成功",
+                        type : "success"
+                    }})
+                )
                 this.onClickReturn();
             }
         });
@@ -81,7 +89,7 @@ export class Page extends React.Component {
     }
     render() {
         return (
-            <div className="feedPage">
+            <div className="feedPage newtopicPage">
                 <NavBar back={true} title="意见反馈" />
                 <NewtopicForm onClickNewTopic={this.onClickFeedBack}/>
             </div>

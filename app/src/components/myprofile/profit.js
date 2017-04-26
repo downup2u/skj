@@ -40,7 +40,13 @@ export class Page extends Component {
 
     handleItemClick = (index) => { 
         this.props.dispatch(profit_set_listtype(index));
-        let query = index==''?{}:{srctype: index};
+        let query = {};
+        if(index!=''){
+            query = { srctype : index };
+            if(index==="withdrawcash"){
+                query = { srctype : {"$in":['withdrawcash','paywithleftbalance']} };
+            }
+        }
         this.getprofitlist(query)
     };
 
@@ -90,13 +96,9 @@ export class Page extends Component {
                                 <div className="l" key={index}>
                                     <div className="i">
                                         <span className="code">
-                                            {
-                                                this.props.set_listtype=="order"
-                                                ?
-                                                "订单:"+profitinfo.fromorder+"获得"
-                                                :
-                                                "提现记录:"
-                                            }
+                                            {profitinfo.srctype=="withdrawcash"?"提现记录":""}
+                                            {profitinfo.srctype=="order"?"订单获得":""}
+                                            {profitinfo.srctype=="paywithleftbalance"?"余额支付":""}
                                         </span>
                                         <span className="date"><span>{moment(profitinfo.created_at).format("MM月DD日 HH时mm分")}</span></span>
                                     </div>

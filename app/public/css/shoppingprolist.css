@@ -1,5 +1,14 @@
-.ProlistPage {
+.pageWamp >div.ProlistPage {
     background: #EEE;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start
 }
 
 .ProlistPage .searchHead {
@@ -7,6 +16,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    flex-shrink: 0;
 }
 
 .ProlistPage .searchHead .ui.input {
@@ -89,6 +99,7 @@
     align-items: center;
     background: #FFF;
     border-bottom: 1px solid #EEE;
+    flex-shrink: 0;
 }
 
 .ProlistPage .hotLnk span {
@@ -116,6 +127,7 @@
     padding: 5px 10px;
     position: relative;
     border-bottom: 1px solid #EEE;
+    flex-shrink: 0;
 }
 
 .ProlistPage .sortlistmore {

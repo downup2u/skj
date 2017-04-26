@@ -105,7 +105,7 @@ let Page = (props) => {
                 <Input placeholder="请输入关键字" value={props.searchtxt} onClick={(e)=>{
                     onClickPage(e,'/shoppingprolist/search');
                 }} />
-                <img src="img/shopping/10.png"/>
+                
             </div>
             <div className="shoppingBody">
                 {shoppingBanner}

@@ -95,6 +95,14 @@ export class Page extends React.Component {
     // productslistSorttype : 0,
     // productslistSearchtxt: '',
 
+    componentWillUnmount(){
+        let payload = {
+            productslistSearchtxt : "",
+            productslistType : 0
+        }
+        this.props.dispatch(set_productlist(payload));
+    }
+
     render() {
 
         //更具类型筛选产品
@@ -175,7 +183,7 @@ export class Page extends React.Component {
                     
                 </div>
 
-                <div className="proList" style={{height:(window.innerHeight-48-42-43)+"px"}}>
+                <div className="proList">
                     {
                         _.map(newsortlist,(proinfo, index)=>{
                             return (

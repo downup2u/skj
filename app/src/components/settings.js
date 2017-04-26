@@ -18,6 +18,7 @@ let Page =(props)=> {
 
     let onClickLogout = ()=>{
         props.dispatch(logout_request());
+        onClickReturn();
     };
 
     return (

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import NavBar from '../nav.js';
+import NavBar from '../newnav.js';
 import { connect } from 'react-redux';
 import { Input, Button, Select, List } from 'semantic-ui-react';
 import '../../../public/css/mycollection.css';
@@ -25,7 +25,10 @@ let Page =(props)=> {
         let proinfo = props.products[item.product];
         if(proinfo){
             return  (
-                <div key={item._id}>
+                <div
+                    key={item._id}
+                    onClick={()=>{props.history.push("/shoppingproinfo/"+item.product)}}
+                >
                     <Swipeout 
                         autoClose={true}
                         right={[{
@@ -55,11 +58,9 @@ let Page =(props)=> {
         }
     };
 
-    let onClickReturn = ()=> {props.history.goBack();}
-
     return (
         <div>
-            <NavBar lefttitle="返回" title="我的收藏" onClickLeft={onClickReturn} />
+            <NavBar back={true} title="我的收藏" />
             <div className="myCollection"
                  style={{
                     height:(window.innerHeight-46)+"px",

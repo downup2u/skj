@@ -49,13 +49,13 @@ export class Page extends Component {
                 <NavBar lefttitle="返回" title="优惠券" onClickLeft={this.onClickReturn} />
                 <Menu pointing secondary>
                     <Menu.Item name='未使用' 
-                        active={this.props.ulcoupontype === 0} 
+                        active={this.props.ulcoupontype === "未使用"} 
                         onClick={()=>{this.handleItemClick('未使用')}}/>
                     <Menu.Item name='已使用' 
-                        active={this.props.ulcoupontype === 1} 
+                        active={this.props.ulcoupontype === "已使用"} 
                         onClick={()=>{this.handleItemClick('已使用')}}/>
                     <Menu.Item name='已过期' 
-                        active={this.props.ulcoupontype === 2} 
+                        active={this.props.ulcoupontype === "已过期"} 
                         onClick={()=>{this.handleItemClick('已过期')}}/>
                 </Menu>
                 <div className="myCouponList" style={{height:window.innerHeight-88}}>

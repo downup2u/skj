@@ -6,7 +6,7 @@ import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import {inserttopic_request} from '../actions/index.js';
 import PicturesWall  from './controls/pictureswall.js';
-import NavBar from './nav.js';
+import NavBar from './newnav.js';
 import {inserttopic} from '../actions/sagacallback.js';
 
 let renderNewtopicForm = (fields)=> {
@@ -15,9 +15,10 @@ let renderNewtopicForm = (fields)=> {
         <div className='loginform newtopic'>
             <div className="newtopicinput">
                 <TextArea placeholder='输入帖子内容' {...fields.title.input} type="text"/>
-            </div>
-            {fields.title.meta.touched && fields.title.meta.error &&
+                {fields.title.meta.touched && fields.title.meta.error &&
             <Label basic color='red' pointing>{fields.title.meta.error}</Label>}
+            </div>
+            
             <PicturesWall {...fields.picurl.input} />
         </div>
     );
@@ -83,8 +84,8 @@ export class Page extends React.Component {
 
     render() {
         return (
-            <div className="feedPage">
-                <NavBar lefttitle="返回" title="发布帖子" onClickLeft={this.onClickReturn}/>
+            <div className="feedPage newtopicPage">
+                <NavBar back={true} title="发布帖子" />
                 <NewtopicForm onClickNewTopic={this.onClickNewTopic}/>
             </div>
         );

@@ -1,3 +1,10 @@
+.newtopicPage{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
 .newtopic{
 
 }
@@ -25,13 +32,44 @@
     padding-bottom: 15px;
 }
 .newtopicbtn{
-    position: fixed;
+    position: absolute;
     bottom: 0;
     display: flex;
     width: 100%;
 }
-.newtopicbtn .ui.button{
+.newtopic .ui.button{
     flex-grow: 1;
     border-radius: 0;
     margin: 0;
+}
+.newtopic.loginform .newtopicinput {
+    position: relative;
+}
+.newtopic.loginform .newtopicinput .ui.red.pointing.basic.label{
+    border-radius: 0;
+    border: none;
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    z-index: 1000;
+    margin:0;
+    font-size: 16px;
+}
+.newtopic.loginform .newtopicinput .ui.red.pointing.basic.label:before{
+    content: none;
+}
+.newtopic.loginform .newtopicinput  .ui.basic.red.label,
+.newtopic.loginform .newtopicinput  .ui.red.label,
+.newtopic.loginform .newtopicinput  .ui.red.labels .label{
+
+    background-image: none;
+    background: none;
+    background-color: rgba(0,0,0,0)!important;
+}
+
+.newtopicPage form{
+    flex-grow: 1;
+}
+.newtopicPage .loginPageTop{
+    background: #FFF;
 }

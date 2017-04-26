@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import NavBar from '../nav.js';
+import NavBar from '../newnav.js';
 import { Input, Button, Menu } from 'semantic-ui-react';
 import '../../../public/css/distribution.css';
 import { connect } from 'react-redux';
@@ -58,10 +58,10 @@ export class Page extends Component {
                     height:(window.innerHeight)+"px",
                     overflow:"scroll"
                 }}>
-                <NavBar lefttitle="返回" title="我的分销" onClickLeft={this.onClickReturn} />
+                <NavBar back={true} title="我的分销" />
                 <div className="headCont">
                     <div className="userInfo">
-                        <img src="img/myprofile/1.png" className="avatar"/>
+                        <img src={this.props.profile.avatar} className="avatar"/>
                         <span className="username">{this.props.editusername}</span>
                         <span className="usertype">代理人数({this.props.nextnumber}人)</span>
                     </div>
