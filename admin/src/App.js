@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
-import { Admin, Resource } from 'admin-on-rest';
-import { Delete } from 'admin-on-rest/lib/mui';
+import { Admin, Resource ,Delete} from 'admin-on-rest';
 import themeReducer from './themeReducer';
 import authClient from './authClient';
 

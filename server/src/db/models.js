@@ -71,7 +71,7 @@ let NewsSchema = new Schema({
 NewsSchema.plugin(mongoosePaginate);
 let News  = mongoose.model('News',  NewsSchema);
 
-
+//=======设备=======
 let DeviceSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
     devicename:String,
@@ -81,6 +81,27 @@ let DeviceSchema = new Schema({
 });
 DeviceSchema.plugin(mongoosePaginate);
 let Device  = mongoose.model('Device',  DeviceSchema);
+//=======设备数据=======
+let DeviceDataSchema = new Schema({
+    devicename:String,
+    devicebrand:String,
+    devicemodel: String,
+    created_at:{ type: Date, default:new Date()},
+});
+DeviceDataSchema.plugin(mongoosePaginate);
+let DeviceData  = mongoose.model('DeviceData',  DeviceDataSchema);
+//=======设备历史记录=======
+let DeviceDataHistorySchema = new Schema({
+    creator:{ type: Schema.Types.ObjectId, ref: 'User' },
+    devicename:String,
+    devicebrand:String,
+    devicemodel: String,
+    created_at:{ type: Date, default:new Date()},
+});
+DeviceDataHistorySchema.plugin(mongoosePaginate);
+let DeviceDataHistory  = mongoose.model('DeviceDataHistory',  DeviceDataHistorySchema);
+//=======设备=======
+
 
 let AddressSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },

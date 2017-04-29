@@ -22,3 +22,5 @@ export const getsystemconfig_request = createAction('getsystemconfig_request');
 export const getsystemconfig_result = createAction('getsystemconfig_result');
 
 export const setmsgcount = createAction('setmsgcount');
+
+export const common_err = createAction('common_err');

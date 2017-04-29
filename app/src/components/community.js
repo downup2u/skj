@@ -82,7 +82,7 @@ let FeedReplyFormShow = ({iscommentshow,dispatch})=>{
         let stopDefault = (e)=> {
             e.stopPropagation();
         };
-           return(<div onClick={stopDefault}>
+        return(<div onClick={stopDefault}>
                     {iscommentshow?<FeedReplyForm />:null}
                 </div>);
 }
