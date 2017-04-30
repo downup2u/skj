@@ -33,9 +33,8 @@ let getallmenus = (valuesel, translate,onMenuTap)=>{
           MenuItem key={child.name}
           primaryText={title}
           leftIcon={child.icon}
-          onTouchTap={onMenuTap}
           containerElement={<Link to={link} />}
-          insetChildren={true} className={child.name === valuesel ? 'active' : ''} />);
+          className={child.name === valuesel ? 'active' : ''} />);
       });
       return itemsco;
    }
@@ -44,6 +43,7 @@ let getallmenus = (valuesel, translate,onMenuTap)=>{
      let title = translate(`resources.${item.name}.name`, { smart_count: 2 });
      if(item.children){
         menuitemsco.push(<MenuItem
+            onTouchTap={onMenuTap}
             primaryText={title}
             key={item.name}
             leftIcon={item.icon}
@@ -57,7 +57,8 @@ let getallmenus = (valuesel, translate,onMenuTap)=>{
             primaryText={title}
             key={item.name}
             leftIcon={item.icon}
-            onTouchTap={onMenuTap}
+       
+            insetChildren={true} 
             containerElement={<Link to={link} />}
         />);
      }
@@ -67,7 +68,6 @@ let getallmenus = (valuesel, translate,onMenuTap)=>{
 
 const Menu = ({ onMenuTap, translate, logout }) => (
     <div style={styles.main}>
-        <DashboardMenuItem onTouchTap={onMenuTap} />
         {getallmenus('baseinfocompany', translate,onMenuTap)}
         {logout}
     </div>

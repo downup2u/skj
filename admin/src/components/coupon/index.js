@@ -46,7 +46,6 @@ const CouponlistCreate = (props) => (
                <DateInput label="过期时间"  source="expdate" />
                <TextInput label="价格条件"  source="pricecondition" />
                <NumberInput label="最高抵扣"  source="pricediscount" />
-               <TextInput label="总库存" source="totalstock" />
            </SimpleForm>
        </Create>
 );
@@ -63,7 +62,6 @@ const CouponlistEdit = (props) => {
                <DateInput label="过期时间"  source="expdate" />
                <TextInput label="价格条件"  source="pricecondition" />
                <NumberInput label="最高抵扣"  source="pricediscount" />
-               <TextInput label="总库存" source="totalstock" />
           </SimpleForm>
       </Edit>);
 
@@ -78,8 +76,6 @@ const CouponlistShow = (props) => (
                <DateField label="过期时间" source="expdate"  />
                <TextField label="价格条件"  source="pricecondition" />
                <TextField label="最高抵扣"  source="pricediscount" />
-               <TextField label="总库存" source="totalstock" />
-               <TextField label="剩余库存" source="leftstock" />
            </SimpleShowLayout>
        </Show>
 );
@@ -91,9 +87,8 @@ const CouponlistList = (props) => (//
         <Datagrid>
             <TextField label="名字" source="name" />
             <DateField label="过期时间" source="expdate"  />
-            <NumberField label="价格条件" source="pricecondition" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
-            <NumberField label="最高抵扣" source="pricediscount" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
-            <TextField label="总库存" source="totalstock" />
+            <NumberField label="价格条件" source="pricecondition" locales="zh-cn"  options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
+            <NumberField label="最高抵扣" source="pricediscount" locales="zh-cn" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
         <EditButton />
         </Datagrid>
     </List>
