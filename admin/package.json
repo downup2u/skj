@@ -6,7 +6,7 @@
   "dependencies": {
     "admin-on-rest": "^1.0.0",
     "antd": "^2.9.0",
-    "aor-language-chinese": "^1.0.1",
+    "aor-language-chinese": "^1.0.3",
     "aor-summernote-input": "^1.0.0",
     "axios": "^0.16.0",
     "moment": "^2.18.1",
