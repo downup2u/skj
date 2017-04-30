@@ -32,9 +32,7 @@ export class Page extends Component {
                     <div>
                         <span className="tt">{item.pricecondition}</span>
                         <span>
-                            有效期
-                            {moment(item.created_at).format("YY-MM-DD")}
-                            至
+                            有效期至
                             {moment(item.expdate).format("YY-MM-DD")}
                         </span>
                     </div>

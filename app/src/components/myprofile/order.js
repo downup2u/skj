@@ -215,7 +215,7 @@ export class Page extends React.Component {
                         pagenumber = {20}
                         updateContent= {this.updateContent} 
                         queryfun= { myordergetall }
-                        listheight= { window.innerHeight-98 }
+                        listheight= { window.innerHeight-108 }
                         sort = {{created_at: -1}}
                         query = {filler}
                     />

@@ -37,6 +37,7 @@ const alertDefault = {
     buttonsClick : ()=>{}
 }
 
+
 export class Page extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.toast.show && !this.props.toast.show) {
@@ -75,7 +76,8 @@ export class Page extends Component {
         const { 
             toast, 
             alert, 
-            confirm 
+            confirm,
+            loading
         } = this.props;
 
         return (
@@ -128,6 +130,13 @@ export class Page extends Component {
                     >
                     {confirm.text}
                 </Dialog>
+
+                <Toast 
+                    id="weuiLoading"
+                    icon="loading"
+                    show={loading.show}>
+                    Loading...
+                </Toast>
             </div>
         )
     }

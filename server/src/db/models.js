@@ -117,7 +117,7 @@ let TopicSchema = new Schema({
   picurl:[String],
   loves:[String],
   comments:[{ type: Schema.Types.ObjectId, ref: 'Comment', default: [] }],
-  isvisiable:{ type: Boolean, default: true },
+  isvisiable:{ type: Boolean, default: true },//评论是否显示
 });
 TopicSchema.plugin(mongoosePaginate);
 let Topic  = mongoose.model('Topic',  TopicSchema);

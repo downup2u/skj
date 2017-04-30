@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { 
     uiinfinitepage_init,
     uiinfinitepage_getdata,
-    uiinfinitepage_setstate
+    uiinfinitepage_setstate,
+    set_weui
  } from '../../actions';
 import { connect } from 'react-redux';
 import $ from 'jquery';
@@ -47,9 +48,13 @@ export class Page extends Component {
             
         });
     }
+
     componentWillMount() {
+        this.props.dispatch(set_weui({loading:{show : true}}))
         this.props.dispatch(uiinfinitepage_init());
+        this.fetchItems(true);
     }
+
     componentWillReceiveProps(nextProps) {
         if (!_.eq(nextProps.query, this.props.query)) {
             this.props.dispatch(uiinfinitepage_init());
@@ -87,7 +92,6 @@ export class Page extends Component {
         this.iScrollInstance.on('scroll', this.onScroll);
         this.iScrollInstance.on('scrollEnd', this.onScrollEnd);
 
-        this.fetchItems(true);
     }
 
     fetchItems = (isRefresh)=> {
@@ -104,12 +108,14 @@ export class Page extends Component {
                     limit: this.props.pagenumber,
                 }
             })).then(({result})=> {
+                let pullDown = $(this.refs.PullDown);
+                let pullUp = $(this.refs.PullUp);
+                let Nodata = $(this.refs.Nodata);
+                pullUp.show();
+                pullDown.show();
+                Nodata.hide();
                 if(result){
-                    console.log("result.page::"+result.page);
                     if(result.page>=result.pages){//最后一页
-                        let pullDown = $(this.refs.PullDown);
-                        let pullUp = $(this.refs.PullUp);
-                        let Nodata = $(this.refs.Nodata);
                         this.props.dispatch(uiinfinitepage_getdata({result,append:!isRefresh}));
                         this.props.dispatch(uiinfinitepage_setstate({ pullUpStatus: 4,pullDownStatus: 4}));
                         if(result.page===1){
@@ -134,8 +140,20 @@ export class Page extends Component {
                         this.props.dispatch(uiinfinitepage_setstate({ page: querypage+1}));
                     }
                 }
+                setTimeout(()=>{
+                    this.iScrollInstance.refresh();
+                    //隐藏loading
+                    this.props.dispatch(set_weui({loading:{show : false}}));
+                },2000);
             });
+        }else{
+            setTimeout(()=>{
+                //隐藏loading
+                this.props.dispatch(set_weui({loading:{show : false}}));
+                this.iScrollInstance.refresh();
+            },2000);
         }
+        
     }
 
     onTouchStart=(ev)=> {
@@ -246,25 +264,35 @@ export class Page extends Component {
         return (
             <div id='ScrollContainer'>
                 <div id='ListOutsite'
-                    style={{height: (this.props.listheight+PullUpHeight)+"px"}}
+                    style={{height: (this.props.listheight)+"px"}}
                     onTouchStart={this.onTouchStart}
                     onTouchEnd={this.onTouchEnd}
                     >
                     <ul id='ListInside'>
-                        <p ref="PullDown" 
+                        <p 
+                            ref="PullDown" 
                             id='PullDown' 
                             className={pullDownImgStyle[this.props.pullDownStatus]}
+                            style={{display:"none"}}
                         >
                             <img src={pullDownImg} />
                             <i></i>
                             <span>{pullDownTips[this.props.pullDownStatus]}</span>
                         </p>
                         {lis}
-                        <p ref="PullUp" id='PullUp' className={this.props.pageEnd?"pageEnd":""}>
+                        <p 
+                            ref="PullUp" 
+                            id='PullUp' 
+                            className={this.props.pageEnd?"pageEnd":""}
+                            style={{display:"none"}}
+                            >
                             <i></i>
                             <span>{pullUpTips[this.props.pullUpStatus]}</span>
                         </p>
-                        <div ref="Nodata" id="Nodata" className="nodata" 
+                        <div 
+                            ref="Nodata" 
+                            id="Nodata" 
+                            className="nodata" 
                             style={{
                                 display:"none",
                                 textAlign:"center",

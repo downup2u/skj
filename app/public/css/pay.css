@@ -81,6 +81,7 @@
     padding-left: 15px;
     font-size:14px;
     position: relative;
+    flex-grow: 1;
 }
 .PayPage .proinfo .li >div .evaluationLnk{
     border: 1px solid #f38108;

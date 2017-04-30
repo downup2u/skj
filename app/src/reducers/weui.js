@@ -28,6 +28,9 @@ const initial = {
             text : "",
             buttonsClose : ()=>{},
             buttonsClick : ()=>{}
+        },
+        loading : {
+            show : false
         }
     },
 };

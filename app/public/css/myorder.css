@@ -1,6 +1,8 @@
 .myOrder {
     background: #F5F5F5;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 .myOrder .actionItem{
     display: flex;
@@ -11,6 +13,7 @@
     z-index: 1000;
     background: #FFF;
     border-bottom: 1px solid #EEE;
+    flex-shrink: 0;
 }
 .myOrder .actionItem span{
     line-height: 40px;
@@ -51,6 +54,12 @@
     background: #FFF;
 }
 
+
+.orderList{
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+}
 .orderList .items {
     margin-bottom: 10px;
     background: #FFF;
