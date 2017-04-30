@@ -127,7 +127,8 @@ import {
     set_weui,
 
     expressquery_result,
-    useraddpoint_result
+    useraddpoint_result,
+    queryorderstatusstat_result
 } from '../actions';
 import {
   sendauth_request,sendauth_result,sendauth_err,
@@ -136,6 +137,11 @@ import {
 
 
 const handlerlist = {
+  ['queryorderstatusstat_result']:(socket,emit)=>{
+    return (result)=> {
+      emit(queryorderstatusstat_result(result));
+    }
+  },
   ['shop.expressquery_result']:(socket,emit)=>{
     return (result)=> {
       emit(expressquery_result(result));
