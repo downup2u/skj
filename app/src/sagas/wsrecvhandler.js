@@ -589,6 +589,15 @@ const handlerlist = {
       emit(wait_getnotifymessage_result({result:result}));
     });
   },
+  ['common_err']: (socket, emit)=> {
+      return (({errmsg})=> {
+        emit(set_weui({toast:{
+            show : true,
+            text : errmsg,
+            type : "error"
+        }}));
+      });
+  },
 };
 
 
