@@ -106,7 +106,7 @@ const MycouponlistShow = (props) => (
 
 
 const MycouponlistList = (props) => (//
-     <List title="优惠券列表" {...props}  filters={<MycouponFilter />}>
+     <List title="用户优惠券列表" {...props}  filters={<MycouponFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
             <TextField label="名字" source="name" />
             <ReferenceField label="用户" source="creator" reference="user" addLabel={false}>
