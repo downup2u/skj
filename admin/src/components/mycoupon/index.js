@@ -106,16 +106,15 @@ const MycouponlistShow = (props) => (
 
 
 const MycouponlistList = (props) => (//
-     <List title="优惠券列表" {...props}  filters={<MycouponFilter />}>
+     <List title="用户优惠券列表" {...props}  filters={<MycouponFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
             <TextField label="名字" source="name" />
             <ReferenceField label="用户" source="creator" reference="user" addLabel={false}>
             <TextField source="username" />
             </ReferenceField>
             <DateField label="过期时间" source="expdate"  />
-            <NumberField label="价格条件" source="pricecondition" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
-            <NumberField label="最高抵扣" source="pricediscount" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
-            <TextField label="总库存" source="totalstock" />
+            <NumberField label="价格条件" source="pricecondition" locales="zh-cn" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
+            <NumberField label="最高抵扣" source="pricediscount" locales="zh-cn"  options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
         <EditButton />
         </Datagrid>
     </List>

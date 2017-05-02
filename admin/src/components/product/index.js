@@ -129,7 +129,7 @@ const ProductlistList = (props) => (//
          <ReferenceField label="类别" source="categoryid" reference="category" addLabel={false}>
             <TextField source="name" />
          </ReferenceField>
-        <NumberField label="现价" source="pricenow" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
+        <NumberField label="现价" source="pricenow" locales="zh-cn" options={{ style: 'currency', currency: 'CNY' }} elStyle={{ fontWeight: 'bold' }}/>
         <EnableButton />
         <EditButton />
         </Datagrid>

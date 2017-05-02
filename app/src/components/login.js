@@ -128,8 +128,6 @@ export class Page extends React.Component {
         let payload = {
             username: values.username,
             password: values.password,
-            // ispasswordvisiable:values.ispasswordvisiable,
-            // ischeckedpassword:values.ischeckedpassword,
         }
         //alert(JSON.stringify(formdata));
         this.props.dispatch(login_request(payload));

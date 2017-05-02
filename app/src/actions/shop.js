@@ -119,7 +119,8 @@ export const myordergetall_result = createAction('myordergetall_result');
 export const getnews_request = createAction('getnews_request');
 export const getnews_result = createAction('getnews_result');
 
-
+export const queryorderstatusstat_request  = createAction('queryorderstatusstat_request');
+export const queryorderstatusstat_result = createAction('queryorderstatusstat_result');
 
 //产品评论相关
 //获取一个产品下所有评论

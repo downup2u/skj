@@ -75,6 +75,8 @@ import {
 
     sendauth_request,sendauth_result,sendauth_err,
     register_request,register_result,register_err,
+
+    queryorderstatusstat_request
 } from '../actions/index.js';
 
 
@@ -98,6 +100,7 @@ exports.sendmessagefnsz = {
 
 //验证发送接口
 exports.sendmessageauthfnsz = {
+    'queryorderstatusstat':`${queryorderstatusstat_request}`,
      'getmytopic':`${getmytopic_request}`,
             'inserttopic':`${inserttopic_request}`,
             'insertcommentstotopic':`${insertcommentstotopic_request}`,

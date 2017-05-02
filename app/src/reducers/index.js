@@ -25,6 +25,9 @@ import integral from './integral';
 import weui from './weui';
 import logisticsinfo from './logisticsinfo';
 import evaluation from './evaluation';
+import {
+    login_err,
+} from '../actions/index.js';
 
 export default combineReducers(
   { 
@@ -52,6 +55,21 @@ export default combineReducers(
     weui,
     logisticsinfo,
     evaluation,
-    form: formReducer
+    form: formReducer.plugin({
+      login: (state, action) => { // <------ 'account' is name of form given to reduxForm()
+        // if(action.type === 'login_err')
+        // switch(action.type) {
+        //   case ACCOUNT_SAVE_SUCCESS:
+        //     return undefined;       // <--- blow away form data
+        //   default:
+            if(action.type === login_err.getType()){
+                console.log(`登录错误,清空密码action:${JSON.stringify(action)}`);
+                console.log(`state:${JSON.stringify(state)}`);
+                let values = {...state.values,['password']:''};
+                state = {...state,values};
+            }
+            return state;
+        }
+      }),
   }
 );

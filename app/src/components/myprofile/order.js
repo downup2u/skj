@@ -16,7 +16,8 @@ import {
     uiinfinitepage_updateitem,
     updata_logisticsinfo_logisticsinfo,
     set_weui,
-    evaluation_data
+    evaluation_data,
+    queryorderstatusstat_request
 } from '../../actions';
 
 export class Page extends React.Component {
@@ -26,7 +27,10 @@ export class Page extends React.Component {
         //筛选列表
         this.actionItem = ["全部","未支付","待发货","待收货","已完成"];
     }
-
+    componentWillMount() {
+        this.props.dispatch(queryorderstatusstat_request({}));
+    }
+        
     //设置列表筛选条件
     handleItemClick = (status) => {
         this.props.dispatch(myOrderList_filler_set(status));

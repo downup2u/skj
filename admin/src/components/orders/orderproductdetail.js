@@ -52,11 +52,11 @@ class OrderProductDetail extends Component {
                                      {item.number}
                                  </TableRowColumn>
                                 <TableRowColumn style={{ textAlign: 'right' }}>
-                                    {item.productinfo.pricenow.toLocaleString(undefined, { style: 'currency', currency: 'CNY' })}
+                                    {item.productinfo.pricenow.toLocaleString('zh-cn', { style: 'currency', currency: 'CNY' })}
  
                                 </TableRowColumn>
                                 <TableRowColumn style={{ textAlign: 'right' }}>
-                                    {item.price.toLocaleString(undefined, { style: 'currency', currency: 'CNY' })}
+                                    {item.price.toLocaleString('zh-cn', { style: 'currency', currency: 'CNY' })}
                                 </TableRowColumn>
                             </TableRow>)
                         )}
@@ -64,28 +64,28 @@ class OrderProductDetail extends Component {
                             <TableRowColumn colSpan={2} />
                             <TableRowColumn>{translate('resources.order.fields.orderprice')}</TableRowColumn>
                             <TableRowColumn style={{ textAlign: 'right' }}>
-                                {record.orderprice.toLocaleString(undefined, { style: 'currency', currency: 'CNY' })}
+                                {record.orderprice.toLocaleString('zh-cn', { style: 'currency', currency: 'CNY' })}
                             </TableRowColumn>
                         </TableRow>
                         <TableRow>
                             <TableRowColumn colSpan={2} />
                             <TableRowColumn>{translate('resources.order.fields.couponprice')}</TableRowColumn>
                             <TableRowColumn style={{ textAlign: 'right' }}>
-                                {record.couponprice.toLocaleString(undefined, { style: 'currency', currency: 'CNY' })}
+                                {record.couponprice.toLocaleString('zh-cn', { style: 'currency', currency: 'CNY' })}
                             </TableRowColumn>
                         </TableRow>
                         <TableRow>
                             <TableRowColumn colSpan={2} />
                             <TableRowColumn>{translate('resources.order.fields.pointprice')}</TableRowColumn>
                             <TableRowColumn style={{ textAlign: 'right' }}>
-                                {record.pointprice.toLocaleString(undefined, { style: 'currency', currency: 'CNY' })}
+                                {record.pointprice.toLocaleString('zh-cn', { style: 'currency', currency: 'CNY' })}
                             </TableRowColumn>
                         </TableRow>
                         <TableRow>
                             <TableRowColumn colSpan={2} />
                             <TableRowColumn style={{ fontWeight: 'bold' }}>{translate('resources.order.fields.realprice')}</TableRowColumn>
                             <TableRowColumn style={{ textAlign: 'right', fontWeight: 'bold' }}>
-                                {record.realprice.toLocaleString(undefined, { style: 'currency', currency: 'CNY' })}
+                                {record.realprice.toLocaleString('zh-cn', { style: 'currency', currency: 'CNY' })}
                             </TableRowColumn>
                         </TableRow>
                     </TableBody>
