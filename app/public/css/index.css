@@ -50,7 +50,7 @@ input, textarea{
     font-weight: 100;
     padding: 5px 0;
 }
-.homeBottom .ui.button.action{
+.homeBottom .ui.button.active{
     background: #EEE;
 }
 .homeBottom .ui.button img{
@@ -58,4 +58,7 @@ input, textarea{
 }
 .logisticsinfoPage{
     justify-content: flex-start;
+}
+.ui.feed>.event>.content .meta .like:hover .icon{
+    color: rgba(0,0,0,.5)
 }

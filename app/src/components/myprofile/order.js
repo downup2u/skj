@@ -172,6 +172,7 @@ export class Page extends React.Component {
                         };
                         this.props.dispatch(myorderupdateone(payload)).then(({updateditem})=>{
                             this.props.dispatch(uiinfinitepage_updateitem(updateditem));
+                            this.handleItemClick(updateditem.orderstatus);
                         });
                     }
                 }}

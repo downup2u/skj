@@ -44,7 +44,10 @@ export class Page extends Component {
         if(index!=''){
             query = { srctype : index };
             if(index==="withdrawcash"){
-                query = { srctype : {"$in":['withdrawcash','paywithleftbalance']} };
+                query = { 
+                    srctype : {"$in":['withdrawcash','paywithleftbalance']} 
+                    
+                };
             }
         }
         this.getprofitlist(query)
@@ -92,8 +95,13 @@ export class Page extends Component {
                     <div className='ll'>
                         
                         {_.map(this.props.profitlist, (profitinfo, index)=>{
+                            let show = profitinfo.feebonus==0?{display:"none"}:{};
                             return (
-                                <div className="l" key={index}>
+                                <div 
+                                    className="l" 
+                                    key={index}
+                                    style={show}
+                                    >
                                     <div className="i">
                                         <span className="code">
                                             {profitinfo.srctype=="withdrawcash"?"提现记录":""}
@@ -103,7 +111,8 @@ export class Page extends Component {
                                         <span className="date"><span>{moment(profitinfo.created_at).format("MM月DD日 HH时mm分")}</span></span>
                                     </div>
                                     <div className="p">
-                                        <span>{profitinfo.feebonus>0?("+"+profitinfo.feebonus):("-"+profitinfo.feebonus*-1)}</span>
+                                        <span>{profitinfo.feebonus>0?("+"+profitinfo.feebonus):""}</span>
+                                        <span>{profitinfo.feebonus<0?("-"+profitinfo.feebonus*-1):""}</span>
                                     </div>
                                 </div>
                             )

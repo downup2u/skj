@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import { set_weui } from '../../actions/index.js';
 const {
     Toast,
-    Dialog
+    Dialog,
+    ActionSheet
 } = WeUI;
 
 const icon = {
@@ -77,7 +78,8 @@ export class Page extends Component {
             toast, 
             alert, 
             confirm,
-            loading
+            loading,
+            action
         } = this.props;
 
         return (
@@ -137,6 +139,8 @@ export class Page extends Component {
                     show={loading.show}>
                     Loading...
                 </Toast>
+
+                
             </div>
         )
     }

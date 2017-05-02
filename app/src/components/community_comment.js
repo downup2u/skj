@@ -44,8 +44,8 @@ let ForumComment = ({loginsuccess,userid,history,topicid,comment,subcomment,user
             history.push('/login');
         }
     };
-    let childCommentstyle = (commentid)=>{
-        return commentid.length>0?"childComments":"childComments hide";
+    let childCommentstyle = (comment)=>{
+        return (comment.comments.length>0&&comment.isvisiable)?"childComments":"childComments hide";
     }
     //"childComments"
 
@@ -53,32 +53,42 @@ let ForumComment = ({loginsuccess,userid,history,topicid,comment,subcomment,user
         return (<div>
         {_.map(commentid, (id)=>{
             let child = subcomment[id];
-            return (
-                <Comment key={id}>
-                    <Comment.Avatar src={users[child.creator].profile.avatar}/>
-                    <Comment.Content>
-                        <Comment.Author as='a'>{users[child.creator].profile.nickname}</Comment.Author>
-                        <Comment.Text>
-                            <p>{child.title}</p>
-                        </Comment.Text>
-                        <Comment.Actions className="myCommentAction">
-                            <Comment.Metadata>
-                                <div>{moment(child.created_at).format("MM月DD日 HH时mm分")}</div>
-                            </Comment.Metadata>
-                        </Comment.Actions>
-                    </Comment.Content>
-                </Comment>
-            )
+            if(child.isvisiable){
+                return (
+                    <Comment key={id}>
+                        <Comment.Avatar src={users[child.creator].profile.avatar}/>
+                        <Comment.Content>
+                            <Comment.Author as='a'>{users[child.creator].profile.nickname}</Comment.Author>
+                            <Comment.Text>
+                                <p>{child.title}</p>
+                            </Comment.Text>
+                            <Comment.Actions className="myCommentAction">
+                                <Comment.Metadata>
+                                    <div>{moment(child.created_at).format("MM月DD日 HH时mm分")}</div>
+                                </Comment.Metadata>
+                            </Comment.Actions>
+                        </Comment.Content>
+                    </Comment>
+                )
+            }else{
+                return (
+                    <div style={{display:"none"}}></div>
+                )
+            }
         })}</div>);
     }
+
     return (
-        <div id={'comment_'+comment._id}>
+
+        <div 
+            id={'comment_'+comment._id}
+            >
             <Comment>
                 <Comment.Avatar src={users[comment.creator].profile.avatar}/>
                 <Comment.Content>
                     <Comment.Author as='a'>{users[comment.creator].profile.nickname}</Comment.Author>
                     <Comment.Text>
-                        <p>{comment.title}</p>
+                        <p>{comment.isvisiable?comment.title:"该评论被隐藏"}</p>
                     </Comment.Text>
                     <Comment.Actions className="myCommentAction">
                         <Comment.Metadata>
@@ -95,7 +105,7 @@ let ForumComment = ({loginsuccess,userid,history,topicid,comment,subcomment,user
                             </div>
                         </div>
                     </Comment.Actions>
-                    <div className={childCommentstyle(comment.comments)}>
+                    <div className={childCommentstyle(comment)}>
                         {showchild? childComments(comment.comments):""}
                     </div>
                 </Comment.Content>

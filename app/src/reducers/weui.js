@@ -31,6 +31,24 @@ const initial = {
         },
         loading : {
             show : false
+        },
+        action : {
+            auto_show: true,
+            ios_show: true,
+            android_show: true,
+            menus: [{
+                label: '拍照',
+                onClick: ()=> {}
+            }, {
+                label: '从手机相册选择',
+                onClick: ()=> {}
+            }],
+            actions: [
+                {
+                    label: '取消',
+                    onClick: ()=>{}
+                }
+            ]
         }
     },
 };
