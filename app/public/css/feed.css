@@ -347,3 +347,12 @@
     display: flex;
     position: relative;
 }
+
+.feedPage .ui.comments .comment .avatar img, 
+.feedPage .ui.comments .comment img.avatar{
+    height: 35px;
+    width: 35px;
+    border-radius: 35px;
+}
+
+

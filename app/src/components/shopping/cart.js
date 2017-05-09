@@ -238,6 +238,7 @@ let mapStateToPropsPricetotal = (
             toordercartsproducts.push(product);
         });
         isselected = itemsel === items.length;
+        totalprice = totalprice.toFixed(2);
         return {totalprice,isselected,items,toordercarts,toordercartsproducts,expressfee,expressfeeforfree,defaultaddress}
 }
 Pricetotal = connect(mapStateToPropsPricetotal)(Pricetotal);

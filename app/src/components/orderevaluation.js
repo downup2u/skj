@@ -50,7 +50,9 @@ export class Page extends Component {
             let newproductsdetail = [];
             _.map(order.productsdetail, (product, index)=>{
                 let newproduct = product;
-                newproduct["isevaluation"] = true;
+                if(this.props.evaluation.productid==product.productid){
+                    newproduct["isevaluation"] = true;
+                }
                 newproductsdetail.push(newproduct);
             })
             let payload = {

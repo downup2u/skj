@@ -1,5 +1,7 @@
 .orderinfoPage{
     background: #EEE;
+    flex-grow: 1;
+    overflow: scroll;
 }
 .orderinfoPage .proinfo{
     margin-bottom: 20px;

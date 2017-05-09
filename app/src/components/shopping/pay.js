@@ -79,53 +79,52 @@ export class Page extends Component {
                     <span className="title">提交订单</span>
                 </div>
                 <div className="PayPageBody">
-                <div className="orderaddress" onClick={()=>{this.onClickPage('/seladdress')}}>
-                    <img src="img/shopping/mark.png" />
-                    <div className="addressinfo">
-                        {orderAddressInfo.hasOwnProperty("_id")?(
-                            <div>
-                                <div className="userinfo">
-                                    <span>收货人:{orderAddressInfo.truename}</span>
-                                    <span>{orderAddressInfo.phonenumber}</span>
-                                </div>
+                    <div className="orderaddress" onClick={()=>{this.onClickPage('/seladdress')}}>
+                        <img src="img/shopping/mark.png" />
+                        <div className="addressinfo">
+                            {orderAddressInfo.hasOwnProperty("_id")?(
                                 <div>
-                                    收货地址:
-                                    {orderAddressInfo.seladdr.selprovice.value}
-                                    {orderAddressInfo.seladdr.selcity.value}
-                                    {orderAddressInfo.seladdr.seldistict.value}
-                                    {orderAddressInfo.addressname}
+                                    <div className="userinfo">
+                                        <span>收货人:{orderAddressInfo.truename}</span>
+                                        <span>{orderAddressInfo.phonenumber}</span>
+                                    </div>
+                                    <div>
+                                        收货地址:
+                                        {orderAddressInfo.seladdr.selprovice.value}
+                                        {orderAddressInfo.seladdr.selcity.value}
+                                        {orderAddressInfo.seladdr.seldistict.value}
+                                        {orderAddressInfo.addressname}
+                                    </div>
                                 </div>
-                            </div>
-                        ):(
-                            <div className="goToseladdress">请选择收获地址</div>
-                        )}
-                        
+                            ):(
+                                <div className="goToseladdress">请选择收获地址</div>
+                            )}
+                            
+                        </div>
                     </div>
-                </div>
-                <div className="proinfo">
-                    {_.map(orderProductsdetail, (prodetail,index)=>{
-                        let proinfo = products[prodetail.productid];
-                        return (
-                            <div className="li" key={index}>
-                                <img src={proinfo.picurl} />
-                                <div>
-                                    <span>{proinfo.name}</span>
-                                    <span className="price">
-                                        <span>¥{prodetail.price}</span>
-                                        <span>X{prodetail.number}</span>
-                                    </span>
+                    <div className="proinfo">
+                        {_.map(orderProductsdetail, (prodetail,index)=>{
+                            let proinfo = products[prodetail.productid];
+                            return (
+                                <div className="li" key={index}>
+                                    <img src={proinfo.picurl} />
+                                    <div>
+                                        <span>{proinfo.name}</span>
+                                        <span className="price">
+                                            <span>¥{prodetail.price}</span>
+                                            <span>X{prodetail.number}</span>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
-                </div>
-
-                <div className="list">
-                    <div className="li">
-                        <span>运费</span>
-                        <span>¥{this.props.orderExpress}</span>
+                            )
+                        })}
                     </div>
-                </div>
+                    <div className="list">
+                        <div className="li">
+                            <span>运费</span>
+                            <span>¥{this.props.orderExpress}</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="subBtn">

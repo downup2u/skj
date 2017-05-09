@@ -414,7 +414,7 @@ let mapStateToProps = ({shop,app,shoporder,userlogin:{balance,point,defaultaddre
         //积分抵扣金额
         if(paystatus.usepoint && point>0 && payprice>0){
             let pointvsmoney = app.pointvsmoney;
-            let pointprice = point * pointvsmoney * .01;
+            let pointprice = (point * pointvsmoney * .01).toFixed(2);
             orderinfo.pointprice = pointprice<=payprice?pointprice:payprice;
             point_used =  (orderinfo.pointprice * 100) / pointvsmoney;
             payprice -= orderinfo.pointprice;

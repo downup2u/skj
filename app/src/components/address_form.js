@@ -8,7 +8,7 @@ let renderNewaddressForm = (fields)=> {
         fields.isdefaultaddress.input.onChange(true);
     }
     return (
-        <div className="AddressAddPage" style={{minHeight:(window.innerHeight-46)+"px"}}>
+        <div className="AddressAddPage" style={{height:(window.innerHeight-46)+"px"}}>
             <List selection verticalAlign='middle' className="addAddress">
                 <List.Item>
                     <div className="tit">姓名:</div>
@@ -84,15 +84,14 @@ const validate = values => {
 
 let NewaddressForm = (props)=> {
     let {handleSubmit,onClickOK} = props;
-    return (<Form onSubmit={handleSubmit(onClickOK)}>
-        <div className="loginPageTop">
+    return (
+        <Form onSubmit={handleSubmit(onClickOK)}>
             <Fields names={['truename','phonenumber','seladdr','addressname','isdefaultaddress']}
                     component={renderNewaddressForm}/>
 
             <div className="loginBotton AddressAddPageBottom">
                 <Button primary>确定</Button>
             </div>
-        </div>
     </Form>);
 };
 
