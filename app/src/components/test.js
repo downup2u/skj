@@ -1,7 +1,7 @@
 /**
  * Created by wangxiaoqing on 2017/3/20.
  */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import {

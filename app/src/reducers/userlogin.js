@@ -36,7 +36,8 @@ const initial = {
 };
 
 const userlogin = createReducer({
-    [setlastreadmsgtime_result]:(state,lastreadmsgtime_at)=>{
+    [setlastreadmsgtime_result]:(state,payload)=>{
+        const {lastreadmsgtime_at} = payload;
         localStorage.setItem('lastreadmsgtime_at',lastreadmsgtime_at);
         return  {...state,lastreadmsgtime_at};
     },

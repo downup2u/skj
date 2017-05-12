@@ -1,7 +1,7 @@
 /*
  * 收货地址管理
  * */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import '../../public/css/user.css';
 import { Input, List, Checkbox, Button, Icon } from 'semantic-ui-react'
 import NavBar from './nav.js';
@@ -12,6 +12,7 @@ import {getaddresslist_request,deleteaddress_request} from '../actions/index.js'
 import {deleteaddress_confirmpopshow,deleteaddress_confirmpophide} from '../actions/index.js';
 import { Confirm } from 'semantic-ui-react';
 import {editaddress} from '../actions/sagacallback.js';
+import _ from 'lodash';
 
 let AddressItem = (props)=> {
     const { addressitem, defaultaddress } = props;
@@ -61,7 +62,7 @@ let AddressItem = (props)=> {
                                     checked={false}
                                 />
                             </div>):(
-                            <Checkbox 
+                            <Checkbox
                                 label="默认地址"
                                 checked={true}
                             />
@@ -126,8 +127,8 @@ export class Page extends React.Component {
 
     render() {
         let itemsco = [];
-        this.props.addresslist.forEach((addressitem)=> {
-            itemsco.push(<AddressItem key={addressitem._id} 
+        _.map(this.props.addresslist,(addressitem)=> {
+            itemsco.push(<AddressItem key={addressitem._id}
                                       dispatch={this.props.dispatch}
                                       addressitem={addressitem}
                                       onClickEdit={this.onClickEdit}

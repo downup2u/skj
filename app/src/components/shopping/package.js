@@ -1,7 +1,7 @@
 /*
  * 套餐一体机
  * */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import NavBar from '../newnav.js';

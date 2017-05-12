@@ -1,7 +1,7 @@
 /**
  * Created by wangxiaoqing on 2017/3/29.
  */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input, Grid, Popup  } from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';

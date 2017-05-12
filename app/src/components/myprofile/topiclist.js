@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import NavBar from '../newnav.js';
 import { Input, Button, Menu, Icon } from 'semantic-ui-react';
 import '../../../public/css/mytopiclist.css';

@@ -1,4 +1,4 @@
-import React,{ Component, PropTypes } from 'react';
+import React,{ Component } from 'react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import {  Button, Icon, Input, List, Radio, Label, Checkbox } from 'semantic-ui-react';
 import Addresssellevel3 from './controls/addresssellevel3';

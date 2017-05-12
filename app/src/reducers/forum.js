@@ -246,7 +246,7 @@ const forum = createReducer({
     };
     },
     [lovetopicadd_result]: (state, payload) => {
-        let updatedtopic = payload;
+        let {updatedtopic} = payload;
         return { ...state,
             topics:{
                 ...state.topics,
@@ -259,7 +259,7 @@ const forum = createReducer({
         };
     },
     [lovetopicunadd_result]: (state, payload) => {
-        let updatedtopic = payload;
+        let {updatedtopic} = payload;
         return { ...state,
             topics:{
                  ...state.topics,
@@ -268,7 +268,7 @@ const forum = createReducer({
         };
     },
     [lovecommentsadd_result]: (state, payload) => {
-        let updatedcomment = payload;
+        let {updatedcomment} = payload;
         return { ...state,
             comments:{
                 ...state.comments,

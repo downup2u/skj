@@ -1,7 +1,7 @@
 /*
  * 订单详情
  * */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Input, Button, Menu, Icon, Checkbox} from 'semantic-ui-react';
 import NavBar from '../nav.js';
 import '../../../public/css/pay.css';

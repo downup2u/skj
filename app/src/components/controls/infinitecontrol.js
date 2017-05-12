@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { 
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import {
     uiinfinitepage_init,
     uiinfinitepage_getdata,
     uiinfinitepage_setstate,
@@ -45,7 +46,7 @@ export class Page extends Component {
     componentWillUnmount =()=> {
         this.props.dispatch(uiinfinitepage_init());
         document.getElementById('ScrollContainer').removeEventListener('touchmove', (ev) => {
-            
+
         });
     }
 
@@ -70,7 +71,7 @@ export class Page extends Component {
     }
 
     componentDidMount() {
-        
+
         document.getElementById('ScrollContainer').addEventListener('touchmove', (ev) => {
             ev.preventDefault();
         });
@@ -153,7 +154,7 @@ export class Page extends Component {
                 this.iScrollInstance.refresh();
             },2000);
         }
-        
+
     }
 
     onTouchStart=(ev)=> {
@@ -269,9 +270,9 @@ export class Page extends Component {
                     onTouchEnd={this.onTouchEnd}
                     >
                     <ul id='ListInside'>
-                        <p 
-                            ref="PullDown" 
-                            id='PullDown' 
+                        <p
+                            ref="PullDown"
+                            id='PullDown'
                             className={pullDownImgStyle[this.props.pullDownStatus]}
                             style={{display:"none"}}
                         >
@@ -280,19 +281,19 @@ export class Page extends Component {
                             <span>{pullDownTips[this.props.pullDownStatus]}</span>
                         </p>
                         {lis}
-                        <p 
-                            ref="PullUp" 
-                            id='PullUp' 
+                        <p
+                            ref="PullUp"
+                            id='PullUp'
                             className={this.props.pageEnd?"pageEnd":""}
                             style={{display:"none"}}
                             >
                             <i></i>
                             <span>{pullUpTips[this.props.pullUpStatus]}</span>
                         </p>
-                        <div 
-                            ref="Nodata" 
-                            id="Nodata" 
-                            className="nodata" 
+                        <div
+                            ref="Nodata"
+                            id="Nodata"
+                            className="nodata"
                             style={{
                                 display:"none",
                                 textAlign:"center",

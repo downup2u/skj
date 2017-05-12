@@ -1,7 +1,7 @@
 /*
  * 购物车
  * */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import NavBar from '../nav.js';
 import { connect } from 'react-redux';
 import { Input, Button, Menu, Checkbox, Label, Icon } from 'semantic-ui-react';

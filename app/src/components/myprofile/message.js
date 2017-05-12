@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import NavBar from '../nav.js';
 import '../../../public/css/mymessage.css';
 import { connect } from 'react-redux';

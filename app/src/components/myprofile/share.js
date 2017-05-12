@@ -1,7 +1,7 @@
 /*
     我的推广吗
 */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import NavBar from '../nav.js';
 import { Input, Button, Select, List, Menu } from 'semantic-ui-react';
 import '../../../public/css/myorder.css';

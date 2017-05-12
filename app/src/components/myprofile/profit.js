@@ -1,7 +1,7 @@
 /*
     我的收益
 */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import NavBar from '../newnav.js';
 import { Input, Button, Menu } from 'semantic-ui-react';
 import '../../../public/css/myprofit.css';

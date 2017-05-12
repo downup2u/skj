@@ -1,7 +1,7 @@
 /*
  * 选择收货地址
  * */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import NavBar from '../newnav.js';
 import { connect } from 'react-redux';
 import {

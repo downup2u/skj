@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import NavBar from './nav.js';
 import { Button, Comment, Header,Feed, Icon,Input  } from 'semantic-ui-react';
 import { connect } from 'react-redux';

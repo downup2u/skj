@@ -28,18 +28,19 @@ const device = createReducer({
         return { ...initial.device};
     },
     [createdevice_result]: (state, payload) => {
-        let newdevice = payload;
+        let {newdevice} = payload;
         return { ...state, mydevicelist:[newdevice,...state.mydevicelist],curdevice:newdevice };
     },
     [getdevicelist_result]: (state, payload) => {
-        let mydevicelist =  payload.docs;
-        return { ...state,mydevicelist:mydevicelist};
+        let {mydevicelist} = payload;
+        return { ...state,mydevicelist:mydevicelist.docs};
     },
     [deletedevice_result]: (state, payload) => {
+        const {_id} = payload;
         let mydevicelist =  state.mydevicelist;
         let newdevicelist = [];
         for(let item of mydevicelist){
-            if(item._id !== payload._id){
+            if(item._id !== _id){
                 newdevicelist.push(item);
             }
         }

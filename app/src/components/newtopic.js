@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import '../../public/css/user.css';
 import '../../public/css/newtopic.css';
 import { Input, List, Radio, Button, Icon, Image, TextArea,Label} from 'semantic-ui-react';

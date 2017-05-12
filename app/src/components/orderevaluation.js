@@ -1,7 +1,7 @@
 /*
  * 订单评价
  * */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Input, Button, Menu,Select,TextArea } from 'semantic-ui-react';
 import NavBar from './newnav.js';
 import '../../public/css/orderevaluation.css';

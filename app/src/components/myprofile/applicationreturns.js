@@ -1,7 +1,7 @@
 /*
 * 退货申请
 * */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import NavBar from '../nav.js';
 import { Input, Button, Menu,Select,TextArea } from 'semantic-ui-react';
 import PicturesWall  from '../controls/pictureswall.js';

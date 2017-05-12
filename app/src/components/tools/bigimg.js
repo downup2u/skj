@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import '../../../public/css/bigimg.css';
 import _ from 'lodash'; 
 import { connect } from 'react-redux';

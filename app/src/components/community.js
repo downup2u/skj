@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input, Grid, Popup  } from 'semantic-ui-react';
 import Lnk from './lnk.js';
 import Bigimg from './tools/bigimg.js';
@@ -32,7 +32,7 @@ export class Topic extends React.Component {
         for (let i = 0; i<length; i++) {
             let commentid = topic.comments[i];
             commentsco.push(
-                <ForumComment 
+                <ForumComment
                     key={commentid}
                     topicid={topic._id}
                     comment={comments[commentid]}
@@ -117,8 +117,8 @@ export class Page extends React.Component {
 
     updateContent = (item)=> {
         return  (
-            <Topic 
-                key = {`topic${item._id}`} 
+            <Topic
+                key = {`topic${item._id}`}
                 itemid = {item._id}
                 onClickTopic = {this.onClickTopic}
             />
@@ -129,7 +129,7 @@ export class Page extends React.Component {
         const {useralerttopiclist} = this.props;
         let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-140:window.innerHeight-98;
         let tctop = useralerttopiclist.length > 0?90:48;
- 
+
         return (
             <div className="feedPage">
                 <div className="PageHead">
@@ -177,7 +177,7 @@ export class Page extends React.Component {
                     }}>
                     <InfinitePage
                         pagenumber = {16}
-                        updateContent= {this.updateContent} 
+                        updateContent= {this.updateContent}
                         queryfun= { gettopiclist }
                         listheight= { communityListHeight }
                         sort = {{created_at: -1}}

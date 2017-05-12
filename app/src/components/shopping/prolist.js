@@ -1,7 +1,7 @@
 /*
  * 商城首页
  * */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Swiper, Slide } from 'react-dynamic-swiper';

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Button, Comment, Header,Feed, Icon,Input  } from 'semantic-ui-react';
 import { Field,Fields, reduxForm,Form ,reset } from 'redux-form';
 import { connect } from 'react-redux';
@@ -30,7 +30,7 @@ const mapStateToProps = ({forum}) => {
 }
 renderInput = connect(mapStateToProps)(renderInput);
 
- 
+
 
 let FeedReplyForm = (props)=>{
   const {handleSubmit} = props;

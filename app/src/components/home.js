@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {  Button, Icon, Input, List, Radio} from 'semantic-ui-react'
 import '../../public/css/home.css';

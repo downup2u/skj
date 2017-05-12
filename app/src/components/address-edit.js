@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import '../../public/css/user.css';
 import {  Button, Icon,Input, List, Radio} from 'semantic-ui-react'
 import { connect } from 'react-redux';
@@ -8,6 +8,7 @@ import {editaddress_request} from '../actions/index.js';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import {editaddress} from '../actions/sagacallback.js';
 import {setdefaultaddrselvalue} from '../areaData_v2.js';
+import _ from 'lodash';
 
 class Page extends React.Component {
   componentWillMount () {
@@ -57,18 +58,20 @@ class Page extends React.Component {
 const mapStateToProps = ({address,userlogin},props) => {
   let addressid = props.match.params.addressid;
   let curaddressitem = {};
-  for(let addressitem of address.addresslist){
+  _.map(address.addresslist,(addressitem)=>{
     if(addressitem._id === addressid){
       curaddressitem = addressitem;
     }
-  }
+  });
+
   curaddressitem.isdefaultaddress = false;
   if(userlogin.defaultaddress.hasOwnProperty('_id')){
     if(curaddressitem._id === userlogin.defaultaddress._id){
       curaddressitem.isdefaultaddress = true;
     }
   }
-  
+
+  console.log(`addressid:${addressid},${JSON.stringify(curaddressitem)}`);
   return curaddressitem;
 }
 
