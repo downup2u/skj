@@ -6,7 +6,6 @@ export const md_editaddress= createAction('md_editaddress');
 export const md_register= createAction('md_register');
 export const md_findpwd= createAction('md_findpwd');
 export const md_inserttopic= createAction('md_inserttopic');
-export const md_createdevice= createAction('md_createdevice');
 export const md_getnotifymessage= createAction('md_getnotifymessage');
 export const md_getmytopic= createAction('md_getmytopic');
 export const md_gettopiclist= createAction('md_gettopiclist');
@@ -33,3 +32,5 @@ export const md_oauthbinduser= createAction('md_oauthbinduser');
 export const md_feedbackaddone= createAction('md_feedbackaddone');
 
 export const md_useraddpoint_result= createAction('md_useraddpoint_result');
+export const md_createdevice_result= createAction('md_createdevice_result');
+export const md_updatedevice_result= createAction('md_updatedevice_result');

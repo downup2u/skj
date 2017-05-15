@@ -15,17 +15,24 @@ const DeviceItem = (props)=> {
     let onDelete = ()=> {
         props.onClickDelete(deviceitem);
     };
+    let onEdit = ()=> {
 
+    };
     return (
         <List.Item key={deviceitem._id}>
             <Swipeout autoClose={true}
                       right={[
-                {
-                    text: '删除',
-                    onPress:onDelete,
-                    style: { backgroundColor: 'red', color: 'white' }
-                }
-            ]}
+                        {
+                            text: '修改',
+                            onPress:onEdit,
+                            style: { backgroundColor: 'red', color: 'white' }
+                        },
+                        {
+                            text: '删除',
+                            onPress:onDelete,
+                            style: { backgroundColor: 'red', color: 'white' }
+                        }
+                    ]}
                 onOpen={() => console.log('open')}
                 onClose={() => console.log('close')}
             >

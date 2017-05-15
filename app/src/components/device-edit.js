@@ -3,11 +3,11 @@ import NavBar from './nav.js';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import { Input, List, Radio, Button, Icon, Image, Checkbox} from 'semantic-ui-react';
-import {createdevice} from '../actions/sagacallback.js';
+// import {createdevice} from '../actions/sagacallback.js';
 import PicturesWall  from './controls/pictureswall.js';
+import {updatedevice_request} from '../actions/index.js';
 
-
-let renderNewdeviceForm = (fields)=>{
+let renderEditdeviceForm = (fields)=>{
   console.dir(fields);
   return (<div className='newdevice'>
             <div className="newdeviceinput">
@@ -21,13 +21,13 @@ let renderNewdeviceForm = (fields)=>{
             </div>
           </div>);
 }
-renderNewdeviceForm = connect()(renderNewdeviceForm);
+renderEditdeviceForm = connect()(renderEditdeviceForm);
 
-let NewdeviceForm = (props)=>{
-  let {handleSubmit,onClickNewDevice} = props;
-  return (<Form onSubmit={handleSubmit(onClickNewDevice)}>
+let EditdeviceForm = (props)=>{
+  let {handleSubmit,onClickEditDevice} = props;
+  return (<Form onSubmit={handleSubmit(onClickEditDevice)}>
     <div className="loginPageTop">
-        <Fields names={['devicename','devicebrand','devicemodel']} component={renderNewdeviceForm}/>
+        <Fields names={['devicename','devicebrand','devicemodel']} component={renderEditdeviceForm}/>
         <div className="loginBotton">
             <Button primary>确定</Button>
         </div>
@@ -35,17 +35,8 @@ let NewdeviceForm = (props)=>{
   </Form>);
 };
 
-NewdeviceForm = reduxForm({
-  form: 'newdevice',
-  initialValues:{
-    devicename:'',
-    devicebrand:'',
-    devicemodel:''
-  }
-})(NewdeviceForm);
 
-import {createdevice_request} from '../actions/index.js';
-export class Page extends React.Component {
+class Page extends React.Component {
 
   componentWillMount () {
 
@@ -53,31 +44,39 @@ export class Page extends React.Component {
   onClickReturn =()=>{
     this.props.history.goBack();
   }
-  onClickNewDevice = (values)=>{
+  onClickEditDevice = (values)=>{
     console.dir(values);
-
-    let payload = {
-      devicename:values.devicename,
-      devicebrand:values.devicebrand,
-      devicemodel:values.devicemodel,
-    }
-    this.props.dispatch(createdevice(payload)).then((result)=>{
-      console.log("新建设备成功:" + JSON.stringify(result));
-      this.props.history.goBack();
-    }).catch((error)=>{
-      //弹出错误框
-      console.log("新建设备失败:" + JSON.stringify(error));
-    });
-  //  this.props.dispatch(createdevice_request(payload));
+    const {curdevice,dispatch} = this.props;
+    dispatch(updatedevice_request({
+      query:{_id:curdevice._id},
+      data:values
+    }));
   }
   render() {
+    const {curdevice} = this.props;
+    EditdeviceForm = reduxForm({
+      form: 'editdevice',
+      initialValues:{
+        devicename:curdevice.devicename,
+        devicebrand:curdevice.devicebrand,
+        devicemodel:curdevice.devicemodel,
+      }
+    })(EditdeviceForm);
     return ( <div>
             <NavBar lefttitle="返回" title="设备列表" onClickLeft={this.onClickReturn}/>
-            <NewdeviceForm onClickNewDevice={this.onClickNewDevice}/>
+            <EditdeviceForm onClickEditDevice={this.onClickEditDevice}/>
           </div>);
   }
 }
 
 
-Page = connect()(Page);
+const mapStateToProps = ({device:{curdevice}},props) => {
+  let deviceid = props.match.params.deviceid;
+  if(curdevice._id !== deviceid){
+
+  }
+  return {curdevice};
+}
+
+Page = connect(mapStateToProps)(Page);
 export default Page;

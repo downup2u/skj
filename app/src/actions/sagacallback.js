@@ -16,11 +16,7 @@ import {
   wait_inserttopic_request,
   wait_inserttopic_result,
 
-  createdevice_request,
-  wait_createdevice_request,
-  wait_createdevice_result,
-
-  getnotifymessage_request, 
+  getnotifymessage_request,
   wait_getnotifymessage_request,
   wait_getnotifymessage_result,
 
@@ -71,7 +67,7 @@ import {
   wait_myorderaddone_request,
   wait_myorderaddone_result,
   myorderaddone_request,
-  
+
   wait_myorderupdateone_request,
   wait_myorderupdateone_result,
   myorderupdateone_request,
@@ -83,7 +79,7 @@ import {
   wait_productcommentaddone_request,
   wait_productcommentaddone_result,
   productcommentaddone_request,
-  
+
   wait_productcommentsfromproductgetcount_request,
   wait_productcommentsfromproductgetcount_result,
   productcommentsfromproductgetcount_request,
@@ -115,7 +111,7 @@ import {
   oauthbinduser_request,
   wait_oauthbinduser_request,
   wait_oauthbinduser_result,
-  
+
   feedbackaddone_request,
   wait_feedbackaddone_request,
   wait_feedbackaddone_result
@@ -164,9 +160,6 @@ export function inserttopic(payload){
     return synccall(payload,wait_inserttopic_request,inserttopic_request);
 }
 
-export function createdevice(payload){
-  return synccall(payload,wait_createdevice_request,createdevice_request);
-}
 
 export function getnotifymessage(payload){
   return synccall(payload,wait_getnotifymessage_request,getnotifymessage_request);
@@ -292,7 +285,6 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_register_request}`,`${wait_register_result}`]);
   waitfnsz.push([`${wait_findpwd_request}`,`${wait_findpwd_result}`]);
   waitfnsz.push([`${wait_inserttopic_request}`,`${wait_inserttopic_result}`]);
-  waitfnsz.push([`${wait_createdevice_request}`,`${wait_createdevice_result}`]);
   waitfnsz.push([`${wait_getnotifymessage_request}`,`${wait_getnotifymessage_result}`]);
   waitfnsz.push([`${wait_getmytopic_request}`,`${wait_getmytopic_result}`]);
   waitfnsz.push([`${wait_gettopiclist_request}`,`${wait_gettopiclist_result}`]);
@@ -324,4 +316,3 @@ export function* createsagacallbackflow(){
   }
 
 }
-

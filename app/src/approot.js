@@ -32,7 +32,7 @@ import Seladdress from './components/shopping/seladdress.js';
 //添加设备
 import Devicelist from './components/devicelist.js';
 //添加设备
-import NewDevice from './components/newdevice.js';
+import EditDevice from './components/device-edit.js';
 //添加设备第一步连接wifi
 import AddNewDevice from './components/device-add.js';
 //添加设备第二步连接设备
@@ -235,7 +235,7 @@ const CoApp = (props) => {
             <CustomRoute path="/profiledetail" component={requireAuthentication(ProfileDetail)}/>
             <CustomRoute path="/newtopic" component={requireAuthentication(NewTopic)}/>
             <CustomRoute path="/devicelist" component={requireAuthentication(Devicelist)}/>
-            <CustomRoute path="/newdevice" component={requireAuthentication(NewDevice)}/>
+            <CustomRoute path="/editdevice/:deviceid" component={requireAuthentication(EditDevice)}/>
             <CustomRoute path="/addnewdevice" component={requireAuthentication(AddNewDevice)}/>
             <CustomRoute path="/addnewdevice2" component={requireAuthentication(AddNewDevice2)}/>
             <CustomRoute path="/addnewdevice3" component={requireAuthentication(AddNewDevice3)}/>
@@ -269,15 +269,15 @@ const CoApp = (props) => {
             <CustomRoute path="/payend/:id" component={requireAuthentication(PayEnd)} />
             <CustomRoute path="/test" component={Test} />
             <CustomRoute path="/share" component={Share} />
-            <CustomRoute path="/userbind" component={Userbind} /> 
-            <CustomRoute path="/seladdress" component={requireAuthentication(Seladdress)} /> 
-            <CustomRoute path="/selcoupon/:id" component={requireAuthentication(Selcoupon)} /> 
-            <CustomRoute path="/mycode" component={requireAuthentication(Mycode)} /> 
-            <CustomRoute path="/orderseladdress/:id" component={requireAuthentication(Orderseladdress)} /> 
-            <CustomRoute path="/settings" component={Settings} /> 
-            <CustomRoute path="/feedback" component={requireAuthentication(Feedback)} /> 
-            <CustomRoute path="/integral" component={requireAuthentication(Integral)} /> 
-            <CustomRoute path="/aboutus/:type" component={Aboutus} /> 
+            <CustomRoute path="/userbind" component={Userbind} />
+            <CustomRoute path="/seladdress" component={requireAuthentication(Seladdress)} />
+            <CustomRoute path="/selcoupon/:id" component={requireAuthentication(Selcoupon)} />
+            <CustomRoute path="/mycode" component={requireAuthentication(Mycode)} />
+            <CustomRoute path="/orderseladdress/:id" component={requireAuthentication(Orderseladdress)} />
+            <CustomRoute path="/settings" component={Settings} />
+            <CustomRoute path="/feedback" component={requireAuthentication(Feedback)} />
+            <CustomRoute path="/integral" component={requireAuthentication(Integral)} />
+            <CustomRoute path="/aboutus/:type" component={Aboutus} />
             <CustomRoute component={App}/>
         </Switch>
     );
@@ -310,7 +310,7 @@ class MessageCo extends React.Component {
             if (this.props.type === 'error') {
                MessageCo = (
                     <div className="messageCo" style={fullheight}>
-                        <Message 
+                        <Message
                             error
                             header={this.props.title}
                             content={this.props.msg}
@@ -320,7 +320,7 @@ class MessageCo extends React.Component {
             }else if (this.props.type === 'warning') {
                  MessageCo = (
                     <div className="messageCo" style={fullheight}>
-                        <Message 
+                        <Message
                                  warning
                                  header={this.props.title}
                                  content={this.props.msg}
@@ -331,7 +331,7 @@ class MessageCo extends React.Component {
             else if (this.props.type === 'success') {
                  MessageCo = (
                     <div className="messageCo" style={fullheight}>
-                        <Message 
+                        <Message
                                  success
                                  header={this.props.title}
                                  content={this.props.msg}
@@ -351,10 +351,10 @@ MessageCo = connect(mapStateToPropsMessageCo)(MessageCo);
 
 //app
 class AppRoot extends React.Component {
-    render() {        
+    render() {
         return (
             <div>
-                <WeuiTool />    
+                <WeuiTool />
                 <MessageCo />
                 <div className="pageWamp"><CoApp /></div>
                 <Sharebox />

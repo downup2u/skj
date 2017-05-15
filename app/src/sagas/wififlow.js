@@ -1,40 +1,80 @@
 /**
  * Created by wangxiaoqing on 2017/3/25.
  */
-import {getwifilist_request,getwifilist_result} from '../actions';
-import { fork, take, call, put, cancel,race } from 'redux-saga/effects';
-import {delay} from 'redux-saga';
-import config from '../env/config.js';
+import { put,takeEvery,call} from 'redux-saga/effects';
+import {
+  getssid,
+  senddata
+} from '../env/device.js';
+import {
+  showpopmessage,
+  getcurwifi_request,
+  getcurwifi_result,
+  getcurwifi_devicelist_request,
+  getcurwifi_devicelist_result,
+  md_createdevice_result,
+  createdevice_result,
+  md_updatedevice_result,
+  updatedevice_result
+} from '../actions';
+import { push,replace } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
 
-function getwifilist() {
+function getcurwifi() {
     return new Promise(resolve => {
-        let wifilist = [
-            {
-                ssid:'aaaaaa',
-                mac:'aa:bb:cc:dd'
-            },
-            {
-                ssid:'bbbb',
-                mac:'aa:bb:cc:dd'
-            },
-            {
-                ssid:'cccccc',
-                mac:'aa:bb:cc:dd'
-            },
-            {
-                ssid:'ddddd',
-                mac:'aa:bb:cc:dd'
-            },
-        ];
-        window.setTimeout(()=>{resolve(wifilist);},0);
-
+      getssid((result)=>{
+        resolve(result);
+      });
     });
 }
 
+function sendwifidata(values){
+  return new Promise(resolve => {
+    senddata(values,(retdata)=>{
+      resolve(retdata);
+    });
+  });
+}
+
 export function* wififlow() {
-    while (true) {
-        yield take(`${getwifilist_request}`);
-        let wifilist = yield call(getwifilist);
-        yield put(getwifilist_result(wifilist));
-    }
+    console.log(`wififlow======>`);
+
+    yield takeEvery(`${md_createdevice_result}`, function*(action) {
+          let {payload:result} = action;
+          console.log(`md_createdevice_result:${JSON.stringify(result)}`);
+          yield put(createdevice_result(result));
+          const {newdevice} = result;
+          yield put(push(`/editdevice/${newdevice._id}`));
+    });
+
+    yield takeEvery(`${md_updatedevice_result}`, function*(action) {
+          let {payload:result} = action;
+          console.log(`md_updatedevice_result:${JSON.stringify(result)}`);
+          yield put(updatedevice_result(result));
+          yield put(replace(`/devicelist`));
+    });
+
+    yield takeEvery(`${getcurwifi_request}`, function*(action) {
+          let {payload:result} = action;
+          console.log(`getcurwifi_request:${JSON.stringify(result)}`);
+          let wifiresult = yield call(getcurwifi);
+          yield put(getcurwifi_result(wifiresult));
+    });
+
+    yield takeEvery(`${getcurwifi_devicelist_request}`, function*(action) {
+          let {payload:result} = action;
+          console.log(`getcurwifi_devicelist_request:${JSON.stringify(result)}`);
+          let wifiresult = yield call(sendwifidata,result);
+          if(wifiresult.code === 0){
+            yield put(getcurwifi_devicelist_result(wifiresult.data));
+            yield put(push('/addnewdevice2'));
+          }
+          else{
+            //弹框,message
+            yield put(showpopmessage({
+              title:'获取设备失败',
+              msg:wifiresult.message,
+              type:'error'
+            }));
+          }
+    });
 }

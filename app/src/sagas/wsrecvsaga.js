@@ -20,9 +20,6 @@ import {
   wait_inserttopic_result,
   md_inserttopic,
 
-  createdevice_result,
-  wait_createdevice_result,
-  md_createdevice,
 
   getnotifymessage_result,
   wait_getnotifymessage_result,
@@ -153,11 +150,6 @@ const waitfnsz = [
     inserttopic_result,
     wait_inserttopic_result,
     `${md_inserttopic}`,
-  ],
-  [
-    createdevice_result,
-    wait_createdevice_result,
-    `${md_createdevice}`,
   ],
   [
     getnotifymessage_result,

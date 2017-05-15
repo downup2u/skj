@@ -13,7 +13,7 @@ import {
     lovecommentsadd_request,lovecommentsadd_result,
     lovecommentsunadd_request,lovecommentsunadd_result,
 
-    createdevice_request, createdevice_result,
+    createdevice_request,
     getdevicelist_request,getdevicelist_result,
     deletedevice_request,deletedevice_result,
     setuseralerttopicreaded_request,
@@ -96,7 +96,7 @@ import {
     md_register,
     md_findpwd,
     md_inserttopic,
-    md_createdevice,
+    md_createdevice_result,
     md_getnotifymessage,
     md_getmytopic,
     md_gettopiclist,
@@ -122,6 +122,9 @@ import {
     md_oauthbinduser,
     md_feedbackaddone,
 
+    updatedevice_request,
+    md_updatedevice_result,
+
     getsystemconfig_result,
     getnextusers_result,
     getdistsalesorderstat_result,
@@ -141,6 +144,7 @@ import {
 
 //接收的对应关系
 exports.recvmessagetoresultpair = {
+  'device.updatedevice_result':md_updatedevice_result,
   'queryorderstatusstat_result':queryorderstatusstat_result,
   'shop.expressquery_result':expressquery_result,
   'getabouthtml_result':getabouthtml_result,
@@ -184,7 +188,7 @@ exports.recvmessagetoresultpair = {
   'users.register_result':md_register,//<--
   'users.register_err':md_findpwd,//<===
   'forum.inserttopic_result':md_inserttopic,
-  'device.createdevice_result':md_createdevice,
+  'device.createdevice_result':md_createdevice_result,
   'getnotifymessage_result':md_getnotifymessage,
   'forum.getmytopic_result':md_getmytopic,
   'forum.gettopiclist_result':md_gettopiclist,
@@ -230,6 +234,7 @@ exports.sendmessagefnsz = {
 
 //验证发送接口
 exports.sendmessageauthfnsz = {
+    'updatedevice':`${updatedevice_request}`,
     'queryorderstatusstat':`${queryorderstatusstat_request}`,
      'getmytopic':`${getmytopic_request}`,
             'inserttopic':`${inserttopic_request}`,

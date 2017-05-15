@@ -4,15 +4,18 @@ import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import { Input, Button, Select } from 'semantic-ui-react';
 import '../../public/css/newdevice.css';
+import _ from 'lodash';
+import {createdevice_request} from '../actions';
 
-
-const Page = (props) => {
+let Page = (props) => {
     let onClickReturn = ()=> {
         props.history.goBack();
     }
-    let onClickNext =()=>{
-        props.history.push('/addnewdevice3');
+    let onClickNext =(device)=>{
+      props.dispatch(createdevice_request(device));
+        //props.history.push('/addnewdevice3');
     }
+    const {devicelist} = props;
     return (
     <div className="addnewdevice">
         <NavBar lefttitle="返回" title="设备匹配" onClickLeft={onClickReturn}/>
@@ -22,15 +25,28 @@ const Page = (props) => {
         </div>
         <div className="fm">
             <div className="device2_text">
-                设备正在尝试和云端进行连接
+            {
+                _.map(devicelist,(device)=>{
+                  console.log('device:' + JSON.stringify(device));
+                   return (
+                    <div key={device.mac} onClick={()=>{
+                       onClickNext(device);
+                    }}>
+                      <div>{device.name}</div>
+                      <div>{device.mac}</div>
+                      <div>{device.ip}</div>
+                    </div>
+                  );
+              })
+            }
             </div>
-            <div className="loginBotton">
-                <Button onClick={onClickNext}  primary>下一步</Button>
-            </div>
-        </div>
+          </div>
     </div>
-);
+  );
 }
 
-
-export default Page
+const mapStateToProps = ({wifi}) => {
+    return {...wifi};
+}
+Page = connect(mapStateToProps)(Page);
+export default Page;

@@ -6,20 +6,25 @@
  */
 import { createReducer } from 'redux-act';
 import {
-    getwifilist_result,
+    getcurwifi_result,
+    getcurwifi_devicelist_result
 } from '../actions/index.js';
 
 const initial = {
     wifi: {
-        wifilist: [],
+        ssid: '正在获取当前wifi的ssid....',
+        devicelist:[]
     },
 };
 
 
 const wifi = createReducer({
-    [getwifilist_result]: (state, payload) => {
-        let wifilist = [...payload];
-        return { ...state, wifilist };
+    [getcurwifi_result]: (state, payload) => {
+        return { ...state, ...payload };
+    },
+    [getcurwifi_devicelist_result]: (state, payload) => {
+        let devicelist = [...payload];
+        return { ...state, devicelist };
     },
 }, initial.wifi);
 

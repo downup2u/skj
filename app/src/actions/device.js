@@ -3,11 +3,12 @@
  */
 import { createAction } from 'redux-act';
 
-export const wait_createdevice_request = createAction('wait_createdevice_request');
-export const wait_createdevice_result = createAction('wait_createdevice_result');
 //device
 export const createdevice_request = createAction('device.createdevice_request');
 export const createdevice_result = createAction('device.createdevice_result');
+
+export const updatedevice_request = createAction('device.updatedevice_request');
+export const updatedevice_result = createAction('device.updatedevice_result');
 
 export const getdevicelist_request = createAction('device.getdevicelist_request');
 export const getdevicelist_result = createAction('device.getdevicelist_result');

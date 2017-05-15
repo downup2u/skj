@@ -4,33 +4,14 @@ import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import { Input, Button, Select } from 'semantic-ui-react';
 import '../../public/css/newdevice.css';
-import {getwifilist_request} from '../actions';
+import {getcurwifi_request,getcurwifi_devicelist_request} from '../actions';
+import {senddata} from '../env/device.js';
 
 let renderWifiForm = (fields)=>{
-     let onChangeSel = (e,newdata)=>{
-         if(fields.wifilist.length > newdata.value) {
-             let newvalue = fields.wifilist[newdata.value];
-             newvalue.index = newdata.value;
-             fields.selwifi.input.onChange(newvalue);
-         }
-    }
-
-    if(fields.wifilist.length > 0 && fields.selwifi.input.value === -1){
-        window.setTimeout(()=>{
-            let newvalue = fields.wifilist[0];
-            newvalue.index = 0;
-            fields.selwifi.input.onChange(newvalue);
-        },0);
-
-    }
-    if(fields.selwifi.input.value === -1){
-        return <div>loading...</div>;
-    }
-    let defaultvalue = fields.selwifi.input.value.index;
     return (
-             <div className="fm">
+            <div className="fm">
             <div className="input">
-            <Select options={fields.wifilistoptions} onChange={onChangeSel} defaultValue={defaultvalue}/>
+            <Input placeholder='请输入网络密码' value={fields.ssid.input.value} onChange={fields.ssid.input.onChange}/>
              <img src="img/8.png" />
             </div>
             <div className="input">
@@ -40,20 +21,6 @@ let renderWifiForm = (fields)=>{
         </div>);
 };
 
-const mapStateToProps = ({wifi}) => {
-    let wifilistoptions = [];
-    const {wifilist} = wifi;
-    wifilist.forEach((wifi,index)=>{
-        wifilistoptions.push({
-            key: index,
-            value: index,
-            flag: 'af', //变成wifi图标？？？
-            text: wifi.ssid,
-        });
-    });
-    return {wifilistoptions,wifilist};
-}
-renderWifiForm = connect(mapStateToProps)(renderWifiForm);
 
 let WifiForm = (props)=>{
     let {handleSubmit,onClickNext} = props;
@@ -63,7 +30,7 @@ let WifiForm = (props)=>{
         <img src="img/6.png"/>
         </div>
 
-        <Fields names={['selwifi','password']}  component={renderWifiForm}/>
+        <Fields names={['ssid','password']}  component={renderWifiForm}/>
 
         <div className="loginBotton">
         <Button primary>下一步</Button>
@@ -93,19 +60,21 @@ let WifiSelForm =({formname,formvalues,...rest})=>{
 
 class Page extends React.Component {
     componentWillMount() {
-        this.props.dispatch(getwifilist_request());
+        this.props.dispatch(getcurwifi_request({}));
     }
     onClickReturn = ()=> {
         this.props.history.goBack();
     }
     onClickNext =(values)=>{
         console.log("----->onclicknext:" + JSON.stringify((values)));
-        this.props.history.push('/addnewdevice2');
+        this.props.dispatch(getcurwifi_devicelist_request(values));
+        //this.props.history.push('/addnewdevice2');
     }
 
     render(){
+        const {ssid} = this.props;
         let formvalue = {
-            selwifi:-1,
+            ssid:ssid,
             password:''
         };
         return (
@@ -119,5 +88,8 @@ class Page extends React.Component {
 
 }
 
-Page = connect()(Page);
-export default Page
+const mapStateToProps = ({wifi}) => {
+    return {...wifi};
+}
+Page = connect(mapStateToProps)(Page);
+export default Page;
