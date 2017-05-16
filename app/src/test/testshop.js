@@ -195,7 +195,7 @@ let test_myorderaddone_request=(dispatch)=>{
   ];
   let payload = {
     productsdetail,
-    payway:'alipay',
+    paytype:'alipay',
     realprice:20,//实付价
     orderprice:30,//订单价=应付价
     orderstatus:'未支付',
@@ -208,7 +208,7 @@ let test_myorderaddone_request=(dispatch)=>{
   };
   //dispatch(myorderaddone_request(payload));
   dispatch(myorderaddone(payload)).then((result)=>{
-    //myorderaddone result=>{"newitem":{"__v":0,"payway"
+    //myorderaddone result=>{"newitem":{"__v":0,"paytype"
     console.log("myorderaddone result=>" + JSON.stringify(result));
   });
 }
@@ -218,13 +218,13 @@ let test_myorderupdateone_request=(dispatch)=>{
   let payload = {
     _id:'58ef69ed510c6f3752e889c0',
     data:{
-      payway:'alipay',
+      paytype:'alipay',
       paystatus:'已支付',
     }
   };
  // dispatch(myorderupdateone_request(payload));
   dispatch(myorderupdateone(payload)).then((result)=>{
-    //{"updateditem":{"_id":"58ed8391d3f83a025b8067b9","payway":"alipay"
+    //{"updateditem":{"_id":"58ed8391d3f83a025b8067b9","paytype":"alipay"
     console.log("myorderupdateone result=>" + JSON.stringify(result));
   });
 }

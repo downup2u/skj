@@ -47,7 +47,7 @@ export const set_orderSurePage = createAction('set_orderSurePage');
 export const myorderlist_addreducers = createAction('myorderlist_addreducers');
 
 //选择当前支付组件
-export const payway_set = createAction('payway_set');
+export const paytype_set = createAction('paytype_set');
 
 //设置产品详情的评论数
 export const set_productevaluatenumber = createAction('set_productevaluatenumber');

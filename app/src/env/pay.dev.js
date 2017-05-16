@@ -5,24 +5,25 @@ import {
 } from '../util/util.js';
 
 
-export const onclickpay = ({orderinfo,payway,dispatch},callbackfn)=> {
-    console.log(`支付方式为:${payway}`);
+export const onclickpay = ({orderinfo,paytype,dispatch},callbackfn)=> {
+    console.log(`支付方式为:${paytype},${orderinfo.realprice}`);
    let orderdoc = {
       out_trade_no: orderinfo._id,
       subject: orderinfo.ordertitle || '商品名称',//$('#subject').val(),//'WL144626511265842',//$('#subject').val(),
       body: orderinfo.body|| '商品详情',//$('#body').val(),//'WL144626511265842',//
       total_fee: orderinfo.realprice,//$('#fee').val(),//'9.00',
     };
-    if(payway === 'weixin'){
+    if(paytype === 'weixin'){
         orderdoc.total_fee = orderdoc.total_fee*100;
     }
     dispatch(getpaysign({
-        paytype:payway,
+        paytype:paytype,
         paypage:'orderdetailpage',
         orderdoc:orderdoc,
     })).then((paysign)=>{
-        //alert(`paytype为:${payway},paysign:${JSON.stringify(paysign)}`);
+        //alert(`paytype为:${paytype},paysign:${JSON.stringify(paysign)}`);
         //callbackfn(paysign);
+        alert(JSON.stringify(paysign));
         let postdata = {
             "out_trade_no":orderinfo._id
         };

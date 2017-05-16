@@ -2,7 +2,7 @@
 import {getpaysign} from '../actions/sagacallback';
 import * as xview from './xview/Common';
 
-export const onclickpay = ({orderinfo,payway,dispatch},callbackfn)=> {
+export const onclickpay = ({orderinfo,paytype,dispatch},callbackfn)=> {
 
    let orderdoc = {
       out_trade_no: orderinfo._id,
@@ -10,20 +10,20 @@ export const onclickpay = ({orderinfo,payway,dispatch},callbackfn)=> {
       body: orderinfo.body|| '商品详情',//$('#body').val(),//'WL144626511265842',//
       total_fee: orderinfo.realprice,//$('#fee').val(),//'9.00',
     };
-    if(payway === 'weixin'){
+    if(paytype === 'weixin'){
         orderdoc.total_fee = orderdoc.total_fee*100;
     }
     dispatch(getpaysign({
-        paytype:payway,
+        paytype:paytype,
         paypage:'orderdetailpage',
         orderdoc:orderdoc,
     })).then((paysign)=>{
-       if(payway === 'weixin'){
+       if(paytype === 'weixin'){
          xview.wxpayUrl(paysign,(result)=>{
           callbackfn(result);
         });
        }
-       else if(payway === 'alipay'){
+       else if(paytype === 'alipay'){
           xview.alipayUrl(paysign,(result)=>{
             callbackfn(result);
          });

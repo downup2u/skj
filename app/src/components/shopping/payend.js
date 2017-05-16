@@ -13,7 +13,7 @@ import {
     myorderupdateone
 } from '../../actions/sagacallback.js';
 import {
-    payway_set,
+    paytype_set,
     updata_orderinfo,
     updata_orderpaydata,
     set_weui,
@@ -49,8 +49,14 @@ export class Page extends Component {
     onClickPay =()=> {
         let orderinfo = this.props.orderinfo;
         let dispatch = this.props.dispatch;
-        let payway = orderinfo.payway;
-        orderinfo.realprice = parseInt(this.props.payprice);
+        let paytype = orderinfo.paytype;
+        if(typeof this.props.payprice === 'number'){
+          orderinfo.realprice = this.props.payprice;
+        }
+        else{
+          orderinfo.realprice = parseInt(this.props.payprice);
+        }
+
 
         let payload = {
             _id:orderinfo._id,
@@ -58,8 +64,8 @@ export class Page extends Component {
         };
 
         dispatch(myorderupdateone(payload)).then((result)=>{
-            onclickpay({orderinfo, payway, dispatch},(result)=>{
-                if(payway=="leftbalance"){
+            onclickpay({orderinfo, paytype, dispatch},(result)=>{
+                if(paytype=="leftbalance"){
                     this.props.dispatch(
                         set_weui({toast:{
                             show : true,
@@ -74,9 +80,9 @@ export class Page extends Component {
 
     };
     //设置支付方式
-    setpayway =(paytype)=>{
+    setpaytype =(paytype)=>{
         let orderinfo = this.props.orderinfo;
-        orderinfo.payway = paytype;
+        orderinfo.paytype = paytype;
         this.props.dispatch(updata_orderinfo(orderinfo));
     };
 
@@ -89,9 +95,9 @@ export class Page extends Component {
         //选择余额支付
         if(type=="usebalance"){
             if(paystatus[type]){
-                this.setpayway("leftbalance");
+                this.setpaytype("leftbalance");
             }else{
-                this.setpayway("alipay");
+                this.setpaytype("alipay");
             }
         }
         this.props.dispatch(updata_orderpaydata(paystatus));
@@ -144,7 +150,7 @@ export class Page extends Component {
                 }}
             )
         )
-        
+
     };
     //添加评论
     addEvaluation=(orderid, productid)=>{
@@ -161,7 +167,7 @@ export class Page extends Component {
         return (
             <div>
                 {orderinfo.paystatus=="未支付"?(
-                    <div 
+                    <div
                         className="PayPage"
                         style={{height:(window.innerHeight)+"px"}}
                         >
@@ -228,9 +234,9 @@ export class Page extends Component {
                                         <span>微信</span>
                                         <span>推荐微信用户使用</span>
                                     </div>
-                                    <Checkbox 
-                                        onClick={()=>{this.setpayway("weixin")}} 
-                                        checked={orderinfo.payway=="weixin"}
+                                    <Checkbox
+                                        onClick={()=>{this.setpaytype("weixin")}}
+                                        checked={orderinfo.paytype=="weixin"}
                                         />
                                 </div>
                                 <div className="li">
@@ -239,9 +245,9 @@ export class Page extends Component {
                                         <span>支付宝</span>
                                         <span>推荐支付宝用户使用</span>
                                     </div>
-                                    <Checkbox 
-                                        onClick={()=>{this.setpayway("alipay")}} 
-                                        checked={orderinfo.payway=="alipay"}
+                                    <Checkbox
+                                        onClick={()=>{this.setpaytype("alipay")}}
+                                        checked={orderinfo.paytype=="alipay"}
                                         />
                                 </div>
                                 <div className="li">
@@ -251,9 +257,9 @@ export class Page extends Component {
                                         <span>账户余额:¥{balance}</span>
                                     </div>
                                     <span className="showbalanceprice">{orderinfo.balanceprice==0?'':`- ¥${orderinfo.balanceprice}`}</span>
-                                    <Checkbox 
-                                        onClick={()=>{this.setpayway("leftbalance")}} 
-                                        checked={orderinfo.payway=="leftbalance"}
+                                    <Checkbox
+                                        onClick={()=>{this.setpaytype("leftbalance")}}
+                                        checked={orderinfo.paytype=="leftbalance"}
                                         />
                                 </div>
                             </div>
@@ -270,7 +276,7 @@ export class Page extends Component {
 
                     </div>
                 ):(
-                    <div 
+                    <div
                         className="PayPage"
                         style={{height:(window.innerHeight)+"px"}}
                         >
@@ -309,7 +315,7 @@ export class Page extends Component {
                                                     <span>X{proinfo.number}</span>
                                                     {
                                                         proinfo.hasOwnProperty("isevaluation")&&!proinfo.isevaluation?(
-                                                            <span 
+                                                            <span
                                                                 className="evaluationLnk"
                                                                 onClick={()=>{this.addEvaluation(orderinfo._id, proinfo.productid)}}
                                                                 >
@@ -343,9 +349,9 @@ export class Page extends Component {
                                 <div className="li">
                                     <span>支付方式</span>
                                     <span>
-                                        {orderinfo.payway=="weixin"?"微信":''}
-                                        {orderinfo.payway=="alipay"?"支付宝":''}
-                                        {orderinfo.payway=="leftbalance"?"余额支付":''}
+                                        {orderinfo.paytype=="weixin"?"微信":''}
+                                        {orderinfo.paytype=="alipay"?"支付宝":''}
+                                        {orderinfo.paytype=="leftbalance"?"余额支付":''}
                                     </span>
                                 </div>
                             </div>
@@ -423,17 +429,17 @@ let mapStateToProps = ({shop,app,shoporder,userlogin:{balance,point,defaultaddre
         let balancePay = (balance>=payprice);
         //设置余额抵扣
         if(balancePay){
-            if(orderinfo.payway=="leftbalance" && balance>0 && payprice>0){
+            if(orderinfo.paytype=="leftbalance" && balance>0 && payprice>0){
                 orderinfo.balanceprice = balance<=payprice?balance:payprice;
                 payprice -= orderinfo.balanceprice;
             }
         }
         //设置支付方式
         if(payprice==0){
-            orderinfo.payway="leftbalance";
+            orderinfo.paytype="leftbalance";
         }else{
-            if(orderinfo.payway=='' || (orderinfo.payway=="leftbalance") ){
-                orderinfo.payway = "alipay";
+            if(orderinfo.paytype=='' || (orderinfo.paytype=="leftbalance") ){
+                orderinfo.paytype = "alipay";
             }
         }
         let newbalance = balance - orderinfo.balanceprice;
@@ -446,4 +452,3 @@ let mapStateToProps = ({shop,app,shoporder,userlogin:{balance,point,defaultaddre
 
 Page = connect(mapStateToProps)(Page);
 export default Page;
-

@@ -16,7 +16,7 @@ import {
     set_productlist,
     set_orderSurePage,
     myorderlist_addreducers,
-    payway_set,
+    paytype_set,
     myOrderList_filler_set,
     logout_result
 } from '../actions/index.js';
@@ -51,10 +51,10 @@ const initial = {
         myOrderListFiller : "全部", //订单过滤条件
 
         //选择支付方式
-        payway:'alipay',
+        paytype:'alipay',
 
         // creator:{ type: Schema.Types.ObjectId, ref: 'User' },
-        // payway:String,
+        // paytype:String,
         // realprice:Number,//实付价
         // orderprice:Number,//订单价=应付价
         // orderstatus:String,
@@ -87,8 +87,8 @@ const order = createReducer({
         return { ...initial.order};
     },
     //设置支付方式
-    [payway_set]:(state, payload)=>{
-        return {...state, payway: payload};
+    [paytype_set]:(state, payload)=>{
+        return {...state, paytype: payload};
     },
     //设置我的订单列表
     [myorderlist_addreducers]:(state, payload)=>{

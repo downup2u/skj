@@ -39,7 +39,7 @@ export class Page extends Component {
         });
         let payload = {
             productsdetail,
-            payway: 'alipay',//支付方式
+            paytype: 'alipay',//支付方式
             ordertitle: ordertitle,
             body: body,
             realprice: parseFloat(this.props.orderPrice),//实付价
