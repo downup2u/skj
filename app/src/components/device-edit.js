@@ -70,11 +70,9 @@ class Page extends React.Component {
 }
 
 
-const mapStateToProps = ({device:{curdevice}},props) => {
+const mapStateToProps = ({device:{devices}},props) => {
   let deviceid = props.match.params.deviceid;
-  if(curdevice._id !== deviceid){
-
-  }
+  let curdevice = devices[deviceid];
   return {curdevice};
 }
 

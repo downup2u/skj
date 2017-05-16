@@ -17,15 +17,15 @@ let SystemConfigSchema = new Schema({
     getpointfromshare:{ type: Schema.Types.Number,default: 5},//分享得到积分
     pointlimitshare:{ type: Schema.Types.Number,default: 30},//每天最多获得分享的积分
     sharesetting:{ type:  Schema.Types.String,default:`{
-                    "title":"(后台需要设置分享标题)", 
+                    "title":"(后台需要设置分享标题)",
                     "descrption":"(后台需要设置分享详情内容)",
-                    "picture":"https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2378550344,2476789148&fm=58", 
+                    "picture":"https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2378550344,2476789148&fm=58",
                     "url":"http://www.xiaheng.net/"
                 }`},
     memberlevelsetting:{ type:  Schema.Types.String,default:`{
-                    "初级会员":0, 
+                    "初级会员":0,
                     "中级会员":200,
-                    "高级会员":500, 
+                    "高级会员":500,
                     "黄金会员":1000,
                     "钻石会员":1500
                 }`},
@@ -45,7 +45,7 @@ let UserSchema = new Schema({
     created_at: { type: Date, default:new Date()},
     updated_at: Date,
     lastreadmsgtime_at: { type: Date, default:new Date()},
-    profile:{ type: Schema.Types.Mixed,default:{ 
+    profile:{ type: Schema.Types.Mixed,default:{
         nickname:`游客${chance.string({length: 4,pool: '0123456789'})}`,
         avatar:'img/myprofile/1.png'},
         sex:'男'
@@ -74,6 +74,7 @@ let News  = mongoose.model('News',  NewsSchema);
 //=======设备=======
 let DeviceSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
+    deviceid:String,//mac->hex
     devicename:String,
     devicebrand:String,
     devicemodel: String,
@@ -83,6 +84,7 @@ DeviceSchema.plugin(mongoosePaginate);
 let Device  = mongoose.model('Device',  DeviceSchema);
 //=======设备数据=======
 let DeviceDataSchema = new Schema({
+    deviceid:String,//mac->hex
     devicename:String,
     devicebrand:String,
     devicemodel: String,
@@ -227,7 +229,7 @@ let Mycart  = mongoose.model('Mycart',  MycartSchema);
 //订单：用户id,[订单详情id],支付方式,折扣金额,金额,订单状态,送货地址id,是否删除，优惠券抵扣金额，优惠券ID／商品总价
 let OrderSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
-    payway:String,//支付方式
+    paytype:String,//支付方式
     ordertitle:String,  //订单标题（支付宝，微信用）
     body:String,//订单内容（文字）
     realprice:Number,//实付价

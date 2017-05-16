@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import {getdevicelist_request,deletedevice_request} from '../actions/index.js';
 import {deletedevice_confirmpopshow,deletedevice_confirmpophide} from '../actions/index.js';
 import { Confirm } from 'semantic-ui-react';
+import _ from 'lodash';
 
 const DeviceItem = (props)=> {
     const {deviceitem} = props;
@@ -16,7 +17,7 @@ const DeviceItem = (props)=> {
         props.onClickDelete(deviceitem);
     };
     let onEdit = ()=> {
-
+        props.onClickEdit(deviceitem);
     };
     return (
         <List.Item key={deviceitem._id}>
@@ -70,6 +71,10 @@ export class Page extends React.Component {
     onClickReturn = ()=> {
         this.props.history.goBack();
     }
+
+    onClickEdit =(deviceitem)=>{
+      this.props.history.push(`/editdevice/${deviceitem._id}`);
+    }
     onClickDelete = (deviceitem)=> {
         let poptitle = '确认删除';
         let popmsg = `你确认要删除设备:${deviceitem.devicename}吗?`;
@@ -92,10 +97,14 @@ export class Page extends React.Component {
 
     render() {
         console.log("devicelist:" + JSON.stringify(this.props));
-
+        const {mydevicelist} = this.props;
         let itemsco = [];
-        this.props.mydevicelist.forEach((deviceitem)=> {
-            itemsco.push(<DeviceItem key={deviceitem._id} deviceitem={deviceitem} onClickDelete={this.onClickDelete}/>);
+        _.map(mydevicelist,(deviceitem)=> {
+            itemsco.push(<DeviceItem key={deviceitem._id}
+              deviceitem={deviceitem}
+              onClickEdit={this.onClickEdit}
+              onClickDelete={this.onClickDelete}/>
+            );
         });
         return (
             <div>
@@ -116,8 +125,12 @@ export class Page extends React.Component {
     }
 }
 
-const mapStateToProps = ({device}) => {
-    return device;
+const mapStateToProps = ({device:{mydevicelist:devicelist,devices}}) => {
+    let mydevicelist = [];
+    _.map(devicelist,(id)=>{
+      mydevicelist.push(devices[id]);
+    })
+    return {mydevicelist};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

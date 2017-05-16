@@ -10,11 +10,14 @@ import {
     deletedevice_confirmpophide,
     logout_result
 } from '../actions/index.js';
+import {normalizrdevices} from './normalizr';
+import _ from 'lodash';
 
 const initial = {
     device: {
         mydevicelist: [],
-        curdevice: {},
+        curdevice: '',
+        devices:{},
         isconfirmshow: false,
         poptitle: '',
         popmsg: '',
@@ -29,22 +32,41 @@ const device = createReducer({
     },
     [createdevice_result]: (state, payload) => {
         let {newdevice} = payload;
-        return { ...state, mydevicelist:[newdevice,...state.mydevicelist],curdevice:newdevice };
+        return {
+          ...state,
+          mydevicelist:[newdevice._id,...state.mydevicelist],
+          curdevice:newdevice._id,
+          devices:{
+            ...state.devices,
+            [newdevice._id]:newdevice
+          }
+        };
     },
     [getdevicelist_result]: (state, payload) => {
         let {mydevicelist} = payload;
-        return { ...state,mydevicelist:mydevicelist.docs};
+        let newdocs = normalizrdevices({list:mydevicelist.docs});
+        console.log(`getdevicelist_result==>${JSON.stringify(newdocs)}`);
+        return {
+          ...state,
+          devices:{
+            ...newdocs.entities.devices,
+          },
+          mydevicelist:[...newdocs.result.list],
+        };
     },
     [deletedevice_result]: (state, payload) => {
         const {_id} = payload;
         let mydevicelist =  state.mydevicelist;
-        let newdevicelist = [];
-        for(let item of mydevicelist){
-            if(item._id !== _id){
-                newdevicelist.push(item);
-            }
-        }
-        return { ...state,mydevicelist:[...newdevicelist]};
+        mydevicelist = _.remove(mydevicelist, (id)=> {
+            return id === _id;
+        });
+        let devices = {...state.devices};
+        delete devices[_id];
+        return {
+          ...state,
+          mydevicelist:[...mydevicelist],
+          devices
+        };
     },
     [deletedevice_confirmpopshow]: (state, payload) => {
         // isconfirmshow:false,

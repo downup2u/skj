@@ -63,6 +63,11 @@ const normalizruseralerttopiclist = (result)=>{
 };
 
 //====================商城====================
+const devices = new schema.Entity('devices',{},{
+  idAttribute: '_id',
+});
+const devicesSchma = { list: [ devices ] };
+
 const banners = new schema.Entity('banners',{},{
   idAttribute: '_id',
 });
@@ -77,6 +82,11 @@ const products = new schema.Entity('products',{},{
   idAttribute: '_id',
 });
 const productsSchma = { list: [ products ] };
+
+const normalizrdevices=(list)=>{
+  const devices = normalize(list, devicesSchma);
+  return devices;
+};
 
 const normalizrbanners=(list)=>{
   const banners = normalize(list, bannersSchma);
@@ -117,6 +127,7 @@ const normalizr_orderslist=(list)=>{
 };
 
 export {
+  normalizrdevices,
   normalizrbanners,
   normalizrcategories,
   normalizrproducts,
