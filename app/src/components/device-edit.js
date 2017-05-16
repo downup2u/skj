@@ -9,7 +9,7 @@ import {updatedevice_request} from '../actions/index.js';
 
 let renderEditdeviceForm = (fields)=>{
   console.dir(fields);
-  return (<div className='newdevice'>
+  return (<div className='newdevice editdevicePage'>
             <div className="newdeviceinput">
                 <Input placeholder='输入设备名' {...fields.devicename.input} type="text"/>
             </div>

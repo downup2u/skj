@@ -26,12 +26,12 @@ const DeviceItem = (props)=> {
                         {
                             text: '修改',
                             onPress:onEdit,
-                            style: { backgroundColor: 'red', color: 'white' }
+                            style: { backgroundColor: '#21ba45', color: 'white', fontSize:"16px" }
                         },
                         {
                             text: '删除',
                             onPress:onDelete,
-                            style: { backgroundColor: 'red', color: 'white' }
+                            style: { backgroundColor: 'red', color: 'white', fontSize:"16px" }
                         }
                     ]}
                 onOpen={() => console.log('open')}

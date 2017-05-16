@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBar from './nav.js';
+import NavBar from './newnav.js';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import { Input, Button, Select } from 'semantic-ui-react';
@@ -18,7 +18,7 @@ let Page = (props) => {
     const {devicelist} = props;
     return (
     <div className="addnewdevice">
-        <NavBar lefttitle="返回" title="设备匹配" onClickLeft={onClickReturn}/>
+        <NavBar back={true} title="设备匹配" />
 
         <div className="tt">
             <img src="img/9.png"/>

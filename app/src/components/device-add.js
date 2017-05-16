@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBar from './nav.js';
+import NavBar from './newnav.js';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import { Input, Button, Select } from 'semantic-ui-react';
@@ -79,7 +79,7 @@ class Page extends React.Component {
         };
         return (
             <div className="addnewdevice">
-            <NavBar lefttitle="返回" title="设备连接" onClickLeft={this.onClickReturn}/>
+            <NavBar back={true} title="设备连接" />
             <WifiSelForm formname="wifiform" formvalues={formvalue} onClickNext={this.onClickNext}/>
         </div>
     );
