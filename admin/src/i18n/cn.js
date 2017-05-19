@@ -118,9 +118,11 @@ export default {
       fields:{
         productcategoryid1:'显示在商城首页的套餐(分类）',
         productcategoryid2:'显示在商城首页的商用一体机(分类）',
-
+      },
+      tabs:{
+        shop:'商城设置',
+        device:'设备设置'
       }
-
     },
   }
 
