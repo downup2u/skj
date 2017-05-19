@@ -8,6 +8,7 @@ import {
     deletedevice_result,
     deletedevice_confirmpopshow,
     deletedevice_confirmpophide,
+    serverpush_devicedata,
     logout_result
 } from '../actions/index.js';
 import {normalizrdevices} from './normalizr';
@@ -41,6 +42,16 @@ const device = createReducer({
             [newdevice._id]:newdevice
           }
         };
+    },
+    [serverpush_devicedata]:(state,payload) => {
+      let device = payload;
+      return {
+        ...state,
+        devices:{
+          ...state.devices,
+          [device._id]:device
+        }
+      };
     },
     [getdevicelist_result]: (state, payload) => {
         let {mydevicelist} = payload;

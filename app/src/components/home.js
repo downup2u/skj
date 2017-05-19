@@ -5,6 +5,7 @@ import '../../public/css/home.css';
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../node_modules/react-dynamic-swiper/lib/styles.css';
 import {withRouter} from 'react-router-dom';
+import _ from 'lodash';
 
 let swiperOptions = {
     navigation: false,
@@ -60,27 +61,75 @@ let Page = (props)=> {
         props.history.push('/devicelist');
     };
     const {curdevicedata} = props;
+    let {name,total,modeltype,leftmodel,rightmodel,detaillist,getdata} = curdevicedata;
+    getdata = true;//是否获取到数据
     let detaillistco = [];
-    for (let detail of curdevicedata.detaillist) {
-        let linestyleresult = linestyle("#52a3da", "#C00", `${detail.leftpecent}%`);
-        detaillistco.push(
-            <li style={listLi} key={detail.name}>
-                <div style={listhead}>
-                    <div>
-                        <span style={listname}>{detail.name}</span>
-                        <span style={listinfo}>剩余{detail.leftday}天</span>
-                    </div>
-                    <div>
-                        <span style={percentage}>{detail.leftpecent}%</span>
-                        <span>复位</span>
-                    </div>
-                </div>
-                <div style={lineBg}>
-                    <div style={linestyleresult}></div>
-                </div>
-            </li>
-        );
+    if(getdata){//是否获取到数据
+      _.map(detaillist,(detail)=> {
+          let linestyleresult = linestyle("#52a3da", "#C00", `${detail.leftpecent}%`);
+          detaillistco.push(
+              <li style={listLi} key={detail.name}>
+                  <div style={listhead}>
+                      <div>
+                          <span style={listname}>{detail.name}</span>
+                          <span style={listinfo}>剩余{detail.leftday}天</span>
+                      </div>
+                      <div>
+                          <span style={percentage}>{detail.leftpecent}%</span>
+                          <span>复位</span>
+                      </div>
+                  </div>
+                  <div style={lineBg}>
+                      <div style={linestyleresult}></div>
+                  </div>
+              </li>
+          );
+      });
     }
+
+    // let devicedata =
+    // {
+    //     name:getgrade(total,deviceconfig.gradetotal),
+    //     total:`${total}`,
+    //     modeltype:'TDS002',
+    //     leftmodel:{
+    //         name:`原水TDS-${data01}`,
+    //         resultstring:getgrade(data01,deviceconfig.gradeleft),
+    //     },
+    //     rightmodel:{
+    //         name:`净水TDS-${data23}`,
+    //         resultstring:getgrade(data23,deviceconfig.graderight),
+    //     },
+    //     detaillist:
+    //         [
+    //             {
+    //                 name:'5微米PP滤芯',
+    //                 leftday:`${left89}`,
+    //                 leftpecent:`${leftpecent89}`,
+    //             },
+    //             {
+    //                 name:'颗粒活性炭',
+    //                 leftday:`${left1011}`,
+    //                 leftpecent:`${leftpecent1011}`,
+    //             },
+    //             {
+    //                 name:'1微米PP滤芯',
+    //                 leftday:`${left1011}`,
+    //                 leftpecent:`${leftpecent1011}`,
+    //               },
+    //             {
+    //                 name:'反渗透RO膜',
+    //                 leftday:`${left1415}`,
+    //                 leftpecent:`${leftpecent1415}`,
+    //               },
+    //             {
+    //                 name:'后置活性炭',
+    //                 leftday:`${left1617}`,
+    //                 leftpecent:`${leftpecent1617}`,
+    //               },
+    //
+    //         ],
+    // };
 
     return (
         <div style={{height:(window.innerHeight-57)+"px"}} className="homePageWamp">
@@ -109,10 +158,10 @@ let Page = (props)=> {
                         <div className="headContent">
                             <img src="img/1.png"/>
                             <div className="headContentInfo">
-                                <span className="i1">TDS002</span>
-                                <span className="i2">优</span>
+                                <span className="i1">{modeltype}</span>
+                                <span className="i2">{name}</span>
                                 <span className="i3"><span>可直饮</span></span>
-                                <span className="i4">共净化2800L</span>
+                                <span className="i4">共净化{total}L</span>
                             </div>
                         </div>
                     </Slide>
@@ -165,4 +214,3 @@ const mapStateToProps = ({devicedata}) => {
 Page = connect(mapStateToProps)(Page);
 Page = withRouter(Page);
 export default Page;
-
