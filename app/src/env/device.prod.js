@@ -1,4 +1,4 @@
-import * as xview from '../xview/Common';
+import * as xview from './xview/Common';
 
 
 export const getssid = (fncallback)=>{

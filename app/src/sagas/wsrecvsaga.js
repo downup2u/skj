@@ -273,18 +273,26 @@ const waitfnsz = [
   ],
 ];
 
-import _ from 'co-lodash';
+// import _ from 'co-lodash';
 
 export function* wsrecvsagaflow() {
-  yield* _.coMap(waitfnsz,function*(fnsz){
-    yield takeEvery(fnsz[2], function*(action) {
-        let {payload:result} = action;
-        console.log(`takeEvery===>result:${JSON.stringify(result)}`);
-        yield put(fnsz[0](result));
-        yield put(fnsz[1]({result:result}));
-    });
-  });
-
+  // yield* _.coMap(waitfnsz,function*(fnsz){
+  //   yield takeEvery(fnsz[2], function*(action) {
+  //       let {payload:result} = action;
+  //       console.log(`takeEvery===>result:${JSON.stringify(result)}`);
+  //       yield put(fnsz[0](result));
+  //       yield put(fnsz[1]({result:result}));
+  //   });
+  // });
+  for(let i = 0; i < waitfnsz.length; i ++){
+      let fnsz = waitfnsz[i];
+      yield takeEvery(fnsz[2], function*(action) {
+          let {payload:result} = action;
+          console.log(`takeEvery===>result:${JSON.stringify(result)}`);
+          yield put(fnsz[0](result));
+          yield put(fnsz[1]({result:result}));
+      });
+  }
   // gettopiclist_result,
   // wait_gettopiclist_result,
   // `${md_gettopiclist}`,
