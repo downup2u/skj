@@ -203,3 +203,39 @@
     };
     window.xview.geographyLocationCallbackMethod("callBack");
   }
+
+
+  /**
+    * WiFi名
+    @method currentLinkWifi
+    @since 2.0
+    */
+   export const currentLinkWifi = (fun) => {
+     window.currentLinkWifiCallBack=function(result){
+       fun(result);
+     };
+     window.xview.currentLinkWifi({callback:"currentLinkWifiCallBack"});
+   }
+   /**
+     * 连接mico
+     @method prepareEasyLink
+     @since 2.0
+     */
+    export const prepareEasyLink = (json,fun) => {
+      window.prepareEasyLinkCallBack=function(result){
+        fun(result);
+      };
+      json['callback']="prepareEasyLinkCallBack";
+      window.xview.prepareEasyLink(json);
+    }
+    /**
+      * 搜索mico
+      @method searchForModules
+      @since 2.0
+      */
+     export const searchForModules = (fun) => {
+       window.searchForModulesCallBack=function(result){
+         fun(result);
+       };
+       window.xview.searchForModules({callback:"searchForModulesCallBack"});
+     }
