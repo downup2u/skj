@@ -61,7 +61,7 @@ export class Cartitem extends Component {
                     dispatch(ui_cartooder_updateitem(result.updateditem));
                 }
             });
-            
+
         }
         let onChangeNumber=(e)=>{
             let number = e.target.value;
@@ -87,7 +87,7 @@ export class Cartitem extends Component {
                         dispatch(ui_cartooder_delitem(item));
                     }
             });
-            
+
         }
         let onClickChecktedItem = ()=>{
             if(isselected){
@@ -108,7 +108,7 @@ export class Cartitem extends Component {
                 }]}
                 >
                 <div className="li" >
-                    <Checkbox 
+                    <Checkbox
                         onClick={onClickChecktedItem}
                         checked={isselected}
                         />
@@ -157,7 +157,7 @@ export class Pricetotal extends Component {
         } = this.props;
         let prolist = this.props.toordercartsproducts;
         let express = totalprice>=expressfeeforfree?0:expressfee;
-        let orderprice = totalprice + express; 
+        let orderprice = totalprice + express;
         let orderAddressInfo = {};
         if(defaultaddress.hasOwnProperty("_id")){
             orderAddressInfo = defaultaddress;
@@ -238,7 +238,7 @@ let mapStateToPropsPricetotal = (
             toordercartsproducts.push(product);
         });
         isselected = itemsel === items.length;
-        totalprice = totalprice.toFixed(2);
+        totalprice = parseFloat(totalprice.toFixed(2));
         return {totalprice,isselected,items,toordercarts,toordercartsproducts,expressfee,expressfeeforfree,defaultaddress}
 }
 Pricetotal = connect(mapStateToPropsPricetotal)(Pricetotal);
@@ -279,7 +279,7 @@ export class Page extends Component {
                 <div className="proinfo" style={{height:(window.innerHeight-118)+"px"}}>
                     <InfinitePage
                         pagenumber = {30}
-                        updateContent= {updateContent} 
+                        updateContent= {updateContent}
                         queryfun= {mycartgetall}
                         listheight= {window.innerHeight-92}
                         query = {{}}
@@ -296,5 +296,3 @@ export class Page extends Component {
 
 Page = connect()(Page);
 export default Page;
-
-

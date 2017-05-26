@@ -100,7 +100,7 @@ export class Page extends Component {
                             //判断时会否为浮点数
                             let r = /^(-?\d+)(\.\d+)?$/;
                             if(r.test(profitinfo.feebonus)){
-                                profitinfo.feebonus = parseFloat(profitinfo.feebonus).toFixed(2);
+                                profitinfo.feebonus = parseFloat(profitinfo.feebonus.toFixed(2));
                             }
                             return (
                                 <div

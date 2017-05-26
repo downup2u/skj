@@ -4,11 +4,11 @@
 import React, { Component } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import _ from 'lodash'; 
+import _ from 'lodash';
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shoppingproinfo.css';
-import { 
+import {
     uiaddcartdilog,
     uiiscollection,
     mycollectionaddone_request,
@@ -52,7 +52,7 @@ export class Page extends React.Component {
                 proid : proid
             }
             this.props.dispatch(set_productevaluatenumber(evaluatenumber));
-        });  
+        });
     };
     //检测是否已经收藏
     checkCollection =()=>{
@@ -70,6 +70,9 @@ export class Page extends React.Component {
     };
     //生成订单确认页
     setOrderSurePage =(proinfo)=>{
+        if(typeof proinfo.pricenow === 'string'){
+            proinfo.pricenow = parseFloat(proinfo.pricenow.toFixed(2));
+        }
         let prolist = [{
             productid: proinfo._id,
             number:1,
@@ -77,7 +80,7 @@ export class Page extends React.Component {
             productinfo: proinfo
         }];
         let express = proinfo.pricenow>=this.props.expressfeeforfree?0:this.props.expressfee;
-        let orderprice = proinfo.pricenow + express; 
+        let orderprice = proinfo.pricenow + express;
         let payload = {
             orderAddressId:'',//地址id
             orderProductsdetail:prolist,//产品列表
@@ -157,7 +160,7 @@ export class Page extends React.Component {
                                     </Slide>
                                 )
                             })}
-                            
+
                         </Swiper>
                     </div>
                     <div className="proinfoHead">
@@ -201,7 +204,7 @@ export class Page extends React.Component {
 
                         </div>
                     </div>
-                    
+
                 </div>
                 <div className="proinfoFoot">
                     <span onClick={()=>{this.showaddcartdilog(proinfo._id)}}><i>加入购物车</i></span>
@@ -219,7 +222,3 @@ let mapStateToProps = ({shop,shopcart,app,order,userlogin:{loginsuccess}}) => {
 
 Page = connect(mapStateToProps)(Page);
 export default Page;
-
-
-
-

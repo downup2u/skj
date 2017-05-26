@@ -2,13 +2,24 @@ import * as xview from './xview/Common';
 import {jpushlistenInMessage,jpushpostNotification} from '../actions';
 
 export const cancelJPushAlisa=()=>{
-  xview.cancelJPushAlisa();
+    try{
+        xview.cancelJPushAlisa();
+    }
+    catch(e){
+
+    }
+
 }
 
 export const setJPushAlias = (name)=> {
     //设置jpush名字
     console.log(`设置别名${name}`);
-     xview.jiGuangTuiSong(name);
+    try{
+         xview.jiGuangTuiSong(name);
+     }
+     catch(e){
+
+     }
 }
 
 export const postNotifyFromJPush = (dispatch)=>{
