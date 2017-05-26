@@ -1,5 +1,6 @@
 import { put,takeEvery} from 'redux-saga/effects';
 import {
+  sendauth_result,
   createaddress_result,
   wait_createaddress_result,
   md_createaddress,
@@ -273,18 +274,26 @@ const waitfnsz = [
   ],
 ];
 
-import _ from 'co-lodash';
+// import _ from 'co-lodash';
 
 export function* wsrecvsagaflow() {
-  yield* _.coMap(waitfnsz,function*(fnsz){
-    yield takeEvery(fnsz[2], function*(action) {
-        let {payload:result} = action;
-        console.log(`takeEvery===>result:${JSON.stringify(result)}`);
-        yield put(fnsz[0](result));
-        yield put(fnsz[1]({result:result}));
-    });
-  });
-
+  // yield* _.coMap(waitfnsz,function*(fnsz){
+  //   yield takeEvery(fnsz[2], function*(action) {
+  //       let {payload:result} = action;
+  //       console.log(`takeEvery===>result:${JSON.stringify(result)}`);
+  //       yield put(fnsz[0](result));
+  //       yield put(fnsz[1]({result:result}));
+  //   });
+  // });
+  for(let i = 0; i < waitfnsz.length; i ++){
+      let fnsz = waitfnsz[i];
+      yield takeEvery(fnsz[2], function*(action) {
+          let {payload:result} = action;
+          console.log(`takeEvery===>result:${JSON.stringify(result)}`);
+          yield put(fnsz[0](result));
+          yield put(fnsz[1]({result:result}));
+      });
+  }
   // gettopiclist_result,
   // wait_gettopiclist_result,
   // `${md_gettopiclist}`,
@@ -293,38 +302,49 @@ export function* wsrecvsagaflow() {
   //     console.log(`takeEvery===>result:${JSON.stringify(result)}`);
   //     yield put(gettopiclist_result(result));
   //     yield put(wait_gettopiclist_result({result:result}));
-  // });
+  // });sendauth_result
+  yield takeEvery(`${sendauth_result}`, function*(action) {
+        let {payload} = action;
+        yield put(set_weui({toast:{
+              show : true,
+              text : `发送验证码成功,${payload.authcode}`,
+              type : "success"
+          }}));
+
+  });
 
   yield takeEvery(`${md_useraddpoint_result}`, function*(action) {
         let {payload} = action;
-        const {err,result} = payload;
-        console.log(`err:${JSON.stringify(err)},result:${JSON.stringify(result)}`);
-        if(!result){
-          yield put(set_weui({toast:{
-              show : true,
-              text : err,
-              type : "error"
-          }}));
+        let {err,result} = payload;
+        console.log(`md_useraddpoint_result,result:${JSON.stringify(result)}`);
+        if(!!result){
+            yield put(set_weui({toast:{
+                show : true,
+                text : `${result.reason}获得${result.pointbonus}积分`,
+                type : "success"
+            }}));
         }
 
-        if(!err){
-          yield put(set_weui({toast:{
-              show : true,
-              text : `${result.reason}获得${result.pointbonus}积分`,
-              type : "success"
-          }}));
+        if(!!err){
+            yield put(set_weui({toast:{
+                show : true,
+                text : `${err}`,
+                type : "error"
+            }}));
         }
+
+
   });
 
 
   yield takeEvery(`${common_err}`, function*(action) {
         let {payload:result} = action;
         console.log(`common_err:${JSON.stringify(result)}`);
-        yield put(showpopmessage({
-          title:result.title,
-          msg:result.errmsg,
-          type:'error'
-        }));
+        yield put(set_weui({toast:{
+            show : true,
+            text : result.errmsg,
+            type : "error"
+        }}));
         // yield put(showpopmessage({
         //   title:result.title,
         //   msg:result.errmsg,

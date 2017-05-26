@@ -38,7 +38,7 @@ const address = createReducer({
         let newaddresslist = [];
         for(let item of addresslist){
             if(item._id === editedaddress._id){
-                newaddresslist.push(payload);
+                newaddresslist.push(editedaddress);
             }
             else{
                 newaddresslist.push(item);

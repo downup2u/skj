@@ -16,6 +16,17 @@ import {
     setlastreadmsgtime_result
 } from '../actions/index.js';
 
+let defaultlastreadmsgtime_at = '';
+defaultlastreadmsgtime_at = localStorage.getItem('lastreadmsgtime_at');
+if(!!defaultlastreadmsgtime_at){
+    try{
+        defaultlastreadmsgtime_at = JSON.parse(defaultlastreadmsgtime_at);
+    }
+    catch(e){
+        
+    }
+
+}
 const initial = {
     userlogin: {
         editusername:'',
@@ -24,7 +35,7 @@ const initial = {
         userid:'',
         token:'',
         profile:{},
-        lastreadmsgtime_at:localStorage.getItem('lastreadmsgtime_at'),
+        lastreadmsgtime_at:defaultlastreadmsgtime_at,
         invitecode:'',
         defaultaddress:{},
         balance:0,
@@ -38,7 +49,7 @@ const initial = {
 const userlogin = createReducer({
     [setlastreadmsgtime_result]:(state,payload)=>{
         const {lastreadmsgtime_at} = payload;
-        localStorage.setItem('lastreadmsgtime_at',lastreadmsgtime_at);
+        localStorage.setItem('lastreadmsgtime_at',JSON.stringify(lastreadmsgtime_at));
         return  {...state,lastreadmsgtime_at};
     },
     [loginwithoauth_result]:(state,payload)=>{

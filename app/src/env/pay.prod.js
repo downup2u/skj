@@ -28,6 +28,9 @@ export const onclickpay = ({orderinfo,paytype,dispatch},callbackfn)=> {
             callbackfn(result);
          });
        }
+       else{
+           callbackfn({});
+       }
     }).catch((err)=>{
          alert(JSON.stringify(err));
          console.log('err:' + JSON.stringify(err));

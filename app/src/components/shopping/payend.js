@@ -38,7 +38,14 @@ export class Page extends Component {
     }
 
     onClickReturn = ()=> {
-        this.props.history.goBack();
+        const fromwhere = this.props.match.params.where;
+        if(fromwhere === 'shopping'){
+            this.props.history.go(-3);
+        }
+        else{
+            this.props.history.goBack();
+        }
+
     };
 
     onClickPage = (name)=> {

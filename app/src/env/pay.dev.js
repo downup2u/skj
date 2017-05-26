@@ -24,13 +24,20 @@ export const onclickpay = ({orderinfo,paytype,dispatch},callbackfn)=> {
         //alert(`paytype为:${paytype},paysign:${JSON.stringify(paysign)}`);
         //callbackfn(paysign);
         alert(JSON.stringify(paysign));
-        let postdata = {
-            "out_trade_no":orderinfo._id
-        };
-        requestpost('/pay/alipaytest',postdata,(err,result)=>{
-                console.log("testpost err:" + JSON.stringify(err));
-                console.log("testpost result:" + JSON.stringify(result));
-        });
+        if(paytype === 'weixin' || paytype === 'alipay'){
+            let postdata = {
+                "out_trade_no":orderinfo._id
+            };
+            requestpost('/pay/alipaytest',postdata,(err,result)=>{
+                    console.log("testpost err:" + JSON.stringify(err));
+                    console.log("testpost result:" + JSON.stringify(result));
+            });
+            callbackfn({});
+        }
+        else{
+            callbackfn({});
+        }
+
     }).catch((err)=>{
          console.log('err:' + JSON.stringify(err));
     });

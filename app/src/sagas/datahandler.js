@@ -143,11 +143,14 @@ import {
 
     serverpush_devicedata,
     senddevicecmd_request,
-    senddevicecmd_result
+    senddevicecmd_result,
+    md_useraddpoint_result,
 } from '../actions/index.js';
 
 //接收的对应关系
 exports.recvmessagetoresultpair = {
+  'useraddpoint_result':md_useraddpoint_result,
+  'users.sendauth_result':sendauth_result,
   'senddevicecmd_result':senddevicecmd_result,
   'serverpush_devicedata':serverpush_devicedata,
   'device.updatedevice_result':md_updatedevice_result,

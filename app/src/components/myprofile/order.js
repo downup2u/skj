@@ -5,7 +5,7 @@ import '../../../public/css/myorder.css';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import InfinitePage from '../controls/infinitecontrol';
-import { 
+import {
     myordergetall,
     myorderupdateone
 } from '../../actions/sagacallback.js';
@@ -30,7 +30,7 @@ export class Page extends React.Component {
     componentWillMount() {
         this.props.dispatch(queryorderstatusstat_request({}));
     }
-        
+
     //设置列表筛选条件
     handleItemClick = (status) => {
         this.props.dispatch(myOrderList_filler_set(status));
@@ -96,7 +96,7 @@ export class Page extends React.Component {
                                             <span className="num">X{pro.number}</span>
                                             {
                                                 pro.hasOwnProperty("isevaluation")&&!pro.isevaluation?(
-                                                    <span 
+                                                    <span
                                                         className="evaluationLnk"
                                                         onClick={(e)=>{this.addEvaluation(e, items._id, pro.productid)}}
                                                         >
@@ -144,7 +144,7 @@ export class Page extends React.Component {
         );
     };
 
-    
+
 
     //确认收货
     endOrder =(e, order)=>{
@@ -182,7 +182,7 @@ export class Page extends React.Component {
                 }}
             )
         )
-        
+
     };
 
     //点击支付订单
@@ -190,7 +190,7 @@ export class Page extends React.Component {
         let payload = {};
         payload[order._id] = order;
         this.props.dispatch(myorderlist_addreducers(payload));
-        this.props.history.push(`/payend/${order._id}`);
+        this.props.history.push(`/payend/${order._id}/myprofile`);
     };
 
     render() {
@@ -205,9 +205,9 @@ export class Page extends React.Component {
                 <div className="actionItem">
                     {_.map(this.actionItem, (status,index)=>{
                         return (
-                            <span 
+                            <span
                                 key={index}
-                                onClick={()=>{this.handleItemClick(status)}} 
+                                onClick={()=>{this.handleItemClick(status)}}
                                 className={this.props.myOrderListFiller==status?"sel":""}
                                 >
                                 {status}
@@ -218,7 +218,7 @@ export class Page extends React.Component {
                 <div className="orderList">
                     <InfinitePage
                         pagenumber = {20}
-                        updateContent= {this.updateContent} 
+                        updateContent= {this.updateContent}
                         queryfun= { myordergetall }
                         listheight= { window.innerHeight-128 }
                         sort = {{created_at: -1}}
@@ -235,7 +235,3 @@ let mapStateToProps = ({shop,order}) => {
 }
 
 export default connect(mapStateToProps)(Page);
-
-
-
-

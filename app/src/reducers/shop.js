@@ -16,13 +16,13 @@ import {
     set_productlist,
     set_orderSurePage,
     myorderlist_addreducers,
-    set_productevaluatenumber
+    set_productevaluatenumber,
+    logout_result
 } from '../actions/index.js';
 import {
     normalizrbanners,
     normalizrcategories,
     normalizrproducts,
-    logout_result
 }from './normalizr.js';
 
 import _ from 'lodash';
@@ -31,7 +31,7 @@ const initial = {
 	//商城
     shop: {
         news:[],
-        
+
         //以下数据从后台取
         shopbanners:[],//商城首页广告
         shopcategorylist1:[],//商城首页横排分类
@@ -50,13 +50,14 @@ const initial = {
         productslistType : 0,
         productslistSorttype : 0,
         productslistSearchtxt: '',
-        
+
     }
 };
 
 const shop = createReducer({
     [logout_result]:(state, payload)=>{
-        return { ...initial.shop};
+        let iscollection = {};
+        return { ...state,iscollection};
     },
     //产品详情添加评论数
     [set_productevaluatenumber]:(state, payload)=>{
@@ -133,7 +134,7 @@ const shop = createReducer({
             }
         });
         return { ...state,shopbanners,banners:{...bannerslist.entities.banners}};
-    },    
+    },
     [getcategory_result]:(state, payload)=>{
         let categorylist = normalizrcategories(payload);
         let shopcategorylist1 = [];//商城首页横排分类
@@ -148,7 +149,7 @@ const shop = createReducer({
             }
         });
         return { ...state,shopcategorylist1,shopcategorylist2,categories:{...categorylist.entities.categories}};
-    },    
+    },
     [getproduct_result]:(state, payload)=>{
         let productslist = normalizrproducts(payload);
         return { ...state,products:{...productslist.entities.products}};
