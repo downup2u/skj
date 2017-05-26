@@ -25,11 +25,7 @@ let Page =(props)=> {
         let proinfo = props.products[item.product];
         if(proinfo){
             return  (
-                <div
-                    key={item._id}
-                    onClick={()=>{props.history.push("/shoppingproinfo/"+item.product)}}
-                >
-                    <Swipeout 
+                    <Swipeout key={item._id}
                         autoClose={true}
                         right={[{
                             text: '删除',
@@ -40,6 +36,9 @@ let Page =(props)=> {
                                 fontSize: '16px'
                             }
                         }]}
+                    >
+                    <div
+                        onClick={()=>{props.history.push("/shoppingproinfo/"+item.product)}}
                     >
                         <div className="myCollectionLi">
                             <div className="pic"><img src={proinfo.picurl}/></div>
@@ -52,8 +51,9 @@ let Page =(props)=> {
                                 </div>
                             </div>
                         </div>
+                        </div>
                     </Swipeout>
-                </div>
+
             );
         }
     };
@@ -69,14 +69,14 @@ let Page =(props)=> {
                 <List.Item>
                     <InfinitePage
                         pagenumber = {30}
-                        updateContent= {updateContent.bind(this)} 
+                        updateContent= {updateContent.bind(this)}
                         queryfun= { mycollectiongetall }
                         listheight= {window.innerHeight-92}
                         query = {{}}
                         sort = {{created_at: -1}}
                     />
                 </List.Item>
-                
+
             </div>
         </div>
     )
