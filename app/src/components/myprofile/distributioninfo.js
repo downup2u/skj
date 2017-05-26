@@ -25,6 +25,7 @@ export class Page extends Component {
             options: {
                 page: 1,
                 limit: 10000,
+                sort:{created_at:-1},
             }
         }
         this.props.dispatch(getdistsalesorderdetails(payload));
@@ -115,4 +116,3 @@ const mapStateToProps =  ({userlogin,nextusers}) =>{
 export default connect(
     mapStateToProps
 )(Page);
-

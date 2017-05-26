@@ -33,20 +33,21 @@ export class Page extends Component {
             options:{
                 page: 1,
                 limit: 10000,
+                sort:{created_at:-1},
             }
         };
         this.props.dispatch(getdistsalesorderdetails(payload))
     };
 
-    handleItemClick = (index) => { 
+    handleItemClick = (index) => {
         this.props.dispatch(profit_set_listtype(index));
         let query = {};
         if(index!=''){
             query = { srctype : index };
             if(index==="withdrawcash"){
-                query = { 
-                    srctype : {"$in":['withdrawcash','paywithleftbalance']} 
-                    
+                query = {
+                    srctype : {"$in":['withdrawcash','paywithleftbalance']}
+
                 };
             }
         }
@@ -93,7 +94,7 @@ export class Page extends Component {
                         - 暂无数据 -
                     </div>
                     <div className='ll'>
-                        
+
                         {_.map(this.props.profitlist, (profitinfo, index)=>{
                             let show = profitinfo.feebonus==0?{display:"none"}:{};
                             //判断时会否为浮点数
@@ -102,8 +103,8 @@ export class Page extends Component {
                                 profitinfo.feebonus = parseFloat(profitinfo.feebonus).toFixed(2);
                             }
                             return (
-                                <div 
-                                    className="l" 
+                                <div
+                                    className="l"
                                     key={index}
                                     style={show}
                                     >
@@ -130,7 +131,7 @@ export class Page extends Component {
     }
 }
 
-const mapStateToProps =  ({userlogin,profit}) =>{ 
+const mapStateToProps =  ({userlogin,profit}) =>{
     profit.profitlist = _.sortBy(profit.profitlist, [function(o) { 
         var t = new Date(o.created_at);
         return -t.getTime(); 
@@ -138,4 +139,3 @@ const mapStateToProps =  ({userlogin,profit}) =>{
     return {...userlogin, ...profit}
 };
 export default connect(mapStateToProps)(Page);
-

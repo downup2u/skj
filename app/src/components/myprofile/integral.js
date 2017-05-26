@@ -38,12 +38,13 @@ export class Page extends Component {
             options:{
                 page: 1,
                 limit: 10000,
+                sort:{created_at:-1},
             }
         };
         this.props.dispatch(getuserpointdetails(payload))
     };
 
-    handleItemClick = (index) => { 
+    handleItemClick = (index) => {
         this.props.dispatch(integral_set_listtype(index));
         this.getIntegralList(this.query[index])
     };
@@ -88,7 +89,7 @@ export class Page extends Component {
                         - 暂无数据 -
                     </div>
                     <div className='ll'>
-                        
+
                         {_.map(this.props.list, (integral, index)=>{
                             return (
                                 <div className="l" key={index}>
