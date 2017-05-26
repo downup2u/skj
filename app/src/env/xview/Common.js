@@ -239,3 +239,20 @@
        };
        window.xview.searchForModules({callback:"searchForModulesCallBack"});
      }
+
+     /**
+       * 设置推送用户名
+       @method jiGuangTuiSong
+       @since 2.0
+       */
+      export const jiGuangTuiSong = (name) => {
+        window.xview.jiGuangTuiSong(name);
+      }
+      /**
+        * 取消单推
+        @method cancelJPushAlisa
+        @since 2.0
+        */
+       export const cancelJPushAlisa = () => {
+         window.xview.cancelJPushAlisa();
+       }
