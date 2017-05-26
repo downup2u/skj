@@ -6,11 +6,12 @@ import {
 } from '../actions/sagacallback.js';
 import {wififlow} from './wififlow';
 import {wsrecvsagaflow} from './wsrecvsaga';
+import {jpushflow} from './jpushflow';
 
 export default function* rootSaga() {
   yield fork(wsrecvsagaflow);
   yield fork(flowmain);
   yield fork(wififlow);
- // yield fork(calcmsgcountflow);
+  yield fork(jpushflow);
   yield fork(createsagacallbackflow);
 }

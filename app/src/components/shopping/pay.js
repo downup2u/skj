@@ -12,7 +12,8 @@ import {
 } from '../../actions/sagacallback.js';
 import {
     myorderlist_addreducers,
-    set_orderSurePage
+    set_orderSurePage,
+    set_weui
 } from '../../actions';
 
 
@@ -28,6 +29,14 @@ export class Page extends Component {
 
     //提交订单,生成一条新的订单
     createNewOrder = ()=>{
+        if(!this.props.orderAddressInfo.hasOwnProperty("_id")){
+            this.props.dispatch(set_weui({toast:{
+                show : true,
+                text : `请选择收货地址`,
+                type : "error"
+            }}));
+            return;
+        }
         let productsdetail = this.props.orderProductsdetail;
         let ordertitle = '';
         let body = '';

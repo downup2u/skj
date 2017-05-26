@@ -3624,6 +3624,7 @@ let defaultaddrselvalue = {
       value:"建邺区",
     }
 };
+
 if(localStorage.getItem('defaultaddrselvalue')){
   try{
     defaultaddrselvalue = JSON.parse(localStorage.getItem('defaultaddrselvalue'));
