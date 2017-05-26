@@ -200,7 +200,7 @@ export class Page extends React.Component {
         }
 
         return (
-            <div className="myOrder" style={{height:(window.innerHeight)+"px"}}>
+            <div className="myOrder">
                 <NavBar back={true} title="我的订单" />
                 <div className="actionItem">
                     {_.map(this.actionItem, (status,index)=>{
@@ -220,7 +220,7 @@ export class Page extends React.Component {
                         pagenumber = {20}
                         updateContent= {this.updateContent} 
                         queryfun= { myordergetall }
-                        listheight= { window.innerHeight-108 }
+                        listheight= { window.innerHeight-128 }
                         sort = {{created_at: -1}}
                         query = {filler}
                     />

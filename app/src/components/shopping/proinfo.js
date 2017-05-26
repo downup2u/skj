@@ -136,63 +136,65 @@ export class Page extends React.Component {
                         <span className={this.props.remoteRowCount==0?"hide":""}>{this.props.remoteRowCount}</span>
                     </span>
                 </div>
-
-                <div className="shoppingBanner">
-                    <Swiper
-                        swiperOptions={{slidesPerView: 'auto'}}
-                        {...swiperOptions}>
-                        {_.map(proinfo.picurls.length>0?proinfo.picurls:[proinfo.picurl], (piclist,index)=>{
-                            return (
-                                <Slide
-                                    key={index}
-                                    className="Demo-swiper__slide">
-                                    <img src={piclist}/>
-                                </Slide>
-                            )
-                        })}
-                        
-                    </Swiper>
-                </div>
-                <div className="proinfoHead">
-                    <div className="p1">
-                        <div>
-                            <span className="proname">{proinfo.name}</span>
-                            <span className="p2">
-                                <span>¥{proinfo.pricenow}</span>
-                                <span>¥{proinfo.pricemarket}</span>
+                <div className="PageContent">
+                    <div className="shoppingBanner">
+                        <Swiper
+                            swiperOptions={{slidesPerView: 'auto'}}
+                            {...swiperOptions}>
+                            {_.map(proinfo.picurls.length>0?proinfo.picurls:[proinfo.picurl], (piclist,index)=>{
+                                return (
+                                    <Slide
+                                        key={index}
+                                        className="Demo-swiper__slide">
+                                        <img src={piclist}/>
+                                    </Slide>
+                                )
+                            })}
+                            
+                        </Swiper>
+                    </div>
+                    <div className="proinfoHead">
+                        <div className="p1">
+                            <div>
+                                <span className="proname">{proinfo.name}</span>
+                                <span className="p2">
+                                    <span>¥{proinfo.pricenow}</span>
+                                    <span>¥{proinfo.pricemarket}</span>
+                                </span>
+                            </div>
+                            <span className="collectionLnk" onClick={()=>{this.clickCollection(proinfo)}}>
+                                <img src={this.props.iscollection[proinfo._id]?"img/shopping/star2.png":"img/shopping/star.png"} />
+                                <span>收藏</span>
                             </span>
                         </div>
-                        <span className="collectionLnk" onClick={()=>{this.clickCollection(proinfo)}}>
-                            <img src={this.props.iscollection[proinfo._id]?"img/shopping/star2.png":"img/shopping/star.png"} />
-                            <span>收藏</span>
-                        </span>
                     </div>
-                </div>
-                <div className="discountlist">
-                    <div className="li" onClick={()=>{this.onClickPage(`/shoppingproevaluate/${proinfo._id}`)}} >
-                        <span className="tt">
-                            商品评论
-                        </span>
-                        <span className="btn">{proinfo.evaluatenumber} 条评论 <Icon name="angle right"/></span>
+                    <div className="discountlist">
+                        <div className="li" onClick={()=>{this.onClickPage(`/shoppingproevaluate/${proinfo._id}`)}} >
+                            <span className="tt">
+                                商品评论
+                            </span>
+                            <span className="btn">{proinfo.evaluatenumber} 条评论 <Icon name="angle right"/></span>
+                        </div>
                     </div>
-                </div>
-                <div className="proinfoBody">
-                    <div className="proinfoBodyHead">
-                        商品详情
-                    </div>
-                    <div className="proinfoBodyBody">
+                    <div className="proinfoBody">
+                        <div className="proinfoBodyHead">
+                            商品详情
+                        </div>
+                        <div className="proinfoBodyBody">
 
-                        {
-                            proinfo.picurldetails.length>0
-                            ?
-                            _.map(proinfo.picurldetails, (picurl,index)=>{
-                                return (<img src={picurl} key={index} />)
-                            })
-                            :
-                            (<div style={{textAlign:"center",lineHeight:"50px",color:"#999999"}}>－暂无数据－</div>)
-                        }
+                            {
+                                proinfo.picurldetails.length>0
+                                ?
+                                _.map(proinfo.picurldetails, (picurl,index)=>{
+                                    return (<img src={picurl} key={index} />)
+                                })
+                                :
+                                (<div style={{textAlign:"center",lineHeight:"50px",color:"#999999"}}>－暂无数据－</div>)
+                            }
 
+                        </div>
                     </div>
+                    
                 </div>
                 <div className="proinfoFoot">
                     <span onClick={()=>{this.showaddcartdilog(proinfo._id)}}><i>加入购物车</i></span>

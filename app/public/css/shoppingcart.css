@@ -12,7 +12,7 @@
     align-items: center;
     position: fixed;
     left: 0;
-    top: 0;
+    top: 20px;
     height: 48px;
     width: 100%;
     z-index: 1000;

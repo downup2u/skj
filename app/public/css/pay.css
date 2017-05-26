@@ -1,17 +1,16 @@
 .PayPage{
     background: #EEE;
     overflow-y: hidden;
-    padding-top: 48px;
     display: flex;
     flex-direction: column;
+    height: 1px;
+    flex-grow: 1;
+    overflow: hidden;
 }
 .PayPage .PageHead {
     background: #5596d6;
     display: flex;
     align-items: center;
-    position: fixed;
-    left: 0;
-    top: 0;
     height: 48px;
     width: 100%;
     z-index: 1000;

@@ -53,11 +53,7 @@ export class Page extends Component {
 
     render() {
         return (
-            <div className="distributionPage"
-                style={{
-                    height:(window.innerHeight)+"px",
-                    overflow:"scroll"
-                }}>
+            <div className="distributionPage">
                 <NavBar back={true} title="我的分销" />
                 <div className="headCont">
                     <div className="userInfo">

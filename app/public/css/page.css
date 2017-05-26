@@ -1,5 +1,7 @@
 .pageWamp{
     position: relative;
+    background: #5596d6;
+    padding-top: 20px;
 }
 .messageCo{
     display: flex;

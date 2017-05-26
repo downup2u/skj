@@ -127,7 +127,7 @@ export class Page extends React.Component {
 
     render() {
         const {useralerttopiclist} = this.props;
-        let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-140:window.innerHeight-98;
+        let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-160:window.innerHeight-118;
         let tctop = useralerttopiclist.length > 0?90:48;
 
         return (
@@ -173,7 +173,7 @@ export class Page extends React.Component {
                     onClick={this.onClickPage}
                     style={{
                         height : communityListHeight+"px",
-                        top: tctop+"px"
+                        top: (tctop+20)+"px"
                     }}>
                     <InfinitePage
                         pagenumber = {16}

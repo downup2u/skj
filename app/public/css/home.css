@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-image: linear-gradient(135deg, #52a3da, #5771c5);
+    background-image: linear-gradient(0deg, #5771c5, #5596d6);
     padding: 0 0 10px 0;
     flex-shrink: 0;
 }
@@ -28,6 +28,13 @@
 }
 .homePage .toolBar .right{
     right: 0;
+    display: flex;
+    height: 48px;
+    text-align: center;
+    justify-content: center;
+}
+.homePage .toolBar .right img{
+    width: 40px;
 }
 .homePageWamp {
     width: 100%;

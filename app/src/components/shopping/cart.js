@@ -269,14 +269,14 @@ export class Page extends Component {
         return (
             <div className="shoppingCartPage"
                 style={{
-                    height:(window.innerHeight)+"px",
+                    height:(window.innerHeight-20)+"px",
                 }}
                 >
                 <div className="PageHead">
                     <Icon name="angle left" onClick={()=>{onClickReturn()}} />
                     <span className="title">购物车</span>
                 </div>
-                <div className="proinfo" style={{height:(window.innerHeight-98)+"px"}}>
+                <div className="proinfo" style={{height:(window.innerHeight-118)+"px"}}>
                     <InfinitePage
                         pagenumber = {30}
                         updateContent= {updateContent} 
