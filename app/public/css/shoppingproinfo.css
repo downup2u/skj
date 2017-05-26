@@ -10,6 +10,9 @@
     flex-grow: 1;
     height: 10px;
 }
+.ProinfoPage .weui-actionsheet_toggle{
+    background: #FFF;
+}
 .ProinfoPage .ProinfoPageHead {
     flex-shrink: 0;
     background: #5596d6;
