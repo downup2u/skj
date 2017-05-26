@@ -83,7 +83,7 @@ function* handleIOWithAuth(socket) {
         }
 
         let action = yield take(`${logout_result}`);
-        yield put(action);
+        //yield put(action);
         localStorage.removeItem('shuikejing_user_token');
 
         for (let task of tasksz) {
