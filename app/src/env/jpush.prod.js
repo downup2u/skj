@@ -8,7 +8,7 @@ export const cancelJPushAlisa=()=>{
 export const setJPushAlias = (name)=> {
     //设置jpush名字
     console.log(`设置别名${name}`);
-     xview.jiGuangTuiSong(this.state.txName);
+     xview.jiGuangTuiSong(name);
 }
 
 export const postNotifyFromJPush = (dispatch)=>{
