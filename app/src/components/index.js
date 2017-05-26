@@ -79,7 +79,7 @@ export class Page extends React.Component {
             }
         });*/
         return (
-            <div style={{height:window.innerHeight+"px"}}>
+            <div>
                 <div className="pageStyle">
                     {pagesz[curtabindex]}
                 </div>

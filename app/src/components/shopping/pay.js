@@ -78,11 +78,7 @@ export class Page extends Component {
     render() {
         const {products, orderPrice, orderProductsdetail, orderExpress, orderAddressInfo, defaultaddress} = this.props;
         return (
-            <div className="PayPage"
-                style={{
-                    height:(window.innerHeight)+"px",
-                }}
-                >
+            <div className="PayPage">
                 <div className="PageHead">
                     <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
                     <span className="title">提交订单</span>
@@ -135,7 +131,6 @@ export class Page extends Component {
                         </div>
                     </div>
                 </div>
-
                 <div className="subBtn">
                     <div className="i">
                         实付金额: <span>¥{this.props.orderPrice}</span>
@@ -144,7 +139,6 @@ export class Page extends Component {
                         <span>提交订单</span>
                     </div>
                 </div>
-
             </div>
         );
     }

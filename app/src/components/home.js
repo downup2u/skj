@@ -132,7 +132,7 @@ let Page = (props)=> {
     // };
 
     return (
-        <div style={{height:(window.innerHeight-57)+"px"}} className="homePageWamp">
+        <div className="homePageWamp">
             <div className="homePage">
 
                 <div className="toolBar">
@@ -141,7 +141,7 @@ let Page = (props)=> {
                     </div>
                     <div className='center' style={{color:"#FFF",fontSize:"18px"}}>水质监测</div>
                     <div className='right' onClick={onClickDevicelist}>
-                        ...
+                        <img src="img/head/1.png" />
                     </div>
                 </div>
                 <Swiper

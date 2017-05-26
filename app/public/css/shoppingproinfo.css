@@ -1,15 +1,24 @@
 .ProinfoPage {
     background: #EEE;
     padding-top: 48px;
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
 }
-
+.ProinfoPage .PageContent{
+    overflow:scroll;
+    flex-shrink: 0;
+    flex-grow: 1;
+    height: 10px;
+}
 .ProinfoPage .ProinfoPageHead {
+    flex-shrink: 0;
     background: #5596d6;
     display: flex;
     align-items: center;
     position: fixed;
     left:0;
-    top:0;
+    top:20px;
     height: 48px;
     width: 100%;
     z-index: 1000;
@@ -178,14 +187,13 @@
 }
 
 .ProinfoPage .proinfoFoot {
-    position: fixed;
-    bottom: 0;
     height: 50px;
     display: flex;
     justify-content: space-between;
     width: 100%;
     border-top: 1px solid #EEE;
     background: #FFF;
+    flex-shrink: 0;
 }
 
 .ProinfoPage .proinfoFoot span {

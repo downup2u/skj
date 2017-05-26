@@ -28,6 +28,12 @@ input, textarea{
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    background: #FFF;
+    position: fixed;
+    top:20px;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .homeBottom{
     display : flex;

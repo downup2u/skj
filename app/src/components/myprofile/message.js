@@ -40,14 +40,14 @@ export class Page extends Component {
 
     render() {
         return (
-            <div className="myMessage" style={{height:(window.innerHeight)+"px"}}>
+            <div className="myMessage">
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn} />
                 <div className="messageList">
                     <InfinitePage
                         pagenumber = {30}
                         updateContent= {this.updateContent} 
                         queryfun= {getnotifymessage}
-                        listheight= {window.innerHeight}
+                        listheight= {window.innerHeight-68}
                         query = {{}}
                         sort = {{created_at: -1}}
                     />

@@ -3,6 +3,8 @@
     flex-direction: column;
     width: 100%;
     background: #F5F5F5;
+    flex-grow: 1;
+    overflow: hidden;
 }
 
 .distributionPage .headCont {
