@@ -8,7 +8,8 @@ import {
     myOrderList_filler_set,
     share_data_updata,
     getusergetpointsigntoday_request,
-    useraddpoint_request
+    useraddpoint_request,
+    queryorderstatusstat_request
 } from '../actions';
 import _ from "lodash";
 
@@ -17,6 +18,8 @@ export class Page extends Component {
     componentWillMount () {
         //判断今天是否签到
         this.props.dispatch(getusergetpointsigntoday_request({}));
+        this.props.dispatch(queryorderstatusstat_request({}));
+        //queryorderstatusstat_request
     };
 
     onClickPage = (name)=> {
@@ -40,6 +43,7 @@ export class Page extends Component {
     }
 
     render(){
+        const { orderstatus } = this.props;
         return (
             <div className="myProfilePage">
                 <div className="headCont">
@@ -80,18 +84,22 @@ export class Page extends Component {
                             <div onClick={()=>{this.handleOrderClick('未支付')}}>
                                 <img src="img/myprofile/2.png"/>
                                 <span>待付款</span>
+                                {orderstatus['未支付']==0?"":(<i>{orderstatus['未支付']}</i>)}
                             </div>
                             <div onClick={()=>{this.handleOrderClick('待发货')}}>
                                 <img src="img/myprofile/3.png"/>
                                 <span>待发货</span>
+                                {orderstatus['待发货']==0?"":(<i>{orderstatus['待发货']}</i>)}
                             </div>
                             <div onClick={()=>{this.handleOrderClick('待收货')}}>
                                 <img src="img/myprofile/4.png"/>
                                 <span>待收货</span>
+                                {orderstatus['待收货']==0?"":(<i>{orderstatus['待收货']}</i>)}
                             </div>
                             <div onClick={()=>{this.handleOrderClick('已完成')}}>
                                 <img src="img/myprofile/5.png"/>
                                 <span>已完成</span>
+                                {orderstatus['已完成']==0?"":(<i>{orderstatus['已完成']}</i>)}
                             </div>
                         </div>
                     </div>

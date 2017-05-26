@@ -13,7 +13,8 @@ import {
     serverpush_usermoney,
     getusergetpointsigntoday_result,
     loginwithoauth_result,
-    setlastreadmsgtime_result
+    setlastreadmsgtime_result,
+    queryorderstatusstat_result
 } from '../actions/index.js';
 
 let defaultlastreadmsgtime_at = '';
@@ -43,6 +44,7 @@ const initial = {
         isusergetpointsigntoday:true,
         bindtype:'',
         openid:'',
+        orderstatus: {},
     },
 };
 
@@ -81,6 +83,9 @@ const userlogin = createReducer({
     },
     [login_err]: (state, payload) => {
         return { ...initial.userlogin};
+    },
+    [queryorderstatusstat_result]:(state,orderstatus)=> {
+        return {...state,orderstatus};
     }
 }, initial.userlogin);
 

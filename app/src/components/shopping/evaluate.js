@@ -52,7 +52,6 @@ let Page = (props) => {
 
             <div className="proList" 
                 style={{
-                    height:(window.innerHeight-48)+"px",
                     width: "100%",
                     overFlow: "hidden"
                 }}>

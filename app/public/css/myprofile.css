@@ -117,7 +117,26 @@
     align-items: center;
     justify-content: center;
     color: #000;
+    position: relative;
 }
+
+.myProfileBannerCont .l2 > div > i{
+    font-style: normal;
+    color: #FFF;
+    background: #C00;
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    margin-left: 50%;
+    left: 10px;
+}
+
+
 .myProfileBannerCont .ll{
     margin-bottom: 15px;
     background: #FFF;

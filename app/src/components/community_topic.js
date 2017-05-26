@@ -95,7 +95,7 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
                           <Icon name="talk outline"/>
                           评论 ({topic.comments.length})
                       </div>
-                      <Feed.Like onClick={clicklove}>
+                      <Feed.Like onClick={clicklove} style={{color:islovedbyme?"#C00":"#333"}}>
                           <Icon name='like' />
                           赞 ({topic.loves.length})
                       </Feed.Like>

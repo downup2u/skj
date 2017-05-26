@@ -1,16 +1,14 @@
 .pageWamp >div.ShoppingproevaluatePage {
+    display: flex;
+    flex-grow: 1;
     background: #EEE;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
     overflow: hidden;
     justify-content: flex-start;
 }
 
 .ShoppingproevaluatePage .proList {
     overflow-y: hidden;
+    flex-grow: 1;
 }
 
 .ShoppingproevaluatePage .proList {
