@@ -5,6 +5,9 @@
     display: flex;
     flex-direction: column;
 }
+.shoppingPage .weui-actionsheet_toggle{
+    background: #FFF;
+}
 .shoppingPage .shoppingHead{
     background: #5596d6;
     display: flex;

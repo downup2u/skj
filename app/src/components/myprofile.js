@@ -41,11 +41,7 @@ export class Page extends Component {
 
     render(){
         return (
-            <div className="myProfilePage"
-                 style={{
-                    height:(window.innerHeight-57)+"px",
-                    overflow:"scroll"
-                 }}>
+            <div className="myProfilePage">
                 <div className="headCont">
                 {
                     this.props.loginsuccess?(

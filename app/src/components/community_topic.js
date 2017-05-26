@@ -4,7 +4,8 @@ import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {gettopiclist_request,
+import {
+    gettopiclist_request,
     lovetopicadd_request,
     lovetopicunadd_request,
     uicommentshow,
@@ -31,6 +32,7 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
       e.stopPropagation();
     }
     else{
+
       history.push('/login');
     }
   }
@@ -76,7 +78,7 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
                       <Feed.Label image={users[topic.creator].profile.avatar}>
                       </Feed.Label>
                       <Feed.Summary>
-                          <a className="summaryName">{users[topic.creator].profile.nickname}</a>
+                          <span className="summaryName">{users[topic.creator].profile.nickname}</span>
                           <Feed.Date>{moment(topic.created_at).format("MM月DD日 HH时mm分")}</Feed.Date>
                       </Feed.Summary>
                   </div>

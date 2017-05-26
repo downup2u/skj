@@ -16,6 +16,7 @@ import {
     mycollectionisproductexits_request,
     set_productevaluatenumber,
     set_orderSurePage,
+    set_weui,
  } from '../../actions';
  import Addcartdilog from './addcartdilog.js';
  import {
@@ -51,10 +52,8 @@ export class Page extends React.Component {
                 proid : proid
             }
             this.props.dispatch(set_productevaluatenumber(evaluatenumber));
-        });
-        
+        });  
     };
-
     //检测是否已经收藏
     checkCollection =()=>{
         let proid = this.props.match.params.id;
@@ -63,15 +62,12 @@ export class Page extends React.Component {
         };
         this.props.dispatch(mycollectionisproductexits_request(payload));
     };
-
     onClickReturn = ()=> {
         this.props.history.goBack();
     };
-
     onClickPage = (name)=> {
         this.props.history.push(name);
     };
-
     //生成订单确认页
     setOrderSurePage =(proinfo)=>{
         let prolist = [{
@@ -95,12 +91,23 @@ export class Page extends React.Component {
 
     //点击加入收藏
     clickCollection =(pro)=>{
-        //let _this = this;
-        let issellection = this.props.iscollection[pro._id];
-        if(issellection){
-            this.delCollection(pro._id);
+        if(this.props.loginsuccess){
+            let issellection = this.props.iscollection[pro._id];
+            if(issellection){
+                this.delCollection(pro._id);
+            }else{
+                this.addCollection(pro._id);
+            }
         }else{
-            this.addCollection(pro._id);
+            this.props.dispatch(set_weui({
+                confirm : {
+                    show : true,
+                    title : "未登录",
+                    text : "登录后才能使用该功能",
+                    buttonsClose : ()=>{},
+                    buttonsClick : ()=>{this.props.history.push("/login")}
+                },
+            }));
         }
     };
 
@@ -206,8 +213,8 @@ export class Page extends React.Component {
     }
 }
 
-let mapStateToProps = ({shop,shopcart,app,order}) => {
-    return {...shop,...shopcart,...app,...order};
+let mapStateToProps = ({shop,shopcart,app,order,userlogin:{loginsuccess}}) => {
+    return {...shop,...shopcart,...app,...order,loginsuccess};
 }
 
 Page = connect(mapStateToProps)(Page);

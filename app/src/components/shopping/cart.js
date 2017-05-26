@@ -119,11 +119,11 @@ export class Cartitem extends Component {
                             <div className="price">
                                 <span>¥{proinfo.pricenow}</span>
                                 <div className="btnControl">
-                                    <div className="add" onClick={()=>{onChangeNumberPlus(1);}}>+</div>
+                                    <div className="del" onClick={()=>{onChangeNumberPlus(-1);}}>-</div>
                                     <div className="num">
                                         <Input name="firstName" type="text" value={item.number} onChange={onChangeNumber}/>
                                     </div>
-                                    <div className="del" onClick={()=>{onChangeNumberPlus(-1);}}>-</div>
+                                    <div className="add" onClick={()=>{onChangeNumberPlus(1);}}>+</div>
                                 </div>
                             </div>
                         </div>

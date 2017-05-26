@@ -14,6 +14,7 @@
     height: 48px;
     width: 100%;
     z-index: 1000;
+    flex-shrink: 0;
 }
 .PayPage .PayPageBody{
     flex-grow: 1;
@@ -51,9 +52,10 @@
     align-items: center;
     padding-left: 10px;
     position: absolute;
-    height: 100%;
     top: 0;
     left: 0;
+    height: auto;
+    align-self: stretch;
 }
 .PayPage .proinfo{
     margin-bottom: 20px;
@@ -210,6 +212,7 @@
     height: 44px;
     padding: 0 0 0 15px;
     border-top: 1px solid #EEE;
+    flex-shrink: 0;
 }
 .PayPage .subBtn .ui.button{
     background: none;
@@ -279,4 +282,17 @@
 }
 .orderinfoPage .list .li.orderstatusinfoContent .warning{color: #f38108}
 .orderinfoPage .list .li.orderstatusinfoContent .green{color: #00c40c}
+
+.PayPageWamp{
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.PayPage{
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+}
+
 

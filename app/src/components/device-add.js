@@ -9,34 +9,33 @@ import {senddata} from '../env/device.js';
 
 let renderWifiForm = (fields)=>{
     return (
-            <div className="fm">
+        <div className="fm">
             <div className="input">
-            <Input placeholder='请输入网络密码' value={fields.ssid.input.value} onChange={fields.ssid.input.onChange}/>
-             <img src="img/8.png" />
+                <Input placeholder='请输入网络密码' value={fields.ssid.input.value} onChange={fields.ssid.input.onChange}/>
+                <img src="img/8.png" />
             </div>
             <div className="input">
-            <Input placeholder='请输入网络密码' value={fields.password.input.value} onChange={fields.password.input.onChange}/>
-            <img src="img/7.png" />
+                <Input placeholder='请输入网络密码' value={fields.password.input.value} onChange={fields.password.input.onChange}/>
+                <img src="img/7.png" />
             </div>
-        </div>);
+        </div>
+    );
 };
-
 
 let WifiForm = (props)=>{
     let {handleSubmit,onClickNext} = props;
-    return (<Form onSubmit={handleSubmit(onClickNext)}>
+    return (
+        <Form onSubmit={handleSubmit(onClickNext)}>
+            <div className="tt">
+                <img src="img/6.png"/>
+            </div>
+            <Fields names={['ssid','password']}  component={renderWifiForm}/>
+            <div className="loginBotton">
+                <Button primary>下一步</Button>
+            </div>
 
-        <div className="tt">
-        <img src="img/6.png"/>
-        </div>
-
-        <Fields names={['ssid','password']}  component={renderWifiForm}/>
-
-        <div className="loginBotton">
-        <Button primary>下一步</Button>
-        </div>
-
-    </Form>);
+        </Form>
+    );
 };
 
 const validate = values => {
@@ -48,13 +47,11 @@ const validate = values => {
 }
 
 let WifiSelForm =({formname,formvalues,...rest})=>{
-
     let FormWrap = reduxForm({
         form: formname,
         validate,
         initialValues:formvalues
     })(WifiForm);
-
     return <FormWrap {...rest} />
 }
 
@@ -66,11 +63,8 @@ class Page extends React.Component {
         this.props.history.goBack();
     }
     onClickNext =(values)=>{
-        console.log("----->onclicknext:" + JSON.stringify((values)));
         this.props.dispatch(getcurwifi_devicelist_request(values));
-        //this.props.history.push('/addnewdevice2');
     }
-
     render(){
         const {ssid} = this.props;
         let formvalue = {
@@ -79,13 +73,11 @@ class Page extends React.Component {
         };
         return (
             <div className="addnewdevice">
-            <NavBar back={true} title="设备连接" />
-            <WifiSelForm formname="wifiform" formvalues={formvalue} onClickNext={this.onClickNext}/>
-        </div>
-    );
-
+                <NavBar back={true} title="设备连接" />
+                <WifiSelForm formname="wifiform" formvalues={formvalue} onClickNext={this.onClickNext}/>
+            </div>
+        );
     }
-
 }
 
 const mapStateToProps = ({wifi}) => {

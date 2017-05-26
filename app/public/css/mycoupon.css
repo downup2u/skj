@@ -28,7 +28,7 @@
     display: flex;
     margin:10px 15px;
     padding-left: 7px;
-    background: url("/img/coupon1.png") repeat-y -1px center;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTVDNTJFMzEwNkYzMTFFN0FDMTlCMEEyRDFDREY3MjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTVDNTJFMzAwNkYzMTFFN0FDMTlCMEEyRDFDREY3MjMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxNUM1MkUyODA2RjMxMUU3QUMxOUIwQTJEMUNERjcyMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxNUM1MkUyOTA2RjMxMUU3QUMxOUIwQTJEMUNERjcyMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PtQzGLgAAAGBSURBVHjalFO7SgNBFL13ZjZZs+4mJhqJj0JBRDB/YGuhpf6LH+AfSNDGQitrSwtBUAsLGxFUEhElMe93sslukt1xdqNoYx4H5jJw7zl35swd3Du+qSXaPo0zBr9AsTgMBgIRkUgSywBxt3+Sw8g/VRyI7GUnMtolm3O37+joNyFM0WKrEfVUo706tXpAxhByJOjlWaybrlvPCwEpUis31mzLZpYjgVRE/Pbjf9CH2R3YXFH0+aB6i37tPKT6t6uNlmZ2xQ2FN4iDZVznDq5z9qJidZYk/UMCYys67Xmd5F2QRBo5ukflgwR2owHaATuKzBvO6j1qMd+kKYgdqwscB3uCXJiWrJrqW8VcjmdasurxXdzFc4FUrQ3WCPPADq9SdCY0EdSN9rpuSPv3L++BssHBxuFkp4KFFQr5Qn3jKfkZq7SUKcPhEDriKAmBQrY8lygaR+mmVyMSdWVHI/dfh5SKzce8TlT0qODYxWE8sCaX/aZ4DJv3xqKj+5k4fAkwAAcyl5IG7XnPAAAAAElFTkSuQmCC) repeat-y -1px center;
     background-size: 8px 7px;
     min-height: 94px;
 }
@@ -47,15 +47,16 @@
 .myCouponList .item .leftcont span > span{
     font-size: 30px;
 }
+.myCouponList .item >img{
+    width: 13px;
+    height: 94px;
+}
 .myCouponList .item .cont {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     align-items: stretch;
     justify-content: space-between;
-    padding-left: 13px;
-    background: url("/img/coupon3.png") no-repeat left center;
-    background-size: 13px 94px;
 }
 .myCouponList .item .cont div{
     background: #FFF;

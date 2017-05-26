@@ -81,7 +81,7 @@ export class Page extends React.Component {
         }
         let topicsco = <Topic key={topicid} topic={topics[topicid]} comments={comments}/>;
         return (
-            <div className="commentInfoPage" style={{height:window.innerHeight+"px"}}>
+            <div className="commentInfoPage">
                 <div className="th">
                     <NavBar lefttitle="返回" title="帖子详情" onClickLeft={this.onClickReturn} />
                 </div>

@@ -33,36 +33,56 @@ renderInput = connect(mapStateToProps)(renderInput);
 
 
 let FeedReplyForm = (props)=>{
-  const {handleSubmit} = props;
-  let onClickSendComment=(values)=>{
-    if(props.selectedtype === 'topic'){
-      props.dispatch(insertcommentstotopic_request({
-        topicid:props.selectedtopicid,
-        comment:{
-          title:values.title,
+    const {handleSubmit} = props;
+    let onClickSendComment=(values)=>{
+        if(props.selectedtype === 'topic'){
+            props.dispatch(insertcommentstotopic_request({
+                topicid:props.selectedtopicid,
+                comment:{
+                    title:values.title,
+                }
+            }));
+            props.dispatch(reset('feedreply'));
+        }else if(props.selectedtype === 'comment'){
+            props.dispatch(insertcommentstocomments_request({
+                commentid:props.selectedcommentid,
+                topicid:props.selectedtopicid,
+                comment:{
+                    title:values.title,
+                }
+            }));
+            props.dispatch(reset('feedreply'));
         }
-      }));
-      props.dispatch(reset('feedreply'));
+        props.dispatch(uicommenthide({}));
     }
-    else if(props.selectedtype === 'comment'){
-      props.dispatch(insertcommentstocomments_request({
-        commentid:props.selectedcommentid,
-        topicid:props.selectedtopicid,
-        comment:{
-          title:values.title,
-        }
-      }));
-      props.dispatch(reset('feedreply'));
+
+    let hidecomment = ()=>{
+        props.dispatch(uicommenthide({}));
     }
-  }
-  return (
-      <Form onSubmit={handleSubmit(onClickSendComment)}>
-        <div className="feedBottomReply">
-            <Field name="title" component={renderInput}/>
-            <Button primary>发送</Button>
-        </div>
-      </Form>
-  );
+
+    let stopDefault = (e)=> {
+        e = e||window.event;
+        e.stopPropagation();
+    };
+
+    return (
+        <Form 
+            onSubmit={handleSubmit(onClickSendComment)}
+            className="feedBottomReplyForm"
+            onClick={hidecomment}
+            >
+            <div 
+                className="feedBottomReply"
+                onClick={stopDefault}
+                >
+                <Field name="title" component={renderInput}/>
+                <Button 
+                    primary
+                    
+                    >发送</Button>
+            </div>
+        </Form>
+    );
 }
 
 

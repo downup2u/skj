@@ -100,13 +100,22 @@ let Page = (props) => {
                     </div>);
     }
     return (
-        <div className="shoppingPage">
-            <div className="shoppingHead">
-                <Input placeholder="请输入关键字" value={props.searchtxt} onClick={(e)=>{
+        <div className="shoppingPage ProlistPage">
+
+
+            <div className="searchHead">
+                <Input 
+                    placeholder="请输入关键字" 
+                    value={props.searchtxt} 
+                    onClick={(e)=>{
                     onClickPage(e,'/shoppingprolist/search');
                 }} />
-                
+                <span className="imgcont" onClick={(e)=>{onClickPage(e,'/shoppingcart')}} >
+                    <img src="img/shopping/11.png"/>
+                    <span className={props.remoteRowCount==0?"hide":""}>{props.remoteRowCount}</span>
+                </span>
             </div>
+
             <div className="shoppingBody">
                 {shoppingBanner}
                 <div className="listTitle" style={{height:"42px"}}>
@@ -143,6 +152,7 @@ let Page = (props) => {
                 {_.map(props.shopcategorylist2, (categoryid, index)=>{
                     let category = props.categories[categoryid];
                     let prolist = shopcategorylist2ProList(categoryid);
+
                     return (
                         <div key={index}>
                             <div className="listTitle2" onClick={(e)=>{onClickPage(e,`/shoppingprolist/${categoryid}`)}}>
@@ -151,16 +161,18 @@ let Page = (props) => {
                             </div>
                             <div className="proList">
                                 {_.map(prolist, (product,index)=>{
-                                    return (
-                                        <div key={index} className="li" onClick={(e)=>{onClickPage(e,`/shoppingproinfo/${product._id}`)}}>
-                                            <img src={product.picurl}/>
-                                            <span className="name">{product.name}</span>
-                                            <span className="price">
-                                                <span>{product.pricenow}</span>
-                                                <img src='img/shopping/9.png' onClick={(e)=>{showaddcartdilog(e,product._id)}}/>
-                                            </span>
-                                        </div>
-                                    )
+                                    if(index<2){
+                                        return (
+                                            <div key={index} className="li" onClick={(e)=>{onClickPage(e,`/shoppingproinfo/${product._id}`)}}>
+                                                <img src={product.picurl}/>
+                                                <span className="name">{product.name}</span>
+                                                <span className="price">
+                                                    <span>{product.pricenow}</span>
+                                                    <img src='img/shopping/9.png' onClick={(e)=>{showaddcartdilog(e,product._id)}}/>
+                                                </span>
+                                            </div>
+                                        )
+                                    }
                                 })}
                             </div>
                         </div>
@@ -172,8 +184,8 @@ let Page = (props) => {
     );
 }
 
-let mapStateToProps = ({shop,app}) => {
-    return {...shop,...app};
+let mapStateToProps = ({shop,app,shopcart:{remoteRowCount}}) => {
+    return {...shop,...app,remoteRowCount};
 }
 
 Page = connect(mapStateToProps)(Page);

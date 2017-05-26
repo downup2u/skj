@@ -170,6 +170,7 @@
 .topTip .con img {
     width: 20px;
     margin-right: 10px;
+    height: 20px;
 }
 .topTip .con span{
     font-size: 14px;
@@ -243,6 +244,19 @@
     color: #5694dd;
     font-weight: normal;
 }
+.feedBottomReplyForm{
+    position: fixed;
+    z-index: 1000;
+    top:0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
 .feedBottomReply{
     display: flex;
     position: fixed;
@@ -254,7 +268,7 @@
     background: #FFF;
     border-top: 1px solid #EEE;
     padding: 8px 0;
-    z-index: 1000;
+    z-index: 1001;
 }
 .feedBottomReply .ui.input{
     flex-grow: 1;
@@ -286,6 +300,11 @@
 }
 .commentInfoPage .ui.comments{
     margin: 0;
+}
+.commentInfoPage .ui.comments .comment .avatar img, 
+.commentInfoPage .ui.comments .comment img.avatar{
+    height: 35px;
+    border-radius: 35px;
 }
 .commentInfoPage .ui.comments > div{
     margin-bottom: 10px;

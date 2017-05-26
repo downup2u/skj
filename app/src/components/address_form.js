@@ -8,7 +8,7 @@ let renderNewaddressForm = (fields)=> {
         fields.isdefaultaddress.input.onChange(true);
     }
     return (
-        <div className="AddressAddPage" style={{height:(window.innerHeight-46)+"px"}}>
+        <div className="AddressAddPage AddressAddPageReal">
             <List selection verticalAlign='middle' className="addAddress">
                 <List.Item>
                     <div className="tit">姓名:</div>

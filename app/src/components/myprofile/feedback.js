@@ -27,10 +27,10 @@ renderNewFeedbackForm = connect()(renderNewFeedbackForm);
 
 let NewtopicForm = (props)=> {
     let {handleSubmit,onClickNewTopic} = props;
-    return (<Form onSubmit={handleSubmit(onClickNewTopic)}>
+    return (<Form onSubmit={handleSubmit(onClickNewTopic)} style={{overflow:"scroll",background:"#FFF"}}>
         <div className="loginPageTop">
             <Fields names={['feedbacktxt','picurl']} component={renderNewFeedbackForm}/>
-            <div className="loginBotton newtopicbtn">
+            <div className="loginBotton newtopicbtn yijianfankuibtn">
                 <Button primary>确定</Button>
             </div>
         </div>

@@ -79,12 +79,16 @@ ToptipCo = connect(mapStateToPropsToptip)(ToptipCo);
 
 
 let FeedReplyFormShow = ({iscommentshow,dispatch})=>{
-        let stopDefault = (e)=> {
-            e.stopPropagation();
-        };
-        return(<div onClick={stopDefault}>
-                    {iscommentshow?<FeedReplyForm />:null}
-                </div>);
+    let stopDefault = (e)=> {
+        e.stopPropagation();
+    };
+    if(iscommentshow){
+        return (
+            <FeedReplyForm />
+        )
+    }else{
+        return (<div style={{display:"none"}} ></div>)
+    }
 }
 const mapStateToPropsFeedReplyFormShow = ({forum:{iscommentshow}}) => {
     return {iscommentshow};
@@ -176,7 +180,7 @@ export class Page extends React.Component {
                         top: (tctop+20)+"px"
                     }}>
                     <InfinitePage
-                        pagenumber = {16}
+                        pagenumber = {8}
                         updateContent= {this.updateContent}
                         queryfun= { gettopiclist }
                         listheight= { communityListHeight }

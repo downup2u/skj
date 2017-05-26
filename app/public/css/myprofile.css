@@ -11,6 +11,7 @@
     padding: 30px 0;
     position: relative;
     flex-shrink: 0;
+    margin-top: -1px;
 }
 .myProfilePage .headCont .signDom{
     position: absolute;
@@ -74,6 +75,10 @@
     padding: 0 3px;
     min-width: 18px;
     text-align: center;
+}
+.myProfileBannerCont{
+    flex-grow: 1;
+    overflow: scroll
 }
 .myProfileBannerCont .l1con{
     background: #FFF;

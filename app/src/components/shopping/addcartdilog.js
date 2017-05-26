@@ -6,7 +6,8 @@ import '../../../public/css/addcartdilog.css';
 import { 
     uiaddcartdilog,
     mycartaddone_request,
-    showpopmessage
+    showpopmessage,
+    set_weui
 } from '../../actions/index.js';
 import { mycartaddone } from '../../actions/sagacallback.js';
 import { withRouter } from 'react-router-dom';
@@ -51,10 +52,12 @@ let Page = ({proid, show, number, dispatch, products, loginsuccess, history})=>{
             number: number
         })).then((result)=>{
             hidedilog();
-            dispatch((showpopmessage({
-                title: '成功加入购物车',
-                msg: '',
-                type: 'success'
+            dispatch((set_weui({
+                toast:{
+                    show: true,
+                    text: '成功加入购物车',
+                    type: 'success'
+                }
             })))
         });
     }

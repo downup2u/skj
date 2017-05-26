@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../public/css/user.css';
 import { Input, List, Radio, Button, Icon, Image } from 'semantic-ui-react'
-import NavBar from './nav.js';
+import NavBar from './newnav.js';
 import { connect } from 'react-redux';
 import {fileupload} from '../util/fileupload.js';
 import {fillprofile_request} from '../actions';
@@ -9,11 +9,7 @@ import config from '../env/config.js';
 import {logout_request} from '../actions';
 
 class Page extends Component {
-
-    onClickReturn = ()=> {
-        this.props.history.goBack();
-    };
-
+    
     onClickPage = (name)=> {
         this.props.history.push(name);
     };
@@ -35,7 +31,7 @@ class Page extends Component {
     render() {
         return (
             <div className="UserInfoPage">
-                <NavBar title="账号信息" lefttitle="返回" onClickLeft={this.onClickReturn.bind(this)} />
+                <NavBar title="账号信息" back={true} />
                 <List selection>
                     <List.Item>
                         <div className="tit">

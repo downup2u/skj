@@ -58,7 +58,7 @@ let ForumComment = ({loginsuccess,userid,history,topicid,comment,subcomment,user
                     <Comment key={id}>
                         <Comment.Avatar src={users[child.creator].profile.avatar}/>
                         <Comment.Content>
-                            <Comment.Author as='a'>{users[child.creator].profile.nickname}</Comment.Author>
+                            <Comment.Author as='span'>{users[child.creator].profile.nickname}</Comment.Author>
                             <Comment.Text>
                                 <p>{child.title}</p>
                             </Comment.Text>
@@ -86,7 +86,7 @@ let ForumComment = ({loginsuccess,userid,history,topicid,comment,subcomment,user
             <Comment>
                 <Comment.Avatar src={users[comment.creator].profile.avatar}/>
                 <Comment.Content>
-                    <Comment.Author as='a'>{users[comment.creator].profile.nickname}</Comment.Author>
+                    <Comment.Author as='span'>{users[comment.creator].profile.nickname}</Comment.Author>
                     <Comment.Text>
                         <p>{comment.isvisiable?comment.title:"该评论被隐藏"}</p>
                     </Comment.Text>

@@ -39,9 +39,6 @@ let renderLoginForm = (fields)=> {
             <Icon name="lock" className='lefticon'/>
             <Icon name="eye" className={ispasswordvisiable?"eye sel":"eye"} onClick={onChangePasswordvisiable}/>
         </div>
-        <div className="remember">
-            <Checkbox label='记住密码' checked={ischeckedpassword} onChange={onChangeRememberpassword}/>
-        </div>
     </div>);
 }
 

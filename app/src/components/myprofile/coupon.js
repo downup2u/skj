@@ -28,6 +28,7 @@ export class Page extends Component {
                     <span><span>{item.pricediscount}</span>元</span>
                     <span>{item.name}</span>
                 </div>
+                <img src="img/coupon3.png" />
                 <div className="cont">
                     <div>
                         <span className="tt">{item.pricecondition}</span>
@@ -56,7 +57,7 @@ export class Page extends Component {
                         active={this.props.ulcoupontype === "已过期"} 
                         onClick={()=>{this.handleItemClick('已过期')}}/>
                 </Menu>
-                <div className="myCouponList" style={{height:window.innerHeight-88}}>
+                <div className="myCouponList">
                     <InfinitePage
                         pagenumber = { 20 }
                         updateContent= { this.updateContent }
