@@ -266,7 +266,7 @@ const CoApp = (props) => {
             <CustomRoute path="/shoppingproevaluate/:id" component={ShoppingProevaluate}/>
             <CustomRoute path="/shoppingcart" component={requireAuthentication(ShoppingCart)} />
             <CustomRoute path="/pay" component={requireAuthentication(Pay)} />
-            <CustomRoute path="/payend/:id" component={requireAuthentication(PayEnd)} />
+            <CustomRoute path="/payend/:id/:where" component={requireAuthentication(PayEnd)} />
             <CustomRoute path="/test" component={Test} />
             <CustomRoute path="/share" component={Share} />
             <CustomRoute path="/userbind" component={Userbind} />

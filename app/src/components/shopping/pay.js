@@ -25,7 +25,7 @@ export class Page extends Component {
     onClickPage = (name)=> {
         this.props.history.push(name);
     };
-    
+
     //提交订单,生成一条新的订单
     createNewOrder = ()=>{
         let productsdetail = this.props.orderProductsdetail;
@@ -62,7 +62,7 @@ export class Page extends Component {
             payload[result.newitem._id] = result.newitem;
             payload.balanceprice = 0;//余额抵扣金额
             //this.props.dispatch(myorderlist_addreducers(payload));
-            this.props.history.push(`/payend/${result.newitem._id}`);
+            this.props.history.push(`/payend/${result.newitem._id}/shopping`);
         });
     };
 
@@ -99,7 +99,7 @@ export class Page extends Component {
                             ):(
                                 <div className="goToseladdress">请选择收获地址</div>
                             )}
-                            
+
                         </div>
                     </div>
                     <div className="proinfo">
@@ -155,4 +155,3 @@ let mapStateToProps = ({shop, order, shoporder, userlogin, address}) => {
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;
-
