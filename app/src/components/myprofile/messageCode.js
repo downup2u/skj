@@ -21,7 +21,7 @@ export class Page extends Component {
 
     //重新获取验证码
     getSendCode =()=>{
-        this.props.dispatch(sendauth_request({username: this.props.username}));
+        this.props.dispatch(sendauth_request({username: this.props.username,reason:'withdraw'}));
     }
 
     submitProfitform =()=>{
@@ -42,7 +42,7 @@ export class Page extends Component {
                             type : "success"
                         }
                     }
-                )) 
+                ))
                 setTimeout(()=>{
                     this.props.history.goBack();
                 },2000)
@@ -94,5 +94,3 @@ export class Page extends Component {
 }
 const mapStateToProps =  ({userlogin,profit}) =>{ return {...userlogin, ...profit};};
 export default connect(mapStateToProps)(Page);
-
-

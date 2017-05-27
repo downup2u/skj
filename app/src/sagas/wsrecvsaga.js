@@ -307,7 +307,7 @@ export function* wsrecvsagaflow() {
         let {payload} = action;
         yield put(set_weui({toast:{
               show : true,
-              text : `发送验证码成功,${payload.authcode}`,
+              text : `发送验证码成功`,
               type : "success"
           }}));
 

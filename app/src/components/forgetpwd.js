@@ -22,7 +22,7 @@ let renderFindPwdForm = (fields)=> {
 
     let onClickAuth = (e)=> {
         const name = fields.username.input.value;
-        fields.dispatch(sendauth_request({username: name}));
+        fields.dispatch(sendauth_request({username: name,reason:'findpwd'}));
         console.log("发送验证码:" + name);
     }
 

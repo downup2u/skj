@@ -29,7 +29,7 @@ export class Page extends Component {
     onClickNext = (name)=> {
         let profitform = this.props.profitform;
         if(profitform.truename==''||profitform.bankaccount==''||profitform.bankname==''){
-            
+
             this.props.dispatch(set_weui(
                 {
                     toast: {
@@ -42,7 +42,7 @@ export class Page extends Component {
         }else{
             this.props.dispatch(withdrawcashapplyaddone(profitform)).then((result)=>{
                 //生成验证码
-                this.props.dispatch(sendauth_request({username: this.props.username}));
+                this.props.dispatch(sendauth_request({username: this.props.username,reason:'withdraw'}));
                 //生成提现记录id
                 this.props.dispatch(profit_set_profitid(result.newitem._id));
 

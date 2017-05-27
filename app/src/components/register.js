@@ -21,7 +21,7 @@ let renderRegisterForm = (fields)=> {
 
     let onClickAuth = (e)=> {
         const name = fields.username.input.value;
-        fields.dispatch(sendauth_request({username: name}));
+        fields.dispatch(sendauth_request({username: name,reason:'register'}));
         console.log("发送验证码:" + name);
     }
 
