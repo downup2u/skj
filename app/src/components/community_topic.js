@@ -70,11 +70,11 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
     }
     console.log("users-->" + JSON.stringify(users));
     console.log("topic.creator-->" + JSON.stringify(topic.creator));
-  return (
-      <Feed>
-          <Feed.Event>
-              <Feed.Content>
-                  <div className="feedHead">
+    return (
+        <Feed>
+            <Feed.Event>
+                <Feed.Content>
+                    <div className="feedHead">
                       <Feed.Label image={users[topic.creator].profile.avatar}>
                       </Feed.Label>
                       <Feed.Summary>
@@ -90,20 +90,23 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
                           {imgcos}
                       </Feed.Extra>
                   </div>
-                  <Feed.Meta className="myMeta">
-                      <div className="addCommunity" onClick={showtopictocomment}>
-                          <Icon name="talk outline"/>
-                          评论 ({topic.comments.length})
-                      </div>
-                      <Feed.Like onClick={clicklove} style={{color:islovedbyme?"#C00":"#333"}}>
-                          <Icon name='like' />
-                          赞 ({topic.loves.length})
-                      </Feed.Like>
-                  </Feed.Meta>
-              </Feed.Content>
-          </Feed.Event>
-      </Feed>
-  );
+                    <Feed.Meta className="myMeta">
+                        <div 
+                            className="addCommunity" 
+                            onClick={showtopictocomment}
+                            >
+                            <Icon name="talk outline"/>
+                            评论 ({topic.comments.length})
+                        </div>
+                        <div className="addCommunity" onClick={clicklove} style={{color:islovedbyme?"#C00":"#333"}}>
+                            <Icon name="like outline"/>
+                            赞 ({topic.loves.length})
+                        </div>
+                    </Feed.Meta>
+                </Feed.Content>
+            </Feed.Event>
+        </Feed>
+    );
 }
 
 //loginsuccess,history,topic,users,dispatch
