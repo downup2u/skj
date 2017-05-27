@@ -35,6 +35,7 @@ import { Field,FieldArray } from 'redux-form';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
+import { ReferenceArrayInput, SelectArrayInput } from 'admin-on-rest';
 
 import moment from 'moment';
 export const MycouponFilter = props => (
@@ -53,10 +54,7 @@ const MycouponcreateTitle = ({ record }) => {
 const MycouponlistCreate = (props) => (
        <Create {...props} title={<MycouponcreateTitle />} >
            <SimpleForm>
-               <TextInput label="名字" source="name" />
-               <ReferenceInput source="coupon" reference="coupon" allowEmpty>
-                  <SelectInput optionText="name" />
-              </ReferenceInput>
+              <TextInput label="名字" source="name" />
               <ReferenceInput source="creator" reference="user" allowEmpty>
                   <SelectInput optionText="username" />
               </ReferenceInput>
@@ -76,9 +74,6 @@ const MycouponlistEdit = (props) => {
       return (<Edit title={<MycouponlistTitle />} {...props}>
           <SimpleForm>
                <TextInput label="名字" source="name" />
-              <ReferenceInput source="coupon" reference="coupon" allowEmpty>
-                  <SelectInput optionText="name" />
-              </ReferenceInput>
               <ReferenceInput source="creator" reference="user" allowEmpty>
                   <SelectInput optionText="username" />
               </ReferenceInput>

@@ -86,9 +86,9 @@ import Icon from 'material-ui/svg-icons/social/person';
 //     { name: 'feedback', icon: <FeedbackIcon /> },
 
 
-  
+
 //   { name: 'order', icon: <UserIcon /> },
-  
+
 //   { name: 'user', icon: <UserIcon /> },
 //   { name: 'mycoupon', icon: <MycouponIcon /> },
 //   { name: 'withdrawcash', icon: <UserIcon /> },
@@ -96,42 +96,38 @@ import Icon from 'material-ui/svg-icons/social/person';
 
 
 export default [
-  {
-    'name':'baseinfo',
-    'icon': <PlatformbaseinfoIcon />,
-    'children': [
-      { name: 'systemconfig', icon: <SystemconfigIcon /> },
-      { name: 'news', icon: <UserIcon /> },
-      { name: 'banner', icon: <BannerIcon /> },
-      { name: 'category', icon: <CategoryIcon /> },
-      { name: 'product', icon: <Icon /> },
-      { name: 'express', icon: <ExpressIcon /> },
-      { name: 'coupon', icon: <CouponIcon /> },
-      { name: 'about', icon: <AboutIcon /> },
-    ]
-  },
-   {
-    'name':'forum',
-    'icon': <ForumIcon />,
-    'children': [
-      { name: 'topic', icon: <TopicIcon /> },
-      { name: 'comments', icon: <TopiccommentIcon /> },
-    ]
-  },
-
-
-
+     {
+        'name':'baseinfo',
+        'icon': <PlatformbaseinfoIcon />,
+        'children': [
+          { name: 'systemconfig', icon: <SystemconfigIcon /> },
+          { name: 'news', icon: <UserIcon /> },
+          { name: 'banner', icon: <BannerIcon /> },
+          { name: 'category', icon: <CategoryIcon /> },
+          { name: 'product', icon: <Icon /> },
+          { name: 'express', icon: <ExpressIcon /> },
+          { name: 'about', icon: <AboutIcon /> },
+        ]
+      },
+      {
+        'name':'forum',
+        'icon': <ForumIcon />,
+        'children': [
+          { name: 'topic', icon: <TopicIcon /> },
+          { name: 'comments', icon: <TopiccommentIcon /> },
+        ]
+    },
     { name: 'notifymessage', icon: <MessageIcon /> },
     { name: 'feedback', icon: <FeedbackIcon /> },
     { name: 'order', icon: <UserIcon /> },
-  {
-    'name':'usermgr',
-    'icon': <UsermgrIcon />,
-    'children': [
-      { name: 'user', icon: <UserIcon /> },
-      { name: 'mycoupon', icon: <MycouponIcon /> },
-      { name: 'withdrawcash', icon: <UserIcon /> },
-    ]
-  },
+    {
+        'name':'usermgr',
+        'icon': <UsermgrIcon />,
+        'children': [
+          { name: 'user', icon: <UserIcon /> },
+          { name: 'mycoupon', icon: <MycouponIcon /> },
+          { name: 'withdrawcash', icon: <UserIcon /> },
+        ]
+      },
 
 ];
