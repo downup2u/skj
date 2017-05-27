@@ -33,7 +33,7 @@ let renderFindPwdForm = (fields)=> {
             <Label basic color='red' pointing>{fields.username.meta.error}</Label>}
             <Icon name="mobile" className='lefticon'/>
         </div>
-        <div className="password logininput">
+        <div className="password logininput yanzhenyinput">
             <Input placeholder='输入验证码'  {...fields.authcode.input} type="text"/>
             {fields.authcode.meta.touched && fields.authcode.meta.error &&
             <Label basic color='red' pointing>{fields.authcode.meta.error}</Label>}

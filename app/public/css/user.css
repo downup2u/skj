@@ -439,12 +439,38 @@
     border-radius: 0;
     border: none;
     position: absolute;
-    bottom: -5px;
-    right: 30px;
+    top: 0;
+    right: 50px;
     z-index: 1000;
-    margin:0;
+    margin: 0;
+    height: 45px;
+    display: flex;
+    align-items: center;
 }
-.UserLoginPage .loginform .logininput .ui.red.pointing.basic.label:before{
+.UserLoginPage .loginform .logininput.password .ui.red.pointing.basic.label{
+    right: 80px;
+}
+.UserLoginPage .loginform .logininput.yanzhenyinput .ui.red.pointing.basic.label{
+    right: 167px;
+}
+.addAddressPage .addAddress .item .content{
+    position: relative;
+}
+.addAddressPage .addAddress .item .content .ui.red.pointing.basic.label{
+    border-radius: 0;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 15px;
+    z-index: 1000;
+    margin: 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.UserLoginPage .loginform .logininput .ui.red.pointing.basic.label:before,
+.addAddressPage .addAddress .item .content .ui.red.pointing.basic.label:before{
     content: none;
 }
 .UserLoginPage .loginform .logininput  .ui.basic.red.label,
