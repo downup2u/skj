@@ -97,6 +97,7 @@ export class Cartitem extends Component {
                 dispatch(ui_cartooder_additem(item));
             }
         }
+
         let proinfo = products[item.product];
         if(proinfo){
             return (

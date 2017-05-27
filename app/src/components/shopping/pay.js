@@ -13,9 +13,12 @@ import {
 import {
     myorderlist_addreducers,
     set_orderSurePage,
-    set_weui
+    set_weui,
+    ui_cartooder_delitem
 } from '../../actions';
-
+import {
+    mycartdelone,
+} from '../../actions/sagacallback.js';
 
 export class Page extends Component {
 
@@ -26,6 +29,20 @@ export class Page extends Component {
     onClickPage = (name)=> {
         this.props.history.push(name);
     };
+
+    //删除购物车商品
+    DeleteCartItem =(items)=>{
+        _.map(items, (item,id)=>{
+            let payload = {
+                _id:id,
+            };
+            this.props.dispatch(mycartdelone(payload)).then((result)=>{
+                if(result){
+                    this.props.dispatch(ui_cartooder_delitem(item));
+                }
+            });
+        })
+    }
 
     //提交订单,生成一条新的订单
     createNewOrder = ()=>{
@@ -69,8 +86,9 @@ export class Page extends Component {
         this.props.dispatch(myorderaddone(payload)).then((result)=>{
             let payload = {};
             payload[result.newitem._id] = result.newitem;
-            payload.balanceprice = 0;//余额抵扣金额
-            //this.props.dispatch(myorderlist_addreducers(payload));
+            payload.balanceprice = 0;
+            //删除购物车已近购买的商品
+            this.DeleteCartItem(this.props.toordercarts);
             this.props.history.push(`/payend/${result.newitem._id}/shopping`);
         });
     };
@@ -144,7 +162,7 @@ export class Page extends Component {
     }
 }
 
-let mapStateToProps = ({shop, order, shoporder, userlogin, address}) => {
+let mapStateToProps = ({shop, order, shoporder, userlogin, address,shopcart:{toordercarts}}) => {
     let products = shop.products;
     let orderPrice = order.orderPrice;
     let orderProductsdetail = order.orderProductsdetail;
@@ -154,7 +172,7 @@ let mapStateToProps = ({shop, order, shoporder, userlogin, address}) => {
     if(_.isEmpty(orderAddressInfo)){
         orderAddressInfo = userlogin.defaultaddress;
     }
-    return {products, orderPrice, orderProductsdetail, orderExpress, orderAddressInfo};
+    return {products, orderPrice, orderProductsdetail, orderExpress, orderAddressInfo, toordercarts};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;
