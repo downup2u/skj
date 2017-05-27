@@ -5,7 +5,8 @@ import '../../../public/css/tixian.css';
 import { connect } from 'react-redux';
 import {
     profit_set_tixianform,
-    showpopmessage
+    showpopmessage,
+    set_weui
 } from '../../actions';
 
 export class Page extends Component {
@@ -27,11 +28,15 @@ export class Page extends Component {
 
     onClickNext = (name)=> {
         if(this.props.profitform.cashmoney<=0){
-            this.props.dispatch((showpopmessage({
-                title: '',
-                msg: '提现金额不能为0！',
-                type: 'error'
-            })))
+            this.props.dispatch(set_weui(
+                {
+                    toast: {
+                        show : true,
+                        text : "提现金额不能为0",
+                        type : "warning"
+                    }
+                }
+            ))
         }else{
             this.props.history.replace(name);
         }

@@ -15,7 +15,8 @@ import {
   md_createdevice_result,
   createdevice_result,
   md_updatedevice_result,
-  updatedevice_result
+  updatedevice_result,
+  set_weui
 } from '../actions';
 import { push,replace } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
 
@@ -70,11 +71,14 @@ export function* wififlow() {
           }
           else{
             //弹框,message
-            yield put(showpopmessage({
-              title:'获取设备失败',
-              msg:wifiresult.message,
-              type:'error'
-            }));
+            yield put(set_weui(
+              { set_weui:{
+                  show:true,
+                  text:wifiresult.message,
+                  type:'warning'
+                }
+              }
+            ));
           }
     });
 }

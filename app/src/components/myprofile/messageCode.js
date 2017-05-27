@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import {
     profit_set_profityanzhen,
     showpopmessage,
-    sendauth_request
+    sendauth_request,
+    set_weui,
 } from '../../actions';
 import {
     withdrawcashapplyauth
@@ -32,21 +33,30 @@ export class Page extends Component {
         };
         this.props.dispatch(withdrawcashapplyauth(payload)).then((result)=>{
             if(result.result=="OK"){
-                this.props.dispatch((showpopmessage({
-                    title: '申请成功',
-                    msg: '',
-                    type: 'success'
-                })));
+
+                this.props.dispatch(set_weui(
+                    {
+                        toast: {
+                            show : true,
+                            text : "申请成功",
+                            type : "success"
+                        }
+                    }
+                )) 
                 setTimeout(()=>{
                     this.props.history.goBack();
                 },2000)
             }
             if(result.result=="Error"){
-                this.props.dispatch((showpopmessage({
-                    title: '验证失败',
-                    msg: '请输入正确的验证码',
-                    type: 'error'
-                })))
+                this.props.dispatch(set_weui(
+                    {
+                        toast: {
+                            show : true,
+                            text : "验证码不正确",
+                            type : "warning"
+                        }
+                    }
+                ))
             }
         });
     }

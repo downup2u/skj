@@ -6,7 +6,6 @@ import '../../../public/css/addcartdilog.css';
 import { 
     uiaddcartdilog,
     mycartaddone_request,
-    showpopmessage,
     set_weui
 } from '../../actions/index.js';
 import { mycartaddone } from '../../actions/sagacallback.js';

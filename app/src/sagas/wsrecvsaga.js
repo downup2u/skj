@@ -345,11 +345,6 @@ export function* wsrecvsagaflow() {
             text : result.errmsg,
             type : "error"
         }}));
-        // yield put(showpopmessage({
-        //   title:result.title,
-        //   msg:result.errmsg,
-        //   type:'error'
-        // }));
   });
 
 }

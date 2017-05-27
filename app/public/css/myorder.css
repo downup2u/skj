@@ -18,14 +18,24 @@
 }
 .myOrder .actionItem span{
     line-height: 40px;
-    padding: 0 10px;
+    margin: 0 10px;
     flex-shrink: 0;
     flex-grow: 1;
     text-align: center;
     font-size: 14px;
 }
 .myOrder .actionItem span.sel{
-    color: #5694dd
+    color: #5694dd;
+    position: relative;
+}
+.myOrder .actionItem span.sel:after{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: #5694dd;
+    content: ""
 }
 
 .myOrder .ui.secondary.pointing.menu{

@@ -5,9 +5,9 @@ import '../../../public/css/tixian.css';
 import { connect } from 'react-redux';
 import {
     profit_set_tixianform,
-    showpopmessage,
     sendauth_request,
-    profit_set_profitid
+    profit_set_profitid,
+    set_weui
 } from '../../actions';
 import {
     withdrawcashapplyaddone
@@ -29,11 +29,16 @@ export class Page extends Component {
     onClickNext = (name)=> {
         let profitform = this.props.profitform;
         if(profitform.truename==''||profitform.bankaccount==''||profitform.bankname==''){
-            this.props.dispatch((showpopmessage({
-                title: '提交失败',
-                msg: '请完善表单信息',
-                type: 'error'
-            })))
+            
+            this.props.dispatch(set_weui(
+                {
+                    toast: {
+                        show : true,
+                        text : "请完善表单信息",
+                        type : "warning"
+                    }
+                }
+            ))
         }else{
             this.props.dispatch(withdrawcashapplyaddone(profitform)).then((result)=>{
                 //生成验证码
