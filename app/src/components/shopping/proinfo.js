@@ -33,6 +33,16 @@ let swiperOptions = {
 
 export class Page extends React.Component {
 
+    componentWillUnmount(){
+        //清空弹窗数据
+        this.props.dispatch(uiaddcartdilog({
+            addcartdilogshow : false,
+            addcartdilogproid : '',
+            addcartdilogpronumber : 1,
+            addcartdilogtype : "",
+        }));
+    }
+
     componentWillMount () {
         this.checkCollection();
         this.getEvaluate();
@@ -128,7 +138,17 @@ export class Page extends React.Component {
     showaddcartdilog =(proid)=>{
         this.props.dispatch(uiaddcartdilog({
             addcartdilogshow : true,
-            addcartdilogproid : proid
+            addcartdilogproid : proid,
+            addcartdilogtype : "cart",
+        }));
+    };
+
+    //显示直接购买弹框
+    showshoppingdilog =(proid)=>{
+        this.props.dispatch(uiaddcartdilog({
+            addcartdilogshow : true,
+            addcartdilogproid : proid,
+            addcartdilogtype : "shop",
         }));
     };
 
@@ -208,9 +228,14 @@ export class Page extends React.Component {
                 </div>
                 <div className="proinfoFoot">
                     <span onClick={()=>{this.showaddcartdilog(proinfo._id)}}><i>加入购物车</i></span>
-                    <span onClick={()=>{this.setOrderSurePage(proinfo)}}><i>立刻购买</i></span>
+                    <span onClick={()=>{this.showshoppingdilog(proinfo._id)}}><i>立刻购买</i></span>
                 </div>
-                <Addcartdilog show={this.props.addcartdilogshow} proid={this.props.addcartdilogproid} number={this.props.addcartdilogpronumber} />
+                <Addcartdilog 
+                    show={this.props.addcartdilogshow} 
+                    proid={this.props.addcartdilogproid} 
+                    number={this.props.addcartdilogpronumber} 
+                    type={this.props.addcartdilogtype}
+                    />
             </div>
         )
     }

@@ -29,7 +29,8 @@ let Page = (props) => {
         e.stopPropagation(e);
         props.dispatch(uiaddcartdilog({
             addcartdilogshow : true,
-            addcartdilogproid : proid
+            addcartdilogproid : proid,
+            addcartdilogtype : "cart",
         }));
     }
 
@@ -179,7 +180,12 @@ let Page = (props) => {
                     )
                 })}
             </div>
-            <Addcartdilog show={props.addcartdilogshow} proid={props.addcartdilogproid} number={props.addcartdilogpronumber} />
+            <Addcartdilog 
+                show={props.addcartdilogshow} 
+                proid={props.addcartdilogproid} 
+                number={props.addcartdilogpronumber} 
+                type={props.addcartdilogtype}
+                />
         </div>
     );
 }

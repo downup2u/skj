@@ -6,12 +6,13 @@ import '../../../public/css/addcartdilog.css';
 import { 
     uiaddcartdilog,
     mycartaddone_request,
-    set_weui
+    set_weui,
+    set_orderSurePage
 } from '../../actions/index.js';
 import { mycartaddone } from '../../actions/sagacallback.js';
 import { withRouter } from 'react-router-dom';
 
-let Page = ({proid, show, number, dispatch, products, loginsuccess, history})=>{
+let Page = ({proid, show, number, dispatch, products, loginsuccess, history, type, expressfeeforfree, expressfee})=>{
 
     //判断是否登录
     if(!loginsuccess&&show){
@@ -22,7 +23,7 @@ let Page = ({proid, show, number, dispatch, products, loginsuccess, history})=>{
         dispatch(uiaddcartdilog({
             addcartdilogshow : false,
             addcartdilogproid : '',
-            addcartdilogpronumber : 1
+            addcartdilogpronumber : 1,
         }));
     }
     //取消冒泡事件
@@ -60,6 +61,33 @@ let Page = ({proid, show, number, dispatch, products, loginsuccess, history})=>{
             })))
         });
     }
+    //直接购买
+    let toshopping = ()=>{
+        let proinfo = products[proid];
+        if(typeof proinfo.pricenow === 'string'){
+            proinfo.pricenow = parseFloat(proinfo.pricenow.toFixed(2));
+        }
+        let prolist = [{
+            productid: proinfo._id,
+            number:number,
+            price:proinfo.pricenow,
+            productinfo: proinfo
+        }];
+        let express = proinfo.pricenow>=expressfeeforfree?0:expressfee;
+        let productprice = parseFloat((proinfo.pricenow*number).toFixed(2));
+        let orderprice = productprice + express;
+        let payload = {
+            orderAddressId:'',//地址id
+            orderProductsdetail:prolist,//产品列表
+            orderExpress:express,//运费
+            orderPrice:orderprice,//订单价格
+            orderProductPrice : productprice, //产品总价格
+        }
+        dispatch(set_orderSurePage(payload));
+        history.push("/pay");
+    }
+
+
     let showstyle = show?"addcartdilog":"addcartdilog hide";
     let translatestyle = show?"weui-actionsheet weui-actionsheet_toggle":"weui-actionsheet";
     let proinfo = {};
@@ -91,14 +119,15 @@ let Page = ({proid, show, number, dispatch, products, loginsuccess, history})=>{
                         <span className="del" onClick={()=>{addnumver()}}>＋</span>
                     </div>
                 </div>
-                <div className="addcartbtn" onClick={()=>{addcart()}}>加入购物车</div>
+                {type=="cart"?(<div className="addcartbtn" onClick={()=>{addcart()}}>加入购物车</div>):""}
+                {type=="shop"?(<div className="addshopbtn" onClick={()=>{toshopping()}}>立刻购买</div>):""}
             </div>
         </div>
     )
 };
 
-const mapStateToProps =  ({userlogin, shop}) =>{
-  return {...userlogin, ...shop};
+const mapStateToProps =  ({userlogin, shop, app:{expressfeeforfree,expressfee} }) =>{
+  return {...userlogin, ...shop, expressfeeforfree, expressfee};
 };
 Page = connect(mapStateToProps)(Page);
 Page = withRouter(Page);

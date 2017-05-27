@@ -27,6 +27,7 @@ const initial = {
         addcartdilogshow : false,
         addcartdilogproid : '',
         addcartdilogpronumber : 1,
+        addcartdilogtype : "",
 
         expressfee : 10,
         expressfeeforfree: 100,

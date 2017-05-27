@@ -98,5 +98,12 @@
     color: #FFF;
 }
 
-
+.addcartdilog .addshopbtn{
+    text-align: center;
+    padding: 10px;
+    margin: 10px 20px;
+    background: #ff3d00;
+    font-size: 16px;
+    color: #FFF;
+}
 
