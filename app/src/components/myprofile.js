@@ -37,9 +37,9 @@ export class Page extends Component {
 
     signAdd =(reason)=>{
         this.props.dispatch(useraddpoint_request({reason}));
-        // setTimeout(()=>{
-        //     this.props.dispatch(getusergetpointsigntoday_request({}));
-        // },10)
+        setTimeout(()=>{
+            this.props.dispatch(getusergetpointsigntoday_request({}));
+        },1500)
     }
 
     render(){
