@@ -30,12 +30,13 @@ export const postNotifyFromJPush = (dispatch)=>{
             if(typeof jsonobj === 'string'){
                 jsonobj = JSON.parse(jsonobj);
             }
+            dispatch(jpushlistenInMessage(jsonobj));
         }
         catch(e){
 
         }
-        window.alert(`listenInMessage==>\n${jsonstr}`);
-        //dispatch(jpushlistenInMessage(jsonobj));
+        //window.alert(`listenInMessage==>\n${jsonstr}`);
+
     }
     //点击了推送消息
     window.postNotification=(jsonstr)=>{
@@ -44,11 +45,12 @@ export const postNotifyFromJPush = (dispatch)=>{
             if(typeof jsonobj === 'string'){
                 jsonobj = JSON.parse(jsonobj);
             }
+            dispatch(jpushpostNotification(jsonobj));
         }
         catch(e){
 
         }
-        window.alert(`postNotification==>\n${jsonstr}`);
-        //dispatch(jpushpostNotification(jsonobj));
+        //window.alert(`postNotification==>\n${jsonstr}`);
+
     }
 }
