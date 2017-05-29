@@ -6,11 +6,13 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import '../../../public/css/mymessage.css';
 import NavBar from '../nav.js';
-
+import { getnotifymessageone_request } from '../../actions';
 
 export class Page extends React.Component {
 
     componentWillMount() {
+      const msgid = this.props.match.params.msgid;
+      this.props.dispatch(getnotifymessageone_request({_id:msgid}));
     }
 
     onClickBack() {
@@ -23,26 +25,32 @@ export class Page extends React.Component {
 
     render() {
         const {notifymessageitem} = this.props;
-        if (typeof notifymessageitem.created_at === 'string') {
-            notifymessageitem.created_at = new Date(Date.parse(notifymessageitem.created_at));
+        if(notifymessageitem.hasOwnProperty('_id')){
+          if (typeof notifymessageitem.created_at === 'string') {
+              notifymessageitem.created_at = new Date(Date.parse(notifymessageitem.created_at));
+          }
         }
+
         return (
             <div className="messageDetail">
                 <NavBar lefttitle="返回" title="消息详情" onClickLeft={this.onClickBack.bind(this)} />
-                <div className="tt">{notifymessageitem.messagetitle}</div>
-                <div className="time">
-                    <span>{moment(notifymessageitem.created_at).format("MM月DD日 HH时mm分")}</span>
-                </div>
-                <div className="cont">{notifymessageitem.messagecontent}</div>
+                {notifymessageitem.hasOwnProperty('_id')?
+                (
+                  <div>
+                  <div className="tt">{notifymessageitem.messagetitle}</div>
+                  <div className="time">
+                      <span>{moment(notifymessageitem.created_at).format("MM月DD日 HH时mm分")}</span>
+                  </div>
+                  <div className="cont">{notifymessageitem.messagecontent}</div>
+                  </div>
+              ):(<div>加载中，请稍后</div>)}
             </div>
         );
     }
 }
 
 
-const mapStateToProps = ({notifymessage}, props) => {
-    let msgid = props.match.params.msgid;
-    let notifymessageitem = notifymessage.mynotifymessages;
+const mapStateToProps = ({notifymessage:{notifymessageitem}}) => {
     return {notifymessageitem};
 };
 

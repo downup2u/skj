@@ -5,23 +5,23 @@ import FlatButton from 'material-ui/FlatButton';
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh';
 import {
     CreateButton
-    ,RichTextField, 
+    ,RichTextField,
     NumberInput,
-    Edit, 
-    SimpleForm, 
-    DisabledInput, 
-    TextInput,  
+    Edit,
+    SimpleForm,
+    DisabledInput,
+    TextInput,
     Create,
     Show,
     SimpleShowLayout,
     BooleanInput,
     ShowButton,
-    DateInput, 
-    LongTextInput, 
-    ReferenceManyField, 
-    Datagrid, 
-    TextField, 
-    DateField, 
+    DateInput,
+    LongTextInput,
+    ReferenceManyField,
+    Datagrid,
+    TextField,
+    DateField,
     EditButton
 } from 'admin-on-rest/lib/mui';
 
@@ -42,6 +42,9 @@ const NotifymessageCreate = (props) => (
        <Create {...props} title={<NotifymessagecreateTitle />} >
            <SimpleForm>
               <TextInput label="标题" source="messagetitle" />
+              <ReferenceInput source="touserid" reference="user" allowEmpty>
+                  <SelectInput optionText="username" />
+              </ReferenceInput>
               <RichTextInput label="详细信息" source="messagecontent" addLabel={false}/>
            </SimpleForm>
        </Create>
@@ -55,7 +58,9 @@ const NotifymessagelistEdit = (props) => {
       return (<Edit title={<NotifymessagelistTitle />} {...props}>
           <SimpleForm>
               <DisabledInput label="Id" source="id" />
-              <DisabledInput label="消息类型" source="messagetype" />
+              <ReferenceInput source="touserid" reference="user" allowEmpty>
+                  <SelectInput optionText="username" />
+              </ReferenceInput>
               <TextInput label="标题"  source="messagetitle" />
               <RichTextInput label="详细信息" source="messagecontent" addLabel={false}/>
           </SimpleForm>
@@ -80,9 +85,12 @@ const NotifymessagelistShow = (props) => (
 const NotifymessagelistList = (props) => (//
      <List title="系统消息列表" {...props} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
-        <TextField label="类型" source="messagetype" />
+        <ReferenceField label="用户" source="touserid" reference="user" addLabel={false}>
+          <TextField source="username" />
+        </ReferenceField>
         <TextField label="标题" source="messagetitle" />
         <RichTextField label="详细信息"  source="messagecontent" stripTags={false} />
+        <DateField label="发送时间" source="created_at"  showTime/>
         <EditButton />
         </Datagrid>
     </List>

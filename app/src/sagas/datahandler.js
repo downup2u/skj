@@ -145,10 +145,14 @@ import {
     senddevicecmd_request,
     senddevicecmd_result,
     md_useraddpoint_result,
+
+    getnotifymessageone_request,
+    getnotifymessageone_result
 } from '../actions/index.js';
 
 //接收的对应关系
 exports.recvmessagetoresultpair = {
+  'getnotifymessageone_result':getnotifymessageone_result,
   'useraddpoint_result':md_useraddpoint_result,
   'users.sendauth_result':sendauth_result,
   'senddevicecmd_result':senddevicecmd_result,
@@ -233,6 +237,7 @@ exports.sendmessagefnsz = {
   'sendauth':`${sendauth_request}`,
   'register':`${register_request}`,
   'gettopiclist':`${gettopiclist_request}`,
+  'getnotifymessageone':`${getnotifymessageone_request}`,
   'getnotifymessage':`${getnotifymessage_request}`,
   'findpwd':`${findpwd_request}`,
   'getbanner':`${getbanner_request}`,

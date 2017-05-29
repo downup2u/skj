@@ -8,5 +8,8 @@ export const getnotifymessage_result = createAction('getnotifymessage_result');
 export const wait_getnotifymessage_request = createAction('wait_getnotifymessage_request');
 export const wait_getnotifymessage_result = createAction('wait_getnotifymessage_result');
 
+export const getnotifymessageone_request= createAction('getnotifymessageone_request');
+export const getnotifymessageone_result= createAction('getnotifymessageone_result');
+
 export const ui_setnotifymessage = createAction('ui_setnotifymessage');
 export const notifymessages_addone = createAction('notifymessages_addone');
