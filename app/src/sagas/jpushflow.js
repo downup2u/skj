@@ -35,10 +35,10 @@ export function* jpushflow(){//仅执行一次
     });
 
     yield takeEvery(`${jpushlistenInMessage}`, function*(action) {
-        let {payload:msgobj} = action;
-        try{
-          yield call(alertmessage,`jpushlistenInMessage ===>${JSON.stringify(msgobj)}`);
 
+        try{
+          //yield call(alertmessage,`jpushlistenInMessage ===>${JSON.stringify(msgobj)}`);
+          let {payload:msgobj} = action;
           let message = '接收到一条消息';
           message = _.get(msgobj,'aps.alert',message);
           yield put(set_weui({
@@ -60,11 +60,11 @@ export function* jpushflow(){//仅执行一次
 
     yield takeEvery(`${jpushpostNotification}`, function*(action) {
         // 按 2，模拟发送（点击了推送消息）
-        let {payload:msgobj} = action;
+
         try{
           //alert(`jpushpostNotification ===>${JSON.stringify(msgobj)}`);
-          yield call(alertmessage,`jpushpostNotification ===>${JSON.stringify(msgobj)}`);
-
+          //yield call(alertmessage,`jpushpostNotification ===>${JSON.stringify(msgobj)}`);
+          let {payload:msgobj} = action;
           if(msgobj.hasOwnProperty('_id')){
             yield put(push(`/mymessagedetail/${msgobj._id}`));
           }
