@@ -74,6 +74,6 @@ export const postNotifyFromJPush = (dispatch)=>{
         catch(e){
 
         }
-        dispatch(jpushpostNotification(jsonstr));
+        dispatch(jpushpostNotification(jsonobj));
     }
 }
