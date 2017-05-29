@@ -35,7 +35,6 @@ export function* jpushflow(){//仅执行一次
     });
 
     yield takeEvery(`${jpushlistenInMessage}`, function*(action) {
-
         try{
           //yield call(alertmessage,`jpushlistenInMessage ===>${JSON.stringify(msgobj)}`);
           let {payload:msgobj} = action;
@@ -60,7 +59,6 @@ export function* jpushflow(){//仅执行一次
 
     yield takeEvery(`${jpushpostNotification}`, function*(action) {
         // 按 2，模拟发送（点击了推送消息）
-
         try{
           //alert(`jpushpostNotification ===>${JSON.stringify(msgobj)}`);
           //yield call(alertmessage,`jpushpostNotification ===>${JSON.stringify(msgobj)}`);

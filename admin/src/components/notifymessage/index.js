@@ -22,7 +22,9 @@ import {
     Datagrid,
     TextField,
     DateField,
-    EditButton
+    EditButton,
+    ReferenceInput,
+    SelectInput
 } from 'admin-on-rest/lib/mui';
 
 import RichTextInput from '../controls/richtoolbar.js';
