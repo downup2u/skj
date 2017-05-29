@@ -24,7 +24,8 @@ import {
     DateField,
     EditButton,
     ReferenceInput,
-    SelectInput
+    SelectInput,
+    ReferenceField
 } from 'admin-on-rest/lib/mui';
 
 import RichTextInput from '../controls/richtoolbar.js';
