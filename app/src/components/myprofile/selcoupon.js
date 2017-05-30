@@ -10,7 +10,7 @@ import {
     updata_orderinfo
 } from '../../actions';
 import { connect } from 'react-redux';
-import InfinitePage from '../controls/infinitecontrol';
+import InfinitePage from '../controls/listview';
 import moment from 'moment';
 
 export class Page extends Component {

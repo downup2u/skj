@@ -18,7 +18,7 @@ import ForumTopic from './community_topic.js';
 import FeedReplyForm from './community_reply.js';
 import TopTip from './community_topictip';
 import { gettopiclist } from '../actions/sagacallback';
-import InfinitePage from './controls/infinitecontrol';
+import InfinitePage from './controls/listview';
 import { withRouter } from 'react-router-dom';
 
 export class Topic extends React.Component {

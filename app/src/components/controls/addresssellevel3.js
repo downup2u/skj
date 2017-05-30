@@ -1,4 +1,4 @@
-import React,{ Component, PropTypes } from 'react';
+import React from 'react';
 import 'iosselect/src/iosSelect.css';
 import IosSelect from 'iosselect';
 import { Segment } from 'semantic-ui-react';

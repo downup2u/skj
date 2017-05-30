@@ -32,6 +32,32 @@ let SystemConfigSchema = new Schema({
     expressapiurl:String,
     expressapicustomer:String,
     expressapikey:String,
+
+    gradetotal:{ type:  Schema.Types.String,default:`{
+      '优':100,
+      '良':90,
+      '差':32,
+      '不要太好':320,
+    }`},
+    gradeleft:{ type:  Schema.Types.String,default:`{
+      '不健康':29,
+      '一般健康':290,
+      '非常健康':2900,
+      '可直饮':10000,
+      '一般':500,
+    }`},
+    graderight:{ type:  Schema.Types.String,default:`{
+      '不健康':29,
+      '一般健康':290,
+      '非常健康':2900,
+      '可直饮':10000,
+      '一般':500,
+    }`},
+    systotal89:{ type: Schema.Types.Number,default: 100 },
+    systotal1011:{ type: Schema.Types.Number,default:100},
+    systotal1213:{ type: Schema.Types.Number,default:100 },
+    systotal1415:{ type: Schema.Types.Number,default: 100 },
+    systotal1617:{ type: Schema.Types.Number,default:100},
 });
 SystemConfigSchema.plugin(mongoosePaginate);
 let SystemConfig  = mongoose.model('SystemConfig',  SystemConfigSchema);
@@ -78,26 +104,20 @@ let DeviceSchema = new Schema({
     devicename:String,
     devicebrand:String,
     devicemodel: String,
+    realtimedata:{type:Schema.Types.Mixed,default:{getdata:false}},
     created_at:{ type: Date, default:new Date()},
 });
 DeviceSchema.plugin(mongoosePaginate);
 let Device  = mongoose.model('Device',  DeviceSchema);
-//=======设备数据=======
-let DeviceDataSchema = new Schema({
-    deviceid:String,//mac->hex
-    devicename:String,
-    devicebrand:String,
-    devicemodel: String,
-    created_at:{ type: Date, default:new Date()},
-});
-DeviceDataSchema.plugin(mongoosePaginate);
-let DeviceData  = mongoose.model('DeviceData',  DeviceDataSchema);
 //=======设备历史记录=======
 let DeviceDataHistorySchema = new Schema({
-    creator:{ type: Schema.Types.ObjectId, ref: 'User' },
-    devicename:String,
-    devicebrand:String,
-    devicemodel: String,
+    deviceid:String,//mac->hex
+    name:String,
+    total:Number,
+    modeltype:String,
+    leftmodel:Schema.Types.Mixed,
+    rightmodel:Schema.Types.Mixed,
+    detaillist:[],
     created_at:{ type: Date, default:new Date()},
 });
 DeviceDataHistorySchema.plugin(mongoosePaginate);
@@ -288,7 +308,6 @@ MycollectionSchema.plugin(mongoosePaginate);
 let Mycollection  = mongoose.model('Mycollection',  MycollectionSchema);
 //我的优惠券：优惠券id,会员id,状态（0未使用 1已使用2已失效）
 let MyCouponSchema = new Schema({
-    coupon:{ type: Schema.Types.ObjectId, ref: 'Coupon' },
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
     name:String,    //优惠券名
     pricecondition:Number,//价格条件
@@ -302,17 +321,17 @@ let MyCouponSchema = new Schema({
 MyCouponSchema.plugin(mongoosePaginate);
 let MyCoupon  = mongoose.model('MyCoupon',  MyCouponSchema);
 //优惠券：优惠券名字,满x元，折扣x元,剩余数量
-let CouponSchema = new Schema({
-    name:String,    //优惠券名
-    pricecondition:Number,//价格条件
-    pricediscount:Number,//抵扣金额
-    totalstock:Number,//总库存
-    leftstock:Number,//剩余库存
-    created_at: { type: Date, default:new Date()},//生成时间
-    expdate: Date,// 过期时间
-});
-CouponSchema.plugin(mongoosePaginate);
-let Coupon  = mongoose.model('Coupon',  CouponSchema);
+// let CouponSchema = new Schema({
+//     name:String,    //优惠券名
+//     pricecondition:Number,//价格条件
+//     pricediscount:Number,//抵扣金额
+//     totalstock:Number,//总库存
+//     leftstock:Number,//剩余库存
+//     created_at: { type: Date, default:new Date()},//生成时间
+//     expdate: Date,// 过期时间
+// });
+// CouponSchema.plugin(mongoosePaginate);
+// let Coupon  = mongoose.model('Coupon',  CouponSchema);
 //我的钱包之明细记录
 //评价：商品ID／用户id/评价内容／评价星级／关联订单
 let ProductcommentSchema = new Schema({
@@ -401,6 +420,7 @@ exports.SystemConfigSchema = SystemConfigSchema;
 exports.NewsSchema = NewsSchema;
 exports.UserSchema= UserSchema;
 exports.DeviceSchema= DeviceSchema;
+exports.DeviceDataHistorySchema= DeviceDataHistorySchema;
 exports.UserAlertTopicSchema= UserAlertTopicSchema;
 exports.TopicSchema= TopicSchema;
 exports.CommentSchema= CommentSchema;
@@ -415,17 +435,19 @@ exports.OrderSchema = OrderSchema;
 exports.ExpressSchema = ExpressSchema;
 exports.MycollectionSchema = MycollectionSchema;
 exports.MyCouponSchema = MyCouponSchema;
-exports.CouponSchema = CouponSchema;
+// exports.CouponSchema = CouponSchema;
 exports.ProductcommentSchema = ProductcommentSchema;
 exports.FeedbackSchema = FeedbackSchema;
 exports.WithdrawcashapplySchema = WithdrawcashapplySchema;
 exports.PointrecordSchema = PointrecordSchema;
 exports.AboutSchema = AboutSchema;
 
+
 exports.SystemConfigModel = SystemConfig;
 exports.NewsModel = News;
 exports.UserModel= User;
 exports.DeviceModel= Device;
+exports.DeviceDataHistoryModel= DeviceDataHistory;
 exports.UserAlertTopicModel= UserAlertTopic;
 exports.TopicModel= Topic;
 exports.CommentModel= Comment;
@@ -440,7 +462,7 @@ exports.OrderModel = Order;
 exports.ExpressModel = Express;
 exports.MycollectionModel = Mycollection;
 exports.MyCouponModel = MyCoupon;
-exports.CouponModel = Coupon;
+// exports.CouponModel = Coupon;
 exports.ProductcommentModel = Productcomment;
 exports.FeedbackModel = Feedback;
 exports.RechargerecordModel = Rechargerecord;

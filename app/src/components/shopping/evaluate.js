@@ -6,7 +6,7 @@ import { Button, Comment, Header, Feed, Icon, Input  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import '../../../public/css/shoppingproevaluate.css';
 import { productcommentsfromproduct } from '../../actions/sagacallback.js';
-import InfinitePage from '../controls/infinitecontrol';
+import InfinitePage from '../controls/listview';
 import moment from 'moment';
 import NavBar from '../newnav.js';
 import $ from "jquery";

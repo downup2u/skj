@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import {getnotifymessage} from '../../actions/sagacallback';
 import { ui_setnotifymessage,setlastreadmsgtime_request } from '../../actions';
-import InfinitePage from '../controls/infinitecontrol';
+import InfinitePage from '../controls/listview';
 
 
 // http://www.cnblogs.com/qq120848369/p/5920420.html

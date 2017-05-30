@@ -6,7 +6,7 @@ import '../../../public/css/mycollection.css';
 import Swipeout from 'rc-swipeout';
 import { mycollectiongetall,mycollectiondelone } from '../../actions/sagacallback.js';
 import { uiinfinitepage_deleteitem } from '../../actions';
-import InfinitePage from '../controls/infinitecontrol';
+import InfinitePage from '../controls/listview';
 //import Paging from '../tools/paging';
 
 let Page =(props)=> {

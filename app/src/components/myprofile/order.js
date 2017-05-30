@@ -4,7 +4,7 @@ import { Input, Button, Select, List, Menu } from 'semantic-ui-react';
 import '../../../public/css/myorder.css';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import InfinitePage from '../controls/infinitecontrol';
+import InfinitePage from '../controls/listview';
 import {
     myordergetall,
     myorderupdateone

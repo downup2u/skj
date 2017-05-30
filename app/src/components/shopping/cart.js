@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Input, Button, Menu, Checkbox, Label, Icon } from 'semantic-ui-react';
 import '../../../public/css/shoppingcart.css';
 import { mycartgetall } from '../../actions/sagacallback.js';
-import InfinitePage from '../controls/infinitecontrol';
+import InfinitePage from '../controls/listview';
 import Swipeout from 'rc-swipeout';
 import {
   mycartupdateone,

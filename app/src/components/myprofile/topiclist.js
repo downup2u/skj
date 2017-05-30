@@ -11,7 +11,7 @@ import {ui_setmytopiclistinited,getmytopic_request} from '../../actions';
 import { uicommentimg } from '../../actions/index.js';
 
 import { getmytopic } from '../../actions/sagacallback';
-import InfinitePage from '../controls/infinitecontrol';
+import InfinitePage from '../controls/listview';
 
 let TopicInfo = (props)=>{
     const {iteminfo, dispatch} = props;
