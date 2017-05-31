@@ -1,11 +1,17 @@
 import store from './store';
 import { goBack  } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
-import {exitApp as exitApptoAndroid} from './xview/Common';
+import * as xview from './xview/Common';
 let handlerbackfn;
 
 export const exitApp=()=>{
-  console.log(`exit app`);
-  exitApptoAndroid();
+  try{
+    console.log(`exit app`);
+    alert('exit app');
+    xview.exitApp();
+  }
+  catch(e){
+
+  }
 }
 
 export const setbackhandler=(fn)=>{
@@ -19,7 +25,7 @@ export const removebackhandler=()=>{
 export const registerandroid=()=>{
   window.webBack=()=>{
     try{
-      alert("window.webBack");
+      //alert("window.webBack");
       if(!!handlerbackfn){
         handlerbackfn();
       }
@@ -28,7 +34,7 @@ export const registerandroid=()=>{
       }
     }
     catch(e){
-      
+
     }
 
   };
