@@ -74,9 +74,9 @@ const MycouponlistEdit = (props) => {
       return (<Edit title={<MycouponlistTitle />} {...props}>
           <SimpleForm>
                <TextInput label="名字" source="name" />
-              <ReferenceInput source="creator" reference="user" allowEmpty>
+               <ReferenceInput source="creator" reference="user" allowEmpty>
                   <SelectInput optionText="username" />
-              </ReferenceInput>
+               </ReferenceInput>
                <DateInput label="过期时间"  source="expdate" />
                <TextInput label="价格条件"  source="pricecondition" />
                <NumberInput label="最高抵扣"  source="pricediscount" />
