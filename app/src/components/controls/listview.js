@@ -54,20 +54,20 @@ class Page extends React.Component {
       that.setState({
         dataSource:dateSource,
         refreshing: false,
-        curpage:result.page,
+        curpage:result.page,//当前页
         totalpage:result.pages,
         isend:result.page>=result.pages
       });
     });
   }
-
+  //到达底部事件
   _onEndReached(event) {
     // load new data
     console.log('reach end', event);
     if(this.state.curpage < this.state.totalpage){
         this.setState({
-          isLoading: true,
-          isend:false
+          isLoading: true,//加载中
+          isend:false//是否最后一页
         });
         let querypage = this.state.curpage + 1;
         let that = this;
@@ -96,7 +96,7 @@ class Page extends React.Component {
     }
     else{
       this.setState({
-        isLoading: true,
+        isLoading: false,
         isend:true
       });
     }
@@ -121,13 +121,17 @@ class Page extends React.Component {
     if(!!this.props.renderFooter){
       return this.props.renderFooter(this.state.isLoading, this.state.isend);
     }
-    return (<div style={{
-      backgroundColor: '#bbb', color: 'white',
-      padding: 30, textAlign: 'center',
+    return (
+      <div style={{
+      color: '#999',
+      padding: "15px", 
+      textAlign: 'center',
+      fontSize: "14px",
+      borderTop: "1px solid #EEE"
     }}
     >
-      {this.state.isLoading ? 'loading...' : 'loaded'}
-      {this.state.isend && '---NO MORE DATA---'}
+      {this.state.isLoading ? 'loading...' : ''}
+      {this.state.isend && '－ 没有更多数据了 －'}
     </div>);
   }
 
@@ -147,12 +151,12 @@ class Page extends React.Component {
         onEndReached={this._onEndReached}
         onEndReachedThreshold={10}
         style={{
-          height: 400,
+          height: this.props.listheight,
           border: '1px solid #ddd',
           margin: '10px 0',
         }}
         useZscroller
-        scrollerOptions={{ scrollbars: true }}
+        scrollerOptions={{ scrollbars: false }}
         refreshControl={<ListView.RefreshControl
           className="my-refresh-control"
           refreshing={this.state.refreshing}
