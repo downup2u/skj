@@ -1,6 +1,6 @@
 import store from './store';
 import { goBack  } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
-import {exitApp as exitApptoAndroid} from '../xview/Common';
+import {exitApp as exitApptoAndroid} from './xview/Common';
 let handlerbackfn;
 
 export const exitApp=()=>{
