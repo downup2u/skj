@@ -22,7 +22,7 @@ import {
 } from '../../actions';
 
 import {onclickpay} from '../../env/pay';
-import {setbackhandler,removebackhandler,exitApp} from '../../env/android';
+import {setbackhandler,removebackhandler} from '../../env/android';
 
 export class Page extends Component {
 

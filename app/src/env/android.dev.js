@@ -10,7 +10,8 @@ export const removebackhandler=()=>{
   handlerbackfn = undefined;
 }
 
-export const exitApp=()=>{
+export const exitAndroidApp=()=>{
+  alert('exit app');
   console.log(`exit app`);
 }
 

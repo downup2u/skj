@@ -3,15 +3,19 @@ import { goBack  } from 'react-router-redux';//https://github.com/reactjs/react-
 import * as xview from './xview/Common';
 let handlerbackfn;
 
-export const exitApp=()=>{
-  try{
-    console.log(`exit app`);
-    alert('exit app');
-    xview.exitApp();
-  }
-  catch(e){
+export const exitAndroidApp=()=>{
+  console.log(`exit app`);
 
-  }
+  window.setTimeout(()=>{
+    try{
+      //alert('exit app');
+      xview.exitApp();
+    }
+    catch(e){
+
+    }
+  },0);
+
 }
 
 export const setbackhandler=(fn)=>{

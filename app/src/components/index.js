@@ -8,7 +8,7 @@ import Page2 from './shopping/index.js';
 import Page3 from './myprofile.js';
 import HomeBottom from './homebottom.js';
 import '../../public/css/index.css';
-import {setbackhandler,removebackhandler,exitApp} from '../env/android';
+import {setbackhandler,removebackhandler,exitAndroidApp} from '../env/android';
 import {set_weui} from '../actions';
 
 export class Page extends React.Component {
@@ -22,7 +22,7 @@ export class Page extends React.Component {
           title : "你确定需要退出吗",
           text : "",
           buttonsClose : ()=>{console.log('click close');},
-          buttonsClick : ()=>{exitApp();}
+          buttonsClick : ()=>{exitAndroidApp();}
         };
         that.props.dispatch(set_weui({confirm}));
 
