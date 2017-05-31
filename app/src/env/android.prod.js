@@ -18,11 +18,18 @@ export const removebackhandler=()=>{
 
 export const registerandroid=()=>{
   window.webBack=()=>{
-    if(!!handlerbackfn){
-      handlerbackfn();
+    try{
+      alert("window.webBack");
+      if(!!handlerbackfn){
+        handlerbackfn();
+      }
+      else{
+        store.dispatch(goBack());
+      }
     }
-    else{
-      store.dispatch(goBack());
+    catch(e){
+      
     }
+
   };
 }
