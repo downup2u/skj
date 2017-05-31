@@ -22,6 +22,7 @@ import {
 } from '../../actions';
 
 import {onclickpay} from '../../env/pay';
+import {setbackhandler,removebackhandler,exitApp} from '../../env/android';
 
 export class Page extends Component {
 
@@ -35,6 +36,21 @@ export class Page extends Component {
             }
         };
         this.props.dispatch(mycoupongetall(payload));
+
+        let that = this;
+        const fromwhere = this.props.match.params.where;
+        setbackhandler(()=>{
+          if(fromwhere === 'shopping'){
+              that.props.history.go(-3);
+          }
+          else{
+              that.props.history.goBack();
+          }
+        });
+
+    }
+    componentWillUnmount() {
+      removebackhandler();
     }
 
     onClickReturn = ()=> {

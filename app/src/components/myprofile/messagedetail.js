@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import '../../../public/css/mymessage.css';
-import NavBar from '../nav.js';
+import NavBar from '../newnav.js';
 import { getnotifymessageone_request } from '../../actions';
 
 export class Page extends React.Component {
@@ -32,18 +32,18 @@ export class Page extends React.Component {
         }
 
         return (
-            <div className="messageDetail">
-                <NavBar lefttitle="返回" title="消息详情" onClickLeft={this.onClickBack.bind(this)} />
+            <div className="messageDetail AppPage">
+                <NavBar back={true} title="消息详情" />
                 {notifymessageitem.hasOwnProperty('_id')?
                 (
-                  <div>
+                  <div className="list">
                   <div className="tt">{notifymessageitem.messagetitle}</div>
                   <div className="time">
                       <span>{moment(notifymessageitem.created_at).format("MM月DD日 HH时mm分")}</span>
                   </div>
-                  <div className="cont">{notifymessageitem.messagecontent}</div>
+                  <div className="cont" dangerouslySetInnerHTML={{__html: notifymessageitem.messagecontent}}></div>
                   </div>
-              ):(<div>加载中，请稍后</div>)}
+              ):(<div className="loading">加载中，请稍后</div>)}
             </div>
         );
     }

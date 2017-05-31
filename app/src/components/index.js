@@ -8,31 +8,32 @@ import Page2 from './shopping/index.js';
 import Page3 from './myprofile.js';
 import HomeBottom from './homebottom.js';
 import '../../public/css/index.css';
-
+import {setbackhandler,removebackhandler,exitApp} from '../env/android';
+import {set_weui} from '../actions';
 
 export class Page extends React.Component {
     componentWillMount() {
+      let that = this;
+      setbackhandler(()=>{
 
+        console.log('click android back');
+        let confirm = {
+          show : true,
+          title : "你确定需要退出吗",
+          text : "",
+          buttonsClose : ()=>{console.log('click close');},
+          buttonsClick : ()=>{exitApp();}
+        };
+        that.props.dispatch(set_weui({confirm}));
+
+      });
     }
 
-    // onClickTab(curtabindex) {
-    //     this.props.dispatch(clickTab({curtabindex: curtabindex}));
-    //     console.log('onClickTab:' + curtabindex);
-    //     if(curtabindex === 3){
-    //         let payload = {
-    //             query:{},
-    //             options:{
-    //                 page: 1,
-    //                 limit: 1,
-    //             }
-    //         };
-    //         this.props.dispatch(getnotifymessage(payload)).then(({result})=>{
-    //             console.log('setmsgcount:' + result.total);
-    //             this.props.dispatch(setmsgcount(result.total));
-    //             //getnotifymessage result=>{"docs":[],"total":0,"limit":10,"page":1,"pages":1}
-    //         });
-    //     }
-    // }
+    componentWillUnmount() {
+      removebackhandler();
+    }
+
+
 
     render() {
         let pagesz = [];
@@ -40,44 +41,8 @@ export class Page extends React.Component {
         pagesz.push(<Page1 key="page1" />);
         pagesz.push(<Page2 key="page2" />);
         pagesz.push(<Page3 key="page3" />);
-        // let btnsz = [
-        //     {
-        //         title: '首页',
-        //         imgnormal: 'img/bottom2.png',
-        //         imghov: 'img/bottom1.png',
-        //     },
-        //     {
-        //         title: '圈子',
-        //         imgnormal: 'img/bottom4.png',
-        //         imghov: 'img/bottom3.png',
-        //     },
-        //     {
-        //         title: '商城',
-        //         imgnormal: 'img/bottom6.png',
-        //         imghov: 'img/bottom5.png',
-        //     },
-        //     {
-        //         title: '我的',
-        //         imgnormal: 'img/bottom8.png',
-        //         imghov: 'img/bottom7.png',
-        //     },
-        // ];
+
         const {curtabindex} = this.props;
-        /*let btncosz = [];
-        btnsz.forEach((obj,index)=> {
-            if (index === curtabindex) {
-                btncosz.push(<Button key={'btn'+index} onClick={this.onClickTab.bind(this,index)} className="action">
-                    <img src={btnsz[index].imghov}/>
-                    <span>{btnsz[index].title}</span>
-                </Button>);
-            }
-            else {
-                btncosz.push(<Button key={'btn'+index} onClick={this.onClickTab.bind(this,index)}>
-                    <img src={btnsz[index].imgnormal}/>
-                    <span>{btnsz[index].title}</span>
-                </Button>);
-            }
-        });*/
         return (
             <div>
                 <div className="pageStyle">

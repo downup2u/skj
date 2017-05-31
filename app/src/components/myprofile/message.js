@@ -24,12 +24,13 @@ export class Page extends Component {
         return  (
             <div className="items" key={item._id}>
                 <div className="tt">{item.messagetitle}</div>
-                <div className="cont">{item.messagecontent}</div>
+                <div className="cont" dangerouslySetInnerHTML={{__html: item.messagecontent}}></div>
+
                 <div className="lnk">
                     <span>{moment(item.created_at).format("MM月DD日 HH时mm分")}</span>
                     <span onClick={()=>{this.onClickItem(item);}}>查看详情</span>
                 </div>
-            </div> 
+            </div>
         );
     }
 
@@ -45,7 +46,7 @@ export class Page extends Component {
                 <div className="messageList">
                     <InfinitePage
                         pagenumber = {30}
-                        updateContent= {this.updateContent} 
+                        updateContent= {this.updateContent}
                         queryfun= {getnotifymessage}
                         listheight= {window.innerHeight-68}
                         query = {{}}

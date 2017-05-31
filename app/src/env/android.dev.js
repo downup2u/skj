@@ -10,8 +10,12 @@ export const removebackhandler=()=>{
   handlerbackfn = undefined;
 }
 
+export const exitApp=()=>{
+  console.log(`exit app`);
+}
+
 export const registerandroid=()=>{
-  window.clickbackbtn=()=>{
+  window.webBack=()=>{
     if(!!handlerbackfn){
       handlerbackfn();
     }

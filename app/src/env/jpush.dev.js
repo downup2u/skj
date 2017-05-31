@@ -48,7 +48,7 @@ export const postNotifyFromJPush = (dispatch)=>{
         }
         if(e && e.keyCode===51){ // 按 3，模拟发送手机安卓键
             //要做的事情
-            window.clickbackbtn();
+            window.webBack();
        }
     }
     //未点击推送消息
