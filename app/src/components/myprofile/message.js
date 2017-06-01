@@ -3,8 +3,8 @@ import NavBar from '../nav.js';
 import '../../../public/css/mymessage.css';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import {getnotifymessage} from '../../actions/sagacallback';
 import { ui_setnotifymessage,setlastreadmsgtime_request } from '../../actions';
+import {getnotifymessage} from '../../actions/sagacallback';
 import InfinitePage from '../controls/listview';
 
 
