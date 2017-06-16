@@ -38,18 +38,20 @@ export function* jpushflow(){//仅执行一次
         try{
           //yield call(alertmessage,`jpushlistenInMessage ===>${JSON.stringify(msgobj)}`);
           let {payload:msgobj} = action;
-          let message = '接收到一条消息';
-          message = _.get(msgobj,'aps.alert',message);
-          yield put(set_weui({
-            toast:{
-            text:message,
-            show: true,
-            type:'success'
-          }}));
-          if(msgobj.hasOwnProperty('_id')){
-            yield put(push(`/mymessagedetail/${msgobj._id}`));
+          if(!!msgobj){
+            let message = '接收到一条消息';
+            message = _.get(msgobj,'aps.alert',message);
+            yield put(set_weui({
+              toast:{
+              text:message,
+              show: true,
+              type:'success'
+            }}));
+            if(!!msgobj._id)){
+              yield put(push(`/mymessagedetail/${msgobj._id}`));
+            }
+            console.log(`jpushlistenInMessage ===>${JSON.stringify(msgobj)}`);
           }
-          console.log(`jpushlistenInMessage ===>${JSON.stringify(msgobj)}`);
         }
         catch(e){
         //  alert(`err->jpushlistenInMessage ===>${JSON.stringify(msgobj)},e:${JSON.stringify(e)}`);
@@ -63,18 +65,20 @@ export function* jpushflow(){//仅执行一次
           //alert(`jpushpostNotification ===>${JSON.stringify(msgobj)}`);
           //yield call(alertmessage,`jpushpostNotification ===>${JSON.stringify(msgobj)}`);
           let {payload:msgobj} = action;
-          if(msgobj.hasOwnProperty('_id')){
-            yield put(push(`/mymessagedetail/${msgobj._id}`));
-          }
-          else{
-            let message = '接收到一条消息';
-            message = _.get(msgobj,'aps.alert',message);
-            yield put(set_weui({
-              toast:{
-              text:message,
-              show: true,
-              type:'success'
-            }}));
+          if(!!msgobj){
+            if(!!msgobj._id){
+              yield put(push(`/mymessagedetail/${msgobj._id}`));
+            }
+            else{
+              let message = '接收到一条消息';
+              message = _.get(msgobj,'aps.alert',message);
+              yield put(set_weui({
+                toast:{
+                text:message,
+                show: true,
+                type:'success'
+              }}));
+            }
           }
           //console.log(`jpushpostNotification ===>${JSON.stringify(msgobj)}`);
         }
