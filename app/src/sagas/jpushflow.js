@@ -47,7 +47,7 @@ export function* jpushflow(){//仅执行一次
               show: true,
               type:'success'
             }}));
-            if(!!msgobj._id)){
+            if(!!msgobj._id){
               yield put(push(`/mymessagedetail/${msgobj._id}`));
             }
             console.log(`jpushlistenInMessage ===>${JSON.stringify(msgobj)}`);
