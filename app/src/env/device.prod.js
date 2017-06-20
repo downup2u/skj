@@ -22,7 +22,7 @@ export const getssid = (fncallback)=>{
 
 
 export const senddata = (values,fncallback)=>{
-  xview.prepareEasyLink(JSON.stringify(values),(data)=>{
+  xview.prepareEasyLink(values,(data)=>{
     try{
       if(typeof data === 'string'){
           data = JSON.parse(data);
