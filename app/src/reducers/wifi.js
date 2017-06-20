@@ -13,7 +13,7 @@ import {
 const initial = {
     wifi: {
         ssid:'正在获取当前wifi的ssid....',
-        code: 0,
+        code: '0',
         devicelist:[]
     },
 };

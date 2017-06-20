@@ -1,6 +1,6 @@
 export const getssid = (fncallback)=>{
    fncallback({
-       code:-1,
+       code:'-1',
        message:'WB123',
    });
 }
