@@ -21,7 +21,7 @@ export class Page extends Component {
             e.target.value = this.props.balance;
         }
         let payload = {
-            cashmoney: parseInt(val),//提现金额
+            cashmoney: parseFloat(val),//提现金额
         }
         this.props.dispatch(profit_set_tixianform(payload));
     }
@@ -71,5 +71,3 @@ export class Page extends Component {
 }
 const mapStateToProps =  ({userlogin,profit}) =>{ return {...userlogin, ...profit};};
 export default connect(mapStateToProps)(Page);
-
-

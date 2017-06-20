@@ -77,7 +77,7 @@ export class Page extends Component {
           orderinfo.realprice = this.props.payprice;
         }
         else{
-          orderinfo.realprice = parseInt(this.props.payprice);
+          orderinfo.realprice = parseFloat(this.props.payprice);
         }
 
 
