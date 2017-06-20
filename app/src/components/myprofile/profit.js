@@ -46,8 +46,7 @@ export class Page extends Component {
             query = { srctype : index };
             if(index==="withdrawcash"){
                 query = {
-                    srctype : {"$in":['withdrawcash','paywithleftbalance']}
-
+                    srctype : {"$in":['withdrawcash_ing','withdrawcash_ed','withdrawcash_denied','withdrawcash','paywithleftbalance']}
                 };
             }
         }
@@ -63,6 +62,32 @@ export class Page extends Component {
     };
 
     render() {
+
+        let getsrctypename =(profitinfo)=>{
+          let srctypename;
+          if(profitinfo.srctype === 'order'){
+            srctypename = '订单获得';
+          }
+          else if(profitinfo.srctype === 'paywithleftbalance'){
+            srctypename = '余额支付';
+          }
+          else{
+            if(_.startsWith(profitinfo.srctype,'withdrawcash')){
+              srctypename = '提现申请';
+              let typemap = {
+                'withdrawcash':'提现申请',
+                'withdrawcash_ing':'提现中',
+                'withdrawcash_ed':'提现成功',
+                'withdrawcash_denied':'提现失败',
+              };
+              if(!!typemap[profitinfo.srctype]){
+                srctypename = typemap[profitinfo.srctype];
+              }
+            }
+          }
+          return srctypename;
+        }
+
         return (
             <div className="myProfitPage"
                  style={{
@@ -110,9 +135,7 @@ export class Page extends Component {
                                     >
                                     <div className="i">
                                         <span className="code">
-                                            {profitinfo.srctype=="withdrawcash"?"提现记录":""}
-                                            {profitinfo.srctype=="order"?"订单获得":""}
-                                            {profitinfo.srctype=="paywithleftbalance"?"余额支付":""}
+                                            {getsrctypename(profitinfo)}
                                         </span>
                                         <span className="date"><span>{moment(profitinfo.created_at).format("MM月DD日 HH时mm分")}</span></span>
                                     </div>

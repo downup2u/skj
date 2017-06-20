@@ -59,10 +59,11 @@ const WithdrawcashlistEdit = (props) => {
              <DisabledInput label="银行卡号" source="bankaccount" />
              <DisabledInput label="银行名" source="bankname" />
              <DisabledInput label="提现金额" source="cashmoney" />
-             <EditStatus  label="状态"  source="status" choices={[
+             <SelectInput  label="状态"  source="status" choices={[
                     { id: '未验证', name: '未验证' },
                     { id: '已验证', name: '已验证' },
                     { id: '已支付', name: '已支付' },
+                    { id: '已拒绝', name: '已拒绝' },
                 ]}/>
           </SimpleForm>
       </Edit>);
