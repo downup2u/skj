@@ -7,7 +7,7 @@ export const getssid = (fncallback)=>{
   //  });
    xview.currentLinkWifi((data)=>{
      alert(JSON.stringify(data));
-     fncallback(data);
+     fncallback(JSON.stringify(data));
    });
 }
 
@@ -15,7 +15,7 @@ export const getssid = (fncallback)=>{
 export const senddata = (values,fncallback)=>{
   xview.prepareEasyLink(values,(data)=>{
     alert(JSON.stringify(data));
-    fncallback(data);
+    fncallback(JSON.stringify(data));
   });
   /*
   values期望格式：ssid，password
