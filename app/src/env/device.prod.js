@@ -5,9 +5,18 @@ export const getssid = (fncallback)=>{
   //  fncallback({
   //      ssid:'101372126',
   //  });
+
    xview.currentLinkWifi((data)=>{
+     try{
+       if(typeof data === 'string'){
+           data = JSON.parse(data);
+       }
+       fncallback(data);
+     }
+     catch(e){
+
+     }
      alert(JSON.stringify(data));
-     fncallback(JSON.stringify(data));
    });
 }
 

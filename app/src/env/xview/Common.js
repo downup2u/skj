@@ -214,7 +214,8 @@
      window.currentLinkWifiCallBack=function(result){
        fun(result);
      };
-     window.xview.currentLinkWifi({callback:"currentLinkWifiCallBack"});
+     let jsonstring = JSON.stringify({callback:"currentLinkWifiCallBack"});
+     window.xview.currentLinkWifi(JSON.stringify(jsonstring));
    }
    /**
      * 连接mico
@@ -226,7 +227,8 @@
         fun(result);
       };
       json['callback']="prepareEasyLinkCallBack";
-      window.xview.prepareEasyLink(json);
+      let jsonstring = JSON.stringify(json);
+      window.xview.prepareEasyLink(jsonstring);
     }
     /**
       * 搜索mico
@@ -237,7 +239,7 @@
        window.searchForModulesCallBack=function(result){
          fun(result);
        };
-       window.xview.searchForModules({callback:"searchForModulesCallBack"});
+       window.xview.searchForModules(JSON.stringify({callback:"searchForModulesCallBack"}));
      }
 
      /**
