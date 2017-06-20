@@ -13,7 +13,7 @@ export const getssid = (fncallback)=>{
 
 
 export const senddata = (values,fncallback)=>{
-  xview.currentLinkWifi(values,(data)=>{
+  xview.prepareEasyLink(values,(data)=>{
     alert(JSON.stringify(data));
     fncallback(data);
   });
