@@ -215,7 +215,8 @@
        fun(result);
      };
      let jsonstring = JSON.stringify({callback:"currentLinkWifiCallBack"});
-     window.xview.currentLinkWifi(JSON.stringify(jsonstring));
+     alert(jsonstring);
+     window.xview.currentLinkWifi(jsonstring);
    }
    /**
      * 连接mico
@@ -228,6 +229,7 @@
       };
       json['callback']="prepareEasyLinkCallBack";
       let jsonstring = JSON.stringify(json);
+      alert(jsonstring);
       window.xview.prepareEasyLink(jsonstring);
     }
     /**
