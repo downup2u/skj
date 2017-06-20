@@ -13,9 +13,17 @@ export const getssid = (fncallback)=>{
 
 
 export const senddata = (values,fncallback)=>{
-  xview.prepareEasyLink(values,(data)=>{
+  xview.prepareEasyLink(JSON.stringify(values),(data)=>{
+    try{
+      if(typeof data === 'string'){
+          data = JSON.parse(data);
+      }
+      fncallback(data);
+    }
+    catch(e){
+
+    }
     alert(JSON.stringify(data));
-    fncallback(JSON.stringify(data));
   });
   /*
   values期望格式：ssid，password
