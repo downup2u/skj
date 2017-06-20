@@ -1,6 +1,9 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { Upload, Icon, Modal,message} from 'antd';
+import Upload from 'antd/lib/upload';
+import Icon from 'antd/lib/icon';
+import message from 'antd/lib/message';
+import Modal from 'antd/lib/modal';
 import {newtopicfileuploadsetpreview,newtopicfileuploadreset} from '../../actions/index.js';
 import { connect } from 'react-redux';
 import './pictureswall.css';
