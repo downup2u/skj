@@ -10,7 +10,8 @@ import _ from 'lodash';
 import moment from 'moment';
 
 import {
-    profit_set_listtype
+    profit_set_listtype,
+    queryuserbalance_request
 } from '../../actions';
 import {
     getdistsalesorderdetails
@@ -20,6 +21,7 @@ import {
 export class Page extends Component {
 
     componentWillMount () {
+        this.props.dispatch(queryuserbalance_request({}));
         //order'来自订单,'withdrawcash'来自提现
         this.menu = {"":"全部","order":"获得明细","withdrawcash":"提现明细"};
         //获取收益列表

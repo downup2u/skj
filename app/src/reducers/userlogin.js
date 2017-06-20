@@ -14,7 +14,8 @@ import {
     getusergetpointsigntoday_result,
     loginwithoauth_result,
     setlastreadmsgtime_result,
-    queryorderstatusstat_result
+    queryorderstatusstat_result,
+    queryuserbalance_result
 } from '../actions/index.js';
 
 let defaultlastreadmsgtime_at = '';
@@ -24,7 +25,7 @@ if(!!defaultlastreadmsgtime_at){
         defaultlastreadmsgtime_at = JSON.parse(defaultlastreadmsgtime_at);
     }
     catch(e){
-        
+
     }
 
 }
@@ -49,6 +50,9 @@ const initial = {
 };
 
 const userlogin = createReducer({
+    [queryuserbalance_result]: (state, payload) => {
+      return { ...state,...payload};
+    },
     [setlastreadmsgtime_result]:(state,payload)=>{
         const {lastreadmsgtime_at} = payload;
         localStorage.setItem('lastreadmsgtime_at',JSON.stringify(lastreadmsgtime_at));

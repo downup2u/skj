@@ -147,11 +147,16 @@ import {
     md_useraddpoint_result,
 
     getnotifymessageone_request,
-    getnotifymessageone_result
+    getnotifymessageone_result,
+    common_err,
+    queryuserbalance_request,
+    queryuserbalance_result
 } from '../actions/index.js';
 
 //接收的对应关系
 exports.recvmessagetoresultpair = {
+  'queryuserbalance_result':queryuserbalance_result,
+  'common_err':common_err,
   'getnotifymessageone_result':getnotifymessageone_result,
   'useraddpoint_result':md_useraddpoint_result,
   'users.sendauth_result':sendauth_result,
@@ -248,6 +253,7 @@ exports.sendmessagefnsz = {
 
 //验证发送接口
 exports.sendmessageauthfnsz = {
+    'queryuserbalance':`${queryuserbalance_request}`,
     'senddevicecmd':`${senddevicecmd_request}`,
     'updatedevice':`${updatedevice_request}`,
     'queryorderstatusstat':`${queryorderstatusstat_request}`,
