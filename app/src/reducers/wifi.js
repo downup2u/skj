@@ -12,7 +12,8 @@ import {
 
 const initial = {
     wifi: {
-        ssid: '正在获取当前wifi的ssid....',
+        ssid:'正在获取当前wifi的ssid....',
+        code: 0,
         devicelist:[]
     },
 };
@@ -20,7 +21,8 @@ const initial = {
 
 const wifi = createReducer({
     [getcurwifi_result]: (state, payload) => {
-        return { ...state, ...payload };
+        const {code,message} = payload;
+        return { ...state,code,ssid:message};
     },
     [getcurwifi_devicelist_result]: (state, payload) => {
         let devicelist = [...payload];

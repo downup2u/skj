@@ -23,7 +23,7 @@ let renderWifiForm = (fields)=>{
 };
 
 let WifiForm = (props)=>{
-    let {handleSubmit,onClickNext} = props;
+    let {handleSubmit,onClickNext,code} = props;
     return (
         <Form onSubmit={handleSubmit(onClickNext)}>
             <div className="tt">
@@ -31,9 +31,8 @@ let WifiForm = (props)=>{
             </div>
             <Fields names={['ssid','password']}  component={renderWifiForm}/>
             <div className="loginBotton">
-                <Button primary>下一步</Button>
+                {code==0 ? <Button primary>下一步</Button>:<div>当前不是连接Wi-Fi</div>}
             </div>
-
         </Form>
     );
 };
@@ -63,18 +62,21 @@ class Page extends React.Component {
         this.props.history.goBack();
     }
     onClickNext =(values)=>{
-        this.props.dispatch(getcurwifi_devicelist_request(values));
+        if(this.props.code == 0){
+          this.props.dispatch(getcurwifi_devicelist_request(values));
+        }
+
     }
     render(){
-        const {ssid} = this.props;
+        const {ssid,code} = this.props;
         let formvalue = {
             ssid:ssid,
-            password:''
+            password:'',
         };
         return (
             <div className="addnewdevice">
                 <NavBar back={true} title="设备连接" />
-                <WifiSelForm formname="wifiform" formvalues={formvalue} onClickNext={this.onClickNext}/>
+                <WifiSelForm formname="wifiform" formvalues={formvalue} onClickNext={this.onClickNext} code={code}/>
             </div>
         );
     }
