@@ -1,6 +1,6 @@
 export const getssid = (fncallback)=>{
    fncallback({
-       code:'-1',
+       code:'0',
        message:'WB123',
    });
 }
@@ -11,7 +11,7 @@ export const senddata = (values,fncallback)=>{
   */
   console.log(`values:${JSON.stringify(values)}`);
   let retjson = {
-    code:0,
+    code:'0',
     messgae:'获取成功',
     data:[
       {

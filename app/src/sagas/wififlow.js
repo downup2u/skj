@@ -65,7 +65,7 @@ export function* wififlow() {
           let {payload:result} = action;
           console.log(`getcurwifi_devicelist_request:${JSON.stringify(result)}`);
           let wifiresult = yield call(sendwifidata,result);
-          if(wifiresult.code === 0){
+          if(wifiresult.code === '0'){
             yield put(getcurwifi_devicelist_result(wifiresult.data));
             yield put(push('/addnewdevice2'));
           }
