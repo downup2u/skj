@@ -13,7 +13,7 @@ import ForumComment from './community_comment.js';
 import ForumTopic from './community_topic.js';
 import FeedReplyForm from './community_reply.js';
 import TopTip from './community_topictip';
-
+import _ from 'lodash';
 export class Topic extends React.Component {
   componentWillMount () {
   }
@@ -21,9 +21,9 @@ export class Topic extends React.Component {
   render() {
     const {topic,comments} = this.props;
     let commentsco = [];
-    for(let commentid of topic.comments){
+    _.map(topic.comments,(commentid)=>{
       commentsco.push(<ForumComment showchild={true} key={commentid} comment={comments[commentid]} />);
-    }
+    });
     return  (<div >
                 <ForumTopic topic={topic} />
                     <Comment.Group>
@@ -62,12 +62,12 @@ export class Page extends React.Component {
         let ToptipCo = null;
         if(useralerttopiclist.length > 0){
             let filterlist = [];
-            for(let useralerttopicid of useralerttopiclist){
+            _.map(useralerttopiclist,(useralerttopicid)=>{
                 if(useralerttopics[useralerttopicid].topicself === topicid){
                     //关于该帖的评论
                     filterlist.push(useralerttopicid);
                 }
-            }
+            });
 
             if(filterlist.length > 0){
                 let useralerttopicnew = useralerttopics[filterlist[0]]; //选取最新一条

@@ -11,6 +11,7 @@ import {
     deleteaddress_confirmpophide,
     logout_result
 } from '../actions/index.js';
+import _ from 'lodash';
 
 const initial = {
     address:{
@@ -36,14 +37,15 @@ const address = createReducer({
         const {editedaddress} = payload;
         let addresslist =  state.addresslist;
         let newaddresslist = [];
-        for(let item of addresslist){
+
+        _.map(addresslist,(item)=>{
             if(item._id === editedaddress._id){
                 newaddresslist.push(editedaddress);
             }
             else{
                 newaddresslist.push(item);
             }
-        }
+        });
         return { ...state,addresslist:[...newaddresslist]};
     },
     [getaddresslist_result]: (state, payload) => {
@@ -54,11 +56,11 @@ const address = createReducer({
         const {_id} = payload;
         let addresslist =  state.addresslist;
         let newaddresslist = [];
-        for(let item of addresslist){
+        _.map(addresslist,(item)=>{
             if(item._id !== _id){
                 newaddresslist.push(item);
             }
-        }
+        });
         return { ...state,addresslist:[...newaddresslist]};
     },
     [deleteaddress_confirmpopshow]: (state, payload) => {

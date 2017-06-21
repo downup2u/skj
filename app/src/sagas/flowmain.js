@@ -86,8 +86,8 @@ function* handleIOWithAuth(socket) {
         //yield put(action);
         localStorage.removeItem('shuikejing_user_token');
 
-        for (let task of tasksz) {
-            yield cancel(task);
+        for(let i=0;i<tasksz.length;i++){
+            yield cancel(tasksz[i]);
         }
     }
 }

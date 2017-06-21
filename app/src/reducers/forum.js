@@ -20,7 +20,7 @@ import {
     setCommunityListHeight
 } from '../actions/index.js';
 import {normalizrtopiclist,normalizruseralerttopiclist,normalizruseralerttopic} from './normalizr.js';
-
+import _ from 'lodash';
 const initial = {
     forum: {
         communityListHeight : 0,
@@ -68,11 +68,11 @@ const forum = createReducer({
     },
     [setuseralerttopicreaded_result]:(state,payload)=> {
         let newuseralerttopiclist = [];
-        for(let id of state.useralerttopiclist){
+        _.map(state.useralerttopiclist,(id)=>{
             if(id != payload._id){
                 newuseralerttopiclist.push(id);
             }
-        }
+        });
         let useralerttopics = {...state.useralerttopics};
         delete useralerttopics[payload._id];
         return {
