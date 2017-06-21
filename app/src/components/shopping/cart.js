@@ -270,7 +270,7 @@ export class Page extends Component {
         return (
             <div className="shoppingCartPage"
                 style={{
-                    height:(window.innerHeight-20)+"px",
+                    height:(window.innerHeight)+"px",
                 }}
                 >
                 <div className="PageHead">

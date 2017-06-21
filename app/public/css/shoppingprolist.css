@@ -23,6 +23,7 @@
     flex-grow: 1;
     margin: 10px 0;
     margin-right: 45px;
+    display: flex;
 }
 
 .ProlistPage .searchHead .ui.input input {
@@ -30,6 +31,9 @@
     margin-left: 10px;
     margin-right: 10px;
     font-size: 14px;
+    width: 100%;
+    flex-grow: 1;
+
 }
 
 .ProlistPage .searchHead img {
@@ -184,17 +188,18 @@
     background: #5596d6;
     display: flex;
     align-items: center;
-    height: 48px;
+    
     width: 100%;
     z-index: 1000;
+    padding-top: 20px;
 }
 .ProlistPage .searchHead .imgcont {
     display: flex;
     width: 50px;
     position: absolute;
-    height: 100%;
+    height: 58px;
     right: 0;
-    top: 0;
+    bottom: 0;
     justify-content: center;
     align-items: center;
 }

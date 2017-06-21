@@ -48,7 +48,8 @@ let Page = (props)=> {
     let listhead = {
         display: "flex",
         justifyContent: "space-between",
-        marginBottom: "2px"
+        marginBottom: "2px",
+        position: "relative"
     };
     let headImg = {
         width: "60%"
@@ -70,14 +71,14 @@ let Page = (props)=> {
           detaillistco.push(
               <li style={listLi} key={detail.name}>
                   <div style={listhead}>
-                      <div>
-                          <span style={listname}>{detail.name}</span>
-                          <span style={listinfo}>剩余{detail.leftday}天</span>
-                      </div>
-                      <div>
-                          <span style={percentage}>{detail.leftpecent}%</span>
-                          <span>复位</span>
-                      </div>
+                        <div style={{display:"inline-block",flexGrow:1}}>
+                            <span style={listname}>{detail.name}</span>
+                            <span style={listinfo}>剩余{detail.leftday}天</span>
+                        </div>
+                        <div style={{position:"absolute",right: 0, top:0}}>
+                            <span style={percentage}>{detail.leftpecent}%</span>
+                            <span>复位</span>
+                        </div>
                   </div>
                   <div style={lineBg}>
                       <div style={linestyleresult}></div>

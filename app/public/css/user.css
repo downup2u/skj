@@ -206,21 +206,37 @@
 .UserLoginPage {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: stretch;
+
+}
+.pageWamp >div.UserLoginPage{
+    overflow: scroll;
+    flex-shrink: 0;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
+.pageWamp >div.UserLoginPage > div{
+    display: flex;
+    flex-direction: column;
+}
 .UserLoginPage .loginhead {
     width: 100%;
 }
 
 .UserLoginPage .loginform {
     padding-top: 20px;
+    flex-shrink: 0;
     position: relative;
 }
 
 .UserLoginPage .loginform .logininput {
     position: relative;
+
 }
 
 .UserLoginPage .loginform .yanzhenBtn {
@@ -239,6 +255,7 @@
     border-radius: 0;
     padding-left: 10%;
     padding-right: 10%;
+    display: block;
 }
 
 .UserLoginPage .logininput .lefticon {
@@ -285,6 +302,7 @@
     text-indent: 25px;
     height: 44px;
     font-size: 14px;
+    width: 100%;
 }
 
 .loginBotton {
@@ -322,7 +340,7 @@
 .UserLoginPage .loginPageTop .loginHead i {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 20px;
     color: #FFF;
     font-size: 30px;
     display: flex;
@@ -333,7 +351,6 @@
 }
 
 .UserLoginPage .loginPageBottom {
-    display: flex;
     flex-direction: column;
 }
 

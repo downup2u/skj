@@ -43,11 +43,11 @@
     align-items: center;
     left: 0;
     top: 0;
-    height: 48px;
     width: 100%;
     z-index: 1000;
     flex-shrink: 0;
     position: relative;
+    padding-top: 20px;
 }
 
 .feedPage .PageHead .title {
@@ -90,7 +90,7 @@
     margin: 0;
     position: absolute;
     right: 0;
-    top: 0;
+    top: 20px;
     height: 48px;
 }
 
@@ -358,6 +358,7 @@
     top: -48px;
     left: 0;
     width: 100%;
+    background: #EEE;
 } 
 .feedPage .tc > div{
     width: 100%

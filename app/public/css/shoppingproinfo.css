@@ -18,9 +18,10 @@
     background: #5596d6;
     display: flex;
     align-items: center;
-    height: 48px;
+    height: 68px;
     width: 100%;
     z-index: 1000;
+    padding-top: 20px;
 }
 
 .ProinfoPage .title {

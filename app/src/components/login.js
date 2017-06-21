@@ -170,6 +170,7 @@ export class Page extends React.Component {
         }
         return (
             <div className="UserLoginPage">
+                <div>
                 <LoginForm onClickRegister={this.onClickRegister}
                            onClickLogin={this.onClickLogin}
                            onClickForgetPasword={this.onClickForgetPasword}
@@ -181,6 +182,7 @@ export class Page extends React.Component {
                         <div onClick={()=>{loginwithqq();}}><Icon name="qq" /></div>
                         <div onClick={()=>{loginwithwechat();}}><Icon name="weixin" /></div>
                     </div>
+                </div>
                 </div>
             </div>
         );

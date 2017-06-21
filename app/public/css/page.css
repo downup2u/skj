@@ -1,8 +1,8 @@
 .pageWamp{
     position: relative;
-    background: #5596d6;
-    height: 50px;
-}
+    height: 100%;
+    width: 100%;
+ }
 .messageCo{
     display: flex;
     position: fixed;
