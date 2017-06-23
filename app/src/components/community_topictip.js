@@ -6,7 +6,7 @@ import { Button, Comment, Header, Feed, Icon, Input, Grid, Popup  } from 'semant
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-    setuseralerttopicreaded_request
+    setuseralerttopicdeleted_request
 } from '../actions/index.js';
 import '../../public/css/feed.css';
 
@@ -20,14 +20,23 @@ export class Page extends React.Component {
 
     onClick = ()=>{
         const {useralerttopic,frompage,history,dispatch} = this.props;
-        dispatch(setuseralerttopicreaded_request(useralerttopic._id));
+        dispatch(setuseralerttopicdeleted_request(useralerttopic._id));
 
-        if(frompage === 'nextpage'){
-            history.push(`/communityinfo/${useralerttopic.topicself}#comment_${useralerttopic.comment}`);
+        //点赞自己的帖子没有comment
+        if(useralerttopic.type !== 'topiclove'){
+          if(frompage === 'nextpage'){
+              history.push(`/communityinfo/${useralerttopic.topicself}#comment_${useralerttopic.comment}`);
+          }
+          else{
+              this.scrollToAnchor('comment_' + useralerttopic.comment);
+          }
         }
         else{
-            this.scrollToAnchor('comment_' + useralerttopic.comment);
+          if(frompage === 'nextpage'){
+              history.push(`/communityinfo/${useralerttopic.topicself}`);
+          }
         }
+
     }
     render() {
         const {data} = this.props;
