@@ -25,15 +25,21 @@ export class Page extends React.Component {
         //点赞自己的帖子没有comment
         if(useralerttopic.type !== 'topiclove'){
           if(frompage === 'nextpage'){
-              history.push(`/communityinfo/${useralerttopic.topicself}#comment_${useralerttopic.comment}`);
+              if(!!useralerttopic.topicself && !!useralerttopic.comment){
+                history.push(`/communityinfo/${useralerttopic.topicself}#comment_${useralerttopic.comment}`);
+              }
           }
           else{
-              this.scrollToAnchor('comment_' + useralerttopic.comment);
+            if(!!useralerttopic.comment){
+                this.scrollToAnchor('comment_' + useralerttopic.comment);
+            }
           }
         }
         else{
           if(frompage === 'nextpage'){
+            if(!!useralerttopic.topicself){
               history.push(`/communityinfo/${useralerttopic.topicself}`);
+            }  
           }
         }
 
