@@ -116,7 +116,9 @@ class Page extends React.Component {
     return
     (<div key={`${sectionID}-${rowID}`} style={{ backgroundColor: '#F5F5F9', height: 8 }} />);
   }
-
+  updateContent(item){
+    return this.props.updateContent(item,this.onRefresh.bind(this));
+  }
   renderFooter(){
     if(!!this.props.renderFooter){
       return this.props.renderFooter(this.state.isLoading, this.state.isend);
@@ -124,7 +126,7 @@ class Page extends React.Component {
     return (
       <div style={{
       color: '#999',
-      padding: "15px", 
+      padding: "15px",
       textAlign: 'center',
       fontSize: "14px",
       borderTop: "1px solid #EEE"
@@ -140,7 +142,7 @@ class Page extends React.Component {
       <ListView
         dataSource={this.state.dataSource}
         renderHeader={this.renderHeader.bind(this)}
-        renderRow={this.props.updateContent}
+        renderRow={this.updateContent.bind(this)}
         renderSeparator={this.renderSeparator.bind(this)}
         renderFooter={this.renderFooter.bind(this)}
         initialListSize={5}

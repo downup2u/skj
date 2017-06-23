@@ -15,7 +15,8 @@ import {
 
     createdevice_request,
     getdevicelist_request,getdevicelist_result,
-    deletedevice_request,deletedevice_result,
+    deletedevice_request,
+    deletedevice_result,
     setuseralerttopicreaded_request,
     setuseralerttopicdeleted_request,
     setuseralerttopicdeleted_result,

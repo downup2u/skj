@@ -67,15 +67,15 @@ const device = createReducer({
     },
     [deletedevice_result]: (state, payload) => {
         const {_id} = payload;
-        let mydevicelist =  state.mydevicelist;
-        mydevicelist = _.remove(mydevicelist, (id)=> {
+        let mydevicelist =  [...state.mydevicelist];
+        _.remove(mydevicelist, (id)=> {
             return id === _id;
         });
         let devices = {...state.devices};
         delete devices[_id];
         return {
           ...state,
-          mydevicelist:[...mydevicelist],
+          mydevicelist,
           devices
         };
     },
