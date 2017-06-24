@@ -15,12 +15,7 @@ const renderImageupload= (props) => {
   //     input.value = '';
   // }
 
-    // let usertoken = localStorage.getItem('admintoken');
-    // let getBase64 = (img, callback)=> {
-    //   const reader = new FileReader();
-    //   reader.addEventListener('load', () => callback(reader.result));
-    //   reader.readAsDataURL(img);
-    // }
+    let usertoken = localStorage.getItem('shuikejing_user_token');
 
     let beforeUpload =(v)=> {
       let imgInfo = {};
