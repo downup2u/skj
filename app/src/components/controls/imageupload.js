@@ -6,31 +6,35 @@ import message from 'antd/lib/message';
 //import 'antd/dist/antd.css';
 import './imageupload.css';
 import config from '../../env/config.js';
+import PicaDisposePhoto from '../../util/pica_dispose_photo';
 
 const renderImageupload= (props) => {
-  let {input} = props;
+  let {input,width,height} = props;
     console.log("input value:" + input.value);
   // if( Object.prototype.toString.call( input.value ) !== 'string' ) {
   //     input.value = '';
   // }
 
-    let usertoken = localStorage.getItem('admintoken');
-    let getBase64 = (img, callback)=> {
-      const reader = new FileReader();
-      reader.addEventListener('load', () => callback(reader.result));
-      reader.readAsDataURL(img);
-    }
+    // let usertoken = localStorage.getItem('admintoken');
+    // let getBase64 = (img, callback)=> {
+    //   const reader = new FileReader();
+    //   reader.addEventListener('load', () => callback(reader.result));
+    //   reader.readAsDataURL(img);
+    // }
 
-    let beforeUpload =(file)=> {
-      //const isImage = file.type === 'image/jpeg';
-      // if (!isJPG) {
-      //   message.error('You can only upload JPG file!');
-      // }
-      const isLt2M = file.size / 1024 / 1024 < 2;
-      if (!isLt2M) {
-        message.error('Image must smaller than 2MB!');
-      }
-      return isLt2M;
+    let beforeUpload =(v)=> {
+      let imgInfo = {};
+      let restconfig = {
+        width:width || -1,
+        height:height || -1
+      };
+      return new Promise((resolve) => {
+        const picaphoto = new PicaDisposePhoto(restconfig);
+        picaphoto.disposePhotoWithFile(v,imgInfo).then((file)=>{
+          file.uid = v.uid;
+          resolve(file);
+        });
+      });
     }
 
     let handleChange = (info) => {
@@ -73,10 +77,10 @@ const renderImageupload= (props) => {
 
 }
 
-const ImageInputUpload = ({source}) => {
+const ImageInputUpload = ({source,...rest}) => {
   return(
     <span>
-      <Field name={source} component={renderImageupload} />
+      <Field name={source} component={renderImageupload} {...rest}/>
     </span>
 )
 }

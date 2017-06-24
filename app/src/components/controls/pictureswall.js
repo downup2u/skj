@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import './pictureswall.css';
 import 'antd/dist/antd.css';
 import config from '../../env/config.js';
+import PicaDisposePhoto from '../../util/pica_dispose_photo';
 
 class PicturesWall extends React.Component {
   // state = {
@@ -21,7 +22,7 @@ class PicturesWall extends React.Component {
   //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
   //   }],
   // };
-   componentWillUnmount() {
+  componentWillUnmount() {
     this.props.dispatch(newtopicfileuploadreset());
   }
 
@@ -94,16 +95,35 @@ class PicturesWall extends React.Component {
     //
     console.log('props' + JSON.stringify(this.props));
 
-    const { previewVisible, previewImage, fileList } = this.props;
+    const { previewVisible, previewImage, fileList,width,height } = this.props;
     const uploadButton = (
       <div>
         <Icon type="plus" />
         <div className="ant-upload-text">上传</div>
       </div>
     );
+
+    let beforeUpload =(v)=> {
+      let imgInfo = {};
+      let restconfig = {
+        width:width || -1,
+        height:height || -1,
+        maxWidthOrHeight:800
+      };
+      return new Promise((resolve) => {
+        const picaphoto = new PicaDisposePhoto(restconfig);
+        picaphoto.disposePhotoWithFile(v,imgInfo).then((file)=>{
+          file.uid = v.uid;
+          resolve(file);
+        });
+      });
+    }
+
+
     return (
       <div className="clearfix">
         <Upload
+          beforeUpload={beforeUpload}
           action={config.serverurl + "/uploadavatar"}
           listType="picture-card"
           fileList={fileList}
