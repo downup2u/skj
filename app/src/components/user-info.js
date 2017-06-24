@@ -9,7 +9,7 @@ import config from '../env/config.js';
 import {logout_request} from '../actions';
 
 class Page extends Component {
-    
+
     onClickPage = (name)=> {
         this.props.history.push(name);
     };
@@ -19,7 +19,12 @@ class Page extends Component {
     };
 
     fileChange=(event)=>{
-        fileupload(event,localStorage.getItem('shuikejing_user_token'),(issuc,result)=>{
+        fileupload(event,
+          {
+            usertoken:localStorage.getItem('shuikejing_user_token'),
+            width: 100,
+            height: 100,
+          },(issuc,result)=>{
             if(issuc){
                 let profile = {...this.props.profile};
                 profile.avatar = config.serverurl + result.url;

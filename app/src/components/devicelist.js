@@ -14,7 +14,7 @@ import _ from 'lodash';
 const DeviceItem = (props)=> {
     const {deviceitem} = props;
     let onDelete = ()=> {
-        props.onClickDelete(deviceitem);
+      props.onClickDelete(deviceitem);
     };
     let onEdit = ()=> {
         props.onClickEdit(deviceitem);
@@ -76,21 +76,11 @@ export class Page extends React.Component {
       this.props.history.push(`/editdevice/${deviceitem._id}`);
     }
     onClickDelete = (deviceitem)=> {
-        let poptitle = '确认删除';
-        let popmsg = `你确认要删除设备:${deviceitem.devicename}吗?`;
-        this.props.dispatch(deletedevice_confirmpopshow({
-            poptitle: poptitle,
-            popmsg: popmsg,
-            deleteingdevice: deviceitem
-        }));
+      if(confirm("确定删除吗？")){
+        this.props.dispatch(deletedevice_request({_id: deviceitem._id}));
+      }
     }
-    onClickConfirmOK = ()=> {
-        this.props.dispatch(deletedevice_request({_id: this.props.deleteingdevice._id}));
-        this.props.dispatch(deletedevice_confirmpophide());
-    }
-    onClickConfirmCancel = ()=> {
-        this.props.dispatch(deletedevice_confirmpophide());
-    }
+
     onClickNewDevice = ()=> {
         this.props.history.push('/addnewdevice');
     }

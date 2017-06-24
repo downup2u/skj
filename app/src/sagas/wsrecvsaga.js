@@ -122,7 +122,9 @@ import {
   showpopmessage,
 
   md_useraddpoint_result,
-  set_weui
+  set_weui,
+
+  setuseralerttopicdeleted_result
 } from '../actions';
 import { push,goBack,go  } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
 
@@ -345,6 +347,10 @@ export function* wsrecvsagaflow() {
             text : result.errmsg,
             type : "error"
         }}));
+  });
+
+  yield takeEvery(`${setuseralerttopicdeleted_result}`, function*(action) {
+      
   });
 
 }

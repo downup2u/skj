@@ -12,24 +12,25 @@ import InfinitePage from '../controls/listview';
 let Page =(props)=> {
 
     //删除收藏
-    let delCollection = (id)=>{
+    let delCollection = (id,fnrefresh)=>{
         if(confirm("确定删除收藏吗？")){
             props.dispatch(mycollectiondelone({_id:id})).then((result)=>{
-                props.dispatch(uiinfinitepage_deleteitem({_id:result._id}));
+              fnrefresh();
+                //props.dispatch(uiinfinitepage_deleteitem({_id:result._id}));
             });
         }
     }
 
     //收藏列表数据
-    let updateContent = (item)=> {
+    let updateContent = (item,fnrefresh)=> {
         let proinfo = props.products[item.product];
-        if(proinfo){
+        if(!!proinfo){
             return  (
                     <Swipeout key={item._id}
                         autoClose={true}
                         right={[{
                             text: '删除',
-                            onPress: ()=>{delCollection(item._id)},
+                            onPress: ()=>{delCollection(item._id,fnrefresh)},
                             style: {
                                 backgroundColor: 'red',
                                 color: 'white',
@@ -56,6 +57,7 @@ let Page =(props)=> {
 
             );
         }
+        return null;
     };
 
     return (

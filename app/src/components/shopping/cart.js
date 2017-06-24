@@ -30,18 +30,16 @@ import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 
 export class Cartitem extends Component {
-
-
     //获取我的地址列表
     componentWillMount() {
-        let payload = {
-            query: {},
-            options: {
-                page: 1,
-                limit: 1000,
-            }
-        };
-        this.props.dispatch(getaddresslist_request(payload));
+        // let payload = {
+        //     query: {},
+        //     options: {
+        //         page: 1,
+        //         limit: 1000,
+        //     }
+        // };
+        // this.props.dispatch(getaddresslist_request(payload));
     }
 
     render(){
@@ -296,7 +294,7 @@ export class Page extends Component {
     // }
 
     render() {
-        
+      //注意：购物车不应该用分页
 
         let onClickReturn = ()=> {
             this.props.history.goBack();

@@ -33,8 +33,8 @@ function connect() {
     return new Promise(resolve => {
             socket.on('connect', () => {
             resolve(socket);
-});
-});
+    });
+    });
 }
 
 function subscribe(socket) {

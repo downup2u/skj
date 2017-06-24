@@ -15,8 +15,11 @@ import {
 
     createdevice_request,
     getdevicelist_request,getdevicelist_result,
-    deletedevice_request,deletedevice_result,
+    deletedevice_request,
+    deletedevice_result,
     setuseralerttopicreaded_request,
+    setuseralerttopicdeleted_request,
+    setuseralerttopicdeleted_result,
     createaddress_request,
     deleteaddress_request,
     editaddress_request,
@@ -155,6 +158,7 @@ import {
 
 //接收的对应关系
 exports.recvmessagetoresultpair = {
+  'setuseralerttopicdeleted_result':setuseralerttopicdeleted_result,
   'queryuserbalance_result':queryuserbalance_result,
   'common_err':common_err,
   'getnotifymessageone_result':getnotifymessageone_result,
@@ -253,6 +257,7 @@ exports.sendmessagefnsz = {
 
 //验证发送接口
 exports.sendmessageauthfnsz = {
+    'setuseralerttopicdeleted':`${setuseralerttopicdeleted_request}`,
     'queryuserbalance':`${queryuserbalance_request}`,
     'senddevicecmd':`${senddevicecmd_request}`,
     'updatedevice':`${updatedevice_request}`,
