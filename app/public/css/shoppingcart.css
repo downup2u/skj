@@ -57,7 +57,7 @@
 }
 
 .shoppingCartPage .proinfo {
-    overflow: hidden;
+    overflow: scroll;
     flex-grow: 1;
     flex-shrink: 0;
 }
@@ -76,8 +76,10 @@
 
 .shoppingCartPage .proinfo .li .l img {
     width: 80px;
+    height: 80px;
     align-self: flex-start;
     border: 1px solid #EEE;
+    flex-shrink: 0;
 }
 
 .shoppingCartPage .proinfo .li div.l {
@@ -148,6 +150,7 @@
 .shoppingCartPage .proinfo .li div .btnControl {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 .shoppingCartPage .proinfo .btnControl > div {
     border: 1px solid #EEE;
@@ -175,6 +178,8 @@
     padding: 0;
     width: 30px;
     font-size: 14px;
+    height: 30px;
+    display: flex;
 
 }
 .shoppingCartPage .ui.checkbox{
@@ -202,3 +207,10 @@
 .shoppingCartPage .ui.checkbox input:checked~label:after{
     color: #FFF;
 }
+.shoppingCartPage .footBtn{
+    border-top:1px solid #EEE;
+}
+.shoppingCartPage .footBtn .btn span{
+    font-size: 16px;
+}
+

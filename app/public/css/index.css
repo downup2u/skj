@@ -13,27 +13,40 @@ input, textarea{
     -ms-user-select:text;
     user-select:text;
 }
-.root{
-
+#root{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+.ui.basic.red.label{
+    pointer-events: none;
+}
+#root > div,
+#root > div > div{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
 }
 .pageStyle{
     display: flex;
     justify-content: space-between;
     padding: 0;
-    overflow: hidden;
     flex-shrink: 1;
     align-self: stretch;
+    flex-grow: 1;
 }
 .pageWamp >div{
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     background: #FFF;
-    position: fixed;
-    top:0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    justify-content: flex-start;
 }
 
 .homeBottom{
@@ -44,6 +57,7 @@ input, textarea{
     background: #EEE;
     border-top: 1px solid #CCC;
     flex-shrink: 0;
+    z-index: 999
 }
 .homeBottom .ui.button{
     width: 33%;

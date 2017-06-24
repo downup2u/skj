@@ -43,14 +43,18 @@ let renderLoginForm = (fields)=> {
 }
 
 let LoginForm = (props)=> {
-    let {handleSubmit,onClickRegister,onClickLogin,onClickForgetPasword} = props;
+    let {handleSubmit,onClickRegister,onClickLogin,onClickForgetPasword, id} = props;
     let onClickReturn = ()=> {
         props.history.goBack();
     }
+
+
+
     return (
-        <Form onSubmit={handleSubmit(onClickLogin)}>
+        <Form onSubmit={handleSubmit(onClickLogin)} id={id}>
             <div className="loginPageTop">
-                <div className="loginHead">
+                
+                <div className="loginHead" onClick={()=>{}}>
                     <Icon  name='angle left' onClick={onClickReturn} />
                     <img src="img/4.png" className="loginhead"/>
                 </div>
@@ -112,6 +116,11 @@ LoginForm = reduxForm({
 import {login_request} from '../actions/index.js';
 export class Page extends React.Component {
 
+    constructor(props) {  
+        super(props);  
+        this.state = {p: 0};
+    } 
+
     componentWillMount() {
         this.props.dispatch(loginwithoauth_result({bindtype:'',openid:''}));
     }
@@ -170,10 +179,11 @@ export class Page extends React.Component {
         }
         return (
             <div className="UserLoginPage">
-                <div>
+                <div style={{height:localStorage.getItem('innerheight')+"px"}}>
                 <LoginForm onClickRegister={this.onClickRegister}
                            onClickLogin={this.onClickLogin}
                            onClickForgetPasword={this.onClickForgetPasword}
+                           id="UserLoginPageForm"
                             {...this.props}/>
 
                 <div className="loginPageBottom">

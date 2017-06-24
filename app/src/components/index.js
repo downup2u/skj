@@ -9,7 +9,7 @@ import Page3 from './myprofile.js';
 import HomeBottom from './homebottom.js';
 import '../../public/css/index.css';
 import {setbackhandler,removebackhandler,exitAndroidApp} from '../env/android';
-import {set_weui} from '../actions';
+import {set_weui, set_innerheight} from '../actions';
 
 export class Page extends React.Component {
     componentWillMount() {
@@ -27,15 +27,19 @@ export class Page extends React.Component {
         that.props.dispatch(set_weui({confirm}));
 
       });
+
+      this.props.dispatch(set_innerheight());
     }
 
     componentWillUnmount() {
       removebackhandler();
+      
     }
 
 
 
     render() {
+        let innerheight = localStorage.getItem('innerheight');
         let pagesz = [];
         pagesz.push(<Page0 key="page0" />);
         pagesz.push(<Page1 key="page1" />);
@@ -44,7 +48,7 @@ export class Page extends React.Component {
 
         const {curtabindex} = this.props;
         return (
-            <div>
+            <div style={{height: innerheight+"px"}}>
                 <div className="pageStyle">
                     {pagesz[curtabindex]}
                 </div>

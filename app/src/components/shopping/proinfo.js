@@ -166,8 +166,13 @@ export class Page extends React.Component {
                         <span className={this.props.remoteRowCount==0?"hide":""}>{this.props.remoteRowCount}</span>
                     </span>
                 </div>
-                <div className="PageContent">
-                    <div className="shoppingBanner">
+                <div className="PageContent" style={{height:(localStorage.getItem('innerheight')-118)+"px"}}>
+                    <div className="shoppingBanner"
+                        style={{
+                                minHeight: "200px",
+                                overflow: "visible"
+                        }}
+                        >
                         <Swiper
                             swiperOptions={{slidesPerView: 'auto'}}
                             {...swiperOptions}>

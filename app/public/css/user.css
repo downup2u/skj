@@ -213,16 +213,29 @@
 .pageWamp >div.UserLoginPage{
     overflow: scroll;
     flex-shrink: 0;
-    display: block;
+    display: flex;
+    flex-direction: column;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+
 }
 
 .pageWamp >div.UserLoginPage > div{
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
+    align-self:  stretch;
+    overflow:  scroll;
+}
+.pageWamp #UserLoginPageForm{
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 482px;
+    flex-grow: 1;
 }
 .UserLoginPage .loginhead {
     width: 100%;

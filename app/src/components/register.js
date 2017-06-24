@@ -61,7 +61,7 @@ renderRegisterForm = connect()(renderRegisterForm);
 
 let RegisterForm = (props)=> {
     let {handleSubmit,onClickRegister,onClickLogin,onClickReturn} = props;
-    return (<Form onSubmit={handleSubmit(onClickRegister)}>
+    return (<Form onSubmit={handleSubmit(onClickRegister)} id="UserLoginPageForm">
         <div className="loginPageTop">
             <div className="loginHead">
                 <Icon name='angle left' onClick={onClickReturn}/>
@@ -173,7 +173,7 @@ export class Page extends React.Component {
 
     render() {
         return (
-            <div className="UserLoginPage">
+            <div className="UserLoginPage" style={{height:localStorage.getItem('innerheight')+"px"}}>
                 <RegisterForm onClickRegister={this.onClickRegister}
                               onClickLogin={this.onClickLogin}
                               onClickReturn={this.onClickReturn}/>

@@ -203,6 +203,7 @@ export class Page extends React.Component {
                     show={this.props.addcartdilogshow}
                     proid={this.props.addcartdilogproid}
                     number={this.props.addcartdilogpronumber}
+                    type="cart"
                 />
             </div>
         )

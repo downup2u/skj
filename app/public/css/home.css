@@ -38,10 +38,10 @@
 }
 .homePageWamp {
     width: 100%;
-    display: flex;
+    display: block;
     flex-direction: column;
     flex-grow: 1;
-    overflow-y: scroll;
+    overflow: scroll;
     padding-top: 20px;
     background: #5596d6
 }

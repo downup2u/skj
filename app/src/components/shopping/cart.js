@@ -22,7 +22,9 @@ import {
     ui_cart_selectallitems,
     set_orderSurePage,
     getaddresslist_request,
-    set_weui
+    set_weui,
+    set_cartslist,
+    del_cartslist
 } from '../../actions';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
@@ -69,7 +71,9 @@ export class Cartitem extends Component {
                 changeproductnumber(number);
             }
         }
-        let onChangeNumberPlus=(value)=>{
+        let onChangeNumberPlus=(e, value)=>{
+            let event = e || window.event;
+            event.stopPropagation();
             let number = item.number;
             number = number + value;
             if(number > 0){
@@ -85,6 +89,7 @@ export class Cartitem extends Component {
                     if(result){
                         dispatch(uiinfinitepage_deleteitem(result));
                         dispatch(ui_cartooder_delitem(item));
+                        dispatch(del_cartslist(item));
                     }
             });
 
@@ -104,7 +109,7 @@ export class Cartitem extends Component {
             <Swipeout autoClose={true}
                 right={[{
                     text: '删除',
-                    style: { backgroundColor: 'red', color: 'white' },
+                    style: { backgroundColor: 'red', color: 'white', fontSize: "16px" },
                     onPress:onClickDeleteItem
                 }]}
                 >
@@ -120,11 +125,11 @@ export class Cartitem extends Component {
                             <div className="price">
                                 <span>¥{proinfo.pricenow}</span>
                                 <div className="btnControl">
-                                    <div className="del" onClick={()=>{onChangeNumberPlus(-1);}}>-</div>
+                                    <div className="del" onClick={(e)=>{onChangeNumberPlus(e,-1);}}>-</div>
                                     <div className="num">
                                         <Input name="firstName" type="text" value={item.number} onChange={onChangeNumber}/>
                                     </div>
-                                    <div className="add" onClick={()=>{onChangeNumberPlus(1);}}>+</div>
+                                    <div className="add" onClick={(e)=>{onChangeNumberPlus(e,1);}}>+</div>
                                 </div>
                             </div>
                         </div>
@@ -212,13 +217,14 @@ export class Pricetotal extends Component {
 let mapStateToPropsPricetotal = (
         {
             shop:{products},
-            shopcart:{toordercarts},
-            infinitepage:{items},
+            shopcart:{toordercarts,cartslist},
+            //infinitepage:{items},
             app:{expressfee,expressfeeforfree},
             address:{addresslist},
             userlogin:{defaultaddress}
         }
     ) => {
+        let items = cartslist;
         let totalprice = 0;
         let isselected = false;
         let itemsel = 0;
@@ -238,12 +244,51 @@ let mapStateToPropsPricetotal = (
             }
             toordercartsproducts.push(product);
         });
-        isselected = itemsel === items.length;
+        let itemslength = 0;
+        _.map(items,(x,i)=>{
+            itemslength++;
+        })
+        isselected = itemsel === itemslength;
         totalprice = parseFloat(totalprice.toFixed(2));
         return {totalprice,isselected,items,toordercarts,toordercartsproducts,expressfee,expressfeeforfree,defaultaddress}
 }
 Pricetotal = connect(mapStateToPropsPricetotal)(Pricetotal);
 Pricetotal = withRouter(Pricetotal);
+
+
+
+export class Cartlist extends Component {
+    componentWillMount(){
+        this.props.dispatch(mycartgetall({
+            query:{},
+            options:{limit:1000}
+        })).then((result)=>{
+            this.props.dispatch(set_cartslist({payload:result.result.docs}));
+        })
+    }
+    render() {
+        const {cartslist} = this.props;
+        return (
+            <div>
+                {
+                    _.map(cartslist, (item, index)=>{
+                        return (
+                            <div key={item._id}>
+                                <Cartitem item={item} />
+                            </div>
+                        )
+                    })
+                }
+                
+            </div>
+        )
+    }
+}
+let dataCartlist = ({shopcart:{cartslist,listchange}}) => {
+    return {cartslist,listchange};
+}
+Cartlist = connect(dataCartlist)(Cartlist);
+
 
 export class Page extends Component {
     // shouldComponentUpdate(nextProps) {
@@ -251,13 +296,7 @@ export class Page extends Component {
     // }
 
     render() {
-        let updateContent = (item)=> {
-            return  (
-                <div key={item._id}>
-                    <Cartitem item={item} />
-                </div>
-            );
-        };
+        
 
         let onClickReturn = ()=> {
             this.props.history.goBack();
@@ -278,22 +317,17 @@ export class Page extends Component {
                     <span className="title">购物车</span>
                 </div>
                 <div className="proinfo" style={{height:(window.innerHeight-118)+"px"}}>
-                    <InfinitePage
-                        pagenumber = {30}
-                        updateContent= {updateContent}
-                        queryfun= {mycartgetall}
-                        listheight= {window.innerHeight-92}
-                        query = {{}}
-                        sort = {{created_at: -1}}
-                    />
+
+                    <Cartlist />
+
                 </div>
                 <div className="footBtn">
                     <Pricetotal onClickPage={onClickPage} />
                 </div>
             </div>
         );
+
     }
 }
-
 Page = connect()(Page);
 export default Page;

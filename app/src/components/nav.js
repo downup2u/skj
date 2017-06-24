@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Segment,Button } from 'semantic-ui-react';
+import { Header, Segment,Button, Icon } from 'semantic-ui-react';
 import '../../public/css/head.css';
 
 
@@ -15,7 +15,7 @@ export class Page extends React.Component {
 
           {this.props.hasOwnProperty('lefttitle')?
               (<span className="leftlnk">
-              <Button onClick={this.props.onClickLeft}>{this.props.lefttitle}</Button>
+              <Button onClick={this.props.onClickLeft}><Icon  name='angle left' /></Button>
               </span>):(<span className="leftlnk"></span>)
           }
 

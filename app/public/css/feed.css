@@ -339,6 +339,11 @@
     display: flex;
     position: relative;
 }
+
+
+.commentInfoPage .th{
+    flex-shrink: 0;
+}
 .feedPage{
     display: flex;
     flex-direction: column;
@@ -374,5 +379,10 @@
     width: 35px;
     border-radius: 35px;
 }
-
-
+.feedPage .list-view-section-body >div{
+    margin-bottom: 10px;
+}
+.feedPage .ui.input input{
+    width: 100%;
+    display:block;
+}

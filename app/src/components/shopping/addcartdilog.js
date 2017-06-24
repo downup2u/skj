@@ -96,12 +96,13 @@ let Page = ({proid, show, number, dispatch, products, loginsuccess, history, typ
     }
 
     return (
-        <div className={showstyle}
+        <div className={showstyle} 
              onClick={()=>{hidedilog()}}
              >
             <div 
                 className={translatestyle} 
                 id="iosActionsheet"
+                style={{background:"#FFF"}}
                 onClick={(e)=>{stopDefault(e)}}
                 >
                 <div className="addcartdilogProinfo">

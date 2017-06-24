@@ -195,3 +195,10 @@ export const wait_getuserpointdetails_result = createAction('wait_getuserpointde
 //查看物流
 export const expressquery_request = createAction('expressquery_request');
 export const expressquery_result = createAction('expressquery_result');
+
+
+//
+export const set_cartslist = createAction('set_cartslist');
+export const del_cartslist = createAction('del_cartslist');
+
+

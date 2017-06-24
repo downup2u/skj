@@ -6,7 +6,8 @@ import {
     uicommentimg,
     uiaddcartdilog,
     getsystemconfig_result,
-    setmsgcount
+    setmsgcount,
+    set_innerheight
 } from '../actions/index.js';
 
 
@@ -34,7 +35,8 @@ const initial = {
         productid1: '',
         productid2: '',
 
-        newmsgnumber:0
+        newmsgnumber:0,
+        innerheight : 0,
     },
 
 };
@@ -62,6 +64,11 @@ const app = createReducer({
     },
     [uicommentimg]: (state, payload) => {
         return { ...state, ...payload };
+    },
+
+    [set_innerheight]:(state) => {
+        localStorage.setItem('innerheight',window.innerHeight);
+        return { ...state, innerheight : window.innerHeight };
     },
 }, initial.app);
 
