@@ -1,5 +1,5 @@
 
-const maclen = 12;
+const maclen = 6;
 const macoffset = 1;
 const lengthoffset = macoffset + maclen;
 const cmdoffset = lengthoffset + 2;
