@@ -138,11 +138,8 @@ let Page = (props)=> {
                     {
                       _.map(mydevicelist,(deviceid)=>{
                           let tmpdevice = devices[deviceid];
-                          let {name,total,modeltype,detaillist} = tmpdevice.realtimedata;
+                          let {name,total,modeltype} = tmpdevice;
                           let getdata = _.get(tmpdevice,'realtimedata.getdata',false);
-                          if(!getdata){
-                            return (<div key={deviceid}>未获取到数据</div>);
-                          }
                           return (
                           <Slide
                               className="Demo-swiper__slide"
@@ -150,12 +147,13 @@ let Page = (props)=> {
                               >
                               <div className="headContent">
                                   <img src="img/1.png"/>
+                                  {getdata &&
                                   <div className="headContentInfo">
                                       <span className="i1">{modeltype}</span>
                                       <span className="i2">{name}</span>
                                       <span className="i3"><span>可直饮</span></span>
                                       <span className="i4">共净化{total}L</span>
-                                  </div>
+                                  </div>}
                               </div>
                           </Slide>);
                       })
