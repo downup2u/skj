@@ -61,6 +61,7 @@ const RealtimedatalistEdit = (props) => {
             <DisabledInput label="原水结果" source="leftmodel.resultstring" />
             <DisabledInput label="净水名字" source="rightmodel.name" />
             <DisabledInput label="净水结果" source="rightmodel.resultstring" />
+            <BooleanField label="是否断水" source="iswatercut"  elStyle={{ float: 'left' }}/>
             <DateField label="更新时间" source="updated_at" showTime />
             <BooleanInput label="是否获取到数据" source="getdata" defaultValue={true} />
           </SimpleForm>

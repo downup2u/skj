@@ -37,7 +37,7 @@ exports.gettestbuf_sendcmd = ()=>{
 }
 //---for test---
 exports.gettestbuf_data = (mac)=>{
-  let bufdata = Buffer.allocUnsafe(18);
+  let bufdata = Buffer.allocUnsafe(19);
 
   let dataoffset = 0;
   dataoffset = bufdata.writeInt16BE(220, dataoffset);//原水流量数
@@ -49,6 +49,7 @@ exports.gettestbuf_data = (mac)=>{
   dataoffset = bufdata.writeInt16BE(34, dataoffset);//1微米pp滤芯已用天数
   dataoffset = bufdata.writeInt16BE(34, dataoffset);//反渗透RO膜已用天数
   dataoffset = bufdata.writeInt16BE(55, dataoffset);//后置活性炭已用天数
+  bufdata[18] = 0x01;
   bufstring = bufdata.toString('hex');
   console.log(`数据部分:${bufstring}`);
   let testbufdata = bufget(mac,0,bufdata);
