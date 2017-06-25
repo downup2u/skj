@@ -53,7 +53,7 @@ exports.gettestbuf_data = (mac)=>{
   dataoffset = bufdata.writeInt16BE(getRandomArbitrary(0,100), dataoffset);//1微米pp滤芯已用天数
   dataoffset = bufdata.writeInt16BE(getRandomArbitrary(0,100), dataoffset);//反渗透RO膜已用天数
   dataoffset = bufdata.writeInt16BE(getRandomArbitrary(0,100), dataoffset);//后置活性炭已用天数
-  bufdata[18] = getRandomArbitrary(0,1);
+  bufdata[18] = getRandomArbitrary(0,10)%2;
   bufstring = bufdata.toString('hex');
   console.log(`数据部分:${bufstring}`);
   let testbufdata = bufget(mac,0,bufdata);
