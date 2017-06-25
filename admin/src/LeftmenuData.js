@@ -127,6 +127,8 @@ export default [
           { name: 'user', icon: <UserIcon /> },
           { name: 'mycoupon', icon: <MycouponIcon /> },
           { name: 'withdrawcash', icon: <UserIcon /> },
+          { name: 'device', icon: <UserIcon /> },
+          { name: 'realtimedata', icon: <UserIcon /> },
         ]
       },
 

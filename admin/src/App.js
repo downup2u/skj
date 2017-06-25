@@ -29,7 +29,8 @@ import {NewslistCreate,NewslistList,NewslistEdit,NewslistShow} from './component
 import {WithdrawcashlistList,WithdrawcashlistEdit,WithdrawcashlistShow} from './components/withdrawcash/index.js';
 import {OrderlistList,OrderlistEdit} from './components/orders/index.js';
 import {AboutlistList,AboutlistEdit,AboutlistCreate} from './components/abouts/index.js';
-
+import {DevicelistList,DevicelistEdit} from './components/device/index';
+import {RealtimedatalistList,RealtimedatalistEdit} from './components/realtimedata/index';
 import restClient from './restClient';
 class App extends Component {
      render() {
@@ -59,6 +60,8 @@ class App extends Component {
                 <Resource name="feedback" list={FeedbackList} show={FeedbackShow} />
                 <Resource name="coupon" list={CouponlistList} edit={CouponlistEdit} create={CouponlistCreate}  remove={Delete} />
                 <Resource name="mycoupon" list={MycouponlistList} edit={MycouponlistEdit} create={MycouponlistCreate}  remove={Delete} />
+                <Resource name="device" list={DevicelistList} edit={DevicelistEdit}  remove={Delete} />
+                <Resource name="realtimedata" list={RealtimedatalistList} edit={RealtimedatalistEdit}  remove={Delete} />
                 <Resource name="user" list={UserlistList} show={UserlistShow} edit={UserlistEdit} />
                 <Resource name="news" list={NewslistList} edit={NewslistEdit} create={NewslistCreate}  remove={Delete} />
                 <Resource name="withdrawcash" list={WithdrawcashlistList}  edit={WithdrawcashlistEdit}/>

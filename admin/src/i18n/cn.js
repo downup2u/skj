@@ -27,6 +27,17 @@ export default {
     banner:{
       name: '广告编辑 |||| 广告编辑',
     },
+    device:{
+      name: '设备管理 |||| 设备管理',
+    },
+    realtimedata:{
+      name: '设备实时数据 |||| 设备实时数据',
+      fields:{
+        name:'名字',
+        leftpecent:'剩余百分比',
+        leftday:'剩余天数'
+      }
+    },
     product:{
       name: '产品管理 |||| 产品管理',
       fields:{
