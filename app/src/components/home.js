@@ -6,6 +6,7 @@ import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../node_modules/react-dynamic-swiper/lib/styles.css';
 import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
+import {ui_setcurrentdeviceid} from '../actions/index.js';
 
 let swiperOptions = {
     navigation: false,
@@ -55,15 +56,38 @@ let Page = (props)=> {
         width: "60%"
     };
 
+    let onChangeDevice =(deviceid)=>{
+        //改变设备时
+        props.dispatch(ui_setcurrentdeviceid(deviceid));
+    }
+
     let onClickNewDevice = ()=> {
         props.history.push('/addnewdevice');
     }
     let onClickDevicelist = ()=> {
         props.history.push('/devicelist');
     };
-    const {curdevicedata} = props;
-    let {name,total,modeltype,leftmodel,rightmodel,detaillist,getdata} = curdevicedata;
-    getdata = true;//是否获取到数据
+    const {curdeviceid,mydevicelist,devices} = props;
+    if(mydevicelist.length === 0){
+      return (<div>当前没有设备,请新建</div>);
+    }
+
+    let curdevice = devices[curdeviceid];
+    if(!curdevice){
+      return (<div>当前设备不可用</div>);
+    }
+
+    let curdevicedata = curdevice.realtimedata;
+    if(!curdevicedata){
+      return (<div>当前设备无数据</div>);
+    }
+
+    let {detaillist,leftmodel,rightmodel} = curdevicedata;
+    let getdata = _.get(curdevicedata,'getdata',false);
+    if(!getdata){
+      return (<div>当前设备未获取到数据</div>);
+    }
+    //getdata = true;//是否获取到数据
     let detaillistco = [];
     if(getdata){//是否获取到数据
       _.map(detaillist,(detail)=> {
@@ -88,49 +112,6 @@ let Page = (props)=> {
       });
     }
 
-    // let devicedata =
-    // {
-    //     name:getgrade(total,deviceconfig.gradetotal),
-    //     total:`${total}`,
-    //     modeltype:'TDS002',
-    //     leftmodel:{
-    //         name:`原水TDS-${data01}`,
-    //         resultstring:getgrade(data01,deviceconfig.gradeleft),
-    //     },
-    //     rightmodel:{
-    //         name:`净水TDS-${data23}`,
-    //         resultstring:getgrade(data23,deviceconfig.graderight),
-    //     },
-    //     detaillist:
-    //         [
-    //             {
-    //                 name:'5微米PP滤芯',
-    //                 leftday:`${left89}`,
-    //                 leftpecent:`${leftpecent89}`,
-    //             },
-    //             {
-    //                 name:'颗粒活性炭',
-    //                 leftday:`${left1011}`,
-    //                 leftpecent:`${leftpecent1011}`,
-    //             },
-    //             {
-    //                 name:'1微米PP滤芯',
-    //                 leftday:`${left1011}`,
-    //                 leftpecent:`${leftpecent1011}`,
-    //               },
-    //             {
-    //                 name:'反渗透RO膜',
-    //                 leftday:`${left1415}`,
-    //                 leftpecent:`${leftpecent1415}`,
-    //               },
-    //             {
-    //                 name:'后置活性炭',
-    //                 leftday:`${left1617}`,
-    //                 leftpecent:`${leftpecent1617}`,
-    //               },
-    //
-    //         ],
-    // };
 
     return (
         <div className="homePageWamp">
@@ -149,37 +130,36 @@ let Page = (props)=> {
                     swiperOptions={{slidesPerView: 'auto'}}
                     {...swiperOptions}
                     onSlideChangeEnd={(swiper, event) => {
-                        console.log("change swiper");
+                        console.log(swiper.index);
+                        let curdeviceid = detaillist[swiper.index];
+                        onChangeDevice(curdeviceid);
                     }}
                     >
-
-                    <Slide
-                        className="Demo-swiper__slide"
-                        >
-                        <div className="headContent">
-                            <img src="img/1.png"/>
-                            <div className="headContentInfo">
-                                <span className="i1">{modeltype}</span>
-                                <span className="i2">{name}</span>
-                                <span className="i3"><span>可直饮</span></span>
-                                <span className="i4">共净化{total}L</span>
-                            </div>
-                        </div>
-                    </Slide>
-
-                    <Slide
-                        className="Demo-swiper__slide"
-                        >
-                        <div className="headContent">
-                            <img src="img/1.png"/>
-                            <div className="headContentInfo">
-                                <span className="i1">TDS002</span>
-                                <span className="i2">优</span>
-                                <span className="i3"><span>可直饮</span></span>
-                                <span className="i4">共净化2800L</span>
-                            </div>
-                        </div>
-                    </Slide>
+                    {
+                      _.map(mydevicelist,(deviceid)=>{
+                          let tmpdevice = devices[deviceid];
+                          let {name,total,modeltype,detaillist} = tmpdevice.realtimedata;
+                          let getdata = _.get(tmpdevice,'realtimedata.getdata',false);
+                          if(!getdata){
+                            return (<div key={deviceid}>未获取到数据</div>);
+                          }
+                          return (
+                          <Slide
+                              className="Demo-swiper__slide"
+                              key={deviceid}
+                              >
+                              <div className="headContent">
+                                  <img src="img/1.png"/>
+                                  <div className="headContentInfo">
+                                      <span className="i1">{modeltype}</span>
+                                      <span className="i2">{name}</span>
+                                      <span className="i3"><span>可直饮</span></span>
+                                      <span className="i4">共净化{total}L</span>
+                                  </div>
+                              </div>
+                          </Slide>);
+                      })
+                    }
 
                 </Swiper>
 
@@ -192,7 +172,6 @@ let Page = (props)=> {
             </div>
 
             <div className="HomeList">
-
                 <div className="ListTitle">
                     <div>滤芯状态</div>
                     <div>断水更换<Radio toggle/></div>
@@ -200,16 +179,14 @@ let Page = (props)=> {
                 <ul style={list}>
                     {detaillistco}
                 </ul>
-
             </div>
-
         </div>
     );
 }
 
 
-const mapStateToProps = ({devicedata}) => {
-    return devicedata;
+const mapStateToProps = ({device}) => {
+    return {...device};
 };
 
 Page = connect(mapStateToProps)(Page);

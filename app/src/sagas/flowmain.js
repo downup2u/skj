@@ -74,6 +74,7 @@ function* handleIOWithAuth(socket) {
         console.log("未登录!");
         yield take(`${login_result}`);
         console.log("登录成功!");
+
         let fnsz = data.sendmessageauthfnsz;
 
         let tasksz =[];

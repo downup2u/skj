@@ -30,7 +30,7 @@ exports.bufmaccmd = bufmaccmd;
 exports.bufget = bufget;
 
 exports.gettestbuf_sendcmd = ()=>{
-  const testbuf = bufmaccmd('0800200A8C6D',0x00,0x01);
+  const testbuf = bufmaccmd('0800200a8c6d',0x00,0x01);
   let bufstring = testbuf.toString('hex');
   console.log(`发送命令:${bufstring}`);
   return testbuf;
@@ -51,7 +51,7 @@ exports.gettestbuf_data = ()=>{
   dataoffset = bufdata.writeInt16BE(45, dataoffset);//后置活性炭已用天数
   bufstring = bufdata.toString('hex');
   console.log(`数据部分:${bufstring}`);
-  let testbufdata = bufget('0800200A8C6D',0,bufdata);
+  let testbufdata = bufget('0800200a8c6d',0,bufdata);
   bufstring = testbufdata.toString('hex');
   console.log(`数据全部:${bufstring}`);
   return testbufdata;

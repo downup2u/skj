@@ -6,8 +6,7 @@ import {
     createdevice_result,
     getdevicelist_result,
     deletedevice_result,
-    deletedevice_confirmpopshow,
-    deletedevice_confirmpophide,
+    ui_setcurrentdeviceid,
     serverpush_devicedata,
     logout_result
 } from '../actions/index.js';
@@ -16,18 +15,18 @@ import _ from 'lodash';
 
 const initial = {
     device: {
-        mydevicelist: [],
-        curdevice: '',
-        devices:{},
-        isconfirmshow: false,
-        poptitle: '',
-        popmsg: '',
-        deleteingdevice: {}
+        mydevicelist: [],//设备ID
+        curdeviceid: '',//主页-当前设备id
+        devices:{},//数据字典
     },
 };
 
 
 const device = createReducer({
+    [ui_setcurrentdeviceid]:(state, payload)=>{
+        let curdeviceid = payload;
+        return { ...state,curdeviceid};
+    },
     [logout_result]:(state, payload)=>{
         return { ...initial.device};
     },
@@ -57,8 +56,10 @@ const device = createReducer({
         let {mydevicelist} = payload;
         let newdocs = normalizrdevices({list:mydevicelist.docs});
         console.log(`getdevicelist_result==>${JSON.stringify(newdocs)}`);
+        let curdeviceid = mydevicelist.docs.length > 0?mydevicelist.docs[0]._id:'';
         return {
           ...state,
+          curdeviceid,
           devices:{
             ...newdocs.entities.devices,
           },
@@ -79,16 +80,7 @@ const device = createReducer({
           devices
         };
     },
-    [deletedevice_confirmpopshow]: (state, payload) => {
-        // isconfirmshow:false,
-        // poptitle:'',
-        // popmsg:''
-        return { ...state,isconfirmshow:true,
-            poptitle:payload.poptitle,popmsg:payload.popmsg,deleteingdevice:payload.deleteingdevice};
-    },
-    [deletedevice_confirmpophide]: (state, payload) => {
-        return { ...state,isconfirmshow:false};
-    },
+
 
 }, initial.device);
 

@@ -1,5 +1,7 @@
 import { put,takeEvery} from 'redux-saga/effects';
 import {
+  login_result,
+  getdevicelist_request,
   sendauth_result,
   createaddress_result,
   wait_createaddress_result,
@@ -350,7 +352,16 @@ export function* wsrecvsagaflow() {
   });
 
   yield takeEvery(`${setuseralerttopicdeleted_result}`, function*(action) {
-      
+
+  });
+
+  yield takeEvery(`${login_result}`, function*(action) {
+    yield put(getdevicelist_request({
+      query: {},
+      options: {
+          page: 1,
+          limit: 100,
+      }}));
   });
 
 }

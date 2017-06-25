@@ -16,9 +16,7 @@ export const getdevicelist_result = createAction('device.getdevicelist_result');
 export const deletedevice_request = createAction('device.deletedevice_request');
 export const deletedevice_result = createAction('device.deletedevice_result');
 
-export const deletedevice_confirmpopshow =  createAction('device.deletedevice_confirmpopshow');
-export const deletedevice_confirmpophide =  createAction('device.deletedevice_confirmpophide');
-
+//======设备数据部分======
 export const serverpush_devicedata = createAction('device.serverpush_devicedata');
 
 export const senddevicecmd_request = createAction('device.senddevicecmd_request');

@@ -10,7 +10,7 @@ export const hidepopmessage = createAction('hidepopmessage');
 
 //点击显示大图
 export const uicommentimg = createAction('forum.uicommentimg');
-
+export const ui_setcurrentdeviceid = createAction('ui_setcurrentdeviceid');
 //滚动事件
 export const uiinfinitepage_init = createAction('uiinfinitepage_init');
 export const uiinfinitepage_getdata = createAction('uiinfinitepage_getdata');

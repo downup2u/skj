@@ -7,7 +7,6 @@ import Swipeout from 'rc-swipeout';
 import 'rc-swipeout/assets/index.css';
 import { connect } from 'react-redux';
 import {getdevicelist_request,deletedevice_request} from '../actions/index.js';
-import {deletedevice_confirmpopshow,deletedevice_confirmpophide} from '../actions/index.js';
 import { Confirm } from 'semantic-ui-react';
 import _ from 'lodash';
 
