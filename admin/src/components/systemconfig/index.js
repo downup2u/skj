@@ -39,10 +39,10 @@ const SystemconfigShow = (props) => (
            <SimpleShowLayout>
                <TextField  label="正常运费" source="expressfee" />
                <TextField  label="免运费金额" source="expressfeeforfree" />
-                 <ReferenceField label="显示在商城首页的套餐(分类）" source="productcategoryid1" reference="category" addLabel={true}>
+                 <ReferenceField label="显示在商城首页的套餐(分类）" source="productcategoryid1" reference="category" addLabel={true} allowEmpty>
                  <TextField source="name" />
                  </ReferenceField>
-                 <ReferenceField label="显示在商城首页的商用一体机(分类）" source="productcategoryid2" reference="category" addLabel={true}>
+                 <ReferenceField label="显示在商城首页的商用一体机(分类）" source="productcategoryid2" reference="category" addLabel={true} allowEmpty>
                  <TextField source="name" />
                  </ReferenceField>
                  <TextField  label="一级分销佣金" source="bonuslevel1" />

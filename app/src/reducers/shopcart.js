@@ -22,7 +22,6 @@ const initial = {
         toordercarts:{},
         cartsform : {},
         cartslist :{},
-        listchange : 0
     },
 };
 
@@ -52,7 +51,7 @@ const carts = createReducer({
             let cartslist = state.cartslist;
             cartslist[item._id] = item;
             return  {...state,toordercarts:{...toordercarts},cartslist:{...cartslist}};
-        
+
         },
         [ui_cartooder_additem]:(state, item) => {
             let toordercarts = state.toordercarts;
@@ -67,7 +66,7 @@ const carts = createReducer({
         },
 
         [set_cartslist]: (state, list) => {
-            
+
             let cartslist = {};
             _.map(list.payload, (o, index)=>{
                 cartslist[o._id] = o;
@@ -78,11 +77,9 @@ const carts = createReducer({
         },
 
         [del_cartslist]:(state, item) => {
-            
-            let cartslist = state.cartslist;
-            let listchange = state.listchange++;
+            let cartslist = {...state.cartslist};
             delete cartslist[item._id];
-            return  {...state,cartslist, listchange};
+            return  {...state,cartslist};
         },
 
 }, initial.carts);

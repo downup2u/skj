@@ -277,13 +277,13 @@ export class Cartlist extends Component {
                         )
                     })
                 }
-                
+
             </div>
         )
     }
 }
-let dataCartlist = ({shopcart:{cartslist,listchange}}) => {
-    return {cartslist,listchange};
+let dataCartlist = ({shopcart:{cartslist}}) => {
+    return {cartslist};
 }
 Cartlist = connect(dataCartlist)(Cartlist);
 
