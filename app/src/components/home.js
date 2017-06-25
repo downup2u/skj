@@ -130,15 +130,15 @@ let Page = (props)=> {
                     swiperOptions={{slidesPerView: 'auto'}}
                     {...swiperOptions}
                     onSlideChangeEnd={(swiper, event) => {
-                        console.log(swiper.index);
-                        let curdeviceid = detaillist[swiper.index];
+                        console.log(swiper.activeIndex);
+                        let curdeviceid = mydevicelist[swiper.activeIndex];
                         onChangeDevice(curdeviceid);
                     }}
                     >
                     {
                       _.map(mydevicelist,(deviceid)=>{
                           let tmpdevice = devices[deviceid];
-                          let {name,total,modeltype} = tmpdevice;
+                          let {name,total,modeltype} = tmpdevice.realtimedata;
                           let getdata = _.get(tmpdevice,'realtimedata.getdata',false);
                           return (
                           <Slide
