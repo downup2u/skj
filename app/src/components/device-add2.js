@@ -45,7 +45,22 @@ let Page = (props) => {
   );
 }
 
-const mapStateToProps = ({wifi}) => {
+const mapStateToProps = ({wifi,device:{mydevicelist,devices}}) => {
+  //mydevicelist,devices <--可以获取设备id的数组
+  let devicemaclist = [];
+  _.map(mydevicelist,(id)=>{
+    let devobj = devices[id];
+    devicemaclist.push(devobj.deviceid);
+  });
+
+  _.map(wifi.devicelist,(devobj)=>{
+    let mac = devobj.mac;
+    //
+    let id = mac;
+    //判断id是否在devicemaclist，在就表示灰色，不能被添加
+    devobj.hasexits = true;
+  });
+  //devicelist<---mac
   //Mac地址冒号去，并转为大写
     return {...wifi};
 }
