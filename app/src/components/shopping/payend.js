@@ -18,7 +18,8 @@ import {
     updata_orderpaydata,
     set_weui,
     updata_logisticsinfo_logisticsinfo,
-    evaluation_data
+    evaluation_data,
+    payorder_request
 } from '../../actions';
 
 import {onclickpay} from '../../env/pay';
@@ -81,25 +82,25 @@ export class Page extends Component {
         }
 
 
-        let payload = {
-            _id:orderinfo._id,
-            data:{...orderinfo}
-        };
+        dispatch(payorder_request({
+          query:{_id:orderinfo._id},
+          data:orderinfo
+        }));
 
-        dispatch(myorderupdateone(payload)).then((result)=>{
-            onclickpay({orderinfo, paytype, dispatch},(result)=>{
-                if(paytype=="leftbalance"){
-                    this.props.dispatch(
-                        set_weui({toast:{
-                            show : true,
-                            text : "订单支付成功",
-                            type : "success"
-                        }})
-                    )
-                }
-                //console.log(`获得数据：${result}`);
-            });
-        });
+        // dispatch(myorderupdateone(payload)).then((result)=>{
+        //     onclickpay({orderinfo, paytype, dispatch},(result)=>{
+        //         if(paytype=="leftbalance"){
+        //             this.props.dispatch(
+        //                 set_weui({toast:{
+        //                     show : true,
+        //                     text : "订单支付成功",
+        //                     type : "success"
+        //                 }})
+        //             )
+        //         }
+        //         //console.log(`获得数据：${result}`);
+        //     });
+        // });
 
     };
     //设置支付方式
@@ -422,9 +423,6 @@ let mapStateToProps = ({shop,app,shoporder,userlogin:{balance,point,defaultaddre
         return { orderinfo:{...orderinfo}};
     }
     if(orderinfo.paystatus=="未支付"){
-        if(!orderinfo.hasOwnProperty("couponid")){
-            orderinfo = {...orderinfo, couponid: ''};
-        }
         //最终支付金额
         let payprice = orderinfo.orderprice;
         //扣除优惠券

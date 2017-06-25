@@ -75,7 +75,6 @@ export class Page extends Component {
             isdeleted : false,
             orderaddress: this.props.orderAddressInfo,
             couponprice: 0,//抵扣价
-            couponid:"",
             pointprice: 0,
             point: 0,
             expressprice: parseFloat(this.props.orderExpress),//运费

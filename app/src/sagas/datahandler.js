@@ -12,7 +12,8 @@ import {
     lovetopicunadd_request,lovetopicunadd_result,
     lovecommentsadd_request,lovecommentsadd_result,
     lovecommentsunadd_request,lovecommentsunadd_result,
-
+    payorder_request,
+    payorder_result,
     createdevice_request,
     getdevicelist_request,getdevicelist_result,
     deletedevice_request,
@@ -158,6 +159,7 @@ import {
 
 //接收的对应关系
 exports.recvmessagetoresultpair = {
+  'payorder_result':payorder_result,
   'setuseralerttopicdeleted_result':setuseralerttopicdeleted_result,
   'queryuserbalance_result':queryuserbalance_result,
   'common_err':common_err,
@@ -257,6 +259,7 @@ exports.sendmessagefnsz = {
 
 //验证发送接口
 exports.sendmessageauthfnsz = {
+    'payorder':`${payorder_request}`,
     'setuseralerttopicdeleted':`${setuseralerttopicdeleted_request}`,
     'queryuserbalance':`${queryuserbalance_request}`,
     'senddevicecmd':`${senddevicecmd_request}`,
