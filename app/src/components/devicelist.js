@@ -43,8 +43,9 @@ const DeviceItem = (props)=> {
                             <span>{deviceitem.devicename}</span>
                         </div>
                         <div className="address">
-                            <span>品牌：{deviceitem.devicebrand}</span>
-                            <span>型号：{deviceitem.devicemodel}</span>
+                            <span>品牌:{deviceitem.devicebrand}</span>
+                            <span>型号:{deviceitem.devicemodel}</span>
+                            <span>设备标识:{deviceitem.deviceid}</span>
                         </div>
                     </div>
                 </div>
