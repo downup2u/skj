@@ -2,7 +2,7 @@
 
 const test = require('./protocol.js');
 const net = require('net');
-const ip = '127.0.0.1';//'114.55.89.241';//'127.0.0.1';//'114.55.89.241';//目标ip
+const ip = process.env.targetip || '127.0.0.1';//'114.55.89.241';//'127.0.0.1';//'114.55.89.241';//目标ip
 const port = 52341;//目标端口
 // const datatosend = 'aae02a84';//16进制字符串
 //
@@ -36,7 +36,7 @@ const port = 52341;//目标端口
 
 const client = net.connect({port: port,host:ip}, () => {
   // 'connect' listener
-  const buf = test.gettestbuf_data();//Buffer.from(datatosend,'hex');
+  const buf = test.gettestbuf_data(process.env.targetmac ||'0800200A8C6D');//Buffer.from(datatosend,'hex');
   let bufstring = buf.toString('hex');
   console.log(`连接上服务器【${ip}:${port}】,发送数据${bufstring}`);
   client.write(buf);

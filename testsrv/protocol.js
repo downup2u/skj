@@ -30,28 +30,28 @@ exports.bufmaccmd = bufmaccmd;
 exports.bufget = bufget;
 
 exports.gettestbuf_sendcmd = ()=>{
-  const testbuf = bufmaccmd('0800200a8c6d',0x00,0x01);
+  const testbuf = bufmaccmd(process.env.targetmac || '0800200a8c6d',0x00,0x01);
   let bufstring = testbuf.toString('hex');
   console.log(`发送命令:${bufstring}`);
   return testbuf;
 }
 //---for test---
-exports.gettestbuf_data = ()=>{
+exports.gettestbuf_data = (mac)=>{
   let bufdata = Buffer.allocUnsafe(18);
 
   let dataoffset = 0;
-  dataoffset = bufdata.writeInt16BE(100, dataoffset);//原水流量数
-  dataoffset = bufdata.writeInt16BE(200, dataoffset);//净水流量数
-  dataoffset = bufdata.writeInt16BE(120, dataoffset);//原水TDS
+  dataoffset = bufdata.writeInt16BE(220, dataoffset);//原水流量数
+  dataoffset = bufdata.writeInt16BE(320, dataoffset);//净水流量数
+  dataoffset = bufdata.writeInt16BE(10, dataoffset);//原水TDS
   dataoffset = bufdata.writeInt16BE(300, dataoffset);//净水TDS
-  dataoffset = bufdata.writeInt16BE(10, dataoffset);//5微米pp滤芯已用天数
-  dataoffset = bufdata.writeInt16BE(11, dataoffset);//颗粒活性炭已用天数
-  dataoffset = bufdata.writeInt16BE(23, dataoffset);//1微米pp滤芯已用天数
+  dataoffset = bufdata.writeInt16BE(30, dataoffset);//5微米pp滤芯已用天数
+  dataoffset = bufdata.writeInt16BE(41, dataoffset);//颗粒活性炭已用天数
+  dataoffset = bufdata.writeInt16BE(34, dataoffset);//1微米pp滤芯已用天数
   dataoffset = bufdata.writeInt16BE(34, dataoffset);//反渗透RO膜已用天数
-  dataoffset = bufdata.writeInt16BE(45, dataoffset);//后置活性炭已用天数
+  dataoffset = bufdata.writeInt16BE(55, dataoffset);//后置活性炭已用天数
   bufstring = bufdata.toString('hex');
   console.log(`数据部分:${bufstring}`);
-  let testbufdata = bufget('0800200a8c6d',0,bufdata);
+  let testbufdata = bufget(mac,0,bufdata);
   bufstring = testbufdata.toString('hex');
   console.log(`数据全部:${bufstring}`);
   return testbufdata;
