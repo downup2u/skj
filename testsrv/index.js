@@ -36,10 +36,12 @@ const port = 52341;//目标端口
 
 const client = net.connect({port: port,host:ip}, () => {
   // 'connect' listener
-  const buf = test.gettestbuf_data(process.env.targetmac ||'0800200A8C6D');//Buffer.from(datatosend,'hex');
-  let bufstring = buf.toString('hex');
-  console.log(`连接上服务器【${ip}:${port}】,发送数据${bufstring}`);
-  client.write(buf);
+  setInterval(()=>{
+    const buf = test.gettestbuf_data(process.env.targetmac ||'0800200A8C6D');//Buffer.from(datatosend,'hex');
+    let bufstring = buf.toString('hex');
+    console.log(`连接上服务器【${ip}:${port}】,发送数据${bufstring}`);
+    client.write(buf);
+  },process.env.sendinterval*1000 || 5000);
 });
 
 client.on('data', (data) => {

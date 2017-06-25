@@ -36,20 +36,24 @@ exports.gettestbuf_sendcmd = ()=>{
   return testbuf;
 }
 //---for test---
+let getRandomArbitrary =(min, max)=> {
+  return Math.random() * (max - min) + min;
+}
+
 exports.gettestbuf_data = (mac)=>{
   let bufdata = Buffer.allocUnsafe(19);
 
   let dataoffset = 0;
-  dataoffset = bufdata.writeInt16BE(220, dataoffset);//原水流量数
-  dataoffset = bufdata.writeInt16BE(320, dataoffset);//净水流量数
-  dataoffset = bufdata.writeInt16BE(10, dataoffset);//原水TDS
-  dataoffset = bufdata.writeInt16BE(300, dataoffset);//净水TDS
-  dataoffset = bufdata.writeInt16BE(30, dataoffset);//5微米pp滤芯已用天数
-  dataoffset = bufdata.writeInt16BE(41, dataoffset);//颗粒活性炭已用天数
-  dataoffset = bufdata.writeInt16BE(34, dataoffset);//1微米pp滤芯已用天数
-  dataoffset = bufdata.writeInt16BE(34, dataoffset);//反渗透RO膜已用天数
-  dataoffset = bufdata.writeInt16BE(55, dataoffset);//后置活性炭已用天数
-  bufdata[18] = 0x01;
+  dataoffset = bufdata.writeInt16BE(getRandomArbitrary(500,2000), dataoffset);//原水流量数
+  dataoffset = bufdata.writeInt16BE(getRandomArbitrary(500,2000), dataoffset);//净水流量数
+  dataoffset = bufdata.writeInt16BE(getRandomArbitrary(500,2000), dataoffset);//原水TDS
+  dataoffset = bufdata.writeInt16BE(getRandomArbitrary(500,2000), dataoffset);//净水TDS
+  dataoffset = bufdata.writeInt16BE(getRandomArbitrary(0,100), dataoffset);//5微米pp滤芯已用天数
+  dataoffset = bufdata.writeInt16BE(getRandomArbitrary(0,100), dataoffset);//颗粒活性炭已用天数
+  dataoffset = bufdata.writeInt16BE(getRandomArbitrary(0,100), dataoffset);//1微米pp滤芯已用天数
+  dataoffset = bufdata.writeInt16BE(getRandomArbitrary(0,100), dataoffset);//反渗透RO膜已用天数
+  dataoffset = bufdata.writeInt16BE(getRandomArbitrary(0,100), dataoffset);//后置活性炭已用天数
+  bufdata[18] = getRandomArbitrary(0,1);
   bufstring = bufdata.toString('hex');
   console.log(`数据部分:${bufstring}`);
   let testbufdata = bufget(mac,0,bufdata);
