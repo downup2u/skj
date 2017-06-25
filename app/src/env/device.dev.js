@@ -21,7 +21,7 @@ export const senddata = (values,fncallback)=>{
       },
       {
         name:'Wi-Fi模块2',
-        mac:'08:00:20:0A:8C:4D',
+        mac:'08:00:20:0A:8C:4C',
         ip:'192.168.9.4'
       },
     ]
