@@ -46,6 +46,7 @@ let Page = (props) => {
 }
 
 const mapStateToProps = ({wifi}) => {
+  //Mac地址冒号去，并转为大写
     return {...wifi};
 }
 Page = connect(mapStateToProps)(Page);
