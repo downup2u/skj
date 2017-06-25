@@ -14,6 +14,28 @@ let swiperOptions = {
     scrollBar: false
 };
 
+
+let Nodevice =(props)=>{
+    return (
+        <div className="nodevice">
+            <img src="img/12.png" />
+            <div className="desc">当前没有设备</div>
+            <div className="btn" onClick={()=>{props.history.push('/addnewdevice');}}>新建设备</div>
+        </div>
+    )
+}
+Nodevice = withRouter(Nodevice);
+
+let Baddevice =(props)=>{
+  return (
+    <div className="baddevice">
+        <img src="img/12.png" />
+        <div className="desc">当前设备不可用</div>
+    </div>
+  )
+}
+
+
 let Page = (props)=> {
 
     let list = {
@@ -69,12 +91,12 @@ let Page = (props)=> {
     };
     const {curdeviceid,mydevicelist,devices} = props;
     if(mydevicelist.length === 0){
-      return (<div>当前没有设备,请新建</div>);
+        return (<Nodevice />);
     }
 
     let curdevice = devices[curdeviceid];
     if(!curdevice){
-      return (<div>当前设备不可用</div>);
+      return (<Baddevice />);
     }
 
     let curdevicedata = curdevice.realtimedata;
