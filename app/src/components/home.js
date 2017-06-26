@@ -19,7 +19,7 @@ let list = {
     padding: "15px",
     margin: "0",
     flexGrow: 1,
-    background: "#FFF",
+    
     flexShrink: 0
 };
 let linestyle = (startColor, endColor, widthStyle)=> ({
@@ -80,7 +80,7 @@ let Baddevice =(props)=>{
 let DeviceDataList =(props)=>{
     const {detaillist} = props;
     return (
-        <ul style={list}>
+        <ul style={list} className="homePageList">
             {_.map(detaillist,(detail)=> {
                 let linestyleresult = linestyle("#52a3da", "#C00", `${detail.leftpecent}%`);
                 return (
@@ -228,14 +228,14 @@ let Page = (props)=> {
     }
 
     return (
-        <div className="homePageWamp" style={{height:(localStorage.getItem('innerheight')-51)+"px"}}>
+        <div className="homePageWamp">
             <div className="homePage">
 
                 <div className="toolBar">
                     <div className='left' onClick={onClickNewDevice}>
                         +
                     </div>
-                    <div className='center' style={{color:"#FFF",fontSize:"18px"}}>水质监测</div>
+                    <div className='center'>水质监测</div>
                     <div className='right' onClick={onClickDevicelist}>
                         <img src="img/head/1.png" />
                     </div>
@@ -262,7 +262,7 @@ let Page = (props)=> {
             { !!detaillist && detaillist.length>0?(
                 <DeviceDataList detaillist={detaillist}/>
             ):(
-                <div style={list}>
+                <div className="homePageList">
                 </div>
             ) }
 

@@ -23,18 +23,28 @@ let Page = (props) => {
         <div className="tt">
             <img src="img/9.png"/>
         </div>
-        <div className="fm">
+        <div className="fm" style={{paddingTop:0}}>
             <div className="device2_text">
             {
                 _.map(devicelist,(device)=>{
-                  console.log('device:' + JSON.stringify(device));
+                  //console.log('device:' + JSON.stringify(device));
+                    let listyle = device.hasexits?"sel":"";
                    return (
-                    <div key={device.mac} onClick={()=>{
-                       onClickNext(device);
-                    }}>
-                      <div>{device.name}</div>
-                      <div>{device.mac}</div>
-                      <div>{device.ip}</div>
+                    <div 
+                      key={device.mac} 
+                      onClick={()=>{
+                        onClickNext(device);
+                      }}
+                      className={listyle}
+                      >
+                      <div className="mac">
+                        <span>{device.name}</span>
+                        <span>{device.mac}</span>
+                      </div>
+                      <div className="ip">
+                        <span>{device.ip}</span>
+                        {device.hasexits && <span className="seltxt">已创建</span>}
+                      </div>
                     </div>
                   );
               })
@@ -52,17 +62,16 @@ const mapStateToProps = ({wifi,device:{mydevicelist,devices}}) => {
     let devobj = devices[id];
     devicemaclist.push(devobj.deviceid);
   });
-
   _.map(wifi.devicelist,(devobj)=>{
-    let mac = devobj.mac;
-    //
-    let id = mac;
+    let mac = devobj.mac.split(':');
+    let id = `${mac[0]}${mac[1]}${mac[2]}${mac[3]}${mac[4]}${mac[5]}`;
+    console.log(devicemaclist);
+    let have = devicemaclist.indexOf(id);
     //判断id是否在devicemaclist，在就表示灰色，不能被添加
-    devobj.hasexits = true;
+    devobj.hasexits = have!==-1;
+    return devobj;
   });
-  //devicelist<---mac
-  //Mac地址冒号去，并转为大写
-    return {...wifi};
+  return {...wifi};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;
