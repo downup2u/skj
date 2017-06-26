@@ -24,24 +24,29 @@ class Page extends React.Component {
   }
 
   componentWillMount() {
-    this.onAjax();
+    this.onAjax(this.props.query,this.props.sort,this.props.pagenumber);
   }
 
   onRefresh() {
     console.log('onRefresh');
     this.setState({ refreshing: true });
-    this.onAjax();
+    this.onAjax(this.props.query,this.props.sort,this.props.pagenumber);
   }
 
-  onAjax(){
+  onRefreshQuery(query){
+    this.setState({ refreshing: true });
+    this.onAjax(query,this.props.sort,this.props.pagenumber);
+  }
+
+  onAjax(query,sort,pagenumber){
     let querypage = 1;
     let that = this;
     this.props.dispatch(this.props.queryfun({
-        query: this.props.query,
+        query: query,
         options: {
-            sort: this.props.sort,
+            sort: sort,
             page: querypage,
-            limit: this.props.pagenumber,
+            limit: pagenumber,
         }
     })).then(({result})=> {
       that.initData = [];
@@ -180,4 +185,4 @@ Page.propTypes = {
 };
 
 
-export default connect()(Page);
+export default connect(null, null, null, { withRef: true })(Page);

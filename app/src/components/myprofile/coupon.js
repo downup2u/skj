@@ -12,6 +12,7 @@ export class Page extends Component {
 
     handleItemClick =(type)=>{
         this.props.dispatch(setulcoupontype(type));
+        this.refs.listviewpage.getWrappedInstance().onRefreshQuery({usestatus : type});
     }
 
     onClickReturn =()=>{
@@ -20,9 +21,9 @@ export class Page extends Component {
 
     updateContent = (item)=> {
         return  (
-            <div 
-                className="item" 
-                key = {item._id} 
+            <div
+                className="item"
+                key = {item._id}
                 >
                 <div className="leftcont">
                     <span><span>{item.pricediscount}</span>元</span>
@@ -47,18 +48,19 @@ export class Page extends Component {
             <div className="myCouponPage" style={{minHeight:(window.innerHeight)+"px"}}>
                 <NavBar lefttitle="返回" title="优惠券" onClickLeft={this.onClickReturn} />
                 <Menu pointing secondary>
-                    <Menu.Item name='未使用' 
-                        active={this.props.ulcoupontype === "未使用"} 
+                    <Menu.Item name='未使用'
+                        active={this.props.ulcoupontype === "未使用"}
                         onClick={()=>{this.handleItemClick('未使用')}}/>
-                    <Menu.Item name='已使用' 
-                        active={this.props.ulcoupontype === "已使用"} 
+                    <Menu.Item name='已使用'
+                        active={this.props.ulcoupontype === "已使用"}
                         onClick={()=>{this.handleItemClick('已使用')}}/>
-                    <Menu.Item name='已过期' 
-                        active={this.props.ulcoupontype === "已过期"} 
+                    <Menu.Item name='已过期'
+                        active={this.props.ulcoupontype === "已过期"}
                         onClick={()=>{this.handleItemClick('已过期')}}/>
                 </Menu>
                 <div className="myCouponList">
                     <InfinitePage
+                        ref="listviewpage"
                         pagenumber = { 20 }
                         updateContent= { this.updateContent }
                         queryfun= {mycoupongetall}
@@ -77,4 +79,3 @@ const mapStateToProps = ({shop, app}) => {
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;
-
