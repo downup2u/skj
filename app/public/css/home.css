@@ -36,6 +36,31 @@
 .homePage .toolBar .right img{
     width: 40px;
 }
+
+.homePage .nodevice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 170px;
+    height: 170px;
+    border: 1px solid #FFF;
+    color: #FFF;
+}
+.homePage .nodevice img{
+    width: 40%;
+    margin-bottom: 10px;
+}
+.homePage .nodevice .desc{
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.homePage .nodevice .btn{
+    font-size: 14px;
+    background: rgba(255,255,255,.3);
+    border-radius: 6px;
+    padding: 0 15px;
+}
 .homePageWamp {
     width: 100%;
     display: flex;
