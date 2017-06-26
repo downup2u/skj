@@ -14,9 +14,9 @@ export const getssid = (fncallback)=>{
        fncallback(data);
      }
      catch(e){
-
+       alert(`获取当前wifi信息失败了${e}`);
      }
-     alert(JSON.stringify(data));
+    //  alert(JSON.stringify(data));
    });
 }
 
@@ -30,9 +30,9 @@ export const senddata = (values,fncallback)=>{
       fncallback(data);
     }
     catch(e){
-
+      alert(`获取数据信息失败了${e}`);
     }
-    alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
   });
   /*
   values期望格式：ssid，password
