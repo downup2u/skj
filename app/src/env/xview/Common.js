@@ -215,7 +215,6 @@
        fun(result);
      };
      let jsonstring = JSON.stringify({callback:"currentLinkWifiCallBack"});
-     alert(jsonstring);
      window.xview.currentLinkWifi(jsonstring);
    }
    /**
@@ -229,7 +228,6 @@
       };
       json['callback']="prepareEasyLinkCallBack";
       let jsonstring = JSON.stringify(json);
-      alert(jsonstring);
       window.xview.prepareEasyLink(jsonstring);
     }
     /**
