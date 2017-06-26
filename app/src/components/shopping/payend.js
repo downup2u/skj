@@ -462,6 +462,9 @@ let mapStateToProps = ({shop,app,shoporder,userlogin:{balance,point,defaultaddre
         let newpoint = point - point_used;
         //修改订单积分抵扣数
         orderinfo.point = point_used;
+        //ayprice = (point * pointvsmoney * .01).toFixed(2);
+        payprice = parseFloat(payprice.toFixed(2));
+
         return { orderinfo:{...orderinfo}, payprice, newbalance, newpoint, balance, point, paystatus };
     }
 }
