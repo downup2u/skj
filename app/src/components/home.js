@@ -216,7 +216,8 @@ let Page = (props)=> {
     if(!!curdeviceid){
         curdevice = devices[curdeviceid];
         curdevicedata = _.get(curdevice,'realtimedata',false);
-        detaillist = _.get(curdevicedata,'detaillist',false);
+        detaillist = _.get(curdevice,'realtimedata.detaillist',false);
+        iswatercut  = _.get(curdevice,'realtimedata.iswatercut',false);
         //curdevicedata = !!curdevice && curdevice.hasOwnProperty("realtimedata")?curdevice.realtimedata:null;
         //detaillist = !!curdevicedata && curdevicedata.hasOwnProperty("detaillist")?curdevicedata.detaillist:false;
     }
@@ -242,8 +243,8 @@ let Page = (props)=> {
 
                 { mydevicelist.length === 0 &&  <Nodevice />}
                 { mydevicelist.length > 0 &&  <DeviceSwiper mydevicelist={mydevicelist} devices={devices} />}
-                
-                { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  && 
+
+                { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  &&
                     <HeadInfo curdevicedata={curdevicedata}/>
                 }
 
@@ -253,7 +254,7 @@ let Page = (props)=> {
                 <div className="HomeList">
                     <div className="ListTitle">
                         <div>滤芯状态</div>
-                        <div>断水更换<Radio toggle onClick={()=>{ClickRadio(iswatercut)}}/></div>
+                        <div>断水更换<Radio toggle checked={iswatercut} onClick={()=>{ClickRadio(iswatercut)}}/></div>
                     </div>
                 </div>
             }
@@ -264,7 +265,7 @@ let Page = (props)=> {
                 <div style={list}>
                 </div>
             ) }
-            
+
 
         </div>
     );

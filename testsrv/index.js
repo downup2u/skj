@@ -46,7 +46,7 @@ const client = net.connect({port: port,host:ip}, () => {
 
 client.on('data', (data) => {
   console.log(`接收到数据为${data.toString('hex')}`);
-  client.end();
+  //client.end();
 });
 
 client.on('end', () => {

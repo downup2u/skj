@@ -34,6 +34,11 @@ export class Page extends React.Component {
     //设置列表筛选条件
     handleItemClick = (status) => {
         this.props.dispatch(myOrderList_filler_set(status));
+        let filler = {};
+        if(status!=='全部'){
+          filler.orderstatus = status;
+        }
+        this.refs.listviewpage.getWrappedInstance().onRefreshQuery(filler);
     };
 
     //取消订单
@@ -217,6 +222,7 @@ export class Page extends React.Component {
                 </div>
                 <div className="orderList">
                     <InfinitePage
+                        ref="listviewpage"
                         pagenumber = {20}
                         updateContent= {this.updateContent}
                         queryfun= { myordergetall }

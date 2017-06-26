@@ -2,7 +2,9 @@
  * Created by wangxiaoqing on 2017/4/7.
  */
 import { createAction } from 'redux-act';
-
+//获取支付验证字符串
+export const payorder_request =  createAction('payorder_request');
+export const payorder_result = createAction('payorder_result');
 
 export const ui_cartooder_additem = createAction('ui_cartooder_additem');
 export const ui_cartooder_delitem = createAction('ui_cartooder_delitem');
@@ -200,5 +202,3 @@ export const expressquery_result = createAction('expressquery_result');
 //
 export const set_cartslist = createAction('set_cartslist');
 export const del_cartslist = createAction('del_cartslist');
-
-
