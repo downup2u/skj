@@ -1,5 +1,6 @@
 import React from 'react';
 import { List, EmailField } from 'admin-on-rest/lib/mui';
+import { Link } from 'react-router-dom';
 import { CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import NavigationRefresh from 'material-ui/svg-icons/navigation/refresh';
@@ -100,8 +101,44 @@ const MycouponlistShow = (props) => (
 
 
 
+const cardActionStyle = {
+    zIndex: 2,
+    display: 'inline-block',
+    float: 'right',
+};
+
+const styles = {
+    floating: {
+        margin: 0,
+        top: 'auto',
+        right: 20,
+        bottom: 60,
+        left: 'auto',
+        position: 'fixed',
+    },
+    flat: {
+        overflow: 'inherit',
+    },
+};
+
+const PostActions = ({ resource, filters, displayedFilters, filterValues, basePath, showFilter, refresh }) => (
+    <CardActions style={cardActionStyle}>
+        {filters && React.cloneElement(filters, { resource, showFilter, displayedFilters, filterValues, context: 'button' }) }
+        <CreateButton basePath={basePath} />
+        <FlatButton primary label="刷新" onClick={refresh} icon={<NavigationRefresh />} />
+        {/* Add your custom actions */}
+        <FlatButton
+        primary
+        style={styles.flat}
+        label="批量发送优惠券"
+        icon={<ContentAdd />}
+        containerElement={<Link to={`/createbatch`} />}/>
+    </CardActions>
+);
+
 const MycouponlistList = (props) => (//
-     <List title="用户优惠券列表" {...props}  filters={<MycouponFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
+     <List title="用户优惠券列表" {...props} actions={<PostActions />}
+     filters={<MycouponFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
             <TextField label="名字" source="name" />
             <ReferenceField label="用户" source="creator" reference="user" addLabel={false}>
