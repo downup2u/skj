@@ -15,8 +15,8 @@ export const senddata = (values,fncallback)=>{
     messgae:'获取成功',
     data:[
       {
-        name:'Wi-Fi模块1',
-        mac:'08:00:20:0A:8C:6D',
+        name:'模块1',
+        mac:'F8:00:20:0A:8C:6D',
         ip:'192.168.9.3'
       },
       {

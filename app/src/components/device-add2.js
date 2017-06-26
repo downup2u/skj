@@ -30,8 +30,8 @@ let Page = (props) => {
                   //console.log('device:' + JSON.stringify(device));
                     let listyle = device.hasexits?"sel":"";
                    return (
-                    <div 
-                      key={device.mac} 
+                    <div
+                      key={device.mac}
                       onClick={()=>{
                         onClickNext(device);
                       }}
@@ -63,10 +63,10 @@ const mapStateToProps = ({wifi,device:{mydevicelist,devices}}) => {
     devicemaclist.push(devobj.deviceid);
   });
   _.map(wifi.devicelist,(devobj)=>{
-    let mac = devobj.mac.split(':');
-    let id = `${mac[0]}${mac[1]}${mac[2]}${mac[3]}${mac[4]}${mac[5]}`;
+    let mac = devobj.mac.replace(/:/g,'');
+    mac = mac.toUpperCase();
     console.log(devicemaclist);
-    let have = devicemaclist.indexOf(id);
+    let have = devicemaclist.indexOf(mac);
     //判断id是否在devicemaclist，在就表示灰色，不能被添加
     devobj.hasexits = have!==-1;
     return devobj;
