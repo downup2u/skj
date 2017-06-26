@@ -8,7 +8,7 @@ import { mycollectiongetall,mycollectiondelone } from '../../actions/sagacallbac
 import { uiinfinitepage_deleteitem } from '../../actions';
 import InfinitePage from '../controls/listview';
 //import Paging from '../tools/paging';
-
+//我的收藏暂时不修改了（需要设为Component,并且刷新什么的）
 let Page =(props)=> {
 
     //删除收藏
