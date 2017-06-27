@@ -5,6 +5,10 @@ import { Card, CardTitle } from 'material-ui/Card';
 import compose from 'recompose/compose';
 import inflection from 'inflection';
 import { CardActions } from 'material-ui/Card';
+import { showNotification as showNotificationAction } from 'admin-on-rest';
+import { push as pushAction } from 'react-router-redux';
+import config from '../../env/config.js';
+
 const cardActionStyle = {
     zIndex: 2,
     display: 'inline-block',
@@ -22,6 +26,16 @@ class Create extends Component {
 
     handleSubmit = (record) =>{
       console.log(`新建一条记录:${JSON.stringify(record)}`);
+      const { push, showNotification }= this.props;
+      fetch(`${config.serverurl}/createmycouponsbatch`, { method: 'POST', body: record })
+            .then(() => {
+                showNotification('批量新建优惠券成功');
+                push('/mycoupon');
+            })
+            .catch((e) => {
+                console.error(e);
+                showNotification('批量新建优惠券失败', 'warning')
+            });
     }
 
     render() {
@@ -53,6 +67,8 @@ class Create extends Component {
 }
 
 Create.propTypes = {
+    push: PropTypes.func,
+    showNotification: PropTypes.func,
     actions: PropTypes.element,
     children: PropTypes.element,
     crudCreate: PropTypes.func.isRequired,
@@ -77,7 +93,11 @@ function mapStateToProps(state) {
 const enhance = compose(
     connect(
         mapStateToProps,
-        { crudCreate: crudCreateAction },
+        {
+          crudCreate: crudCreateAction,
+          showNotification: showNotificationAction,
+          push: pushAction,
+        },
     ),
     translate,
 );
