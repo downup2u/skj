@@ -111,13 +111,13 @@ let DeviceSwiper =(props)=>{
         //改变设备时
         props.dispatch(ui_setcurrentdeviceid(deviceid));
     }
-    const {mydevicelist, devices, curdeviceid} = props;
-    let showindex = mydevicelist.indexOf(curdeviceid);
+    const {mydevicelist, devices} = props;
+    //let showindex = mydevicelist.indexOf(curdeviceid);
     return (
         <Swiper
             swiperOptions={{
                 slidesPerView: 'auto',
-                initialSlide : showindex
+                initialSlide : 0
             }}
             {...swiperOptions}
             onSlideChangeEnd={(swiper, event) => {
@@ -176,103 +176,91 @@ let HeadInfo =(props)=>{
 }
 
 
+export class Page extends Component {
 
-let Page = (props)=> {
-
-    let onClickNewDevice = ()=> {
-        props.history.push('/addnewdevice');
+    componentWillMount(){
+        const {mydevicelist} = this.props;
+        if(!!mydevicelist){
+            if(mydevicelist.length>0){
+                this.props.dispatch(ui_setcurrentdeviceid(mydevicelist[0]));
+            }
+        }
     }
-    let onClickDevicelist = ()=> {
-        props.history.push('/devicelist');
-    };
+    
+    render(){
 
-    //curdeviceid当前设备
-    //mydevicelist我的设备列表
-    //数据库设备列表
-    const {curdeviceid,mydevicelist,devices} = props;
+        const {props} = this;
+        const {curdeviceid,mydevicelist,devices} = props;
 
-    //判断是否有设备
-    // if(mydevicelist.length === 0){
-    //     return (<Nodevice />);
-    // }
+        let onClickNewDevice = ()=> {
+            props.history.push('/addnewdevice');
+        }
+        let onClickDevicelist = ()=> {
+            props.history.push('/devicelist');
+        };
 
-    //判断设备是否可用
-    // let curdevice = devices[curdeviceid];
-    // if(!curdevice){
-    //   return (<Baddevice />);
-    // }
-    //判断设备是否有数据
-    // let curdevicedata = curdevice.realtimedata;
-    // if(!curdevicedata){
-    //   return (<Baddevice />);
-    // }
+        
+        let curdevice = null;
+        let curdevicedata = null;
+        let detaillist = false;
+        let iswatercut = false;
+        if(!!curdeviceid){
+            curdevice = devices[curdeviceid];
+            curdevicedata = _.get(curdevice,'realtimedata',false);
+            detaillist = _.get(curdevice,'realtimedata.detaillist',false);
+            iswatercut  = _.get(curdevice,'realtimedata.iswatercut',false);
+            //curdevicedata = !!curdevice && curdevice.hasOwnProperty("realtimedata")?curdevice.realtimedata:null;
+            //detaillist = !!curdevicedata && curdevicedata.hasOwnProperty("detaillist")?curdevicedata.detaillist:false;
+        }
 
-    // let {detaillist,leftmodel,rightmodel} = curdevicedata;
-    // let getdata = _.get(curdevicedata,'getdata',false);
-    // if(!getdata){
-    //   return (<Baddevice />);
-    // }
-    //getdata = true;//是否获取到数据
-    let curdevice = null;
-    let curdevicedata = null;
-    let detaillist = false;
-    let iswatercut = false;
-    if(!!curdeviceid){
-        curdevice = devices[curdeviceid];
-        curdevicedata = _.get(curdevice,'realtimedata',false);
-        detaillist = _.get(curdevice,'realtimedata.detaillist',false);
-        iswatercut  = _.get(curdevice,'realtimedata.iswatercut',false);
-        //curdevicedata = !!curdevice && curdevice.hasOwnProperty("realtimedata")?curdevice.realtimedata:null;
-        //detaillist = !!curdevicedata && curdevicedata.hasOwnProperty("detaillist")?curdevicedata.detaillist:false;
-    }
+        let ClickRadio = (iswatercut)=> {
+            let deviceid = devices[curdeviceid].deviceid;
+            props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
+        }
 
-    let ClickRadio = (iswatercut)=> {
-        let deviceid = devices[curdeviceid].deviceid;
-        props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
-    }
+        return (
+            <div className="homePageWamp">
+                <div className="homePage">
 
-    return (
-        <div className="homePageWamp">
-            <div className="homePage">
-
-                <div className="toolBar">
-                    <div className='left' onClick={onClickNewDevice}>
-                        +
+                    <div className="toolBar">
+                        <div className='left' onClick={onClickNewDevice}>
+                            +
+                        </div>
+                        <div className='center'>水质监测</div>
+                        <div className='right' onClick={onClickDevicelist}>
+                            <img src="img/head/1.png" />
+                        </div>
                     </div>
-                    <div className='center'>水质监测</div>
-                    <div className='right' onClick={onClickDevicelist}>
-                        <img src="img/head/1.png" />
-                    </div>
+
+                    { mydevicelist.length === 0 &&  <Nodevice />}
+                    { mydevicelist.length > 0 &&  <DeviceSwiper mydevicelist={mydevicelist} devices={devices} />}
+
+                    { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  &&
+                        <HeadInfo curdevicedata={curdevicedata}/>
+                    }
+
                 </div>
 
-                { mydevicelist.length === 0 &&  <Nodevice />}
-                { mydevicelist.length > 0 &&  <DeviceSwiper mydevicelist={mydevicelist} devices={devices} curdeviceid={curdeviceid} />}
-
-                { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  &&
-                    <HeadInfo curdevicedata={curdevicedata}/>
+                { !!detaillist && detaillist.length>0 &&
+                    <div className="HomeList">
+                        <div className="ListTitle">
+                            <div>滤芯状态</div>
+                            <div>断水更换<Radio toggle checked={iswatercut} onClick={()=>{ClickRadio(iswatercut)}}/></div>
+                        </div>
+                    </div>
                 }
 
-            </div>
-
-            { !!detaillist && detaillist.length>0 &&
-                <div className="HomeList">
-                    <div className="ListTitle">
-                        <div>滤芯状态</div>
-                        <div>断水更换<Radio toggle checked={iswatercut} onClick={()=>{ClickRadio(iswatercut)}}/></div>
+                { !!detaillist && detaillist.length>0?(
+                    <DeviceDataList detaillist={detaillist}/>
+                ):(
+                    <div className="homePageList">
                     </div>
-                </div>
-            }
-
-            { !!detaillist && detaillist.length>0?(
-                <DeviceDataList detaillist={detaillist}/>
-            ):(
-                <div className="homePageList">
-                </div>
-            ) }
+                ) }
 
 
-        </div>
-    );
+            </div>
+        );
+    }
 }
 
 

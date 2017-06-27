@@ -80,37 +80,37 @@ let BinduserForm = (props)=> {
 const validate = values => {
     const errors = {}
     if (!values.username) {
-        errors.username = '必须填写用户名';
+        errors.username = '必填项';
     }
     else {
         let phone = values.username;
         phone = phone.replace(/\s/g, '');
         if (phone.match(/\D/g) || phone.length !== 11 || !phone.match(/^1/)) {
-            errors.username = '无效的手机号码';
+            errors.username = '无效手机号';
         }
     }
 
     if (!values.authcode) {
-        errors.authcode = '必须填写验证码';
+        errors.authcode = '必填项';
     }
     else {
         let authcode = values.authcode;
         authcode = authcode.replace(/\s/g, '');
         if (authcode.match(/\D/g) || authcode.length !== 4) {
-            errors.authcode = '验证码必须是四位数字';
+            errors.authcode = '四位数字';
         }
     }
 
     if (!values.password) {
-        errors.password = '必须填写密码'
+        errors.password = '必填项'
     }
     else {
         let psd = values.password;
         if (psd.match(/\s/g)) {
-            errors.password = '密码不能含有空格';
+            errors.password = '不能含有空格';
         }
         else if (psd.length < 6) {
-            errors.password = '密码不能小于六位';
+            errors.password = '密码至少六位';
         }
         else if (psd.length > 16) {
             errors.password = '密码太长';
@@ -120,7 +120,7 @@ const validate = values => {
    if (values.invitecode) {
         let invitecode = values.invitecode;
         if (invitecode.match(/\D/g) || invitecode.length !== 8) {
-            errors.invitecode = '邀请码必须是八位数字(也可不填)';
+            errors.invitecode = '八位数字(选填)';
         }
     }
     return errors;

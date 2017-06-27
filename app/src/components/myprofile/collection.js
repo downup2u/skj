@@ -34,6 +34,7 @@ let Page =(props)=> {
                             style: {
                                 backgroundColor: 'red',
                                 color: 'white',
+                                fontSize: '16px'
                             }
                         }]}
                     >

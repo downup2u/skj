@@ -30,6 +30,9 @@
 .orderevaluationPage .proinfo .li >div .price span span{
     justify-content: space-between;
     color: #F00;
+    text-overflow : ellipsis;
+    overflow:hidden;
+    white-space : nowrap;
 }
 .orderevaluationPage .list .li{
     display: flex;

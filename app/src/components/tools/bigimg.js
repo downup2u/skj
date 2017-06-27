@@ -6,49 +6,61 @@ import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import { uicommentimg } from '../../actions/index.js';
 
-let Page = ({imglist, showindex, show, dispatch})=>{
+class Page extends Component {
 
-    let swiperOptions = {
-        navigation: false,
-        pagination: true,
-        scrollBar: false
-    };
-
-    //点击显示大图
-    let hideimg = ()=>{
+    componentWillUnmount(){
         let imgObj = {
-            bigimgshow : false,
-            bigimglist : [],
-            bigimgindex : 0
+          bigimgshow : false,
+          bigimglist : "",
+          bigimgindex : 0
         };
-        dispatch(uicommentimg(imgObj));
+        this.props.dispatch(uicommentimg(imgObj));
     }
 
-    //是否显示大图
-    let showstyle = show?"showBigImg":"showBigImg hide";
+    render(){
+        const {imglist, showindex, show, dispatch} = this.props;
+        let swiperOptions = {
+            navigation: false,
+            pagination: true,
+            scrollBar: false
+        };
 
-    return (
-        <div className={showstyle} onClick={()=>{hideimg()}}>
-            <Swiper
-                swiperOptions={{
-                    slidesPerView : 'auto',
-                    initialSlide : showindex
-                }}
-                {...swiperOptions}
-                onSlideChangeEnd={(swiper, event) => {
-                    console.log("change swiper");
-                }}
-                >
-                {_.map(imglist,(img,index)=>{
-                    return (
-                        <Slide key={index} className="Demo-swiper__slide">
-                            <img src={img} />
-                        </Slide>
-                    );
-                })}
-            </Swiper>
-        </div>
-    )
+        //点击显示大图
+        let hideimg = ()=>{
+            let imgObj = {
+                bigimgshow : false,
+                bigimglist : [],
+                bigimgindex : 0
+            };
+            dispatch(uicommentimg(imgObj));
+        }
+
+        //是否显示大图
+        let showstyle = show?"showBigImg":"showBigImg hide";
+
+        return (
+            <div className={showstyle} onClick={()=>{hideimg()}}>
+                <Swiper
+                    swiperOptions={{
+                        slidesPerView : 'auto',
+                        initialSlide : showindex
+                    }}
+                    {...swiperOptions}
+                    onSlideChangeEnd={(swiper, event) => {
+                        console.log("change swiper");
+                    }}
+                    >
+                    {_.map(imglist,(img,index)=>{
+                        return (
+                            <Slide key={index} className="Demo-swiper__slide">
+                                <img src={img} />
+                            </Slide>
+                        );
+                    })}
+                </Swiper>
+            </div>
+        )
+    }
 };
 //imglist, showindex, show,
 const mapStateToProps =  ({app:{bigimglist:imglist,bigimgshow:show,bigimgindex:showindex}}) =>{

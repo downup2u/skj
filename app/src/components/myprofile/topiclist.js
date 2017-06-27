@@ -13,46 +13,50 @@ import { uicommentimg } from '../../actions/index.js';
 import { getmytopic } from '../../actions/sagacallback';
 import InfinitePage from '../controls/listview';
 
-let TopicInfo = (props)=>{
-    const {iteminfo, dispatch} = props;
-    let piccos = [];
-    let pics = iteminfo.picurl;
-    //点击显示大图
-    let clickimg = (pic, index)=>{
-        let imgObj = {
-          bigimgshow : true,
-          bigimglist : pic,
-          bigimgindex : index
-        };
-        dispatch(uicommentimg(imgObj));
-    }
-    pics.forEach((picurl,index)=>{
-        piccos.push(<div key={index}><img src={picurl} onClick={()=>{clickimg(iteminfo.picurl, index)}}/></div>);
-    });
-    return (
-        <div className="li" onClick={props.onClick}>
-            <div className="title"></div>
-                <div className="content">
-                    <div>{iteminfo.title}</div>
-                    <div className="imglist">
-                        {piccos}
+class TopicInfo extends Component {
+
+    render(){
+        const {props} = this;
+        const {iteminfo, dispatch} = props;
+        let piccos = [];
+        let pics = iteminfo.picurl;
+        //点击显示大图
+        let clickimg = (pic, index)=>{
+            let imgObj = {
+              bigimgshow : true,
+              bigimglist : pic,
+              bigimgindex : index
+            };
+            dispatch(uicommentimg(imgObj));
+        }
+        pics.forEach((picurl,index)=>{
+            piccos.push(<div key={index}><img src={picurl} onClick={()=>{clickimg(iteminfo.picurl, index)}}/></div>);
+        });
+        return (
+            <div className="li" onClick={props.onClick}>
+                <div className="title"></div>
+                    <div className="content">
+                        <div>{iteminfo.title}</div>
+                        <div className="imglist">
+                            {piccos}
+                        </div>
                     </div>
-                </div>
-                <div className="lnk">
-                    <div>{moment(iteminfo.created_at).format("MM月DD日 HH时mm分")}</div>
-                    <div className="myCommentLnk">
-                        <div className="lnkAddCommunity" >
-                        <Icon name="commenting outline"/>
-                        {iteminfo.comments.length}
-                    </div>
-                    <div className="lnkZhan">
-                        <Icon name="thumbs outline up"/>
-                        {iteminfo.loves.length}
+                    <div className="lnk">
+                        <div>{moment(iteminfo.created_at).format("MM月DD日 HH时mm分")}</div>
+                        <div className="myCommentLnk">
+                            <div className="lnkAddCommunity" >
+                            <Icon name="commenting outline"/>
+                            {iteminfo.comments.length}
+                        </div>
+                        <div className="lnkZhan">
+                            <Icon name="thumbs outline up"/>
+                            {iteminfo.loves.length}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 class Page extends Component {

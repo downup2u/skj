@@ -73,26 +73,26 @@ let LoginForm = (props)=> {
 const validate = values => {
     const errors = {}
     if (!values.username) {
-        errors.username = '必须填写用户名';
+        errors.username = '必填项';
     }
     else {
         let phone = values.username;
         phone = phone.replace(/\s/g, '');
         if (phone.match(/\D/g) || phone.length !== 11 || !phone.match(/^1/)) {
-            errors.username = '无效的手机号码';
+            errors.username = '无效手机号';
         }
     }
 
     if (!values.password) {
-        errors.password = '必须填写密码'
+        errors.password = '必填项'
     }
     else {
         let psd = values.password;
         if (psd.match(/\s/g)) {
-            errors.password = '密码不能含有空格';
+            errors.password = '不能含有空格';
         }
         else if (psd.length < 6) {
-            errors.password = '密码不能小于六位';
+            errors.password = '密码至少六位';
         }
         else if (psd.length > 16) {
             errors.password = '密码太长';

@@ -30,6 +30,13 @@ import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 
 export class Cartitem extends Component {
+
+//     constructor(props) {  
+//         super(props);  
+//         this.state = {searchStr: ''};  
+//         this.handleChange = this.handleChange.bind(this); 
+//     } 
+
     //获取我的地址列表
     componentWillMount() {
         // let payload = {
@@ -44,7 +51,7 @@ export class Cartitem extends Component {
 
     render(){
         console.log('Cartitem renderCaritem==>' + JSON.stringify(this.props));
-        let {item,products,isselected,dispatch} = this.props;
+        let {item,products,isselected,dispatch,history} = this.props;
         let cartid = item._id;
         let changeproductnumber = (number)=>{
             let payload = {
@@ -101,6 +108,12 @@ export class Cartitem extends Component {
             }
         }
 
+        let onClickChecktedItemImg=(e)=>{
+            let event = e || window.event;
+            event.stopPropagation();
+            history.push(`shoppingproinfo/${item.product}`);
+        }
+
         let proinfo = products[item.product];
         if(proinfo){
             return (
@@ -117,7 +130,7 @@ export class Cartitem extends Component {
                         checked={isselected}
                         />
                     <div className="l">
-                        <img src={proinfo.picurl}/>
+                        <img src={proinfo.picurl} onClick={(e)=>{onClickChecktedItemImg(e);}} />
                         <div>
                             <span>{proinfo.name}</span>
                             <div className="price">
@@ -144,6 +157,7 @@ let mapStateToPropsCartItem = ({shop:{products},shopcart:{toordercarts}},props) 
     return {products,isselected};
 }
 Cartitem = connect(mapStateToPropsCartItem)(Cartitem);
+Cartitem = withRouter(Cartitem);
 
 
 export class Pricetotal extends Component {
@@ -293,6 +307,8 @@ export class Page extends Component {
     //       return false;
     // }
 
+
+
     render() {
       //注意：购物车不应该用分页
 
@@ -320,7 +336,7 @@ export class Page extends Component {
 
                 </div>
                 <div className="footBtn">
-                    <Pricetotal onClickPage={onClickPage} />
+                    <Pricetotal onClickPage={onClickPage}  />
                 </div>
             </div>
         );
