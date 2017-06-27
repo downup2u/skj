@@ -9,28 +9,29 @@ import { uiinfinitepage_deleteitem } from '../../actions';
 import InfinitePage from '../controls/listview';
 //import Paging from '../tools/paging';
 //我的收藏暂时不修改了（需要设为Component,并且刷新什么的）
-let Page =(props)=> {
+export class Page extends Component {
+
 
     //删除收藏
-    let delCollection = (id,fnrefresh)=>{
+   delCollection = (id)=>{
         if(confirm("确定删除收藏吗？")){
-            props.dispatch(mycollectiondelone({_id:id})).then((result)=>{
-              fnrefresh();
+            this.props.dispatch(mycollectiondelone({_id:id})).then((result)=>{
+              this.refs.listviewpage.getWrappedInstance().onRefresh();
                 //props.dispatch(uiinfinitepage_deleteitem({_id:result._id}));
             });
         }
     }
 
     //收藏列表数据
-    let updateContent = (item,fnrefresh)=> {
-        let proinfo = props.products[item.product];
+   updateContent = (item)=> {
+        let proinfo = this.props.products[item.product];
         if(!!proinfo){
             return  (
                     <Swipeout key={item._id}
                         autoClose={true}
                         right={[{
                             text: '删除',
-                            onPress: ()=>{delCollection(item._id,fnrefresh)},
+                            onPress: ()=>{this.delCollection(item._id)},
                             style: {
                                 backgroundColor: 'red',
                                 color: 'white',
@@ -39,7 +40,7 @@ let Page =(props)=> {
                         }]}
                     >
                     <div
-                        onClick={()=>{props.history.push("/shoppingproinfo/"+item.product)}}
+                        onClick={()=>{this.props.history.push("/shoppingproinfo/"+item.product)}}
                     >
                         <div className="myCollectionLi">
                             <div className="pic"><img src={proinfo.picurl}/></div>
@@ -59,29 +60,31 @@ let Page =(props)=> {
         }
         return null;
     };
+    render() {
+      return (
+          <div>
+              <NavBar back={true} title="我的收藏" />
+              <div className="myCollection"
+                   style={{
+                      height:(window.innerHeight-46)+"px",
+                      overflow:"hidden"
+                  }}>
+                  <List.Item>
+                      <InfinitePage
+                          ref="listviewpage"
+                          pagenumber = {30}
+                          updateContent= {this.updateContent}
+                          queryfun= { mycollectiongetall }
+                          listheight= {window.innerHeight-92}
+                          query = {{}}
+                          sort = {{created_at: -1}}
+                      />
+                  </List.Item>
 
-    return (
-        <div>
-            <NavBar back={true} title="我的收藏" />
-            <div className="myCollection"
-                 style={{
-                    height:(window.innerHeight-46)+"px",
-                    overflow:"hidden"
-                }}>
-                <List.Item>
-                    <InfinitePage
-                        pagenumber = {30}
-                        updateContent= {updateContent.bind(this)}
-                        queryfun= { mycollectiongetall }
-                        listheight= {window.innerHeight-92}
-                        query = {{}}
-                        sort = {{created_at: -1}}
-                    />
-                </List.Item>
-
-            </div>
-        </div>
-    )
+              </div>
+          </div>
+      )
+  }
 }
 
 let mapStateToProps = ({shop}) => {
