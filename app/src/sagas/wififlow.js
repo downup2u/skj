@@ -1,7 +1,8 @@
 /**
  * Created by wangxiaoqing on 2017/3/25.
  */
-import { put,takeEvery,call} from 'redux-saga/effects';
+import { put,takeEvery,call,race} from 'redux-saga/effects';
+import {delay} from 'redux-saga';
 import {
   getssid,
   senddata
@@ -57,29 +58,63 @@ export function* wififlow() {
     yield takeEvery(`${getcurwifi_request}`, function*(action) {
           let {payload:result} = action;
           console.log(`getcurwifi_request:${JSON.stringify(result)}`);
-          let wifiresult = yield call(getcurwifi);
-          yield put(getcurwifi_result(wifiresult));
-    });
-
-    yield takeEvery(`${getcurwifi_devicelist_request}`, function*(action) {
-          let {payload:result} = action;
-          console.log(`getcurwifi_devicelist_request:${JSON.stringify(result)}`);
-          let wifiresult = yield call(sendwifidata,result);
-          if(wifiresult.code === '0'){
-            yield put(getcurwifi_devicelist_result(wifiresult.data));
-            yield put(push('/addnewdevice2'));
-          }
-          else{
-            //弹框,message
+          const { wifiresult, timeout } = yield race({
+             wifiresult: yield call(getcurwifi),
+             timeout: call(delay, 3000)
+          });
+          if(!!timeout){
             yield put(set_weui(
               {
                 set_weui:{
                   show:true,
-                  text:wifiresult.message,
+                  text:`调用函数超时`,
                   type:'warning'
                 }
               }
             ));
           }
+          else{
+            yield put(getcurwifi_result(wifiresult));
+          }
+
+    });
+
+    yield takeEvery(`${getcurwifi_devicelist_request}`, function*(action) {
+          let {payload:result} = action;
+          console.log(`getcurwifi_devicelist_request:${JSON.stringify(result)}`);
+          const { wifiresult, timeout } = yield race({
+             wifiresult: yield call(sendwifidata,result),
+             timeout: call(delay, 3000)
+          });
+          if(!!timeout){
+            yield put(set_weui(
+              {
+                set_weui:{
+                  show:true,
+                  text:`调用函数超时`,
+                  type:'warning'
+                }
+              }
+            ));
+          }
+          else{
+            if(wifiresult.code === '0'){
+              yield put(getcurwifi_devicelist_result(wifiresult.data));
+              yield put(push('/addnewdevice2'));
+            }
+            else{
+              //弹框,message
+              yield put(set_weui(
+                {
+                  set_weui:{
+                    show:true,
+                    text:wifiresult.message,
+                    type:'warning'
+                  }
+                }
+              ));
+            }
+          }
+
     });
 }
