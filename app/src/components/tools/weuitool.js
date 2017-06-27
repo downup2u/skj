@@ -54,14 +54,14 @@ export class Page extends Component {
     };
     //confirm close
     confirmClose = (confirm,dispatch)=>{
-        if(confirm.hasOwnProperty("buttonsClose")){
+        if(!!confirm.buttonsClose){
             confirm.buttonsClose();
         }
         dispatch(set_weui({ confirm:confirmDefault }));
     };
     //confirm click
     confirmClick = (confirm,dispatch)=>{
-        if(confirm.hasOwnProperty("buttonsClick")){
+        if(!!confirm.buttonsClick){
             confirm.buttonsClick();
         }
         dispatch(set_weui({ confirm:confirmDefault }));
