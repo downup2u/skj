@@ -60,12 +60,12 @@ export function* wififlow() {
           console.log(`getcurwifi_request:${JSON.stringify(result)}`);
           const { wifiresult, timeout } = yield race({
              wifiresult: yield call(getcurwifi),
-             timeout: call(delay, 3000)
+             timeout: call(delay, 2000)
           });
           if(!!timeout){
             yield put(set_weui(
               {
-                set_weui:{
+                toast:{
                   show:true,
                   text:`调用函数超时`,
                   type:'warning'
@@ -84,12 +84,12 @@ export function* wififlow() {
           console.log(`getcurwifi_devicelist_request:${JSON.stringify(result)}`);
           const { wifiresult, timeout } = yield race({
              wifiresult: yield call(sendwifidata,result),
-             timeout: call(delay, 3000)
+             timeout: call(delay, 60000)
           });
           if(!!timeout){
             yield put(set_weui(
               {
-                set_weui:{
+                toast:{
                   show:true,
                   text:`调用函数超时`,
                   type:'warning'
@@ -106,7 +106,7 @@ export function* wififlow() {
               //弹框,message
               yield put(set_weui(
                 {
-                  set_weui:{
+                  toast:{
                     show:true,
                     text:wifiresult.message,
                     type:'warning'
