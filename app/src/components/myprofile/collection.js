@@ -35,7 +35,6 @@ export class Page extends Component {
                             style: {
                                 backgroundColor: 'red',
                                 color: 'white',
-                                fontSize: '16px'
                             }
                         }]}
                     >

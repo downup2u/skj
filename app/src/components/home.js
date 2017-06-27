@@ -111,10 +111,14 @@ let DeviceSwiper =(props)=>{
         //改变设备时
         props.dispatch(ui_setcurrentdeviceid(deviceid));
     }
-    const {mydevicelist, devices} = props;
+    const {mydevicelist, devices, curdeviceid} = props;
+    let showindex = mydevicelist.indexOf(curdeviceid);
     return (
         <Swiper
-            swiperOptions={{slidesPerView: 'auto'}}
+            swiperOptions={{
+                slidesPerView: 'auto',
+                initialSlide : showindex
+            }}
             {...swiperOptions}
             onSlideChangeEnd={(swiper, event) => {
                 console.log(swiper.activeIndex);
@@ -242,7 +246,7 @@ let Page = (props)=> {
                 </div>
 
                 { mydevicelist.length === 0 &&  <Nodevice />}
-                { mydevicelist.length > 0 &&  <DeviceSwiper mydevicelist={mydevicelist} devices={devices} />}
+                { mydevicelist.length > 0 &&  <DeviceSwiper mydevicelist={mydevicelist} devices={devices} curdeviceid={curdeviceid} />}
 
                 { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  &&
                     <HeadInfo curdevicedata={curdevicedata}/>

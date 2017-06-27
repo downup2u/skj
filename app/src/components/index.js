@@ -28,7 +28,8 @@ export class Page extends React.Component {
 
       });
 
-      this.props.dispatch(set_innerheight());
+
+      //this.props.dispatch(set_innerheight());
     }
 
     componentWillUnmount() {

@@ -1,6 +1,7 @@
 .feedPage{
     width: 100%;
     background: #EEE;
+    justify-content: flex-start;
 }
 .feedPage #ListInside >div{
     margin-bottom: 15px;
@@ -347,7 +348,7 @@
 .feedPage{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: stretch;
     overflow: hidden;
 }
