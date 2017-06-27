@@ -44,7 +44,7 @@ export class Page extends React.Component {
     //取消订单
     delorder = (e, _id)=>{
         this.stopDefault(e);
-        if(confirm("去定要删除订单吗?")){
+        if(confirm("确定要取消订单吗?")){
             let payload = {
                 _id: _id,
                 data:{

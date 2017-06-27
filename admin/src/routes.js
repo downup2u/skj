@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import Configuration from './configuration/Configuration';
-import {MycouponbatchCreate} from './components/mycoupon/createbatch.js';
+import MycouponbatchCreate from './components/mycoupon/createbatch.js';
 
 
 export default [

@@ -15,6 +15,12 @@ export default {
         keyname:'设置类型',
       }
     },
+    mycouponsbatch:{
+      name:'批量优惠券 |||| 批量优惠券',
+      fields:{
+        creators:'所属用户',
+      }
+    },
     baseinfo:{
       name: '基本信息 |||| 基本信息',
     },

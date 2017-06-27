@@ -72,7 +72,8 @@ export function* wififlow() {
           else{
             //弹框,message
             yield put(set_weui(
-              { set_weui:{
+              {
+                set_weui:{
                   show:true,
                   text:wifiresult.message,
                   type:'warning'
