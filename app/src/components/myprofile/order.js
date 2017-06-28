@@ -52,6 +52,7 @@ export class Page extends React.Component {
                 }
             };
             this.props.dispatch(myorderupdateone(payload)).then(({updateditem})=>{
+                this.refs.listviewpage.getWrappedInstance().onRefresh();
                 this.props.dispatch(uiinfinitepage_updateitem(updateditem));
             });
         }
