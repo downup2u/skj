@@ -82,10 +82,24 @@ export function* wififlow() {
     yield takeEvery(`${getcurwifi_devicelist_request}`, function*(action) {
           let {payload:result} = action;
           console.log(`getcurwifi_devicelist_request:${JSON.stringify(result)}`);
+          yield put(set_weui(
+            {
+              loading:{
+                show:true,
+              }
+            }
+          ));
           const { wifiresult, timeout } = yield race({
              wifiresult: yield call(sendwifidata,result),
              timeout: call(delay, 60000)
           });
+          yield put(set_weui(
+            {
+              loading:{
+                show:false,
+              }
+            }
+          ));
           if(!!timeout){
             yield put(set_weui(
               {

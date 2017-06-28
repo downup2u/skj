@@ -26,5 +26,8 @@ export const senddata = (values,fncallback)=>{
       },
     ]
   };
-  fncallback(retjson);
+  window.setTimeout(()=>{
+    fncallback(retjson);
+  },5000);
+
 };
