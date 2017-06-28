@@ -59,7 +59,7 @@ export function* wififlow() {
           let {payload:result} = action;
           console.log(`getcurwifi_request:${JSON.stringify(result)}`);
           const { wifiresult, timeout } = yield race({
-             wifiresult: yield call(getcurwifi),
+             wifiresult: call(getcurwifi),
              timeout: call(delay, 2000)
           });
           if(!!timeout){
@@ -90,8 +90,8 @@ export function* wififlow() {
             }
           ));
           const { wifiresult, timeout } = yield race({
-             wifiresult: yield call(sendwifidata,result),
-             timeout: call(delay, 30000)
+             wifiresult:  call(sendwifidata,result),
+             timeout:  call(delay, 30000)
           });
           yield put(set_weui(
             {
