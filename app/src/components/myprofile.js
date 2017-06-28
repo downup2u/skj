@@ -12,7 +12,7 @@ import {
     queryorderstatusstat_request
 } from '../actions';
 import _ from "lodash";
-
+import {setbackhandler,removebackhandler} from '../env/android';
 export class Page extends Component {
 
     componentWillMount () {
@@ -30,8 +30,15 @@ export class Page extends Component {
         this.props.dispatch(myOrderList_filler_set(status));
         this.onClickPage("/myorder");
     };
-
+    componentWillUnmount() {
+      removebackhandler();
+    }
     showShare =()=>{
+        setbackhandler(()=>{
+          console.log('click android back');
+          this.props.dispatch(share_data_updata(false));
+          removebackhandler();
+        });
         this.props.dispatch(share_data_updata(true));
     }
 
@@ -186,4 +193,3 @@ Page = withRouter(Page);
 export default connect(
     mapStateToProps
 )(Page);
-
