@@ -12,7 +12,9 @@ let Page = (props) => {
         props.history.goBack();
     }
     let onClickNext =(device)=>{
-      props.dispatch(createdevice_request(device));
+        if(!device.hasexits){
+            props.dispatch(createdevice_request(device));
+        }
         //props.history.push('/addnewdevice3');
     }
     const {devicelist} = props;
