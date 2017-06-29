@@ -41,7 +41,7 @@ const client = net.connect({port: port,host:ip}, () => {
     let bufstring = buf.toString('hex');
     console.log(`连接上服务器【${ip}:${port}】,发送数据${bufstring}`);
     client.write(buf);
-  },process.env.sendinterval*1000 || 5000);
+  },process.env.sendinterval*1000 || 10000);
 });
 
 client.on('data', (data) => {

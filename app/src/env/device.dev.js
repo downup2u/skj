@@ -28,6 +28,6 @@ export const senddata = (values,fncallback)=>{
   };
   window.setTimeout(()=>{
     fncallback(retjson);
-  },50000);
+  },5000);
 
 };
