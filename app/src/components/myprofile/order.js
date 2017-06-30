@@ -223,6 +223,7 @@ export class Page extends React.Component {
                 </div>
                 <div className="orderList">
                     <InfinitePage
+                        listtypeid='myorders'
                         ref="listviewpage"
                         pagenumber = {20}
                         updateContent= {this.updateContent}

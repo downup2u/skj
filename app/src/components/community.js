@@ -180,6 +180,7 @@ export class Page extends React.Component {
                         top: (tctop+20)+"px"
                     }}>
                     <InfinitePage
+                        listtypeid='community'
                         pagenumber = {8}
                         updateContent= {this.updateContent}
                         queryfun= { gettopiclist }

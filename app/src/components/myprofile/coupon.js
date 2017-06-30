@@ -60,6 +60,7 @@ export class Page extends Component {
                 </Menu>
                 <div className="myCouponList">
                     <InfinitePage
+                        listtypeid='mycoupons'
                         ref="listviewpage"
                         pagenumber = { 20 }
                         updateContent= { this.updateContent }

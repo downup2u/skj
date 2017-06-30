@@ -45,6 +45,7 @@ export class Page extends Component {
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn} />
                 <div className="messageList">
                     <InfinitePage
+                        listtypeid='messagelist'
                         pagenumber = {30}
                         updateContent= {this.updateContent}
                         queryfun= {getnotifymessage}

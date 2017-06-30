@@ -50,14 +50,15 @@ let Page = (props) => {
                 </div>
             </div>
 
-            <div className="proList" 
+            <div className="proList"
                 style={{
                     width: "100%",
                     overFlow: "hidden"
                 }}>
                 <InfinitePage
+                    listtypeid='evaluate'
                     pagenumber = {30}
-                    updateContent= {updateContent.bind(this)} 
+                    updateContent= {updateContent.bind(this)}
                     queryfun= {productcommentsfromproduct}
                     listheight= {window.innerHeight-147}
                     query = {{product: props.match.params.id}}

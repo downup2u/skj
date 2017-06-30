@@ -4,6 +4,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import './listview.css';
+//https://github.com/edwardhotchkiss/mongoose-paginate
+//https://github.com/react-component/m-list-view
+//https://github.com/ant-design/ant-design-mobile/issues/541
+const listtypeiddata = {
+
+};//listtypeid:offset
+/*
+'productlist':{
+    offset:100,
+    limit:0,
+    total:0,
+    listdata:[]
+}
+*/
 
 class Page extends React.Component {
   constructor(props) {
@@ -16,6 +30,11 @@ class Page extends React.Component {
     this.state = {
       dataSource: dataSource.cloneWithRows(this.initData),
       refreshing: false,
+      pos:0,
+      // pos:{
+      //   __scrollLeft:0,
+      //   __scrollTop:0
+      // }
     };
 
     this.onAjax = this.onAjax.bind(this);
@@ -24,9 +43,40 @@ class Page extends React.Component {
   }
 
   componentWillMount() {
-    this.onAjax(this.props.query,this.props.sort,this.props.pagenumber);
+    let saveddata = listtypeiddata[this.props.listtypeid];
+    if(!!saveddata){//first time
+      this.initData = [...saveddata.listdata];
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(this.initData),
+        refreshing: false,
+        offset:saveddata.offset,//当前页
+        total:saveddata.total,
+        isend:saveddata.offset + saveddata.limit >= saveddata.total,
+        pos:saveddata.pos
+      });
+    }
+    else{
+      this.onAjax(this.props.query,this.props.sort,this.props.pagenumber);
+    }
   }
+  componentWillUnmount() {
+    listtypeiddata[this.props.listtypeid] = {
+      offset:this.state.offset,
+      limit:this.props.pagenumber,
+      total:this.state.total,
+      listdata:this.initData,
+      pos:this.state.pos//document.body.scrollTop||document.documentElement.scrollTop
+    };
 
+    console.log(`保存位置数据:${JSON.stringify(this.state.pos)}`);
+  }
+  componentDidMount(){
+    console.log(`滚动到位置数据:${JSON.stringify(this.state.pos)}`);
+    this.refs.listview.scrollTo(0,this.state.pos);
+  //  this.refs.listview.refs.listviewscroll.scrollTo(this.state.pos.__scrollLeft,this.state.pos.__scrollTop);
+    //this.refs.listview.refs.listviewscroll.__scrollTop = this.state.pos.__scrollTop;
+    //document.body.scrollTop=document.documentElement.scrollTop=this.state.pos;
+  }
   onRefresh() {
     console.log('onRefresh');
     this.setState({ refreshing: true });
@@ -39,13 +89,13 @@ class Page extends React.Component {
   }
 
   onAjax(query,sort,pagenumber){
-    let querypage = 1;
+    let offset = 0;
     let that = this;
     this.props.dispatch(this.props.queryfun({
         query: query,
         options: {
             sort: sort,
-            page: querypage,
+            offset: offset,
             limit: pagenumber,
         }
     })).then(({result})=> {
@@ -59,9 +109,9 @@ class Page extends React.Component {
       that.setState({
         dataSource:dateSource,
         refreshing: false,
-        curpage:result.page,//当前页
-        totalpage:result.pages,
-        isend:result.page>=result.pages
+        offset:result.offset,//当前页
+        total:result.total,
+        isend:result.offset + result.limit >= result.total
       });
     });
   }
@@ -69,18 +119,18 @@ class Page extends React.Component {
   _onEndReached(event) {
     // load new data
     console.log('reach end', event);
-    if(this.state.curpage < this.state.totalpage){
+    if(this.state.offset + this.props.pagenumber < this.state.total){
         this.setState({
           isLoading: true,//加载中
           isend:false//是否最后一页
         });
-        let querypage = this.state.curpage + 1;
+        let offset = this.state.offset + this.props.pagenumber;
         let that = this;
         this.props.dispatch(this.props.queryfun({
             query: this.props.query,
             options: {
                 sort: this.props.sort,
-                page: querypage,
+                offset: offset,
                 limit: this.props.pagenumber,
             }
         })).then(({result})=> {
@@ -93,9 +143,9 @@ class Page extends React.Component {
           that.setState({
             dataSource:dateSource,
             isLoading: false,
-            curpage:result.page,
-            totalpage:result.pages,
-            isend:result.page>=result.pages
+            offset:result.offset,//当前页
+            total:result.total,
+            isend:result.offset + result.limit >= result.total
           });
         });
     }
@@ -143,18 +193,28 @@ class Page extends React.Component {
   }
 
   render() {
+    const initialListSize = this.initData.length > 5 ?this.initData.length:5;
     return (
       <ListView
+        ref='listview'
         dataSource={this.state.dataSource}
         renderHeader={this.renderHeader.bind(this)}
         renderRow={this.updateContent.bind(this)}
         renderSeparator={this.renderSeparator.bind(this)}
         renderFooter={this.renderFooter.bind(this)}
-        initialListSize={5}
+        initialListSize={initialListSize}
         pageSize={4}
         scrollRenderAheadDistance={200}
         scrollEventThrottle={20}
-        onScroll={() => { console.log('scroll'); } }
+        onScroll={(scroll) => {
+          let pos = {
+            __scrollLeft:_.get(scroll,'scroller.__scrollLeft',0),
+            __scrollTop:_.get(scroll,'scroller.__scrollTop',0)
+          };
+          console.log(`滚动中...${JSON.stringify(pos)}`);
+           this.setState({pos:pos.__scrollTop});
+          }
+        }
         onEndReached={this._onEndReached}
         onEndReachedThreshold={10}
         style={{height: this.props.listheight}}
@@ -173,6 +233,7 @@ class Page extends React.Component {
 
 
 Page.propTypes = {
+    listtypeid:PropTypes.string.isRequired,
     renderHeader:PropTypes.func,
     renderSeparator:PropTypes.func,
     renderFooter:PropTypes.func,

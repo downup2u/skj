@@ -5,7 +5,7 @@ import '../../../public/css/mycoupon.css';
 import {
     mycoupongetall
 } from '../../actions/sagacallback.js';
-import { 
+import {
     setulcoupontype,
     updata_orderinfo
 } from '../../actions';
@@ -34,7 +34,7 @@ export class Page extends Component {
         const {orderinfo} = this.props;
         let classname = orderinfo.orderprice>=item.pricecondition?"item":"item noitem";
         return  (
-            <div 
+            <div
                 className={classname}
                 key = {item._id}
                 onClick={()=>{
@@ -70,6 +70,7 @@ export class Page extends Component {
                 <NavBar lefttitle="返回" title="选择优惠券" onClickLeft={this.onClickReturn} />
                 <div className="myCouponList" style={{height:window.innerHeight-118}}>
                     <InfinitePage
+                        listtypeid='selcoupons'
                         pagenumber = { 100 }
                         updateContent= { this.updateContent }
                         queryfun= {mycoupongetall}
@@ -89,4 +90,3 @@ let mapStateToProps = ({shoporder},props) => {
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;
-

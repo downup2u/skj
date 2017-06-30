@@ -67,9 +67,9 @@ class Page extends Component {
 
     rowRenderer = (item)=> {
         return (
-            <TopicInfo 
+            <TopicInfo
                 dispatch={this.props.dispatch}
-                key={item._id} 
+                key={item._id}
                 onClick={()=>{this.onClick(item)}}
                 iteminfo={item}
                 />
@@ -79,18 +79,19 @@ class Page extends Component {
 
     render() {
         return (
-            <div 
+            <div
                 className="myTopicListPage"
                 style={{height:window.innerHeight+"px"}}
                 >
-                <NavBar 
+                <NavBar
                     back={true}
-                    title="我的帖子" 
+                    title="我的帖子"
                     />
                 <div className="cont">
                     <InfinitePage
+                        listtypeid='mytopics'
                         pagenumber = {20}
-                        updateContent= {this.rowRenderer} 
+                        updateContent= {this.rowRenderer}
                         queryfun= { getmytopic }
                         listheight={window.innerHeight-48}
                         sort = {{created_at: -1}}

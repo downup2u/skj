@@ -71,6 +71,7 @@ export class Page extends Component {
                   }}>
                   <List.Item>
                       <InfinitePage
+                          listtypeid='collection'
                           ref="listviewpage"
                           pagenumber = {30}
                           updateContent= {this.updateContent}
