@@ -15,7 +15,8 @@ const listtypeiddata = {
     offset:100,
     limit:0,
     total:0,
-    listdata:[]
+    listdata:[],
+    pos://滚动位置
 }
 */
 
@@ -31,10 +32,6 @@ class Page extends React.Component {
       dataSource: dataSource.cloneWithRows(this.initData),
       refreshing: false,
       pos:0,
-      // pos:{
-      //   __scrollLeft:0,
-      //   __scrollTop:0
-      // }
     };
 
     this.onAjax = this.onAjax.bind(this);
@@ -60,22 +57,19 @@ class Page extends React.Component {
     }
   }
   componentWillUnmount() {
+    let pos = _.get(this,'refs.listview.scrollProperties.offset',0);
     listtypeiddata[this.props.listtypeid] = {
       offset:this.state.offset,
       limit:this.props.pagenumber,
       total:this.state.total,
       listdata:this.initData,
-      pos:this.state.pos//document.body.scrollTop||document.documentElement.scrollTop
+      pos:pos//document.body.scrollTop||document.documentElement.scrollTop
     };
-
-    console.log(`保存位置数据:${JSON.stringify(this.state.pos)}`);
+    console.log(`保存位置数据:,pos:${pos}`);
   }
   componentDidMount(){
     console.log(`滚动到位置数据:${JSON.stringify(this.state.pos)}`);
     this.refs.listview.scrollTo(0,this.state.pos);
-  //  this.refs.listview.refs.listviewscroll.scrollTo(this.state.pos.__scrollLeft,this.state.pos.__scrollTop);
-    //this.refs.listview.refs.listviewscroll.__scrollTop = this.state.pos.__scrollTop;
-    //document.body.scrollTop=document.documentElement.scrollTop=this.state.pos;
   }
   onRefresh() {
     console.log('onRefresh');
@@ -206,15 +200,6 @@ class Page extends React.Component {
         pageSize={4}
         scrollRenderAheadDistance={200}
         scrollEventThrottle={20}
-        onScroll={(scroll) => {
-          let pos = {
-            __scrollLeft:_.get(scroll,'scroller.__scrollLeft',0),
-            __scrollTop:_.get(scroll,'scroller.__scrollTop',0)
-          };
-          console.log(`滚动中...${JSON.stringify(pos)}`);
-           this.setState({pos:pos.__scrollTop});
-          }
-        }
         onEndReached={this._onEndReached}
         onEndReachedThreshold={10}
         style={{height: this.props.listheight}}
