@@ -7,7 +7,6 @@
 .ProinfoPage .PageContent{
     overflow:scroll;
     flex-shrink: 0;
-    height: 10px;
 }
 .ProinfoPage .weui-actionsheet_toggle{
     background: #FFF;
