@@ -187,7 +187,8 @@ export class Page extends Component {
     }
 
     render() {
-        const {orderinfo, payprice, newbalance, newpoint, paystatus, balance, point} = this.props;
+        const isalipayinstalled = false;
+        const {isweixininstalled,orderinfo, payprice, newbalance, newpoint, paystatus, balance, point} = this.props;
         return (
             <div className="PayPageWamp">
                 {orderinfo.paystatus=="未支付"?(
@@ -249,6 +250,7 @@ export class Page extends Component {
                                 </div>
                             </div>
                             <div className="paytype">
+                            {isweixininstalled && (
                                 <div className="li">
                                     <img src="img/shopping/15.png" />
                                     <div className="txt">
@@ -259,8 +261,10 @@ export class Page extends Component {
                                         onClick={()=>{this.setpaytype("weixin")}}
                                         checked={orderinfo.paytype=="weixin"}
                                         />
-                                </div>
-                                <div className="li">
+                                </div>)
+                              }
+                              {isalipayinstalled &&
+                                (<div className="li">
                                     <img src="img/shopping/16.png" />
                                     <div className="txt">
                                         <span>支付宝</span>
@@ -270,7 +274,8 @@ export class Page extends Component {
                                         onClick={()=>{this.setpaytype("alipay")}}
                                         checked={orderinfo.paytype=="alipay"}
                                         />
-                                </div>
+                                </div>)
+                               }
                                 <div className="li">
                                     <img src="img/shopping/17.png" />
                                     <div className="txt">
@@ -465,7 +470,9 @@ let mapStateToProps = ({shop,app,shoporder,userlogin:{balance,point,defaultaddre
         //ayprice = (point * pointvsmoney * .01).toFixed(2);
         payprice = parseFloat(payprice.toFixed(2));
 
-        return { orderinfo:{...orderinfo}, payprice, newbalance, newpoint, balance, point, paystatus };
+        return { orderinfo:{...orderinfo},
+          isweixininstalled:app.isweixininstalled,
+         payprice, newbalance, newpoint, balance, point, paystatus };
     }
 }
 

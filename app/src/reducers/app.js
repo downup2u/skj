@@ -7,7 +7,8 @@ import {
     uiaddcartdilog,
     getsystemconfig_result,
     setmsgcount,
-    set_innerheight
+    set_innerheight,
+    setisweixininstalled
 } from '../actions/index.js';
 
 
@@ -23,7 +24,7 @@ const initial = {
         bigimgshow : false,
         bigimglist : [],
         bigimgindex : 0,
-        
+
         //是否显示添加购物车控件
         addcartdilogshow : false,
         addcartdilogproid : '',
@@ -37,11 +38,16 @@ const initial = {
 
         newmsgnumber:0,
         innerheight : 0,
+
+        isweixininstalled:true,
     },
 
 };
 
 const app = createReducer({
+    [setisweixininstalled]: (state, isweixininstalled) => {
+        return { ...state, isweixininstalled };
+    },
     [setmsgcount]: (state, newmsgnumber) => {
         console.log('setmsgcount===>' + newmsgnumber);
         return { ...state, newmsgnumber};

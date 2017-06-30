@@ -13,6 +13,9 @@
   */
  const xviewPhoneWithAppDataWithCallbackMethodWithType = (data,fun,typeString) => {
    window.xviewCallBack=function(result){
+     if(typeof result === 'string'){
+         result = JSON.parse(result);
+     }
      fun(result);
    };
    window.xview.xviewPhoneWithAppDataWithCallbackMethodWithType(JSON.stringify(data),"xviewCallBack",typeString);
@@ -155,6 +158,9 @@
    */
   export const showiPhoneAlertWithAppDataTypeWithCallbackMethod=(dataString,typeString,fun) => {
     window.xviewCallBack=function(result){
+      if(typeof result === 'string'){
+          result = JSON.parse(result);
+      }
       fun(result);
     };
     window.xview.showiPhoneAlertWithAppDataTypeWithCallbackMethod(dataString,typeString,"xviewCallBack");
@@ -188,9 +194,29 @@
    */
   export const sendSmsWithPhoneNumber = (phone,fun) => {
   	window.xviewCallBack=function(result){
+      if(typeof result === 'string'){
+          result = JSON.parse(result);
+      }
       fun(result);
     };
   	window.xview.sendSmsWithPhoneNumber(phone,"xviewCallBack");
+  }
+
+
+  export const haveWechatApp=(fun)=>{
+    window.haveWechatAppcallBack=function(result){
+      if(typeof result === 'string'){
+          result = JSON.parse(result);
+      }
+      fun(result);
+    };
+    if(!!window.xview.haveWechatApp){
+      let jsonstring = JSON.stringify({callback:"haveWechatAppcallBack"});
+      window.xview.haveWechatApp(jsonstring);
+    }
+    else{
+      fun({code: '0',message:'找不到该函数'});
+    }
   }
  /**
    * 获取经纬度
@@ -199,6 +225,9 @@
    */
   export const geographyLocationCallbackMethod = (fun) => {
     window.callBack=function(result){
+      if(typeof result === 'string'){
+          result = JSON.parse(result);
+      }
       fun(result);
     };
     window.xview.geographyLocationCallbackMethod("callBack");
@@ -212,6 +241,9 @@
     */
    export const currentLinkWifi = (fun) => {
      window.currentLinkWifiCallBack=function(result){
+       if(typeof result === 'string'){
+           result = JSON.parse(result);
+       }
        fun(result);
      };
      let jsonstring = JSON.stringify({callback:"currentLinkWifiCallBack"});
@@ -224,6 +256,9 @@
      */
     export const prepareEasyLink = (json,fun) => {
       window.prepareEasyLinkCallBack=function(result){
+        if(typeof result === 'string'){
+            result = JSON.parse(result);
+        }
         fun(result);
       };
       json['callback']="prepareEasyLinkCallBack";
@@ -237,6 +272,9 @@
       */
      export const searchForModules = (fun) => {
        window.searchForModulesCallBack=function(result){
+         if(typeof result === 'string'){
+             result = JSON.parse(result);
+         }
          fun(result);
        };
        window.xview.searchForModules(JSON.stringify({callback:"searchForModulesCallBack"}));

@@ -53,7 +53,7 @@ let LoginForm = (props)=> {
     return (
         <Form onSubmit={handleSubmit(onClickLogin)} id={id}>
             <div className="loginPageTop">
-                
+
                 <div className="loginHead" onClick={()=>{}}>
                     <Icon  name='angle left' onClick={onClickReturn} />
                     <img src="img/4.png" className="loginhead"/>
@@ -166,6 +166,7 @@ export class Page extends React.Component {
 
 
     render() {
+        const {isweixininstalled} = this.props;
         let loginwithqq = ()=>{
             loginQQ((result)=>{
                 this.props.dispatch(loginwithoauth_request({bindtype:'qq',openid:result.openId}));
@@ -190,7 +191,7 @@ export class Page extends React.Component {
                     <div className="tit"><span>其他登录方式</span></div>
                     <div className="lnk">
                         <div onClick={()=>{loginwithqq();}}><Icon name="qq" /></div>
-                        <div onClick={()=>{loginwithwechat();}}><Icon name="weixin" /></div>
+                        {isweixininstalled && <div onClick={()=>{loginwithwechat();}}><Icon name="weixin" /></div>}
                     </div>
                 </div>
                 </div>
@@ -200,8 +201,8 @@ export class Page extends React.Component {
 
 }
 
-const mapStateToProps = ({userlogin}) => {
-    return userlogin;
+const mapStateToProps = ({userlogin,app:{isweixininstalled}}) => {
+    return {...userlogin,isweixininstalled};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;
