@@ -34,7 +34,6 @@ export class Page extends React.Component {
 
     componentWillUnmount() {
       removebackhandler();
-      
     }
 
 

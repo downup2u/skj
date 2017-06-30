@@ -74,6 +74,28 @@ export class Page extends Component {
         let orderinfo = this.props.orderinfo;
         let dispatch = this.props.dispatch;
         let paytype = orderinfo.paytype;
+        if(!paytype){
+          let alert = {
+            toast:{
+              show:true,
+              text:`请选择支付方式`,
+              type:'warning'
+            }
+          };
+          dispatch(set_weui(alert));
+          return;
+        }
+        if(paytype === 'alipay'){
+          let alert = {
+            toast:{
+              show:true,
+              text:`暂不支持支付宝支付`,
+              type:'warning'
+            }
+          };
+          dispatch(set_weui(alert));
+          return;
+        }
         if(typeof this.props.payprice === 'number'){
           orderinfo.realprice = this.props.payprice;
         }

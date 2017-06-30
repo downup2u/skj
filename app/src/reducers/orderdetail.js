@@ -51,7 +51,7 @@ const initial = {
         myOrderListFiller : "全部", //订单过滤条件
 
         //选择支付方式
-        paytype:'alipay',
+        //paytype:'alipay',
 
         // creator:{ type: Schema.Types.ObjectId, ref: 'User' },
         // paytype:String,
@@ -78,7 +78,7 @@ const initial = {
         // expressbarid:String,
         // created_at: Date,
         // pay_at:Date,
-        
+
     }
 };
 
@@ -106,4 +106,3 @@ const order = createReducer({
 }, initial.order);
 
 export default order;
-
