@@ -19,8 +19,12 @@ export class Page extends React.Component {
     onClickTab(curtabindex) {
         this.props.dispatch(clickTab({curtabindex: curtabindex}));
         if(curtabindex === 3){
+            let query = {};
+            if(!!this.props.lastreadmsgtime_at){
+              query = {created_at:{$gt:this.props.lastreadmsgtime_at}};
+            }
             let payload = {
-                query:{created_at:{$gt:this.props.lastreadmsgtime_at}},
+                query,
                 options:{
                     page: 1,
                     limit: 1,
@@ -94,5 +98,3 @@ const mapStateToProps = ({app:{curtabindex},userlogin:{lastreadmsgtime_at}}) => 
 
 Page = connect(mapStateToProps)(Page);
 export default Page;
-
-
