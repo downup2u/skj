@@ -3,7 +3,7 @@ import { Button, Comment, Header,Feed, Icon,Input  } from 'semantic-ui-react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
-
+import {getthumbnailurl} from '../util/fileupload.js';
 import {
     gettopiclist_request,
     lovetopicadd_request,
@@ -76,16 +76,16 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
 
   let imgcos = _.map(topic.picurl,(url,index)=>{
     return (
-        <div 
-            key={url} 
-            className="communityImg" 
+        <div
+            key={url}
+            className="communityImg"
             style={{
-                background:"url('"+url+"') no-repeat",
+                background:"url('"+getthumbnailurl(url)+"') no-repeat",
                 backgroundSize: "100%",
                 backgroundPosition: "center",
-            }} 
-            onClick={()=>{clickimg(topic.picurl, index)}}> 
-            
+            }}
+            onClick={()=>{clickimg(topic.picurl, index)}}>
+
         </div>
       );
   })
@@ -117,8 +117,8 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
                       </Feed.Extra>
                   </div>
                     <Feed.Meta className="myMeta">
-                        <div 
-                            className="addCommunity" 
+                        <div
+                            className="addCommunity"
                             onClick={showtopictocomment}
                             >
                             <Icon name="talk outline"/>
