@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {sendauth_request,register_request} from '../actions/index.js';
 import {register} from '../actions/sagacallback.js';
 import NavBar from './nav.js';
+import Sendauth from './tools/sendauth.js';
 
 
 let renderFindPwdForm = (fields)=> {
@@ -20,10 +21,14 @@ let renderFindPwdForm = (fields)=> {
         fields.ispasswordvisiable.input.onChange(newvalue);
     }
 
-    let onClickAuth = (e)=> {
+    let onClickAuth = (callback)=> {
         const name = fields.username.input.value;
-        fields.dispatch(sendauth_request({username: name,reason:'findpwd'}));
-        console.log("发送验证码:" + name);
+        const phone =  !!name && !(name.match(/\D/g)||name.length !== 11||!name.match(/^1/));
+        console.log(phone);
+        if(phone){
+            fields.dispatch(sendauth_request({username: name,reason:'findpwd'}));
+        }
+        callback(phone);
     }
 
     return (<div className='loginform'>
@@ -38,7 +43,8 @@ let renderFindPwdForm = (fields)=> {
             {fields.authcode.meta.touched && fields.authcode.meta.error &&
             <Label basic color='red' pointing>{fields.authcode.meta.error}</Label>}
             <Icon name="lock" className='lefticon'/>
-            <Button type="button" className="yanzhenBtn" primary onClick={onClickAuth}>发送验证码</Button>
+
+            <Sendauth primary action={onClickAuth} className="yanzhenBtn" />
         </div>
         <div className="password logininput">
             <Input placeholder='输入密码'  {...fields.password.input} type={ispasswordvisiable?"text":"password"}/>

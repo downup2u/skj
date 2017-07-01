@@ -15,8 +15,24 @@ import {
 import '../../public/css/feed.css';
 import moment from 'moment';
 import _ from 'lodash';
+import Layzr from 'layzr.js';
+
+//let loadingimg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzZFNzM5Rjk1NjVBMTFFNzhGQzY4N0ZCQjQ2M0RDNEQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzZFNzM5RkE1NjVBMTFFNzhGQzY4N0ZCQjQ2M0RDNEQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3NkU3MzlGNzU2NUExMUU3OEZDNjg3RkJCNDYzREM0RCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3NkU3MzlGODU2NUExMUU3OEZDNjg3RkJCNDYzREM0RCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PngAk1MAAAAGUExURe7u7ru6utT4gdkAAABBSURBVHja7NUxCgAgDATB3P8/bWthpRAwzJRBsl2sAgAAAOZI8vxCZBv/GDlvFhERmRmZc7u6I35GAAAA4NoSYACB/gDKNOdHTwAAAABJRU5ErkJggg==";
 
 let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
+
+  const instance = Layzr({
+      normal: 'data-normal',
+      retina: 'data-retina'
+  })
+
+  document.addEventListener('DOMContentLoaded', event => {
+    instance
+      .update()           // track initial elements
+      .check()            // check initial elements
+      .handlers(true)     // bind scroll and resize handlers
+  })
+
   let islovedbyme = false;//判断love数组是否有自己
   if(topic.loves.indexOf(userid) !== -1){
     islovedbyme = true;
@@ -48,7 +64,7 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
       history.push('/login');
     }
   }
-  //点击显示大图
+  //点击显示大图<img data-normal={loadingimg} data-retina={url} onClick={()=>{clickimg(topic.picurl, index)}}  />
   let clickimg = (pic, index)=>{
     let imgObj = {
       bigimgshow : true,
@@ -60,7 +76,17 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
 
   let imgcos = _.map(topic.picurl,(url,index)=>{
     return (
-        <div key={url}><img src={url} onClick={()=>{clickimg(topic.picurl, index)}}/></div>
+        <div 
+            key={url} 
+            className="communityImg" 
+            style={{
+                background:"url('"+url+"') no-repeat",
+                backgroundSize: "100%",
+                backgroundPosition: "center",
+            }} 
+            onClick={()=>{clickimg(topic.picurl, index)}}> 
+            
+        </div>
       );
   })
 

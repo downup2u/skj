@@ -5,6 +5,7 @@ import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import {sendauth_request} from '../actions/index.js';
 import {oauthbinduser} from '../actions/sagacallback.js';
+import Sendauth from './tools/sendauth.js';
 
 
 let renderBinduserForm = (fields)=> {
@@ -19,10 +20,20 @@ let renderBinduserForm = (fields)=> {
         fields.ispasswordvisiable.input.onChange(newvalue);
     }
 
-    let onClickAuth = (e)=> {
+    // let onClickAuth = (e)=> {
+    //     const name = fields.username.input.value;
+    //     fields.dispatch(sendauth_request({username: name,reason:'binduser'}));
+    //     console.log("发送验证码:" + name);
+    // }
+
+    let onClickAuth = (callback)=> {
         const name = fields.username.input.value;
-        fields.dispatch(sendauth_request({username: name,reason:'binduser'}));
-        console.log("发送验证码:" + name);
+        const phone =  !!name && !(name.match(/\D/g)||name.length !== 11||!name.match(/^1/));
+        console.log(phone);
+        if(phone){
+            fields.dispatch(sendauth_request({username: name,reason:'binduser'}));
+        }
+        callback(phone);
     }
 
 
@@ -39,7 +50,8 @@ let renderBinduserForm = (fields)=> {
             {fields.authcode.meta.touched && fields.authcode.meta.error &&
             <Label basic color='red' pointing>{fields.authcode.meta.error}</Label>}
             <img src="img/rg2.png" className='lefticon'/>
-            <Button type="button" className="yanzhenBtn" primary onClick={onClickAuth}>发送验证码</Button>
+            
+            <Sendauth primary action={onClickAuth} className="yanzhenBtn" />
         </div>
         <div className="password logininput">
             <Input placeholder='输入密码'  {...fields.password.input} type={ispasswordvisiable?"text":"password"}/>
