@@ -56,7 +56,7 @@ let Page = (props) => {
                     overFlow: "hidden"
                 }}>
                 <InfinitePage
-                    listtypeid='evaluate'
+                    listtypeid={`evaluate${props.match.params.id}`}
                     pagenumber = {30}
                     updateContent= {updateContent.bind(this)}
                     queryfun= {productcommentsfromproduct}
