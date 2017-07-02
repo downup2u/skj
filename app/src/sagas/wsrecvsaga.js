@@ -333,7 +333,7 @@ export function* wsrecvsagaflow() {
             yield put(set_weui({toast:{
                 show : true,
                 text : `${err}`,
-                type : "error"
+                type : "warning"
             }}));
         }
 
@@ -347,7 +347,7 @@ export function* wsrecvsagaflow() {
         yield put(set_weui({toast:{
             show : true,
             text : result.errmsg,
-            type : "error"
+            type : "warning"
         }}));
   });
 
