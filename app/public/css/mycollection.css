@@ -17,8 +17,15 @@
 }
 .myCollectionLi .pic{
     width: 30%;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
+    -moz-flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
 }
 .myCollectionLi .pic img{
     width: 100%;

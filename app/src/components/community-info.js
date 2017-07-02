@@ -21,7 +21,13 @@ export class Topic extends React.Component {
   render() {
     const {topic,comments} = this.props;
     let commentsco = [];
-    _.map(topic.comments,(commentid)=>{
+    let newcomments = [];
+
+    for (let i = topic.comments.length-1; i>=0; i--) {
+        newcomments.push(topic.comments[i]);
+    }
+
+    _.map(newcomments,(commentid)=>{
       commentsco.push(<ForumComment showchild={true} key={commentid} comment={comments[commentid]} />);
     });
     return  (<div >

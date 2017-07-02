@@ -121,5 +121,5 @@ const mapStateToProps = ({userlogin:{loginsuccess,userid},forum:{subcomment,user
 };
 
 ForumComment = connect(mapStateToProps)(ForumComment);
-ForumComment =withRouter(ForumComment);
+ForumComment = withRouter(ForumComment);
 export default ForumComment;

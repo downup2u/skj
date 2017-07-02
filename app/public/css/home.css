@@ -135,6 +135,9 @@
     margin: 0 15px;
     justify-content: center;
 }
+.headInfo span{
+    font-size: 12px;
+}
 .headInfo .headInfoborder {
     border-right: 1px solid #7abbf5;
     margin: 0 10px;

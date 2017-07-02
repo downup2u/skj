@@ -29,14 +29,15 @@ export class Topic extends React.Component {
         let showcomments = commentslength>0?"commentlistcontent":"commentlistcontent hide";
         let length = commentslength>2?2:topic.comments.length;
         let showmore = commentslength>2?(<div className="comentShowMore" onClick={()=>{this.props.onClickTopic(topic._id);}}>查看更多...</div>) :'';
-        for (let i = 0; i<length; i++) {
+        for (let i = length-1; i>=0; i--) {
             let commentid = topic.comments[i];
             commentsco.push(
                 <ForumComment
                     key={commentid}
                     topicid={topic._id}
                     comment={comments[commentid]}
-                    showchild={false} />
+                    showchild={false} 
+                    />
                 );
         }
         return (
@@ -52,8 +53,8 @@ export class Topic extends React.Component {
     }
 }
 const mapStateToPropsTopic = ({forum:{comments,topics}},props) => {
-     let topic = topics[props.itemid];
-     return {comments,topic};
+    let topic = topics[props.itemid];
+    return {comments,topic};
 }
 Topic = connect(mapStateToPropsTopic)(Topic);
 

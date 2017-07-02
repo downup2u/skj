@@ -4,6 +4,8 @@ import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {getthumbnailurl} from '../util/fileupload.js';
+import {setbackhandler,removebackhandler} from '../env/android';
+
 import {
     gettopiclist_request,
     lovetopicadd_request,
@@ -66,6 +68,18 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
   }
   //点击显示大图<img data-normal={loadingimg} data-retina={url} onClick={()=>{clickimg(topic.picurl, index)}}  />
   let clickimg = (pic, index)=>{
+
+
+    let oldhandlerbackfn = setbackhandler(()=>{
+      let hidebigimg = {
+        bigimgshow : false,
+        bigimglist : [],
+        bigimgindex : 0
+      };
+      dispatch(uicommentimg(hidebigimg));
+      setbackhandler(oldhandlerbackfn);
+    });
+
     let imgObj = {
       bigimgshow : true,
       bigimglist : pic,

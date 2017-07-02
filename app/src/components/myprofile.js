@@ -34,10 +34,9 @@ export class Page extends Component {
       removebackhandler();
     }
     showShare =()=>{
-        setbackhandler(()=>{
-          console.log('click android back');
+        let oldhandlerbackfn = setbackhandler(()=>{
           this.props.dispatch(share_data_updata(false));
-          removebackhandler();
+          setbackhandler(oldhandlerbackfn);
         });
         this.props.dispatch(share_data_updata(true));
     }
