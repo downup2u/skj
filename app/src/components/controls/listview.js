@@ -41,7 +41,7 @@ class Page extends React.Component {
 
   componentWillMount() {
     let saveddata = listtypeiddata[this.props.listtypeid];
-    if(!!saveddata){//first time
+    if(!!saveddata && this.props.usecache){//first time
       this.initData = [...saveddata.listdata];
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(this.initData),
@@ -53,10 +53,14 @@ class Page extends React.Component {
       });
     }
     else{
+      if(!!saveddata){
+        delete listtypeiddata[this.props.listtypeid];
+      }
       this.onAjax(this.props.query,this.props.sort,this.props.pagenumber);
     }
   }
   componentWillUnmount() {
+    this.mounted = false;
     let pos = _.get(this,'refs.listview.scrollProperties.offset',0);
     listtypeiddata[this.props.listtypeid] = {
       offset:this.state.offset,
@@ -68,6 +72,7 @@ class Page extends React.Component {
     console.log(`保存位置数据:,pos:${pos}`);
   }
   componentDidMount(){
+    this.mounted = true;
     console.log(`滚动到位置数据:${JSON.stringify(this.state.pos)}`);
     this.refs.listview.scrollTo(0,this.state.pos);
   }
@@ -93,20 +98,22 @@ class Page extends React.Component {
             limit: pagenumber,
         }
     })).then(({result})=> {
-      that.initData = [];
-      if(!!result){
-        _.map(result.docs,(item)=>{
-          that.initData.push(item);
+      if (that.mounted){
+        that.initData = [];
+        if(!!result){
+          _.map(result.docs,(item)=>{
+            that.initData.push(item);
+          });
+        }
+        let dateSource =  that.state.dataSource.cloneWithRows([...that.initData]);
+        that.setState({
+          dataSource:dateSource,
+          refreshing: false,
+          offset:result.offset,//当前页
+          total:result.total,
+          isend:result.offset + result.limit >= result.total
         });
       }
-      let dateSource =  that.state.dataSource.cloneWithRows([...that.initData]);
-      that.setState({
-        dataSource:dateSource,
-        refreshing: false,
-        offset:result.offset,//当前页
-        total:result.total,
-        isend:result.offset + result.limit >= result.total
-      });
     });
   }
   //到达底部事件
@@ -128,20 +135,22 @@ class Page extends React.Component {
                 limit: this.props.pagenumber,
             }
         })).then(({result})=> {
-          if(!!result){
-            _.map(result.docs,(item)=>{
-              that.initData.push(item);
-            });
-          }
-          let dateSource =  that.state.dataSource.cloneWithRows([...that.initData]);
-          that.setState({
-            dataSource:dateSource,
-            isLoading: false,
-            offset:result.offset,//当前页
-            total:result.total,
-            isend:result.offset + result.limit >= result.total
+          if (that.mounted){
+              if(!!result){
+                _.map(result.docs,(item)=>{
+                  that.initData.push(item);
+                });
+              }
+              let dateSource =  that.state.dataSource.cloneWithRows([...that.initData]);
+              that.setState({
+                dataSource:dateSource,
+                isLoading: false,
+                offset:result.offset,//当前页
+                total:result.total,
+                isend:result.offset + result.limit >= result.total
+              });
+            }
           });
-        });
     }
     else{
       this.setState({
@@ -218,6 +227,7 @@ class Page extends React.Component {
 
 
 Page.propTypes = {
+    usecache:PropTypes.bool.isRequired,
     listtypeid:PropTypes.string.isRequired,
     renderHeader:PropTypes.func,
     renderSeparator:PropTypes.func,

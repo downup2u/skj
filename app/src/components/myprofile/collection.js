@@ -71,6 +71,7 @@ export class Page extends Component {
                   }}>
                   <List.Item>
                       <InfinitePage
+                          usecache={false}
                           listtypeid='collection'
                           ref="listviewpage"
                           pagenumber = {30}

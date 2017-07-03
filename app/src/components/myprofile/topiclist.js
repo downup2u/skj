@@ -12,7 +12,7 @@ import { uicommentimg } from '../../actions/index.js';
 
 import { getmytopic } from '../../actions/sagacallback';
 import InfinitePage from '../controls/listview';
-
+let usecachemytopic = false;
 class TopicInfo extends Component {
 
     render(){
@@ -62,9 +62,12 @@ class TopicInfo extends Component {
 class Page extends Component {
 
     onClick =(iteminfo)=>{
+        usecachemytopic = true;
         this.props.history.push(`/communityinfo/${iteminfo._id}`);
     }
-
+    componentDidMount(){
+      usecachemytopic = false;
+    }
     rowRenderer = (item)=> {
         return (
             <TopicInfo
@@ -89,6 +92,7 @@ class Page extends Component {
                     />
                 <div className="cont">
                     <InfinitePage
+                        usecache={usecachemytopic}
                         listtypeid='mytopics'
                         pagenumber = {20}
                         updateContent= {this.rowRenderer}

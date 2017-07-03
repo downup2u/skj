@@ -6,7 +6,7 @@ import moment from 'moment';
 import { ui_setnotifymessage,setlastreadmsgtime_request } from '../../actions';
 import {getnotifymessage} from '../../actions/sagacallback';
 import InfinitePage from '../controls/listview';
-
+let usecachemsg = false;
 
 // http://www.cnblogs.com/qq120848369/p/5920420.html
 export class Page extends Component {
@@ -16,6 +16,7 @@ export class Page extends Component {
     }
 
     onClickReturn = ()=> {
+        usecachemsg = false;
         this.props.history.goBack();
     };
 
@@ -35,6 +36,7 @@ export class Page extends Component {
     }
 
     onClickItem = (item)=>{
+        usecachemsg = true;
         this.props.dispatch( ui_setnotifymessage(item) );
         this.props.history.push(`/mymessagedetail/${item._id}`);
     }
@@ -45,6 +47,7 @@ export class Page extends Component {
                 <NavBar lefttitle="返回" title="消息" onClickLeft={this.onClickReturn} />
                 <div className="messageList">
                     <InfinitePage
+                        usecache={usecachemsg}
                         listtypeid='messagelist'
                         pagenumber = {30}
                         updateContent= {this.updateContent}

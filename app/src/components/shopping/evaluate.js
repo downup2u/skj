@@ -56,6 +56,7 @@ let Page = (props) => {
                     overFlow: "hidden"
                 }}>
                 <InfinitePage
+                    usecache={false}
                     listtypeid='evaluate'
                     pagenumber = {30}
                     updateContent= {updateContent.bind(this)}
