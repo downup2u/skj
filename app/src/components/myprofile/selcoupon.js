@@ -70,6 +70,7 @@ export class Page extends Component {
                 <NavBar lefttitle="返回" title="选择优惠券" onClickLeft={this.onClickReturn} />
                 <div className="myCouponList" style={{height:window.innerHeight-118}}>
                     <InfinitePage
+                        usecache={false}
                         listtypeid='selcoupons'
                         pagenumber = { 100 }
                         updateContent= { this.updateContent }

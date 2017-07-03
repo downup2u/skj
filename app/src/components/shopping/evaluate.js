@@ -57,6 +57,8 @@ let Page = (props) => {
                 }}>
                 <InfinitePage
                     listtypeid={`evaluate${props.match.params.id}`}
+                    usecache={false}
+                    listtypeid='evaluate'
                     pagenumber = {30}
                     updateContent= {updateContent.bind(this)}
                     queryfun= {productcommentsfromproduct}

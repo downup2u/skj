@@ -20,7 +20,7 @@ import TopTip from './community_topictip';
 import { gettopiclist } from '../actions/sagacallback';
 import InfinitePage from './controls/listview';
 import { withRouter } from 'react-router-dom';
-
+let usecachetopic = false;
 export class Topic extends React.Component {
     render() {
         const {topic,comments} = this.props;
@@ -36,7 +36,7 @@ export class Topic extends React.Component {
                     key={commentid}
                     topicid={topic._id}
                     comment={comments[commentid]}
-                    showchild={false} 
+                    showchild={false}
                     />
                 );
         }
@@ -106,8 +106,11 @@ export class Page extends React.Component {
     onClickPage = ()=> {//点击空白处，隐藏?如何判断点击空白
         this.props.dispatch(uicommenthide());
     };
-
+    componentDidMount(){
+      usecachetopic = false;
+    }
     onClickTopic = (topicid)=> {//点击空白处，隐藏?如何判断点击空白
+        usecachetopic = true;
         this.props.history.push(`/communityinfo/${topicid}`);
     };
 
@@ -117,6 +120,7 @@ export class Page extends React.Component {
     };
 
     addNewCommunityHotlnk = ()=>{
+        usecachetopic = false;
         this.props.history.push('/newtopic');
     };
 
@@ -181,6 +185,7 @@ export class Page extends React.Component {
                         top: (tctop+20)+"px"
                     }}>
                     <InfinitePage
+                        usecache={usecachetopic}
                         listtypeid='community'
                         pagenumber = {8}
                         updateContent= {this.updateContent}

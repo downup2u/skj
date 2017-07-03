@@ -60,6 +60,7 @@ export class Page extends Component {
                 </Menu>
                 <div className="myCouponList">
                     <InfinitePage
+                        usecache={false}
                         listtypeid='mycoupons'
                         ref="listviewpage"
                         pagenumber = { 20 }

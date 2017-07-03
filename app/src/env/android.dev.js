@@ -3,12 +3,15 @@ import { goBack  } from 'react-router-redux';//https://github.com/reactjs/react-
 
 let handlerbackfn;
 export const setbackhandler=(fn)=>{
+  let oldhandlerbackfn = handlerbackfn;
   handlerbackfn = fn;
+  return oldhandlerbackfn;
 }
 
 export const removebackhandler=()=>{
   handlerbackfn = undefined;
 }
+
 
 export const exitAndroidApp=()=>{
   alert('exit app');

@@ -19,8 +19,11 @@ export const exitAndroidApp=()=>{
 }
 
 export const setbackhandler=(fn)=>{
+  let oldhandlerbackfn = handlerbackfn;
   handlerbackfn = fn;
+  return oldhandlerbackfn;
 }
+
 
 export const removebackhandler=()=>{
   handlerbackfn = undefined;

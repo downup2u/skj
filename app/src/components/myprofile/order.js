@@ -19,7 +19,7 @@ import {
     evaluation_data,
     queryorderstatusstat_request
 } from '../../actions';
-
+let usecacheorder = false;
 export class Page extends React.Component {
 
     constructor(props, context) {
@@ -104,7 +104,10 @@ export class Page extends React.Component {
                                                 pro.hasOwnProperty("isevaluation")&&!pro.isevaluation?(
                                                     <span
                                                         className="evaluationLnk"
-                                                        onClick={(e)=>{this.addEvaluation(e, items._id, pro.productid)}}
+                                                        onClick={(e)=>{
+                                                          usecacheorder = true;
+                                                          this.addEvaluation(e, items._id, pro.productid);
+                                                        }}
                                                         >
                                                         立刻评价
                                                     </span>
@@ -223,6 +226,7 @@ export class Page extends React.Component {
                 </div>
                 <div className="orderList">
                     <InfinitePage
+                        usecache={usecacheorder}
                         listtypeid='myorders'
                         ref="listviewpage"
                         pagenumber = {20}
