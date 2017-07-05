@@ -1,6 +1,8 @@
 .homePage{
-    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
+    -webkit-flex-direction: column;
     flex-direction: column;
     padding: 0 0 10px 0;
     flex-shrink: 0;
@@ -8,14 +10,24 @@
     position: relative;
     background-image: linear-gradient(0deg, #5771c5, #5596d6);
 
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -moz-justify-content: flex-start;
+    -webkit-justify-content: flex-start;
     justify-content: flex-start;
 }
 .homePage .toolBar{
     background: none;
     border: none;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
-    justify-content: space-between;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
     width: 100%;
 }
@@ -26,25 +38,44 @@
     width: 60px;
     height: 40px;
     line-height: 40px;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
 }
 .homePage .toolBar .right{
     right: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     height: 48px;
     text-align: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
 }
 .homePage .toolBar .right img{
     width: 40px;
 }
-
 .homePage .nodevice{
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
+
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
+
+    -webkit-flex-direction: column;
     flex-direction: column;
     border-radius: 170px;
     height: 170px;
@@ -67,7 +98,10 @@
 }
 .homePageWamp {
     width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
     flex-grow: 1;
     overflow: scroll;
@@ -88,6 +122,8 @@
     height: 100%;
     top:0;
     left: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     flex-direction: column;
     padding-top: 65px;
@@ -111,9 +147,17 @@
     margin-bottom: 5px;
 }
 .headContentInfo .i3 {
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
+    
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
+
     margin-bottom: 22px;
 }
 .headContentInfo .i3 span{
@@ -131,8 +175,12 @@
     border-radius: 100px;
     font-size: 14px;
     color: #FFF;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     margin: 0 15px;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
 }
 .headInfo span{
@@ -144,18 +192,34 @@
 }
 .HomeList{
     display: flex;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
+
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
     align-items: stretch;
+
+    -webkit-flex-direction: column;
     flex-direction: column;
+
+    -moz-flex-shrink: 0;
+    -webkit-flex-shrink: 0;
     flex-shrink: 0;
+
     background: #FFF;
 }
 .HomeList .ListTitle{
     flex-shrink: 0;
 }
 .HomeList > ul{
+    -moz-flex-shrink: 1;
+    -webkit-flex-shrink: 1;
     flex-shrink: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
     overflow: scroll;
 }
@@ -164,9 +228,16 @@
 }
 
 .ListTitle{
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
+    -webkit-flex-grow: 1;
     flex-grow: 1;
     border-bottom: 1px solid #DDD;
     background: #EEE;
@@ -174,9 +245,17 @@
     padding: 10px 15px;
 }
 .ListTitle > div{
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
+
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
+
     font-size: 16px;
 }
 .ListTitle > div:last-child .ui.fitted.toggle.checkbox{
@@ -202,12 +281,14 @@
     margin: 0 2px;
 }
 .homePageWamp .homePageList{
-    flex-grow: 1;
     -webkit-flex-grow: 1;
+    flex-grow: 1;
     background: #FFF;
     list-style: none;
     padding: 15px;
     margin: 0px;
+    -moz-flex-shrink: 0;
+    -webkit-flex-shrink: 0;
     flex-shrink: 0;
 }
 .homePage .toolBar{
