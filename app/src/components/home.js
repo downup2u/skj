@@ -32,7 +32,7 @@ let listLi = {
     marginBottom: "10px"
 };
 let listinfo = {
-    color: "#CCC",
+    color: "#666",
     fontSize: "14px",
     marginLeft: "15px"
 };
@@ -139,8 +139,13 @@ let DeviceSwiper =(props)=>{
                           className="Demo-swiper__slide"
                           key={deviceid}
                           >
-                          <div className="headContent">
-                              <img src="img/1.png"/>
+                          <div className="headContent"
+                                style={{
+                                    background:"url('img/1-1.png') no-repeat center",
+                                    backgroundSize: "220px 220px"
+                                }}
+                          >
+                              <img src="img/1.png" className="bg"/>
                               {getdata?(
                                   <div className="headContentInfo">
                                       <span className="i1">{modeltype}</span>

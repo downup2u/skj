@@ -45,10 +45,7 @@ let renderRegisterForm = (fields)=> {
             {fields.authcode.meta.touched && fields.authcode.meta.error &&
             <Label basic color='red' pointing>{fields.authcode.meta.error}</Label>}
             <img src="img/rg2.png" className='lefticon'/>
-
-            
             <Sendauth primary action={onClickAuth} className="yanzhenBtn" />
-
         </div>
         <div className="password logininput">
             <Input placeholder='输入密码'  {...fields.password.input} type={ispasswordvisiable?"text":"password"}/>

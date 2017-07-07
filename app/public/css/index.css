@@ -5,7 +5,7 @@
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
-    font-weight: 100;
+    font-weight: 300;
 }
 input, textarea{
     -webkit-user-select:text;
@@ -39,6 +39,20 @@ input, textarea{
     align-self: stretch;
     flex-grow: 1;
 }
+
+
+.pageStyle >div, .pageWamp > div{
+    opacity: 1;
+    animation:pageshow 1s;
+    -webkit-animation:pageshow 1s;
+}
+@keyframes pageshow{
+    from {opacity : .2;}
+    to {opacity : 1;}
+}
+
+
+
 .pageWamp >div{
     display: flex;
     justify-content: space-between;

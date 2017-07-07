@@ -6,6 +6,9 @@
     flex-direction: column;
     width: 100%
 }
+.shoppingPage .swiper-slide{
+    min-height: 160px;
+}
 .shoppingPage .weui-actionsheet_toggle{
     background: #FFF;
 }
