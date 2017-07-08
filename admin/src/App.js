@@ -63,7 +63,7 @@ class App extends Component {
                 <Resource name="mycoupon" list={MycouponlistList} edit={MycouponlistEdit} create={MycouponlistCreate}  remove={Delete} />
                 <Resource name="device" list={DevicelistList} edit={DevicelistEdit}  remove={Delete} />
                 <Resource name="realtimedata" list={RealtimedatalistList} edit={RealtimedatalistEdit}  remove={Delete} />
-                <Resource name="user" list={UserlistList} show={UserlistShow} edit={UserlistEdit} />
+                <Resource name="user" list={UserlistList} edit={UserlistEdit} />
                 <Resource name="news" list={NewslistList} edit={NewslistEdit} create={NewslistCreate}  remove={Delete} />
                 <Resource name="withdrawcash" list={WithdrawcashlistList}  edit={WithdrawcashlistEdit}/>
                 <Resource name="order" list={OrderlistList} edit={OrderlistEdit}/>

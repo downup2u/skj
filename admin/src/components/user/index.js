@@ -25,6 +25,7 @@ import {
   SelectInput,
   BooleanInput,
   BooleanField,
+  ImageField,
   Filter
 } from 'admin-on-rest/lib/mui';
 
@@ -32,7 +33,7 @@ import { Field,FieldArray } from 'redux-form';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
-
+import {Titlewithimage} from '../controls/Titlewithimage';
 import moment from 'moment';
 
 
@@ -66,6 +67,8 @@ const UserlistEdit = (props) => {
               <DateField label="注册时间" source="created_at"  showTime/>
               <DateField label="上次登录时间" source="updated_at"  showTime/>
               <TextField label="昵称" source="profile.nickname" />
+              <ImageField label="头像"  source="profile.avatar" />
+              <TextInput label="头像" source="profile.avatar" />
           </SimpleForm>
       </Edit>);
 
@@ -75,11 +78,11 @@ const UserlistEdit = (props) => {
 const UserlistList = (props) => (//
      <List title="用户列表" {...props}  filters={<UserFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
-        <TextField label="手机号" source="username" />
+        <Titlewithimage label="名字" icon="profile.avatar" name="username"/>
         <DateField label="注册时间" source="created_at"  showTime/>
         <DateField label="上次登录时间" source="updated_at"  showTime/>
         <TextField label="昵称" source="profile.nickname" />
-        <ShowButton />
+        <EditButton />
         </Datagrid>
     </List>
 );
