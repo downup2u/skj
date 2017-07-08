@@ -7,6 +7,7 @@ import '../../node_modules/react-dynamic-swiper/lib/styles.css';
 import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
 import {ui_setcurrentdeviceid,senddevicecmd_request} from '../actions/index.js';
+import Waterwave from './waterwave.js';
 
 let swiperOptions = {
     navigation: false,
@@ -19,7 +20,7 @@ let list = {
     padding: "15px",
     margin: "0",
     flexGrow: 1,
-    
+
     flexShrink: 0
 };
 let linestyle = (startColor, endColor, widthStyle)=> ({
@@ -191,7 +192,7 @@ export class Page extends Component {
             }
         }
     }
-    
+
     render(){
 
         const {props} = this;
@@ -204,7 +205,7 @@ export class Page extends Component {
             props.history.push('/devicelist');
         };
 
-        
+
         let curdevice = null;
         let curdevicedata = null;
         let detaillist = false;
@@ -240,6 +241,9 @@ export class Page extends Component {
                     { mydevicelist.length === 0 &&  <Nodevice />}
                     { mydevicelist.length > 0 &&  <DeviceSwiper mydevicelist={mydevicelist} devices={devices} />}
 
+                    { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  &&
+                        <Waterwave />
+                    }
                     { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  &&
                         <HeadInfo curdevicedata={curdevicedata}/>
                     }
