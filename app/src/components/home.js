@@ -6,7 +6,7 @@ import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../node_modules/react-dynamic-swiper/lib/styles.css';
 import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
-import {ui_setcurrentdeviceid,senddevicecmd_request} from '../actions/index.js';
+import {ui_setcurrentdeviceid,senddevicecmd_request, set_weui} from '../actions/index.js';
 import Waterwave from './waterwave.js';
 
 let swiperOptions = {
@@ -146,7 +146,11 @@ let DeviceSwiper =(props)=>{
                                     backgroundSize: "220px 220px"
                                 }}
                           >
-                              <img src="img/1.png" className="bg"/>
+                              
+                                <div className="waterwave">
+                                    <div><Waterwave id={deviceid}/></div>
+                                </div>
+                                <img src="img/1.png" className="bg"/>
                               {getdata?(
                                   <div className="headContentInfo">
                                       <span className="i1">{modeltype}</span>
@@ -220,8 +224,26 @@ export class Page extends Component {
         }
 
         let ClickRadio = (iswatercut)=> {
-            let deviceid = devices[curdeviceid].deviceid;
-            props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
+
+            let text = iswatercut?"你确认需要断水吗？":"你确认要开通水源吗？";
+            props.dispatch(
+                set_weui({
+                    confirm:{
+                        show : true,
+                        title : "确认收货",
+                        text : text,
+                        //
+                        buttonsClose : ()=>{},
+                        //确认收货
+                        buttonsClick : ()=>{
+                            let deviceid = devices[curdeviceid].deviceid;
+                            props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
+                        }
+                    }}
+                )
+            )
+
+            
         }
 
         return (
@@ -240,10 +262,7 @@ export class Page extends Component {
 
                     { mydevicelist.length === 0 &&  <Nodevice />}
                     { mydevicelist.length > 0 &&  <DeviceSwiper mydevicelist={mydevicelist} devices={devices} />}
-
-                    { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  &&
-                        <Waterwave />
-                    }
+                    
                     { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  &&
                         <HeadInfo curdevicedata={curdevicedata}/>
                     }

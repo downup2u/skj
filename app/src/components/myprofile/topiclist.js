@@ -3,8 +3,6 @@ import NavBar from '../newnav.js';
 import { Input, Button, Menu, Icon } from 'semantic-ui-react';
 import '../../../public/css/mytopiclist.css';
 import Bigimg from '../tools/bigimg.js';
-import { InfiniteLoader, List } from 'react-virtualized';
-import 'react-virtualized/styles.css'; // only needs to be imported once
 import { connect } from 'react-redux';
 import moment from 'moment';
 import {ui_setmytopiclistinited,getmytopic_request} from '../../actions';

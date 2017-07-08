@@ -308,3 +308,22 @@
     font-size:18px;
     padding-top: 20px;
 }
+.homePage .waterwave{
+    height: 190px;
+    width: 100%;
+    position: absolute;
+    top: 24px;
+    overflow: hidden;
+    border-radius: 250px;
+    padding-right: 18px;
+    z-index: 0;
+}
+.homePage .waterwave >div{
+    width: 196px;
+    height: 190px;
+    margin: auto;
+    overflow:  hidden;
+    border-radius: 190px;
+}
+
+
