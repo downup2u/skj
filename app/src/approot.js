@@ -14,7 +14,7 @@ import Userinfo from './components/user-info.js';
 import ProfileDetail from './components/profiledetail.js';
 import { TransitionMotion, spring } from 'react-motion';
 
-
+import Waterwave from './components/waterwave.js';
 //关于我们
 import Aboutus from './components/myprofile/aboutus.js';
 //意见反馈
@@ -278,6 +278,8 @@ const CoApp = (props) => {
             <CustomRoute path="/feedback" component={requireAuthentication(Feedback)} />
             <CustomRoute path="/integral" component={requireAuthentication(Integral)} />
             <CustomRoute path="/aboutus/:type" component={Aboutus} />
+            <CustomRoute path="/waterwave" component={Waterwave} />
+
             <CustomRoute component={App}/>
         </Switch>
     );

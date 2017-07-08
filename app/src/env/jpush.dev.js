@@ -46,10 +46,10 @@ export const postNotifyFromJPush = (dispatch)=>{
       //         let jsonstring = JSON.stringify(jsonobj);
       //         window.postNotification(jsonstring);
       //   }
-        if(e && e.keyCode===51){ // 按 3，模拟发送手机安卓键
-            //要做的事情
-            window.webBack();
-       }
+      //   if(e && e.keyCode===51){ // 按 3，模拟发送手机安卓键
+      //       //要做的事情
+      //       window.webBack();
+      //  }
     }
     //未点击推送消息
     window.listenInMessage=(jsonstr)=>{
