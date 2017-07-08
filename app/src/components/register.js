@@ -7,6 +7,13 @@ import {sendauth_request,register_request} from '../actions/index.js';
 import {register} from '../actions/sagacallback.js';
 import Sendauth from './tools/sendauth.js';
 
+import WeUI from 'react-weui';
+import 'weui';
+import 'react-weui/lib/react-weui.min.css';
+const { 
+
+    FormCell
+    } = WeUI;
 
 let renderRegisterForm = (fields)=> {
     let ispasswordvisiable = fields.ispasswordvisiable.input.value;
@@ -60,22 +67,39 @@ let renderRegisterForm = (fields)=> {
             <Label basic color='red' pointing>{fields.invitecode.meta.error}</Label>}
             <img src="img/rg4.png" className='lefticon'/>
         </div>
-
+        <FormCell style={{paddingLeft:"6%"}} className="logininput">
+            <label className="weui-agree">
+                <input className="weui-agree__checkbox" {...fields.aggree.input} type="checkbox" />
+                <span className="weui-agree__text">
+                    &nbsp;&nbsp;同意水可净的《<a >服务条款</a>》
+                </span>
+            </label>
+            {fields.aggree.meta.touched && fields.aggree.meta.error &&
+            <Label basic color='red' pointing><span style={{
+                border:"1px solid #C00",
+                borderRadius: "20px",
+                display:"block",
+                width : "14px",
+                height : "14px",
+                lineHeight: "14px",
+                textAlign: "center"
+            }}>{fields.aggree.meta.error}</span></Label>}
+        </FormCell>
     </div>);
 }
 renderRegisterForm = connect()(renderRegisterForm);
 
 let RegisterForm = (props)=> {
     let {handleSubmit,onClickRegister,onClickLogin,onClickReturn} = props;
-    return (<Form onSubmit={handleSubmit(onClickRegister)} id="UserLoginPageForm">
+    return (<Form onSubmit={handleSubmit(onClickRegister)} id="UserLoginPageForm" style={{height:window.innerHeight + "px", overflow:"scroll"}}>
         <div className="loginPageTop">
             <div className="loginHead">
                 <Icon name='angle left' onClick={onClickReturn}/>
                 <img src="img/4.png" className="loginhead"/>
             </div>
-            <Fields names={['username','ispasswordvisiable','password','authcode','invitecode']} component={renderRegisterForm}/>
+            <Fields names={['username','ispasswordvisiable','password','authcode','invitecode','aggree']} component={renderRegisterForm}/>
 
-            <div className="loginBotton">
+            <div className="loginBotton" style={{padding: "2px 14% 10px 14%"}}>
                 <Button primary>注册</Button>
                 <Button basic type="button" onClick={onClickLogin}>快速登录</Button>
             </div>
@@ -130,6 +154,12 @@ const validate = values => {
             errors.invitecode = '八位数字(选填)';
         }
     }
+
+    
+    if (!values.aggree) {
+        errors.aggree = '!';
+    }
+
     return errors;
 }
 
@@ -141,6 +171,7 @@ RegisterForm = reduxForm({
         password: '',
         authcode: '',
         invitecode:'',
+        aggree: false,
         ispasswordvisiable: false,
     }
 })(RegisterForm);
