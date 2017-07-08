@@ -9,11 +9,21 @@
 
 }
 .newtopicinput{
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     align-items: stretch;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
 }
 .newtopicinput textarea{
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     resize: none;
     min-height: 200px;
@@ -23,6 +33,7 @@
     font-size: 18px;
     outline: none;
     margin-bottom: 15px;
+    -webkit-flex-grow: 1;
     flex-grow: 1;
 }
 .newtopic .clearfix{
@@ -32,10 +43,13 @@
     padding-bottom: 15px;
 }
 .newtopicbtn{
-    display: flex;
     width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
 }
 .newtopic .ui.button{
+    -webkit-flex-grow: 1;
     flex-grow: 1;
     border-radius: 0;
     margin: 0;
@@ -66,6 +80,7 @@
 }
 
 .newtopicPage form{
+    -webkit-flex-grow: 1;
     flex-grow: 1;
     overflow: scroll;
 }

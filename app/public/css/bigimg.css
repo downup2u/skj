@@ -6,8 +6,15 @@
     top: 0;
     left: 0;
     background: rgba(0,0,0,.2);
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
+    align-items: stretch;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
     align-items: stretch;
 }
 .showBigImg img{
@@ -17,9 +24,17 @@
     bottom: 10px;
 }
 .showBigImg .swiper-slide {
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
 }
 .showBigImg.hide{
