@@ -332,6 +332,8 @@
 .loginBotton .ui.button {
     border-radius: 100px;
     margin-bottom: 10px;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
 }
 
 
@@ -341,12 +343,19 @@
 
 .UserLoginPage .forgetpwd {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: flex-end;
+    -moz-justify-content: flex-end;
+    -webkit-justify-content:flex-end; 
     justify-content: flex-end;
     padding-right: 10px;
     font-size: 14px;
 }
 
 .UserLoginPage .loginPageTop {
+    -webkit-flex-grow: 1;
     flex-grow: 1;
     position: relative;
 }
@@ -361,21 +370,34 @@
     top: 20px;
     color: #FFF;
     font-size: 30px;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     width: 60px;
     height: 60px;
     justify-content: center;
+    -moz-justify-content: center;
+    -webkit-justify-content:center; 
+    justify-content: center;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
 }
 
 .UserLoginPage .loginPageBottom {
+    -webkit-flex-direction: column;
     flex-direction: column;
 }
 
 .UserLoginPage .loginPageBottom .tit {
     position: relative;
     line-height: 20px;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    -moz-justify-content: center;
+    -webkit-justify-content:center; 
     justify-content: center;
     margin: 0 10%;
     margin-bottom: 10px;
@@ -401,7 +423,16 @@
 
 .UserLoginPage .loginPageBottom .lnk {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
     justify-content: center;
+    -moz-justify-content: center;
+    -webkit-justify-content:center; 
+    justify-content: center;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
     margin-bottom: 20px;
 }
@@ -413,7 +444,16 @@
     height: 50px;
     width: 50px;
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
     justify-content: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
     color: #FFF;
 }
@@ -422,8 +462,17 @@
     margin: 0;
     font-size: 22px;
     display: flex;
-    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
     justify-content: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
 }
 
 .UserLoginPage .loginPageBottom .lnk > div:last-child {
@@ -433,7 +482,16 @@
 
 .ChangeUsernamePage .inputContent{
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
     justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    align-items: stretch;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
     align-items: stretch;
     padding: 15px;
     position: relative;
@@ -442,6 +500,7 @@
 
 }
 .ChangeUsernamePage .inputContent > .ui.input{
+    -webkit-flex-grow: 1;
     flex-grow: 1;
 }
 .ChangeUsernamePage .inputContent > .ui.input input{

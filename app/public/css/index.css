@@ -43,8 +43,8 @@ input, textarea{
 
 .pageStyle >div, .pageWamp > div{
     opacity: 1;
-    animation:pageshow 1s;
-    -webkit-animation:pageshow 1s;
+    animation:pageshow .5s;
+    -webkit-animation:pageshow .5s;
 }
 @keyframes pageshow{
     from {opacity : .2;}
@@ -90,6 +90,9 @@ input, textarea{
 }
 .homeBottom .ui.button img{
     width: 26px;
+}
+.homeBottom .ui.button span{
+    display: block;
 }
 .logisticsinfoPage{
     justify-content: flex-start;

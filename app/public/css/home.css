@@ -157,6 +157,7 @@
     color: #FFF;
     font-weight: bold;
     margin-bottom: 5px;
+    display: block;
 }
 .headContentInfo .i3 {
     display: -webkit-box;
