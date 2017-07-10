@@ -54,6 +54,8 @@ input, textarea{
 
 
 .pageWamp >div{
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -64,7 +66,10 @@ input, textarea{
 }
 
 .homeBottom{
-    display : flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
     justify-content: space-between;
     bottom: 0;
     width: 100%;
@@ -74,8 +79,10 @@ input, textarea{
     z-index: 999
 }
 .homeBottom .ui.button{
-    width: 33%;
+    width: 25%;
     background: none;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     flex-direction: column;
     justify-content: center;
