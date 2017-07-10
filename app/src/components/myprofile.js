@@ -31,7 +31,7 @@ export class Page extends Component {
         this.onClickPage("/myorder");
     };
     componentWillUnmount() {
-      removebackhandler();
+
     }
     showShare =()=>{
         let oldhandlerbackfn = setbackhandler(()=>{
