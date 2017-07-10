@@ -39,7 +39,7 @@ export class Page extends React.Component {
 
 
     render() {
-        let innerheight = localStorage.getItem('innerheight');
+        let innerheight = window.innerHeight;
         let pagesz = [];
         pagesz.push(<Page0 key="page0" />);
         pagesz.push(<Page1 key="page1" />);

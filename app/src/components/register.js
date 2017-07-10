@@ -210,7 +210,7 @@ export class Page extends React.Component {
 
     render() {
         return (
-            <div className="UserLoginPage" style={{height:localStorage.getItem('innerheight')+"px"}}>
+            <div className="UserLoginPage" style={{height:window.innerHeight+"px"}}>
                 <RegisterForm onClickRegister={this.onClickRegister}
                               onClickLogin={this.onClickLogin}
                               onClickReturn={this.onClickReturn}/>
