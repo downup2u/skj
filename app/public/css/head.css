@@ -5,9 +5,20 @@
     background: #5596d6;
     border-radius: 0;
     border: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+
     justify-content : space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+
     align-items: stretch;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    
     margin-bottom: 0;
     padding: 0;
     height:68px;
@@ -19,11 +30,17 @@
 }
 .ui.segment.headContent .leftlnk{
     width: 25%;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+
 }
 .ui.segment.headContent .rightlnk {
     width: 25%;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+
     justify-content: flex-end;
 }
 .ui.segment.headContent .leftlnk button, .ui.segment.headContent .rightlnk button{
@@ -44,9 +61,17 @@
     font-size: 18px;
     color: #FFF;
     font-weight: 100;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
+
 }
 
 .ui.segment.headContent .ui.grid{
@@ -60,7 +85,10 @@
     padding: 0;
 }
 .communityMoreLnk > div{
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+
     padding: 0 10px;
     line-height: 30px;
 }

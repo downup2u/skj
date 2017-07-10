@@ -60,7 +60,7 @@ let headImg = {
 
 let Nodevice =(props)=>{
     return (
-        <div className="nodevice">
+        <div className="nodevice" style={{width: "170px"}}>
             <img src="img/12.png" />
             <div className="desc">当前没有设备</div>
             <div className="btn" onClick={()=>{props.history.push('/addnewdevice');}}>新建设备</div>

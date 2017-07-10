@@ -39,7 +39,7 @@ class Page extends Component {
         let showstyle = show?"showBigImg":"showBigImg hide";
 
         return (
-            <div className={showstyle} onClick={()=>{hideimg()}}>
+            <div className={showstyle} onClick={()=>{hideimg()}} style={{height: window.innerHeight+"px"}}>
                 <Swiper
                     swiperOptions={{
                         slidesPerView : 'auto',
@@ -52,7 +52,7 @@ class Page extends Component {
                     >
                     {_.map(imglist,(img,index)=>{
                         return (
-                            <Slide key={index} className="Demo-swiper__slide">
+                            <Slide key={index} className="Demo-swiper__slide" style={{height: window.innerHeight+"px"}}>
                                 <img src={img} />
                             </Slide>
                         );

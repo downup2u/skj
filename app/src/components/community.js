@@ -136,7 +136,7 @@ export class Page extends React.Component {
 
     render() {
         const {useralerttopiclist} = this.props;
-        let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-150:window.innerHeight-108;
+        let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-162:window.innerHeight-120;
         let tctop = useralerttopiclist.length > 0?90:48;
 
         return (

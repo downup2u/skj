@@ -1,4 +1,5 @@
 .addAddressPage{
+    -webkit-flex-grow: 1;
     flex-grow: 1;
     overflow: hidden;
 }
@@ -7,14 +8,29 @@
 }
 .AddressAddPage .setForm {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
     background: #FFF;
 }
 .AddressAddPage .setForm > div {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
     justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+
     align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+
     font-size: 14px;
     height: 40px;
+    -webkit-flex-grow: 1;
     flex-grow: 1;
     margin: 5px 15px;
 }
@@ -34,6 +50,12 @@
 }
 .AddressListPage .addressItem .tit{
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     font-size: 14px;
     margin-bottom: 5px;
@@ -47,6 +69,12 @@
 
 .addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     padding-left: 15px;
     border-bottom: 1px solid #EEE;
@@ -83,12 +111,22 @@
 .addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item .tit {
     width: 80px;
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
     font-size: 16px;
 }
 
 .addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item .content {
+    -webkit-flex-grow: 1;
     flex-grow: 1;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     font-size: 16px;
 }
@@ -100,6 +138,10 @@
 
 .addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item .content .input {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-grow: 1;
     flex-grow: 1;
     border: none;
     border-radius: 0;
@@ -108,12 +150,19 @@
 .addAddress.ui.selection.list .list > .item, .addAddress.ui.selection.list > .item .content select {
     border: none;
     border-radius: 0;
+    -webkit-flex-grow: 1;
     flex-grow: 1;
+    -webkit-align-self: stretch;
     align-self: stretch;
 }
 
 .AddressListPage .addNew {
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     position: fixed;
     bottom: 0;
@@ -123,6 +172,7 @@
 }
 
 .AddressListPage .addNew button.button {
+    -webkit-flex-grow: 1;
     flex-grow: 1;
     border-radius: 0;
     margin: 0;
@@ -134,6 +184,10 @@
 
 .AddressListPage .ui.selection.list > .item {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
     padding: 15px;
     background: #FFF;
@@ -142,7 +196,12 @@
 }
 
 .AddressListPage .ui.selection.list > .item .tit {
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
+    justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     margin-bottom: 10px;
     font-size: 14px;
@@ -159,10 +218,19 @@
 
 .AddressListPage .listControl {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
 }
 
 .AddressListPage .listControl .lnk {
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
 }
 
@@ -183,6 +251,12 @@
 
 .UserInfoPage .ui.selection.list > .item {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     padding: 15px;
     background: #FFF;
@@ -194,6 +268,12 @@
 
 .UserInfoPage .escLogin {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     justify-content: center;
 }
 
@@ -205,15 +285,32 @@
 
 .UserLoginPage {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
     justify-content: flex-start;
+    -moz-justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    align-items: stretch;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
     align-items: stretch;
 
 }
 .pageWamp >div.UserLoginPage{
     overflow: scroll;
     flex-shrink: 0;
+    -moz-flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
     top: 0;
     bottom: 0;
@@ -223,18 +320,31 @@
 }
 
 .pageWamp >div.UserLoginPage > div{
-    display: flex;
+    display: block;
+    -webkit-flex-direction: column;
     flex-direction: column;
     flex-shrink: 0;
+    -moz-flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    -webkit-align-self:  stretch;
     align-self:  stretch;
     overflow:  scroll;
 }
 .pageWamp #UserLoginPageForm{
     flex-shrink: 0;
+    -moz-flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
     overflow: hidden;
     min-height: 482px;
+    -webkit-flex-grow: 1;
     flex-grow: 1;
 }
 .UserLoginPage .loginhead {
@@ -297,7 +407,16 @@
     color: #CCC;
     height: 44px;
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
     justify-content: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
     width: 44px;
     margin: 0;
@@ -325,6 +444,10 @@
 
 .loginBotton {
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
     padding: 20px 14% 10px 14%;
 }
@@ -334,8 +457,8 @@
     margin-bottom: 10px;
     -webkit-flex-grow: 1;
     flex-grow: 1;
+    display: block;
 }
-
 
 .AddressAddPageBottom{
     margin-top: 20px;
@@ -473,6 +596,7 @@
     -webkit-box-align: center;
     -webkit-align-items: center;
     align-items: center;
+    line-height: 22px;
 }
 
 .UserLoginPage .loginPageBottom .lnk > div:last-child {
@@ -545,6 +669,12 @@
     margin: 0;
     height: 45px;
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
 }
 .UserLoginPage .loginform .logininput.password .ui.red.pointing.basic.label{
@@ -566,6 +696,12 @@
     margin: 0;
     height: 40px;
     display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
     align-items: center;
 }
 

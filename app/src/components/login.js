@@ -180,7 +180,7 @@ export class Page extends React.Component {
         }
         return (
             <div className="UserLoginPage">
-                <div style={{height:window.innerHeight+"px"}}>
+                <div style={{height:window.innerHeight+"px",overflow:"scroll"}}>
                 <LoginForm onClickRegister={this.onClickRegister}
                            onClickLogin={this.onClickLogin}
                            onClickForgetPasword={this.onClickForgetPasword}

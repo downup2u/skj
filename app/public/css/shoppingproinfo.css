@@ -1,7 +1,10 @@
 .ProinfoPage {
     background: #EEE;
     overflow:hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
 }
 .ProinfoPage .PageContent{
@@ -14,7 +17,10 @@
 .ProinfoPage .ProinfoPageHead {
     flex-shrink: 0;
     background: #5596d6;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
     align-items: center;
     height: 68px;
     width: 100%;
@@ -31,7 +37,10 @@
 }
 
 .ProinfoPage .ProinfoPageHead .imgcont {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
     width: 50px;
     justify-content: center;
     align-items: center;
@@ -44,7 +53,10 @@
     color: #FFF;
     border-radius: 20px;
     line-height: 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
     justify-content: center;
     align-items: center;
     font-size: 10px;
@@ -64,7 +76,10 @@
 .ProinfoPage .ProinfoPageHead i.icon {
     font-size: 30px;
     color: #FFF;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
     justify-content: center;
     align-items: center;
     padding-left: 10px;
@@ -88,13 +103,21 @@
 }
 
 .ProinfoPage .proinfoHead .p1 {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-grow: 1
+    display: -webkit-flex;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
 }
 .ProinfoPage .proinfoHead .p1 >div{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
-    flex-grow: 1
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
 }
 
 .ProinfoPage .proinfoHead .p2 {
@@ -109,18 +132,25 @@
 }
 
 .ProinfoPage .shoppingBanner .swiper-slide {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
     align-items: flex-start;
 }
 
 .ProinfoPage .proinfoHead .proname {
     font-size: 16px;
     margin-right: 15px;
+    -webkit-flex-grow: 1;
     flex-grow: 1
 }
 
 .ProinfoPage .proinfoHead .collectionLnk {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -135,7 +165,10 @@
 
 .ProinfoPage .discountlist .li {
     background: #FFF;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
     padding: 10px;
     justify-content: space-between;
     align-items: center;
@@ -143,7 +176,10 @@
 }
 
 .ProinfoPage .discountlist .li .tt {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
     align-items: center;
     font-size: 14px;
 }
@@ -168,6 +204,7 @@
 }
 
 .ProinfoPage .proinfoBody {
+    -webkit-flex-grow: 1;
     flex-grow: 1;
 }
 
@@ -193,6 +230,10 @@
     width: 50%;
     line-height: 40px;
     display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
     justify-content: center;
     align-items: center;
 }
@@ -201,6 +242,10 @@
     width: 90%;
     line-height: 40px;
     display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
     font-style: normal;
     justify-content: center;
     font-size: 14px;
@@ -229,7 +274,8 @@
 }
 
 .shoppingNews {
-    height:"42px";
+    height: 42px;
+    -webkit-flex-grow: 1;
     flex-grow: 1;
 }
 .shoppingNews .swiper-container{
@@ -237,6 +283,11 @@
 }
 .shoppingNews .swiper-container .swiper-slide{
     display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
     justify-content: flex-start;
     align-items: center;
+    line-height: 42px;
 }
