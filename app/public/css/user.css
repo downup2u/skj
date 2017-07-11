@@ -211,6 +211,9 @@
     align-items: stretch;
 
 }
+.UserLoginPage .weui-agree{
+    padding-right: 0;
+}
 .pageWamp >div.UserLoginPage{
     overflow: scroll;
     flex-shrink: 0;

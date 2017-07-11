@@ -10,6 +10,7 @@ import Sendauth from './tools/sendauth.js';
 import WeUI from 'react-weui';
 import 'weui';
 import 'react-weui/lib/react-weui.min.css';
+import {withRouter} from 'react-router-dom';
 const { 
 
     FormCell
@@ -38,7 +39,11 @@ let renderRegisterForm = (fields)=> {
         callback(phone);
     }
 
-
+    //服务条款
+    let showsrever =()=>{
+        console.log(fields);
+        fields.history.push('/aboutus/servicerule');
+    }
 
     return (<div className='loginform'>
         <div className="username logininput">
@@ -71,9 +76,10 @@ let renderRegisterForm = (fields)=> {
             <label className="weui-agree">
                 <input className="weui-agree__checkbox" {...fields.aggree.input} type="checkbox" />
                 <span className="weui-agree__text">
-                    &nbsp;&nbsp;同意水可净的《<a >服务条款</a>》
+                    &nbsp;&nbsp;同意水可净的
                 </span>
             </label>
+            《<a onClick={showsrever}>服务条款</a>》
             {fields.aggree.meta.touched && fields.aggree.meta.error &&
             <Label basic color='red' pointing><span style={{
                 border:"1px solid #C00",
@@ -88,6 +94,7 @@ let renderRegisterForm = (fields)=> {
     </div>);
 }
 renderRegisterForm = connect()(renderRegisterForm);
+renderRegisterForm = withRouter(renderRegisterForm);
 
 let RegisterForm = (props)=> {
     let {handleSubmit,onClickRegister,onClickLogin,onClickReturn} = props;

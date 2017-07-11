@@ -12,7 +12,8 @@ import {
     lovetopicunadd_request,
     uicommentshow,
     uicommenthide,
-    uicommentimg
+    uicommentimg,
+    set_weui
 } from '../actions/index.js';
 import '../../public/css/feed.css';
 import moment from 'moment';
@@ -66,6 +67,18 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
       history.push('/login');
     }
   }
+
+  let jubao=()=>{
+      dispatch(set_weui({
+        alert : {
+            show : true,
+            title : "举报成功",
+            text : "我们已经接收到您的举报信息，谢谢！",
+            buttonsClick : ()=>{}
+        }
+      }))
+  }
+
   //点击显示大图<img data-normal={loadingimg} data-retina={url} onClick={()=>{clickimg(topic.picurl, index)}}  />
   let clickimg = (pic, index)=>{
 
@@ -141,6 +154,9 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch}) => {
                         <div className="addCommunity" onClick={clicklove} style={{color:islovedbyme?"#C00":"#333"}}>
                             <Icon name="like outline"/>
                             赞 ({topic.loves.length})
+                        </div>
+                        <div className="addCommunity" onClick={jubao}>
+                            举报
                         </div>
                     </Feed.Meta>
                 </Feed.Content>

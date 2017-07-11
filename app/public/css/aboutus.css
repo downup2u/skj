@@ -17,6 +17,10 @@
     font-size: 14px;
     overflow: scroll;
 }
+.aboutusPage .content div{
+    padding: 15px;
+}
 .aboutusPage .content img{
-    max-width: 100%;
+    max-width: 80%;
+    margin: auto;
 }
