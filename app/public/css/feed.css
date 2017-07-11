@@ -68,9 +68,6 @@
     -webkit-box-align: center;
     -webkit-align-items: center;
     align-items: center;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
-    justify-content: center;
     left: 0;
     top: 0;
     width: 100%;
@@ -86,6 +83,8 @@
     line-height: 48px;
     color: #FFF;
     font-size: 16px;
+    display: block;
+    text-align: center;
 }
 
 .feedPage .PageHead .imgcont {

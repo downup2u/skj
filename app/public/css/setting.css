@@ -22,6 +22,9 @@
     align-items: center;
     height: 60px;
 }
+.settingPage .list .li span{
+    display: block;
+}
 .settingPage .list .li img{
     width: 40px;
     margin-right: -10px;

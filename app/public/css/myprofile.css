@@ -1,26 +1,15 @@
 .myProfilePage{
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-    -webkit-flex-direction: column;
     flex-direction: column;
     width: 100%;
     background: #F5F5F5;
 }
 .myProfilePage .headCont{
     background: linear-gradient(180deg, #5596d6, #337dc4);
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-    -webkit-flex-direction: column;
     flex-direction: column;
     padding: 30px 0;
     position: relative;
-    -moz-flex-shrink: 0;
-    -webkit-flex-shrink: 0;
-    flex-shrink: 0;
-    -moz-flex-shrink: 0;
-    -webkit-flex-shrink: 0;
     flex-shrink: 0;
     margin-top: -1px;
     padding-top: 50px;
@@ -30,11 +19,7 @@
     top: 90px;
     right: 15px;
     color: #FFF;
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
     align-items: center;
 }
 .myProfilePage .headCont .signDom span.lnk{
@@ -46,21 +31,13 @@
     text-align: center;
     border-radius: 36px;
     margin-right: 5px;
+    display: block;
 }
 .myProfilePage .userInfo{
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
     justify-content: center;
-    -webkit-flex-direction: column;
     flex-direction: column;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
     align-items: center;
-    display: block;
-    text-align: center;
 }
 .myProfilePage .userInfo img.avatar{
     border-radius: 50%;
@@ -103,7 +80,6 @@
     text-align: center;
 }
 .myProfileBannerCont{
-    -webkit-flex-grow: 1;
     flex-grow: 1;
     overflow: scroll
 }
@@ -112,30 +88,23 @@
 }
 .myProfileBannerCont .l1{
     border-bottom: 1px solid #EEE;
+    display: flex;
     padding: 10px 15px;
-    padding-right: 30px;
+    justify-content: space-between;
     padding-right: 30px;
     background: url("/img/myprofile/15.png") no-repeat right center;
     background-size: 40px 40px;
-    display: block;
-    overflow: hidden;
 }
 .myProfileBannerCont .l1 span{
     font-size: 16px;
-    display: inline-block;
-    float: left;
+    display: block;
 }
 .myProfileBannerCont .l1 span:last-child{
     font-size:14px;
     color: #999;
-    float: right;
 }
 .myProfileBannerCont .l2 {
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-    -moz-justify-content: space-between;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     border-bottom: 1px solid #EEE;
     margin-bottom: 20px;
@@ -148,28 +117,13 @@
 }
 .myProfileBannerCont .l2 > div{
     padding:5px 0 10px 0;
-    
-    -webkit-flex-direction: column;
+    display: flex;
     flex-direction: column;
     width: 25%;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
     align-items: center;
-    justify-content: center;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
     justify-content: center;
     color: #000;
     position: relative;
-    display: -webkit-flex;
-    display: block;
-    text-align: center;
-    display: box; /* OLD - Android 4.4- */
-    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
-    display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
-    display: -ms-flexbox; /* TWEENER - IE 10 */
-    display: -webkit-flex; /* NEW - Chrome */
-    display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
 .myProfileBannerCont .l2 > div > i{
@@ -179,15 +133,8 @@
     height: 16px;
     width: 16px;
     border-radius: 16px;
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
     justify-content: center;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
     align-items: center;
     position: absolute;
     top: 10px;
@@ -207,23 +154,13 @@
 .myProfileBannerCont .ll div{
     border-bottom: 1px solid #EEE;
     padding: 5px 15px;
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-    justify-content: flex-start;
-    -moz-justify-content: flex-start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
     -webkit-box-align: center;
-    -webkit-align-items: center;
     align-items: center;
+    -webkit-align-items: center;
     background: url("/img/myprofile/15.png") no-repeat right center;
     background-size: 40px 40px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    display: -webkit-flex;
-
 }
 .myProfileBannerCont .ll div img{
     width: 30px;
@@ -231,4 +168,5 @@
 }
 .myProfileBannerCont .ll div span{
     font-size: 16px;
+    display: block;
 }

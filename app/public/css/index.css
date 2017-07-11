@@ -32,22 +32,11 @@ input, textarea{
     top: 0;
 }
 .pageStyle{
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
-    justify-content: space-between;
-    -moz-justify-content: space-between;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     padding: 0;
     flex-shrink: 1;
-    -moz-flex-shrink: 1;
-    -webkit-flex-shrink: 1;
-    flex-shrink: 1;
-    -webkit-align-self: stretch;
     align-self: stretch;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
 }
 
@@ -65,65 +54,37 @@ input, textarea{
 
 
 .pageWamp >div{
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
     justify-content: space-between;
-    -moz-justify-content: space-between;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
-    -webkit-flex-direction: column;
     flex-direction: column;
     background: #FFF;
-    -webkit-align-self: stretch;
     align-self: stretch;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
-    justify-content: flex-start;
-
-    -moz-justify-content: flex-start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
 }
 
 .homeBottom{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    justify-content: space-between;
-    -moz-justify-content: space-between;
-    -webkit-justify-content: space-between;
+    display : flex;
     justify-content: space-between;
     bottom: 0;
     width: 100%;
     background: #EEE;
     border-top: 1px solid #CCC;
-    -moz-flex-shrink: 0;
-    -webkit-flex-shrink: 0;
     flex-shrink: 0;
-    z-index: 1001
+    z-index: 999
 }
 .homeBottom .ui.button{
     width: 25%;
     background: none;
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-    -webkit-flex-direction: column;
     flex-direction: column;
     justify-content: center;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    align-items: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
     align-items: center;
     border-radius: 0;
     margin:0;
     font-weight: 100;
     padding: 5px 0;
+
 }
 .homeBottom .ui.button.active{
     background: #EEE;
@@ -135,9 +96,6 @@ input, textarea{
     display: block;
 }
 .logisticsinfoPage{
-    justify-content: flex-start;
-    -moz-justify-content: flex-start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
 }
 .ui.feed>.event>.content .meta .like:hover .icon{

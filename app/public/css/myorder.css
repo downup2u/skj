@@ -1,20 +1,12 @@
 .myOrder {
     background: #F5F5F5;
     overflow: hidden;
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
-    -webkit-flex-direction: column;
     flex-direction: column;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
 }
 .myOrder .actionItem{
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
     width: 100%;
     overflow-x: scroll;
     margin-bottom: 10px;
@@ -23,19 +15,11 @@
     background: #FFF;
     border-bottom: 1px solid #EEE;
     flex-shrink: 0;
-    -moz-flex-shrink: 0;
-    -webkit-flex-shrink: 0;
-    flex-shrink: 0;
-
 }
 .myOrder .actionItem span{
     line-height: 40px;
     margin: 0 10px;
     flex-shrink: 0;
-    -moz-flex-shrink: 0;
-    -webkit-flex-shrink: 0;
-    flex-shrink: 0;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
     text-align: center;
     font-size: 14px;
@@ -60,19 +44,10 @@
     z-index:1000;
 }
 .myOrder .ui.secondary.pointing.menu .item {
-    -webkit-flex-grow: 1;
     flex-grow: 1;
     text-align: center;
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
     justify-content: center;
-
-    -webkit-box-align: center;
-    -webkit-align-items: center;
     align-items: center;
 }
 
@@ -92,7 +67,6 @@
 
 
 .orderList{
-    -webkit-flex-grow: 1;
     flex-grow: 1;
     overflow: hidden;
     position: relative;
@@ -107,17 +81,9 @@
 }
 
 .orderList .items > div.tt {
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
     height: 36px;
     justify-content: space-between;
-    -moz-justify-content: space-between;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
     align-items: center;
     font-size: 14px;
     color: #999;
@@ -127,14 +93,8 @@
     border-top: 1px solid #EEE;
 }
 .orderList .items > div.cont .li{
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
     align-items: flex-start;
-    -moz-justify-content: flex-start;
-    -webkit-justify-content: flex-start;
-    justify-content: flex-start;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -146,19 +106,10 @@
 }
 
 .orderList .items > div.cont .proinfo {
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
-    -webkit-flex-direction: column;
     flex-direction: column;
     justify-content: space-between;
-    -moz-justify-content: space-between;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
-    -webkit-align-self: stretch;
     align-self: stretch;
 }
 
@@ -167,16 +118,8 @@
 }
 
 .orderList .items > div.cont .proinfo .proother {
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
     justify-content: space-between;
-    -moz-justify-content: space-between;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
     align-items: center;
 }
 
@@ -184,19 +127,10 @@
     border: 1px solid #f38108;
     color: #f38108;
     border-radius: 6px;
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
     width: 80px;
     height: 32px;
     align-items: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    justify-content: center;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
     justify-content: center;
     
 }
@@ -205,15 +139,8 @@
     font-size: 16px;
 }
 .orderList .items > div.lnk {
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
-    -webkit-flex-direction: column;
     flex-direction: column;
-    justify-content: flex-end;
-    -moz-justify-content: flex-end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
     border-top: 1px solid #EEE;
     padding-top: 10px;
@@ -224,15 +151,8 @@
     margin-bottom: 5px;
 }
 .orderList .items > div.lnk .hotlnk{
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
-
-    -moz-justify-content: flex-end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
     align-items: center;
 }
 .orderList .items > div.lnk .hotlnk span{

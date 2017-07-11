@@ -8,16 +8,8 @@
     padding: 0;
 }
 .myCollectionLi{
-    display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
     align-items: stretch;
-    -webkit-box-align: stretch;
-    -webkit-align-items: stretch;
-    align-items: stretch;
-    justify-content: space-between;
-    -moz-justify-content: space-between;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     border-bottom: 1px solid #EEE;
     padding: 5px 10px;
@@ -39,21 +31,10 @@
     width: 100%;
 }
 .myCollectionLi .info{
-    -webkit-flex-grow: 1;
     flex-grow: 1;
     display: flex;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
     justify-content: flex-start;
-    -moz-justify-content: flex-start;
-    -webkit-justify-content: flex-start;
-    justify-content: flex-start;
-    -webkit-flex-direction: column;
     flex-direction: column;
-    align-items: flex-start;
-    -webkit-box-align: flex-start;
-    -webkit-align-items: flex-start;
     align-items: flex-start;
     padding: 15px;
 }
@@ -63,10 +44,6 @@
 }
 .myCollectionLi .info .address{
     display: flex;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
     flex-direction: column;
 }
 .myCollectionLi .info .address span{
