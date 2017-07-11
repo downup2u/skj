@@ -12,6 +12,7 @@ import {
     setCommunityListHeight,
     fillprofile_request,
     fillprofile_result,
+    set_weui
 } from '../actions/index.js';
 import {callthen} from '../sagas/sagacallback.js';
 import '../../public/css/feed.css';
@@ -123,8 +124,20 @@ export class Page extends React.Component {
     };
 
     addNewCommunityHotlnk = ()=>{
+        const {point, pointfornewtopic} = this.props;
         usecachetopic = false;
-        this.props.history.push('/newtopic');
+        if(point>pointfornewtopic){
+            this.props.history.push('/newtopic');
+        }else{
+            this.props.dispatch(set_weui({
+                alert : {
+                    show : true,
+                    title : "积分不够",
+                    text : `积分必须大于${pointfornewtopic}者,才能发帖`,
+                    buttonsClick : ()=>{}
+                },
+            }))
+        }
     };
     onClickPinbi = (id)=>{
       if(confirm("确定要屏蔽该用户吗？")){
@@ -216,9 +229,9 @@ export class Page extends React.Component {
     }
 }
 
-const mapStateToProps = ({forum:{useralerttopiclist},userlogin:{profile}}) => {
+const mapStateToProps = ({forum:{useralerttopiclist},userlogin:{profile,point}, app:{pointfornewtopic}, app}) => {
        //所有使用到的属性列表：bigimgindex/iscommentshow/communityListHeight/useralerttopiclist
-    return {useralerttopiclist,profile};
+    return {useralerttopiclist,profile,pointfornewtopic};
 }
 Page = connect(mapStateToProps)(Page);
 Page = withRouter(Page);
