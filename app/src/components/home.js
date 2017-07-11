@@ -118,8 +118,9 @@ let DeviceSwiper =(props)=>{
         <Swiper
             swiperOptions={{
                 slidesPerView: 'auto',
-                initialSlide : 0
+                initialSlide : 0,
             }}
+
             {...swiperOptions}
             onSlideChangeEnd={(swiper, event) => {
                 console.log(swiper.activeIndex);
