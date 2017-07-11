@@ -9,8 +9,11 @@ import {
     gettopiclist_request,
     uicommentshow,
     uicommenthide,
-    setCommunityListHeight
+    setCommunityListHeight,
+    fillprofile_request,
+    fillprofile_result,
 } from '../actions/index.js';
+import {callthen} from '../sagas/sagacallback.js';
 import '../../public/css/feed.css';
 import NavBar from './nav2.js';
 import ForumComment from './community_comment.js';
@@ -42,7 +45,7 @@ export class Topic extends React.Component {
         }
         return (
             <div>
-                <ForumTopic topic={topic} />
+                <ForumTopic topic={topic} onClickPinbi={this.props.onClickPinbi}/>
                 <div className={showcomments}>
                     <Comment.Group>
                         {commentsco}
@@ -123,13 +126,24 @@ export class Page extends React.Component {
         usecachetopic = false;
         this.props.history.push('/newtopic');
     };
-
+    onClickPinbi = (id)=>{
+      if(confirm("确定要屏蔽该用户吗？")){
+        let profile = {...this.props.profile};
+        profile['shield'] = profile['shield']  || [];
+        profile['shield'].push(id);
+        //console.log(callthen);
+        this.props.dispatch(callthen(fillprofile_request,fillprofile_result,{profile})).then((result)=>{
+          this.refs.listviewpage.getWrappedInstance().onRefresh();
+        });
+      }
+    }
     updateContent = (item)=> {
         return  (
             <Topic
                 key = {`topic${item._id}`}
                 itemid = {item._id}
                 onClickTopic = {this.onClickTopic}
+                onClickPinbi = {this.onClickPinbi}
             />
         );
     }
@@ -185,6 +199,7 @@ export class Page extends React.Component {
                         top: (tctop+20)+"px"
                     }}>
                     <InfinitePage
+                        ref="listviewpage"
                         usecache={usecachetopic}
                         listtypeid='community'
                         pagenumber = {8}

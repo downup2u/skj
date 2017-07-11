@@ -8,6 +8,9 @@ import {wififlow} from './wififlow';
 import {wsrecvsagaflow} from './wsrecvsaga';
 import {jpushflow} from './jpushflow';
 import {payflow} from './payflow';
+import {
+  createsagacallbackflow2
+} from '../sagas/sagacallback.js';
 
 export default function* rootSaga() {
   yield fork(wsrecvsagaflow);
@@ -16,4 +19,5 @@ export default function* rootSaga() {
   yield fork(wififlow);
   yield fork(jpushflow);
   yield fork(createsagacallbackflow);
+  yield fork(createsagacallbackflow2);
 }

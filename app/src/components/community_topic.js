@@ -24,7 +24,7 @@ import Layzr from 'layzr.js';
 
 //let loadingimg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzZFNzM5Rjk1NjVBMTFFNzhGQzY4N0ZCQjQ2M0RDNEQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzZFNzM5RkE1NjVBMTFFNzhGQzY4N0ZCQjQ2M0RDNEQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3NkU3MzlGNzU2NUExMUU3OEZDNjg3RkJCNDYzREM0RCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3NkU3MzlGODU2NUExMUU3OEZDNjg3RkJCNDYzREM0RCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PngAk1MAAAAGUExURe7u7ru6utT4gdkAAABBSURBVHja7NUxCgAgDATB3P8/bWthpRAwzJRBsl2sAgAAAOZI8vxCZBv/GDlvFhERmRmZc7u6I35GAAAA4NoSYACB/gDKNOdHTwAAAABJRU5ErkJggg==";
 
-let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch,profile}) => {
+let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch,profile,onClickPinbi}) => {
 
     const instance = Layzr({
         normal: 'data-normal',
@@ -120,8 +120,7 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch,profile}) =>
     })
 
     let pingbi =(id)=>{
-        profile['shield'].push(id);
-        dispatch(fillprofile_request({profile}));
+        onClickPinbi(id);
     }
     if (typeof topic.created_at === 'string') {
         topic.created_at= new Date(Date.parse(topic.created_at));
