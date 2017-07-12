@@ -55,6 +55,8 @@ const UserlistShow = (props) => (
                <DateField label="注册时间" source="created_at"  showTime/>
                <DateField label="上次登录时间" source="updated_at"  showTime/>
                <TextField label="昵称" source="profile.nickname" />
+               <TextField label="微信openid" source="openidweixin" />
+               <TextField label="QQopenid" source="openidqq" />
            </SimpleShowLayout>
        </Show>
 );
@@ -69,6 +71,8 @@ const UserlistEdit = (props) => {
               <TextField label="昵称" source="profile.nickname" />
               <ImageField label="头像"  source="profile.avatar" />
               <TextInput label="头像" source="profile.avatar" />
+              <TextField label="微信openid" source="openidweixin" />
+              <TextField label="QQopenid" source="openidqq" />
           </SimpleForm>
       </Edit>);
 

@@ -91,7 +91,7 @@ export function* wififlow() {
           ));
           const { wifiresult, timeout } = yield race({
              wifiresult:  call(sendwifidata,result),
-             timeout:  call(delay, 30000)
+             timeout:  call(delay, 40000)
           });
           yield put(set_weui(
             {

@@ -8,14 +8,22 @@ export const haveWechatApp=(fncallback)=>{
 
 
 export const loginQQ = (fncallback)=>{
-    xview.loginToTencentQQ((data)=>{
-      fncallback(data);
+    xview.loginToTencentQQ((result)=>{
+      if(typeof result === 'string'){
+          result = JSON.parse(result);
+      }
+      alert(JSON.stringify(result));
+      fncallback(result);
     });
   }
 
 
   export const loginWx=(fncallback)=>{
-    xview.loginToWeixin((data)=>{
-      fncallback(data);
+    xview.loginToWeixin((result)=>{
+      if(typeof result === 'string'){
+          result = JSON.parse(result);
+      }
+      alert(JSON.stringify(result));
+      fncallback(result);
     });
   }
