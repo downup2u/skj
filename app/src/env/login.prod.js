@@ -12,7 +12,7 @@ export const loginQQ = (fncallback)=>{
       if(typeof result === 'string'){
           result = JSON.parse(result);
       }
-      alert(JSON.stringify(result));
+      //alert(JSON.stringify(result));
       fncallback(result);
     });
   }
@@ -23,7 +23,7 @@ export const loginQQ = (fncallback)=>{
       if(typeof result === 'string'){
           result = JSON.parse(result);
       }
-      alert(JSON.stringify(result));
+      //alert(JSON.stringify(result));
       fncallback(result);
     });
   }

@@ -156,12 +156,12 @@ export class Page extends React.Component {
             }
             return;
         }
-        else{
-            if(nextProps.bindtype !== '' && this.props.bindtype === '' &&
-            nextProps.openid !== '' && this.props.openid === ''){
-                this.props.history.push('/userbind');
-            }
-        }
+        // else{
+        //     if(nextProps.bindtype !== '' && this.props.bindtype === '' &&
+        //     nextProps.openid !== '' && this.props.openid === ''){
+        //         this.props.history.push('/userbind');
+        //     }
+        // }
     }
 
 
@@ -174,7 +174,7 @@ export class Page extends React.Component {
         }
         let loginwithwechat = ()=>{
             loginWx((result)=>{
-                this.props.dispatch(loginwithoauth_request({bindtype:'weixin',openid:result.openId}));
+                this.props.dispatch(loginwithoauth_request({bindtype:'weixin',openid:result.openid}));
             });
 
         }

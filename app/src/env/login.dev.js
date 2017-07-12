@@ -11,6 +11,6 @@ export const loginQQ = (fncallback)=>{
 
 export const loginWx=(fncallback)=>{
     fncallback({
-       openId:'101372126',
+       openid:'101372126',
    });
 }

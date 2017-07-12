@@ -126,7 +126,8 @@ import {
   md_useraddpoint_result,
   set_weui,
 
-  setuseralerttopicdeleted_result
+  setuseralerttopicdeleted_result,
+  loginwithoauth_result
 } from '../actions';
 import { push,goBack,go  } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
 
@@ -354,6 +355,11 @@ export function* wsrecvsagaflow() {
   yield takeEvery(`${setuseralerttopicdeleted_result}`, function*(action) {
 
   });
+
+  yield takeEvery(`${loginwithoauth_result}`, function*(action) {
+    yield put(push('/userbind'));
+  }
+
 
   yield takeEvery(`${login_result}`, function*(action) {
     yield put(getdevicelist_request({
