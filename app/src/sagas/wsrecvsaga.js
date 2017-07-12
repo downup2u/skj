@@ -357,7 +357,12 @@ export function* wsrecvsagaflow() {
   });
 
   yield takeEvery(`${loginwithoauth_result}`, function*(action) {
-    yield put(push('/userbind'));
+    const {payload:{bindtype,openid}} = action;
+    if(!!bindtype && !!openid){
+      if(bindtype !== '' && openid !== ''){
+        yield put(push('/userbind'));
+      }
+    }
   });
 
 
