@@ -358,7 +358,7 @@ export function* wsrecvsagaflow() {
 
   yield takeEvery(`${loginwithoauth_result}`, function*(action) {
     yield put(push('/userbind'));
-  }
+  });
 
 
   yield takeEvery(`${login_result}`, function*(action) {
