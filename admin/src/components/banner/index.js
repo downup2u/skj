@@ -25,6 +25,8 @@ import {
   SelectInput,
   BooleanInput,
   BooleanField,
+  ReferenceInput,
+  ReferenceField,
   ImageField
 } from 'admin-on-rest/lib/mui';
 
@@ -49,6 +51,9 @@ const BannerlistCreate = (props) => (
                  { id: '商城首页广告', name: '商城首页广告' },
                  { id: '首页设备图片', name: '首页设备图片' },
              ]} />
+             <ReferenceInput source="productid" reference="product" allowEmpty>
+                 <SelectInput optionText="name" />
+             </ReferenceInput>
              <NumberInput label="排序字段"  source="sortflag" />
              <ImageInputUpload label="图片"  source="picurl" />
              <BooleanInput label="是否启用" source="isenabled" defaultValue={true} />
@@ -69,6 +74,9 @@ const BannerlistEdit = (props) => {
                   { id: '商城首页广告', name: '商城首页广告' },
                   { id: '首页设备图片', name: '首页设备图片' },
               ]} />
+              <ReferenceInput source="productid" reference="product" allowEmpty>
+                  <SelectInput optionText="name" />
+              </ReferenceInput>
               <NumberInput label="排序字段"  source="sortflag" />
               <ImageInputUpload label="图片"  source="picurl" />
               <BooleanInput label="是否启用" source="isenabled" defaultValue={true} />
@@ -84,6 +92,9 @@ const BannerlistShow = (props) => (
                <TextField label="类型" source="type" />
                 <ImageField source="picurl" label="图片"/>
                 <TextField label="名字" source="name" />
+                <ReferenceField label="产品" source="productid" reference="product" addLabel={false} allowEmpty>
+                   <TextField source="name" />
+                </ReferenceField>
                 <TextField label="排序字段" source="sortflag" />
                <BooleanField label="是否启用" source="isenabled" />
            </SimpleShowLayout>
@@ -98,6 +109,9 @@ const BannerlistList = (props) => (//
         <TextField label="类型" source="type" />
         <ImageField source="picurl" label="图片"/>
         <TextField label="名字" source="name" />
+        <ReferenceField label="产品" source="productid" reference="product" addLabel={false} allowEmpty>
+           <TextField source="name" />
+        </ReferenceField>
         <TextField label="排序字段" source="sortflag" />
         <BooleanField label="是否启用" source="isenabled" />
         <EditButton />

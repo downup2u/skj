@@ -6,10 +6,11 @@ const Chance = require('chance');
 const chance = new Chance();
 //系统设置
 let SystemConfigSchema = new Schema({
+    pointfornewtopic:{ type: Schema.Types.Number,default: 0 },
     productcategoryid1: String,//套餐专题
     productcategoryid2: String,//一体机专题
-    expressfee:Number,
-    expressfeeforfree:Number,
+    expressfee:{ type: Schema.Types.Number,default: 10 },
+    expressfeeforfree:{ type: Schema.Types.Number,default: 100 },
     bonuslevel1:{ type: Schema.Types.Number,default: 0.1 },//一级分销提成百分比
     bonuslevel2:{ type: Schema.Types.Number,default: 0.05 },//二级分销提成百分比
     pointvsmoney:{ type: Schema.Types.Number,default: 1},//换算,例1积分换1分
@@ -29,29 +30,29 @@ let SystemConfigSchema = new Schema({
                     "黄金会员":1000,
                     "钻石会员":1500
                 }`},
-    expressapiurl:String,
-    expressapicustomer:String,
-    expressapikey:String,
+    expressapiurl:{ type:  Schema.Types.String,default:`http://poll.kuaidi100.com/poll/query.do`},
+    expressapicustomer:{ type:  Schema.Types.String,default:`FE88C77449846749F9A80BC5D466984D`},
+    expressapikey:{ type:  Schema.Types.String,default:`piOqvhjg755`},
 
-    gradetotal:{ type:  Schema.Types.String,default:`{
-      '优':100,
-      '良':90,
-      '差':32,
-      '不要太好':320,
-    }`},
+    gradetotal:{ type:Schema.Types.String,default:JSON.stringify({
+      "优":100,
+      "良":90,
+      "差":32,
+      "不要太好":320
+    })},
     gradeleft:{ type:  Schema.Types.String,default:`{
-      '不健康':29,
-      '一般健康':290,
-      '非常健康':2900,
-      '可直饮':10000,
-      '一般':500,
+      "不健康":29,
+      "一般健康":290,
+      "非常健康":2900,
+      "可直饮":10000,
+      "一般":500
     }`},
     graderight:{ type:  Schema.Types.String,default:`{
-      '不健康':29,
-      '一般健康':290,
-      '非常健康':2900,
-      '可直饮':10000,
-      '一般':500,
+      "不健康":29,
+      "一般健康":290,
+      "非常健康":2900,
+      "可直饮":10000,
+      "一般":500
     }`},
     systotal89:{ type: Schema.Types.Number,default: 100 },
     systotal1011:{ type: Schema.Types.Number,default:100},
@@ -91,6 +92,7 @@ let User  = mongoose.model('User',  UserSchema);
 //动态管理
 let NewsSchema = new Schema({
     textname:String,
+    productid:{ type: Schema.Types.ObjectId, ref: 'Product' },
     created_at: { type: Date, default:new Date()},
     isenabled:Boolean
 });
@@ -98,13 +100,29 @@ NewsSchema.plugin(mongoosePaginate);
 let News  = mongoose.model('News',  NewsSchema);
 
 //=======设备=======
+//
+let RealtimedataSchema = new Schema({
+    deviceid:String,//mac->hex
+    getdata:{ type: Boolean, default:false},
+    name:String,
+    total:Number,
+    modeltype:String,
+    leftmodel:Schema.Types.Mixed,
+    rightmodel:Schema.Types.Mixed,
+    detaillist:[],
+    updated_at:{ type: Date, default:new Date()},
+    iswatercut:{ type: Schema.Types.Boolean,default: false },//是否断水
+});
+RealtimedataSchema.plugin(mongoosePaginate);
+let Realtimedata  = mongoose.model('Realtimedata',  RealtimedataSchema);
+
 let DeviceSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
     deviceid:String,//mac->hex
     devicename:String,
     devicebrand:String,
     devicemodel: String,
-    realtimedata:{type:Schema.Types.Mixed,default:{getdata:false}},
+    realtimedata:{ type: Schema.Types.ObjectId, ref: 'Realtimedata' },
     created_at:{ type: Date, default:new Date()},
 });
 DeviceSchema.plugin(mongoosePaginate);
@@ -202,6 +220,7 @@ let BannerSchema = new Schema({
     picurl:String,
     sortflag:Number,
     type:String,
+    productid:{ type: Schema.Types.ObjectId, ref: 'Product' },
     isenabled:{ type: Boolean, default:true},
 });
 BannerSchema.plugin(mongoosePaginate);
@@ -248,6 +267,7 @@ MycartSchema.plugin(mongoosePaginate);
 let Mycart  = mongoose.model('Mycart',  MycartSchema);
 //订单：用户id,[订单详情id],支付方式,折扣金额,金额,订单状态,送货地址id,是否删除，优惠券抵扣金额，优惠券ID／商品总价
 let OrderSchema = new Schema({
+    out_trade_no:String,
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
     paytype:String,//支付方式
     ordertitle:String,  //订单标题（支付宝，微信用）
@@ -380,11 +400,12 @@ let WithdrawcashapplySchema =  new Schema({
     bankaccount:String,//银行账号
     bankname:String,//银行名称
     cashmoney:Number,//提现金额
+    rechargerecord:{ type: Schema.Types.ObjectId, ref: 'Rechargerecord' },
     status:String,//未验证／已验证／已支付
     created_at: Date,
 });
 WithdrawcashapplySchema.plugin(mongoosePaginate);
-let Withdrawcashapply  = mongoose.model('Withdrawcashapply',  WithdrawcashapplySchema);
+let Withdrawcashapply  = mongoose.model('withdrawcashapply',  WithdrawcashapplySchema);
 
 //积分表
 let PointrecordSchema = new Schema({
@@ -420,6 +441,7 @@ exports.SystemConfigSchema = SystemConfigSchema;
 exports.NewsSchema = NewsSchema;
 exports.UserSchema= UserSchema;
 exports.DeviceSchema= DeviceSchema;
+exports.RealtimedataSchema= RealtimedataSchema;
 exports.DeviceDataHistorySchema= DeviceDataHistorySchema;
 exports.UserAlertTopicSchema= UserAlertTopicSchema;
 exports.TopicSchema= TopicSchema;
@@ -462,7 +484,7 @@ exports.OrderModel = Order;
 exports.ExpressModel = Express;
 exports.MycollectionModel = Mycollection;
 exports.MyCouponModel = MyCoupon;
-// exports.CouponModel = Coupon;
+exports.RealtimedataModel = Realtimedata;
 exports.ProductcommentModel = Productcomment;
 exports.FeedbackModel = Feedback;
 exports.RechargerecordModel = Rechargerecord;

@@ -32,6 +32,9 @@ export default {
     },
     banner:{
       name: '广告编辑 |||| 广告编辑',
+      fields:{
+        productid:'产品',
+      },
     },
     device:{
       name: '设备管理 |||| 设备管理',
@@ -108,6 +111,9 @@ export default {
     },
     news:{
       name: '动态管理 |||| 动态管理',
+      fields:{
+        productid:'产品',
+      },
     },
     withdrawcash:{
       name: '提现管理 |||| 提现管理',
