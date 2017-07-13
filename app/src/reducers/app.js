@@ -8,7 +8,8 @@ import {
     getsystemconfig_result,
     setmsgcount,
     set_innerheight,
-    setisweixininstalled
+    setisweixininstalled,
+    setsharesettingcur
 } from '../actions/index.js';
 
 
@@ -42,11 +43,18 @@ const initial = {
         isweixininstalled:true,
 
         maxleftpecent : 90,//净水器报警百分比
+        sharesettingcur:{
+
+        }
     },
 
 };
 
 const app = createReducer({
+    [setsharesettingcur]:(state,payload)=>{
+      let sharesettingcur = {...payload};
+      return {...state,sharesettingcur};
+    },
     [setisweixininstalled]: (state, isweixininstalled) => {
         return { ...state, isweixininstalled };
     },

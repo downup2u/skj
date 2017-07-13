@@ -27,4 +27,5 @@ export const setmsgcount = createAction('setmsgcount');
 export const common_err = createAction('common_err');
 export const set_innerheight = createAction('set_innerheight');
 
+export const setsharesettingcur = createAction('setsharesettingcur');
 //set_innerheight

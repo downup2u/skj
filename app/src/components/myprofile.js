@@ -9,7 +9,8 @@ import {
     share_data_updata,
     getusergetpointsigntoday_request,
     useraddpoint_request,
-    queryorderstatusstat_request
+    queryorderstatusstat_request,
+    setsharesettingcur
 } from '../actions';
 import _ from "lodash";
 import {setbackhandler,removebackhandler} from '../env/android';
@@ -17,6 +18,7 @@ export class Page extends Component {
 
     componentWillMount () {
         //判断今天是否签到
+        this.props.dispatch(setsharesettingcur(this.props.sharesetting));
         this.props.dispatch(getusergetpointsigntoday_request({}));
         this.props.dispatch(queryorderstatusstat_request({}));
         //queryorderstatusstat_request
@@ -170,7 +172,7 @@ export class Page extends Component {
 }
 }
 
-const mapStateToProps =  ({userlogin,app:{newmsgnumber,memberlevelsetting}}) =>{
+const mapStateToProps =  ({userlogin,app:{newmsgnumber,memberlevelsetting,sharesetting}}) =>{
     let usertype = "";
     let usertypeArry = [];
     _.map(memberlevelsetting, (typepoint, index)=>{
@@ -186,7 +188,7 @@ const mapStateToProps =  ({userlogin,app:{newmsgnumber,memberlevelsetting}}) =>{
         }
     });
     let userlogins = {...userlogin}
-    return {...userlogins,newmsgnumber,usertype};
+    return {...userlogins,newmsgnumber,usertype,sharesetting};
 };
 Page = withRouter(Page);
 export default connect(

@@ -8,11 +8,19 @@ import '../../../public/css/mycode.css';
 import '../../../public/css/head.css';
 import { connect } from 'react-redux';
 import {
-    share_data_updata
+    share_data_updata,
+    setsharesettingcur
 } from '../../actions';
+import config from '../../env/config.js';
 
 export class Page extends Component {
-
+    componentWillMount () {
+        //判断今天是否签到
+        let sharesetting = {...this.props.sharesetting};
+        sharesetting.url = `${config.serverurl}/app/#/qrcode/${this.props.invitecode}`;
+        this.props.dispatch(setsharesettingcur(sharesetting));
+        //queryorderstatusstat_request
+    };
     onClickReturn =()=>{
         this.props.history.goBack();
     }
@@ -42,9 +50,7 @@ export class Page extends Component {
     }
 }
 
-let PageRedux =  ({userlogin:{invitecode}}) =>{
-    return {invitecode};
+let PageRedux =  ({userlogin:{invitecode},app:{sharesetting}}) =>{
+    return {invitecode,sharesetting};
 };
 export default connect(PageRedux)(Page);
-
-
