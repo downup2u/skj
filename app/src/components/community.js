@@ -231,7 +231,7 @@ export class Page extends React.Component {
 
 const mapStateToProps = ({forum:{useralerttopiclist},userlogin:{profile,point}, app:{pointfornewtopic}, app}) => {
        //所有使用到的属性列表：bigimgindex/iscommentshow/communityListHeight/useralerttopiclist
-    return {useralerttopiclist,profile,pointfornewtopic};
+    return {useralerttopiclist,profile,point,pointfornewtopic};
 }
 Page = connect(mapStateToProps)(Page);
 Page = withRouter(Page);
