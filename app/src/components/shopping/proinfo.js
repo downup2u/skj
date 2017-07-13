@@ -17,6 +17,8 @@ import {
     set_productevaluatenumber,
     set_orderSurePage,
     set_weui,
+    setsharesettingcur,
+    share_data_updata,
  } from '../../actions';
  import Addcartdilog from './addcartdilog.js';
  import {
@@ -24,6 +26,7 @@ import {
   mycollectiondelone,
   productcommentsfromproductgetcount
 } from '../../actions/sagacallback.js';
+import config from '../../env/config.js';
 
 let swiperOptions = {
     navigation: false,
@@ -44,9 +47,17 @@ export class Page extends React.Component {
     }
 
     componentWillMount () {
+        let sharesetting = {...this.props.sharesetting};
+        sharesetting.url = `${config.serverurl}/app/#/shareprodinfo/${this.props.match.params.id}`;
+        this.props.dispatch(setsharesettingcur(sharesetting));
+
         this.checkCollection();
         this.getEvaluate();
     };
+
+    showShare =()=>{
+        this.props.dispatch(share_data_updata(true));
+    }
 
     //获取产品的评论条数
     getEvaluate =()=>{
@@ -235,10 +246,10 @@ export class Page extends React.Component {
                     <span onClick={()=>{this.showaddcartdilog(proinfo._id)}}><i>加入购物车</i></span>
                     <span onClick={()=>{this.showshoppingdilog(proinfo._id)}}><i>立刻购买</i></span>
                 </div>
-                <Addcartdilog 
-                    show={this.props.addcartdilogshow} 
-                    proid={this.props.addcartdilogproid} 
-                    number={this.props.addcartdilogpronumber} 
+                <Addcartdilog
+                    show={this.props.addcartdilogshow}
+                    proid={this.props.addcartdilogproid}
+                    number={this.props.addcartdilogpronumber}
                     type={this.props.addcartdilogtype}
                     />
             </div>

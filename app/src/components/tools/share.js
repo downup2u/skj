@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../../../public/css/bigimg.css';
-import _ from 'lodash'; 
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import '../../../public/css/share.css';
-import { 
+import {
     share_data_updata,
     useraddpoint_request
 } from '../../actions/index.js';
@@ -26,14 +26,14 @@ let Page = ({show,sharesetting,dispatch})=>{
             if(result.code == 0){
                 dispatch(useraddpoint_request({reason:'分享'}));
             }
-            
+
         });
     }
     return (
-        <div 
+        <div
             className={show?"shareContent":"shareContent hide"}
             >
-            <div 
+            <div
                 className="shareBox"
                 >
                 <div className="shareList">
@@ -60,10 +60,8 @@ let Page = ({show,sharesetting,dispatch})=>{
     )
 };
 
-let mapStateToProps =  ({share:{show},app:{sharesetting}}) =>{
-    return {show,sharesetting};
+let mapStateToProps =  ({share:{show},app:{sharesettingcur}}) =>{
+    return {show,sharesetting:sharesettingcur};
 };
 Page = connect(mapStateToProps)(Page);
 export default Page;
-
-

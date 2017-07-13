@@ -8,7 +8,8 @@ import {
     getsystemconfig_result,
     setmsgcount,
     set_innerheight,
-    setisweixininstalled
+    setisweixininstalled,
+    setsharesettingcur
 } from '../actions/index.js';
 
 
@@ -40,11 +41,18 @@ const initial = {
         innerheight : 0,
 
         isweixininstalled:true,
+        sharesettingcur:{
+
+        }
     },
 
 };
 
 const app = createReducer({
+    [setsharesettingcur]:(state,payload)=>{
+      let sharesettingcur = {...payload};
+      return {...state,sharesettingcur};
+    },
     [setisweixininstalled]: (state, isweixininstalled) => {
         return { ...state, isweixininstalled };
     },
