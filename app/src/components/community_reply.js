@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Comment, Header,Feed, Icon,Input  } from 'semantic-ui-react';
+import { Button, Comment, Header,Feed, Icon,Input,TextArea  } from 'semantic-ui-react';
 import { Field,Fields, reduxForm,Form ,reset } from 'redux-form';
 import { connect } from 'react-redux';
 import {
@@ -9,11 +9,13 @@ import {
     uicommenthide
 } from '../actions/index.js';
 import '../../public/css/feed.css';
-
+import NavBar from './newnav.js';
 
 let renderInput =(props)=>{
   const { input: { value, onChange } ,replyplaceholder} = props;
-  return (<Input value={value} onChange={onChange}  type="text" placeholder={replyplaceholder}/>);
+  return (
+      <TextArea placeholder='输入帖子内容' placeholder={replyplaceholder} type="text" value={value} onChange={onChange} />
+  );
 }
 
 const mapStateToProps = ({forum}) => {
@@ -69,12 +71,15 @@ let FeedReplyForm = (props)=>{
         <Form 
             onSubmit={handleSubmit(onClickSendComment)}
             className="feedBottomReplyForm"
-            onClick={hidecomment}
+            
             >
+            <NavBar back={false} title="评论帖子" />
+            <Icon name="angle left" className="back" onClick={hidecomment} />
             <div 
                 className="feedBottomReply"
                 onClick={stopDefault}
                 >
+                
                 <Field name="title" component={renderInput}/>
                 <Button 
                     primary

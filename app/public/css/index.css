@@ -5,7 +5,7 @@
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
-    font-weight: 300;
+    font-weight: 400;
 }
 input, textarea{
     -webkit-user-select:text;
@@ -101,3 +101,37 @@ input, textarea{
 .ui.feed>.event>.content .meta .like:hover .icon{
     color: rgba(0,0,0,.5)
 }
+
+
+.feedBottomReplyForm #newNavHeadContent.newNavHeadContent{
+    width: 100%;
+    top: 0;
+    position: absolute;
+    z-index: 10001
+}
+
+
+.feedBottomReplyForm i.back{
+    position: absolute;
+    left: 0;
+    top: 20px;
+    z-index: 10002;
+    color: #FFF;
+    font-size: 20px;
+    font-size: 30px;
+    color: #FFF;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-left: 15px;
+    height: 48px;
+    width: 50px;
+}
+
+

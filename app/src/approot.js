@@ -43,6 +43,7 @@ import AddNewDevice3 from './components/device-add3.js';
 import Community from './components/community.js';
 //帖子详情
 import Communityinfo from './components/community-info.js';
+import Communityreplypage from './components/community-replypage.js';
 //个人中心
 import UserCenter from './components/user-center.js';
 //我的收藏
@@ -254,6 +255,7 @@ const CoApp = (props) => {
             <CustomRoute path="/distributioninfo/:id" component={requireAuthentication(DistributionInfo)}/>
             <CustomRoute path="/applicationreturns" component={requireAuthentication(ApplicationReturns)}/>
             <CustomRoute path="/communityinfo/:topicid" component={Communityinfo}/>
+            <CustomRoute path="/communityreplypage/:topicid" component={Communityreplypage}/>
             <CustomRoute path="/mytopiclist" component={Topiclist}/>
             <CustomRoute path="/changeusername" component={requireAuthentication(ChangeUsername)}/>
             <CustomRoute path="/orderevaluation" component={OrderEvaluation}/>

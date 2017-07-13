@@ -40,6 +40,8 @@ const initial = {
         innerheight : 0,
 
         isweixininstalled:true,
+
+        maxleftpecent : 90,//净水器报警百分比
     },
 
 };

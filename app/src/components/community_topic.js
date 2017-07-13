@@ -45,12 +45,19 @@ let ForumTopic = ({loginsuccess,userid,history,topic,users,dispatch,profile,onCl
 
     let showtopictocomment = (e)=>{
       if(loginsuccess){
+
+        let oldhandlerbackfn = setbackhandler(()=>{
+        dispatch(uicommenthide({}));
+        setbackhandler(oldhandlerbackfn);
+      });
+
         dispatch(uicommentshow({
           selectedcommentid:'',
           selectedtopicid:topic._id,
           selectedtype:'topic'
         }));
         e.stopPropagation();
+        // history.push(`/communityreplypage/${topic._id}`});
       }
       else{
 

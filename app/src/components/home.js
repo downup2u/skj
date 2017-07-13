@@ -24,7 +24,7 @@ let list = {
     flexShrink: 0
 };
 let linestyle = (startColor, endColor, widthStyle)=> ({
-    backgroundImage: "linear-gradient(135deg, " + startColor + ", " + endColor + ")",
+    background: startColor,
     height: "12px",
     borderRadius: "12px",
     width: widthStyle
@@ -79,11 +79,13 @@ let Baddevice =(props)=>{
 }
 
 let DeviceDataList =(props)=>{
-    const {detaillist} = props;
+    const {detaillist, maxleftpecent} = props;
     return (
         <ul style={list} className="homePageList">
             {_.map(detaillist,(detail)=> {
-                let linestyleresult = linestyle("#52a3da", "#C00", `${detail.leftpecent}%`);
+                let bgcolor = detail.leftpecent>maxleftpecent?"#C00":"#52a3da";
+                bgcolor = detail.leftpecent>=100?"#CCC":bgcolor;
+                let linestyleresult = linestyle(bgcolor, "#C00", `${detail.leftpecent}%`);
                 return (
                     <li style={listLi} key={detail.name}>
                         <div style={listhead}>
@@ -201,7 +203,7 @@ export class Page extends Component {
     render(){
 
         const {props} = this;
-        const {curdeviceid,mydevicelist,devices} = props;
+        const {curdeviceid,mydevicelist,devices, maxleftpecent} = props;
 
         let onClickNewDevice = ()=> {
             props.history.push('/addnewdevice');
@@ -280,7 +282,7 @@ export class Page extends Component {
                 }
 
                 { !!detaillist && detaillist.length>0?(
-                    <DeviceDataList detaillist={detaillist}/>
+                    <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent}/>
                 ):(
                     <div className="homePageList">
                     </div>
@@ -293,8 +295,8 @@ export class Page extends Component {
 }
 
 
-const mapStateToProps = ({device}) => {
-    return {...device};
+const mapStateToProps = ({device, app:{maxleftpecent}}) => {
+    return {...device, maxleftpecent};
 };
 
 Page = connect(mapStateToProps)(Page);
