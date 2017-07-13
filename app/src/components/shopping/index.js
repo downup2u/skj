@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import _ from 'lodash'; 
+import _ from 'lodash';
 import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shopping.css';
@@ -33,7 +33,12 @@ let Page = (props) => {
             addcartdilogtype : "cart",
         }));
     }
-
+    let onClickProduct = (e,proid)=>{
+      if(!!proid){
+        e.stopPropagation(e);
+        props.history.push(`/shoppingproinfo/${proid}`);
+      }
+    }
     let onClickPage = (e,name)=> {
         e.stopPropagation(e);
         props.history.push(name);
@@ -52,7 +57,7 @@ let Page = (props) => {
         // e.stopPropagation(e);
         // props.dispatch(mycartaddone_request({
         //     product:pro._id
-        // }));  
+        // }));
     }
     //取消时间冒泡
     let stopDefault =(e)=>{
@@ -67,7 +72,8 @@ let Page = (props) => {
                         {...swiperOptions}>
                         {_.map(props.shopbanners, (bannerid,index)=>{
                             return (
-                                <Slide key={index} className="Demo-swiper__slide">
+                                <Slide key={index} className="Demo-swiper__slide"
+                                onClick={(e)=>{onClickProduct(e,props.banners[bannerid].productid)}}>
                                     <img src={props.banners[bannerid].picurl} />
                                 </Slide>
                             )
@@ -93,7 +99,7 @@ let Page = (props) => {
                             {_.map(props.news, (newsinfo,index)=>{
                                 return (
                                     <Slide key={newsinfo._id} className="Demo-swiper__slide" style={{height:"42px"}}>
-                                        <span>{newsinfo.textname}</span>
+                                        <span onClick={(e)=>{onClickProduct(e,newsinfo.productid)}}>{newsinfo.textname}</span>
                                     </Slide>
                                 )
                             })}
@@ -105,9 +111,9 @@ let Page = (props) => {
 
 
             <div className="searchHead">
-                <Input 
-                    placeholder="请输入关键字" 
-                    value={props.searchtxt} 
+                <Input
+                    placeholder="请输入关键字"
+                    value={props.searchtxt}
                     onClick={(e)=>{
                     onClickPage(e,'/shoppingprolist/search');
                 }} />
@@ -180,10 +186,10 @@ let Page = (props) => {
                     )
                 })}
             </div>
-            <Addcartdilog 
-                show={props.addcartdilogshow} 
-                proid={props.addcartdilogproid} 
-                number={props.addcartdilogpronumber} 
+            <Addcartdilog
+                show={props.addcartdilogshow}
+                proid={props.addcartdilogproid}
+                number={props.addcartdilogpronumber}
                 type={props.addcartdilogtype}
                 />
         </div>
@@ -197,4 +203,3 @@ let mapStateToProps = ({shop,app,shopcart:{remoteRowCount}}) => {
 Page = connect(mapStateToProps)(Page);
 Page = withRouter(Page);
 export default Page;
-
