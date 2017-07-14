@@ -17,30 +17,30 @@ import QRCode from "qrcode.react";
 export class Page extends Component {
     componentWillMount () {
         //判断今天是否签到
-        let sharesetting = {...this.props.sharesetting};
-        sharesetting.url = `${config.serverurl}/app/#/qrcode/${this.props.invitecode}`;
-        this.props.dispatch(setsharesettingcur(sharesetting));
-        //queryorderstatusstat_request
+        // let sharesetting = {...this.props.sharesetting};
+        // sharesetting.url = `${config.serverurl}/app/#/qrcode/${this.props.invitecode}`;
+        // this.props.dispatch(setsharesettingcur(sharesetting));
+        // //queryorderstatusstat_request
     };
-    onClickReturn =()=>{
-        this.props.history.goBack();
-    }
-    showShare =()=>{
-        this.props.dispatch(share_data_updata(true));
-    }
+    // onClickReturn =()=>{
+    //     this.props.history.goBack();
+    // }
+    // showShare =()=>{
+    //     this.props.dispatch(share_data_updata(true));
+    // }
 
     render() {
-        const { match } = this.props;
+        const { match,downloadurl } = this.props;
         return (
             <div className="mycodePage">
                 <div className="PageHead">
                     <span className="title">我的邀请码</span>
                 </div>
                 <div className="content">
-                    <span className="tt">邀请其他用户加入</span>
+                    <span className="tt">我的邀请码是:</span>
                     <span className="code">{match.params.code}</span>
                     <QRCode
-                        value={`${config.serverurl}/app/#/registerborrow/${match.params.code}`}
+                        value={`${downloadurl}`}
                         size={200}
                         />
                     <div className="desc" style={{fontSize:"14px",lineHeight:"30px"}}>
@@ -54,5 +54,7 @@ export class Page extends Component {
         );
     }
 }
-
-export default connect()(Page);
+let mapStateToProps = ({app:{downloadurl}}) => {
+    return {downloadurl};
+}
+export default connect(mapStateToProps)(Page);

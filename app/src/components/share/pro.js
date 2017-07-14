@@ -63,7 +63,10 @@ export class Page extends React.Component {
                 title : "下载水智盒app",
                 text : "当前支持IOS和安卓系统",
                 buttonsClose : ()=>{},
-                buttonsClick : ()=>{this.props.history.push(`${config.serverurl}`)}
+                buttonsClick : ()=>{
+                  window.location.href=`${this.props.downloadurl}`;
+                  //this.props.history.push(`${this.props.downloadurl}`)
+                }
             },
         }));
     }

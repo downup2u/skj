@@ -279,7 +279,7 @@ const CoApp = (props) => {
             <CustomRoute path="/seladdress" component={requireAuthentication(Seladdress)} />
             <CustomRoute path="/selcoupon/:id" component={requireAuthentication(Selcoupon)} />
             <CustomRoute path="/mycode" component={requireAuthentication(Mycode)} />
-            <CustomRoute path="/code/:code" component={Code} />
+            <CustomRoute path="/qrcode/:code" component={Code} />
 
             <CustomRoute path="/orderseladdress/:id" component={requireAuthentication(Orderseladdress)} />
             <CustomRoute path="/settings" component={Settings} />
