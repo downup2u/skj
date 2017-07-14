@@ -149,7 +149,7 @@ let DeviceSwiper =(props)=>{
                                     backgroundSize: "220px 220px"
                                 }}
                           >
-                              
+
                                 <div className="waterwave">
                                     <div><Waterwave id={deviceid}/></div>
                                 </div>
@@ -233,7 +233,7 @@ export class Page extends Component {
                 set_weui({
                     confirm:{
                         show : true,
-                        title : "确认收货",
+                        title : "确认",
                         text : text,
                         //
                         buttonsClose : ()=>{},
@@ -246,7 +246,7 @@ export class Page extends Component {
                 )
             )
 
-            
+
         }
 
         return (
@@ -265,7 +265,7 @@ export class Page extends Component {
 
                     { mydevicelist.length === 0 &&  <Nodevice />}
                     { mydevicelist.length > 0 &&  <DeviceSwiper mydevicelist={mydevicelist} devices={devices} />}
-                    
+
                     { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  &&
                         <HeadInfo curdevicedata={curdevicedata}/>
                     }

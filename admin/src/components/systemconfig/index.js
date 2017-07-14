@@ -45,6 +45,7 @@ const SystemconfigShow = (props) => (
                  <ReferenceField label="显示在商城首页的商用一体机(分类）" source="productcategoryid2" reference="category" addLabel={true} allowEmpty>
                  <TextField source="name" />
                  </ReferenceField>
+                 <TextField  label="下载地址" source="downloadurl" />
                  <TextField  label="一级分销佣金" source="bonuslevel1" />
                  <TextField  label="二级分销佣金" source="bonuslevel2" />
                  <TextField  label="发帖积分限制(大于设置的积分才能发帖)" source="pointfornewtopic" />
@@ -82,6 +83,7 @@ export const SystemconfigCreate = (props) => (
                 <ReferenceInput source="productcategoryid2" reference="category"  allowEmpty>
                     <SelectInput optionText="name" />
                 </ReferenceInput>
+                <TextInput  label="下载地址" source="downloadurl" />
                 <TextInput  label="一级分销佣金" source="bonuslevel1" />
                 <TextInput  label="二级分销佣金" source="bonuslevel2" />
                 <TextInput  label="换算,例1积分换1分" source="pointvsmoney" />
@@ -122,6 +124,7 @@ export const SystemconfigEdit = (props) => (
              <ReferenceInput source="productcategoryid2" reference="category"  allowEmpty>
                  <SelectInput optionText="name" />
              </ReferenceInput>
+             <TextInput  label="下载地址" source="downloadurl" />
              <TextInput  label="一级分销佣金" source="bonuslevel1" />
              <TextInput  label="二级分销佣金" source="bonuslevel2" />
              <TextInput  label="换算,例1积分换1分" source="pointvsmoney" />
