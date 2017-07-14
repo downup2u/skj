@@ -6,6 +6,12 @@ import { Input, Button, Select } from 'semantic-ui-react';
 import '../../public/css/newdevice.css';
 import _ from 'lodash';
 import {createdevice_request} from '../actions';
+import WeUI from 'react-weui';
+import 'weui';
+import './tools/myweui.css';
+const {
+    LoadMore
+} = WeUI;
 
 let Page = (props) => {
     let onClickReturn = ()=> {
@@ -27,10 +33,12 @@ let Page = (props) => {
         </div>
         <div className="fm" style={{paddingTop:0}}>
             <div className="device2_text">
-            {
+            { devicelist.length===0?(
+                <LoadMore showLine>暂无设备</LoadMore>
+              ):
                 _.map(devicelist,(device)=>{
                   //console.log('device:' + JSON.stringify(device));
-                    let listyle = device.hasexits?"sel":"";
+                    let listyle = device.hasexits?"sel ls":"ls";
                    return (
                     <div
                       key={device.mac}

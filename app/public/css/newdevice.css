@@ -26,7 +26,7 @@
     flex-direction: column;
     padding-top: 0;
 }
-.addnewdevice .fm .device2_text>div{
+.addnewdevice .fm .device2_text>div.ls{
     display: flex;
     flex-grow: 1;
     align-self: stretch;

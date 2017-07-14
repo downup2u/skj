@@ -25,6 +25,7 @@ import Settings from './components/settings.js';
 import Orderseladdress from './components/shopping/orderseladdress.js';
 //我的邀请码
 import Mycode from './components/myprofile/mycode.js';
+import Code from './components/share/code.js';
 //订单选择优惠券
 import Selcoupon from './components/myprofile/selcoupon.js';
 //订单选择地址
@@ -90,6 +91,8 @@ import ShoppingPackage from './components/shopping/package.js';
 import ShoppingProlist from './components/shopping/prolist.js';
 //商城产品详情
 import ShoppingProinfo from './components/shopping/proinfo.js';
+import ShareShoppingProinfo from './components/share/pro.js';
+
 //商城产品评价
 import ShoppingProevaluate from './components/shopping/evaluate.js';
 //购物车
@@ -265,6 +268,7 @@ const CoApp = (props) => {
             <CustomRoute path="/shoppingpackage/:id" component={ShoppingPackage}/>
             <CustomRoute path="/shoppingprolist/:type" component={ShoppingProlist}/>
             <CustomRoute path="/shoppingproinfo/:id" component={ShoppingProinfo}/>
+            <CustomRoute path="/shareshoppingproinfo/:id" component={ShareShoppingProinfo}/>
             <CustomRoute path="/shoppingproevaluate/:id" component={ShoppingProevaluate}/>
             <CustomRoute path="/shoppingcart" component={requireAuthentication(ShoppingCart)} />
             <CustomRoute path="/pay" component={requireAuthentication(Pay)} />
@@ -275,6 +279,8 @@ const CoApp = (props) => {
             <CustomRoute path="/seladdress" component={requireAuthentication(Seladdress)} />
             <CustomRoute path="/selcoupon/:id" component={requireAuthentication(Selcoupon)} />
             <CustomRoute path="/mycode" component={requireAuthentication(Mycode)} />
+            <CustomRoute path="/code/:code" component={Code} />
+
             <CustomRoute path="/orderseladdress/:id" component={requireAuthentication(Orderseladdress)} />
             <CustomRoute path="/settings" component={Settings} />
             <CustomRoute path="/feedback" component={requireAuthentication(Feedback)} />

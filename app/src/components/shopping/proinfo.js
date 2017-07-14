@@ -1,5 +1,5 @@
 /*
- * 商城首页
+ * 产品详情
  * */
 import React, { Component } from 'react';
 import { Button, Comment, Header, Feed, Icon, Input  } from 'semantic-ui-react';
@@ -22,11 +22,12 @@ import {
  } from '../../actions';
  import Addcartdilog from './addcartdilog.js';
  import {
-  mycollectionisproductexits,
-  mycollectiondelone,
-  productcommentsfromproductgetcount
+    mycollectionisproductexits,
+    mycollectiondelone,
+    productcommentsfromproductgetcount
 } from '../../actions/sagacallback.js';
 import config from '../../env/config.js';
+import {setbackhandler,removebackhandler} from '../../env/android';
 
 let swiperOptions = {
     navigation: false,
@@ -55,13 +56,13 @@ export class Page extends React.Component {
         this.getEvaluate();
     };
 
-    showShare =()=>{
-        this.props.dispatch(share_data_updata(true));
-    }
+    // showShare =()=>{
+    //     this.props.dispatch(share_data_updata(true));
+    // }
 
     //获取产品的评论条数
     getEvaluate =()=>{
-        let proid = this.props.match.params.id
+        let proid = this.props.match.params.id;
         let proinfo = this.props.products[proid];
         //productcommentsfromproduct
         //evaluatenumber:set_productevaluatenumber
@@ -163,6 +164,15 @@ export class Page extends React.Component {
         }));
     };
 
+    //分享产品
+    showShare =()=>{
+        let oldhandlerbackfn = setbackhandler(()=>{
+          this.props.dispatch(share_data_updata(false));
+          setbackhandler(oldhandlerbackfn);
+        });
+        this.props.dispatch(share_data_updata(true));
+    }
+
     render(){
         let proid = this.props.match.params.id;
         let proinfo = this.props.products[proid];
@@ -211,6 +221,10 @@ export class Page extends React.Component {
                             <span className="collectionLnk" onClick={()=>{this.clickCollection(proinfo)}}>
                                 <img src={this.props.iscollection[proinfo._id]?"img/shopping/star2.png":"img/shopping/star.png"} />
                                 <span>收藏</span>
+                            </span>
+                            <span className="collectionLnk" onClick={()=>{this.showShare()}} style={{marginLeft:"10px"}}>
+                                <img src="img/shopping/share.png" />
+                                <span>分享</span>
                             </span>
                         </div>
                     </div>
