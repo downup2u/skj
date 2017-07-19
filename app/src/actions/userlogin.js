@@ -37,11 +37,10 @@ export const ui_changeusername = createAction('ui_changeusername');
 export const logout_request = createAction('userlogin.logout_request');
 export const logout_result = createAction('userlogin.logout_result');
 
-export const wait_findpwd_request= createAction('wait_findpwd_request');
-export const wait_findpwd_result= createAction('wait_findpwd_result');
-export const findpwd_request = createAction('userlogin.findpwd_request');
-export const findpwd_result = createAction('userlogin.findpwd_result');
-export const findpwd_err = createAction('userlogin.findpwd_err');
+
+export const findpwd_request = createAction('findpwd_request');
+export const findpwd_result = createAction('findpwd_result');
+
 
 export const queryuserbalance_request= createAction('queryuserbalance_request');
 export const queryuserbalance_result= createAction('queryuserbalance_result');

@@ -4,7 +4,7 @@ import { createAction } from 'redux-act';
 export const md_createaddress= createAction('md_createaddress');
 export const md_editaddress= createAction('md_editaddress');
 export const md_register= createAction('md_register');
-export const md_findpwd= createAction('md_findpwd');
+
 export const md_inserttopic= createAction('md_inserttopic');
 export const md_getnotifymessage= createAction('md_getnotifymessage');
 export const md_getmytopic= createAction('md_getmytopic');

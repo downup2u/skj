@@ -3,7 +3,7 @@ import '../../public/css/user.css';
 import { Input, List, Radio, Button, Icon, Image, Checkbox,Label} from 'semantic-ui-react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
-import {sendauth_request,register_request} from '../actions/index.js';
+import {sendauth_request,findpwd_request} from '../actions/index.js';
 import {register} from '../actions/sagacallback.js';
 import NavBar from './nav.js';
 import Sendauth from './tools/sendauth.js';
@@ -139,13 +139,15 @@ export class Page extends React.Component {
             username: values.username,
             password: values.password,
             authcode: values.authcode
-        }
+        };
+
+        this.props.dispatch(findpwd_request(payload));
         //alert(JSON.stringify(formdata));
-        this.props.dispatch(findpwd(payload)).then((result)=> {
-            this.props.history.goBack();
-        }).catch((error)=> {
-            console.log("注册失败:" + JSON.stringify(error));
-        });
+        // this.props.dispatch(findpwd(payload)).then((result)=> {
+        //     this.props.history.goBack();
+        // }).catch((error)=> {
+        //     console.log("注册失败:" + JSON.stringify(error));
+        // });
     }
 
     onClickLogin = ()=> {

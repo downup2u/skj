@@ -16,8 +16,6 @@ import {
   md_register,
 
   findpwd_result,
-  wait_findpwd_result,
-  md_findpwd,
 
   inserttopic_result,
   wait_inserttopic_result,
@@ -146,11 +144,6 @@ const waitfnsz = [
     register_result,
     wait_register_result,
     `${md_register}`,
-  ],
-  [
-    findpwd_result,
-    wait_findpwd_result,
-    `${md_findpwd}`,
   ],
   [
     inserttopic_result,
@@ -373,6 +366,10 @@ export function* wsrecvsagaflow() {
           page: 1,
           limit: 100,
       }}));
+  });
+
+  yield takeEvery(`${findpwd_result}`, function*(action) {
+    yield put(goBack());
   });
 
 }

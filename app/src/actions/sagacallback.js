@@ -20,9 +20,6 @@ import {
   wait_getnotifymessage_request,
   wait_getnotifymessage_result,
 
-  findpwd_request,
-  wait_findpwd_request,
-  wait_findpwd_result,
 
   wait_getmytopic_request,
   wait_getmytopic_result,
@@ -152,9 +149,6 @@ export function register(payload){
   return synccall(payload,wait_register_request,register_request);
 }
 
-export function findpwd(payload){
-  return synccall(payload,wait_findpwd_request,findpwd_request);
-}
 
 export function inserttopic(payload){
     return synccall(payload,wait_inserttopic_request,inserttopic_request);
@@ -283,7 +277,6 @@ export function* createsagacallbackflow(){
   waitfnsz.push([`${wait_createaddress_request}`,`${wait_createaddress_result}`]);
   waitfnsz.push([`${wait_editaddress_request}`,`${wait_editaddress_result}`]);
   waitfnsz.push([`${wait_register_request}`,`${wait_register_result}`]);
-  waitfnsz.push([`${wait_findpwd_request}`,`${wait_findpwd_result}`]);
   waitfnsz.push([`${wait_inserttopic_request}`,`${wait_inserttopic_result}`]);
   waitfnsz.push([`${wait_getnotifymessage_request}`,`${wait_getnotifymessage_result}`]);
   waitfnsz.push([`${wait_getmytopic_request}`,`${wait_getmytopic_result}`]);

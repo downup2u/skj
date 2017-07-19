@@ -29,6 +29,7 @@ import {
     getnotifymessage_request,
     fillprofile_request,
     findpwd_request,
+    findpwd_result,
 
     getbanner_request,
     getcategory_request,
@@ -98,7 +99,7 @@ import {
     md_createaddress,
     md_editaddress,
     md_register,
-    md_findpwd,
+  
     md_inserttopic,
     md_createdevice_result,
     md_getnotifymessage,
@@ -210,7 +211,7 @@ exports.recvmessagetoresultpair = {
   'address.createaddress_result':md_createaddress,
   'address.editaddress_result':md_editaddress,
   'users.register_result':md_register,//<--
-  'users.register_err':md_findpwd,//<===
+  'findpwd_result':findpwd_result,//<===
   'forum.inserttopic_result':md_inserttopic,
   'device.createdevice_result':md_createdevice_result,
   'getnotifymessage_result':md_getnotifymessage,
