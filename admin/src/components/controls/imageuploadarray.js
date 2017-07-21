@@ -20,7 +20,7 @@ class PicturesWall extends React.Component {
                     url: props.input.value[i]
                 });
             }
-   
+
             this.state = {
                 previewVisible: false,
                 previewImage: '',
@@ -31,7 +31,7 @@ class PicturesWall extends React.Component {
 
   handleCancel = () =>{
     this.setState({ previewVisible: false });
-  } 
+  }
 
   handlePreview = (file) => {
     let fileobj = file;
@@ -112,7 +112,7 @@ class PicturesWall extends React.Component {
           onPreview={this.handlePreview}
           onChange={this.handleChange}
         >
-          {fileList.length >= 9 ? null : uploadButton}
+        
         </Upload>
         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
