@@ -369,6 +369,11 @@ export function* wsrecvsagaflow() {
   });
 
   yield takeEvery(`${findpwd_result}`, function*(action) {
+    yield put(set_weui({toast:{
+          show : true,
+          text : `找回密码成功`,
+          type : "success"
+      }}));
     yield put(goBack());
   });
 
