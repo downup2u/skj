@@ -38,7 +38,7 @@ const client = net.connect({port: port,host:ip}, () => {
   // 'connect' listener
   setInterval(()=>{
     const buf = test.gettestbuf_data(process.env.targetmac ||'0800200A8C6D');//Buffer.from(datatosend,'hex');
-    let bufstring = buf.toString('hex');
+    let bufstring = 'aa3c2c9422b9d5001300ffffffff00000000001d001d001d001d001d00';//buf.toString('hex');
     console.log(`连接上服务器【${ip}:${port}】,发送数据${bufstring}`);
     client.write(buf);
   },process.env.sendinterval*1000 || 10000);

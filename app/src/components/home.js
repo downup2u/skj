@@ -79,10 +79,10 @@ let Baddevice =(props)=>{
 }
 
 let DeviceDataList =(props)=>{
-    const {detaillist, maxleftpecent} = props;
+    const {detaillist, maxleftpecent,onClickReset} = props;
     return (
         <ul style={list} className="homePageList">
-            {_.map(detaillist,(detail)=> {
+            {_.map(detaillist,(detail,detailindex)=> {
                 let bgcolor = detail.leftpecent>maxleftpecent?"#C00":"#52a3da";
                 bgcolor = detail.leftpecent>=100?"#CCC":bgcolor;
                 let linestyleresult = linestyle(bgcolor, "#C00", `${detail.leftpecent}%`);
@@ -95,7 +95,11 @@ let DeviceDataList =(props)=>{
                               </div>
                               <div style={{position:"absolute",right: 0, top:0}}>
                                   <span style={percentage}>{detail.leftpecent}%</span>
-                                  <span>复位</span>
+                                  {detail.leftpecent>maxleftpecent && <span onClick={
+                                    ()=>{
+                                      onClickReset(detailindex);
+                                    }
+                                  }>复位</span>}
                               </div>
                         </div>
                         <div style={lineBg}>
@@ -225,7 +229,25 @@ export class Page extends Component {
             //curdevicedata = !!curdevice && curdevice.hasOwnProperty("realtimedata")?curdevice.realtimedata:null;
             //detaillist = !!curdevicedata && curdevicedata.hasOwnProperty("detaillist")?curdevicedata.detaillist:false;
         }
-
+        let onClickReset = (detailindex)=>{
+          let text = "你确认需要复位吗？";
+          props.dispatch(
+              set_weui({
+                  confirm:{
+                      show : true,
+                      title : "确认",
+                      text : text,
+                      //
+                      buttonsClose : ()=>{},
+                      //确认收货
+                      buttonsClick : ()=>{
+                          let deviceid = devices[curdeviceid].deviceid;
+                          props.dispatch(senddevicecmd_request({deviceid,cmd: 1,value:detailindex}));
+                      }
+                  }}
+              )
+          );
+        }
         let ClickRadio = (iswatercut)=> {
 
             let text = iswatercut?"你确认需要断水吗？":"你确认要开通水源吗？";
@@ -282,7 +304,7 @@ export class Page extends Component {
                 }
 
                 { !!detaillist && detaillist.length>0?(
-                    <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent}/>
+                    <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent} onClickReset={onClickReset}/>
                 ):(
                     <div className="homePageList">
                     </div>
