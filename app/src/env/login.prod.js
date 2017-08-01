@@ -17,6 +17,7 @@ export const loginQQ = (fncallback)=>{
             result = JSON.parse(result);
         }
         //alert(JSON.stringify(result));
+        result.openId = data.openId || data.openid ;
         fncallback(result);
       });
     }
@@ -30,6 +31,7 @@ export const loginQQ = (fncallback)=>{
             result = JSON.parse(result);
         }
         //alert(JSON.stringify(result));
+        result.openid = data.openid || data.openId ;
         fncallback(result);
       });
     }
