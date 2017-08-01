@@ -96,22 +96,48 @@ let renderRegisterForm = (fields)=> {
 renderRegisterForm = connect()(renderRegisterForm);
 renderRegisterForm = withRouter(renderRegisterForm);
 
-let RegisterForm = (props)=> {
-    let {handleSubmit,onClickRegister,onClickLogin,onClickReturn} = props;
-    return (<Form onSubmit={handleSubmit(onClickRegister)} id="UserLoginPageForm" style={{height:window.innerHeight + "px", overflow:"scroll"}}>
-        <div className="loginPageTop">
-            <div className="loginHead">
-                <Icon name='angle left' onClick={onClickReturn}/>
-                <img src="img/4.png" className="loginhead"/>
-            </div>
-            <Fields names={['username','ispasswordvisiable','password','authcode','invitecode','aggree']} component={renderRegisterForm}/>
 
-            <div className="loginBotton" style={{padding: "2px 14% 10px 14%"}}>
-                <Button primary>注册</Button>
-                <Button basic type="button" onClick={onClickLogin}>快速登录</Button>
+let resizetime = null;
+
+// let RegisterForm = (props)=> {
+export class RegisterForm extends React.Component {
+
+//     constructor(props) {  
+//         super(props);  
+//         this.state = {
+//             innerHeight : window.innerHeight
+//         };
+//     } 
+//     componentWillMount() {
+//         window.onresize = ()=>{
+//             window.clearTimeout(resizetime);
+//             resizetime = window.setTimeout(()=>{
+//                 this.setState({innerHeight: window.innerHeight});
+//             }, 10)
+//         }
+//     }
+    
+    render(){
+        let {handleSubmit,onClickRegister,onClickLogin,onClickReturn} = this.props;
+        return (
+            <Form 
+                onSubmit={handleSubmit(onClickRegister)} id="UserLoginPageForm" 
+                // style={{height:this.state.innerHeight + "px", overflow:"scroll"}}
+                >
+            <div className="loginPageTop">
+                <div className="loginHead">
+                    <Icon name='angle left' onClick={onClickReturn}/>
+                    <img src="img/4.png" className="loginhead"/>
+                </div>
+                <Fields names={['username','ispasswordvisiable','password','authcode','invitecode','aggree']} component={renderRegisterForm}/>
+
+                <div className="loginBotton" style={{padding: "2px 14% 10px 14%"}}>
+                    <Button primary>注册</Button>
+                    <Button basic type="button" onClick={onClickLogin}>快速登录</Button>
+                </div>
             </div>
-        </div>
-    </Form>);
+        </Form>);
+    }
 };
 
 
@@ -185,10 +211,23 @@ RegisterForm = reduxForm({
 
 
 import {login_request} from '../actions/index.js';
+let resizetime2 = null;
 export class Page extends React.Component {
 
-    componentWillMount() {
-    }
+//     constructor(props) {  
+//         super(props);  
+//         this.state = {
+//             innerHeight : window.innerHeight
+//         };
+//     } 
+//     componentWillMount() {
+//         window.onresize = ()=>{
+//             window.clearTimeout(resizetime2);
+//             resizetime2 = window.setTimeout(()=>{
+//                 this.setState({innerHeight: window.innerHeight});
+//             }, 10)
+//         }
+//     }
 
     onClickReturn =()=>{
         this.props.history.goBack();
@@ -217,7 +256,7 @@ export class Page extends React.Component {
 
     render() {
         return (
-            <div className="UserLoginPage" style={{height:window.innerHeight+"px"}}>
+            <div className="UserLoginPage">
                 <RegisterForm onClickRegister={this.onClickRegister}
                               onClickLogin={this.onClickLogin}
                               onClickReturn={this.onClickReturn}/>

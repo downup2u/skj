@@ -24,6 +24,8 @@ let renderLoginForm = (fields)=> {
         let newvalue = data.checked;//!ischeckedpassword;
         fields.ischeckedpassword.input.onChange(newvalue);
     }
+
+
     //选中时候怎么弄？  <Icon name={ispasswordvisiable?"lock":"eye"} className="sel" onClick={onChangePasswordvisiable}/>
     return (<div className='loginform'>
         <div className="username logininput">
@@ -112,17 +114,29 @@ LoginForm = reduxForm({
     }
 })(LoginForm);
 
+let resizetime = null;
 
 import {login_request} from '../actions/index.js';
 export class Page extends React.Component {
 
     constructor(props) {  
         super(props);  
-        this.state = {p: 0};
+        this.state = {
+            p: 0,
+            innerHeight : window.innerHeight
+        };
     } 
 
     componentWillMount() {
         this.props.dispatch(loginwithoauth_result({bindtype:'',openid:''}));
+        window.onresize = ()=>{
+            window.clearTimeout(resizetime);
+            resizetime = window.setTimeout(()=>{
+                this.setState({innerHeight: window.innerHeight});
+            }, 10)
+        }
+
+
     }
 
     onClickRegister = ()=> {
@@ -180,7 +194,7 @@ export class Page extends React.Component {
         }
         return (
             <div className="UserLoginPage">
-                <div style={{height:window.innerHeight+"px",overflow:"scroll"}}>
+                <div>
                 <LoginForm onClickRegister={this.onClickRegister}
                            onClickLogin={this.onClickLogin}
                            onClickForgetPasword={this.onClickForgetPasword}

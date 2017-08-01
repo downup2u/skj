@@ -13,24 +13,11 @@ input, textarea{
     -ms-user-select:text;
     user-select:text;
 }
-#root{
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-}
+
 .ui.basic.red.label{
     pointer-events: none;
 }
-#root > div,
-#root > div > div{
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-}
+
 .pageStyle{
     display: flex;
     justify-content: space-between;
