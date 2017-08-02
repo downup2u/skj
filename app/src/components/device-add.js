@@ -79,7 +79,7 @@ class Page extends React.Component {
             password:'',
         };
         return (
-            <div className="addnewdevice">
+            <div className="addnewdevice" style={{height: window.innerHeight+"px"}}>
                 <NavBar back={true} title="设备连接" />
                 <WifiSelForm formname="wifiform" formvalues={formvalue} 
                 onClickNext={this.onClickNext} code={code}/>
