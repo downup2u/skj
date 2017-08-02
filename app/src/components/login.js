@@ -183,12 +183,17 @@ export class Page extends React.Component {
         const {isweixininstalled} = this.props;
         let loginwithqq = ()=>{
             loginQQ((result)=>{
-                this.props.dispatch(loginwithoauth_request({bindtype:'qq',openid:result.openId}));
+                if(result.code === '0'){
+                  this.props.dispatch(loginwithoauth_request({bindtype:'qq',openid:result.openId}));
+                }
+
             });
         }
         let loginwithwechat = ()=>{
             loginWx((result)=>{
+              if(result.code === '0'){
                 this.props.dispatch(loginwithoauth_request({bindtype:'weixin',openid:result.openid}));
+              }
             });
 
         }
