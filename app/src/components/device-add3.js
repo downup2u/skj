@@ -15,7 +15,7 @@ const Page = (props) => {
         props.history.replace('/');
     }
     return (
-    <div className="addnewdevice">
+    <div className="addnewdevice"  style={{height: window.innerHeight+"px"}}>
         <NavBar lefttitle="返回" title="匹配成功" onClickLeft={onClickReturn}/>
         <div className="fm">
             <div className="device2_text">
