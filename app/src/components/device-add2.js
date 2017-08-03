@@ -25,7 +25,7 @@ let Page = (props) => {
     }
     const {devicelist} = props;
     return (
-    <div className="addnewdevice">
+    <div className="addnewdevice" style={{height: window.innerHeight+"px"}}>
         <NavBar back={true} title="设备匹配" />
 
         <div className="tt">

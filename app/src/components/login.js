@@ -129,12 +129,12 @@ export class Page extends React.Component {
 
     componentWillMount() {
         this.props.dispatch(loginwithoauth_result({bindtype:'',openid:''}));
-        window.onresize = ()=>{
-            window.clearTimeout(resizetime);
-            resizetime = window.setTimeout(()=>{
-                this.setState({innerHeight: window.innerHeight});
-            }, 10)
-        }
+        // window.onresize = ()=>{
+        //     window.clearTimeout(resizetime);
+        //     resizetime = window.setTimeout(()=>{
+        //         this.setState({innerHeight: window.innerHeight});
+        //     }, 10)
+        // }
 
 
     }
