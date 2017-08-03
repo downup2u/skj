@@ -53,7 +53,7 @@ export class Page extends Component {
 
     render() {
         return (
-            <div className="distributionPage">
+            <div className="distributionPage" style={{minHeight : window.innerHeight +"px"}}>
                 <NavBar back={true} title="我的分销" />
                 <div className="headCont">
                     <div className="userInfo">
