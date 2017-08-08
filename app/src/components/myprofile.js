@@ -81,31 +81,33 @@ export class Page extends Component {
                             <span>领积分</span>
                         </div>
                     ):""}
+
+                    <div className="myorderstitle">
+                        <span>我的订单</span>
+                        <span onClick={()=>{this.handleOrderClick('全部')}}>全部订单</span>
+                    </div>
                 </div>
                 <div className="myProfileBannerCont">
                     <div className="l1con">
-                        <div className="l1">
-                            <span>我的订单</span>
-                            <span onClick={()=>{this.handleOrderClick('全部')}}>全部订单</span>
-                        </div>
+                        
                         <div className="l2">
                             <div onClick={()=>{this.handleOrderClick('未支付')}}>
-                                <img src="img/myprofile/2.png"/>
+                                <img src="img/shuikj_7.png"/>
                                 <span>待付款</span>
                                 {orderstatus['未支付']>0&&loginsuccess?(<i>{orderstatus['未支付']}</i>):""}
                             </div>
                             <div onClick={()=>{this.handleOrderClick('待发货')}}>
-                                <img src="img/myprofile/3.png"/>
+                                <img src="img/shuikj_8.png"/>
                                 <span>待发货</span>
                                 {orderstatus['待发货']>0&&loginsuccess?(<i>{orderstatus['待发货']}</i>):""}
                             </div>
                             <div onClick={()=>{this.handleOrderClick('待收货')}}>
-                                <img src="img/myprofile/4.png"/>
+                                <img src="img/shuikj_9.png"/>
                                 <span>待收货</span>
                                 {orderstatus['待收货']>0&&loginsuccess?(<i>{orderstatus['待收货']}</i>):""}
                             </div>
                             <div onClick={()=>{this.handleOrderClick('已完成')}}>
-                                <img src="img/myprofile/5.png"/>
+                                <img src="img/shuikj_10.png"/>
                                 <span>已完成</span>
                                 {orderstatus['已完成']>0&&loginsuccess?(<i>{orderstatus['已完成']}</i>):""}
                             </div>
@@ -114,54 +116,50 @@ export class Page extends Component {
                     <div className="llcont">
                         <div className="ll">
                             <div onClick={()=>{this.onClickPage('/distribution')}}>
-                                <img src="img/myprofile/6.png"/>
+                                <img src="img/shuikj_30.png"/>
                                 <span>我的分销</span>
                             </div>
                             <div onClick={()=>{this.onClickPage('/myprofit')}}>
-                                <img src="img/myprofile/7.png" />
+                                <img src="img/shuikj_31.png" />
                                 <span>我的钱包</span>
                             </div>
                             <div onClick={()=>{this.onClickPage('/integral')}}>
-                                <img src="img/myprofile/17.png"/>
+                                <img src="img/shuikj_32.png" />
                                 <span>积分明细</span>
                             </div>
                         </div>
                         <div className="ll">
                             <div onClick={()=>{this.onClickPage('/mycode')}}>
-                                <img src="img/myprofile/8.png"/>
+                                <img src="img/shuikj_33.png" />
                                 <span>推广产品</span>
                             </div>
                             <div onClick={()=>{this.showShare()}}>
-                                <img src="img/myprofile/9.png"/>
+                                <img src="img/shuikj_34.png" />
                                 <span>分享赚钱</span>
-                            </div>
-                        </div>
-                        <div className="ll">
-                            <div onClick={()=>{this.onClickPage('/settings')}}>
-                                <img src="img/myprofile/10.png"/>
-                                <span>设置</span>
                             </div>
                         </div>
 
                         <div className="ll">
                             <div onClick={()=>{this.onClickPage('/mycollection')}}>
-                                <img src="img/myprofile/11.png"/>
+                                <img src="img/shui_06.png"/>
                                 <span>我的收藏</span>
                             </div>
                             <div onClick={()=>{this.onClickPage('/mycoupon')}}>
-                                <img src="img/myprofile/12.png"/>
+                                <img src="img/shui_08.png"/>
                                 <span>优惠券</span>
                             </div>
-                        </div>
-                        <div className="ll">
                             <div onClick={()=>{this.onClickPage('/addresslist')}}>
-                                <img src="img/myprofile/13.png"/>
+                                <img src="img/shui_10.png"/>
                                 <span>地址管理</span>
                             </div>
                         </div>
                         <div className="ll">
+                            <div onClick={()=>{this.onClickPage('/settings')}}>
+                                <img src="img/shui_03.png"/>
+                                <span>设置</span>
+                            </div>
                             <div onClick={()=>{this.onClickPage('/feedback')}}>
-                                <img src="img/myprofile/14.png"/>
+                                <img src="img/shui_12.png"/>
                                 <span>意见反馈</span>
                             </div>
                         </div>
