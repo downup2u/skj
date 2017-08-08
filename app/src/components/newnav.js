@@ -99,7 +99,7 @@ export class Page extends React.Component {
         }
 
         return (
-            <div className="newNavHeadContent" id="newNavHeadContent">
+            <div className="newNavHeadContent" id="newNavHeadContent" style={this.props.style}>
                 <span className="leftlnk">
                 {
                     back?(<Icon name="angle left" className="back" onClick={()=>{this.pageBack()}} />):''

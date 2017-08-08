@@ -26,7 +26,7 @@ let Page = (props) => {
     const {devicelist} = props;
     return (
     <div className="addnewdevice"  style={{height: window.innerHeight+"px"}}>
-        <NavBar back={true} title="设备匹配" />
+        <NavBar back={true} title="设备匹配" style={{backgroundImage:"linear-gradient(0deg, #0090d8, #0090d8)"}}/>
 
         <div className="tt">
             <img src="img/9.png"/>

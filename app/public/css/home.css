@@ -177,7 +177,7 @@
     -webkit-align-items: center;
     align-items: center;
 
-    margin-bottom: 6px;
+    margin:5px 0;
     color: #FFF;
     -moz-box-direction:normal;
     flex-direction:column;
@@ -190,7 +190,7 @@
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 16px solid #FFF;
+    border-bottom: 10px solid #FFF;
 
 }
 .headContentInfo .i4 {
