@@ -81,14 +81,16 @@
     
     color: #FFF;
     text-align: center;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
 }
 .homePage .nodevice img{
     width: 40%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 .homePage .nodevice .desc{
-    font-size: 14px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 120px;
 }
 .homePage .nodevice .btn{
     font-size: 14px;

@@ -62,7 +62,7 @@ let headImg = {
 let Nodevice =(props)=>{
     return (
         <div className="nodevice">
-            <img src="img/12.png" />
+            <img src="img/h2.png" />
             <div className="desc">当前没有设备</div>
             <div className="btn" onClick={()=>{props.history.push('/addnewdevice');}}>新建设备</div>
         </div>
@@ -163,7 +163,7 @@ let DeviceSwiper =(props)=>{
                                 <div className="waterwave">
                                     <div><Waterwave id={deviceid}/></div>
                                 </div>
-                                <img src="img/1.png" className="bg"/>
+                                <img src="img/h1.png" className="bg"/>
                               {getdata?(
                                   <div className="headContentInfo">
                                       <span className="i1">{modeltype}</span>
