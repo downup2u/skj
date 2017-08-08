@@ -24,6 +24,7 @@
     color: #FFF;
     display: flex;
     align-items: center;
+    z-index: 5
 }
 .myProfilePage .headCont .signDom span.lnk{
     background: #FFF;
