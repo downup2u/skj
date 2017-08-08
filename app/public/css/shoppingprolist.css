@@ -16,7 +16,8 @@
 }
 
 .ProlistPage .searchHead {
-    background: #5596d6;
+    background-image: linear-gradient(0deg, #00cac8, #0090d8);
+    
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -234,7 +235,7 @@
     border-bottom: none;
 }
 .ProlistPage .searchHead {
-    background: #5596d6;
+    
     display: flex;
     align-items: center;
     

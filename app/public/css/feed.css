@@ -60,7 +60,9 @@
 
 
 .feedPage .PageHead {
-    background: #5596d6;
+    
+    background-image: linear-gradient(0deg, #00cac8, #0090d8);
+    
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -126,7 +128,9 @@
     top: 0;
     left: 0;
 }
-
+.feedPage i.blue.icon{
+    color:#00cac8!important
+}
 .feedPage .PageHead .ui.grid{
     margin: 0;
     position: absolute;

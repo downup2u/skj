@@ -70,7 +70,7 @@ export class Page extends Component {
                 }
                     <div className="userCode">我的积分 <span>{this.props.point}</span></div>
                     <div className="userMessageLnk"  onClick={()=>{this.onClickPage('/mymessage')}}>
-                        <img src="img/message.png"/>
+                        <img src="img/shuikj_3.png"/>
                         {this.props.newmsgnumber>0?(
                             <span>{this.props.newmsgnumber}</span>
                         ):""}

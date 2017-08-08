@@ -2,7 +2,8 @@
     outline: none;
 }
 .ui.segment.headContent{
-    background: #5596d6;
+    background-image: linear-gradient(0deg, #00cac8, #0090d8);
+    
     border-radius: 0;
     border: 0;
     display: flex;

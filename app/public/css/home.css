@@ -8,7 +8,7 @@
     flex-shrink: 0;
     min-height: 311px;
     position: relative;
-    background-image: linear-gradient(0deg, #5771c5, #5596d6);
+    background-image: linear-gradient(0deg, #00cac8, #0090d8);
 
     display: -webkit-box;
     display: -webkit-flex;
@@ -59,8 +59,9 @@
     -webkit-justify-content: center;
     justify-content: center;
 }
+.homePage .toolBar .left img,
 .homePage .toolBar .right img{
-    width: 40px;
+    width: 26px;
 }
 .homePage .nodevice{
     display: -webkit-box;
@@ -77,9 +78,7 @@
 
     -webkit-flex-direction: column;
     flex-direction: column;
-    border-radius: 170px;
-    height: 170px;
-    border: 1px solid #FFF;
+    
     color: #FFF;
     text-align: center;
 }
@@ -93,9 +92,13 @@
 }
 .homePage .nodevice .btn{
     font-size: 14px;
-    background: rgba(255,255,255,.3);
-    border-radius: 6px;
-    padding: 0 15px;
+    background: #FFF;
+    border-radius: 50px;
+    width: 70%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 24px;
+    color: #00bec8;
 }
 .homePageWamp {
     width: 100%;
@@ -223,6 +226,9 @@
 
     background: #FFF;
 }
+.HomeList >img{
+    width: 100%
+}
 .HomeList .ListTitle{
     flex-shrink: 0;
 }
@@ -254,8 +260,7 @@
     -webkit-flex-grow: 1;
     flex-grow: 1;
     border-bottom: 1px solid #DDD;
-    background: #EEE;
-    color: #5694dd;
+    
     padding: 10px 15px;
 }
 .ListTitle > div{
@@ -273,7 +278,7 @@
     font-size: 16px;
 }
 .ListTitle > div:last-child .ui.fitted.toggle.checkbox{
-    margin-left: 10px;
+    margin-right: 10px;
 }
 .homePage .swiper-container{
     width: 100%;

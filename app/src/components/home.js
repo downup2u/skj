@@ -24,7 +24,8 @@ let list = {
     flexShrink: 0
 };
 let linestyle = (startColor, endColor, widthStyle)=> ({
-    background: startColor,
+    
+    backgroundImage: `linear-gradient(90deg, ${startColor}, ${endColor})`,
     height: "12px",
     borderRadius: "12px",
     width: widthStyle
@@ -38,14 +39,14 @@ let listinfo = {
     marginLeft: "15px"
 };
 let listname = {
-    fontSize: "14px"
+    fontSize: "18px"
 };
 let lineBg = {
     borderRadius: "12px",
     backgroundColor: "#EEE"
 };
 let percentage = {
-    color: "#5694dd",
+    color: "#00cbc9",
     fontSize: "11px"
 };
 let listhead = {
@@ -60,7 +61,7 @@ let headImg = {
 
 let Nodevice =(props)=>{
     return (
-        <div className="nodevice" style={{width: "170px"}}>
+        <div className="nodevice">
             <img src="img/12.png" />
             <div className="desc">当前没有设备</div>
             <div className="btn" onClick={()=>{props.history.push('/addnewdevice');}}>新建设备</div>
@@ -83,9 +84,14 @@ let DeviceDataList =(props)=>{
     return (
         <ul style={list} className="homePageList">
             {_.map(detaillist,(detail,detailindex)=> {
-                let bgcolor = detail.leftpecent>maxleftpecent?"#C00":"#52a3da";
-                bgcolor = detail.leftpecent>=100?"#CCC":bgcolor;
-                let linestyleresult = linestyle(bgcolor, "#C00", `${detail.leftpecent}%`);
+
+                let color1 = detail.leftpecent>maxleftpecent?"#C00":"#4bcef5";
+                let color2 = detail.leftpecent>maxleftpecent?"#C00":"#4bf3ee";
+              
+                color1 = detail.leftpecent>=100?"#CCC":color1;
+                color2 = detail.leftpecent>=100?"#CCC":color2;
+
+                let linestyleresult = linestyle(color1, color2, `${detail.leftpecent}%`);
                 return (
                     <li style={listLi} key={detail.name}>
                         <div style={listhead}>
@@ -93,7 +99,7 @@ let DeviceDataList =(props)=>{
                                   <span style={listname}>{detail.name}</span>
                                   <span style={listinfo}>剩余{detail.leftday}天</span>
                               </div>
-                              <div style={{position:"absolute",right: 0, top:0}}>
+                              <div style={{position:"absolute",right: 0, top:"3px"}}>
                                   <span style={percentage}>{detail.leftpecent}%</span>
                                   {detail.leftpecent>maxleftpecent && <span onClick={
                                     ()=>{
@@ -267,21 +273,24 @@ export class Page extends Component {
                     }}
                 )
             )
-
-
         }
+
+        
 
         return (
             <div className="homePageWamp">
-                <div className="homePage">
-
+                
+                <div 
+                    className="homePage"
+                    style={{flexGrow:!!detaillist && detaillist.length>0?0:1}}
+                    >
                     <div className="toolBar">
                         <div className='left' onClick={onClickNewDevice}>
-                            +
+                            <img src="img/shuikj_1.png" />
                         </div>
                         <div className='center'>水质监测</div>
                         <div className='right' onClick={onClickDevicelist}>
-                            <img src="img/head/1.png" />
+                            <img src="img/shuikj_2.png" />
                         </div>
                     </div>
 
@@ -296,19 +305,17 @@ export class Page extends Component {
 
                 { !!detaillist && detaillist.length>0 &&
                     <div className="HomeList">
+                        <img src="img/head/3.png" />
                         <div className="ListTitle">
                             <div>滤芯状态</div>
-                            <div>断水更换<Radio toggle checked={iswatercut} onClick={()=>{ClickRadio(iswatercut)}}/></div>
+                            <div><Radio toggle checked={iswatercut} onClick={()=>{ClickRadio(iswatercut)}}/>断水更换</div>
                         </div>
                     </div>
                 }
 
                 { !!detaillist && detaillist.length>0?(
                     <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent} onClickReset={onClickReset}/>
-                ):(
-                    <div className="homePageList">
-                    </div>
-                ) }
+                ):null }
 
 
             </div>
