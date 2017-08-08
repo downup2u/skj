@@ -45,7 +45,7 @@ export function* wififlow() {
           console.log(`md_createdevice_result:${JSON.stringify(result)}`);
           yield put(createdevice_result(result));
           const {newdevice} = result;
-          yield put(push(`/editdevice/${newdevice._id}`));
+          yield put(push(`/addnewdevice3`));
     });
 
     yield takeEvery(`${md_updatedevice_result}`, function*(action) {
