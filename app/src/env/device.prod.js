@@ -5,36 +5,45 @@ export const getssid = (fncallback)=>{
   //  fncallback({
   //      ssid:'101372126',
   //  });
-
-   xview.currentLinkWifi((data)=>{
-     try{
-       if(typeof data === 'string'){
-           data = JSON.parse(data);
-       }
-       fncallback(data);
-     }
-     catch(e){
-       alert(`获取当前wifi信息失败了${e}`);
-     }
-    //  alert(JSON.stringify(data));
-   });
+  try{
+    xview.currentLinkWifi((data)=>{
+      try{
+        if(typeof data === 'string'){
+            data = JSON.parse(data);
+        }
+        fncallback(data);
+      }
+      catch(e){
+        alert(`获取当前wifi信息失败了${e}`);
+      }
+     //  alert(JSON.stringify(data));
+    });
+  }
+  catch(e){
+    console.log(e);
+  }
 }
 
 
 export const senddata = (values,fncallback)=>{
   //alert(`开始调用xview.prepareEasyLink方法,参数:${JSON.stringify(values)}`);
-  xview.prepareEasyLink(values,(data)=>{
-    try{
-      if(typeof data === 'string'){
-          data = JSON.parse(data);
+  try{
+    xview.prepareEasyLink(values,(data)=>{
+      try{
+        if(typeof data === 'string'){
+            data = JSON.parse(data);
+        }
+        fncallback(data);
       }
-      fncallback(data);
-    }
-    catch(e){
-      alert(`获取数据信息失败了${e}`);
-    }
-    // alert(JSON.stringify(data));
-  });
+      catch(e){
+        alert(`获取数据信息失败了${e}`);
+      }
+      // alert(JSON.stringify(data));
+    });
+  }
+  catch(e){
+    console.log(e);
+  }
   /*
   values期望格式：ssid，password
   */

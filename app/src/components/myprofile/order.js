@@ -92,31 +92,33 @@ export class Page extends React.Component {
                     {
                         _.map(items.productsdetail, (pro,index)=>{
                             let proinfo = this.props.products[pro.productid];
-                            return (
-                                <div className="li" key={index}>
-                                    <img src={proinfo.picurl} />
-                                    <div className="proinfo">
-                                        <div className="proname">{proinfo.name}</div>
-                                        <div className="proother">
-                                            <span className="price">￥{pro.price}</span>
-                                            <span className="num">X{pro.number}</span>
-                                            {
-                                                pro.hasOwnProperty("isevaluation")&&!pro.isevaluation?(
-                                                    <span
-                                                        className="evaluationLnk"
-                                                        onClick={(e)=>{
-                                                          usecacheorder = true;
-                                                          this.addEvaluation(e, items._id, pro.productid);
-                                                        }}
-                                                        >
-                                                        立刻评价
-                                                    </span>
-                                                ):""
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            )
+                            if(!!proinfo){
+                              return (
+                                  <div className="li" key={index}>
+                                      <img src={proinfo.picurl} />
+                                      <div className="proinfo">
+                                          <div className="proname">{proinfo.name}</div>
+                                          <div className="proother">
+                                              <span className="price">￥{pro.price}</span>
+                                              <span className="num">X{pro.number}</span>
+                                              {
+                                                  pro.hasOwnProperty("isevaluation")&&!pro.isevaluation?(
+                                                      <span
+                                                          className="evaluationLnk"
+                                                          onClick={(e)=>{
+                                                            usecacheorder = true;
+                                                            this.addEvaluation(e, items._id, pro.productid);
+                                                          }}
+                                                          >
+                                                          立刻评价
+                                                      </span>
+                                                  ):""
+                                              }
+                                          </div>
+                                      </div>
+                                  </div>
+                              )
+                            }
                         })
                     }
                 </div>
