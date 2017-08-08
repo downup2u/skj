@@ -153,12 +153,7 @@ let DeviceSwiper =(props)=>{
                           className="Demo-swiper__slide"
                           key={deviceid}
                           >
-                          <div className="headContent"
-                                style={{
-                                    background:"url('img/1-1.png') no-repeat center",
-                                    backgroundSize: "220px 220px"
-                                }}
-                          >
+                          <div className="headContent">
 
                                 <div className="waterwave">
                                     <div><Waterwave id={deviceid}/></div>
@@ -166,9 +161,9 @@ let DeviceSwiper =(props)=>{
                                 <img src="img/h1.png" className="bg"/>
                               {getdata?(
                                   <div className="headContentInfo">
-                                      <span className="i1">{modeltype}</span>
                                       <span className="i2">{name}</span>
-                                      <span className="i3"><span>可直饮</span></span>
+                                      <span className="i1">{modeltype}</span>
+                                      <span className="i3">当前水质</span>
                                       <span className="i4">共净化{total}L</span>
                                   </div>):(
                                   <div className="headContentInfo">

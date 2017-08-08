@@ -95,7 +95,7 @@ export class Page extends Component {
     render() {
         const {products, orderPrice, orderProductsdetail, orderExpress, orderAddressInfo, defaultaddress} = this.props;
         return (
-            <div className="PayPage">
+            <div className="PayPage" style={{height: window.innerHeight+"px"}}>
                 <div className="PageHead">
                     <Icon name="angle left" onClick={()=>{this.onClickReturn()}} />
                     <span className="title">提交订单</span>

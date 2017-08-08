@@ -10,8 +10,8 @@ class Page extends React.Component {
 
       const id = this.props.id;
       //波浪动画
-      const svg_height = 310;
-      const svg_width = 200;
+      const svg_height = 230;
+      const svg_width = 248;
       const wave_data = [[],[]];
       console.log(d3);
       const area = d3.area().y0(svg_height).curve(d3.curveBasis);  //curve会进行平滑处理
@@ -26,7 +26,7 @@ class Page extends React.Component {
       svg_paths.push(d3.select(`#svg-area-${id} path:first-child`));
       svg_paths.push(d3.select(`#svg-area-${id} path:last-child`));
       function area_generator(data) {
-        const wave_height = 0.10;     //波浪高度
+        const wave_height = 0.20;     //波浪高度
         const area_data = data.map( function(y,i) {
           return [i * d, svg_height*(1 - (wave_height*Math.sin(y*Math.PI) + 2)/3)]; //+2将范围[-1,1]转成[1,3]
         } );
@@ -52,7 +52,7 @@ class Page extends React.Component {
     render() {
         const {id} = this.props;
         return (
-          <svg id={`svg-area-${id}`} width="500" height="200">
+          <svg id={`svg-area-${id}`} width="500" height="500">
             <path fill="rgba(127, 254, 248, 0.1)"></path>
             <path fill="rgba(127, 254, 248, 0.2)"></path>
           </svg>

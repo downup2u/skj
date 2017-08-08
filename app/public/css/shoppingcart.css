@@ -7,7 +7,8 @@
 }
 
 .shoppingCartPage .PageHead {
-    background: #5596d6;
+    
+    background-image: linear-gradient(0deg, #00cac8, #0090d8);
     display: flex;
     align-items: center;
     position: fixed;
@@ -60,6 +61,7 @@
     overflow: scroll;
     flex-grow: 1;
     flex-shrink: 0;
+    background: #EEE;
 }
 
 .shoppingCartPage .proinfo .li {
