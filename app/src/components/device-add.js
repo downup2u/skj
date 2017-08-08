@@ -80,7 +80,7 @@ class Page extends React.Component {
         };
         return (
             <div className="addnewdevice" style={{height: window.innerHeight+"px"}}>
-                <NavBar back={true} title="设备连接" />
+                <NavBar back={true} title="设备连接" style={{backgroundImage:"linear-gradient(0deg, #0090d8, #0090d8)"}}/>
                 <WifiSelForm formname="wifiform" formvalues={formvalue} 
                 onClickNext={this.onClickNext} code={code}/>
             </div>
