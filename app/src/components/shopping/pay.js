@@ -119,7 +119,7 @@ export class Page extends Component {
                                     </div>
                                 </div>
                             ):(
-                                <div className="goToseladdress">请选择收获地址</div>
+                                <div className="goToseladdress">请选择收货地址</div>
                             )}
 
                         </div>

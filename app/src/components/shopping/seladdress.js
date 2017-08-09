@@ -61,7 +61,7 @@ export class Page extends React.Component {
             <div className="seladdressPage" style={{height:window.innerHeight+"px"}}>
                 <NavBar
                     back={true}
-                    title="选择收获地址"
+                    title="选择收货地址"
                 />
                 <div className="listcont">
                     {

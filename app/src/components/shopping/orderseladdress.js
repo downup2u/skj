@@ -40,7 +40,7 @@ export class Page extends React.Component {
         const {addresslist} = this.props
         return (
             <div className="seladdressPage" style={{height:window.innerHeight+"px"}}>
-                <NavBar lefttitle="返回" title="选择收获地址" onClickLeft={this.onClickReturn}/>
+                <NavBar lefttitle="返回" title="选择收货地址" onClickLeft={this.onClickReturn}/>
                 <div className="listcont">
                     {_.map(addresslist, (address, index)=>{
                         return (
