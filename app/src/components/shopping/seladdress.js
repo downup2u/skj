@@ -45,12 +45,17 @@ export class Page extends React.Component {
                     <span>{address.truename}</span>
                     <span>{address.phonenumber}</span>
                 </div>
-                <div className="address">
-                    <span>{address.seladdr.selprovice.value}</span>
-                    <span>{address.seladdr.selcity.value}</span>
-                    <span>{address.seladdr.seldistict.value}</span>
-                    <span>{address.addressname}</span>
-                </div>
+                {
+                  !!address.seladdr && (
+                    <div className="address">
+                        <span>{address.seladdr.selprovice.value}</span>
+                        <span>{address.seladdr.selcity.value}</span>
+                        <span>{address.seladdr.seldistict.value}</span>
+                        <span>{address.addressname}</span>
+                    </div>
+                  )
+                }
+
             </div>
         )
     }
@@ -83,5 +88,3 @@ const mapStateToProps = ({address,order}) => {
 };
 Page = connect(mapStateToProps)(Page);
 export default Page;
-
-
