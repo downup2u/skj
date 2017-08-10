@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import WeUI from 'react-weui';
 import 'weui';
-import 'react-weui/lib/react-weui.min.css';
+import '../../../public/react-weui.min.css';
 import './myweui.css';
 import { connect } from 'react-redux';
 import { set_weui } from '../../actions/index.js';

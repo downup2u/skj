@@ -9,9 +9,9 @@ import Sendauth from './tools/sendauth.js';
 
 import WeUI from 'react-weui';
 import 'weui';
-import 'react-weui/lib/react-weui.min.css';
+import '../../public/react-weui.min.css';
 import {withRouter} from 'react-router-dom';
-const { 
+const {
 
     FormCell
     } = WeUI;
@@ -116,12 +116,12 @@ export class RegisterForm extends React.Component {
 //             }, 10)
 //         }
 //     }
-    
+
     render(){
         let {handleSubmit,onClickRegister,onClickLogin,onClickReturn} = this.props;
         return (
-            <Form 
-                onSubmit={handleSubmit(onClickRegister)} id="UserLoginPageForm" 
+            <Form
+                onSubmit={handleSubmit(onClickRegister)} id="UserLoginPageForm"
                 // style={{height:this.state.innerHeight + "px", overflow:"scroll"}}
                 >
             <div className="loginPageTop">
@@ -188,7 +188,7 @@ const validate = values => {
         }
     }
 
-    
+
     if (!values.aggree) {
         errors.aggree = '!';
     }
