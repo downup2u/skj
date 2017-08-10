@@ -163,6 +163,7 @@ export class Page extends React.Component {
 
     render() {
         const {useralerttopiclist} = this.props;
+        const {point, pointfornewtopic} = this.props;
         let communityListHeight = useralerttopiclist.length > 0?window.innerHeight-162:window.innerHeight-120;
         let tctop = useralerttopiclist.length > 0?90:48;
 
@@ -183,10 +184,12 @@ export class Page extends React.Component {
                                     >
                                     <Popup.Content>
                                         <div className="communityMoreLnk">
+                                            { point>pointfornewtopic && (
                                             <Lnk value="" url="/newtopic" {...this.props}>
                                                 <Icon name="add circle"/>
                                                 <span>发布</span>
-                                            </Lnk>
+                                            </Lnk>)
+                                            }
                                             <Lnk value="" url="/mytopiclist" {...this.props}>
                                                 <Icon name="commenting"/>
                                                 <span>我的发布</span>
