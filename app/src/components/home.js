@@ -24,7 +24,7 @@ let list = {
     flexShrink: 0
 };
 let linestyle = (startColor, endColor, widthStyle)=> ({
-    
+
     backgroundImage: `linear-gradient(90deg, ${startColor}, ${endColor})`,
     height: "12px",
     borderRadius: "12px",
@@ -87,7 +87,7 @@ let DeviceDataList =(props)=>{
 
                 let color1 = detail.leftpecent>maxleftpecent?"#C00":"#4bcef5";
                 let color2 = detail.leftpecent>maxleftpecent?"#C00":"#4bf3ee";
-              
+
                 color1 = detail.leftpecent>=100?"#CCC":color1;
                 color2 = detail.leftpecent>=100?"#CCC":color2;
 
@@ -178,7 +178,11 @@ let DeviceSwiper =(props)=>{
         </Swiper>
     )
 }
-DeviceSwiper = connect()(DeviceSwiper);
+
+const mapStateToPropsDeviceSwiper = ({device:{devices}}) => {
+    return {devices};
+};
+DeviceSwiper = connect(mapStateToPropsDeviceSwiper)(DeviceSwiper);
 
 
 let HeadInfo =(props)=>{
@@ -270,12 +274,12 @@ export class Page extends Component {
             )
         }
 
-        
+
 
         return (
             <div className="homePageWamp">
-                
-                <div 
+
+                <div
                     className="homePage"
                     style={{flexGrow:!!detaillist && detaillist.length>0?0:1}}
                     >
@@ -290,7 +294,7 @@ export class Page extends Component {
                     </div>
 
                     { mydevicelist.length === 0 &&  <Nodevice />}
-                    { mydevicelist.length > 0 &&  <DeviceSwiper mydevicelist={mydevicelist} devices={devices} />}
+                    { mydevicelist.length > 0 &&  <DeviceSwiper mydevicelist={mydevicelist} />}
 
                     { !!curdevicedata && (curdevicedata.hasOwnProperty("leftmodel") || curdevicedata.hasOwnProperty("rightmodel"))  &&
                         <HeadInfo curdevicedata={curdevicedata}/>
