@@ -57,6 +57,16 @@ const RealtimedatalistEdit = (props) => {
             <DateDetail />
             <DisabledInput label="结果" source="name" />
             <DisabledInput label="设备ID" source="deviceid" />
+            <DisabledInput label="原水流量数" source="rawdata.data01" />
+            <DisabledInput label="净水流量数" source="rawdata.data23" />
+            <DisabledInput label="原水TDS" source="rawdata.dts0" />
+            <DisabledInput label="净水TDS" source="rawdata.dts1" />
+            <DisabledInput label="5微米pp滤芯已用天数" source="rawdata.data89" />
+            <DisabledInput label="颗粒活性炭已用天数" source="rawdata.data1011" />
+            <DisabledInput label="1微米pp滤芯已用天数" source="rawdata.data1213" />
+            <DisabledInput label="反渗透RO膜已用天数" source="rawdata.data1415" />
+            <DisabledInput label="后置活性炭已用天数" source="rawdata.data1617" />
+
             <DisabledInput label="原水名字" source="leftmodel.name" />
             <DisabledInput label="原水结果" source="leftmodel.resultstring" />
             <DisabledInput label="净水名字" source="rightmodel.name" />
@@ -76,10 +86,10 @@ const RealtimedatalistList = (props) => (//
             <TextField label="结果" source="name" />
             <TextField label="设备ID" source="deviceid" />
             <DateField label="更新时间" source="updated_at" showTime />
-            <TextField label="原水名字" source="leftmodel.name" />
-            <TextField label="原水结果" source="leftmodel.resultstring" />
-            <TextField label="净水名字" source="rightmodel.name" />
-            <TextField label="净水结果" source="rightmodel.resultstring" />
+            <TextField label="原水流量数" source="rawdata.data01" />
+            <TextField label="净水流量数" source="rawdata.data23" />
+            <TextField label="原水TDS" source="rawdata.dts0" />
+            <TextField label="净水TDS" source="rawdata.dts1" />
           <EditButton />
         </Datagrid>
     </List>
