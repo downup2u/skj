@@ -78,6 +78,7 @@ const DevicelistList = (props) => (//
      <List title="设备列表" {...props} filters={<DeviceFilter />} sort={{ field: 'created_at', order: 'DESC' }}>
         <Datagrid>
             <TextField label="设备名字" source="devicename" />
+            <TextField label="是否获取到数据" source="getdata" />
             <ReferenceField label="用户" source="creator" reference="user" addLabel={false} allowEmpty>
               <TextField source="username" />
             </ReferenceField>

@@ -210,7 +210,7 @@
       }
       fun(result);
     };
-    if(!!window.xview.haveWechatApp){
+    if(!!window.xview && !!window.xview.haveWechatApp){
       let jsonstring = JSON.stringify({callback:"haveWechatAppcallBack"});
       window.xview.haveWechatApp(jsonstring);
     }
@@ -246,8 +246,10 @@
        }
        fun(result);
      };
-     let jsonstring = JSON.stringify({callback:"currentLinkWifiCallBack"});
-     window.xview.currentLinkWifi(jsonstring);
+     if(!!window.xview){
+       let jsonstring = JSON.stringify({callback:"currentLinkWifiCallBack"});
+       window.xview.currentLinkWifi(jsonstring);
+     }
    }
    /**
      * 连接mico
@@ -261,9 +263,11 @@
         }
         fun(result);
       };
-      json['callback']="prepareEasyLinkCallBack";
-      let jsonstring = JSON.stringify(json);
-      window.xview.prepareEasyLink(jsonstring);
+      if(!!window.xview){
+        json['callback']="prepareEasyLinkCallBack";
+        let jsonstring = JSON.stringify(json);
+        window.xview.prepareEasyLink(jsonstring);
+      }
     }
     /**
       * 搜索mico
@@ -277,7 +281,10 @@
          }
          fun(result);
        };
-       window.xview.searchForModules(JSON.stringify({callback:"searchForModulesCallBack"}));
+       if(!!window.xview){
+         window.xview.searchForModules(JSON.stringify({callback:"searchForModulesCallBack"}));
+       }
+
      }
 
      /**
@@ -286,7 +293,10 @@
        @since 2.0
        */
       export const jiGuangTuiSong = (name) => {
-        window.xview.jiGuangTuiSong(name);
+        if(!!window.xview){
+          window.xview.jiGuangTuiSong(name);
+        }
+
       }
       /**
         * 取消单推
@@ -294,5 +304,7 @@
         @since 2.0
         */
        export const cancelJPushAlisa = () => {
-         window.xview.cancelJPushAlisa();
+         if(!!window.xview){
+           window.xview.cancelJPushAlisa();
+         }
        }
