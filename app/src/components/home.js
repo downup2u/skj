@@ -255,7 +255,7 @@ export class Page extends Component {
         }
         let ClickRadio = (iswatercut)=> {
 
-            let text = iswatercut?"你确认需要断水吗？":"你确认要开通水源吗？";
+            let text = !iswatercut?"你确认需要断水吗？":"你确认要开通水源吗？";
             props.dispatch(
                 set_weui({
                     confirm:{
