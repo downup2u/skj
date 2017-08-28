@@ -21,6 +21,9 @@ let Page = (props) => {
         if(!device.hasexits){
             props.dispatch(createdevice_request(device));
         }
+        else{
+          props.history.replace('/');
+        }
         //props.history.push('/addnewdevice3');
     }
     const {devicelist} = props;
