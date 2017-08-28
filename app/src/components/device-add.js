@@ -73,15 +73,15 @@ class Page extends React.Component {
         }
     }
     render(){
-        const {ssid,code} = this.props;
+        const {ssid,code,wifipwd} = this.props;
         let formvalue = {
             ssid:ssid,
-            password:'',
+            password:wifipwd[ssid] || '',
         };
         return (
             <div className="addnewdevice" style={{height: window.innerHeight+"px"}}>
                 <NavBar back={true} title="设备连接" style={{backgroundImage:"linear-gradient(0deg, #0090d8, #0090d8)"}}/>
-                <WifiSelForm formname="wifiform" formvalues={formvalue} 
+                <WifiSelForm formname="wifiform" formvalues={formvalue}
                 onClickNext={this.onClickNext} code={code}/>
             </div>
         );

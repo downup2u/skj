@@ -23,6 +23,7 @@ const initial = {
 
 
 const device = createReducer({
+
     [ui_setcurrentdeviceid]:(state, payload)=>{
         let curdeviceid = payload;
         return { ...state,curdeviceid};
