@@ -8,3 +8,5 @@ export const getcurwifi_result = createAction('getcurwifi_result');
 
 export const getcurwifi_devicelist_request = createAction('getcurwifi_devicelist_request');
 export const getcurwifi_devicelist_result = createAction('getcurwifi_devicelist_result');
+
+export const leave_finished_device = createAction('leave_finished_device');

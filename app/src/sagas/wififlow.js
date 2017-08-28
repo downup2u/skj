@@ -1,7 +1,7 @@
 /**
  * Created by wangxiaoqing on 2017/3/25.
  */
-import { put,takeEvery,call,race} from 'redux-saga/effects';
+import { put,takeEvery,call,race,fork,take} from 'redux-saga/effects';
 import {delay} from 'redux-saga';
 import {
   getssid,
@@ -17,6 +17,7 @@ import {
   createdevice_result,
   md_updatedevice_result,
   updatedevice_result,
+  leave_finished_device,
   set_weui
 } from '../actions';
 import { push,replace } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
@@ -115,6 +116,23 @@ export function* wififlow() {
             if(wifiresult.code === '0'){
               yield put(getcurwifi_devicelist_result(wifiresult.data));
               yield put(push('/addnewdevice2'));
+              //等待是否还存在
+              // yield fork(function*(){
+              //   while(true){
+              //     const { wifiresult, finished } = yield race({
+              //        wifiresult:  call(sendwifidata,result),
+              //        finished: take(`${leave_finished_device}`)
+              //     });
+              //     if(!!finished){
+              //       break;
+              //     }
+              //     if(wifiresult.code === '0'){
+              //       yield put(getcurwifi_devicelist_result(wifiresult.data));
+              //     }
+              //   }
+              //
+              // });
+
             }
             else{
               //弹框,message
