@@ -54,17 +54,19 @@ export class Page extends Component {
     };
     //confirm close
     confirmClose = (confirm,dispatch)=>{
+        dispatch(set_weui({ confirm:confirmDefault }));
         if(!!confirm.buttonsClose){
             confirm.buttonsClose();
         }
-        dispatch(set_weui({ confirm:confirmDefault }));
+        
     };
     //confirm click
     confirmClick = (confirm,dispatch)=>{
+        dispatch(set_weui({ confirm:confirmDefault }));
         if(!!confirm.buttonsClick){
             confirm.buttonsClick();
         }
-        dispatch(set_weui({ confirm:confirmDefault }));
+        
     };
     //alert click
     alertClick =(alert,dispatch)=>{

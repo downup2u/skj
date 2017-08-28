@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import NavBar from './nav.js';
 import {loginQQ,loginWx} from '../env/login.js';
 import {loginwithoauth_result,loginwithoauth_request} from '../actions';
+import {withRouter} from 'react-router-dom';
+
 //import 'semantic-ui/dist/semantic.min.css';
 let renderLoginForm = (fields)=> {
     let ispasswordvisiable = fields.ispasswordvisiable.input.value;
@@ -65,8 +67,10 @@ let LoginForm = (props)=> {
                 <div className="loginBotton">
                     <Button primary>登录</Button>
                     <Button basic type="button" onClick={onClickRegister}>快速注册</Button>
-
-                    <div className="forgetpwd" onClick={onClickForgetPasword}>忘记密码</div>
+                    <div className="forgetpwdcon">
+                        <div className="loginbysms" onClick={()=>props.history.push("/loginbysms")}>验证码登录</div>
+                        <div className="forgetpwd" onClick={onClickForgetPasword}>忘记密码</div>
+                    </div>
                 </div>
             </div>
         </Form>);
@@ -113,6 +117,8 @@ LoginForm = reduxForm({
         ischeckedpassword: true
     }
 })(LoginForm);
+
+LoginForm = withRouter(LoginForm);
 
 let resizetime = null;
 

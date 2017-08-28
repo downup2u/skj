@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import App from './containers/index.js';
 import Register from './components/register.js';
 import Login from './components/login.js';
+import Loginbysms from './components/loginbysms.js';
 import Addresslist from './components/address_list.js';
 import AddressAdd from './components/address-add.js';
 import AddressEdit from './components/address-edit.js';
@@ -110,6 +111,7 @@ import Integral from './components/myprofile/integral.js';
 import Userbind from './components/userbind.js';
 
 import Test from './components/test.js';
+
 
 
 
@@ -231,6 +233,7 @@ const CoApp = (props) => {
         <Switch>
             <CustomRoute exact path="/" component={App}/>
             <CustomRoute path="/login" component={Login}/>
+            <CustomRoute path="/loginbysms" component={Loginbysms}/>
             <CustomRoute path="/register" component={Register}/>
             <CustomRoute path="/addresslist" component={requireAuthentication(Addresslist)}/>
             <CustomRoute path="/newaddress" component={requireAuthentication(AddressAdd)}/>

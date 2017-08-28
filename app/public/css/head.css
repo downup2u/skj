@@ -3,7 +3,6 @@
 }
 .ui.segment.headContent{
     background-image: linear-gradient(0deg, #00cac8, #0090d8);
-    
     border-radius: 0;
     border: 0;
     display: flex;
@@ -49,11 +48,9 @@
     align-items: center;
     justify-content: center;
 }
-
 .ui.segment.headContent .ui.grid{
     margin: 0;
 }
-
 .ui.segment.headContent .ui.grid>.row>[class*="right aligned"].column.column i.large.icon{
     color: #FFF;
 }
@@ -68,8 +65,6 @@
 .communityMoreLnk > div:first-child{
     border-bottom: 1px solid #EEE;
 }
-
-
 .ui.segment.headContent .leftlnk button i.icon.angle.left:before{
     font-size: 30px;
 }

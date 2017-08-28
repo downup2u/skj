@@ -253,6 +253,47 @@ export class Page extends Component {
               )
           );
         }
+        //切断和开通水成功后的提示
+        let ClickDuanshuiSuccess = ()=> {
+            props.dispatch(
+                set_weui({
+                  toast:{
+                    show:true,
+                    text:`滤芯正在保护中...`,
+                    type:'success'
+                  }
+                })
+            )
+        }
+        let ClickDuanshui = (iswatercut)=> {
+
+            let text = <div>
+                            <input
+                              style={{
+                                width: "100%",
+                                border: "1px solid #EEE",
+                                height: "50px",
+                                borderRadius : "6px",
+                                textIndent: "15px"
+                              }}
+                                name="userpwd" 
+                                placeholder={"请输入帐号密码"} /></div>;
+            props.dispatch(
+                set_weui({
+                    confirm:{
+                        show : true,
+                        title : "输入密码",
+                        text : text,
+                        buttonsClose : ()=>{},
+                        buttonsClick : ()=>{
+                            // let deviceid = devices[curdeviceid].deviceid;
+                            // props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
+                            ClickDuanshuiSuccess();
+                        }
+                    }}
+                )
+            )
+        }
         let ClickRadio = (iswatercut)=> {
 
             let text = !iswatercut?"你确认需要断水吗？":"你确认要开通水源吗？";
@@ -262,18 +303,21 @@ export class Page extends Component {
                         show : true,
                         title : "确认",
                         text : text,
-                        //
                         buttonsClose : ()=>{},
-                        //确认收货
                         buttonsClick : ()=>{
-                            let deviceid = devices[curdeviceid].deviceid;
-                            props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
+                            // let deviceid = devices[curdeviceid].deviceid;
+                            // props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
+                            
+                            ClickDuanshui();
+                            
+
                         }
                     }}
                 )
             )
         }
 
+        
 
 
         return (
