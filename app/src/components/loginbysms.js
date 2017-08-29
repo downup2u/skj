@@ -3,7 +3,7 @@ import '../../public/css/user.css';
 import { Input, List, Radio, Button, Icon, Image, Checkbox,Label} from 'semantic-ui-react';
 import { Field,Fields, reduxForm,Form  } from 'redux-form';
 import { connect } from 'react-redux';
-import {sendauth_request,findpwd_request} from '../actions/index.js';
+import {sendauth_request,loginwithauth_request} from '../actions/index.js';
 import {register} from '../actions/sagacallback.js';
 import NavBar from './nav.js';
 import Sendauth from './tools/sendauth.js';
@@ -19,7 +19,7 @@ let renderFindPwdForm = (fields)=> {
         const phone =  !!name && !(name.match(/\D/g)||name.length !== 11||!name.match(/^1/));
         console.log(phone);
         if(phone){
-            fields.dispatch(sendauth_request({username: name,reason:'findpwd'}));
+            fields.dispatch(sendauth_request({username: name,reason:'loginuser'}));
         }
         callback(phone);
     }
@@ -86,7 +86,7 @@ const validate = values => {
 }
 
 FindpwdForm = reduxForm({
-    form: 'findpwd',
+    form: 'loginbysms',
     validate,
     initialValues: {
         username: '',
@@ -100,23 +100,32 @@ export class Page extends React.Component {
 
     componentWillMount() {
     }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.loginsuccess && !this.props.loginsuccess) {
+            console.log("------->" + JSON.stringify(this.props.location));
+            //search:?next=/devicelist
+            var fdStart = this.props.location.search.indexOf("?next=");
+            if (fdStart === 0) {
+                const redirectRoute = this.props.location.search.substring(6);
+                this.props.history.replace(redirectRoute);
+            }
+            else {
+                this.props.history.go(-2);
+            }
+            return;
+        }
+    }
 
     onClickOK = (values)=> {
         console.dir(values);
 
         let payload = {
-            username: values.username,
+            phonenumber: values.username,
             password: values.password,
             authcode: values.authcode
         };
 
-        this.props.dispatch(findpwd_request(payload));
-        //alert(JSON.stringify(formdata));
-        // this.props.dispatch(findpwd(payload)).then((result)=> {
-        //     this.props.history.goBack();
-        // }).catch((error)=> {
-        //     console.log("注册失败:" + JSON.stringify(error));
-        // });
+        this.props.dispatch(loginwithauth_request(payload));
     }
 
     onClickLogin = ()=> {
@@ -141,7 +150,7 @@ export class Page extends React.Component {
 }
 
 const mapStateToProps = ({userlogin}) => {
-    return {userlogin};
+    return {...userlogin};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

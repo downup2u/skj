@@ -21,6 +21,7 @@ export const oauthbinduser_result = createAction('userlogin.oauthbinduser_result
 export const loginwithoauth_request = createAction('loginwithoauth_request');
 export const loginwithoauth_result = createAction('loginwithoauth_result');
 
+export const loginwithauth_request = createAction('userlogin.loginwithauth_request');
 export const login_request = createAction('userlogin.login_request');
 export const login_result = createAction('userlogin.login_result');
 export const login_err = createAction('userlogin.login_err');

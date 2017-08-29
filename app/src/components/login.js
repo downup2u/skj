@@ -47,7 +47,7 @@ let renderLoginForm = (fields)=> {
 }
 
 let LoginForm = (props)=> {
-    let {handleSubmit,onClickRegister,onClickLogin,onClickForgetPasword, id} = props;
+    let {handleSubmit,onClickRegister,onClickLogin,onClickForgetPasword,onClickLoginbysms, id} = props;
     let onClickReturn = ()=> {
         props.history.goBack();
     }
@@ -68,14 +68,13 @@ let LoginForm = (props)=> {
                     <Button primary>登录</Button>
                     <Button basic type="button" onClick={onClickRegister}>快速注册</Button>
                     <div className="forgetpwdcon">
-                        <div className="loginbysms" onClick={()=>props.history.push("/loginbysms")}>验证码登录</div>
+                        <div className="loginbysms" onClick={onClickLoginbysms}>验证码登录</div>
                         <div className="forgetpwd" onClick={onClickForgetPasword}>忘记密码</div>
                     </div>
                 </div>
             </div>
         </Form>);
 };
-
 const validate = values => {
     const errors = {}
     if (!values.username) {
@@ -161,6 +160,15 @@ export class Page extends React.Component {
     onClickForgetPasword = ()=> {
         this.props.history.push('/forgetpwd');
     }
+    onClickLoginbysms = ()=>{
+      let targeturl = '/loginbysms';
+      var fdStart = this.props.location.search.indexOf("?next=");
+      if (fdStart === 0) {
+          const redirectRoute = this.props.location.search.substring(6);
+          targeturl = `${targeturl}?next=${redirectRoute}`;
+      }
+      this.props.history.push(targeturl);
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.loginsuccess && !this.props.loginsuccess) {
@@ -176,12 +184,6 @@ export class Page extends React.Component {
             }
             return;
         }
-        // else{
-        //     if(nextProps.bindtype !== '' && this.props.bindtype === '' &&
-        //     nextProps.openid !== '' && this.props.openid === ''){
-        //         this.props.history.push('/userbind');
-        //     }
-        // }
     }
 
 
@@ -209,6 +211,7 @@ export class Page extends React.Component {
                 <LoginForm onClickRegister={this.onClickRegister}
                            onClickLogin={this.onClickLogin}
                            onClickForgetPasword={this.onClickForgetPasword}
+                           onClickLoginbysms={this.onClickLoginbysms}
                            id="UserLoginPageForm"
                             {...this.props}/>
 
@@ -225,7 +228,6 @@ export class Page extends React.Component {
     }
 
 }
-
 const mapStateToProps = ({userlogin,app:{isweixininstalled}}) => {
     return {...userlogin,isweixininstalled};
 }

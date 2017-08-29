@@ -99,7 +99,7 @@ import {
     md_createaddress,
     md_editaddress,
     md_register,
-  
+
     md_inserttopic,
     md_createdevice_result,
     md_getnotifymessage,
@@ -155,7 +155,9 @@ import {
     getnotifymessageone_result,
     common_err,
     queryuserbalance_request,
-    queryuserbalance_result
+    queryuserbalance_result,
+
+    loginwithauth_request,
 } from '../actions/index.js';
 
 //接收的对应关系
@@ -244,6 +246,7 @@ exports.recvmessagetoresultpair = {
 exports.sendmessagefnsz = {
   'getabouthtml':`${getabouthtml_request}`,
   'oauthbinduser':`${oauthbinduser_request}`,
+  'loginwithauth':`${loginwithauth_request}`,
   'loginwithoauth':`${loginwithoauth_request}`,
   'login':`${login_request}`,
   'sendauth':`${sendauth_request}`,
