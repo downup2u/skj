@@ -254,17 +254,17 @@ export class Page extends Component {
           );
         }
         //切断和开通水成功后的提示
-        let ClickDuanshuiSuccess = ()=> {
-            props.dispatch(
-                set_weui({
-                  toast:{
-                    show:true,
-                    text:`滤芯正在保护中...`,
-                    type:'success'
-                  }
-                })
-            )
-        }
+        // let ClickDuanshuiSuccess = ()=> {
+        //     props.dispatch(
+        //         set_weui({
+        //           toast:{
+        //             show:true,
+        //             text:`滤芯正在保护中...`,
+        //             type:'success'
+        //           }
+        //         })
+        //     )
+        // }
         let ClickDuanshui = (iswatercut)=> {
 
             let text = <div>
@@ -276,8 +276,8 @@ export class Page extends Component {
                                 borderRadius : "6px",
                                 textIndent: "15px"
                               }}
-                                name="userpwd" 
-                                placeholder={"请输入帐号密码"} /></div>;
+                              id="inutpwdwatercutuserpassword"
+                              placeholder={"请输入帐号密码"} /></div>;
             props.dispatch(
                 set_weui({
                     confirm:{
@@ -286,9 +286,12 @@ export class Page extends Component {
                         text : text,
                         buttonsClose : ()=>{},
                         buttonsClick : ()=>{
-                            // let deviceid = devices[curdeviceid].deviceid;
-                            // props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
-                            ClickDuanshuiSuccess();
+                            // console.log(this.refs.myInput.value);
+                            const inputid = document.getElementById('inutpwdwatercutuserpassword');
+                            console.log(`inputid==>${inputid.value}`);
+                            const deviceid = devices[curdeviceid].deviceid;
+                            props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut,password:inputid.value}));
+                            // ClickDuanshuiSuccess();
                         }
                     }}
                 )
@@ -307,9 +310,9 @@ export class Page extends Component {
                         buttonsClick : ()=>{
                             // let deviceid = devices[curdeviceid].deviceid;
                             // props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
-                            
+
                             ClickDuanshui();
-                            
+
 
                         }
                     }}
@@ -317,7 +320,7 @@ export class Page extends Component {
             )
         }
 
-        
+
 
 
         return (

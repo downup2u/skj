@@ -125,7 +125,9 @@ import {
   set_weui,
 
   setuseralerttopicdeleted_result,
-  loginwithoauth_result
+  loginwithoauth_result,
+
+  senddevicecmd_result
 } from '../actions';
 import { push,goBack,go  } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
 
@@ -375,6 +377,19 @@ export function* wsrecvsagaflow() {
           type : "success"
       }}));
     yield put(goBack());
+  });
+
+  yield takeEvery(`${senddevicecmd_result}`, function*(action) {
+    const {cmd} = action.payload;
+    if(cmd === 0){
+      yield put(set_weui({
+          toast:{
+            show:true,
+            text:`滤芯正在保护中...`,
+            type:'success'
+          }
+        }));
+    }
   });
 
 }
