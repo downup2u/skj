@@ -58,6 +58,10 @@
     flex-direction: column;
     position: relative;
 }
+.addnewdevice .fm .device2_text>div div.mac span{
+    word-wrap: break-word;
+    word-break: break-all;
+}
 .addnewdevice .fm .device2_text>div div.ip{
     padding-right: 25px;
     font-size: 18px;
