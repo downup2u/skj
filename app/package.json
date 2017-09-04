@@ -31,7 +31,7 @@
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
-    "react-weui": "^1.0.4",
+    "react-weui": "1.0.4",
     "redux": "^3.7.1",
     "redux-act": "^1.2.0",
     "redux-form": "^6.7.0",

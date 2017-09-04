@@ -98,7 +98,7 @@ export const SystemconfigCreate = (props) => (
                 <TextInput  label="快递查询APIKEY" source="expressapikey" />
               </FormTab >
               <FormTab label="resources.systemconfig.tabs.device">
-              <LongTextInput  label="总流量等级设置(JSON格式)" source="gradetotal" />
+              <LongTextInput  label="净水水质等级设置(JSON格式)" source="gradetotal" />
               <LongTextInput  label="原水等级设置(JSON格式)" source="gradeleft" />
               <LongTextInput  label="净水等级设置(JSON格式)" source="graderight" />
               <NumberInput  label="5微米pp滤芯总使用天数" source="systotal89" />
@@ -139,7 +139,7 @@ export const SystemconfigEdit = (props) => (
              <TextInput  label="快递查询APIKEY" source="expressapikey" />
            </FormTab >
            <FormTab label="resources.systemconfig.tabs.device">
-           <LongTextInput  label="总流量等级设置(JSON格式)" source="gradetotal" />
+           <LongTextInput  label="净水水质等级设置(JSON格式)" source="gradetotal" />
            <LongTextInput  label="原水等级设置(JSON格式)" source="gradeleft" />
            <LongTextInput  label="净水等级设置(JSON格式)" source="graderight" />
            <NumberInput  label="5微米pp滤芯总使用天数" source="systotal89" />
