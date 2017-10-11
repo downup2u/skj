@@ -8,7 +8,7 @@ services:
       - ./srv:/app
       - ../srv/dist:/dist
     environment:
-      - MONGO_URL=mongodb://192.168.0.1:27017/skj
+      - MONGO_URL=mongodb://192.168.0.1:27018/skj
       - listenport=3100
     links:
       - mongodb
@@ -21,8 +21,8 @@ services:
   mongodb:
     image:  mongo:3.4
     expose:
-       - "27017"
+       - "27018"
     volumes:
        - "/db/dbdata:/data/db -d"
     ports:
-       - "27017:27017"
+       - "27018:27018"
