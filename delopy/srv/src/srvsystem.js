@@ -199,8 +199,8 @@ let setmycouponsexpired = ()=>{
 let updatesystemconfig = ()=>{
   let sysModel = DBModels.SystemConfigModel;
   sysModel.findOne({}, (err, systemconfig)=> {
-    systemconfig = systemconfig.toJSON();
     if(!err && !!systemconfig){
+      systemconfig = systemconfig.toJSON();
       config.setdeviceconfig(systemconfig);
 
       console.log(`config====>${JSON.stringify(config)}`);
