@@ -7,6 +7,8 @@ const config = require('./config');
 let mongoose     = require('mongoose');
 mongoose.Promise = global.Promise;
 
+console.log(`mongodburl:${config.mongodburl}`);
+
 mongoose.connect(config.mongodburl,{
     socketOptions: {
       // This option is on by default, but why not set it explicitly
