@@ -44,6 +44,7 @@
     "weui": "^1.1.2"
   },
   "scripts": {
+    "buildcp": "react-scripts build && cp -r build/. ../deploy/dist/app && rm -R build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
