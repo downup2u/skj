@@ -37,7 +37,7 @@
     "redux-form": "^6.7.0",
     "redux-saga": "^0.14.8",
     "redux-thunk": "^2.2.0",
-    "request": "^2.81.0",
+    "request": "2.81.0",
     "rmc-list-view": "^0.8.3",
     "semantic-ui-react": "^0.67.2",
     "socket.io-client": "^1.7.4",
