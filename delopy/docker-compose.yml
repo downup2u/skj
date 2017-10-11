@@ -1,0 +1,28 @@
+version: '2'
+services:
+  demoserver:
+    image: node:6.11.2
+    command: node ./index.js
+    working_dir: /app
+    volumes:
+      - ./srv:/app
+      - ../srv/dist:/dist
+    environment:
+      - MONGO_URL=mongodb://192.168.0.1:27017/skj
+      - listenport=3100
+    links:
+      - mongodb
+    ports:
+       - "3100:3100"
+       - "52341:52341"
+    expose:
+       - "3100"
+       - "52341"
+  mongodb:
+    image:  mongo:3.4
+    expose:
+       - "27017"
+    volumes:
+       - "/db/dbdata:/data/db -d"
+    ports:
+       - "27017:27017"
