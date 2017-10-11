@@ -16,12 +16,12 @@ let startsrv = ()=>{
   let appdir = config.publishdirapp;
   console.log("static appdir:" + appdir);
   app.use('/app', express.static(appdir));
-  fs.exists(`{$appdir}/index.html`,(exists)=>{
+  fs.exists(`${appdir}/index.html`,(exists)=>{
     if(exists){
-       console.log(`{$appdir}/index.html -->存在`);
+       console.log(`${appdir}/index.html -->存在`);
     }
     else{
-      console.log(`{$appdir}/index.html -->不存在`);
+      console.log(`${appdir}/index.html -->不存在`);
     }
   });
 
