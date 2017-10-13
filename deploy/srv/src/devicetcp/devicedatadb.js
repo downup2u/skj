@@ -4,9 +4,15 @@ let winston = require('../log/log.js');
 let DBModels = require('../db/models.js');
 let PubSub = require('pubsub-js');
 
-let savedatatodb = (mac,data)=>{
+let savedatatodb = (mac,data,curaddress)=>{
   data.getdata = true;
   data.updated_at = new Date();
+  if(curaddress.isget){
+    data.ipaddr = curaddress.ipaddr;
+    data.provice = curaddress.provice;
+    data.city = curaddress.city;
+    data.county = curaddress.county;
+  }
   let dbModel = DBModels.RealtimedataModel;
   dbModel.findOneAndUpdate({deviceid:mac},{$set:data},{
     upsert:true,new:true

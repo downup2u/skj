@@ -106,15 +106,18 @@ let startsrv = ()=>{
 
   });
 
-  console.log("static rider:" + path.join(__dirname, '../certificate/private.pem'));
-  const privateKey  = fs.readFileSync(path.join(__dirname, '../certificate/private.pem'), 'utf8');
-  const certificate = fs.readFileSync(path.join(__dirname, '../certificate/file.crt'), 'utf8');
-  const credentials = {key: privateKey, cert: certificate};
-  const httpsServer = https.createServer(credentials, app);
-  //创建https服务器
-  httpsServer.listen(443, ()=> {
-      console.log('HTTPS Server is running on: https://localhost:%s', 443);
-  });
+  if(config.enabelssl){
+    console.log("static rider:" + path.join(__dirname, '../certificate/private.pem'));
+    const privateKey  = fs.readFileSync(path.join(__dirname, '../certificate/private.pem'), 'utf8');
+    const certificate = fs.readFileSync(path.join(__dirname, '../certificate/file.crt'), 'utf8');
+    const credentials = {key: privateKey, cert: certificate};
+    const httpsServer = https.createServer(credentials, app);
+    //创建https服务器
+    httpsServer.listen(443, ()=> {
+        console.log('HTTPS Server is running on: https://localhost:%s', 443);
+    });
+  }
+
 
   return http;
 };

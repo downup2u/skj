@@ -1,7 +1,7 @@
 let config =  {
   secretkey:'shuikejingkey',
   listenport:process.env.listenport ||3100,
-  rooturl:process.env.rooturl ||'http://shuizhihe.com28.cn',
+  rooturl:process.env.rooturl ||'http://skj.com28.cn',
   publishdirtest:'/dist/test',
   publishdirapp:'/dist/app',
   publishdiradmin:'/dist/admin',

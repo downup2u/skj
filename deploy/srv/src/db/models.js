@@ -113,6 +113,10 @@ let RealtimedataSchema = new Schema({
     detaillist:[],
     updated_at:{ type: Date, default:new Date()},
     iswatercut:{ type: Schema.Types.Boolean,default: false },//是否断水
+    ipaddr:String,
+    provice:String,
+    city:String,
+    county:String,
     rawdata:Schema.Types.Mixed,
 });
 RealtimedataSchema.plugin(mongoosePaginate);
@@ -140,6 +144,10 @@ let DeviceDataHistorySchema = new Schema({
     detaillist:[],
     created_at:{ type: Date, default:new Date()},
     rawdata:Schema.Types.Mixed,
+    ipaddr:String,
+    provice:String,
+    city:String,
+    county:String,
 });
 DeviceDataHistorySchema.plugin(mongoosePaginate);
 let DeviceDataHistory  = mongoose.model('DeviceDataHistory',  DeviceDataHistorySchema);
