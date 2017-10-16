@@ -25,7 +25,8 @@ let savedatatodb = (mac,data,curaddress)=>{
   let dbHistoryModel =  DBModels.DeviceDataHistoryModel;
   let entity = new dbHistoryModel(data);
   entity.save((err,newdevice)=>{
-
+    console.log(`DeviceDataHistoryModel==>err:${JSON.stringify(err)}`)
+    console.log(`DeviceDataHistoryModel==>newdevice:${JSON.stringify(newdevice)}`)
   });
 }
 

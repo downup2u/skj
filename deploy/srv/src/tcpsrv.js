@@ -36,7 +36,7 @@ starttcpsrv = (settings)=> {
         city:'',
         county:''
       };
-      const remoteip = pureIp(socket.remoteAddress);
+      const remoteip = getpureIp(socket.remoteAddress);
       let fromsock = remoteip + ':' + socket.remotePort;
       winston.getlog().info("["+fromsock+"]接受一个socket");
       const ipaddr = getpureIp(remoteip);

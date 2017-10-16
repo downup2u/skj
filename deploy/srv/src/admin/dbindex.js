@@ -101,6 +101,11 @@ let dbs ={
     schema:db.RealtimedataSchema,
     collectionname:'realtimedata',
   },
+  'devicedatahistory':{
+   urlname:'/devicedatahistory',
+   schema:db.DeviceDataHistorySchema,
+   collectionname:'devicedatahistory',
+ },
 };
 
 module.exports= dbs;

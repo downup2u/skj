@@ -9,6 +9,12 @@ export default {
     },
   },
   resources: {
+    devicedatahistory:{
+      name: '设备历史数据 |||| 设备历史数据',
+      fields:{
+        keyname:'设置类型',
+      }
+    },
     about:{
       name: '关于信息设置 |||| 关于信息设置',
       fields:{
