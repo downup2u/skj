@@ -136,18 +136,21 @@ let Device  = mongoose.model('Device',  DeviceSchema);
 //=======设备历史记录=======
 let DeviceDataHistorySchema = new Schema({
     deviceid:String,//mac->hex
+    getdata:{ type: Boolean, default:false},
     name:String,
     total:Number,
     modeltype:String,
     leftmodel:Schema.Types.Mixed,
     rightmodel:Schema.Types.Mixed,
     detaillist:[],
-    created_at:{ type: Date, default:new Date()},
-    rawdata:Schema.Types.Mixed,
+    updated_at:{ type: Date, default:new Date()},
+    iswatercut:{ type: Schema.Types.Boolean,default: false },//是否断水
     ipaddr:String,
     provice:String,
     city:String,
     county:String,
+    rawdata:Schema.Types.Mixed,
+    created_at: { type: Date, default:new Date()},
 });
 DeviceDataHistorySchema.plugin(mongoosePaginate);
 let DeviceDataHistory  = mongoose.model('DeviceDataHistory',  DeviceDataHistorySchema);
