@@ -2,7 +2,7 @@
 
 const test = require('./protocol.js');
 const net = require('net');
-const ip = process.env.targetip || '127.0.0.1';//'114.55.89.241';//'127.0.0.1';//'114.55.89.241';//目标ip
+const ip = process.env.targetip || '114.55.89.241';//'114.55.89.241';//'127.0.0.1';//'114.55.89.241';//目标ip
 const port = 52342;//目标端口
 // const datatosend = 'aae02a84';//16进制字符串
 //
