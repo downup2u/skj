@@ -15,7 +15,7 @@ let config =  {
   loginuserexptime:60*60*24*30,//用户登录有效期,30天
   mongodburl:process.env.MONGO_URL || 'mongodb://localhost/skj',
 
-  tcpport:process.env.tcpport ||52341,
+  tcpport:process.env.tcpport ||52342,
   deviceconfig:{
     //  gradetotal:{
     //    '优':100,

@@ -40,7 +40,7 @@ starttcpsrv = (settings)=> {
       let fromsock = remoteip + ':' + socket.remotePort;
       winston.getlog().info("["+fromsock+"]接受一个socket");
       const ipaddr = getpureIp(remoteip);
-      util.getIpInfo('114.228.37.134',(err,result)=>{
+      util.getIpInfo(ipaddr,(err,result)=>{
         if(!err && !!result){
           if(result.code === 0 && !!result.data){
             curaddress = {
