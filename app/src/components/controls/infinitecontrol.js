@@ -7,7 +7,7 @@ import {
     set_weui
  } from '../../actions';
 import { connect } from 'react-redux';
-import $ from 'jquery';
+
 import iScroll from 'iscroll/build/iscroll-probe';
 import './infinitecontrol.css';
 import _ from 'lodash';

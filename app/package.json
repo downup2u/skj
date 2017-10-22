@@ -12,7 +12,7 @@
   "dependencies": {
     "antd": "^2.11.2",
     "axios": "^0.15.3",
-    "d3": "^4.9.1",
+    "d3": "4.9.1",
     "history": "^4.6.3",
     "iosselect": "0.0.5",
     "iscroll": "^5.2.0",
@@ -31,7 +31,7 @@
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
-    "react-weui": "^1.0.4",
+    "react-weui": "1.0.4",
     "redux": "^3.7.1",
     "redux-act": "^1.2.0",
     "redux-form": "^6.7.0",
@@ -44,6 +44,7 @@
     "weui": "^1.1.2"
   },
   "scripts": {
+    "buildcp": "react-scripts build && cp -r build/. ../deploy/dist/app && rm -R build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

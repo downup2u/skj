@@ -55,10 +55,14 @@ const RealtimedatalistEdit = (props) => {
           <SimpleForm>
             <DisabledInput label="Id" source="id" />
             <DateDetail />
+            <DisabledInput label="IP地址" source="ipaddr" />
+            <DisabledInput label="省" source="provice" />
+            <DisabledInput label="市" source="city" />
+
             <DisabledInput label="结果" source="name" />
             <DisabledInput label="设备ID" source="deviceid" />
-            <DisabledInput label="原水流量数" source="rawdata.data01" />
-            <DisabledInput label="净水流量数" source="rawdata.data23" />
+            <DisabledInput label="原水流量数" source="rawdata.data23" />
+            <DisabledInput label="净水流量数" source="rawdata.data01" />
             <DisabledInput label="原水TDS" source="rawdata.dts0" />
             <DisabledInput label="净水TDS" source="rawdata.dts1" />
             <DisabledInput label="5微米pp滤芯已用天数" source="rawdata.data89" />
@@ -86,10 +90,11 @@ const RealtimedatalistList = (props) => (//
             <TextField label="结果" source="name" />
             <TextField label="设备ID" source="deviceid" />
             <DateField label="更新时间" source="updated_at" showTime />
-            <TextField label="原水流量数" source="rawdata.data01" />
-            <TextField label="净水流量数" source="rawdata.data23" />
+            <TextField label="原水流量数" source="rawdata.data23" />
+            <TextField label="净水流量数" source="rawdata.data01" />
             <TextField label="原水TDS" source="rawdata.dts0" />
             <TextField label="净水TDS" source="rawdata.dts1" />
+            <TextField label="IP地址" source="ipaddr" />
           <EditButton />
         </Datagrid>
     </List>

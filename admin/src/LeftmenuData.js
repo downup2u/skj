@@ -129,6 +129,7 @@ export default [
           { name: 'withdrawcash', icon: <UserIcon /> },
           { name: 'device', icon: <UserIcon /> },
           { name: 'realtimedata', icon: <UserIcon /> },
+          { name: 'devicedatahistory', icon: <UserIcon /> },
         ]
       },
 

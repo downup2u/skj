@@ -31,7 +31,7 @@ import {OrderlistList,OrderlistEdit} from './components/orders/index.js';
 import {AboutlistList,AboutlistEdit,AboutlistCreate} from './components/abouts/index.js';
 import {DevicelistList,DevicelistEdit} from './components/device/index';
 import {RealtimedatalistList,RealtimedatalistEdit} from './components/realtimedata/index';
-
+import {DevicedatahistoryList,DevicedatahistoryEdit} from './components/devicedatahistory/index';
 import restClient from './restClient';
 class App extends Component {
      render() {
@@ -63,6 +63,7 @@ class App extends Component {
                 <Resource name="mycoupon" list={MycouponlistList} edit={MycouponlistEdit} create={MycouponlistCreate}  remove={Delete} />
                 <Resource name="device" list={DevicelistList} edit={DevicelistEdit}  remove={Delete} />
                 <Resource name="realtimedata" list={RealtimedatalistList} edit={RealtimedatalistEdit}  remove={Delete} />
+                <Resource name="devicedatahistory" list={DevicedatahistoryList} edit={DevicedatahistoryEdit}  remove={Delete} />
                 <Resource name="user" list={UserlistList} edit={UserlistEdit} />
                 <Resource name="news" list={NewslistList} edit={NewslistEdit} create={NewslistCreate}  remove={Delete} />
                 <Resource name="withdrawcash" list={WithdrawcashlistList}  edit={WithdrawcashlistEdit}/>

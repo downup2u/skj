@@ -9,7 +9,7 @@ import { productcommentsfromproduct } from '../../actions/sagacallback.js';
 import InfinitePage from '../controls/listview';
 import moment from 'moment';
 import NavBar from '../newnav.js';
-import $ from "jquery";
+
 
 let Page = (props) => {
 
