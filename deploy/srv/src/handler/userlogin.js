@@ -176,17 +176,25 @@ let setloginsuccess = (socket,ctx,user)=>{
     profile = user.profile;
   }
   ctx.shield = profile['shield'] || [];
+  const token = jwt.sign({
+    exp: Math.floor(Date.now() / 1000) + config.loginuserexptime,
+    _id:user._id,
+  },config.secretkey, {});
   socket.emit('users.login_result', {
-    token: jwt.sign({
-      exp: Math.floor(Date.now() / 1000) + config.loginuserexptime,
-      _id:user._id,
-    },config.secretkey, {}),
+    token: token,
     username: user.username,
     userid:user._id,
     profile,
     invitecode:user.invitecode,
     lastreadmsgtime_at:user.lastreadmsgtime_at,
     loginsuccess: true
+  });
+
+  let userModel =  DBModels.UserModel;
+  userModel.findByIdAndUpdate(ctx.userid, {$set:
+    {lasttoken:token}
+  },{new: true},(err,result)=>{
+      console.log(`findByIdAndUpdate===>ctx.userid:${ctx.userid},token:${token},err:${JSON.stringify(err)},result:${JSON.stringify(result)}`)
   });
   userloginsuccess(socket,ctx);
 };
@@ -515,15 +523,21 @@ exports.loginwithoauth = (socket,actiondata,ctx)=>{
 
 exports.loginwithtoken = (socket,actiondata,ctx)=>{
   try {
+
     let decodeduser = jwt.verify(actiondata.token, config.secretkey);
     let userid = decodeduser._id;
     let userModel = DBModels.UserModel;
     userModel.findByIdAndUpdate(userid, {updated_at:new Date()},{new: true},(err,result)=>{
     if(!err && result){
+        if(result.lasttoken !== actiondata.token){
+          console.log(`lasttoken:${result.lasttoken},curtoken:${actiondata.token}`);
+          socket.emit('common_err',{errmsg:'您已经在另外一台设备登录,请重新登录',type:'login'});
+          return;
+        }
         setloginsuccess(socket,ctx,result);
     }
     else{
-      socket.emit('common_err',{err:'找不到该用户',type:'login'});
+      socket.emit('common_err',{errmsg:'找不到该用户',type:'login'});
     }
 
   });
@@ -532,7 +546,7 @@ exports.loginwithtoken = (socket,actiondata,ctx)=>{
   } catch (e) {
     console.log("invalied token===>" + JSON.stringify(actiondata.token));
     console.log("invalied token===>" + JSON.stringify(e));
-    socket.emit('common_err',{err:e.message,type:'login'});
+    socket.emit('common_err',{errmsg:e.message,type:'login'});
   }
 }
 

@@ -4,10 +4,10 @@ const winston = require('../log/log.js');
 
 let parseBufData0 = (buf)=>{
   let deviceconfig = config.deviceconfig;
-  // data0	 	原水流量数	原水流量数高8位
-  // data1	 	原水流量数	原水流量数低8位
-  // data2	 	净水流量数	原水流量数高8位
-  // data3	 	净水流量数	净水流量数低8位
+// data0		净水流量数	净水流量数高8位
+// data1		净水流量数	净水流量数低8位
+// data2		原水流量数	原水流量数高8位
+// data3		原水流量数	原水流量数低8位
   // data4	 	原水TDS	原水TDS字节高8位
   // data5	 	原水TDS	原水TDS字节低8位
   // data6	 	净水TDS	净水TDS字节高8位
@@ -22,8 +22,8 @@ let parseBufData0 = (buf)=>{
   // data15	 	反渗透RO膜已用天数	反渗透RO膜已用天数低8位
   // data16	 	后置活性炭已用天数	后置活性炭已用天数高8位
   // data17	 	后置活性炭已用天数	后置活性炭已用天数低8位
-  let data01 = (buf[0] << 8) + buf[1];//原水流量数
-  let data23 = (buf[2] << 8) + buf[3];//净水流量数
+  let data01 = (buf[0] << 8) + buf[1];//净水流量数
+  let data23 = (buf[2] << 8) + buf[3];//原水流量数
 
   let total =  data23;
 
@@ -94,8 +94,8 @@ let parseBufData0 = (buf)=>{
   let devicedata =
   {
       rawdata:{
-        data01,//原水流量数
-        data23,//净水流量数
+        data01,//净水流量数
+        data23,//原水流量数
         dts0,//原水TDS
         dts1,//净水TDS
         data89,///5微米pp滤芯已用天数
@@ -105,7 +105,7 @@ let parseBufData0 = (buf)=>{
         data1617,//后置活性炭已用天数
       },
       iswatercut,
-      name:getgrade(total,deviceconfig.graderight),
+      name:getgrade(dts1,deviceconfig.gradetotal),
       total:`${total}`,
       modeltype:'',
       leftmodel:{
