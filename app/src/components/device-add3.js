@@ -23,7 +23,7 @@ const Page = (props) => {
             </div>
             <div className="loginBotton">
                 <Button onClick={onClickNext} primary>完成</Button>
-                <Button onClick={onClickNext} default>查看数据</Button>
+                <Button onClick={onClickNext} default>输入品牌</Button>
             </div>
         </div>
     </div>

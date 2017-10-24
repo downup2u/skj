@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Input, List, Radio, Button, Icon } from 'semantic-ui-react'
 import NavBar from './nav.js';
 import '../../public/css/device.css';
-
+import {withRouter} from 'react-router-dom';
 import Swipeout from 'rc-swipeout';
 import 'rc-swipeout/assets/index.css';
 import { connect } from 'react-redux';
@@ -20,22 +20,24 @@ const DeviceItem = (props)=> {
     };
     return (
         <List.Item key={deviceitem._id}>
-            <Swipeout autoClose={true}
-                      right={[
-                        {
-                            text: '修改',
-                            onPress:onEdit,
-                            style: { backgroundColor: '#21ba45', color: 'white', fontSize:"16px" }
-                        },
-                        {
-                            text: '删除',
-                            onPress:onDelete,
-                            style: { backgroundColor: 'red', color: 'white', fontSize:"16px" }
-                        }
-                    ]}
+            <Swipeout 
+                autoClose={true}
+                right={[
+                    {
+                        text: '修改',
+                        onPress:onEdit,
+                        style: { backgroundColor: '#21ba45', color: 'white', fontSize:"16px" }
+                    },
+                    {
+                        text: '删除',
+                        onPress:onDelete,
+                        style: { backgroundColor: 'red', color: 'white', fontSize:"16px" }
+                    }
+                ]}
                 onOpen={() => console.log('open')}
                 onClose={() => console.log('close')}
-            >
+                onClick={()=>{ props.history.push("/addnewdevice")} }
+                >
                 <div className="deviceLi">
                     <div className="pic"><img src="img/5.png"/></div>
                     <div className="info">
@@ -52,6 +54,7 @@ const DeviceItem = (props)=> {
             </Swipeout>
         </List.Item>);
 }
+DeviceItem = withRouter(DeviceItem);
 
 export class Page extends React.Component {
 
