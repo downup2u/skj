@@ -79,43 +79,56 @@ let Baddevice =(props)=>{
     )
 }
 
-let DeviceDataList =(props)=>{
-    const {detaillist, maxleftpecent,onClickReset} = props;
-    return (
-        <ul style={list} className="homePageList">
-            {_.map(detaillist,(detail,detailindex)=> {
+export class DeviceDataList extends Component {
+    
 
-                let color1 = detail.leftpecent>maxleftpecent?"#C00":"#4bcef5";
-                let color2 = detail.leftpecent>maxleftpecent?"#C00":"#4bf3ee";
+    render(){
+        const {detaillist, maxleftpecent,onClickReset, showbackbtn} = this.props;
+        return (
+            <ul style={list} className="homePageList">
+                {_.map(detaillist,(detail,detailindex)=> {
 
-                color1 = detail.leftpecent>=100?"#CCC":color1;
-                color2 = detail.leftpecent>=100?"#CCC":color2;
+                    let color1 = detail.leftpecent>maxleftpecent?"#C00":"#4bcef5";
+                    let color2 = detail.leftpecent>maxleftpecent?"#C00":"#4bf3ee";
 
-                let linestyleresult = linestyle(color1, color2, `${detail.leftpecent}%`);
-                return (
-                    <li style={listLi} key={detail.name}>
-                        <div style={listhead}>
-                              <div style={{display:"inline-block",flexGrow:1}}>
-                                  <span style={listname}>{detail.name}</span>
-                                  <span style={listinfo}>剩余{detail.leftday}天</span>
-                              </div>
-                              <div style={{position:"absolute",right: 0, top:"3px"}}>
-                                  <span style={percentage}>{detail.leftpecent}%</span>
-                                  {detail.leftpecent>maxleftpecent && <span onClick={
-                                    ()=>{
-                                      onClickReset(detailindex);
-                                    }
-                                  }>复位</span>}
-                              </div>
-                        </div>
-                        <div style={lineBg}>
-                            <div style={linestyleresult}></div>
-                        </div>
-                    </li>
-                );
-            })}
-        </ul>
-    )
+                    color1 = detail.leftpecent>=100?"#CCC":color1;
+                    color2 = detail.leftpecent>=100?"#CCC":color2;
+
+                    let linestyleresult = linestyle(color1, color2, `${detail.leftpecent}%`);
+                    return (
+                        <li className="devicedatalistli" key={detail.name}>
+                            <span className="listname">{detail.name}</span>
+                            <div className="datadata">
+                                <span className="title">天数</span>
+                                <div className="listprocess">
+                                    <div style={lineBg}>
+                                        <div style={linestyleresult}></div>
+                                    </div>
+                                </div>
+                                <span className="datanumber">{detail.leftpecent}%</span>
+                                { showbackbtn && <span className="backdatabtn">复位</span> }
+                                { showbackbtn && <span className="setdatabtn">设置</span> }
+                            </div>
+
+                            <div className="datadata">
+                                <span className="title">流量</span>
+                                <div className="listprocess">
+                                    <div style={lineBg}>
+                                        <div style={linestyleresult}></div>
+                                    </div>
+                                </div>
+                                <span className="datanumber">{detail.leftpecent}%</span>
+
+                                { showbackbtn && <span className="backdatabtn">复位</span> }
+                                { showbackbtn && <span className="setdatabtn">设置</span> }
+                            </div>
+
+                        </li>
+                    );
+                })}
+            </ul>
+        )
+    }
 }
 
 
@@ -200,6 +213,16 @@ let HeadInfo =(props)=>{
 
 export class Page extends Component {
 
+    constructor(props) {  
+        super(props);  
+        this.state = {showbackbtn: false};
+    } 
+
+    //复位操作按钮隐藏显示
+    toggleShowbackBtn =()=>{
+        this.setState({showbackbtn : !this.state.showbackbtn});
+    }
+
     componentWillMount(){
         const {mydevicelist} = this.props;
         if(!!mydevicelist){
@@ -217,6 +240,7 @@ export class Page extends Component {
         let onClickNewDevice = ()=> {
             props.history.push('/addnewdevice');
         }
+
         let onClickDevicelist = ()=> {
             props.history.push('/devicelist');
         };
@@ -353,14 +377,16 @@ export class Page extends Component {
                     <div className="HomeList">
                         <img src="img/head/3.png" />
                         <div className="ListTitle">
-                            <div>滤芯状态</div>
-                            <div><Radio toggle checked={iswatercut} onClick={()=>{ClickRadio(iswatercut)}}/>断水更换</div>
+                            <div className="tit">滤芯状态</div>
+                            <div className="setbackliuliang">流量重置</div>
+                            <div className="ListTitleRadio"><Radio toggle checked={iswatercut} onClick={()=>{ClickRadio(iswatercut)}}/>断水更换</div>
+                            <div className={this.state.showbackbtn ? "showbackbtn sel": "showbackbtn"} onClick={this.toggleShowbackBtn}>{this.state.showbackbtn ? "取消复位": "复位操作"}</div>
                         </div>
                     </div>
                 }
 
                 { !!detaillist && detaillist.length>0?(
-                    <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent} onClickReset={onClickReset}/>
+                    <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent} onClickReset={onClickReset} showbackbtn={this.state.showbackbtn}/>
                 ):null }
 
 

@@ -1,4 +1,4 @@
-let islocalhost = true;
+let islocalhost = false;
 let config = {
   serverurl:islocalhost?'http://localhost:3101':'http://skj.com28.cn',//'http://localhost:3100'
   requesttimeout:15000,
