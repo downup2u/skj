@@ -13,6 +13,7 @@ let savedatatodb = (mac,data,curaddress)=>{
     data.city = curaddress.city;
     data.county = curaddress.county;
   }
+
   let dbModel = DBModels.RealtimedataModel;
   dbModel.findOneAndUpdate({deviceid:mac},{$set:data},{
     upsert:true,new:true
@@ -23,6 +24,7 @@ let savedatatodb = (mac,data,curaddress)=>{
   });
 
   let dbHistoryModel =  DBModels.DeviceDataHistoryModel;
+  data.deviceid = mac;
   let entity = new dbHistoryModel(data);
   entity.save((err,newdevice)=>{
     console.log(`DeviceDataHistoryModel==>err:${JSON.stringify(err)}`)

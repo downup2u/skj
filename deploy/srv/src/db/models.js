@@ -60,6 +60,12 @@ let SystemConfigSchema = new Schema({
     systotal1213:{ type: Schema.Types.Number,default:100 },
     systotal1415:{ type: Schema.Types.Number,default: 100 },
     systotal1617:{ type: Schema.Types.Number,default:100},
+
+    systotalvol89:{ type: Schema.Types.Number,default: 2500 },//5微米PP滤芯的允许最大流量为2500升
+    systotalvol1011:{ type: Schema.Types.Number,default:2500},//颗粒活性炭的允许最大流量为2500升
+    systotalvol1213:{ type: Schema.Types.Number,default:2500 },//1微米PP滤芯的允许最大流量为2500升
+    systotalvol1415:{ type: Schema.Types.Number,default: 100 },//反渗透RO膜的允许最大流量为20000升
+    systotalvol1617:{ type: Schema.Types.Number,default:100},//后置活性炭的允许最大流量为2500升
 });
 SystemConfigSchema.plugin(mongoosePaginate);
 let SystemConfig  = mongoose.model('SystemConfig',  SystemConfigSchema);
@@ -72,6 +78,7 @@ let UserSchema = new Schema({
     openidweixin: String,
     created_at: { type: Date, default:new Date()},
     updated_at: Date,
+    lasttoken:String,
     lastreadmsgtime_at: { type: Date, default:new Date()},
     profile:{ type: Schema.Types.Mixed,default:{
         nickname:`游客${chance.string({length: 4,pool: '0123456789'})}`,
@@ -129,6 +136,15 @@ let DeviceSchema = new Schema({
     devicebrand:String,
     devicemodel: String,
     realtimedata:{ type: Schema.Types.ObjectId, ref: 'Realtimedata' },
+    detailvollist:[
+      {
+          name:String,
+          isvisiable:{ type: Schema.Types.Boolean,default: false },//是否显示
+          fv_l0:Number,//初始值为L0, 就是复位或者设置之后的值
+          fv_lx:Number,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
+          updated_at:{ type: Date, default:new Date()},
+      }
+    ],
     created_at:{ type: Date, default:new Date()},
 });
 DeviceSchema.plugin(mongoosePaginate);

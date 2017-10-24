@@ -106,6 +106,12 @@ export const SystemconfigCreate = (props) => (
               <NumberInput  label="1微米pp滤芯总使用天数" source="systotal1213" />
               <NumberInput  label="反渗透RO膜总使用天数" source="systotal1415" />
               <NumberInput  label="后置活性炭总使用天数" source="systotal1617" />
+
+              <NumberInput  label="5微米PP滤芯的允许最大流量" source="systotalvol89" />
+              <NumberInput  label="颗粒活性炭的允许最大流量" source="systotalvol1011" />
+              <NumberInput  label="1微米PP滤芯的允许最大流量" source="systotalvol1213" />
+              <NumberInput  label="反渗透RO膜的允许最大流量" source="systotalvol1415" />
+              <NumberInput  label="后置活性炭的允许最大流量" source="systotalvol1617" />
               </FormTab >
            </TabbedForm>
        </Create>
