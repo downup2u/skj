@@ -158,10 +158,14 @@ import {
     queryuserbalance_result,
 
     loginwithauth_request,
+
+    resetdevicecmd_request,
+    resetdevicecmd_result,
 } from '../actions/index.js';
 
 //接收的对应关系
 exports.recvmessagetoresultpair = {
+  'resetdevicecmd_result':resetdevicecmd_result,
   'payorder_result':payorder_result,
   'setuseralerttopicdeleted_result':setuseralerttopicdeleted_result,
   'queryuserbalance_result':queryuserbalance_result,
@@ -263,6 +267,7 @@ exports.sendmessagefnsz = {
 
 //验证发送接口
 exports.sendmessageauthfnsz = {
+    'resetdevicecmd':`${resetdevicecmd_request}`,
     'payorder':`${payorder_request}`,
     'setuseralerttopicdeleted':`${setuseralerttopicdeleted_request}`,
     'queryuserbalance':`${queryuserbalance_request}`,

@@ -8,6 +8,7 @@ import {
     deletedevice_result,
     ui_setcurrentdeviceid,
     serverpush_devicedata,
+    resetdevicecmd_result,
     logout_result
 } from '../actions/index.js';
 import {normalizrdevices} from './normalizr';
@@ -23,7 +24,17 @@ const initial = {
 
 
 const device = createReducer({
-
+    [resetdevicecmd_result]: (state, payload) => {
+        let newdevice = payload;
+        return {
+          ...state,
+          curdevice:newdevice._id,
+          devices:{
+            ...state.devices,
+            [newdevice._id]:newdevice
+          }
+        };
+    },
     [ui_setcurrentdeviceid]:(state, payload)=>{
         let curdeviceid = payload;
         return { ...state,curdeviceid};
