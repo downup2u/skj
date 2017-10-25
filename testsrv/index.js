@@ -2,8 +2,8 @@
 
 const test = require('./protocol.js');
 const net = require('net');
-const ip = process.env.targetip || '114.55.89.241';//'114.55.89.241';//'127.0.0.1';//'114.55.89.241';//目标ip
-const port = 52342;//目标端口
+const ip = process.env.targetip || '127.0.0.1';//'114.55.89.241';//'114.55.89.241';//'127.0.0.1';//'114.55.89.241';//目标ip
+const port = 52341;//目标端口
 // const datatosend = 'aae02a84';//16进制字符串
 //
 // const maclen = 12;
@@ -36,7 +36,7 @@ const port = 52342;//目标端口
 
 const client = net.connect({port: port,host:ip}, () => {
   // 'connect' listener
-  setInterval(()=>{
+  // setInterval(()=>{
     // const buf = test.gettestbuf_data(process.env.targetmac ||'3C2C9422B9E4');//Buffer.from(datatosend,'hex');
     const bufstr = 'aa3c2c9422b9e300130000360000009d00090006000600060006000600';
     let buf = Buffer.from(bufstr,'hex');
@@ -44,7 +44,7 @@ const client = net.connect({port: port,host:ip}, () => {
     let bufstring = buf.toString()//'aa3c2c9422b9e300130000360000009d00090006000600060006000600';//buf.toString('hex');
     console.log(`连接上服务器【${ip}:${port}】,发送数据${bufstring}`);
     client.write(buf);
-  },process.env.sendinterval*1000 || 10000);
+  // },process.env.sendinterval*1000 || 1000);
 });
 
 client.on('data', (data) => {
