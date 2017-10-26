@@ -6,7 +6,7 @@ import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../node_modules/react-dynamic-swiper/lib/styles.css';
 import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
-import {ui_setcurrentdeviceid,senddevicecmd_request, set_weui} from '../actions/index.js';
+import {ui_setcurrentdeviceid,senddevicecmd_request, set_weui, resetdevicecmd_request} from '../actions/index.js';
 import Waterwave from './waterwave.js';
 
 let swiperOptions = {
@@ -81,20 +81,69 @@ let Baddevice =(props)=>{
 
 export class DeviceDataList extends Component {
     
+    // resetdevicecmd_request
+    // deviceid:设备id
+    // cmd:'resetall'/'resetone'/'setone'/'setvisible'【resetall表示实时水流重置,resetone表示复位1个滤芯,setone表示设置一个滤芯,setvisible表示设置滤芯是否可见】
+    // indexname:'5微米PP滤芯'/'颗粒活性炭'【表示滤芯名字，当cmd为'resetone'/'setone'/'setvisible'有效】
+    // value:用户输入的值，仅当cmd为'setone'/'setvisible'有效，其中setone输入数字，setvisible为bool类型
+    // type:'vol'/'day'【vol表示复位流量,day表示复位天数】
+    resetdevicecmd =(name, datatp, tp)=>{
+        let payload = {
+            deviceid : this.props.curdeviceid,
+            cmd : tp,
+            indexname : name,
+            value : "",
+            type : datatp
+        }
+        this.props.dispatch(resetdevicecmd_request(payload));
+    }
 
     render(){
-        const {detaillist, maxleftpecent,onClickReset, showbackbtn} = this.props;
+        const {detaillist, maxleftpecent,onClickReset, showbackbtn, detaildaylist, detailvollist } = this.props;
         return (
             <ul style={list} className="homePageList">
                 {_.map(detaillist,(detail,detailindex)=> {
 
-                    let color1 = detail.leftpecent>maxleftpecent?"#C00":"#4bcef5";
-                    let color2 = detail.leftpecent>maxleftpecent?"#C00":"#4bf3ee";
 
-                    color1 = detail.leftpecent>=100?"#CCC":color1;
-                    color2 = detail.leftpecent>=100?"#CCC":color2;
+                    // let color1 = detail.leftpecent>maxleftpecent?"#C00":"#4bcef5";
+                    // let color2 = detail.leftpecent>maxleftpecent?"#C00":"#4bf3ee";
 
-                    let linestyleresult = linestyle(color1, color2, `${detail.leftpecent}%`);
+                    // color1 = detail.leftpecent>=100?"#CCC":color1;
+                    // color2 = detail.leftpecent>=100?"#CCC":color2;
+                    //#FF9224 橙色
+                    //#EA0000 红色
+                    //#00BB00 绿色
+
+                    //百分比
+                    let percent1 = (detail.v / detail.t).toFixed(2);
+                    let color1 = null;
+                    if(percent1<0.95){
+                        color1 = "#00BB00";
+                    }
+                    if(percent1>=0.95 && percent1 < 1){
+                        color1 = "#FF9224";
+                    }
+                    if(percent1 >= 1){
+                        color1 = "#EA0000";
+                        percent1 = 1;
+                    }
+                    let percent2 = (detail.detailvollist.v / detail.detailvollist.t).toFixed(2);
+                    let color2 = null;
+                    if(percent2<0.95){
+                        color2 = "#00BB00";
+                    }
+                    if(percent2>=0.95 && percent2 < 1){
+                        color2 = "#FF9224";
+                    }
+                    if(percent2 >= 1){
+                        color2 = "#EA0000";
+                        percent2 = 1;
+                    }
+
+                    let linestyleresult1 = linestyle(color1, color1, `${percent1*100}%`);
+                    let linestyleresult2 = linestyle(color2, color2, `${percent2*100}%`);
+
+
                     return (
                         <li className="devicedatalistli" key={detail.name}>
                             <span className="listname">{detail.name}</span>
@@ -102,10 +151,10 @@ export class DeviceDataList extends Component {
                                 <span className="title">天数</span>
                                 <div className="listprocess">
                                     <div style={lineBg}>
-                                        <div style={linestyleresult}></div>
+                                        <div style={linestyleresult1}></div>
                                     </div>
                                 </div>
-                                <span className="datanumber">{detail.leftpecent}%</span>
+                                <span className="datanumber">{percent1*100}%</span>
                                 { showbackbtn && <span className="backdatabtn">复位</span> }
                                 { showbackbtn && <span className="setdatabtn">设置</span> }
                             </div>
@@ -114,12 +163,12 @@ export class DeviceDataList extends Component {
                                 <span className="title">流量</span>
                                 <div className="listprocess">
                                     <div style={lineBg}>
-                                        <div style={linestyleresult}></div>
+                                        <div style={linestyleresult2}></div>
                                     </div>
                                 </div>
-                                <span className="datanumber">{detail.leftpecent}%</span>
+                                <span className="datanumber">{percent2*100}%</span>
 
-                                { showbackbtn && <span className="backdatabtn">复位</span> }
+                                { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone")}>复位</span> }
                                 { showbackbtn && <span className="setdatabtn">设置</span> }
                             </div>
 
@@ -130,6 +179,8 @@ export class DeviceDataList extends Component {
         )
     }
 }
+
+DeviceDataList = withRouter(DeviceDataList);
 
 
 let DeviceSwiper =(props)=>{
@@ -235,7 +286,8 @@ export class Page extends Component {
     render(){
 
         const {props} = this;
-        const {curdeviceid,mydevicelist,devices, maxleftpecent} = props;
+        const {curdeviceid, mydevicelist, devices, maxleftpecent} = props;
+        //detaildaylist, detailvollist
 
         let onClickNewDevice = ()=> {
             props.history.push('/addnewdevice');
@@ -245,16 +297,30 @@ export class Page extends Component {
             props.history.push('/devicelist');
         };
 
+        // console.log(props);
 
         let curdevice = null;
         let curdevicedata = null;
-        let detaillist = false;
+        let detaillist = {};
         let iswatercut = false;
+        let deviceid = '';
+
         if(!!curdeviceid){
             curdevice = devices[curdeviceid];
             curdevicedata = _.get(curdevice,'realtimedata',false);
-            detaillist = _.get(curdevice,'realtimedata.detaillist',false);
-            iswatercut  = _.get(curdevice,'realtimedata.iswatercut',false);
+            // console.log(curdevice);
+            let d1 = _.get(curdevice,"detaildaylist",false);
+            let d2 = _.get(curdevice,"detailvollist",false);
+            deviceid = curdevice.deviceid;
+
+            if(d1){
+                _.map(d1, (d, i)=>{
+                    detaillist[d.name] = d;
+                    detaillist[d.name]["detailvollist"] = d2[i]; 
+                })
+            }
+            // console.log(detaillist);
+            // console.log(JSON.stringify(detaillist));
             //curdevicedata = !!curdevice && curdevice.hasOwnProperty("realtimedata")?curdevice.realtimedata:null;
             //detaillist = !!curdevicedata && curdevicedata.hasOwnProperty("detaillist")?curdevicedata.detaillist:false;
         }
@@ -270,7 +336,6 @@ export class Page extends Component {
                       buttonsClose : ()=>{},
                       //确认收货
                       buttonsClick : ()=>{
-                          let deviceid = devices[curdeviceid].deviceid;
                           props.dispatch(senddevicecmd_request({deviceid,cmd: 1,value:detailindex}));
                       }
                   }}
@@ -313,7 +378,6 @@ export class Page extends Component {
                             // console.log(this.refs.myInput.value);
                             const inputid = document.getElementById('inutpwdwatercutuserpassword');
                             console.log(`inputid==>${inputid.value}`);
-                            const deviceid = devices[curdeviceid].deviceid;
                             props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut,password:inputid.value}));
                             // ClickDuanshuiSuccess();
                         }
@@ -373,7 +437,7 @@ export class Page extends Component {
 
                 </div>
 
-                { !!detaillist && detaillist.length>0 &&
+                { JSON.stringify(detaillist)!=="{}" &&
                     <div className="HomeList">
                         <img src="img/head/3.png" />
                         <div className="ListTitle">
@@ -385,8 +449,8 @@ export class Page extends Component {
                     </div>
                 }
 
-                { !!detaillist && detaillist.length>0?(
-                    <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent} onClickReset={onClickReset} showbackbtn={this.state.showbackbtn}/>
+                { JSON.stringify(detaillist)!=="{}" ?(
+                    <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent} dispatch={props.dispatch} curdeviceid = {deviceid} onClickReset={onClickReset} showbackbtn={this.state.showbackbtn}/>
                 ):null }
 
 

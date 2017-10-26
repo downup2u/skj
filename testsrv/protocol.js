@@ -44,11 +44,11 @@ exports.gettestbuf_data = (mac)=>{
   let bufdata = Buffer.allocUnsafe(19);
 
   let dataoffset = 0;
-  dataoffset = bufdata.writeInt16BE(57, dataoffset);//原水流量数
+  dataoffset = bufdata.writeInt16BE(2490, dataoffset);//原水流量数
   dataoffset = bufdata.writeInt16BE(274, dataoffset);//净水流量数
   dataoffset = bufdata.writeInt16BE(95, dataoffset);//原水TDS
   dataoffset = bufdata.writeInt16BE(7, dataoffset);//净水TDS
-  dataoffset = bufdata.writeInt16BE(2, dataoffset);//5微米pp滤芯已用天数
+  dataoffset = bufdata.writeInt16BE(2400, dataoffset);//5微米pp滤芯已用天数
   dataoffset = bufdata.writeInt16BE(2, dataoffset);//颗粒活性炭已用天数
   dataoffset = bufdata.writeInt16BE(2, dataoffset);//1微米pp滤芯已用天数
   dataoffset = bufdata.writeInt16BE(2, dataoffset);//反渗透RO膜已用天数
