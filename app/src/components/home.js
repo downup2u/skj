@@ -80,6 +80,11 @@ let Baddevice =(props)=>{
 }
 
 export class DeviceDataList extends Component {
+
+    constructor(props) {  
+        super(props);  
+        this.state = {setoneinput: ''};
+    } 
     
     // resetdevicecmd_request
     // deviceid:设备id
@@ -88,14 +93,41 @@ export class DeviceDataList extends Component {
     // value:用户输入的值，仅当cmd为'setone'/'setvisible'有效，其中setone输入数字，setvisible为bool类型
     // type:'vol'/'day'【vol表示复位流量,day表示复位天数】
     resetdevicecmd =(name, datatp, tp)=>{
-        let payload = {
-            deviceid : this.props.curdeviceid,
-            cmd : tp,
-            indexname : name,
-            value : "",
-            type : datatp
+        let text = '';
+        let comformtitle = "确认";
+        if(tp==="resetone"){
+            text = `您确定要复位${name}的`;
+            if(datatp=="vol"){ text = `${text}流量?`; }
+            if(datatp=="day"){ text = `${text}天数?`; }
         }
-        this.props.dispatch(resetdevicecmd_request(payload));
+        if(tp ==="setone"){
+            if(datatp=="vol"){ comformtitle = "请输入流量"; }
+            if(datatp=="day"){ comformtitle = "请输入天数"; }
+            text = <div className="setoneform"><input type="number" style={{border: "1px solid #EEE", width: "100%", height: "40px", borderRadius: "6px",textAlign: "center"}} onChange={(e)=>{ this.setState({setoneinput: e.target.value})}} /></div>
+        }
+        this.props.dispatch(
+            set_weui({
+                confirm:{
+                    show : true,
+                    title : comformtitle,
+                    text : text,
+                    //
+                    buttonsClose : ()=>{},
+                    //确认收货
+                    buttonsClick : ()=>{
+                        // props.dispatch(senddevicecmd_request({deviceid,cmd: 1,value:detailindex}));
+                        let payload = {
+                            deviceid : this.props.curdeviceid,
+                            cmd : tp,
+                            indexname : name,
+                            value : parseInt(this.state.setoneinput),
+                            type : datatp
+                        }
+                        this.props.dispatch(resetdevicecmd_request(payload));
+                    }
+                }}
+            )
+        )
     }
 
     render(){
@@ -155,8 +187,8 @@ export class DeviceDataList extends Component {
                                     </div>
                                 </div>
                                 <span className="datanumber">{percent1*100}%</span>
-                                { showbackbtn && <span className="backdatabtn">复位</span> }
-                                { showbackbtn && <span className="setdatabtn">设置</span> }
+                                { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "resetone")}>复位</span> }
+                                { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "setone")}>设置</span> }
                             </div>
 
                             <div className="datadata">
@@ -169,7 +201,7 @@ export class DeviceDataList extends Component {
                                 <span className="datanumber">{percent2*100}%</span>
 
                                 { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone")}>复位</span> }
-                                { showbackbtn && <span className="setdatabtn">设置</span> }
+                                { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "setone")}>设置</span> }
                             </div>
 
                         </li>
@@ -342,6 +374,33 @@ export class Page extends Component {
               )
           );
         }
+
+        let resetdevicecmdall =()=>{
+            props.dispatch(
+                set_weui({
+                    confirm:{
+                        show : true,
+                        title : "确认",
+                        text : "您确定要复位该设备所有的数据吗？",
+                        //
+                        buttonsClose : ()=>{},
+                        //确认收货
+                        buttonsClick : ()=>{
+                            // props.dispatch(senddevicecmd_request({deviceid,cmd: 1,value:detailindex}));
+                            let payload = {
+                                deviceid : deviceid,
+                                cmd : 'resetall',
+                                indexname : '',
+                                value : "",
+                                type : ''
+                            }
+                            props.dispatch(resetdevicecmd_request(payload));
+                        }
+                    }}
+                )
+            )
+            
+        }
         //切断和开通水成功后的提示
         // let ClickDuanshuiSuccess = ()=> {
         //     props.dispatch(
@@ -398,10 +457,7 @@ export class Page extends Component {
                         buttonsClick : ()=>{
                             // let deviceid = devices[curdeviceid].deviceid;
                             // props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
-
                             ClickDuanshui();
-
-
                         }
                     }}
                 )
@@ -442,7 +498,7 @@ export class Page extends Component {
                         <img src="img/head/3.png" />
                         <div className="ListTitle">
                             <div className="tit">滤芯状态</div>
-                            <div className="setbackliuliang">流量重置</div>
+                            <div className="setbackliuliang" onClick={resetdevicecmdall}>流量重置</div>
                             <div className="ListTitleRadio"><Radio toggle checked={iswatercut} onClick={()=>{ClickRadio(iswatercut)}}/>断水更换</div>
                             <div className={this.state.showbackbtn ? "showbackbtn sel": "showbackbtn"} onClick={this.toggleShowbackBtn}>{this.state.showbackbtn ? "取消复位": "复位操作"}</div>
                         </div>
