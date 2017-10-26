@@ -44,6 +44,17 @@ export default {
     },
     device:{
       name: '设备管理 |||| 设备管理',
+      fields:{
+        type:'类型',
+        name:'名字',
+        typevol:'流量',
+        typeday:'天数',
+        t:'总数',
+        v:'当前值',
+        ln:'ln',
+        lx:'lx',
+        l0:'l0'
+      }
     },
     realtimedata:{
       name: '设备实时数据 |||| 设备实时数据',
