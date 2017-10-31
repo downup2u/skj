@@ -38,7 +38,6 @@ const DeviceItem = (props)=> {
                 ]}
                 onOpen={() => console.log('open')}
                 onClose={() => console.log('close')}
-                onClick={()=>{ props.history.push(`/editdevice/${deviceitem._id}`)} }
                 >
                 <div className="deviceLi">
                     <div className="pic"><img src="img/5.png"/></div>
@@ -78,7 +77,7 @@ export class Page extends React.Component {
     }
 
     onClickEdit =(deviceitem)=>{
-      this.props.history.push(`/editdevice/${deviceitem._id}`);
+       this.props.history.push(`/editdevice/${deviceitem._id}`);
     }
     onClickDelete = (deviceitem)=> {
       if(confirm("确定删除吗？")){

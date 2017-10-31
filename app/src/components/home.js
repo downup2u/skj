@@ -335,10 +335,11 @@ export class Page extends Component {
         let curdevicedata = null;
         let detaillist = [];
         let iswatercut = false;
-        let deviceid = '';
+        let deviceid = ""
 
         if(!!curdeviceid){
             curdevice = devices[curdeviceid];
+            deviceid = devices[curdeviceid].deviceid;
             curdevicedata = _.get(curdevice,'realtimedata',false);
 
             console.log(curdevice);
@@ -472,7 +473,7 @@ export class Page extends Component {
         }
 
 
-
+        console.log(deviceid);
 
         return (
             <div className="homePageWamp">
