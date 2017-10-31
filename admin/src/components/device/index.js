@@ -35,7 +35,7 @@ import { Field,FieldArray } from 'redux-form';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
-
+import DateDetail from './datadetail';
 import moment from 'moment';
 
 
@@ -67,6 +67,7 @@ const DevicelistEdit = (props) => {
                   <DateField label="最后更新时间" source="updated_at" showTime />
                </ReferenceField>
               <DateField label="新建时间" source="created_at" showTime />
+              <DateDetail />
           </SimpleForm>
       </Edit>);
 
