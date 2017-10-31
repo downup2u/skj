@@ -26,6 +26,7 @@
 }
 .deviceLi .pic{
     width: 30%;
+    flex-shrink: 0;
 }
 .deviceLi .pic img{
     width: 100%;

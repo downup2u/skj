@@ -70,7 +70,8 @@ class Page extends React.Component {
 }
 
 
-const mapStateToProps = ({device:{devices}},props) => {
+const mapStateToProps = ({device:{mydevicelist,devices}},props) => {
+
   let deviceid = props.match.params.deviceid;
   let curdevice = devices[deviceid];
   return {curdevice};

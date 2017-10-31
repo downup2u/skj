@@ -245,7 +245,7 @@ const CoApp = (props) => {
             <CustomRoute path="/editdevice/:deviceid" component={requireAuthentication(EditDevice)}/>
             <CustomRoute path="/addnewdevice" component={requireAuthentication(AddNewDevice)}/>
             <CustomRoute path="/addnewdevice2" component={requireAuthentication(AddNewDevice2)}/>
-            <CustomRoute path="/addnewdevice3" component={requireAuthentication(AddNewDevice3)}/>
+            <CustomRoute path="/addnewdevice3/:deviceid" component={requireAuthentication(AddNewDevice3)}/>
             <CustomRoute path="/mycollection" component={requireAuthentication(MyCollection)}/>
             <CustomRoute path="/mycoupon" component={requireAuthentication(MyCoupon)}/>
             <CustomRoute path="/mymessage" component={MyMessage}/>

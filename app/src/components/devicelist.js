@@ -13,10 +13,12 @@ import _ from 'lodash';
 const DeviceItem = (props)=> {
     const {deviceitem} = props;
     let onDelete = ()=> {
-      props.onClickDelete(deviceitem);
+        props.onClickDelete(deviceitem);
+        return false;
     };
     let onEdit = ()=> {
         props.onClickEdit(deviceitem);
+        return false;
     };
     return (
         <List.Item key={deviceitem._id}>
@@ -36,7 +38,7 @@ const DeviceItem = (props)=> {
                 ]}
                 onOpen={() => console.log('open')}
                 onClose={() => console.log('close')}
-                onClick={()=>{ props.history.push("/addnewdevice")} }
+                onClick={()=>{ props.history.push(`/editdevice/${deviceitem._id}`)} }
                 >
                 <div className="deviceLi">
                     <div className="pic"><img src="img/5.png"/></div>

@@ -14,6 +14,10 @@ const Page = (props) => {
     let onClickNext =()=>{
         props.history.replace('/');
     }
+    let onClickEditdevice =()=>{
+        console.log(props);
+        props.history.replace(`/editdevice/${props.deviceid}`);
+    }
     return (
     <div className="addnewdevice"  style={{height: window.innerHeight+"px"}}>
         <NavBar lefttitle="返回" title="匹配成功" onClickLeft={onClickReturn}/>
@@ -23,11 +27,17 @@ const Page = (props) => {
             </div>
             <div className="loginBotton">
                 <Button onClick={onClickNext} primary>完成</Button>
-                <Button onClick={onClickNext} default>输入品牌</Button>
+                <Button onClick={onClickEditdevice} default >输入品牌</Button>
             </div>
         </div>
     </div>
 );
 }
 
-export default Page
+const mapStateToProps = ({},props) => {
+    let deviceid = props.match.params.deviceid;
+    return {deviceid};
+}
+
+Page = connect(mapStateToProps)(Page);
+export default Page;
