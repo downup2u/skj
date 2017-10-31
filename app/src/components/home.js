@@ -186,7 +186,7 @@ export class DeviceDataList extends Component {
                                         <div style={linestyleresult1}></div>
                                     </div>
                                 </div>
-                                <span className="datanumber">{percent1*100}%</span>
+                                <span className="datanumber">{parseInt(percent1*100)}%</span>
                                 { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "resetone")}>复位</span> }
                                 { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "setone")}>设置</span> }
                             </div>
@@ -198,7 +198,7 @@ export class DeviceDataList extends Component {
                                         <div style={linestyleresult2}></div>
                                     </div>
                                 </div>
-                                <span className="datanumber">{percent2*100}%</span>
+                                <span className="datanumber">{parseInt(percent2*100)}%</span>
 
                                 { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone")}>复位</span> }
                                 { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "setone")}>设置</span> }
@@ -333,28 +333,35 @@ export class Page extends Component {
 
         let curdevice = null;
         let curdevicedata = null;
-        let detaillist = {};
+        let detaillist = [];
         let iswatercut = false;
         let deviceid = '';
 
         if(!!curdeviceid){
             curdevice = devices[curdeviceid];
             curdevicedata = _.get(curdevice,'realtimedata',false);
-            // console.log(curdevice);
-            let d1 = _.get(curdevice,"detaildaylist",false);
-            let d2 = _.get(curdevice,"detailvollist",false);
-            deviceid = curdevice.deviceid;
 
-            if(d1){
-                _.map(d1, (d, i)=>{
-                    detaillist[d.name] = d;
-                    detaillist[d.name]["detailvollist"] = d2[i]; 
-                })
-            }
+            console.log(curdevice);
+
+            // console.log(curdevice);
+            let d1 = curdevice.detaildaylist || [];
+            let d2 = curdevice.detailvollist || [];
+
+            let detaildatamap = {};
+            _.map(d1, (daylist,i)=>{
+                detaildatamap[daylist.name] = daylist;
+            })
+            _.map(d2, (vollist,i)=>{
+                detaildatamap[vollist.name] = detaildatamap[vollist.name] || {};
+                detaildatamap[vollist.name]["detailvollist"] = vollist;
+            })
+            if(!!detaildatamap["5微米PP滤芯"]){ detaillist.push(detaildatamap["5微米PP滤芯"]) }
+            if(!!detaildatamap["颗粒活性炭"]){ detaillist.push(detaildatamap["颗粒活性炭"]) }
+            if(!!detaildatamap["1微米PP滤芯"]){ detaillist.push(detaildatamap["1微米PP滤芯"]) }
+            if(!!detaildatamap["反渗透RO膜"]){ detaillist.push(detaildatamap["反渗透RO膜"]) }
+            if(!!detaildatamap["后置活性炭"]){ detaillist.push(detaildatamap["后置活性炭"]) }
             // console.log(detaillist);
-            // console.log(JSON.stringify(detaillist));
-            //curdevicedata = !!curdevice && curdevice.hasOwnProperty("realtimedata")?curdevice.realtimedata:null;
-            //detaillist = !!curdevicedata && curdevicedata.hasOwnProperty("detaillist")?curdevicedata.detaillist:false;
+            
         }
         let onClickReset = (detailindex)=>{
           let text = "你确认需要复位吗？";
@@ -493,7 +500,7 @@ export class Page extends Component {
 
                 </div>
 
-                { JSON.stringify(detaillist)!=="{}" &&
+                { detaillist.length>0 &&
                     <div className="HomeList">
                         <img src="img/head/3.png" />
                         <div className="ListTitle">
@@ -505,7 +512,7 @@ export class Page extends Component {
                     </div>
                 }
 
-                { JSON.stringify(detaillist)!=="{}" ?(
+                { detaillist.length>0 ?(
                     <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent} dispatch={props.dispatch} curdeviceid = {deviceid} onClickReset={onClickReset} showbackbtn={this.state.showbackbtn}/>
                 ):null }
 
