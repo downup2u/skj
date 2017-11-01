@@ -136,76 +136,79 @@ export class DeviceDataList extends Component {
             <ul style={list} className="homePageList">
                 {_.map(detaillist,(detail,detailindex)=> {
 
+                    if(detail.isvisiable){
+                        // let color1 = detail.leftpecent>maxleftpecent?"#C00":"#4bcef5";
+                        // let color2 = detail.leftpecent>maxleftpecent?"#C00":"#4bf3ee";
 
-                    // let color1 = detail.leftpecent>maxleftpecent?"#C00":"#4bcef5";
-                    // let color2 = detail.leftpecent>maxleftpecent?"#C00":"#4bf3ee";
+                        // color1 = detail.leftpecent>=100?"#CCC":color1;
+                        // color2 = detail.leftpecent>=100?"#CCC":color2;
+                        //#FF9224 橙色
+                        //#EA0000 红色
+                        //#00BB00 绿色
 
-                    // color1 = detail.leftpecent>=100?"#CCC":color1;
-                    // color2 = detail.leftpecent>=100?"#CCC":color2;
-                    //#FF9224 橙色
-                    //#EA0000 红色
-                    //#00BB00 绿色
+                        //百分比
+                        let percent1 = (detail.v / detail.t).toFixed(2);
+                        let color1 = null;
+                        if(percent1<0.95){
+                            color1 = "#00BB00";
+                        }
+                        if(percent1>=0.95 && percent1 < 1){
+                            color1 = "#FF9224";
+                        }
+                        if(percent1 >= 1){
+                            color1 = "#EA0000";
+                            percent1 = 1;
+                        }
+                        let percent2 = (detail.detailvollist.v / detail.detailvollist.t).toFixed(2);
+                        let color2 = null;
+                        if(percent2<0.95){
+                            color2 = "#00BB00";
+                        }
+                        if(percent2>=0.95 && percent2 < 1){
+                            color2 = "#FF9224";
+                        }
+                        if(percent2 >= 1){
+                            color2 = "#EA0000";
+                            percent2 = 1;
+                        }
 
-                    //百分比
-                    let percent1 = (detail.v / detail.t).toFixed(2);
-                    let color1 = null;
-                    if(percent1<0.95){
-                        color1 = "#00BB00";
-                    }
-                    if(percent1>=0.95 && percent1 < 1){
-                        color1 = "#FF9224";
-                    }
-                    if(percent1 >= 1){
-                        color1 = "#EA0000";
-                        percent1 = 1;
-                    }
-                    let percent2 = (detail.detailvollist.v / detail.detailvollist.t).toFixed(2);
-                    let color2 = null;
-                    if(percent2<0.95){
-                        color2 = "#00BB00";
-                    }
-                    if(percent2>=0.95 && percent2 < 1){
-                        color2 = "#FF9224";
-                    }
-                    if(percent2 >= 1){
-                        color2 = "#EA0000";
-                        percent2 = 1;
-                    }
+                        let linestyleresult1 = linestyle(color1, color1, `${percent1*100}%`);
+                        let linestyleresult2 = linestyle(color2, color2, `${percent2*100}%`);
 
-                    let linestyleresult1 = linestyle(color1, color1, `${percent1*100}%`);
-                    let linestyleresult2 = linestyle(color2, color2, `${percent2*100}%`);
-
-
-                    return (
-                        <li className="devicedatalistli" key={detail.name}>
-                            <span className="listname">{detail.name}</span>
-                            <div className="datadata">
-                                <span className="title">天数</span>
-                                <div className="listprocess">
-                                    <div style={lineBg}>
-                                        <div style={linestyleresult1}></div>
+                        
+                        return (
+                            <li className="devicedatalistli" key={detail.name}>
+                                <span className="listname">{detail.name}</span>
+                                <div className="datadata">
+                                    <span className="title">天数</span>
+                                    <div className="listprocess">
+                                        <div style={lineBg}>
+                                            <div style={linestyleresult1}></div>
+                                        </div>
                                     </div>
+                                    <span className="datanumber">{parseInt(percent1*100)}%</span>
+                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "resetone")}>复位</span> }
+                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "setone")}>设置</span> }
                                 </div>
-                                <span className="datanumber">{parseInt(percent1*100)}%</span>
-                                { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "resetone")}>复位</span> }
-                                { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "setone")}>设置</span> }
-                            </div>
 
-                            <div className="datadata">
-                                <span className="title">流量</span>
-                                <div className="listprocess">
-                                    <div style={lineBg}>
-                                        <div style={linestyleresult2}></div>
+                                <div className="datadata">
+                                    <span className="title">流量</span>
+                                    <div className="listprocess">
+                                        <div style={lineBg}>
+                                            <div style={linestyleresult2}></div>
+                                        </div>
                                     </div>
+                                    <span className="datanumber">{parseInt(percent2*100)}%</span>
+
+                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone")}>复位</span> }
+                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "setone")}>设置</span> }
                                 </div>
-                                <span className="datanumber">{parseInt(percent2*100)}%</span>
 
-                                { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone")}>复位</span> }
-                                { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "setone")}>设置</span> }
-                            </div>
-
-                        </li>
-                    );
+                            </li>
+                        )
+                    }else{
+                        return (<li style={{display: "none"}} key={detail.name}></li>)
+                    }
                 })}
             </ul>
         )
@@ -231,7 +234,7 @@ let DeviceSwiper =(props)=>{
 
             {...swiperOptions}
             onSlideChangeEnd={(swiper, event) => {
-                console.log(swiper.activeIndex);
+                // console.log(swiper.activeIndex);
                 let curdeviceid = mydevicelist[swiper.activeIndex];
                 onChangeDevice(curdeviceid);
             }}
@@ -342,7 +345,7 @@ export class Page extends Component {
             deviceid = devices[curdeviceid].deviceid;
             curdevicedata = _.get(curdevice,'realtimedata',false);
 
-            console.log(curdevice);
+            // console.log(curdevice);
 
             // console.log(curdevice);
             let d1 = curdevice.detaildaylist || [];
@@ -444,7 +447,7 @@ export class Page extends Component {
                         buttonsClick : ()=>{
                             // console.log(this.refs.myInput.value);
                             const inputid = document.getElementById('inutpwdwatercutuserpassword');
-                            console.log(`inputid==>${inputid.value}`);
+                            // console.log(`inputid==>${inputid.value}`);
                             props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut,password:inputid.value}));
                             // ClickDuanshuiSuccess();
                         }
@@ -473,7 +476,7 @@ export class Page extends Component {
         }
 
 
-        console.log(deviceid);
+        // console.log(deviceid);
 
         return (
             <div className="homePageWamp">

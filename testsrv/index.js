@@ -37,7 +37,7 @@ const port = 52341;//目标端口
 const client = net.connect({port: port,host:ip}, () => {
   // 'connect' listener
   // setInterval(()=>{
-    let buf = test.gettestbuf_data(process.env.targetmac ||'3C2C9422B9C3');//Buffer.from(datatosend,'hex');
+    let buf = test.gettestbuf_data(process.env.targetmac ||'0800200A8C4C');//Buffer.from(datatosend,'hex');
     //const bufstr = 'aa3c2c9422b9e300130000360000009d00090006000600060006000600';
     //let buf = Buffer.from(bufstr,'hex');
 

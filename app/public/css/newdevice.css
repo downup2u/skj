@@ -116,16 +116,46 @@
     padding-bottom: 0;
     display: flex;
     flex-direction: column;
+    border-bottom: 1px solid #EEE;
 }
 .editdevicePage .newdeviceinput{
     margin-bottom: 15px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    display: -webkit-flex;
+}
+.editdevicePage .newdeviceinput span{
+    display: inline-block;
+    width: 70px;
+    line-height: 40px;
+    text-align: right;
+    margin-right: 10px;
+    font-size: 16px;
+    flex-shrink: 0;
 }
 .editdevicePage .newdeviceinput .ui.input{
     flex-grow: 1;
     height: 40px;
 }
-
+.newdevice2{
+    border-bottom: 1px solid #EEE;
+    padding: 20px;
+}
+.newdevice2 .newdeviceinput{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    border-bottom: 1px solid #EEE;
+    padding: 10px 0;
+}
+.newdevice2 .newdeviceinput span{
+    font-size: 16px;
+}
 
 
 
