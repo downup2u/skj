@@ -37,8 +37,16 @@ let startsrv = ()=>{
   console.log("static admin:" + admindir);
   app.use('/admin', express.static(admindir));
 
-  let uploaddir = path.join(__dirname,'./router',config.uploaddir);
+  let uploaddir = path.join(__dirname,config.uploaddir);
   console.log("static upload:" + uploaddir);
+  fs.exists(`${uploaddir}/readme.txt`,(exists)=>{
+    if(exists){
+       console.log(`${uploaddir}/readme.txt -->存在`);
+    }
+    else{
+      console.log(`${uploaddir}/readme.txt -->不存在`);
+    }
+  });
   app.use(config.uploadurl, express.static(uploaddir));
 
 

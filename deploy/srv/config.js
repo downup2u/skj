@@ -6,7 +6,7 @@ let config =  {
   publishdirapp:'../../dist/app',
   publishdiradmin:'../../dist/admin',
   publishlog:'../../log',
-  uploaddir:'../uploader',
+  uploaddir:'../../dist/uploader',
   uploadurl:'/uploader',
   expRequestMinutes:2,//2分钟之内
   maxAge:86400000,
