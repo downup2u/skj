@@ -1,12 +1,12 @@
 let config =  {
   secretkey:'shuikejingkey',
-  listenport:process.env.listenport ||3101,
+  listenport:process.env.listenport ||3100,
   rooturl:process.env.rooturl ||'http://skj.com28.cn',
-  publishdirtest:'/dist/test',
-  publishdirapp:'/dist/app',
-  publishdiradmin:'/dist/admin',
-  publishlog:'/dist/log',
-  uploaddir:'/dist/uploader',
+  publishdirtest:'../../dist/test',
+  publishdirapp:'../../dist/app',
+  publishdiradmin:'../../dist/admin',
+  publishlog:'../../log',
+  uploaddir:'../uploader',
   uploadurl:'/uploader',
   expRequestMinutes:2,//2分钟之内
   maxAge:86400000,
@@ -15,7 +15,7 @@ let config =  {
   loginuserexptime:60*60*24*30,//用户登录有效期,30天
   mongodburl:process.env.MONGO_URL || 'mongodb://localhost/skj',
 
-  tcpport:process.env.tcpport ||52342,
+  tcpport:process.env.tcpport ||52341,
   deviceconfig:{
     //  gradetotal:{
     //    '优':100,
@@ -74,6 +74,12 @@ config.setdeviceconfig =  (systemconfig)=>{
     systotal1213:systemconfig.systotal1213,
     systotal1415:systemconfig.systotal1415,
     systotal1617:systemconfig.systotal1617,
+
+    systotalvol89:systemconfig.systotalvol89,
+    systotalvol1011:systemconfig.systotalvol1011,
+    systotalvol1213:systemconfig.systotalvol1213,
+    systotalvol1415:systemconfig.systotalvol1415,
+    systotalvol1617:systemconfig.systotalvol1617,
   };
   console.log(`setdeviceconfig:${JSON.stringify(config)}`);
 };

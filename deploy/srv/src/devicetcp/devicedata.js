@@ -4,10 +4,10 @@ const winston = require('../log/log.js');
 
 let parseBufData0 = (buf)=>{
   let deviceconfig = config.deviceconfig;
-// data0		净水流量数	净水流量数高8位
-// data1		净水流量数	净水流量数低8位
-// data2		原水流量数	原水流量数高8位
-// data3		原水流量数	原水流量数低8位
+  // data0		净水流量数	净水流量数高8位
+  // data1		净水流量数	净水流量数低8位
+  // data2		原水流量数	原水流量数高8位
+  // data3		原水流量数	原水流量数低8位
   // data4	 	原水TDS	原水TDS字节高8位
   // data5	 	原水TDS	原水TDS字节低8位
   // data6	 	净水TDS	净水TDS字节高8位
@@ -103,6 +103,20 @@ let parseBufData0 = (buf)=>{
         data1213,///1微米pp滤芯已用天数
         data1415,//反渗透RO膜已用天数
         data1617,//后置活性炭已用天数
+        mapv:{
+          '5微米PP滤芯':deviceconfig.systotalvol89,
+          '颗粒活性炭':deviceconfig.systotalvol1011,
+          '1微米PP滤芯':deviceconfig.systotalvol1213,
+          '反渗透RO膜':deviceconfig.systotalvol1415,
+          '后置活性炭':deviceconfig.systotalvol1617,
+        },
+        mapd:{
+          '5微米PP滤芯':deviceconfig.systotal89,
+          '颗粒活性炭':deviceconfig.systotal1011,
+          '1微米PP滤芯':deviceconfig.systotal1213,
+          '反渗透RO膜':deviceconfig.systotal1415,
+          '后置活性炭':deviceconfig.systotal1617,
+        }
       },
       iswatercut,
       name:getgrade(dts1,deviceconfig.gradetotal),

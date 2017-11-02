@@ -64,8 +64,8 @@ let SystemConfigSchema = new Schema({
     systotalvol89:{ type: Schema.Types.Number,default: 2500 },//5微米PP滤芯的允许最大流量为2500升
     systotalvol1011:{ type: Schema.Types.Number,default:2500},//颗粒活性炭的允许最大流量为2500升
     systotalvol1213:{ type: Schema.Types.Number,default:2500 },//1微米PP滤芯的允许最大流量为2500升
-    systotalvol1415:{ type: Schema.Types.Number,default: 100 },//反渗透RO膜的允许最大流量为20000升
-    systotalvol1617:{ type: Schema.Types.Number,default:100},//后置活性炭的允许最大流量为2500升
+    systotalvol1415:{ type: Schema.Types.Number,default: 20000 },//反渗透RO膜的允许最大流量为20000升
+    systotalvol1617:{ type: Schema.Types.Number,default:2500},//后置活性炭的允许最大流量为2500升
 });
 SystemConfigSchema.plugin(mongoosePaginate);
 let SystemConfig  = mongoose.model('SystemConfig',  SystemConfigSchema);
@@ -129,6 +129,15 @@ let RealtimedataSchema = new Schema({
 RealtimedataSchema.plugin(mongoosePaginate);
 let Realtimedata  = mongoose.model('Realtimedata',  RealtimedataSchema);
 
+/*
+流程：
+【app上实时水量重置按钮】如果实时水量复位,则将该设备所有滤芯的fv_lx为当前realtimedata的值
+【app上某滤芯复位按钮】设置某滤芯fv_l0的值为当前realtimedata的值
+【app上某滤芯设置按钮】设置某滤芯fv_l0的值为用户输入的值
+
+当前数据过来后，判断detailvollist是否为0数据，如果是，则初始化数组
+如果有数据，则动态填充v
+*/
 let DeviceSchema = new Schema({
     creator:{ type: Schema.Types.ObjectId, ref: 'User' },
     deviceid:String,//mac->hex
@@ -142,6 +151,21 @@ let DeviceSchema = new Schema({
           isvisiable:{ type: Schema.Types.Boolean,default: false },//是否显示
           fv_l0:Number,//初始值为L0, 就是复位或者设置之后的值
           fv_lx:Number,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
+          fv_ln:Number,//当前值
+          v:Number,//L0+(Ln – Lx)
+          t:Number,
+          updated_at:{ type: Date, default:new Date()},
+      }
+    ],
+    detaildaylist:[
+      {
+          name:String,
+          isvisiable:{ type: Schema.Types.Boolean,default: false },//是否显示
+          fd_l0:Number,//初始值为L0, 就是复位或者设置之后的值
+          fd_lx:Number,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
+          fd_ln:Number,//当前值
+          v:Number,//L0+(Ln – Lx)
+          t:Number,
           updated_at:{ type: Date, default:new Date()},
       }
     ],

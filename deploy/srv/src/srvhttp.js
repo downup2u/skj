@@ -13,7 +13,7 @@ const uuid = require('node-uuid');
 const _  = require('lodash');
 
 let startsrv = ()=>{
-  let appdir = config.publishdirapp;
+  let appdir = path.join(__dirname,config.publishdirapp);
   console.log("static appdir:" + appdir);
   app.use('/app', express.static(appdir));
   fs.exists(`${appdir}/index.html`,(exists)=>{
@@ -25,19 +25,19 @@ let startsrv = ()=>{
     }
   });
 
-  let testdir = config.publishdirtest;
+  let testdir = path.join(__dirname,config.publishdirtest);
   console.log("static test:" + testdir);
   app.use('/test', express.static(testdir));
 
-  let logdir = config.publishlog;
+  let logdir = path.join(__dirname,config.publishlog);
   console.log("static test:" + logdir);
   app.use('/log', express.static(logdir));
 
-  let admindir = config.publishdiradmin;
+  let admindir = path.join(__dirname,config.publishdiradmin);
   console.log("static admin:" + admindir);
   app.use('/admin', express.static(admindir));
 
-  let uploaddir =config.uploaddir;
+  let uploaddir = path.join(__dirname,'./router',config.uploaddir);
   console.log("static upload:" + uploaddir);
   app.use(config.uploadurl, express.static(uploaddir));
 
