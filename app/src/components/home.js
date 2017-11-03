@@ -240,38 +240,38 @@ let DeviceSwiper =(props)=>{
             }}
             >
             {
-              _.map(mydevicelist,(deviceid)=>{
+                _.map(mydevicelist,(deviceid)=>{
 
-                  //判断当前设备是否有数据
-                  let tmpdevice = devices[deviceid];
-                  let {name,total,modeltype} = tmpdevice.realtimedata;
-                  let getdata = _.get(tmpdevice,'realtimedata.getdata',false);
+                    //判断当前设备是否有数据
+                    let tmpdevice = devices[deviceid];
+                    let {name,total,modeltype} = tmpdevice.realtimedata;
+                    let getdata = _.get(tmpdevice,'realtimedata.getdata',false);
 
-                  return (
-                      <Slide
-                          className="Demo-swiper__slide"
-                          key={deviceid}
-                          >
-                          <div className="headContent">
+                    return (
+                        <Slide
+                            className="Demo-swiper__slide"
+                            key={deviceid}
+                            >
+                            <div className="headContent">
 
                                 <div className="waterwave">
                                     <div><Waterwave id={deviceid}/></div>
                                 </div>
                                 <img src="img/h1.png" className="bg"/>
-                              {getdata?(
-                                  <div className="headContentInfo">
-                                      <span className="i2">{name}</span>
-                                      <span className="i1">{modeltype}</span>
-                                      <span className="i3">当前水质</span>
-                                      <span className="i4">共净化{total}L</span>
-                                  </div>):(
-                                  <div className="headContentInfo">
+                                {getdata?(
+                                    <div className="headContentInfo">
+                                        <span className="i2">{name}</span>
+                                        <span className="i1">{modeltype}</span>
+                                        <span className="i3">当前水质</span>
+                                        <span className="i4">共净化{total}L</span>
+                                    </div>):(
+                                    <div className="headContentInfo">
                                         <div className="nodata">暂无数据</div>
-                                  </div>
-                                  )}
-                          </div>
-                      </Slide>
-                  );
+                                    </div>
+                                    )}
+                            </div>
+                        </Slide>
+                    );
                 })
             }
         </Swiper>

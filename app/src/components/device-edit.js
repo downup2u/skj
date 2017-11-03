@@ -10,24 +10,46 @@ import { Switch } from 'antd';
 import _ from 'lodash';
 
 //{"5微米PP滤芯":180,"颗粒活性炭":180,"1微米PP滤芯":180,"反渗透RO膜":730,"后置活性炭":360}
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+const asyncValidate = (values /*, dispatch */) => {
+  return sleep(1000).then(() => {
+    // simulate server latency
+  })
+}
 
-const required = value => value ? undefined : undefined;
 
-let renderEditdeviceForm = (fields)=>{
-    console.log(fields);
-    let dispatch = fields.dispatch;
-    let detaildaylist = fields.curdevice.detaildaylist;
-    let dinputdata = [
-        fields.d1.input,
-        fields.d2.input,
-        fields.d3.input,
-        fields.d4.input,
-        fields.d5.input
-    ];
+let renderform1 = (fields)=>{
+    return (
+        <div className="newdeviceinput">
+            <span>设备名称</span><Input placeholder='输入设备名' {...fields.input} type="text"/>
+        </div>
+    )
+}
+let renderform2 = (fields)=>{
+    return (
+        <div className="newdeviceinput">
+            <span>设备品牌</span><Input placeholder='输入设备品牌' {...fields.input} type="text"/>
+        </div>
+    )
+}
+let renderform3 = (fields)=>{
+    return (
+        <div className="newdeviceinput">
+            <span>型号</span><Input placeholder='输入型号' {...fields.input} type="text"/>
+        </div>
+    )
+}
+
+
+
+
+let EditdeviceFormXX = (props)=>{
+    let {handleSubmit,onClickEditDevice, curdevice, dispatch, detaildaylist, curdeviceid} = props;
+
     let setdeviceshow = (v, id, name)=>{
-        console.log(v);
-        console.log(id);
-        console.log(name);
+        // console.log(v);
+        // console.log(id);
+        // console.log(name);
         let payload = {
             deviceid : id,
             cmd : "setvisible",
@@ -38,72 +60,59 @@ let renderEditdeviceForm = (fields)=>{
         dispatch(resetdevicecmd_request(payload));
     }
 
-    /*
+    //'devicebrand','devicemodel']
 
-    onChange={(v)=>{setdeviceshow(v, fields.curdevice.deviceid, data.name)}}
-    复位操作 payload说明
-    deviceid:设备id
-    cmd:'resetall'/'resetone'/'setone'/'setvisible'【resetall表示实时水流重置,resetone表示复位1个滤芯,setone表示设置一个滤芯,setvisible表示设置滤芯是否可见】
-    indexname:'5微米PP滤芯'/'颗粒活性炭'【表示滤芯名字，当cmd为'resetone'/'setone'/'setvisible'有效】
-    value:用户输入的值，仅当cmd为'setone'/'setvisible'有效，其中setone输入数字，setvisible为bool类型
-    type:'vol'/'day'【vol表示复位流量,day表示复位天数】
-    */
-    
-    return (
-        <div className="editdevicePageWamp">
-            <div className='newdevice editdevicePage'>
-                <div className="newdeviceinput">
-                    <span>设备名称</span><Input placeholder='输入设备名' {...fields.devicename.input} type="text"/>
-                </div>
-                <div className="newdeviceinput">
-                    <span>设备品牌</span><Input placeholder='输入设备品牌' {...fields.devicebrand.input} type="text"/>
-                </div>
-                <div className="newdeviceinput">
-                    <span>型号</span><Input placeholder='输入型号' {...fields.devicemodel.input} type="text"/>
-                </div>
-            </div>
-            { detaildaylist.length>0 && 
-                <div className='newdevice2'>
-                    {_.map(detaildaylist, (data,i)=>{
-                        return (
-                            <div className="newdeviceinput" key={`dd${i}`}>
-                                <span>{data.name}</span>
-                                <Switch 
-                                    checkedChildren="开" 
-                                    unCheckedChildren="关" 
-                                    defaultChecked= {fields.curdevice.detaildaylist[i].isvisiable}
-                                    {...dinputdata[i]} 
-                                    onChange={(v)=>{setdeviceshow(v, fields.curdevice.deviceid, data.name)}}
-                                    />
-                            </div>
-                        )
-                    })}
-                </div>
-            }
-        </div>
-    );
-}
-renderEditdeviceForm = connect()(renderEditdeviceForm);
-
-let EditdeviceForm = (props)=>{
-    let {handleSubmit,onClickEditDevice, curdevice, dispatch} = props;
     return (
         <Form onSubmit={handleSubmit(onClickEditDevice)}>
             <div className="loginPageTop">
-                <Fields 
-                    names={['devicename','devicebrand','devicemodel',"d1","d2","d3","d4","d5"]} 
-                    component={renderEditdeviceForm} 
-                    curdevice={curdevice}
-                    dispatch={dispatch}
-                    validate={[required]}
-                    />
-                    <div className="loginBotton">
-                        <Button primary>确定</Button>
+                <div className="editdevicePageWamp">
+                    <div className='newdevice editdevicePage'>
+                    
+                        <Field 
+                            name='devicename'
+                            component={renderform1}
+                            />
+                        <Field 
+                            name='devicebrand'
+                            component={renderform2}
+                            />
+                        <Field 
+                            name='devicemodel'
+                            component={renderform3}
+                            />
+
                     </div>
+                </div>
+                { detaildaylist.length>0 && 
+                    <div className='newdevice2'>
+                        {_.map(detaildaylist, (data,i)=>{
+                            return (
+                                <div className="newdeviceinput" key={`dd${i}`}>
+                                    <span>{data.name}</span>
+                                    <Switch 
+                                        checkedChildren="开" 
+                                        unCheckedChildren="关" 
+                                        defaultChecked= {detaildaylist[i].isvisiable}
+                                        onChange={(v)=>{setdeviceshow(v, curdeviceid, data.name)}}
+                                        />
+                                </div>
+                            )
+                        })}
+                    </div>
+                }
+
+                <div className="loginBotton">
+                    <Button primary>确定</Button>
+                </div>
+
             </div>
         </Form>
     );
 };
+
+
+
+
 
 class Page extends React.Component {
 
@@ -121,27 +130,37 @@ class Page extends React.Component {
         data:values
     }));
   }
+
+  
   render() {
-    const {curdevice} = this.props;
+    const {curdevice, detaildaylist, curdeviceid} = this.props;
 
     console.log(curdevice);
-    EditdeviceForm = reduxForm({
-      form: 'editdevice',
-      initialValues:{
-        devicename:curdevice.devicename,
-        devicebrand:curdevice.devicebrand,
-        devicemodel:curdevice.devicemodel,
+    EditdeviceFormXX = reduxForm({
+        form: 'editdevice',
+        initialValues:{
+            devicename:curdevice.devicename,
+            devicebrand:curdevice.devicebrand,
+            devicemodel:curdevice.devicemodel,
 
-        // devicemodel:curdevice.devicemodel,
-        // devicemodel:curdevice.devicemodel,
-        // devicemodel:curdevice.devicemodel,
-        // devicemodel:curdevice.devicemodel,
-        // devicemodel:curdevice.devicemodel,
-      }
-    })(EditdeviceForm);
+            // devicemodel:curdevice.devicemodel,
+            // devicemodel:curdevice.devicemodel,
+            // devicemodel:curdevice.devicemodel,
+            // devicemodel:curdevice.devicemodel,
+            // devicemodel:curdevice.devicemodel,
+        },
+        asyncValidate
+    })(EditdeviceFormXX);
     return ( <div>
             <NavBar lefttitle="返回" title={curdevice.devicename} onClickLeft={this.onClickReturn}/>
-            <EditdeviceForm onClickEditDevice={this.onClickEditDevice} curdevice = {curdevice} dispatch={this.props.dispatch}/>
+            <EditdeviceFormXX 
+                onClickEditDevice={this.onClickEditDevice} 
+                dispatch={this.props.dispatch} 
+                detaildaylist={detaildaylist}
+                curdeviceid={curdeviceid}
+                />
+
+                    
           </div>);
   }
 }
@@ -149,9 +168,13 @@ class Page extends React.Component {
 
 const mapStateToProps = ({device:{mydevicelist,devices}},props) => {
 
-  let deviceid = props.match.params.deviceid;
-  let curdevice = devices[deviceid];
-  return {curdevice};
+    let deviceid = props.match.params.deviceid;
+    let curdevice = devices[deviceid];
+    let curdeviceid = curdevice.deviceid;
+    let curdetaildaylist = curdevice.detaildaylist;
+
+
+    return {curdevice, detaildaylist: curdetaildaylist, curdeviceid: curdeviceid};
 }
 
 Page = connect(mapStateToProps)(Page);
