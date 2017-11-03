@@ -185,3 +185,117 @@ exports.senddevicecmd = (socket,payloaddata,ctx)=>{
   }
   doresult();
 }
+
+// 【app上实时水量重置按钮】如果实时水量复位,则将该设备所有滤芯的fv_lx为当前realtimedata的值
+// 【app上某滤芯复位按钮】设置某滤芯fv_l0的值为当前realtimedata的值
+// 【app上某滤芯设置按钮】设置某滤芯fv_l0的值为用户输入的值
+/*
+deviceid:设备id
+cmd:'resetall'/'resetone'/'setone'
+indexname:'5微米PP滤芯'/'颗粒活性炭'
+value:'setone'有效
+type:'vol'/'day'
+*/
+exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
+  const deviceid = payloaddata.deviceid;
+
+  const dbModel = DBModels.DeviceModel;
+  dbModel.findOne({deviceid:deviceid,creator:ctx.userid}).populate([
+    {
+      path:'realtimedata', model: 'Realtimedata'
+    }
+    ]).exec((err,devicedata)=>{
+    if(!err && !!devicedata){
+      const realtimedata = devicedata.realtimedata;
+      if(!realtimedata){
+        socket.emit('common_err',{type:'resetdevicecmd',errmsg:`未获取到实时数据,无法复位`});
+        return;
+      }
+      if(payloaddata.type === 'vol'){
+        let detailvollist = devicedata.detailvollist || [];
+        let detailvollist_new = [];
+        if(payloaddata.cmd === 'resetall'){//【app上实时水量重置按钮】如果实时水量复位,则将该设备所有滤芯的fv_lx为当前realtimedata的值
+          _.map(detailvollist,(record)=>{
+            record.fv_lx = realtimedata.rawdata.data01;
+            record.v = record.fv_l0 + realtimedata.rawdata.data01 - record.fv_lx;
+            record.t = realtimedata.rawdata.mapv[record.name],
+            record.updated_at = new Date();
+            detailvollist_new.push(record);
+          });
+        }
+        else{
+          _.map(detailvollist,(record)=>{
+            if(record.name === payloaddata.indexname){
+              if(payloaddata.cmd === 'setvisible'){
+                record.isvisiable = payloaddata.value;
+              }
+              else{
+                if(payloaddata.cmd === 'resetone'){
+                  record.fv_lx = realtimedata.rawdata.data01;
+                }
+                else{//'setone'
+                  record.fv_lx = payloaddata.value;
+                }
+                record.v = record.fv_l0 + realtimedata.rawdata.data01 - record.fv_lx;
+                record.t = realtimedata.rawdata.mapv[record.name],
+                record.updated_at = new Date();
+              }
+            }
+            detailvollist_new.push(record);
+          });
+        }
+        dbModel.findByIdAndUpdate(devicedata._id,{
+          $set:{detailvollist:detailvollist_new}
+        }, {new: true},
+          (err, result)=> {
+            devicedata.detailvollist = detailvollist_new;
+            socket.emit('resetdevicecmd_result',devicedata);
+            console.log(`resetdevicecmd_result===>${JSON.stringify(devicedata)}`);
+        });
+      }
+      else if(payloaddata.type === 'day'){
+        let detaildaylist = devicedata.detaildaylist || [];
+        let detaildaylist_new = [];
+        if(payloaddata.cmd === 'resetall'){//【app上实时水量重置按钮】如果实时水量复位,则将该设备所有滤芯的fv_lx为当前realtimedata的值
+          _.map(detaildaylist,(record)=>{
+            record.fd_lx = realtimedata.rawdata.data89;
+            record.v = record.fd_l0 + realtimedata.rawdata.data89 - record.fd_lx;
+            record.t = realtimedata.rawdata.mapd[record.name],
+            record.updated_at = new Date();
+            detaildaylist_new.push(record);
+          });
+        }
+        else{
+          _.map(detaildaylist,(record)=>{
+            if(record.name === payloaddata.indexname){
+              if(payloaddata.cmd === 'setvisible'){
+                record.isvisiable = payloaddata.value;
+              }
+              else{
+                if(payloaddata.cmd === 'resetone'){
+                  record.fd_lx = realtimedata.rawdata.data89;
+                }
+                else{//'setone'
+                  record.fd_lx = payloaddata.value;
+                }
+                record.v = record.fd_l0 + realtimedata.rawdata.data01 - record.fd_lx;
+                record.t = realtimedata.rawdata.mapd[record.name],
+                record.updated_at = new Date();
+              }
+            }
+            detaildaylist_new.push(record);
+          });
+        }
+
+        dbModel.findByIdAndUpdate(devicedata._id,{
+          $set:{detaildaylist:detaildaylist_new}
+        }, {new: true},
+          (err, result)=> {
+            devicedata.detaildaylist = detaildaylist_new;
+            socket.emit('resetdevicecmd_result',devicedata);
+            console.log(`resetdevicecmd_result===>${JSON.stringify(devicedata)}`);
+        });
+      }
+    }
+  });
+}

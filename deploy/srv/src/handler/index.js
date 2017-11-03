@@ -41,7 +41,7 @@ const authhandler = {
   'queryuserbalance':userlogin.queryuserbalance,
   'fillprofile':userlogin.fillprofile,
   'setlastreadmsgtime':userlogin.setlastreadmsgtime,
-
+  'resetdevicecmd':device.resetdevicecmd,
   'senddevicecmd':device.senddevicecmd,
   'createdevice':device.createdevice,
   'updatedevice':device.updatedevice,

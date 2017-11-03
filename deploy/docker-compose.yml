@@ -9,16 +9,16 @@ services:
       - ./dist:/dist
     environment:
       - MONGO_URL=mongodb://192.168.0.1:27018/skj
-      - listenport=3101
-      - tcpport=52342
+      - listenport=3100
+      - tcpport=52341
     links:
       - mongodb
     ports:
-       - "3101:3101"
-       - "52342:52342"
+       - "3100:3100"
+       - "52341:52341"
     expose:
-       - "3101"
-       - "52342"
+       - "3100"
+       - "52341"
   mongodb:
     image:  mongo:3.4
     expose:
