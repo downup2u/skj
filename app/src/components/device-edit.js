@@ -67,31 +67,31 @@ let EditdeviceFormXX = (props)=>{
             <div className="loginPageTop">
                 <div className="editdevicePageWamp">
                     <div className='newdevice editdevicePage'>
-                    
-                        <Field 
+
+                        <Field
                             name='devicename'
                             component={renderform1}
                             />
-                        <Field 
+                        <Field
                             name='devicebrand'
                             component={renderform2}
                             />
-                        <Field 
+                        <Field
                             name='devicemodel'
                             component={renderform3}
                             />
 
                     </div>
                 </div>
-                { detaildaylist.length>0 && 
+                { detaildaylist.length>0 &&
                     <div className='newdevice2'>
                         {_.map(detaildaylist, (data,i)=>{
                             return (
                                 <div className="newdeviceinput" key={`dd${i}`}>
                                     <span>{data.name}</span>
-                                    <Switch 
-                                        checkedChildren="开" 
-                                        unCheckedChildren="关" 
+                                    <Switch
+                                        checkedChildren="开"
+                                        unCheckedChildren="关"
                                         defaultChecked= {detaildaylist[i].isvisiable}
                                         onChange={(v)=>{setdeviceshow(v, curdeviceid, data.name)}}
                                         />
@@ -110,7 +110,24 @@ let EditdeviceFormXX = (props)=>{
     );
 };
 
+EditdeviceFormXX = reduxForm({
+    form: 'editdevice',
+    asyncValidate,
+    asyncBlurFields: ['devicename']
+})(EditdeviceFormXX);
 
+EditdeviceFormXX = connect(
+  ({device:{devices}},props)=>{
+      const curdevice = devices[props.deviceid];
+      return {
+        initialValues:{
+            devicename:curdevice.devicename,
+            devicebrand:curdevice.devicebrand,
+            devicemodel:curdevice.devicemodel,
+        },
+      }
+  }
+)(EditdeviceFormXX);
 
 
 
@@ -119,6 +136,8 @@ class Page extends React.Component {
   componentWillMount () {
 
   }
+
+
   onClickReturn =()=>{
     this.props.history.goBack();
   }
@@ -131,36 +150,20 @@ class Page extends React.Component {
     }));
   }
 
-  
+
   render() {
-    const {curdevice, detaildaylist, curdeviceid} = this.props;
-
-    console.log(curdevice);
-    EditdeviceFormXX = reduxForm({
-        form: 'editdevice',
-        initialValues:{
-            devicename:curdevice.devicename,
-            devicebrand:curdevice.devicebrand,
-            devicemodel:curdevice.devicemodel,
-
-            // devicemodel:curdevice.devicemodel,
-            // devicemodel:curdevice.devicemodel,
-            // devicemodel:curdevice.devicemodel,
-            // devicemodel:curdevice.devicemodel,
-            // devicemodel:curdevice.devicemodel,
-        },
-        asyncValidate
-    })(EditdeviceFormXX);
+    const {curdevice, detaildaylist, curdeviceid,deviceid} = this.props;
     return ( <div>
             <NavBar lefttitle="返回" title={curdevice.devicename} onClickLeft={this.onClickReturn}/>
-            <EditdeviceFormXX 
-                onClickEditDevice={this.onClickEditDevice} 
-                dispatch={this.props.dispatch} 
+            <EditdeviceFormXX
+                onClickEditDevice={this.onClickEditDevice}
+                dispatch={this.props.dispatch}
                 detaildaylist={detaildaylist}
                 curdeviceid={curdeviceid}
+                deviceid={deviceid}
                 />
 
-                    
+
           </div>);
   }
 }
@@ -174,7 +177,7 @@ const mapStateToProps = ({device:{mydevicelist,devices}},props) => {
     let curdetaildaylist = curdevice.detaildaylist;
 
 
-    return {curdevice, detaildaylist: curdetaildaylist, curdeviceid: curdeviceid};
+    return {curdevice, detaildaylist: curdetaildaylist, curdeviceid: curdeviceid,deviceid};
 }
 
 Page = connect(mapStateToProps)(Page);
