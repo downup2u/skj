@@ -163,7 +163,6 @@ class Page extends React.Component {
                 deviceid={deviceid}
                 />
 
-
           </div>);
   }
 }
