@@ -212,16 +212,24 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
         return;
       }
       if(payloaddata.type === 'vol'){
+        let cleanCount = devicedata.cleanCount || {
+          fv_l0:0,
+          fv_lx:0
+        };
+        let lr = devicedata.lr;
         let detailvollist = devicedata.detailvollist || [];
         let detailvollist_new = [];
         if(payloaddata.cmd === 'resetall'){//【app上实时水量重置按钮】如果实时水量复位,则将该设备所有滤芯的fv_lx为当前realtimedata的值
-          _.map(detailvollist,(record)=>{
-            record.fv_lx = realtimedata.rawdata.data01;
-            record.v = record.fv_l0 + realtimedata.rawdata.data01 - record.fv_lx;
-            record.t = realtimedata.rawdata.mapv[record.name],
-            record.updated_at = new Date();
-            detailvollist_new.push(record);
-          });
+          // _.map(detailvollist,(record)=>{
+          //   record.fv_lx = realtimedata.rawdata.data01;
+          //   record.v = record.fv_l0 + realtimedata.rawdata.data01 - record.fv_lx;
+          //   record.t = realtimedata.rawdata.mapv[record.name],
+          //   record.updated_at = new Date();
+          //   detailvollist_new.push(record);
+          // });
+          detailvollist_new = detailvollist;
+          cleanCount.fv_lx = cu_j;
+          lr = 0;
         }
         else{
           _.map(detailvollist,(record)=>{
@@ -236,7 +244,7 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
                 else{//'setone'
                   record.fv_lx = payloaddata.value;
                 }
-                record.v = record.fv_l0 + realtimedata.rawdata.data01 - record.fv_lx;
+                record.v = record.fv_l0 + devicedata.cu_y - record.fv_lx;
                 record.t = realtimedata.rawdata.mapv[record.name],
                 record.updated_at = new Date();
               }
@@ -245,7 +253,7 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
           });
         }
         dbModel.findByIdAndUpdate(devicedata._id,{
-          $set:{detailvollist:detailvollist_new}
+          $set:{detailvollist:detailvollist_new,lr,cleanCount}
         }, {new: true},
           (err, result)=> {
             devicedata.detailvollist = detailvollist_new;

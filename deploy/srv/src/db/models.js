@@ -145,6 +145,13 @@ let DeviceSchema = new Schema({
     devicebrand:String,
     devicemodel: String,
     realtimedata:{ type: Schema.Types.ObjectId, ref: 'Realtimedata' },
+    cleanCount:{
+      fv_l0:{ type: Schema.Types.Number,default: 0 },//初始值为L0, 就是复位或者设置之后的值
+      fv_lx:{ type: Schema.Types.Number,default: 0 },//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
+    },
+    lr:{ type: Schema.Types.Number,default: 0 },
+    cu_y:{ type: Schema.Types.Number,default: 0 },
+    cu_j:{ type: Schema.Types.Number,default: 0 },
     detailvollist:[
       {
           name:String,

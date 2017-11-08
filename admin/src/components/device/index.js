@@ -63,6 +63,13 @@ const DevicelistEdit = (props) => {
                <TextField label="设备ID" source="deviceid" />
                <TextField label="设备型号" source="devicemodel" />
                <TextField label="设备品牌" source="devicebrand" />
+
+               <TextField label="当前总量(lr)" source="lr" />
+               <TextField label="当前原水" source="cu_y" />
+               <TextField label="当前净水" source="cu_j" />
+               <TextField label="cleanCount(l0)" source="cleanCount.fv_l0" />
+               <TextField label="cleanCount(lx)" source="cleanCount.fv_lx" />
+
                <ReferenceField label="设备实时数据" source="realtimedata" reference="realtimedata" addLabel={true}  allowEmpty>
                   <DateField label="最后更新时间" source="updated_at" showTime />
                </ReferenceField>

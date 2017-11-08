@@ -6,72 +6,83 @@ let PubSub = require('pubsub-js');
 const _ = require('lodash');
 const updatedevice =(realtimedata)=>{
   //查找
+
   const dbModel = DBModels.DeviceModel;
   console.log(`开始更新设备数据${realtimedata.deviceid}`);
   dbModel.findOne({deviceid:realtimedata.deviceid},(err,devicedata)=>{
     if(!err && !!devicedata){
       let detailvollist = devicedata.detailvollist || [];
       let detaildaylist = devicedata.detaildaylist || [];
+      let cleanCount = devicedata.cleanCount || {
+        fv_l0:0,
+        fv_lx:0
+      };
+      let cu_j = realtimedata.rawdata.data12;//当前净水
+      let cu_y = realtimedata.rawdata.data23;//当前原水
       if(detailvollist.length === 0){
+        // Lr = L0 + ( Ln – Lx )
         detailvollist = [
           {
             name:'5微米PP滤芯',
             isvisiable:true,//是否显示
-            fv_l0:realtimedata.rawdata.data01,//初始值为L0, 就是复位或者设置之后的值
-            fv_lx:realtimedata.rawdata.data01,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
-            fv_ln:realtimedata.rawdata.data01,
-            v:realtimedata.rawdata.data01,//L0+(Ln – Lx)
+            fv_l0:cu_y,//初始值为L0, 就是复位或者设置之后的值
+            fv_lx:cu_y,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
+            fv_ln:cu_y,
+            v:cu_y,//L0+(Ln – Lx)
             t:realtimedata.rawdata.mapv['5微米PP滤芯'],
             updated_at:new Date()
           },
           {
             name:'颗粒活性炭',
             isvisiable:true,//是否显示
-            fv_l0:realtimedata.rawdata.data01,//初始值为L0, 就是复位或者设置之后的值
-            fv_lx:realtimedata.rawdata.data01,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
-            fv_ln:realtimedata.rawdata.data01,
-            v:realtimedata.rawdata.data01,//L0+(Ln – Lx)
+            fv_l0:cu_y,//初始值为L0, 就是复位或者设置之后的值
+            fv_lx:cu_y,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
+            fv_ln:cu_y,
+            v:cu_y,//L0+(Ln – Lx)
             t:realtimedata.rawdata.mapv['颗粒活性炭'],
             updated_at:new Date()
           },
           {
             name:'1微米PP滤芯',
             isvisiable:true,//是否显示
-            fv_l0:realtimedata.rawdata.data01,//初始值为L0, 就是复位或者设置之后的值
-            fv_lx:realtimedata.rawdata.data01,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
-            fv_ln:realtimedata.rawdata.data01,
-            v:realtimedata.rawdata.data01,//L0+(Ln – Lx)
+            fv_l0:cu_y,//初始值为L0, 就是复位或者设置之后的值
+            fv_lx:cu_y,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
+            fv_ln:cu_y,
+            v:cu_y,//L0+(Ln – Lx)
             t:realtimedata.rawdata.mapv['1微米PP滤芯'],
             updated_at:new Date()
           },
           {
             name:'反渗透RO膜',
             isvisiable:true,//是否显示
-            fv_l0:realtimedata.rawdata.data01,//初始值为L0, 就是复位或者设置之后的值
-            fv_lx:realtimedata.rawdata.data01,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
-            fv_ln:realtimedata.rawdata.data01,
-            v:realtimedata.rawdata.data01,//L0+(Ln – Lx)
+            fv_l0:cu_y,//初始值为L0, 就是复位或者设置之后的值
+            fv_lx:cu_y,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
+            fv_ln:cu_y,
+            v:cu_y,//L0+(Ln – Lx)
             t:realtimedata.rawdata.mapv['反渗透RO膜'],
             updated_at:new Date()
           },
           {
             name:'后置活性炭',
             isvisiable:true,//是否显示
-            fv_l0:realtimedata.rawdata.data01,//初始值为L0, 就是复位或者设置之后的值
-            fv_lx:realtimedata.rawdata.data01,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
-            fv_ln:realtimedata.rawdata.data01,
-            v:realtimedata.rawdata.data01,//L0+(Ln – Lx)
+            fv_l0:cu_y,//初始值为L0, 就是复位或者设置之后的值
+            fv_lx:cu_y,//初始净化值为Lx, 为水智盒第一次通电的值或者实时水量重置后的值
+            fv_ln:cu_y,
+            v:cu_y,//L0+(Ln – Lx)
             t:realtimedata.rawdata.mapv['后置活性炭'],
             updated_at:new Date()
           },
         ];
       }
       else{
+        // 首先取出systemtable表cleanCount记录中的Lx，L0字段值赋给变量Lx，L0，
+        // 5微米PP滤芯总流量=初始值+(每个时间点的原水总流量值-初始流量值)
+        // Lr = L0 + ( Ln – Lx )
         let detailvollist_new = [];
         _.map(detailvollist,(record,index)=>{
-          record.v = record.fv_l0 + realtimedata.rawdata.data01 - record.fv_lx;
+          record.v = record.fv_l0 + cu_y - record.fv_lx;
           record.t = realtimedata.rawdata.mapv[record.name],
-          record.fv_ln = realtimedata.rawdata.data01;
+          record.fv_ln = cu_y;
           record.updated_at = new Date();
           detailvollist_new.push(record);
         });
@@ -147,8 +158,11 @@ const updatedevice =(realtimedata)=>{
       console.log(`detailvollist==>${JSON.stringify(detailvollist)}`)
       console.log(`detaildaylist==>${JSON.stringify(detaildaylist)}`)
 
+      // 首先取出systemtable表cleanCount记录中的Lx字段值赋给变量Lx，
+      // 共净化值=每个时间点的净水总流量值-初始净化值
+      const lr = cu_j - cleanCount.fv_l0;
       dbModel.findByIdAndUpdate(devicedata._id,{
-        $set:{detailvollist,detaildaylist}
+        $set:{detailvollist,detaildaylist,lr,cleanCount,cu_y,cu_j}
       }, {new: true},
         (err, result)=> {
         PubSub.publish(`device.${realtimedata.deviceid}`,realtimedata);
