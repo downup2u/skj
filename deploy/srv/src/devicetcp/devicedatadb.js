@@ -167,11 +167,15 @@ const updatedevice =(realtimedata)=>{
       const updateddata = {detailvollist,detaildaylist,lr,cleanCount,cu_y,cu_j,realtimedata:realtimedata._id};
 
       console.log(`updateddata==>${JSON.stringify(updateddata)}`)
-
-      dbModel.findByIdAndUpdate(devicedata._id,{
+      const devicedata_id = devicedata._id;
+      if(typeof devicedata_id === 'string'){
+        devicedata_id = mongoose.Types.ObjectId(devicedata_id);
+      }
+      dbModel.findByIdAndUpdate(devicedata_id,{
         $set:updateddata
       }, {new: true},
         (err, result)=> {
+          console.log(`dbModel err==>${JSON.stringify(err)}`)
           console.log(`dbModel result==>${JSON.stringify(result)}`)
 
           PubSub.publish(`device.${realtimedata.deviceid}`,realtimedata);
