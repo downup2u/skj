@@ -228,7 +228,7 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
           //   detailvollist_new.push(record);
           // });
           detailvollist_new = detailvollist;
-          cleanCount.fv_lx = cu_j;
+          cleanCount.fv_lx = devicedata.cu_j;
           lr = 0;
         }
         else{

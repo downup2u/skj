@@ -85,7 +85,7 @@ export class DeviceDataList extends Component {
         super(props);  
         this.state = {setoneinput: ''};
     } 
-    
+
     // resetdevicecmd_request
     // deviceid:设备id
     // cmd:'resetall'/'resetone'/'setone'/'setvisible'【resetall表示实时水流重置,resetone表示复位1个滤芯,setone表示设置一个滤芯,setvisible表示设置滤芯是否可见】
@@ -175,7 +175,7 @@ export class DeviceDataList extends Component {
                         let linestyleresult1 = linestyle(color1, color1, `${percent1*100}%`);
                         let linestyleresult2 = linestyle(color2, color2, `${percent2*100}%`);
 
-                        
+
                         return (
                             <li className="devicedatalistli" key={detail.name}>
                                 <span className="listname">{detail.name}</span>
@@ -365,7 +365,7 @@ export class Page extends Component {
             if(!!detaildatamap["反渗透RO膜"]){ detaillist.push(detaildatamap["反渗透RO膜"]) }
             if(!!detaildatamap["后置活性炭"]){ detaillist.push(detaildatamap["后置活性炭"]) }
             // console.log(detaillist);
-            
+
         }
         let onClickReset = (detailindex)=>{
           let text = "你确认需要复位吗？";
@@ -402,15 +402,15 @@ export class Page extends Component {
                                 deviceid : deviceid,
                                 cmd : 'resetall',
                                 indexname : '',
-                                value : "",
-                                type : ''
+                                value : '',
+                                type : 'vol'
                             }
                             props.dispatch(resetdevicecmd_request(payload));
                         }
                     }}
                 )
             )
-            
+
         }
         //切断和开通水成功后的提示
         // let ClickDuanshuiSuccess = ()=> {
