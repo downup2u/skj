@@ -239,12 +239,12 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
                 record.isvisiable = payloaddata.value;
               }
               else{
-                record.fv_l0 = 0;
+                record.fv_lx = devicedata.cu_y;
                 if(payloaddata.cmd === 'resetone'){
-                  record.fv_lx = devicedata.cu_y;
+                  record.fv_l0 = 0;
                 }
                 else{//'setone'
-                  record.fv_lx = payloaddata.value;
+                  record.fv_l0 = payloaddata.value;
                 }
                 record.v = record.fv_l0 + devicedata.cu_y - record.fv_lx;
                 record.t = realtimedata.rawdata.mapv[record.name],
@@ -285,13 +285,14 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
                 record.isvisiable = payloaddata.value;
               }
               else{
+                record.fd_lx = realtimedata.rawdata.data89;
                 if(payloaddata.cmd === 'resetone'){
-                  record.fd_lx = realtimedata.rawdata.data89;
+                  record.fd_l0 = 0;
                 }
                 else{//'setone'
-                  record.fd_lx = payloaddata.value;
+                  record.fd_l0 = payloaddata.value;
                 }
-                record.fd_l0 = 0;
+
                 record.v = record.fd_l0 + realtimedata.rawdata.data89 - record.fd_lx;
                 record.t = realtimedata.rawdata.mapd[record.name],
                 record.updated_at = new Date();
