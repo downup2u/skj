@@ -267,14 +267,16 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
         let detaildaylist = devicedata.detaildaylist || [];
         let detaildaylist_new = [];
         if(payloaddata.cmd === 'resetall'){//【app上实时水量重置按钮】如果实时水量复位,则将该设备所有滤芯的fv_lx为当前realtimedata的值
-          _.map(detaildaylist,(record)=>{
-            record.fd_l0 = 0;
-            record.fd_lx = realtimedata.rawdata.data89;
-            record.v = record.fd_l0 + realtimedata.rawdata.data89 - record.fd_lx;
-            record.t = realtimedata.rawdata.mapd[record.name],
-            record.updated_at = new Date();
-            detaildaylist_new.push(record);
-          });
+          // _.map(detaildaylist,(record)=>{
+          //   record.fd_l0 = 0;
+          //   record.fd_lx = realtimedata.rawdata.data89;
+          //   record.v = record.fd_l0 + realtimedata.rawdata.data89 - record.fd_lx;
+          //   record.t = realtimedata.rawdata.mapd[record.name],
+          //   record.updated_at = new Date();
+          //   detaildaylist_new.push(record);
+          // });
+          socket.emit('common_err',{type:'resetdevicecmd',errmsg:`非法命令,【无法对天数进行重置全部操作】`});
+          return;
         }
         else{
           _.map(detaildaylist,(record)=>{
@@ -290,7 +292,7 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
                   record.fd_lx = payloaddata.value;
                 }
                 record.fd_l0 = 0;
-                record.v = record.fd_l0 + realtimedata.rawdata.data01 - record.fd_lx;
+                record.v = record.fd_l0 + realtimedata.rawdata.data89 - record.fd_lx;
                 record.t = realtimedata.rawdata.mapd[record.name],
                 record.updated_at = new Date();
               }
