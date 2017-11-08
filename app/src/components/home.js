@@ -246,7 +246,7 @@ let DeviceSwiper =(props)=>{
                     let tmpdevice = devices[deviceid];
                     let {name,total,modeltype} = tmpdevice.realtimedata;
                     let getdata = _.get(tmpdevice,'realtimedata.getdata',false);
-
+                    let lr = tmpdevice.lr || 0;
                     return (
                         <Slide
                             className="Demo-swiper__slide"
@@ -263,7 +263,7 @@ let DeviceSwiper =(props)=>{
                                         <span className="i2">{name}</span>
                                         <span className="i1">{modeltype}</span>
                                         <span className="i3">当前水质</span>
-                                        <span className="i4">共净化{total}L</span>
+                                        <span className="i4">共净化{lr}L</span>
                                     </div>):(
                                     <div className="headContentInfo">
                                         <div className="nodata">暂无数据</div>
