@@ -258,9 +258,9 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
           $set:{detailvollist:detailvollist_new,lr,cleanCount}
         }, {new: true},
           (err, result)=> {
-            devicedata.detailvollist = detailvollist_new;
-            socket.emit('resetdevicecmd_result',devicedata);
-            console.log(`resetdevicecmd_result===>${JSON.stringify(devicedata)}`);
+            result.realtimedata = realtimedata;//展开
+            socket.emit('resetdevicecmd_result',result);
+            console.log(`resetdevicecmd_result===>${JSON.stringify(result)}`);
         });
       }
       else if(payloaddata.type === 'day'){
@@ -303,9 +303,9 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
           $set:{detaildaylist:detaildaylist_new}
         }, {new: true},
           (err, result)=> {
-            devicedata.detaildaylist = detaildaylist_new;
-            socket.emit('resetdevicecmd_result',devicedata);
-            console.log(`resetdevicecmd_result===>${JSON.stringify(devicedata)}`);
+            result.realtimedata = realtimedata;//展开
+            socket.emit('resetdevicecmd_result',result);
+            console.log(`resetdevicecmd_result===>${JSON.stringify(result)}`);
         });
       }
     }
