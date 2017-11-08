@@ -16,7 +16,7 @@ export const senddata = (values,fncallback)=>{
     data:[
       {
         name:'测试模块',
-        mac:'3c:2c:94:22:B9:C3',
+        mac:'3C:2C:94:22:B9:E4',
         ip:'192.168.9.3'
       },
       {

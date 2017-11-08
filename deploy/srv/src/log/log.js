@@ -1,19 +1,22 @@
 var winston = require('winston');
 var moment = require('moment');
 var path = require('path');
+const config = require('../../config');
 var logger;
 exports.initLog =  ()=>{
   var filename = "shuihezi";//+moment().format('YYYY-MM-DD-HHmmss');
 
   var logfile = filename+".log";
-  var logpath = path.resolve(__dirname,'../../../log', logfile);
+  let logdir = path.join(__dirname,'../',config.publishlog);
+  var logpath = `${logdir}/${logfile}`;
 
   var logfileerr = filename+"_err.log";
-  var logpatherr = path.resolve(__dirname,'../../../log', logfileerr);
+  var logpatherr = `${logdir}/${logfileerr}`;
 
   var logfilewarn = filename+"_warn.log";
-  var logpathwarn = path.resolve(__dirname,'../../../log', logfilewarn);
+  var logpathwarn =  `${logdir}/${logfilewarn}`;
 
+  console.log(`logpath:${logpath},logpatherr:${logpatherr},logpathwarn:${logpathwarn}`);
   // winston.configure({
   //   transports: [
   //     new (winston.transports.File)({ filename: logpath ,level: 'info'}),
