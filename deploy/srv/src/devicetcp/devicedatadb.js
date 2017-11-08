@@ -162,7 +162,7 @@ const updatedevice =(realtimedata)=>{
       console.log(`realtimedata==>${JSON.stringify(realtimedata)}`)
       // 首先取出systemtable表cleanCount记录中的Lx字段值赋给变量Lx，
       // 共净化值=每个时间点的净水总流量值-初始净化值
-      const lr = cu_j - cleanCount.fv_l0;
+      const lr = cu_j - cleanCount.fv_lx;
 
       const updateddata = {detailvollist,detaildaylist,lr,cleanCount,cu_y,cu_j,realtimedata:realtimedata._id};
 
