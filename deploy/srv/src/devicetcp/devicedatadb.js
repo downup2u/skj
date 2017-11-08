@@ -17,8 +17,8 @@ const updatedevice =(realtimedata)=>{
         fv_l0:0,
         fv_lx:0
       };
-      let cu_j = realtimedata.rawdata.data12;//当前净水
-      let cu_y = realtimedata.rawdata.data23;//当前原水
+      let cu_j = realtimedata.rawdata.data01 || 0;//当前净水
+      let cu_y = realtimedata.rawdata.data23 || 0;//当前原水
       if(detailvollist.length === 0){
         // Lr = L0 + ( Ln – Lx )
         detailvollist = [
