@@ -1,5 +1,7 @@
 import { put,takeEvery} from 'redux-saga/effects';
 import {
+  logout_request,
+  
   login_result,
   getdevicelist_request,
   sendauth_result,
@@ -345,6 +347,10 @@ export function* wsrecvsagaflow() {
             text : result.errmsg,
             type : "warning"
         }}));
+
+        if(result.type === 'login'){
+          yield put(logout_request());
+        }
   });
 
   yield takeEvery(`${setuseralerttopicdeleted_result}`, function*(action) {

@@ -523,7 +523,6 @@ exports.loginwithoauth = (socket,actiondata,ctx)=>{
 
 exports.loginwithtoken = (socket,actiondata,ctx)=>{
   try {
-
     let decodeduser = jwt.verify(actiondata.token, config.secretkey);
     let userid = decodeduser._id;
     let userModel = DBModels.UserModel;

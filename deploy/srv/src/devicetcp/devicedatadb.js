@@ -147,7 +147,7 @@ const updatedevice =(realtimedata)=>{
         let detaildaylist_new = [];
         _.map(detaildaylist,(record,index)=>{
           record.v = record.fd_l0 + realtimedata.rawdata.data89 - record.fd_lx;
-          record.t = realtimedata.rawdata.mapv[record.name],
+          record.t = realtimedata.rawdata.mapd[record.name],
           record.updated_at = new Date();
           record.fd_ln = realtimedata.rawdata.data89;
           detaildaylist_new.push(record);
