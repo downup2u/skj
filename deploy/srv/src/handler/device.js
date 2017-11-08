@@ -228,6 +228,7 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
           //   detailvollist_new.push(record);
           // });
           detailvollist_new = detailvollist;
+          cleanCount.fv_l0 = 0;
           cleanCount.fv_lx = devicedata.cu_j;
           lr = 0;
         }
@@ -238,8 +239,9 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
                 record.isvisiable = payloaddata.value;
               }
               else{
+                record.fv_l0 = 0;
                 if(payloaddata.cmd === 'resetone'){
-                  record.fv_lx = realtimedata.rawdata.data01;
+                  record.fv_lx = devicedata.cu_y;
                 }
                 else{//'setone'
                   record.fv_lx = payloaddata.value;
@@ -266,6 +268,7 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
         let detaildaylist_new = [];
         if(payloaddata.cmd === 'resetall'){//【app上实时水量重置按钮】如果实时水量复位,则将该设备所有滤芯的fv_lx为当前realtimedata的值
           _.map(detaildaylist,(record)=>{
+            record.fd_l0 = 0;
             record.fd_lx = realtimedata.rawdata.data89;
             record.v = record.fd_l0 + realtimedata.rawdata.data89 - record.fd_lx;
             record.t = realtimedata.rawdata.mapd[record.name],
@@ -286,6 +289,7 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
                 else{//'setone'
                   record.fd_lx = payloaddata.value;
                 }
+                record.fd_l0 = 0;
                 record.v = record.fd_l0 + realtimedata.rawdata.data01 - record.fd_lx;
                 record.t = realtimedata.rawdata.mapd[record.name],
                 record.updated_at = new Date();
