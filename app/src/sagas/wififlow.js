@@ -21,6 +21,10 @@ import {
   set_weui
 } from '../actions';
 import { push,replace } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
+import _ from 'lodash';
+const getrandom=(min,max)=>{
+  return parseInt(Math.random()*(max-min+1)+min,10);
+}
 
 function getcurwifi() {
     return new Promise(resolve => {
@@ -33,7 +37,16 @@ function getcurwifi() {
 function sendwifidata(values){
   return new Promise(resolve => {
     senddata(values,(retdata)=>{
-      resolve(retdata);
+      let retjson = retdata;
+      let datasz = [];
+      _.map(retjson.data,(data)=>{
+        data.name = `SCICLEAN${getrandom(0,10)}${getrandom(0,10)}${getrandom(0,10)}${getrandom(0,10)}`;
+        datasz.push(
+          data
+        );
+      });
+      retjson.data = datasz;
+      resolve(retjson);
     });
   });
 }

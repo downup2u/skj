@@ -12,9 +12,7 @@ import './tools/myweui.css';
 const {
     LoadMore
 } = WeUI;
-const getrandom=(min,max)=>{
-  return parseInt(Math.random()*(max-min+1)+min,10);
-}
+
 
 class Page extends React.Component {
   componentWillUnount () {
@@ -24,7 +22,7 @@ class Page extends React.Component {
 
   onClickNext =(device)=>{
       if(!device.hasexits){
-          device.name = `SCICLEAN${getrandom(0,10)}${getrandom(0,10)}${getrandom(0,10)}${getrandom(0,10)}`;
+          
           this.props.dispatch(createdevice_request(device));
       }
       else{
