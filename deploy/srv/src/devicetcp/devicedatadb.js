@@ -8,7 +8,7 @@ const updatedevice =(realtimedata)=>{
   //查找
 
   const dbModel = DBModels.DeviceModel;
-  console.log(`开始更新设备数据${realtimedata.deviceid}`);
+  winston.getlog().info(`开始更新设备数据${realtimedata.deviceid}`);
   dbModel.findOne({deviceid:realtimedata.deviceid},(err,devicedata)=>{
     if(!err && !!devicedata){
       let detailvollist = devicedata.detailvollist || [];
@@ -162,7 +162,7 @@ const updatedevice =(realtimedata)=>{
       // 共净化值=每个时间点的净水总流量值-初始净化值
       const lr = cu_j - cleanCount.fv_l0;
       dbModel.findByIdAndUpdate(devicedata._id,{
-        $set:{detailvollist,detaildaylist,lr,cleanCount,cu_y,cu_j}
+        $set:{detailvollist,detaildaylist,lr,cleanCount,cu_y,cu_j,realtimedata:realtimedata._id}
       }, {new: true},
         (err, result)=> {
         PubSub.publish(`device.${realtimedata.deviceid}`,realtimedata);
