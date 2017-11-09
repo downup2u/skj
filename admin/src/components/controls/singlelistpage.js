@@ -51,7 +51,7 @@ const mapStateToProps = (state,props) => {
     ids: _.get(state,`admin.${props.resource}.list.ids`,[]),
   };
   console.log("page:" + JSON.stringify(page));
-  return Object.assign({},page);
+  return {...page};
 };
 
 const mapDispatchToProps = (dispatch) => {
