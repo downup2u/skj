@@ -18,7 +18,7 @@ import { push } from 'react-router-redux';
 import { CreateButton,NumberInput,Create, Edit, SimpleForm, DisabledInput, TextInput,  Show,SimpleShowLayout,ShowButton,
    DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, EditButton,BooleanInput,BooleanField } from 'admin-on-rest/lib/mui';
 //import { CreateButton } from 'admin-on-rest/lib/mui/button';
-
+import _ from 'lodash';
 import CircularProgress from 'material-ui/CircularProgress';
 class Page extends Component {
 
@@ -50,7 +50,7 @@ const mapStateToProps = (state,props) => {
   const resourceState = state.admin[props.resource];
   console.log('resourceState===>' + JSON.stringify(resourceState));
   let page = {
-    ids: resourceState.list.ids,
+    ids: _.get(resourceState,'list.ids',[]),
   };
   console.log("page:" + JSON.stringify(page));
   return Object.assign({},page);
