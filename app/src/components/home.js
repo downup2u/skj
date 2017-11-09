@@ -366,6 +366,8 @@ export class Page extends Component {
             if(!!detaildatamap["后置活性炭"]){ detaillist.push(detaildatamap["后置活性炭"]) }
             // console.log(detaillist);
 
+            iswatercut = curdevicedata.iswatercut;
+
         }
         let onClickReset = (detailindex)=>{
           let text = "你确认需要复位吗？";
@@ -468,7 +470,7 @@ export class Page extends Component {
                         buttonsClick : ()=>{
                             // let deviceid = devices[curdeviceid].deviceid;
                             // props.dispatch(senddevicecmd_request({deviceid,cmd: 0,value:!iswatercut}));
-                            ClickDuanshui();
+                            ClickDuanshui(iswatercut);
                         }
                     }}
                 )
@@ -476,8 +478,7 @@ export class Page extends Component {
         }
 
 
-        // console.log(deviceid);
-
+        console.log(`是否断水:${iswatercut}`);
         return (
             <div className="homePageWamp">
 
