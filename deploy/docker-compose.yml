@@ -1,6 +1,6 @@
 version: '2'
 services:
-  demoserver:
+  skjserver:
     image: node:6.11.2
     command: node ./index.js
     working_dir: /app
