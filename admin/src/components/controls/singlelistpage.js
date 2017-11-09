@@ -47,10 +47,8 @@ class Page extends Component {
 
 
 const mapStateToProps = (state,props) => {
-  const resourceState = state.admin[props.resource];
-  console.log('resourceState===>' + JSON.stringify(resourceState));
   let page = {
-    ids: _.get(resourceState,'list.ids',[]),
+    ids: _.get(state,`admin.${props.resource}.list.ids`,[]),
   };
   console.log("page:" + JSON.stringify(page));
   return Object.assign({},page);
