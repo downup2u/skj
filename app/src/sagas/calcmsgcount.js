@@ -1,8 +1,11 @@
-import { put,takeLatest,call } from 'redux-saga/effects';
+import { put,takeLatest,call,race,select } from 'redux-saga/effects';
 import {
   clickTab,
-  setmsgcount
+  setmsgcount,
+  getserverdate_request
 } from '../actions';
+import config from '../env/config.js';
+import {delay} from 'redux-saga';
 import {getnotifymessage} from '../actions/sagacallback.js';
 import store from '../env/store.js';
 
@@ -37,3 +40,11 @@ export function* calcmsgcount(action){
 export function* calcmsgcountflow(){
     yield takeLatest(`${clickTab}`,calcmsgcount);
 }
+
+
+export function* refreshgetserverdate(){
+ while (true) {
+       yield call(delay, config.refreshserverdateinterval);
+       yield put(getserverdate_request({}));
+   }//while
+ }

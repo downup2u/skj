@@ -1,6 +1,6 @@
 import { fork } from 'redux-saga/effects';
 import {flowmain} from './flowmain';
-import {calcmsgcountflow} from './calcmsgcount';
+import {calcmsgcountflow,refreshgetserverdate} from './calcmsgcount';
 import {
   createsagacallbackflow
 } from '../actions/sagacallback.js';
@@ -13,6 +13,7 @@ import {
 } from '../sagas/sagacallback.js';
 
 export default function* rootSaga() {
+  yield fork(refreshgetserverdate);
   yield fork(wsrecvsagaflow);
   yield fork(flowmain);
   yield fork(payflow);

@@ -14,3 +14,7 @@ exports.getabouthtml = (socket,actiondata,ctx)=>{
     }
   });
 }
+
+exports.getserverdate = (socket,actiondata,ctx)=>{
+    socket.emit('getserverdate_result',{srvdate:new Date()});
+}

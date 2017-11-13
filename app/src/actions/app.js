@@ -29,3 +29,5 @@ export const set_innerheight = createAction('set_innerheight');
 
 export const setsharesettingcur = createAction('setsharesettingcur');
 //set_innerheight
+export const getserverdate_request = createAction('getserverdate_request');
+export const getserverdate_result = createAction('getserverdate_result');

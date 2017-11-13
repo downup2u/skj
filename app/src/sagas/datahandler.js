@@ -161,10 +161,14 @@ import {
 
     resetdevicecmd_request,
     resetdevicecmd_result,
+
+    getserverdate_request,
+    getserverdate_result
 } from '../actions/index.js';
 
 //接收的对应关系
 exports.recvmessagetoresultpair = {
+  'getserverdate_result':getserverdate_result,
   'resetdevicecmd_result':resetdevicecmd_result,
   'payorder_result':payorder_result,
   'setuseralerttopicdeleted_result':setuseralerttopicdeleted_result,
@@ -248,6 +252,7 @@ exports.recvmessagetoresultpair = {
 
 //非验证发送接口
 exports.sendmessagefnsz = {
+  'getserverdate':`${getserverdate_request}`,
   'getabouthtml':`${getabouthtml_request}`,
   'oauthbinduser':`${oauthbinduser_request}`,
   'loginwithauth':`${loginwithauth_request}`,

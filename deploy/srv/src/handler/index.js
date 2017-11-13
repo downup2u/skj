@@ -12,6 +12,7 @@ const about  = require('./about.js');
 const order = require('./order.js');
 
 const datahandler = {
+  'getserverdate':about.getserverdate,
   'getabouthtml':about.getabouthtml,
   'register':userlogin.registeruser,
   'findpwd':userlogin.findpwd,

@@ -9,9 +9,10 @@ import {
     setmsgcount,
     set_innerheight,
     setisweixininstalled,
-    setsharesettingcur
+    setsharesettingcur,
+    getserverdate_result,
 } from '../actions/index.js';
-
+import moment from 'moment';
 
 const initial = {
     app: {
@@ -45,12 +46,17 @@ const initial = {
         maxleftpecent : 90,//净水器报警百分比
         sharesettingcur:{
 
-        }
+        },
+        srvdate:moment(),
     },
 
 };
 
 const app = createReducer({
+    [getserverdate_result]:(state,payload)=>{
+      const srvdate = moment(payload.srvdate);
+      return {...state,srvdate};
+    },
     [setsharesettingcur]:(state,payload)=>{
       let sharesettingcur = {...payload};
       return {...state,sharesettingcur};
