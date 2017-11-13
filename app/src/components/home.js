@@ -121,6 +121,7 @@ export class DeviceDataList extends Component {
                             cmd : tp,
                             indexname : name,
                             value : parseInt(this.state.setoneinput),
+                            warningpercentvalue:0.95,//这里可以设置报警的值,默认0.95,从输入框输入,输入框显示1～100，转成float类型
                             type : datatp
                         }
                         this.props.dispatch(resetdevicecmd_request(payload));

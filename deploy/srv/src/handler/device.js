@@ -247,7 +247,8 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
                   record.fv_l0 = payloaddata.value;
                 }
                 record.v = record.fv_l0 + devicedata.cu_y - record.fv_lx;
-                record.t = realtimedata.rawdata.mapv[record.name],
+                record.t = realtimedata.rawdata.mapv[record.name];
+                record.warningpercentvalue = payloaddata.warningpercentvalue || 0.95;
                 record.updated_at = new Date();
               }
             }
@@ -294,7 +295,8 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
                 }
 
                 record.v = record.fd_l0 + realtimedata.rawdata.data89 - record.fd_lx;
-                record.t = realtimedata.rawdata.mapd[record.name],
+                record.t = realtimedata.rawdata.mapd[record.name];
+                record.warningpercentvalue = payloaddata.warningpercentvalue || 0.95;
                 record.updated_at = new Date();
               }
             }
