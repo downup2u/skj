@@ -11,6 +11,8 @@ import {
     setisweixininstalled,
     setsharesettingcur,
     getserverdate_result,
+    set_homeconfirmday,
+    set_homeconfirmvol,
 } from '../actions/index.js';
 import moment from 'moment';
 
@@ -48,14 +50,25 @@ const initial = {
 
         },
         srvdate:moment(),
+
+        homeconfirmday : 1,
+        homeconfirmvol : 95
     },
 
 };
 
 const app = createReducer({
+    [set_homeconfirmday]:(state,payload)=>{
+        
+        return {...state,homeconfirmday : payload};
+    },
+    [set_homeconfirmvol]:(state,payload)=>{
+
+        return {...state,homeconfirmvol : payload};
+    },
     [getserverdate_result]:(state,payload)=>{
-      const srvdate = moment(payload.srvdate);
-      return {...state,srvdate};
+        const srvdate = moment(payload.srvdate);
+        return {...state,srvdate};
     },
     [setsharesettingcur]:(state,payload)=>{
       let sharesettingcur = {...payload};

@@ -6,8 +6,17 @@ import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../node_modules/react-dynamic-swiper/lib/styles.css';
 import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
-import {ui_setcurrentdeviceid,senddevicecmd_request, set_weui, resetdevicecmd_request} from '../actions/index.js';
+import {
+    ui_setcurrentdeviceid,
+    senddevicecmd_request, 
+    set_weui, 
+    resetdevicecmd_request, 
+    set_homeconfirmday,
+    set_homeconfirmvol
+} from '../actions/index.js';
 import Waterwave from './waterwave.js';
+import { InputNumber } from 'antd';
+
 
 let swiperOptions = {
     navigation: false,
@@ -79,12 +88,78 @@ let Baddevice =(props)=>{
     )
 }
 
+export class ConfirmDom extends Component{
+
+    click_setoneinput =(type)=>{
+        let v = 0;
+        if(type=="add"){
+            v = this.props.homeconfirmday+1;
+        }else{
+            v = this.props.homeconfirmday-1;
+        }
+        if(v<1){
+            v = 1;
+        }
+        this.props.dispatch(set_homeconfirmday(v));
+    }
+    click_setoneinput2 =(type)=>{
+        let v = 0;
+        if(type=="add"){
+            v = this.props.homeconfirmvol+1;
+        }else{
+            v = this.props.homeconfirmvol-1;
+        }
+        if(v<1){
+            v = 1;
+        }
+        if(v>100){
+            v = 100;
+        }
+        this.props.dispatch(set_homeconfirmvol(v));
+    }
+
+    render(){
+        const { homeconfirmday, homeconfirmvol } = this.props;
+        return (
+            <div className="setoneform">
+                <div>
+                    <span>净水器的使用天数: </span>
+                    <div className="numbrinput">
+                        <span onClick={this.click_setoneinput.bind(this, "del")}> - </span>
+                        <input type="number" value={homeconfirmday} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value)); }} />
+                        <span onClick={this.click_setoneinput.bind(this, "add")}> + </span>
+                    </div>
+                </div>
+                <div>
+                    <span>预警百分比: </span>
+                    <div className="numbrinput">
+                        <span onClick={this.click_setoneinput2.bind(this, "del")}> - </span>
+                        <input type="number" value={`${homeconfirmvol}`} onChange={(e)=>{ this.props.dispatch(set_homeconfirmvol(e.target.value));}} />
+                        <i>%</i>
+                        <span onClick={this.click_setoneinput2.bind(this, "add")}> + </span>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+const ConfirmDomData = ({app:{homeconfirmday,homeconfirmvol}}) => {
+    return {homeconfirmday, homeconfirmvol};
+};
+
+ConfirmDom = connect(ConfirmDomData)(ConfirmDom);
+
+
 export class DeviceDataList extends Component {
 
     constructor(props) {  
         super(props);  
-        this.state = {setoneinput: ''};
+        this.state = {
+            setoneinput: 1,
+            setoneinput2: 95
+        };
     } 
+    
 
     // resetdevicecmd_request
     // deviceid:设备id
@@ -92,18 +167,27 @@ export class DeviceDataList extends Component {
     // indexname:'5微米PP滤芯'/'颗粒活性炭'【表示滤芯名字，当cmd为'resetone'/'setone'/'setvisible'有效】
     // value:用户输入的值，仅当cmd为'setone'/'setvisible'有效，其中setone输入数字，setvisible为bool类型
     // type:'vol'/'day'【vol表示复位流量,day表示复位天数】
-    resetdevicecmd =(name, datatp, tp)=>{
+
+
+    //您要将5微米PP滤芯的使用天数设为0吗？
+    //流量设为0吗？
+    resetdevicecmd =(name, datatp, tp, detail)=>{
+
+        let percent = (detail.detailvollist.v / detail.detailvollist.t).toFixed(2)*100;
+        this.props.dispatch(set_homeconfirmvol(percent));
+        this.props.dispatch(set_homeconfirmday(detail.fd_l0));
+
         let text = '';
         let comformtitle = "确认";
         if(tp==="resetone"){
-            text = `您确定要复位${name}的`;
-            if(datatp=="vol"){ text = `${text}流量?`; }
-            if(datatp=="day"){ text = `${text}天数?`; }
+            text = `您要将${name}的使用天数设为0吗？`;
+            if(datatp=="vol"){ text = `您要将${name}的流量设为0吗？`; }
+            if(datatp=="day"){ text = `您要将${name}的使用天数设为0吗？`; }
         }
         if(tp ==="setone"){
-            if(datatp=="vol"){ comformtitle = "请输入流量"; }
-            if(datatp=="day"){ comformtitle = "请输入天数"; }
-            text = <div className="setoneform"><input type="number" style={{border: "1px solid #EEE", width: "100%", height: "40px", borderRadius: "6px",textAlign: "center"}} onChange={(e)=>{ this.setState({setoneinput: e.target.value})}} /></div>
+            if(datatp=="vol"){ comformtitle = "提示:设置预警百分比可以在流量达到多少的时候进度条就会橙色显示！"; }
+            if(datatp=="day"){ comformtitle = "提示:设置预警百分比可以在天数达到多少的时候进度条就会橙色显示！"; }
+            text = <ConfirmDom dispatch={this.props.dispatch} datatp="datatp" detail={detail} />
         }
         this.props.dispatch(
             set_weui({
@@ -130,6 +214,13 @@ export class DeviceDataList extends Component {
             )
         )
     }
+
+
+
+
+
+
+
 
     render(){
         const {detaillist, maxleftpecent,onClickReset, showbackbtn, detaildaylist, detailvollist } = this.props;
@@ -188,8 +279,8 @@ export class DeviceDataList extends Component {
                                         </div>
                                     </div>
                                     <span className="datanumber">{parseInt(percent1*100)}%</span>
-                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "resetone")}>复位</span> }
-                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "setone")}>设置</span> }
+                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "resetone", detail)}>复位</span> }
+                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "setone", detail)}>设置</span> }
                                 </div>
 
                                 <div className="datadata">
@@ -201,8 +292,8 @@ export class DeviceDataList extends Component {
                                     </div>
                                     <span className="datanumber">{parseInt(percent2*100)}%</span>
 
-                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone")}>复位</span> }
-                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "setone")}>设置</span> }
+                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone", detail)}>复位</span> }
+                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "setone", detail)}>设置</span> }
                                 </div>
 
                             </li>
@@ -395,7 +486,7 @@ export class Page extends Component {
                     confirm:{
                         show : true,
                         title : "确认",
-                        text : "您确定要复位该设备所有的数据吗？",
+                        text : "您要将净水器的共净化流量设为0吗？",
                         //
                         buttonsClose : ()=>{},
                         //确认收货
@@ -517,6 +608,10 @@ export class Page extends Component {
                         </div>
                     </div>
                 }
+                
+                { detaillist.length>0 ?(
+                    <img src="img/shuoming.png" className="shuoming" />
+                ):null }
 
                 { detaillist.length>0 ?(
                     <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent} dispatch={props.dispatch} curdeviceid = {deviceid} onClickReset={onClickReset} showbackbtn={this.state.showbackbtn}/>

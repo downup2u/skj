@@ -31,3 +31,9 @@ export const setsharesettingcur = createAction('setsharesettingcur');
 //set_innerheight
 export const getserverdate_request = createAction('getserverdate_request');
 export const getserverdate_result = createAction('getserverdate_result');
+
+
+//set_homeconfirmday,
+//set_homeconfirmvol,
+export const set_homeconfirmday = createAction('set_homeconfirmday');
+export const set_homeconfirmvol = createAction('set_homeconfirmvol');
