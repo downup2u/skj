@@ -161,6 +161,7 @@ let DeviceSchema = new Schema({
           fv_ln:Number,//当前值
           v:Number,//L0+(Ln – Lx)
           t:Number,
+          warningpercentvalue:{ type: Schema.Types.Number,default: 0.95 },//
           updated_at:{ type: Date, default:new Date()},
       }
     ],
@@ -173,6 +174,7 @@ let DeviceSchema = new Schema({
           fd_ln:Number,//当前值
           v:Number,//L0+(Ln – Lx)
           t:Number,
+          warningpercentvalue:{ type: Schema.Types.Number,default: 0.95 },//
           updated_at:{ type: Date, default:new Date()},
       }
     ],
