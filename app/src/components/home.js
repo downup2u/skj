@@ -16,7 +16,8 @@ import {
 } from '../actions/index.js';
 import Waterwave from './waterwave.js';
 import { InputNumber } from 'antd';
-
+import config from '../env/config.js';
+import moment from 'moment';
 
 let swiperOptions = {
     navigation: false,
@@ -171,10 +172,12 @@ export class DeviceDataList extends Component {
 
     //您要将5微米PP滤芯的使用天数设为0吗？
     //流量设为0吗？
-    resetdevicecmd =(name, datatp, tp, detail)=>{
+    resetdevicecmd =(name, datatp, tp, detail, warningpercent)=>{
 
-        let percent = (detail.detailvollist.v / detail.detailvollist.t).toFixed(2)*100;
-        this.props.dispatch(set_homeconfirmvol(percent));
+        //let percent = (detail.detailvollist.v / detail.detailvollist.t).toFixed(2)*100;
+        //warningpercentvalue:0.95,//这里可以设置报警的值,默认0.95,从输入框输入,输入框显示1～100，转成float类型
+
+        this.props.dispatch(set_homeconfirmvol(warningpercent));
         this.props.dispatch(set_homeconfirmday(detail.fd_l0));
 
         let text = '';
@@ -204,8 +207,8 @@ export class DeviceDataList extends Component {
                             deviceid : this.props.curdeviceid,
                             cmd : tp,
                             indexname : name,
-                            value : parseInt(this.state.setoneinput),
-                            warningpercentvalue:0.95,//这里可以设置报警的值,默认0.95,从输入框输入,输入框显示1～100，转成float类型
+                            value : parseInt(this.props.homeconfirmday),
+                            warningpercentvalue: this.props.homeconfirmvol,//这里可以设置报警的值,默认0.95,从输入框输入,输入框显示1～100，转成float类型
                             type : datatp
                         }
                         this.props.dispatch(resetdevicecmd_request(payload));
@@ -214,13 +217,6 @@ export class DeviceDataList extends Component {
             )
         )
     }
-
-
-
-
-
-
-
 
     render(){
         const {detaillist, maxleftpecent,onClickReset, showbackbtn, detaildaylist, detailvollist } = this.props;
@@ -266,7 +262,8 @@ export class DeviceDataList extends Component {
 
                         let linestyleresult1 = linestyle(color1, color1, `${percent1*100}%`);
                         let linestyleresult2 = linestyle(color2, color2, `${percent2*100}%`);
-
+                        
+                        let warningpercent = detail.warningpercentvalue || config.warningpercentdefault;
 
                         return (
                             <li className="devicedatalistli" key={detail.name}>
@@ -279,8 +276,8 @@ export class DeviceDataList extends Component {
                                         </div>
                                     </div>
                                     <span className="datanumber">{parseInt(percent1*100)}%</span>
-                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "resetone", detail)}>复位</span> }
-                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "setone", detail)}>设置</span> }
+                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "resetone", detail, warningpercent)}>复位</span> }
+                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'day', "setone", detail, warningpercent)}>设置</span> }
                                 </div>
 
                                 <div className="datadata">
@@ -292,8 +289,8 @@ export class DeviceDataList extends Component {
                                     </div>
                                     <span className="datanumber">{parseInt(percent2*100)}%</span>
 
-                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone", detail)}>复位</span> }
-                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "setone", detail)}>设置</span> }
+                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone", detail, warningpercent)}>复位</span> }
+                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "setone", detail, warningpercent)}>设置</span> }
                                 </div>
 
                             </li>
@@ -308,6 +305,10 @@ export class DeviceDataList extends Component {
 }
 
 DeviceDataList = withRouter(DeviceDataList);
+const ConfirmDomData2 = ({app:{homeconfirmday,homeconfirmvol}}) => {
+    return {homeconfirmday, homeconfirmvol};
+};
+DeviceDataList = connect(ConfirmDomData2)(DeviceDataList);
 
 
 let DeviceSwiper =(props)=>{
@@ -336,34 +337,56 @@ let DeviceSwiper =(props)=>{
 
                     //判断当前设备是否有数据
                     let tmpdevice = devices[deviceid];
-                    let {name,total,modeltype} = tmpdevice.realtimedata;
+                    let {name,total,modeltype, updated_at} = tmpdevice.realtimedata;
                     let getdata = _.get(tmpdevice,'realtimedata.getdata',false);
                     let lr = tmpdevice.lr || 0;
-                    return (
-                        <Slide
-                            className="Demo-swiper__slide"
-                            key={deviceid}
-                            >
-                            <div className="headContent">
 
-                                <div className="waterwave">
-                                    <div><Waterwave id={deviceid}/></div>
+                    //updated_at
+                    let time_updated_at = moment(updated_at).format();
+                    let time_at = (new Date(time_updated_at)).getTime();
+
+                    let outlinetime = (new Date()).getTime() -time_at;
+                    let isoutline = outlinetime > config.outlinetime;
+                    
+                    if(isoutline){
+                        return (
+                            <Slide
+                                className="Demo-swiper__slide"
+                                key={deviceid}
+                                >
+                                <div className="headContent outlinestyle">
+                                    <div class="tit">断开</div>
+                                    <div class="con">当前水智盒状态为断开状态你需要等待水智盒自动连接或者手动连接</div>
                                 </div>
-                                <img src="img/h1.png" className="bg"/>
-                                {getdata?(
-                                    <div className="headContentInfo">
-                                        <span className="i2">{name}</span>
-                                        <span className="i1">{modeltype}</span>
-                                        <span className="i3">当前水质</span>
-                                        <span className="i4">共净化{lr}L</span>
-                                    </div>):(
-                                    <div className="headContentInfo">
-                                        <div className="nodata">暂无数据</div>
+                            </Slide>
+                        )
+                    }else{
+                        return (
+                            <Slide
+                                className="Demo-swiper__slide"
+                                key={deviceid}
+                                >
+                                <div className="headContent">
+
+                                    <div className="waterwave">
+                                        <div><Waterwave id={deviceid}/></div>
                                     </div>
-                                    )}
-                            </div>
-                        </Slide>
-                    );
+                                    <img src="img/h1.png" className="bg"/>
+                                    {getdata?(
+                                        <div className="headContentInfo">
+                                            <span className="i2">{name}</span>
+                                            <span className="i1">{modeltype}</span>
+                                            <span className="i3">当前水质</span>
+                                            <span className="i4">共净化{lr}L</span>
+                                        </div>):(
+                                        <div className="headContentInfo">
+                                            <div className="nodata">暂无数据</div>
+                                        </div>
+                                        )}
+                                </div>
+                            </Slide>
+                        );
+                    }
                 })
             }
         </Swiper>
@@ -378,14 +401,30 @@ DeviceSwiper = connect(mapStateToPropsDeviceSwiper)(DeviceSwiper);
 
 let HeadInfo =(props)=>{
     const {curdevicedata} = props;
-    const {leftmodel,rightmodel} = curdevicedata;
-    return (
-        <div className="headInfo">
-            {!!leftmodel && <span>{leftmodel.name} {leftmodel.resultstring}</span>}
-            <span className="headInfoborder"></span>
-            {!!rightmodel && <span>{rightmodel.name} {rightmodel.resultstring}</span>}
-        </div>
-    )
+    const {leftmodel,rightmodel, updated_at} = curdevicedata;
+    
+    //updated_at
+    let time_updated_at = moment(updated_at).format();
+    let time_at = (new Date(time_updated_at)).getTime();
+
+    let outlinetime = (new Date()).getTime() -time_at;
+    let isoutline = outlinetime > config.outlinetime;
+
+
+    if(isoutline){
+        return (
+            <div className="headInfo" style={{display: "none"}}>
+            </div>
+        )
+    }else{
+        return (
+            <div className="headInfo">
+                {!!leftmodel && <span>{leftmodel.name} {leftmodel.resultstring}</span>}
+                <span className="headInfoborder"></span>
+                {!!rightmodel && <span>{rightmodel.name} {rightmodel.resultstring}</span>}
+            </div>
+        )
+    }
 }
 
 
@@ -430,7 +469,8 @@ export class Page extends Component {
         let curdevicedata = null;
         let detaillist = [];
         let iswatercut = false;
-        let deviceid = ""
+        let deviceid = "";
+        let isoutline = false;
 
         if(!!curdeviceid){
             curdevice = devices[curdeviceid];
@@ -461,6 +501,17 @@ export class Page extends Component {
             iswatercut = curdevicedata.iswatercut;
 
         }
+
+        if(!!curdevicedata){
+            const {updated_at} = curdevicedata;
+            //updated_at
+            let time_updated_at = moment(updated_at).format();
+            let time_at = (new Date(time_updated_at)).getTime();
+
+            let outlinetime = (new Date()).getTime() -time_at;
+            isoutline = outlinetime > config.outlinetime;
+        }
+
         let onClickReset = (detailindex)=>{
           let text = "你确认需要复位吗？";
           props.dispatch(
@@ -570,13 +621,13 @@ export class Page extends Component {
         }
 
 
-        console.log(`是否断水:${iswatercut}`);
+        // console.log(`是否断水:${iswatercut}`);
         return (
             <div className="homePageWamp">
 
                 <div
                     className="homePage"
-                    style={{flexGrow:!!detaillist && detaillist.length>0?0:1}}
+                    style={{flexGrow:!!detaillist && (detaillist.length>0&&!isoutline)?0:1}}
                     >
                     <div className="toolBar">
                         <div className='left' onClick={onClickNewDevice}>
@@ -597,7 +648,7 @@ export class Page extends Component {
 
                 </div>
 
-                { detaillist.length>0 &&
+                { (detaillist.length>0 && !isoutline ) &&
                     <div className="HomeList">
                         <img src="img/head/3.png" />
                         <div className="ListTitle">
@@ -609,11 +660,11 @@ export class Page extends Component {
                     </div>
                 }
                 
-                { detaillist.length>0 ?(
+                { (detaillist.length>0 && !isoutline) ?(
                     <img src="img/shuoming.png" className="shuoming" />
                 ):null }
 
-                { detaillist.length>0 ?(
+                { (detaillist.length>0 && !isoutline) ?(
                     <DeviceDataList detaillist={detaillist} maxleftpecent={maxleftpecent} dispatch={props.dispatch} curdeviceid = {deviceid} onClickReset={onClickReset} showbackbtn={this.state.showbackbtn}/>
                 ):null }
 
