@@ -265,6 +265,9 @@ export class DeviceDataList extends Component {
                         let linestyleresult2 = linestyle(color2, color2, `${percent2*100}%`);
                         
                         let warningpercent = detail.warningpercentvalue || config.warningpercentdefault;
+                        let warningpercentvol = detail.detailvollist.warningpercentvalue || config.warningpercentdefault;
+
+                        //detailvollist
 
                         return (
                             <li className="devicedatalistli" key={detail.name}>
@@ -290,8 +293,8 @@ export class DeviceDataList extends Component {
                                     </div>
                                     <span className="datanumber">{parseInt(percent2*100)}%</span>
 
-                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone", detail, warningpercent)}>复位</span> }
-                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "setone", detail, warningpercent)}>设置</span> }
+                                    { showbackbtn && <span className="backdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "resetone", detail, warningpercentvol)}>复位</span> }
+                                    { showbackbtn && <span className="setdatabtn" onClick={this.resetdevicecmd.bind(this, detail.name, 'vol', "setone", detail, warningpercentvol)}>设置</span> }
                                 </div>
 
                             </li>
