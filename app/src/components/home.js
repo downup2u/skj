@@ -120,11 +120,12 @@ export class ConfirmDom extends Component{
     }
 
     render(){
-        const { homeconfirmday, homeconfirmvol } = this.props;
+        const { homeconfirmday, homeconfirmvol, datatp } = this.props;
+        const tpname = datatp==="vol"?"流量":"天数";
         return (
             <div className="setoneform">
                 <div>
-                    <span>净水器的使用天数: </span>
+                    <span>{`净水器的使用${tpname}:`}</span>
                     <div className="numbrinput">
                         <span onClick={this.click_setoneinput.bind(this, "del")}> - </span>
                         <input type="number" value={homeconfirmday} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value)); }} />
@@ -190,7 +191,7 @@ export class DeviceDataList extends Component {
         if(tp ==="setone"){
             if(datatp=="vol"){ comformtitle = "提示:设置预警百分比可以在流量达到多少的时候进度条就会橙色显示！"; }
             if(datatp=="day"){ comformtitle = "提示:设置预警百分比可以在天数达到多少的时候进度条就会橙色显示！"; }
-            text = <ConfirmDom dispatch={this.props.dispatch} datatp="datatp" detail={detail} />
+            text = <ConfirmDom dispatch={this.props.dispatch} datatp={datatp} detail={detail} />
         }
         this.props.dispatch(
             set_weui({
@@ -355,8 +356,8 @@ let DeviceSwiper =(props)=>{
                                 key={deviceid}
                                 >
                                 <div className="headContent outlinestyle">
-                                    <div class="tit">断开</div>
-                                    <div class="con">当前水智盒状态为断开状态你需要等待水智盒自动连接或者手动连接</div>
+                                    <div className="tit">断开</div>
+                                    <div className="con">当前水智盒状态为断开状态你需要等待水智盒自动连接或者手动连接</div>
                                 </div>
                             </Slide>
                         )
