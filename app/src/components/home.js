@@ -178,8 +178,10 @@ export class DeviceDataList extends Component {
         //let percent = (detail.detailvollist.v / detail.detailvollist.t).toFixed(2)*100;
         //warningpercentvalue:0.95,//这里可以设置报警的值,默认0.95,从输入框输入,输入框显示1～100，转成float类型
 
+        let daynumber = datatp==="vol"? detail.detailvollist.fv_l0:detail.fd_l0;
+
         this.props.dispatch(set_homeconfirmvol(warningpercent));
-        this.props.dispatch(set_homeconfirmday(detail.fd_l0));
+        this.props.dispatch(set_homeconfirmday(daynumber));
 
         let text = '';
         let comformtitle = "确认";
