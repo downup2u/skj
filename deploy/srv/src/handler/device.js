@@ -262,13 +262,23 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
             detailvollist_new.push(record);
           });
         }
-        dbModel.findByIdAndUpdate(devicedata._id,{
-          $set:{detailvollist:detailvollist_new,lr,cleanCount}
-        }, {new: true},
-          (err, result)=> {
-            result.realtimedata = realtimedata;//展开
+        // dbModel.findByIdAndUpdate(devicedata._id,{
+        //   $set:{detailvollist:detailvollist_new,lr,cleanCount}
+        // }, {new: true},
+        //   (err, result)=> {
+        //     result.realtimedata = realtimedata;//展开
+        //     socket.emit('resetdevicecmd_result',result);
+        //     console.log(`resetdevicecmd_result===>${JSON.stringify(result)}`);
+        // });
+        dbModel.update({deviceid:deviceid},{$set:{detailvollist:detailvollist_new,lr,cleanCount}}, { multi: true },(err,raw)=>{
+          if(!!err){
+            let result = _.clone(devicedata);
+            devicedata.detailvollist = detailvollist_new;
+            devicedata.lr = lr;
+            devicedata.cleanCount = cleanCount;//展开
             socket.emit('resetdevicecmd_result',result);
             console.log(`resetdevicecmd_result===>${JSON.stringify(result)}`);
+          }
         });
       }
       else if(payloaddata.type === 'day'){
@@ -310,15 +320,22 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
             detaildaylist_new.push(record);
           });
         }
-
-        dbModel.findByIdAndUpdate(devicedata._id,{
-          $set:{detaildaylist:detaildaylist_new}
-        }, {new: true},
-          (err, result)=> {
-            result.realtimedata = realtimedata;//展开
+        dbModel.update({deviceid:deviceid},{$set:{detaildaylist:detaildaylist_new}}, { multi: true },(err,raw)=>{
+          if(!!err){
+            let result = _.clone(devicedata);
+            result.detaildaylist = detaildaylist_new;//展开
             socket.emit('resetdevicecmd_result',result);
             console.log(`resetdevicecmd_result===>${JSON.stringify(result)}`);
+          }
         });
+        // dbModel.findByIdAndUpdate(devicedata._id,{
+        //   $set:{detaildaylist:detaildaylist_new}
+        // }, {new: true},
+        //   (err, result)=> {
+        //     result.realtimedata = realtimedata;//展开
+        //     socket.emit('resetdevicecmd_result',result);
+        //     console.log(`resetdevicecmd_result===>${JSON.stringify(result)}`);
+        // });
       }
     }
   });
