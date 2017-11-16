@@ -540,3 +540,11 @@
 .HomeList .ListTitle  .ListTitleRadio .ui.fitted.toggle.checkbox{
     margin-right: 5px;
 }
+.ListTitleRadio .ui.toggle.checkbox .box:before,
+.ListTitleRadio .ui.toggle.checkbox label:before{
+    background: rgba(0,0,0,.2);
+}
+.ListTitleRadio .ui.toggle.checkbox .box:after,
+.ListTitleRadio .ui.toggle.checkbox label:after{
+    background: #fff linear-gradient(transparent,rgba(0,0,0,.15));
+}

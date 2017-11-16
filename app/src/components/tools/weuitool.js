@@ -83,9 +83,12 @@ export class Page extends Component {
             loading,
             action
         } = this.props;
+        
+        let isshow = toast.show || alert.show || confirm.show || loading.show;
+
 
         return (
-            <div className="weuiPage">
+            <div className="weuiPage" style={ isshow? {bottom: "0px", height : "auto"}: {}}>
 
                 <Toast
                     icon={icon[toast.type]}
