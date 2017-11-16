@@ -39,7 +39,9 @@ exports.createdevice = (socket,payloaddata,ctx)=>{
   };
   createddata.deviceid = createddata.deviceid.toUpperCase();
   let dbModel = DBModels.RealtimedataModel;
-  dbModel.findOneAndUpdate({deviceid:createddata.deviceid},{$set:{
+  dbModel.findOneAndUpdate({
+    deviceid:createddata.deviceid,
+  },{$set:{
     deviceid:createddata.deviceid,
     updated_at:new Date()
   }},{
@@ -50,8 +52,12 @@ exports.createdevice = (socket,payloaddata,ctx)=>{
       createddata.creator = ctx.userid;
       createddata.created_at = new Date();
       createddata.realtimedata = result._id;
+      createddata.creator = ctx.userid;
       dbModel = DBModels.DeviceModel;
-      dbModel.findOneAndUpdate({deviceid:createddata.deviceid},{$set:createddata},{
+      dbModel.findOneAndUpdate({
+        deviceid:createddata.deviceid,
+        creator:ctx.userid
+      },{$set:createddata},{
         upsert:true,new:true
       },(err,newdevice)=>{
           if(!err && !!newdevice){
@@ -84,6 +90,7 @@ exports.createdevice = (socket,payloaddata,ctx)=>{
 
 exports.updatedevice = (socket,payloaddata,ctx)=>{
   let dbModel = DBModels.DeviceModel;
+  payloaddata.creator = ctx.userid;
   dbModel.findOneAndUpdate(payloaddata.query,{$set:payloaddata.data},{new: true},
     (err, editeditem)=> {
       if(!err){
