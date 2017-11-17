@@ -92,16 +92,30 @@ let Baddevice =(props)=>{
 export class ConfirmDom extends Component{
 
     click_setoneinput =(type)=>{
-        let v = 0;
-        if(type=="add"){
-            v = this.props.homeconfirmday+1;
+
+        if(this.props.datatp==="vol"){
+            let v = 0;
+            if(type=="add"){
+                v = this.props.homeconfirmday+15;
+            }else{
+                v = this.props.homeconfirmday-15;
+            }
+            if(v<15){
+                v = 15;
+            }
+            this.props.dispatch(set_homeconfirmday(v));
         }else{
-            v = this.props.homeconfirmday-1;
+            let v = 0;
+            if(type=="add"){
+                v = this.props.homeconfirmday+1;
+            }else{
+                v = this.props.homeconfirmday-1;
+            }
+            if(v<1){
+                v = 1;
+            }
+            this.props.dispatch(set_homeconfirmday(v));
         }
-        if(v<1){
-            v = 1;
-        }
-        this.props.dispatch(set_homeconfirmday(v));
     }
     click_setoneinput2 =(type)=>{
         let v = 0;
@@ -118,31 +132,57 @@ export class ConfirmDom extends Component{
         }
         this.props.dispatch(set_homeconfirmvol(v));
     }
-
     render(){
         const { homeconfirmday, homeconfirmvol, datatp } = this.props;
         const tpname = datatp==="vol"?"流量":"天数";
-        return (
-            <div className="setoneform">
-                <div>
-                    <span>{`净水器的使用${tpname}:`}</span>
-                    <div className="numbrinput">
-                        <span onClick={this.click_setoneinput.bind(this, "del")}> - </span>
-                        <input type="number" value={homeconfirmday} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value)); }} />
-                        <span onClick={this.click_setoneinput.bind(this, "add")}> + </span>
+
+        if(datatp==="vol"){
+            return (
+                <div className="setoneform volsetoneform">
+                    <div>
+                        <span>净水器的使<br/>用天数</span>
+                        <div className="numbrinput">
+                            <span onClick={this.click_setoneinput.bind(this, "del")}> - </span>
+                            <input type="number" value={Math.ceil(homeconfirmday/15)} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value*15)); }} />
+                            <span onClick={this.click_setoneinput.bind(this, "add")}> + </span>
+                            <b>＊15＝{homeconfirmday}升</b>
+                        </div>
+                    </div>
+                    <div>
+                        <span>预警百分比: </span>
+                        <div className="numbrinput">
+                            <span onClick={this.click_setoneinput2.bind(this, "del")}> - </span>
+                            <input type="number" value={`${homeconfirmvol}`} onChange={(e)=>{ this.props.dispatch(set_homeconfirmvol(e.target.value));}} />
+                            <i>%</i>
+                            <span onClick={this.click_setoneinput2.bind(this, "add")}> + </span>
+                            <b></b>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <span>预警百分比: </span>
-                    <div className="numbrinput">
-                        <span onClick={this.click_setoneinput2.bind(this, "del")}> - </span>
-                        <input type="number" value={`${homeconfirmvol}`} onChange={(e)=>{ this.props.dispatch(set_homeconfirmvol(e.target.value));}} />
-                        <i>%</i>
-                        <span onClick={this.click_setoneinput2.bind(this, "add")}> + </span>
+            )
+        }else{
+            return (
+                <div className="setoneform">
+                    <div>
+                        <span>净水器的使用天数</span>
+                        <div className="numbrinput">
+                            <span onClick={this.click_setoneinput.bind(this, "del")}> - </span>
+                            <input type="number" value={homeconfirmday} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value)); }} />
+                            <span onClick={this.click_setoneinput.bind(this, "add")}> + </span>
+                        </div>
+                    </div>
+                    <div>
+                        <span>预警百分比: </span>
+                        <div className="numbrinput">
+                            <span onClick={this.click_setoneinput2.bind(this, "del")}> - </span>
+                            <input type="number" value={`${homeconfirmvol}`} onChange={(e)=>{ this.props.dispatch(set_homeconfirmvol(e.target.value));}} />
+                            <i>%</i>
+                            <span onClick={this.click_setoneinput2.bind(this, "add")}> + </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }
 const ConfirmDomData = ({app:{homeconfirmday,homeconfirmvol}}) => {
@@ -154,7 +194,7 @@ ConfirmDom = connect(ConfirmDomData)(ConfirmDom);
 
 export class DeviceDataList extends Component {
 
-    constructor(props) {  
+    constructor(props) {
         super(props);  
         this.state = {
             setoneinput: 1,
@@ -180,7 +220,7 @@ export class DeviceDataList extends Component {
 
         let daynumber = datatp==="vol"? detail.detailvollist.fv_l0:detail.fd_l0;
 
-        this.props.dispatch(set_homeconfirmvol(warningpercent));
+        this.props.dispatch(set_homeconfirmvol(warningpercent*100));
         this.props.dispatch(set_homeconfirmday(daynumber));
 
         let text = '';
@@ -211,7 +251,7 @@ export class DeviceDataList extends Component {
                             cmd : tp,
                             indexname : name,
                             value : parseInt(this.props.homeconfirmday),
-                            warningpercentvalue: this.props.homeconfirmvol,//这里可以设置报警的值,默认0.95,从输入框输入,输入框显示1～100，转成float类型
+                            warningpercentvalue: (this.props.homeconfirmvol/100).toFixed(2),//这里可以设置报警的值,默认0.95,从输入框输入,输入框显示1～100，转成float类型
                             type : datatp
                         }
                         this.props.dispatch(resetdevicecmd_request(payload));
@@ -266,8 +306,8 @@ export class DeviceDataList extends Component {
                         let linestyleresult1 = linestyle(color1, color1, `${percent1*100}%`);
                         let linestyleresult2 = linestyle(color2, color2, `${percent2*100}%`);
                         
-                        let warningpercent = detail.warningpercentvalue || config.warningpercentdefault;
-                        let warningpercentvol = detail.detailvollist.warningpercentvalue || config.warningpercentdefault;
+                        let warningpercent = detail.warningpercentvalue || (config.warningpercentdefault/100).toFixed(2);
+                        let warningpercentvol = detail.detailvollist.warningpercentvalue || (config.warningpercentdefault/100).toFixed(2);
 
                         //detailvollist
 
