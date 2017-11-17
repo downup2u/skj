@@ -271,7 +271,7 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
         //     console.log(`resetdevicecmd_result===>${JSON.stringify(result)}`);
         // });
         dbModel.update({deviceid:deviceid},{$set:{detailvollist:detailvollist_new,lr,cleanCount}}, { multi: true },(err,raw)=>{
-          if(!!err){
+          if(!err){
             let result = _.clone(devicedata);
             devicedata.detailvollist = detailvollist_new;
             devicedata.lr = lr;
@@ -321,7 +321,7 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
           });
         }
         dbModel.update({deviceid:deviceid},{$set:{detaildaylist:detaildaylist_new}}, { multi: true },(err,raw)=>{
-          if(!!err){
+          if(!err){
             let result = _.clone(devicedata);
             result.detaildaylist = detaildaylist_new;//展开
             socket.emit('resetdevicecmd_result',result);
