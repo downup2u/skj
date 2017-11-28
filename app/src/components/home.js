@@ -153,9 +153,8 @@ export class ConfirmDom extends Component{
                         <div className="numbrinput">
                             <span onClick={this.click_setoneinput2.bind(this, "del")}> - </span>
                             <input type="number" value={`${homeconfirmvol}`} onChange={(e)=>{ this.props.dispatch(set_homeconfirmvol(e.target.value));}} />
-                            <i>%</i>
                             <span onClick={this.click_setoneinput2.bind(this, "add")}> + </span>
-                            <b></b>
+                            <b>%</b>
                         </div>
                     </div>
                 </div>
