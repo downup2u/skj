@@ -168,6 +168,7 @@ export class ConfirmDom extends Component{
                             <span onClick={this.click_setoneinput.bind(this, "del")}> - </span>
                             <input type="number" value={homeconfirmday} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value)); }} />
                             <span onClick={this.click_setoneinput.bind(this, "add")}> + </span>
+                            <b style={{textAlign: "left",textIndent: "5px", lineHeight : "30px", width: "26px"}}></b>
                         </div>
                     </div>
                     <div>
@@ -175,8 +176,8 @@ export class ConfirmDom extends Component{
                         <div className="numbrinput">
                             <span onClick={this.click_setoneinput2.bind(this, "del")}> - </span>
                             <input type="number" value={`${homeconfirmvol}`} onChange={(e)=>{ this.props.dispatch(set_homeconfirmvol(e.target.value));}} />
-                            <i>%</i>
                             <span onClick={this.click_setoneinput2.bind(this, "add")}> + </span>
+                            <b style={{textAlign: "left",textIndent: "5px", lineHeight : "30px", width: "26px"}}>%</b>
                         </div>
                     </div>
                 </div>
