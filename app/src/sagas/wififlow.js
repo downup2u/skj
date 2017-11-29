@@ -81,7 +81,7 @@ export function* wififlow() {
               {
                 toast:{
                   show:true,
-                  text:`调用函数超时`,
+                  text:`获取wifi信息超时`,
                   type:'warning'
                 }
               }
@@ -119,7 +119,7 @@ export function* wififlow() {
               {
                 toast:{
                   show:true,
-                  text:`调用函数超时`,
+                  text:`获取当前wifi设备超时`,
                   type:'warning'
                 }
               }
