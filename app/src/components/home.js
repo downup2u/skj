@@ -8,9 +8,9 @@ import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
 import {
     ui_setcurrentdeviceid,
-    senddevicecmd_request, 
-    set_weui, 
-    resetdevicecmd_request, 
+    senddevicecmd_request,
+    set_weui,
+    resetdevicecmd_request,
     set_homeconfirmday,
     set_homeconfirmvol
 } from '../actions/index.js';
@@ -201,7 +201,7 @@ export class DeviceDataList extends Component {
             setoneinput2: 95
         };
     } 
-    
+
 
     // resetdevicecmd_request
     // deviceid:设备id
@@ -276,26 +276,32 @@ export class DeviceDataList extends Component {
                         //#FF9224 橙色
                         //#EA0000 红色
                         //#00BB00 绿色
-
+                        const warningpercentvalue = detail.warningpercentvalue || config.warningpercentdefault;
                         //百分比
                         let percent1 = (detail.v / detail.t).toFixed(2);
+                        percent1 = parseFloat(percent1);
                         let color1 = null;
-                        if(percent1<0.95){
+                        if(percent1<warningpercentvalue){
                             color1 = "#00BB00";
                         }
-                        if(percent1>=0.95 && percent1 < 1){
+                        if(percent1>=warningpercentvalue && percent1 < 1){
                             color1 = "#FF9224";
                         }
                         if(percent1 >= 1){
                             color1 = "#EA0000";
                             percent1 = 1;
                         }
+
+                        const warningpercentvaluevol =  detail.detailvollist.warningpercentvalue || config.warningpercentdefault;
                         let percent2 = (detail.detailvollist.v / detail.detailvollist.t).toFixed(2);
+                        percent2 = parseFloat(percent2);
+
+                        console.log(`--->percent1:${percent1},percent2:${percent2},warningpercentvalue:${warningpercentvalue}`)
                         let color2 = null;
-                        if(percent2<0.95){
+                        if(percent2<warningpercentvaluevol){
                             color2 = "#00BB00";
                         }
-                        if(percent2>=0.95 && percent2 < 1){
+                        if(percent2>=warningpercentvaluevol && percent2 < 1){
                             color2 = "#FF9224";
                         }
                         if(percent2 >= 1){
@@ -305,7 +311,7 @@ export class DeviceDataList extends Component {
 
                         let linestyleresult1 = linestyle(color1, color1, `${percent1*100}%`);
                         let linestyleresult2 = linestyle(color2, color2, `${percent2*100}%`);
-                        
+
                         let warningpercent = detail.warningpercentvalue || (config.warningpercentdefault/100).toFixed(2);
                         let warningpercentvol = detail.detailvollist.warningpercentvalue || (config.warningpercentdefault/100).toFixed(2);
 
@@ -393,7 +399,7 @@ let DeviceSwiper =(props)=>{
 
                     let outlinetime = (new Date()).getTime() -time_at;
                     let isoutline = outlinetime > config.outlinetime;
-                    
+
                     if(isoutline){
                         return (
                             <Slide
@@ -448,7 +454,7 @@ DeviceSwiper = connect(mapStateToPropsDeviceSwiper)(DeviceSwiper);
 let HeadInfo =(props)=>{
     const {curdevicedata} = props;
     const {leftmodel,rightmodel, updated_at} = curdevicedata;
-    
+
     //updated_at
     let time_updated_at = moment(updated_at).format();
     let time_at = (new Date(time_updated_at)).getTime();
@@ -705,7 +711,7 @@ export class Page extends Component {
                         </div>
                     </div>
                 }
-                
+
                 { (detaillist.length>0 && !isoutline) ?(
                     <img src="img/shuoming.png" className="shuoming" />
                 ):null }
