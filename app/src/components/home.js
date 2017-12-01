@@ -699,6 +699,8 @@ export class Page extends Component {
                         <HeadInfo curdevicedata={curdevicedata}/>
                     }
 
+                    { (detaillist.length==0 && !isoutline && !!curdevicedata ) && <div style={{textAlign:"center", marginTop: "20px", fontSize: "16px", color: "#FFF"}}>数据加载中...</div>}
+
                 </div>
 
                 { (detaillist.length>0 && !isoutline ) &&
@@ -712,6 +714,8 @@ export class Page extends Component {
                         </div>
                     </div>
                 }
+
+
 
                 { (detaillist.length>0 && !isoutline) ?(
                     <img src="img/shuoming.png" className="shuoming" />
