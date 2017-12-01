@@ -526,32 +526,33 @@ export class Page extends Component {
 
         if(!!curdeviceid){
             curdevice = devices[curdeviceid];
-            deviceid = devices[curdeviceid].deviceid;
-            curdevicedata = _.get(curdevice,'realtimedata',false);
+            if(!!curdevice){
+              deviceid = devices[curdeviceid].deviceid;
+              curdevicedata = _.get(curdevice,'realtimedata',false);
 
-            // console.log(curdevice);
+              // console.log(curdevice);
 
-            // console.log(curdevice);
-            let d1 = curdevice.detaildaylist || [];
-            let d2 = curdevice.detailvollist || [];
+              // console.log(curdevice);
+              let d1 = curdevice.detaildaylist || [];
+              let d2 = curdevice.detailvollist || [];
 
-            let detaildatamap = {};
-            _.map(d1, (daylist,i)=>{
-                detaildatamap[daylist.name] = daylist;
-            })
-            _.map(d2, (vollist,i)=>{
-                detaildatamap[vollist.name] = detaildatamap[vollist.name] || {};
-                detaildatamap[vollist.name]["detailvollist"] = vollist;
-            })
-            if(!!detaildatamap["5微米PP滤芯"]){ detaillist.push(detaildatamap["5微米PP滤芯"]) }
-            if(!!detaildatamap["颗粒活性炭"]){ detaillist.push(detaildatamap["颗粒活性炭"]) }
-            if(!!detaildatamap["1微米PP滤芯"]){ detaillist.push(detaildatamap["1微米PP滤芯"]) }
-            if(!!detaildatamap["反渗透RO膜"]){ detaillist.push(detaildatamap["反渗透RO膜"]) }
-            if(!!detaildatamap["后置活性炭"]){ detaillist.push(detaildatamap["后置活性炭"]) }
-            // console.log(detaillist);
+              let detaildatamap = {};
+              _.map(d1, (daylist,i)=>{
+                  detaildatamap[daylist.name] = daylist;
+              })
+              _.map(d2, (vollist,i)=>{
+                  detaildatamap[vollist.name] = detaildatamap[vollist.name] || {};
+                  detaildatamap[vollist.name]["detailvollist"] = vollist;
+              })
+              if(!!detaildatamap["5微米PP滤芯"]){ detaillist.push(detaildatamap["5微米PP滤芯"]) }
+              if(!!detaildatamap["颗粒活性炭"]){ detaillist.push(detaildatamap["颗粒活性炭"]) }
+              if(!!detaildatamap["1微米PP滤芯"]){ detaillist.push(detaildatamap["1微米PP滤芯"]) }
+              if(!!detaildatamap["反渗透RO膜"]){ detaillist.push(detaildatamap["反渗透RO膜"]) }
+              if(!!detaildatamap["后置活性炭"]){ detaillist.push(detaildatamap["后置活性炭"]) }
+              // console.log(detaillist);
 
-            iswatercut = curdevicedata.iswatercut;
-
+              iswatercut = curdevicedata.iswatercut;
+            }
         }
 
         if(!!curdevicedata){

@@ -52,12 +52,14 @@ exports.createdevice = (socket,payloaddata,ctx)=>{
       createddata.creator = ctx.userid;
       createddata.created_at = new Date();
       createddata.realtimedata = result._id;
-      createddata.creator = ctx.userid;
+
       dbModel = DBModels.DeviceModel;
       dbModel.findOneAndUpdate({
         deviceid:createddata.deviceid,
-        creator:ctx.userid
-      },{$set:createddata},{
+      },{
+        $set:createddata,
+        "$push": { "owners": ctx.userid }
+      },{
         upsert:true,new:true
       },(err,newdevice)=>{
           if(!err && !!newdevice){
@@ -90,7 +92,7 @@ exports.createdevice = (socket,payloaddata,ctx)=>{
 
 exports.updatedevice = (socket,payloaddata,ctx)=>{
   let dbModel = DBModels.DeviceModel;
-  payloaddata.creator = ctx.userid;
+  // payloaddata.creator = ctx.userid;
   dbModel.findOneAndUpdate(payloaddata.query,{$set:payloaddata.data},{new: true},
     (err, editeditem)=> {
       if(!err){
@@ -111,7 +113,7 @@ exports.updatedevice = (socket,payloaddata,ctx)=>{
 exports.getdevicelist  = (socket,payloaddata,ctx)=>{
   //获取所有设备列表
   let dbModel = DBModels.DeviceModel;
-  payloaddata.query.creator = ctx.userid;
+  payloaddata.query.owners = ctx.userid;//<----
   payloaddata.options.populate = [
     {
       path:'realtimedata', model: 'Realtimedata'
@@ -131,18 +133,32 @@ exports.getdevicelist  = (socket,payloaddata,ctx)=>{
 exports.deletedevice = (socket,payloaddata,ctx)=>{
   //删除设备
   let dbModel = DBModels.DeviceModel;
-  dbModel.findOneAndRemove({
-        _id: payloaddata._id
-    }, (err, result)=> {
-      console.log("DELETE err=>" + JSON.stringify(err));
-      console.log("DELETE result=>" + JSON.stringify(result));
+  dbModel.findOneAndUpdate({
+    _id: payloaddata._id
+  },{
+    "$pull": { "owners": ctx.userid }
+  },{
+    new:true
+  },(err,result)=>{
       if(!err){
         socket.emit('device.deletedevice_result',{_id:payloaddata._id});
       }
       else{
         socket.emit('common_err',{type:'deletedevice',errmsg:`删除设备失败:${err.message}`});
       }
-    });
+  });
+  // dbModel.findOneAndRemove({
+  //       _id: payloaddata._id
+  //   }, (err, result)=> {
+  //     console.log("DELETE err=>" + JSON.stringify(err));
+  //     console.log("DELETE result=>" + JSON.stringify(result));
+  //     if(!err){
+  //       socket.emit('device.deletedevice_result',{_id:payloaddata._id});
+  //     }
+  //     else{
+  //       socket.emit('common_err',{type:'deletedevice',errmsg:`删除设备失败:${err.message}`});
+  //     }
+  //   });
 }
 
 exports.senddevicecmd = (socket,payloaddata,ctx)=>{
@@ -207,7 +223,7 @@ exports.resetdevicecmd = (socket,payloaddata,ctx)=>{
   const deviceid = payloaddata.deviceid;
 
   const dbModel = DBModels.DeviceModel;
-  dbModel.findOne({deviceid:deviceid,creator:ctx.userid}).populate([
+  dbModel.findOne({deviceid:deviceid}).populate([
     {
       path:'realtimedata', model: 'Realtimedata'
     }

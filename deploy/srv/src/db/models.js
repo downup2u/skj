@@ -179,6 +179,7 @@ let DeviceSchema = new Schema({
       }
     ],
     created_at:{ type: Date, default:new Date()},
+    owners:[{ type: Schema.Types.ObjectId, ref: 'User', default: [] }],
 });
 DeviceSchema.plugin(mongoosePaginate);
 let Device  = mongoose.model('Device',  DeviceSchema);
