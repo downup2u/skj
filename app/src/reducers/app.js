@@ -59,12 +59,12 @@ const initial = {
 
 const app = createReducer({
     [set_homeconfirmday]:(state,payload)=>{
-        
-        return {...state,homeconfirmday : payload};
+
+        return {...state,homeconfirmday :  Math.round(payload)};
     },
     [set_homeconfirmvol]:(state,payload)=>{
 
-        return {...state,homeconfirmvol : payload};
+        return {...state,homeconfirmvol :  Math.round(payload)};
     },
     [getserverdate_result]:(state,payload)=>{
         const srvdate = moment(payload.srvdate);
