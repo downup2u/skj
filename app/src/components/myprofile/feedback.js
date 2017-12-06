@@ -89,7 +89,7 @@ export class Page extends React.Component {
     }
     render() {
         return (
-            <div className="feedPage newtopicPage">
+            <div className="feedPage newtopicPage" style={{height: `${window.innerHeight}px`}}>
                 <NavBar back={true} title="意见反馈" />
                 <NewtopicForm onClickNewTopic={this.onClickFeedBack}/>
             </div>
