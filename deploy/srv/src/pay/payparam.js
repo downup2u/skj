@@ -20,7 +20,7 @@ let globalpayparam = {
       trade_type:'APP',
       unifiedorderurl:'https://api.mch.weixin.qq.com/pay/unifiedorder',
       //以上为预支付
-      keystring:'xiaheng666xiaheng666xiaheng66666',
+      keystring:'ywbftaesn3dy0vanhlyc5apt0l2ez02a',
       package:'Sign=WXPay',
     },
 };
