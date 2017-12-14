@@ -28,50 +28,17 @@ import Chip from 'material-ui/Chip';
 import RichTextEditorInput from '../controls/richtoolbar.js';
 
 
-import ShowPageOne from '../controls/singlelistpage.js';
+import ShowPageOne from '../singledocumentpage/index.js';
 // import ShowPage from '../controls/ShowPage.js';
 // import EditPage from '../controls/EditPage.js';
 
 
 const SystemconfigTitle = ({ record }) => <span>系统设置</span>;
-const SystemconfigShow = (props) => (
-       <ShowPage title={<SystemconfigTitle />} {...props}>
-           <SimpleShowLayout>
-               <TextField  label="正常运费" source="expressfee" />
-               <TextField  label="免运费金额" source="expressfeeforfree" />
-                 <ReferenceField label="显示在商城首页的套餐(分类）" source="productcategoryid1" reference="category" addLabel={true} allowEmpty>
-                 <TextField source="name" />
-                 </ReferenceField>
-                 <ReferenceField label="显示在商城首页的商用一体机(分类）" source="productcategoryid2" reference="category" addLabel={true} allowEmpty>
-                 <TextField source="name" />
-                 </ReferenceField>
-                 <TextField  label="下载地址" source="downloadurl" />
-                 <TextField  label="一级分销佣金" source="bonuslevel1" />
-                 <TextField  label="二级分销佣金" source="bonuslevel2" />
-                 <TextField  label="发帖积分限制(大于设置的积分才能发帖)" source="pointfornewtopic" />
-                 <TextField  label="换算,例1积分换1分" source="pointvsmoney" />
-                 <TextField  label="每天签到一次" source="getpointfromsign" />
-                 <TextField  label="分享得到积分" source="getpointfromshare" />
-                 <TextField  label="每天最多获得的积分" source="pointlimitshare" />
-                 <TextField  label="分享设置(JSON格式)" source="sharesetting" />
-                 <TextField  label="会员等级设置(JSON格式)" source="memberlevelsetting" />
-                 <TextField  label="快递查询URL" source="expressapiurl" />
-                 <TextField  label="快递查询用户号" source="expressapicustomer" />
-                 <TextField  label="快递查询APIKEY" source="expressapikey" />
-           </SimpleShowLayout>
-       </ShowPage>
-);
-
-export {SystemconfigShow};
-export const SystemconfigList = props => (
-    <ShowPageOne resource={props.resource} location={props.location} ShowPage={SystemconfigShow} hasEdit={true}>
-    </ShowPageOne>
-);
 
 const SystemconfigCreateTitle = ({ record }) => {
    return <span>新建 系统配置</span>;
 };
-export const SystemconfigCreate = (props) => (
+ const SystemconfigCreate = (props) => (
        <Create {...props} title={<SystemconfigCreateTitle />} >
        <TabbedForm>
            <FormTab label="resources.systemconfig.tabs.shop">
@@ -118,7 +85,7 @@ export const SystemconfigCreate = (props) => (
 );
 
 
-export const SystemconfigEdit = (props) => (
+ const SystemconfigEdit = (props) => (
     <EditPage {...props} title={<SystemconfigTitle />}>
     <TabbedForm>
         <FormTab label="resources.systemconfig.tabs.shop">
@@ -163,3 +130,10 @@ export const SystemconfigEdit = (props) => (
         </TabbedForm>
     </EditPage>
 );
+
+
+export const SystemconfigList = props => (
+    <ShowPageOne Create={SystemconfigCreate} Edit={SystemconfigEdit} {...props}>
+    </ShowPageOne>
+);
+

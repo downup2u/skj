@@ -7,7 +7,7 @@ const moment  = require('moment');
 let dbs = require('../admin/dbindex.js');
 let middlewareauth = require('./middlewareauth.js');
 const adminaction = require('../admin/adminaction.js');
-
+const pwd = require('../util/pwd.js');
 let startmodule = (app)=>{
 
 const GET_LIST = 'GET_LIST';
@@ -21,47 +21,49 @@ const DELETE = 'DELETE';
 // let defaultmiddlewareauth = (req,res,next)=>{
 //   next();
 // };
-app.post('/adminapi/adminauth',(req,res)=>{
-  let actiondata =   req.body;
+app.post('/adminauth',(req,res)=>{
+  const actiondata =   req.body;
   console.log("actiondata=>" + JSON.stringify(actiondata));
-  let userModel = mongoose.model('UserAdmin', DBModels.UserAdminSchema);
-  let passwordhashed = actiondata.password;
-  userModel.findOneAndUpdate({username:actiondata.username,password:passwordhashed},{updated_at:new Date()},
-  {new: true},(err,userEntity)=>{
-    console.log("userEntity err:" + JSON.stringify(err));
-    console.log("userEntity:" + JSON.stringify(userEntity));
-    if(!err && userEntity){
-      //logined
+
+
+  const userModel = DBModels.UserAdminModel;
+  userModel.findOne({ username: actiondata.username }, (err, user)=> {
+    if (!!err) {
+      res.status(200).json({
+        loginsuccess:false,
+        err:'服务器内部错误'
+      });
+      return;
+    }
+    if (!user) {
+      res.status(200).json({
+        loginsuccess:false,
+        err:'用户找不到'
+      });
+      return;
+    }
+    pwd.checkPassword(user.passwordhash,user.passwordsalt,actiondata.password,(err,isloginsuccess)=>{
+      if(!err && isloginsuccess){
       let token = jwt.sign({
             exp: Math.floor(Date.now() / 1000) +config.loginuserexptime,
-            _id:userEntity._id,
-            usertype:'admin',
+              _id:user._id,
+              usertype:'adminuser',
           },config.secretkey, {});
       res.status(200).json({
         loginsuccess:true,
         token:token
       });
-      // socket.emit('action', {type:'loginpage_setobj', data:{
-      //     submitting:false,
-      //     loginsuccess:true,
-      //     token:token
-      // }});
-      // socket.emit('action', {type:'apppage_setobj', data:{
-      //     showpop:true,
-      //     popmessage:'登录成功'
-      // }});
     }
     else{
       res.status(200).json({
         loginsuccess:false,
+          err:'用户密码错误'
       });
-      // socket.emit('action',{type:'loginpage_submitting',data:false});
-      // socket.emit('action', {type:'apppage_setobj', data:{
-      //   showpop:true,
-      //   popmessage:'登录失败'
-      // }});
     }
-  });//end userModel.findOneAndUpdate
+    });
+  });
+
+
 });
 
 for(let keyname in dbs){

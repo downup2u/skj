@@ -8,22 +8,27 @@ let winston = require('./log/log.js');
 let DBModels = require('./db/models.js');
 const _ = require('lodash');
 const schedule = require('node-schedule');
-
+let pwd = require('./util/pwd.js');
 let createadmin = ()=>{
   let userModel = mongoose.model('UserAdmin', DBModels.UserAdminSchema);
   userModel.findOne({username: 'admin'}, (err, adminuser)=> {
     if(!err && !adminuser) {
+        let passwordsalt = pwd.getsalt();
+        pwd.hashPassword('admin',passwordsalt,(err,passwordhash)=>{
+          if(!err){
         adminuser = {
           username:'admin',
-          password: 'admin'
+              passwordsalt,
+              passwordhash
         };
         let entity = new userModel(adminuser);
         entity.save((err)=> {
         });
     }
   });
+    }
+  });
 };
-
 let createexpress = ()=>{
     var express = {
       "auspost": "澳大利亚邮政",
