@@ -22,8 +22,6 @@ import {
  } from '../../actions';
  import Addcartdilog from './addcartdilog.js';
  import {
-    mycollectionisproductexits,
-    mycollectiondelone,
     productcommentsfromproductgetcount
 } from '../../actions/sagacallback.js';
 import config from '../../env/config.js';

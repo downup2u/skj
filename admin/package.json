@@ -10,7 +10,7 @@
     "aor-summernote-input": "^1.0.0",
     "axios": "^0.16.1",
     "jquery": "^3.2.1",
-     "jwt-decode": "^2.2.0",
+    "jwt-decode": "^2.2.0",
     "moment": "^2.18.1",
     "react": "15.6.1",
     "react-dom": "15.6.1",
