@@ -7,11 +7,14 @@ const mycoupon = require('./mycoupon');
 const distsales = require('./distsales');
 const point = require('./point');
 const express = require('./express');
-
+const banner = require('./banner.js');
+const category = require('./category.js');
+const product = require('./product.js');
 module.exports = {
-  getbanner: require('./banner.js').getbanner,
-  getcategory: require('./category.js').getcategory,
-  getproduct: require('./product.js').getproduct,
+  getbanner: banner.getbanner,
+  getcategory: category.getcategory,
+  shoppingproinfo:product.shoppingproinfo,
+  getproduct: product.getproduct,
   pushmycartcount:cart.pushmycartcount,
   mycartaddone:cart.mycartaddone,
   mycartupdateone:cart.mycartupdateone,
@@ -42,4 +45,3 @@ module.exports = {
   getuserpointdetails:point.getuserpointdetails,
   expressquery:express.expressquery,
 };
-

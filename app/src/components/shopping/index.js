@@ -13,7 +13,8 @@ import {
     search_shoptxt,
     mycartaddone_request,
     mycartgetall,
-    uiaddcartdilog
+    uiaddcartdilog,
+    ui_viewshoppingproinfo
 } from '../../actions';
 import Addcartdilog from './addcartdilog.js';
 
@@ -36,7 +37,8 @@ let Page = (props) => {
     let onClickProduct = (e,proid)=>{
       if(!!proid){
         e.stopPropagation(e);
-        props.history.push(`/shoppingproinfo/${proid}`);
+        props.dispatch(ui_viewshoppingproinfo(proid));
+        // props.history.push(`/shoppingproinfo/${proid}`);
       }
     }
     let onClickPage = (e,name)=> {
@@ -170,7 +172,10 @@ let Page = (props) => {
                                 {_.map(prolist, (product,index)=>{
                                     if(index<2){
                                         return (
-                                            <div key={index} className="li" onClick={(e)=>{onClickPage(e,`/shoppingproinfo/${product._id}`)}}>
+                                            <div key={index} className="li" onClick={(e)=>{
+                                              // onClickPage(e,`/shoppingproinfo/${product._id}`)
+                                              props.dispatch(ui_viewshoppingproinfo(product._id));
+                                            }}>
                                                 <img src={product.picurl}/>
                                                 <span className="name">{product.name}</span>
                                                 <span className="price">

@@ -24,7 +24,8 @@ import {
     getaddresslist_request,
     set_weui,
     set_cartslist,
-    del_cartslist
+    del_cartslist,
+    ui_viewshoppingproinfo
 } from '../../actions';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
@@ -111,7 +112,8 @@ export class Cartitem extends Component {
         let onClickChecktedItemImg=(e)=>{
             let event = e || window.event;
             event.stopPropagation();
-            history.push(`shoppingproinfo/${item.product}`);
+            // history.push(`shoppingproinfo/${item.product}`);
+            this.props.dispatch(ui_viewshoppingproinfo(item.product));
         }
 
         let proinfo = products[item.product];

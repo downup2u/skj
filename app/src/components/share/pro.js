@@ -24,7 +24,6 @@ import {
  import {
     mycollectionisproductexits,
     mycollectiondelone,
-    productcommentsfromproductgetcount
 } from '../../actions/sagacallback.js';
 import config from '../../env/config.js';
 import {setbackhandler,removebackhandler} from '../../env/android';

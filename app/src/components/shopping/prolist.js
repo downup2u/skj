@@ -8,10 +8,11 @@ import { Swiper, Slide } from 'react-dynamic-swiper';
 import '../../../node_modules/react-dynamic-swiper/lib/styles.css';
 import '../../../public/css/shoppingprolist.css';
 import _ from 'lodash';
-import { 
+import {
     uiaddcartdilog,
     getproduct_request,
-    set_productlist
+    set_productlist,
+    ui_viewshoppingproinfo
 } from '../../actions';
 import Addcartdilog from './addcartdilog.js';
 
@@ -142,8 +143,8 @@ export class Page extends React.Component {
                     </span>
                 </div>
                 <div className="hotLnk">
-                    <span 
-                        key="all" 
+                    <span
+                        key="all"
                         onClick={()=>{this.setCategoryid(0)}}
                         className={this.props.productslistType==0?"sel":""}
                         >
@@ -152,7 +153,7 @@ export class Page extends React.Component {
                     {_.map(this.props.categories, (category, index)=>{
                         if(category.name!="套餐"&&category.name!="一体机"){
                             return (
-                                <span 
+                                <span
                                     key={index}
                                     onClick={()=>{this.setCategoryid(category._id)}}
                                     className={this.props.productslistType==category._id?"sel":""}
@@ -165,13 +166,13 @@ export class Page extends React.Component {
                                 <span key={index} style={{display:"none"}}></span>
                             )
                         }
-                        
+
                     })}
                 </div>
                 <div className="sortList">
                     {_.map(this.sortlist, (sortlistitem, index)=>{
                         return (
-                            <span 
+                            <span
                                 key={index}
                                 onClick={()=>{this.setSorttype(index)}}
                                 className={this.props.productslistSorttype==index?"sel":""}
@@ -180,14 +181,18 @@ export class Page extends React.Component {
                             </span>
                         )
                     })}
-                    
+
                 </div>
 
                 <div className="proList">
                     {
                         _.map(newsortlist,(proinfo, index)=>{
                             return (
-                                <div className="li" key={index} onClick={()=>{this.onClickPage(`/shoppingproinfo/${proinfo._id}`)}}>
+                                <div className="li" key={index} onClick={()=>{
+                                  this.props.dispatch(ui_viewshoppingproinfo(proinfo._id));
+                                  // this.onClickPage(`/shoppingproinfo/${proinfo._id}`)
+                                }
+                                }>
                                     <img src={proinfo.picurl}/>
                                     <span className="name">{proinfo.name}</span>
                                     <span className="price">
@@ -199,7 +204,7 @@ export class Page extends React.Component {
                         })
                     }
                 </div>
-                <Addcartdilog 
+                <Addcartdilog
                     show={this.props.addcartdilogshow}
                     proid={this.props.addcartdilogproid}
                     number={this.props.addcartdilogpronumber}
@@ -215,5 +220,3 @@ let mapStateToProps = ({shop,shopcart,app}) => {
 }
 
 export default connect(mapStateToProps)(Page);
-
-

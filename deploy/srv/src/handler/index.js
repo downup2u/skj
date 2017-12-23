@@ -31,6 +31,7 @@ const datahandler = {
   'getbanner':shop.getbanner,
   'getcategory':shop.getcategory,
   'getproduct':shop.getproduct,
+  'shoppingproinfo':shop.shoppingproinfo,
 
   'feedbackaddone':feedback.feedbackaddone,
   'getsystemconfig':app.getsystemconfig,

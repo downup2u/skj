@@ -15,3 +15,13 @@ exports.getproduct = (socket,payloaddata,ctx)=>{
     }
   });
 }
+
+exports.shoppingproinfo =  (socket,payloaddata,ctx)=>{
+  let dbModel = DBModels.ProductModel;
+  dbModel.findOne({_id:payloaddata._id},(err,result)=>{
+    if(!err && !!result){
+        socket.emit('shoppingproinfo_result',result);
+    }
+
+  });
+}

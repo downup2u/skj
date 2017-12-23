@@ -1,7 +1,8 @@
-import { put,takeEvery} from 'redux-saga/effects';
+import { put,takeEvery,takeLatest,call,race,take} from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import {
   logout_request,
-  
+
   login_result,
   getdevicelist_request,
   sendauth_result,
@@ -129,7 +130,11 @@ import {
   setuseralerttopicdeleted_result,
   loginwithoauth_result,
 
-  senddevicecmd_result
+  senddevicecmd_result,
+
+  ui_viewshoppingproinfo,
+  shoppingproinfo_request,
+  shoppingproinfo_result
 } from '../actions';
 import { push,goBack,go  } from 'react-router-redux';//https://github.com/reactjs/react-router-redux
 
@@ -289,12 +294,17 @@ export function* wsrecvsagaflow() {
   // });
   for(let i = 0; i < waitfnsz.length; i ++){
       let fnsz = waitfnsz[i];
-      yield takeEvery(fnsz[2], function*(action) {
-          let {payload:result} = action;
-          console.log(`takeEvery===>result:${JSON.stringify(result)}`);
-          yield put(fnsz[0](result));
-          yield put(fnsz[1]({result:result}));
-      });
+      try{
+        yield takeEvery(fnsz[2], function*(action) {
+            let {payload:result} = action;
+            console.log(`takeEvery===>result:${JSON.stringify(result)}`);
+            yield put(fnsz[0](result));
+            yield put(fnsz[1]({result:result}));
+        });
+      }
+      catch(e){
+        console.log(e);
+      }
   }
   // gettopiclist_result,
   // wait_gettopiclist_result,
@@ -395,6 +405,21 @@ export function* wsrecvsagaflow() {
             type:'success'
           }
         }));
+    }
+  });
+
+  yield takeLatest(`${ui_viewshoppingproinfo}`, function*(action) {
+    try{
+      const productid = action.payload;
+      yield put(shoppingproinfo_request({_id:productid}));
+      const { result, timeout } = yield race({
+         result:  take(`${shoppingproinfo_result}`),
+         timeout:  call(delay, 1000)
+      });
+      yield put(push(`shoppingproinfo/${productid}`));
+    }
+    catch(e){
+      console.log(e);
     }
   });
 

@@ -6,6 +6,7 @@ import {
     getbanner_result,
     getcategory_result,
     getproduct_result,
+    shoppingproinfo_result,
     getnews_result,
     search_shoptxt,
     uiiscollection,
@@ -149,6 +150,11 @@ const shop = createReducer({
             }
         });
         return { ...state,shopcategorylist1,shopcategorylist2,categories:{...categorylist.entities.categories}};
+    },
+    [shoppingproinfo_result]:(state,payload)=>{
+      let products = state.products;
+      products[payload._id] = payload;
+      return {...state,products};
     },
     [getproduct_result]:(state, payload)=>{
         let productslist = normalizrproducts(payload);

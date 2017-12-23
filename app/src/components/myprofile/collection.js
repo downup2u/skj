@@ -5,7 +5,7 @@ import { Input, Button, Select, List } from 'semantic-ui-react';
 import '../../../public/css/mycollection.css';
 import Swipeout from 'rc-swipeout';
 import { mycollectiongetall,mycollectiondelone } from '../../actions/sagacallback.js';
-import { uiinfinitepage_deleteitem } from '../../actions';
+import { uiinfinitepage_deleteitem,ui_viewshoppingproinfo} from '../../actions';
 import InfinitePage from '../controls/listview';
 //import Paging from '../tools/paging';
 //我的收藏暂时不修改了（需要设为Component,并且刷新什么的）
@@ -40,7 +40,10 @@ export class Page extends Component {
                         }]}
                     >
                     <div
-                        onClick={()=>{this.props.history.push("/shoppingproinfo/"+item.product)}}
+                        onClick={()=>{
+                          this.props.dispatch(ui_viewshoppingproinfo(item.product));
+                          // this.props.history.push("/shoppingproinfo/"+item.product)
+                        }}
                     >
                         <div className="myCollectionLi">
                             <div className="pic"><img src={proinfo.picurl}/></div>

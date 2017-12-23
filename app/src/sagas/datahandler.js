@@ -163,11 +163,15 @@ import {
     resetdevicecmd_result,
 
     getserverdate_request,
-    getserverdate_result
+    getserverdate_result,
+
+    shoppingproinfo_request,
+    shoppingproinfo_result
 } from '../actions/index.js';
 
 //接收的对应关系
 exports.recvmessagetoresultpair = {
+  'shoppingproinfo_result':shoppingproinfo_result,
   'getserverdate_result':getserverdate_result,
   'resetdevicecmd_result':resetdevicecmd_result,
   'payorder_result':payorder_result,
@@ -252,6 +256,7 @@ exports.recvmessagetoresultpair = {
 
 //非验证发送接口
 exports.sendmessagefnsz = {
+  'shoppingproinfo':`${shoppingproinfo_request}`,
   'getserverdate':`${getserverdate_request}`,
   'getabouthtml':`${getabouthtml_request}`,
   'oauthbinduser':`${oauthbinduser_request}`,

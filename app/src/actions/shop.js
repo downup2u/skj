@@ -19,6 +19,9 @@ export const getbanner_result = createAction('getbanner_result');
 export const getcategory_request = createAction('getcategory_request');
 export const getcategory_result = createAction('getcategory_result');
 
+export const ui_viewshoppingproinfo = createAction('ui_viewshoppingproinfo');
+export const shoppingproinfo_request = createAction('shoppingproinfo_request');
+export const shoppingproinfo_result = createAction('shoppingproinfo_result');
 //获取支付验证字符串
 export const wait_getpaysign_request= createAction('wait_getpaysign_request');
 export const wait_getpaysign_result= createAction('wait_getpaysign_result');
