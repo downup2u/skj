@@ -6,9 +6,6 @@
     -ms-user-select:none;
     user-select:none;
     font-weight: 300;
-    -webkit-transform: rotateY(30deg)rotateX(-30deg);
-    -webkit-transform: translateZ(0);
-    -webkit-backface-visibility:hidden;
 }
 .weuiPage{
     width: 100%;
