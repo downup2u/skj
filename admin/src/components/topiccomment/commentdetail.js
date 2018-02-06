@@ -10,7 +10,7 @@ import {
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import compose from 'recompose/compose';
-import { 
+import {
     ReferenceField,
     TextField,
 } from 'admin-on-rest/lib/mui';
@@ -82,12 +82,36 @@ class CommentDetail extends Component {
 
 const mapStateToProps = (state, props) => {
     const { record: { comments } } = props;
+    let  topiccomments = [];
+    comments.map((commentid)=>{
+      let record;
+      if(!!state.admin.comments){
+        if(!!state.admin.comments.data){
+          record = state.admin.comments.data[commentid];
+        }
+      }
+      if(!record){
+        if(!!state.admin.resources){
+          if(!!state.admin.resources.comments){
+            if(!!state.admin.resources.comments.data){
+              record = state.admin.resources.comments.data[commentid];
+            }
+          }
+        }
+      }
+      if(!!record){
+        topiccomments.push(record)
+      }
+    });
     return {
-        topiccomments: comments
-            .map(commentid => state.admin.comments.data[commentid])
-            .filter(r => typeof r !== 'undefined')
-
+      topiccomments
     };
+    // return {
+    //     topiccomments: comments
+    //         .map(commentid => state.admin.comments[commentid])
+    //         .filter(r => typeof r !== 'undefined')
+    //
+    // };
 };
 
 const enhance = compose(
