@@ -17,12 +17,12 @@ const Page = (props) => {
     let onClickPage = (name)=> {
         props.history.push(name);
     };
-
+    let categoryname = _.get(props,'categoryname','');
     return (
         <div className="PackagePage">
             <NavBar
                 back = {true}
-                title = "一体机"
+                title = {categoryname}
                 rightnav = {
                     [
                         {
@@ -69,9 +69,10 @@ const Page = (props) => {
 
 let Data = ({shop,shopcart:{remoteRowCount}},props) => {
     let fillerList = _.filter(shop.products, { 'categoryid': props.match.params.id });
+    let categoryname = _.get(shop,`categories.${props.match.params.id}.name`,'');
     //排序
     let prolist = _.sortBy(fillerList, ['publishdate']);
-    return { prolist, remoteRowCount };
+    return { prolist, remoteRowCount ,categoryname};
 }
 
 export default connect(Data)(Page);
