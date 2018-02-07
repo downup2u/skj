@@ -79,16 +79,16 @@ export class Page extends Component {
                                         <img src={nextlist.avatar} className="avatar" />
                                         <div>
                                             <span>姓名: {nextlist.nickname}</span>
-                                            <span>消费金额: <i>¥{nextlist.totalorderprices}</i></span>
+                                            <span>消费金额: <i>¥{nextlist.totalorderprices.toFixed(2)}</i></span>
                                         </div>
-                                        <span>奖励金额: <i>¥{nextlist.totalfeebonus}</i></span>
+                                        <span>奖励金额: <i>¥{nextlist.totalfeebonus.toFixed(2)}</i></span>
                                     </div>
                                 )
                         })}
                 </div>
                 <div className="bottomBttn" onClick={()=>{this.onClickPage("/ordertotal")}}><span>订单统计</span></div>
             </div>
-        
+
         );
     }
 }
@@ -100,4 +100,3 @@ const mapStateToProps =  ({userlogin,nextusers}) =>{
 export default connect(
     mapStateToProps
 )(Page);
-
