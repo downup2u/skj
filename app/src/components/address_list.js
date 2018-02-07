@@ -37,13 +37,7 @@ let AddressItem = (props)=> {
     let isdefaultaddress = defaultaddress.hasOwnProperty('_id')&&(addressitem._id===defaultaddress._id);
     return (
         <div className="addressItem" key={addressitem._id}>
-            <Swipeout autoClose={true}
-                    right={[{
-                        text: '删除',
-                        onPress:onDelete,
-                        style: { backgroundColor: 'red', color: 'white' }
-                    }]}
-                >
+            <div className="rc-swipeout">
                 <div className="tit">
                     <span>{addressitem.truename}</span>
                     <span>{addressitem.phonenumber}</span>
@@ -73,7 +67,7 @@ let AddressItem = (props)=> {
                         <div onClick={onDelete}><Icon link name='trash outline'/>删除</div>
                     </div>
                 </div>
-            </Swipeout>
+            </div>
         </div>);
 };
 
