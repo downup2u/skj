@@ -143,7 +143,7 @@ export class ConfirmDom extends Component{
                         <span>净水器的使<br/>用天数</span>
                         <div className="numbrinput">
                             <span onClick={this.click_setoneinput.bind(this, "del")}> - </span>
-                            <input type="number" value={Math.ceil(homeconfirmday/15)} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value*15)); }} />
+                            <input type="number" value={`${Math.ceil(homeconfirmday/15)}`} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value*15)); }} />
                             <span onClick={this.click_setoneinput.bind(this, "add")}> + </span>
                             <b>＊15＝{homeconfirmday}升</b>
                         </div>
@@ -166,7 +166,7 @@ export class ConfirmDom extends Component{
                         <span>净水器的使用天数</span>
                         <div className="numbrinput">
                             <span onClick={this.click_setoneinput.bind(this, "del")}> - </span>
-                            <input type="number" value={homeconfirmday} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value)); }} />
+                            <input type="number" value={`${homeconfirmday}`} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value)); }} />
                             <span onClick={this.click_setoneinput.bind(this, "add")}> + </span>
                             <b style={{textAlign: "left",textIndent: "5px", lineHeight : "30px", width: "26px"}}></b>
                         </div>
