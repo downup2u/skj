@@ -137,6 +137,8 @@ export class ConfirmDom extends Component{
         const tpname = datatp==="vol"?"流量":"天数";
 
         if(datatp==="vol"){
+           let valuehomeconfirmday = parseInt(Math.ceil(homeconfirmday/15));
+           console.log(`valuehomeconfirmday==>${valuehomeconfirmday}`);
             return (
                 <div className="setoneform volsetoneform">
                     <div>
@@ -144,6 +146,7 @@ export class ConfirmDom extends Component{
                         <div className="numbrinput">
                             <span onClick={this.click_setoneinput.bind(this, "del")}> - </span>
                             <input type="number" value={`${Math.ceil(homeconfirmday/15)}`} onChange={(e)=>{ this.props.dispatch(set_homeconfirmday(e.target.value*15)); }} />
+                            
                             <span onClick={this.click_setoneinput.bind(this, "add")}> + </span>
                             <b>＊15＝{homeconfirmday}升</b>
                         </div>
@@ -160,6 +163,8 @@ export class ConfirmDom extends Component{
                 </div>
             )
         }else{
+            let valuehomeconfirmday = parseInt(homeconfirmday);
+            console.log(`valuehomeconfirmday==>${valuehomeconfirmday}`);
             return (
                 <div className="setoneform">
                     <div>
