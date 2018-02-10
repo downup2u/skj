@@ -188,7 +188,7 @@ export class Page extends React.Component {
 
 
     render() {
-        const {isweixininstalled} = this.props;
+        const {isweixininstalled,isqqstalled} = this.props;
         let loginwithqq = ()=>{
             loginQQ((result)=>{
                 if(result.code === '0'){
@@ -218,7 +218,7 @@ export class Page extends React.Component {
                 <div className="loginPageBottom">
                     <div className="tit"><span>其他登录方式</span></div>
                     <div className="lnk">
-                        <div onClick={()=>{loginwithqq();}}><Icon name="qq" /></div>
+                        {isqqstalled && <div onClick={()=>{loginwithqq();}}><Icon name="qq" /></div>}
                         {isweixininstalled && <div onClick={()=>{loginwithwechat();}}><Icon name="weixin" /></div>}
                     </div>
                 </div>
@@ -228,8 +228,8 @@ export class Page extends React.Component {
     }
 
 }
-const mapStateToProps = ({userlogin,app:{isweixininstalled}}) => {
-    return {...userlogin,isweixininstalled};
+const mapStateToProps = ({userlogin,app:{isweixininstalled,isqqstalled}}) => {
+    return {...userlogin,isweixininstalled,isqqstalled};
 }
 Page = connect(mapStateToProps)(Page);
 export default Page;

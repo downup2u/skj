@@ -218,6 +218,22 @@
       fun({code: '0',message:'找不到该函数'});
     }
   }
+
+  export const haveQQApp=(fun)=>{
+    window.haveQQAppCallback=function(result){
+      if(typeof result === 'string'){
+          result = JSON.parse(result);
+      }
+      fun(result);
+    };
+    if(!!window.xview && !!window.xview.haveQQApp){
+      let jsonstring = JSON.stringify({callback:"haveQQAppCallback"});
+      window.xview.haveQQApp(jsonstring);
+    }
+    else{
+      fun({code: '0',message:'找不到该函数'});
+    }
+  }
  /**
    * 获取经纬度
    @method getLocation

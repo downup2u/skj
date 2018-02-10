@@ -10,10 +10,12 @@ import {
   registerandroid
 } from './env/android';
 import {
-  haveWechatApp
+  haveWechatApp,
+  haveQQApp
 } from './env/login';
 import {
-  setisweixininstalled
+  setisweixininstalled,
+  setisqqstalled
 } from './actions';
 
 ReactDOM.render(
@@ -33,4 +35,13 @@ haveWechatApp((data)=>{
     isweixininstalled = data.code === '1'?false:true;
   }
   store.dispatch(setisweixininstalled(isweixininstalled));
+});
+haveQQApp((data)=>{
+  //alert(JSON.stringify(`微信是否安装:${JSON.stringify(data)}`));
+  let isqqstalled = true;
+  if(!!data){
+    // 	{code: 1} 手机没有安装微信客户端
+    isqqstalled = data.code === '1'?false:true;
+  }
+  store.dispatch(setisqqstalled(isqqstalled));
 });

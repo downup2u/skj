@@ -9,6 +9,7 @@ import {
     setmsgcount,
     set_innerheight,
     setisweixininstalled,
+    setisqqstalled,
     setsharesettingcur,
     getserverdate_result,
     set_homeconfirmday,
@@ -44,6 +45,7 @@ const initial = {
         innerheight : 0,
 
         isweixininstalled:true,
+        isqqstalled:true,
 
         maxleftpecent : 90,//净水器报警百分比
         sharesettingcur:{
@@ -76,6 +78,9 @@ const app = createReducer({
     },
     [setisweixininstalled]: (state, isweixininstalled) => {
         return { ...state, isweixininstalled };
+    },
+    [setisqqstalled]: (state, isqqstalled) => {
+        return { ...state, isqqstalled };
     },
     [setmsgcount]: (state, newmsgnumber) => {
         console.log('setmsgcount===>' + newmsgnumber);

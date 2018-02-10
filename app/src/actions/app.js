@@ -4,6 +4,7 @@
 import { createAction } from 'redux-act';
 
 export const setisweixininstalled = createAction('setisweixininstalled');
+export const setisqqstalled = createAction('setisqqstalled');
 //以下为saga用
 export const clickTab = createAction('click bottom tab');
 export const showpopmessage = createAction('showpopmessage');
