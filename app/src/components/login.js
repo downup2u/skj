@@ -205,6 +205,18 @@ export class Page extends React.Component {
             });
 
         }
+        const haveno = (!isqqstalled && !isweixininstalled);
+        let otherlogin;
+        if(!haveno){
+          otherlogin = (<div className="loginPageBottom">
+                <div className="tit"><span>其他登录方式</span></div>
+                <div className="lnk">
+                    {isqqstalled && <div onClick={()=>{loginwithqq();}}><Icon name="qq" /></div>}
+                    {isweixininstalled && <div onClick={()=>{loginwithwechat();}}><Icon name="weixin" /></div>}
+                </div>
+            </div>
+          );
+        }
         return (
             <div className="UserLoginPage">
                 <div>
@@ -214,14 +226,9 @@ export class Page extends React.Component {
                            onClickLoginbysms={this.onClickLoginbysms}
                            id="UserLoginPageForm"
                             {...this.props}/>
-
-                <div className="loginPageBottom">
-                    <div className="tit"><span>其他登录方式</span></div>
-                    <div className="lnk">
-                        {isqqstalled && <div onClick={()=>{loginwithqq();}}><Icon name="qq" /></div>}
-                        {isweixininstalled && <div onClick={()=>{loginwithwechat();}}><Icon name="weixin" /></div>}
-                    </div>
-                </div>
+                {
+                  otherlogin
+                }
                 </div>
             </div>
         );

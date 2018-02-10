@@ -44,8 +44,8 @@ const initial = {
         newmsgnumber:0,
         innerheight : 0,
 
-        isweixininstalled:true,
-        isqqstalled:true,
+        isweixininstalled:false,
+        isqqstalled:false,
 
         maxleftpecent : 90,//净水器报警百分比
         sharesettingcur:{
