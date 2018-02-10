@@ -13,7 +13,18 @@ export const haveWechatApp=(fncallback)=>{
   }
 
 }
-
+export const haveQQApp=(fncallback)=>{
+  try{
+    if(!!xview){
+      xview.haveQQApp((data)=>{
+        fncallback(data);
+      });
+    }
+  }
+  catch(e){
+    console.log(e);
+  }
+}
 
 export const loginQQ = (fncallback)=>{
     try{
