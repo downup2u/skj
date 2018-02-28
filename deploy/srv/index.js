@@ -14,6 +14,10 @@ mongoose.connect(config.mongodburl,{
       // This option is on by default, but why not set it explicitly
       autoReconnect: true
     },
+    server: {
+         auto_reconnect: true,
+         poolSize: 10
+     },
     // This options is 1 second by default, its possible the ha
     // takes longer than 30 seconds to recover.
     reconnectInterval: 5000,
