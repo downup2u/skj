@@ -1,0 +1,21 @@
+version: '2'
+services:
+  skjserver:
+    image: node:6.11.2
+    restart: always
+    command: node ./index.js
+    working_dir: /app
+    volumes:
+      - ./srv:/app
+      - ./dist:/dist
+      - ./log:/log
+    environment:
+      - MONGO_URL=mongodb://192.168.0.1:27018/skj
+      - listenport=3100
+      - tcpport=52341
+    ports:
+       - "3100:3100"
+       - "52341:52341"
+    expose:
+       - "3100"
+       - "52341"
