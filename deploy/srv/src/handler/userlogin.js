@@ -123,10 +123,15 @@ exports.queryuserbalance = (socket,actiondata,ctx)=>{
 
 let userloginsuccess =(socket,ctx)=>{
   let dbModel = DBModels.DeviceModel;
-  dbModel.find({creator:ctx.userid},(err,devicelist)=>{
+  dbModel.find({},(err,devicelist)=>{
     if(!err && devicelist.length > 0){
       _.map(devicelist,(device)=>{
-        PubSub.subscribe(`device.${device.deviceid}`, ctx.userSubscriber);
+        const owners = _.get(device,'owners',[]);
+        if(!!_.find(owners,(o)=>{
+          return o === ctx.userid;
+        })){
+          PubSub.subscribe(`device.${device.deviceid}`, ctx.userSubscriber);
+        }
       });
     }
   });
