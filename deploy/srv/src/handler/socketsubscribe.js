@@ -150,7 +150,7 @@ exports.usersubfn  = (socket,ctx)=>{
           let dbModel = DBModels.DeviceModel;
           let deviceid = topicsz[1];
           console.log(`开始推送设备数据${deviceid}给${ctx.userid}`);
-          dbModel.findOne({deviceid:deviceid,creator:ctx.userid}).populate([
+          dbModel.findOne({deviceid:deviceid}).populate([
             {
               path:'realtimedata', model: 'Realtimedata'
             }
