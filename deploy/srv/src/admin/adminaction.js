@@ -1,4 +1,4 @@
-let PubSub = require('pubsub-js');
+const PubSub = require('pubsub-js');
 const withdraw = require('../handler/shop/withdrawcash.js');
 let DBModels = require('../db/models.js');
 const jpush = require('../smspush/push.js');
@@ -72,6 +72,14 @@ let postaction =(actionname,collectionname,doc)=>{
         });
       }
   }
+
+  if(collectionname==='product'){
+      if(actionname=== 'save' || actionname === 'findByIdAndUpdate'){
+        PubSub.publish(`product`,retdoc);
+      }
+  }
+
+
 };
 
 exports.preaction = preaction;

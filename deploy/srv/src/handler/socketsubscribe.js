@@ -1,6 +1,6 @@
-let winston = require('../log/log.js');
-let DBModels = require('../db/models.js');
-
+const winston = require('../log/log.js');
+const DBModels = require('../db/models.js');
+const PubSub = require('pubsub-js');
 /*
 topic:notifymessage
 topic:topic.id + data
@@ -21,7 +21,18 @@ topic:comment.id + data
 //     userfrom:{ type: Schema.Types.ObjectId, ref: 'User' },
 //     created_at: Date,
 // });
-
+const pushdatatouser_product = (socket)=>{
+  const dbModel = DBModels.ProductModel;
+  dbModel.find({isenabled:true},(err,list)=>{
+    if(!err){
+        socket.emit('shop.getproduct_result',{list});
+    }
+    else{
+      socket.emit('common_err',{type:'getproduct',errmsg:`获取产品列表失败:${err.message}`});
+        //winston.getlog().error(`获取产品列表失败：${err.message}`);
+    }
+  });
+}
 
 let pushdatatouser_useralerttopic = (socket,useralerttopic)=>{
     dbModel = DBModels.UserAlertTopicModel;
@@ -129,6 +140,10 @@ exports.usersubfn  = (socket,ctx)=>{
       //winston.getlog().info('用户订阅消息:'+msg);
       //winston.getlog().info('用户订阅数据:'+data);
       let topicsz = msg.split('.');
+      if(topicsz.length > 0 && topicsz[0] === 'product'){
+          pushdatatouser_product(socket);
+          return;
+      }
       if(topicsz.length === 2 && topicsz[0] === 'topic'){
           pushdatatouser_useralerttopic(socket,data);
           return;
@@ -162,4 +177,6 @@ exports.usersubfn  = (socket,ctx)=>{
           return;
       }
   };//for eachuser
+
+  PubSub.subscribe(`product`, ctx.userSubscriber);
 };
