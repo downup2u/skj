@@ -28,6 +28,8 @@ const renderImageupload= (props) => {
         picaphoto.disposePhotoWithFile(v,imgInfo).then((file)=>{
           file.uid = v.uid;
           resolve(file);
+        }).catch((e)=>{
+          console.log(e);
         });
       });
     }

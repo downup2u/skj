@@ -147,6 +147,8 @@ export class Page extends React.Component {
         //console.log(callthen);
         this.props.dispatch(callthen(fillprofile_request,fillprofile_result,{profile})).then((result)=>{
           this.refs.listviewpage.getWrappedInstance().onRefresh();
+        }).catch((e)=>{
+          console.log(e)
         });
       }
     }

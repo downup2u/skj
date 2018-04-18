@@ -146,6 +146,8 @@ export class Page extends Component {
                     //隐藏loading
                     this.props.dispatch(set_weui({loading:{show : false}}));
                 },2000);
+            }).catch((e)=>{
+              console.log(e);
             });
         }else{
             setTimeout(()=>{

@@ -28,6 +28,8 @@ export function fileupload(e,config,callbackfn){
           console.log("result:" + JSON.stringify(result));
           callbackfn(issuc,result);
       });
+    }).catch((e)=>{
+      console.log(e);
     });
 }
 

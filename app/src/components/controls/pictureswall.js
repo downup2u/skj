@@ -115,6 +115,8 @@ class PicturesWall extends React.Component {
         picaphoto.disposePhotoWithFile(v,imgInfo).then((file)=>{
           file.uid = v.uid;
           resolve(file);
+        }).catch((err) => {
+          console.log(err);
         });
       });
     }

@@ -114,6 +114,8 @@ class Page extends React.Component {
           isend:result.offset + result.limit >= result.total
         });
       }
+    }).catch((e)=>{
+      console.log(e);
     });
   }
   //到达底部事件
@@ -150,6 +152,8 @@ class Page extends React.Component {
                 isend:result.offset + result.limit >= result.total
               });
             }
+          }).catch((e)=>{
+            console.log(e);
           });
     }
     else{
