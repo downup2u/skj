@@ -411,12 +411,12 @@ export function* wsrecvsagaflow() {
   yield takeLatest(`${ui_viewshoppingproinfo}`, function*(action) {
     try{
       const productid = action.payload;
-      yield put(shoppingproinfo_request({_id:productid}));
-      const { result, timeout } = yield race({
-         result:  take(`${shoppingproinfo_result}`),
-         timeout:  call(delay, 1000)
-      });
-      yield put(push(`shoppingproinfo/${productid}`));
+      // yield put(shoppingproinfo_request({_id:productid}));
+      // const { result, timeout } = yield race({
+      //    result:  take(`${shoppingproinfo_result}`),
+      //    timeout:  call(delay, 1000)
+      // });
+      yield put(push(`/shoppingproinfo/${productid}`));
     }
     catch(e){
       console.log(e);
