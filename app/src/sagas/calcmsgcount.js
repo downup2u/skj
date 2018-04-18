@@ -12,7 +12,7 @@ import store from '../env/store.js';
 function getmsgcount(payload){
    return new Promise((resolve, reject) => {
        console.log('start call getmsgcount:' + JSON.stringify(payload));
-        getnotifymessage(payload)).then(({result})=>{
+        put(getnotifymessage(payload)).then(({result})=>{
             console.log('setmsgcount:' + result.total);
             resolve(result.total);
             //getnotifymessage result=>{"docs":[],"total":0,"limit":10,"page":1,"pages":1}
