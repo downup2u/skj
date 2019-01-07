@@ -1,0 +1,17 @@
+{
+  "apps" : [
+      {
+        "name": "cronexe_skj_dbbk",
+        "script": "/var/db100/skj/deploy/cronexe/srv/index.js",
+        "env": {
+          "NODE_ENV": "production",
+          "DEBUG_COLORS":"1",
+          "istest":"true",
+          "logdir":"/var/db100/skj/deploy/cronexe/logs",
+          "shellcmd":"mongodump --port=27018 -d=skj -o=/var/db100/skjdbbk/db2019",
+          "crontime":"0 3 * * *"
+        },
+        "node-args": "--nouse-idle-notification --gc_global --max-old-space-size=80960 --max-new-space-size=80960"
+      }
+  ]
+}

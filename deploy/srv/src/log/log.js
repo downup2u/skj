@@ -4,7 +4,7 @@ var path = require('path');
 const config = require('../../config');
 var logger;
 exports.initLog =  ()=>{
-  var filename = "shuihezi";//+moment().format('YYYY-MM-DD-HHmmss');
+  var filename = `shuihezi${moment().format('YYYYMMDD')}`;//+moment().format('YYYY-MM-DD-HHmmss');
 
   var logfile = filename+".log";
   let logdir = path.join(__dirname,'../',config.publishlog);
