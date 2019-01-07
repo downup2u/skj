@@ -4,6 +4,7 @@
         "name": "cronexe_skj_dockerrestart",
         "script": "/var/db100/skj/deploy/cronexe/srv/index.js",
         "env": {
+          "name": "cronexe_skj_dockerrestart",
           "NODE_ENV": "production",
           "DEBUG_COLORS":"1",
           "istest":"true",

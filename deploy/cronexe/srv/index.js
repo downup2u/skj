@@ -5,13 +5,16 @@ const schedule = require('node-schedule');
 const shell = require('shelljs');
 const moment = require('moment');
 const debug = require('debug')('srv:start');
+const format = require('string-format')
+format.extend(String.prototype, {});
 
 winston.initLog();
 
 winston.getlog().info(`==程序启动${config.version},istest:${config.istest},shellcmd:${config.shellcmd},crontime:${config.crontime}`);
 
 const job = (callbackfn)=>{
-  const shellcmd = config.shellcmd;
+  const shellcmd = config.shellcmd.format({curday:moment().format('YYYYMMDD')});
+  console.log(shellcmd);
   shell.exec(shellcmd,(code, stdout, stderr)=>{
     winston.getlog().info(`命令行完毕:${code}-->${stdout}-->${stderr}`);
     callbackfn(null,true);

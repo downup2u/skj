@@ -3,9 +3,9 @@ const moment = require('moment');
 const path = require('path');
 const config = require('../config');
 let logger;
-const pid = process.getgid();
+
 exports.initLog =  ()=>{
-   const filename = `cronexe${moment().format('YYYYMMDD')}_${pid}`;
+   const filename = `${config.name}${moment().format('YYYYMMDD')}`;
 
   const logfile = filename+".log";
   const logdir = config.logdir || path.resolve(__dirname,'../../../log');
